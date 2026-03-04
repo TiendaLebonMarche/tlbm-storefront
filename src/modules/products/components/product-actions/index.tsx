@@ -132,9 +132,10 @@ export default function ProductActions({
         quantity: 1,
         countryCode,
       })
-    } catch (error) {
-      console.error("Error al añadir a la bolsa:", error)
-      alert("Hubo un problema de conexión al intentar agregar tu producto a la bolsa. Por favor, verifica tu conexión o inténtalo más tarde.")
+    } catch (error: any) {
+      console.error("DEBUG - Error al añadir a la bolsa:", error)
+      const message = error?.message || "Error desconocido de conexión"
+      alert(`Error: ${message}\n\nPor favor, verifica que la región esté configurada correctamente o intenta de nuevo.`)
     } finally {
       setIsAdding(false)
     }
