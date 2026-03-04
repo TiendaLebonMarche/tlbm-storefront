@@ -21,6 +21,14 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        brand: {
+          black: '#1a1a1a', 
+          gold: '#C5A059',
+          gray: '#f9f9f9',
+          magenta: '#FF00FF',
+          slate: '#2C3338',
+          whatsapp: '#25D366'
+        },
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -69,6 +77,10 @@ module.exports = {
           "Ubuntu",
           "sans-serif",
         ],
+        serif: [
+          "Playfair Display",
+          "serif"
+        ]
       },
       keyframes: {
         ring: {
@@ -158,5 +170,13 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-radix")()],
+  plugins: [
+    require("tailwindcss-radix")(),
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar::-webkit-scrollbar': { 'display': 'none' },
+        '.no-scrollbar': { '-ms-overflow-style': 'none', 'scrollbar-width': 'none' },
+      })
+    }
+  ],
 }

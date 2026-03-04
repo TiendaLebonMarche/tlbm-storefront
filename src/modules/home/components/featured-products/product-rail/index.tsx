@@ -22,25 +22,28 @@ export default async function ProductRail({
     },
   })
 
-  if (!pricedProducts) {
+  if (!pricedProducts || pricedProducts.length === 0) {
     return null
   }
 
   return (
-    <div className="content-container py-12 small:py-24">
-      <div className="flex justify-between mb-8">
-        <Text className="txt-xlarge">{collection.title}</Text>
-        <InteractiveLink href={`/collections/${collection.handle}`}>
-          View all
-        </InteractiveLink>
+    <div className="max-w-[95rem] mx-auto px-6 md:px-12 py-12">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl font-serif mb-3 capitalize">{collection.title}</h2>
+        <div className="w-24 h-[1px] bg-brand-black mx-auto"></div>
+        <div className="mt-6">
+          <InteractiveLink href={`/collections/${collection.handle}`}>
+            Ver Colección Exclusiva
+          </InteractiveLink>
+        </div>
       </div>
-      <ul className="grid grid-cols-2 small:grid-cols-3 gap-x-6 gap-y-24 small:gap-y-36">
-        {pricedProducts &&
-          pricedProducts.map((product) => (
-            <li key={product.id}>
-              <ProductPreview product={product} region={region} isFeatured />
-            </li>
-          ))}
+
+      <ul className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12">
+        {pricedProducts.slice(0, 8).map((product) => (
+          <li key={product.id} className="group text-center">
+            <ProductPreview product={product} region={region} isFeatured />
+          </li>
+        ))}
       </ul>
     </div>
   )

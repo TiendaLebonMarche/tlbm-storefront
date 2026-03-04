@@ -29,23 +29,36 @@ export default async function ProductPreview({
   })
 
   return (
-    <LocalizedClientLink href={`/products/${product.handle}`} className="group">
-      <div data-testid="product-wrapper">
-        <Thumbnail
-          thumbnail={product.thumbnail}
-          images={product.images}
-          size="full"
-          isFeatured={isFeatured}
-        />
-        <div className="flex txt-compact-medium mt-4 justify-between">
-          <Text className="text-ui-fg-subtle" data-testid="product-title">
-            {product.title}
-          </Text>
-          <div className="flex items-center gap-x-2">
-            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-          </div>
+    <div className="group text-center">
+      <LocalizedClientLink href={`/products/${product.handle}`} data-testid="product-wrapper">
+        <div className="relative overflow-hidden bg-gray-50 aspect-square mb-4">
+          <Thumbnail
+            thumbnail={product.thumbnail}
+            images={product.images}
+            size="full"
+            isFeatured={isFeatured}
+          />
         </div>
-      </div>
-    </LocalizedClientLink>
+      </LocalizedClientLink>
+
+      {/* Generamos un Tag Visual basado en el Collection o Genérico */}
+      <span className="text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-sm mb-1 inline-block bg-slate-100 text-slate-600">
+        {product.collection?.title || "Exclusivo"}
+      </span>
+
+      <p className="text-[9px] text-gray-400 mb-2 uppercase tracking-wide">
+        #{product.type?.value || "Luxury"}
+      </p>
+
+      <LocalizedClientLink href={`/products/${product.handle}`}>
+        <h3 className="text-lg font-serif" data-testid="product-title">{product.title}</h3>
+      </LocalizedClientLink>
+
+      {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
+
+      <LocalizedClientLink href={`/products/${product.handle}`} className="w-full inline-block border border-brand-black flex items-center justify-center py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-black hover:text-white transition-all">
+        Ver Detalles
+      </LocalizedClientLink>
+    </div>
   )
 }

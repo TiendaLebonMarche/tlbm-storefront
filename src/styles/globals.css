@@ -17,6 +17,73 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  /* === CORRECCIONES GLOBALES === */
+  html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+  }
+
+  /* Animación Marquee */
+  @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .animate-marquee { animation: marquee-scroll 30s linear infinite; }
+  
+  /* Zoom Imágenes */
+  .img-zoom { transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+  .group:hover .img-zoom { transform: scale(1.08); }
+  
+  /* Header Glass */
+  .header-scrolled {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Modales */
+  .modal-overlay { transition: opacity 0.3s ease; opacity: 0; pointer-events: none; }
+  .is-open .modal-overlay { opacity: 1; pointer-events: auto; }
+  
+  .drawer-right { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .is-open .drawer-right { transform: translateX(0); }
+
+  .mobile-menu { transform: translateX(-100%); transition: transform 0.4s ease; }
+  .mobile-menu-open { transform: translateX(0); }
+
+  /* Buscador */
+  .search-modal { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .search-open { opacity: 1; pointer-events: auto; }
+  
+  /* Carrusel Seguro */
+  .carousel-viewport {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px; 
+  }
+  .carousel-card {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 280px;
+  }
+  @media (min-width: 768px) {
+      .carousel-card { width: 320px; }
+  }
+  
+  /* Ajuste Categorías 9:16 */
+  .category-card {
+      min-width: calc(50% - 12px);
+      scroll-snap-align: start;
+  }
+  @media(min-width: 768px){
+      .category-card {
+          min-width: calc(25% - 18px); 
+      }
+  }
+
   input:focus ~ label,
   input:not(:placeholder-shown) ~ label {
     @apply -translate-y-2 text-xsmall-regular;

@@ -12,145 +12,60 @@ export default async function Footer() {
   const productCategories = await listCategories()
 
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
-            >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {productCategories && productCategories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul
-                  className="grid grid-cols-1 gap-2"
-                  data-testid="footer-categories"
-                >
-                  {productCategories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
-
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
-
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
-            </div>
+    <footer className="bg-brand-black text-white pt-20 pb-10 px-6 mt-auto">
+      <div className="max-w-[95rem] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div>
+          <h3 className="font-serif text-2xl mb-6 text-white">Le Bon Marché</h3>
+          <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+            Rastreamos los productos más exóticos. Gadgets importados a los mejores precios.
+          </p>
+          <div className="flex gap-4 text-xs font-bold tracking-widest text-gray-400">
+            <a href="https://instagram.com/tiendalebonmarche" className="hover:text-white transition" target="_blank" rel="noreferrer">IG</a>
+            <a href="#" className="hover:text-white transition">FB</a>
+            <a href="#" className="hover:text-white transition">TK</a>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
-          </Text>
-          <MedusaCTA />
+
+        <div>
+          <h4 className="text-xs font-bold uppercase tracking-widest mb-6 text-brand-gold">TIENDA</h4>
+          <ul className="space-y-4 text-sm text-gray-400">
+            {collections && collections.length > 0 ? (
+              collections.slice(0, 4).map((c) => (
+                <li key={c.id}>
+                  <LocalizedClientLink className="hover:text-white transition" href={`/collections/${c.handle}`}>
+                    {c.title}
+                  </LocalizedClientLink>
+                </li>
+              ))
+            ) : (
+              <>
+                <li><LocalizedClientLink href="/store" className="hover:text-white transition">Catálogo</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/store" className="hover:text-white transition">Nuevos</LocalizedClientLink></li>
+              </>
+            )}
+            <li><LocalizedClientLink href="/store" className="hover:text-white transition">Ver todo el Catálogo</LocalizedClientLink></li>
+          </ul>
         </div>
+
+        <div>
+          <h4 className="text-xs font-bold uppercase tracking-widest mb-6 text-brand-gold">AYUDA</h4>
+          <ul className="space-y-4 text-sm text-gray-400">
+            <li><a href="#" className="hover:text-white transition">Garantías</a></li>
+            <li><a href="#" className="hover:text-white transition">Envíos</a></li>
+            <li><a href="#" className="hover:text-white transition">Devoluciones</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-xs font-bold uppercase tracking-widest mb-6 text-brand-gold">CONTACTO</h4>
+          <a href="https://wa.me/573027567783" className="text-2xl font-serif text-white hover:text-brand-gold transition block mb-2" target="_blank" rel="noreferrer">
+            +57 302 756 7783
+          </a>
+        </div>
+      </div>
+
+      <div className="max-w-[95rem] mx-auto border-t border-gray-800 pt-8 text-center text-xs text-gray-600">
+        <p>&copy; {new Date().getFullYear()} Tienda Le Bon Marché. Medusa Storefront.</p>
       </div>
     </footer>
   )
