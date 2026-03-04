@@ -50,7 +50,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {open && (
                 <div
-                  className="fixed inset-0 z-[50] bg-black/50 pointer-events-auto"
+                  className="fixed inset-0 z-[50] backdrop-blur-md bg-black/30 pointer-events-auto transition-opacity"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                 />
