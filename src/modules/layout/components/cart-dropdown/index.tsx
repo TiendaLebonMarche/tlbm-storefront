@@ -127,7 +127,7 @@ const CartDropdown = ({
                           </LocalizedClientLink>
                           <div className="text-sm">
                             <p className="font-bold text-brand-black w-36 truncate">{item.title}</p>
-                            <p className="text-[10px] text-gray-500 mb-1">Cant: {item.quantity}</p>
+                            <p className="text-[10px] text-gray-500 mb-1">Cantidad: {item.quantity}</p>
                             <LineItemPrice item={item} style="tight" currencyCode={cartState.currency_code} className="text-gray-500 font-medium" />
                           </div>
                         </div>

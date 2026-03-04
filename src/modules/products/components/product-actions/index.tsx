@@ -126,13 +126,18 @@ export default function ProductActions({
 
     setIsAdding(true)
 
-    await addToCart({
-      variantId: selectedVariant.id,
-      quantity: 1,
-      countryCode,
-    })
-
-    setIsAdding(false)
+    try {
+      await addToCart({
+        variantId: selectedVariant.id,
+        quantity: 1,
+        countryCode,
+      })
+    } catch (error) {
+      console.error("Error al añadir a la bolsa:", error)
+      alert("Hubo un problema de conexión al intentar agregar tu producto a la bolsa. Por favor, verifica tu conexión o inténtalo más tarde.")
+    } finally {
+      setIsAdding(false)
+    }
   }
 
   return (
@@ -172,15 +177,15 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-12 text-xs font-bold uppercase tracking-widest bg-brand-black hover:bg-brand-gold hover:border-brand-gold text-white transition-colors"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
           {!selectedVariant && !options
-            ? "Select variant"
+            ? "Selecciona tu variante"
             : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
+              ? "Agotado Temporalmente"
+              : "Añadir a Mi Bolsa"}
         </Button>
         <MobileActions
           product={product}
