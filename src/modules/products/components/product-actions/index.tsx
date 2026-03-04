@@ -177,8 +177,7 @@ export default function ProductActions({
             isAdding ||
             !isValidVariant
           }
-          variant="primary"
-          className="w-full h-12 text-xs font-bold uppercase tracking-widest bg-brand-black hover:bg-brand-gold hover:border-brand-gold text-white transition-colors"
+          className="w-full h-12 text-[10px] font-bold uppercase tracking-[0.2em] border border-brand-black bg-brand-black text-white hover:bg-white hover:text-brand-black transition-all rounded-none"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
@@ -186,7 +185,7 @@ export default function ProductActions({
             ? "Selecciona tu variante"
             : !inStock || !isValidVariant
               ? "Agotado Temporalmente"
-              : "Añadir a Mi Bolsa"}
+              : "Agregar a la Bolsa"}
         </Button>
         <MobileActions
           product={product}

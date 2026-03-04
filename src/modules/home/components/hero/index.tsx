@@ -1,46 +1,27 @@
-import { Button, Heading } from "@medusajs/ui"
+import { Button } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const Hero = () => {
   return (
-    <div className="relative h-[90vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden bg-brand-black">
-      {/* Background Overlay/Image Placeholder */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-brand-black z-10" />
-        {/* Usaremos un degradado premium hasta que el usuario decida la imagen principal */}
-        <div className="absolute inset-0 opacity-20 bg-[url('https://res.cloudinary.com/dbv5un7p9/image/upload/v1/assets/pattern_exotic')] bg-repeat" />
-      </div>
-
-      <div className="relative z-20 content-container flex flex-col items-center text-center px-6">
-        <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-6 animate-fade-in-down">
-          Luxury & Tech Curators
-        </span>
-
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-[1.1] animate-fade-in underline decoration-brand-gold/30 underline-offset-[16px]">
-          Descubre lo <span className="italic text-brand-gold">Exótico</span>
-        </h1>
-
-        <p className="max-w-[600px] text-gray-400 text-sm md:text-base leading-relaxed mb-12 font-medium tracking-wide uppercase px-4">
-          Rastreamos las piezas más exclusivas del mundo. Gadgets importados y lifestyle luxury curado para quienes buscan lo extraordinario.
+    <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-brand-black">
+      <img
+        src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2600&auto=format&fit=crop"
+        alt="Luxury Home Decoration"
+        className="absolute inset-0 w-full h-full object-cover opacity-60 animate-pulse-slow"
+      />
+      <div className="relative z-10 text-center text-white px-4 mt-10">
+        <p className="text-xs font-sans tracking-[0.4em] uppercase mb-6 text-brand-gold">
+          Bienvenidos a lo extraordinario
         </p>
-
-        <div className="flex flex-col sm:flex-row gap-6 mt-4">
-          <LocalizedClientLink href="/store">
-            <Button
-              className="h-14 px-12 bg-brand-gold hover:bg-white text-black font-bold uppercase tracking-widest text-xs transition-all duration-500 rounded-none shadow-2xl"
-            >
-              Explorar Colección
-            </Button>
-          </LocalizedClientLink>
-          <LocalizedClientLink href="/about">
-            <Button
-              variant="secondary"
-              className="h-14 px-12 border-white/20 text-white hover:bg-white hover:text-black font-bold uppercase tracking-widest text-xs transition-all duration-500 rounded-none"
-            >
-              Nuestra Historia
-            </Button>
-          </LocalizedClientLink>
-        </div>
+        <h1 className="text-5xl md:text-7xl font-serif mb-8 italic">
+          Originales & Exóticos
+        </h1>
+        <LocalizedClientLink
+          href="/store"
+          className="inline-block border border-white px-10 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-brand-black transition duration-300"
+        >
+          Ver Colección 2026
+        </LocalizedClientLink>
       </div>
 
       {/* Aesthetic Scroll Indicator */}
@@ -48,7 +29,7 @@ const Hero = () => {
         <span className="text-[9px] uppercase tracking-[0.5em] text-white/40">Deslizar</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-brand-gold to-transparent" />
       </div>
-    </div>
+    </section>
   )
 }
 

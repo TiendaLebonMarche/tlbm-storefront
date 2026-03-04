@@ -35,10 +35,9 @@ export default async function Home(props: {
 
       <section id="catalogo" className="bg-white">
         <div className="py-24 content-container">
-          <div className="flex flex-col items-center text-center mb-16 px-4">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Selección Curada</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-black mb-6">Piezas Destacadas</h2>
-            <div className="w-20 h-[1px] bg-brand-gold/30" />
+          <div className="text-center mb-16 px-4">
+            <h2 className="text-4xl font-serif text-brand-black mb-3">Productos Exclusivos</h2>
+            <div className="w-24 h-[1px] bg-brand-black mx-auto" />
           </div>
           <FeaturedProducts collections={collections} region={region} />
         </div>

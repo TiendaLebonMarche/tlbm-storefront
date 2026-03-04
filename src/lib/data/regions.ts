@@ -55,11 +55,18 @@ export const getRegion = async (countryCode: string) => {
       })
     })
 
-    const region = countryCode
-      ? regionMap.get(countryCode)
-      : regionMap.get("us")
+    let region = countryCode ? regionMap.get(countryCode) : null
 
-    return region
+    if (!region) {
+      // Fallback a la primera región disponible para evitar errores fatales en el carrito
+      const firstRegion = regionMap.values().next().value
+      if (firstRegion) {
+        console.warn(`getRegion: Country code "${countryCode}" no encontrado. Usando fallback: ${firstRegion.name}`)
+        return firstRegion
+      }
+    }
+
+    return region || null
   } catch (e: any) {
     return null
   }

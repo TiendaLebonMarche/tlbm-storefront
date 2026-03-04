@@ -22,9 +22,9 @@ export default async function Nav() {
       <div className="flex-shrink-0 z-50">
         <LocalizedClientLink
           href="/"
-          className="text-2xl md:text-3xl font-serif font-semibold tracking-tight transition-colors text-white group-data-[scrolled=true]:text-brand-black hover:opacity-80"
+          className="text-2xl md:text-3xl font-serif font-bold tracking-tight transition-colors text-white group-data-[scrolled=true]:text-brand-black hover:opacity-80"
         >
-          Tienda Le Bon Marché
+          LE BON MARCHÉ
         </LocalizedClientLink>
       </div>
 
