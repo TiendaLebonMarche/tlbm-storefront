@@ -29,7 +29,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   const languageToggleState = useToggleState()
 
   return (
-    <div className="h-full">
+    <div className="h-full z-50">
       <div className="flex items-center h-full">
         <Popover className="h-full flex">
           {({ open, close }) => (
@@ -37,15 +37,20 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                  className="nav-icon outline-none text-inherit hover:text-brand-gold transition-colors group-hover:underline decoration-1 underline-offset-4"
                 >
-                  Menu
+                  <span className="hidden md:inline">MENU</span>
+                  <span className="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                  </span>
                 </Popover.Button>
               </div>
 
               {open && (
                 <div
-                  className="fixed inset-0 z-[50] bg-black/0 pointer-events-auto"
+                  className="fixed inset-0 z-[50] bg-black/50 pointer-events-auto"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                 />
@@ -54,30 +59,32 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <Transition
                 show={open}
                 as={Fragment}
-                enter="transition ease-out duration-150"
-                enterFrom="opacity-0"
-                enterTo="opacity-100 backdrop-blur-2xl"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 backdrop-blur-2xl"
-                leaveTo="opacity-0"
+                enter="transition transform duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
+                enterFrom="-translate-x-full opacity-0"
+                enterTo="translate-x-0 opacity-100"
+                leave="transition transform duration-400 ease-in"
+                leaveFrom="translate-x-0 opacity-100"
+                leaveTo="-translate-x-full opacity-0"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-[51] inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
+                <PopoverPanel className="fixed top-0 left-0 h-full w-[350px] max-w-[85%] bg-brand-black shadow-2xl flex flex-col z-[51] text-white">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
+                    className="flex flex-col h-full justify-between p-8"
                   >
-                    <div className="flex justify-end" id="xmark">
-                      <button data-testid="close-menu-button" onClick={close}>
-                        <XMark />
+                    <div className="flex justify-between items-center mb-12">
+                      <h2 className="text-xl font-serif font-bold italic">Menu</h2>
+                      <button data-testid="close-menu-button" onClick={close} className="text-3xl text-gray-400 hover:text-white transition-colors">
+                        &times;
                       </button>
                     </div>
-                    <ul className="flex flex-col gap-6 items-start justify-start">
+
+                    <ul className="flex flex-col gap-8 items-start justify-start flex-1">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
                           <li key={name}>
                             <LocalizedClientLink
                               href={href}
-                              className="text-3xl leading-10 hover:text-ui-fg-disabled"
+                              className="text-xl font-bold uppercase tracking-[0.2em] hover:text-brand-gold transition-colors"
                               onClick={close}
                               data-testid={`${name.toLowerCase()}-link`}
                             >
@@ -87,10 +94,11 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         )
                       })}
                     </ul>
-                    <div className="flex flex-col gap-y-6">
+
+                    <div className="flex flex-col gap-y-6 pt-8 border-t border-gray-800">
                       {!!locales?.length && (
                         <div
-                          className="flex justify-between"
+                          className="flex justify-between hover:text-brand-gold transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
                           onMouseEnter={languageToggleState.open}
                           onMouseLeave={languageToggleState.close}
                         >
@@ -107,8 +115,9 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           />
                         </div>
                       )}
+
                       <div
-                        className="flex justify-between"
+                        className="flex justify-between hover:text-brand-gold transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
                         onMouseEnter={countryToggleState.open}
                         onMouseLeave={countryToggleState.close}
                       >
@@ -125,9 +134,9 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           )}
                         />
                       </div>
-                      <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
-                        reserved.
+
+                      <Text className="flex justify-between mt-4 text-[10px] text-gray-500">
+                        © {new Date().getFullYear()} Le Bon Marché.
                       </Text>
                     </div>
                   </div>

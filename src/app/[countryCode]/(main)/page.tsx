@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import FeaturedProducts from "@modules/home/components/featured-products"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
   title: "Tienda Le Bon Marché | Originales & Exóticos",
@@ -118,7 +119,7 @@ export default async function Home(props: {
             <div className="space-y-2">
               <time className="text-[10px] text-gray-400 uppercase tracking-widest">14 Feb 2026</time>
               <h3 className="text-lg font-serif leading-tight group-hover:text-brand-gold transition">Productos Luxury para tu Hogar</h3>
-              <a href="#" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2">Leer Artículo</a>
+              <LocalizedClientLink href="/store" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2 text-brand-black hover:text-brand-gold hover:border-brand-gold transition">Leer Artículo</LocalizedClientLink>
             </div>
           </article>
           <article className="group cursor-pointer">
@@ -129,7 +130,7 @@ export default async function Home(props: {
             <div className="space-y-2">
               <time className="text-[10px] text-gray-400 uppercase tracking-widest">10 Feb 2026</time>
               <h3 className="text-lg font-serif leading-tight group-hover:text-brand-gold transition">Configura tus Gadgets</h3>
-              <a href="#" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2">Leer Artículo</a>
+              <LocalizedClientLink href="/store" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2 text-brand-black hover:text-brand-gold hover:border-brand-gold transition">Leer Artículo</LocalizedClientLink>
             </div>
           </article>
           <article className="group cursor-pointer">
@@ -140,7 +141,7 @@ export default async function Home(props: {
             <div className="space-y-2">
               <time className="text-[10px] text-gray-400 uppercase tracking-widest">05 Feb 2026</time>
               <h3 className="text-lg font-serif leading-tight group-hover:text-brand-gold transition">Nueva Colección Importada</h3>
-              <a href="#" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2">Leer Artículo</a>
+              <LocalizedClientLink href="/store" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2 text-brand-black hover:text-brand-gold hover:border-brand-gold transition">Leer Artículo</LocalizedClientLink>
             </div>
           </article>
           <article className="group cursor-pointer">
@@ -151,7 +152,7 @@ export default async function Home(props: {
             <div className="space-y-2">
               <time className="text-[10px] text-gray-400 uppercase tracking-widest">28 Ene 2026</time>
               <h3 className="text-lg font-serif leading-tight group-hover:text-brand-gold transition">Review: Calidad de Sonido</h3>
-              <a href="#" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2">Leer Artículo</a>
+              <LocalizedClientLink href="/store" className="text-[10px] font-bold uppercase tracking-widest border-b border-black pb-1 inline-block mt-2 text-brand-black hover:text-brand-gold hover:border-brand-gold transition">Leer Artículo</LocalizedClientLink>
             </div>
           </article>
         </div>

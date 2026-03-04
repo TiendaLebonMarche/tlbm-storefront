@@ -28,8 +28,8 @@ export default async function Nav() {
         </LocalizedClientLink>
       </div>
 
-      <div className="hidden md:flex items-center gap-10">
-        <nav className="flex gap-8 text-xs font-bold tracking-widest uppercase">
+      <div className="flex items-center gap-6 md:gap-10">
+        <nav className="hidden md:flex gap-8 text-xs font-bold tracking-widest uppercase">
           <LocalizedClientLink href="/store" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">
             Catálogo
           </LocalizedClientLink>
@@ -38,9 +38,9 @@ export default async function Nav() {
           </LocalizedClientLink>
         </nav>
 
-        <div className="w-[1px] h-4 transition-colors bg-white/40 group-data-[scrolled=true]:bg-brand-black/20"></div>
+        <div className="hidden md:block w-[1px] h-4 transition-colors bg-white/40 group-data-[scrolled=true]:bg-brand-black/20"></div>
 
-        <div className="flex gap-6 items-center font-bold tracking-widest text-xs text-inherit">
+        <div className="flex gap-4 md:gap-6 items-center font-bold tracking-widest text-[10px] md:text-xs text-inherit">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           <SearchModal />
           <Suspense fallback={<CartButton />}>
