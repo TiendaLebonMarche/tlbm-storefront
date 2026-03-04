@@ -20,38 +20,50 @@ const FilterRadioGroup = ({
   "data-testid": dataTestId,
 }: FilterRadioGroupProps) => {
   return (
-    <div className="flex gap-x-3 flex-col gap-y-3">
-      <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
-      <RadioGroup data-testid={dataTestId} onValueChange={handleChange}>
-        {items?.map((i) => (
-          <div
-            key={i.value}
-            className={clx("flex gap-x-2 items-center", {
-              "ml-[-23px]": i.value === value,
-            })}
-          >
-            {i.value === value && <EllipseMiniSolid />}
-            <RadioGroup.Item
-              checked={i.value === value}
-              className="hidden peer"
-              id={i.value}
-              value={i.value}
-            />
-            <Label
-              htmlFor={i.value}
-              className={clx(
-                "!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer",
-                {
-                  "text-ui-fg-base": i.value === value,
-                }
-              )}
-              data-testid="radio-label"
-              data-active={i.value === value}
+    <div className="flex flex-col gap-y-6">
+      <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-gold border-b border-gray-100 pb-2">
+        {title}
+      </h3>
+      <RadioGroup data-testid={dataTestId} onValueChange={handleChange} value={value}>
+        <div className="flex flex-col gap-y-4">
+          {items?.map((i) => (
+            <div
+              key={i.value}
+              className="flex items-center group transition-all duration-300"
             >
-              {i.label}
-            </Label>
-          </div>
-        ))}
+              <RadioGroup.Item
+                checked={i.value === value}
+                className="hidden peer"
+                id={i.value}
+                value={i.value}
+              />
+              <Label
+                htmlFor={i.value}
+                className={clx(
+                  "relative pl-6 text-xs tracking-wider transition-all duration-300 hover:cursor-pointer flex items-center gap-x-2 font-medium",
+                  {
+                    "text-brand-black font-semibold": i.value === value,
+                    "text-gray-400 hover:text-brand-black": i.value !== value,
+                  }
+                )}
+                data-testid="radio-label"
+                data-active={i.value === value}
+              >
+                {/* Custom indicator */}
+                <span
+                  className={clx(
+                    "absolute left-0 w-3 h-[1px] transition-all duration-300",
+                    {
+                      "bg-brand-gold w-4": i.value === value,
+                      "bg-gray-200 w-0 group-hover:w-2": i.value !== value,
+                    }
+                  )}
+                />
+                {i.label}
+              </Label>
+            </div>
+          ))}
+        </div>
       </RadioGroup>
     </div>
   )

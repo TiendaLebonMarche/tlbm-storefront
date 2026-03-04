@@ -37,60 +37,76 @@ export default function CategoryTemplate({
   getParents(category)
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.name}
-                </LocalizedClientLink>
-                /
-              </span>
-            ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
+    <div className="py-12 bg-white" data-testid="category-container">
+      <div className="content-container flex flex-col small:flex-row small:items-start gap-x-12">
+        <div className="small:sticky small:top-24 w-full small:w-[250px] flex-shrink-0">
+          <RefinementList sortBy={sort} data-testid="sort-by-container" />
         </div>
-        {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
-          </div>
-        )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
-              {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
-                  </InteractiveLink>
-                </li>
+        <div className="w-full">
+          <div className="mb-12 border-b border-gray-100 pb-8 flex flex-col gap-y-4">
+            {/* Breadcrumbs */}
+            <div className="flex items-center gap-x-2 text-[10px] uppercase tracking-widest text-gray-400">
+              <LocalizedClientLink href="/store" className="hover:text-brand-gold transition-colors">
+                Tienda
+              </LocalizedClientLink>
+              {parents && parents.reverse().map((parent) => (
+                <span key={parent.id} className="flex items-center gap-x-2">
+                  <span className="text-gray-300">/</span>
+                  <LocalizedClientLink
+                    href={`/categories/${parent.handle}`}
+                    className="hover:text-brand-gold transition-colors"
+                  >
+                    {parent.name}
+                  </LocalizedClientLink>
+                </span>
               ))}
-            </ul>
+              <span className="text-gray-300">/</span>
+              <span className="text-brand-gold font-bold">{category.name}</span>
+            </div>
+
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <h1 className="text-4xl md:text-5xl font-serif text-brand-black" data-testid="category-page-title">
+                  {category.name}
+                </h1>
+                {category.description && (
+                  <p className="mt-4 text-gray-500 text-sm max-w-[600px] leading-relaxed italic font-serif">
+                    &ldquo;{category.description}&rdquo;
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {category.category_children && category.category_children.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {category.category_children.map((c) => (
+                  <LocalizedClientLink
+                    key={c.id}
+                    href={`/categories/${c.handle}`}
+                    className="px-4 py-2 border border-gray-100 bg-gray-50/50 text-brand-black text-[10px] uppercase tracking-widest font-bold hover:bg-brand-black hover:text-white transition-all duration-300 rounded-full"
+                  >
+                    {c.name}
+                  </LocalizedClientLink>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-        <Suspense
-          fallback={
-            <SkeletonProductGrid
-              numberOfProducts={category.products?.length ?? 8}
+
+          <Suspense
+            fallback={
+              <SkeletonProductGrid
+                numberOfProducts={category.products?.length ?? 8}
+              />
+            }
+          >
+            <PaginatedProducts
+              sortBy={sort}
+              page={pageNumber}
+              categoryId={category.id}
+              countryCode={countryCode}
             />
-          }
-        >
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            categoryId={category.id}
-            countryCode={countryCode}
-          />
-        </Suspense>
+          </Suspense>
+        </div>
       </div>
     </div>
   )

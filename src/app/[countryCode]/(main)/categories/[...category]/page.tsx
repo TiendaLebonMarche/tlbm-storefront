@@ -47,16 +47,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   try {
     const productCategory = await getCategoryByHandle(params.category)
 
-    const title = productCategory.name + " | Medusa Store"
-
-    const description = productCategory.description ?? `${title} category.`
+    const title = productCategory.name
+    const description = productCategory.description ?? `Explora nuestra colección de ${title} en Tienda Le Bon Marché. Selección exclusiva y exótica.`
 
     return {
-      title: `${title} | Medusa Store`,
+      title,
       description,
       alternates: {
         canonical: `${params.category.join("/")}`,
       },
+      openGraph: {
+        title: `${title} | Tienda Le Bon Marché`,
+        description,
+        siteName: "Tienda Le Bon Marché",
+      }
     }
   } catch (error) {
     notFound()
