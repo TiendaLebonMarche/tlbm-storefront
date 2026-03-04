@@ -127,11 +127,15 @@ export default function ProductActions({
     setIsAdding(true)
 
     try {
-      await addToCart({
+      const error = await addToCart({
         variantId: selectedVariant.id,
         quantity: 1,
         countryCode,
       })
+
+      if (error) {
+        throw new Error(error)
+      }
     } catch (error: any) {
       console.error("DEBUG - Error al añadir a la bolsa:", error)
       const message = error?.message || "Error desconocido de conexión"

@@ -56,7 +56,7 @@ export async function getOrSetCart(countryCode: string) {
   const region = await getRegion(countryCode)
 
   if (!region) {
-    throw new Error(`Region not found for country code: ${countryCode}`)
+    throw new Error(`Región no disponible para "${countryCode}". Por favor contacta a soporte.`)
   }
 
   let cart = await retrieveCart(undefined, "id,region_id")
@@ -67,23 +67,31 @@ export async function getOrSetCart(countryCode: string) {
 
   if (!cart) {
     const locale = await getLocale()
-    const cartResp = await sdk.store.cart.create(
-      { region_id: region.id, locale: locale || undefined },
-      {},
-      headers
-    )
-    cart = cartResp.cart
+    try {
+      const cartResp = await sdk.store.cart.create(
+        { region_id: region.id, locale: locale || undefined },
+        {},
+        headers
+      )
+      cart = cartResp.cart
+    } catch (e: any) {
+      return medusaError(e)
+    }
 
     await setCartId(cart.id)
 
     const cartCacheTag = await getCacheTag("carts")
-    revalidateTag(cartCacheTag)
+    if (cartCacheTag) revalidateTag(cartCacheTag)
   }
 
   if (cart && cart?.region_id !== region.id) {
-    await sdk.store.cart.update(cart.id, { region_id: region.id }, {}, headers)
-    const cartCacheTag = await getCacheTag("carts")
-    revalidateTag(cartCacheTag)
+    try {
+      await sdk.store.cart.update(cart.id, { region_id: region.id }, {}, headers)
+      const cartCacheTag = await getCacheTag("carts")
+      if (cartCacheTag) revalidateTag(cartCacheTag)
+    } catch (e: any) {
+      console.error("Error al actualizar la región del carrito:", e)
+    }
   }
 
   return cart
@@ -123,38 +131,45 @@ export async function addToCart({
   quantity: number
   countryCode: string
 }) {
-  if (!variantId) {
-    throw new Error("Missing variant ID when adding to cart")
+  try {
+    if (!variantId) {
+      throw new Error("ID de variante faltante al añadir a la bolsa")
+    }
+
+    const cart = await getOrSetCart(countryCode)
+
+    if (!cart) {
+      throw new Error("No se pudo obtener ni crear un carrito de compras")
+    }
+
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
+
+    await sdk.store.cart
+      .createLineItem(
+        cart.id,
+        {
+          variant_id: variantId,
+          quantity,
+        },
+        {},
+        headers
+      )
+      .then(async () => {
+        const cartCacheTag = await getCacheTag("carts")
+        if (cartCacheTag) revalidateTag(cartCacheTag)
+
+        const fulfillmentCacheTag = await getCacheTag("fulfillment")
+        if (fulfillmentCacheTag) revalidateTag(fulfillmentCacheTag)
+      })
+
+    return null // Éxito
+  } catch (error: any) {
+    console.error("DEBUG - Fallo crítico en addToCart:", error)
+    // Devolvemos el mensaje descriptivo. Si es un error de conexión, medusaError ahora lo devolverá limpio.
+    return `Error en el servidor: ${error?.message || "Error desconocido"}`
   }
-
-  const cart = await getOrSetCart(countryCode)
-
-  if (!cart) {
-    throw new Error("Error retrieving or creating cart")
-  }
-
-  const headers = {
-    ...(await getAuthHeaders()),
-  }
-
-  await sdk.store.cart
-    .createLineItem(
-      cart.id,
-      {
-        variant_id: variantId,
-        quantity,
-      },
-      {},
-      headers
-    )
-    .then(async () => {
-      const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag)
-
-      const fulfillmentCacheTag = await getCacheTag("fulfillment")
-      revalidateTag(fulfillmentCacheTag)
-    })
-    .catch(medusaError)
 }
 
 export async function updateLineItem({
