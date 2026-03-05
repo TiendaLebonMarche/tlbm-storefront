@@ -19,27 +19,36 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-      <div className="flex-shrink-0 z-50">
-        <LocalizedClientLink
-          href="/"
-          className="text-2xl md:text-3xl font-serif font-bold tracking-tight transition-colors text-white group-data-[scrolled=true]:text-brand-black hover:opacity-80"
-        >
-          LE BON MARCHÉ
-        </LocalizedClientLink>
-      </div>
-
-      <div className="flex items-center gap-6 md:gap-10">
-        <nav className="hidden md:flex gap-8 text-xs font-bold tracking-widest uppercase">
-          <LocalizedClientLink href="/store" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">
-            Catálogo
-          </LocalizedClientLink>
-          <LocalizedClientLink href="/about" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">
-            Nosotros
-          </LocalizedClientLink>
+      <div className="flex flex-1 items-center justify-between gap-4 md:gap-0">
+        {/* Menú izquierdo (desktop) */}
+        <nav className="hidden md:flex flex-1 justify-end gap-6 text-xs font-bold tracking-widest uppercase">
+          <LocalizedClientLink href="/ofertas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Ofertas</LocalizedClientLink>
+          <LocalizedClientLink href="/tecnologia" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Tecnología</LocalizedClientLink>
+          <LocalizedClientLink href="/sonido" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Sonido</LocalizedClientLink>
+          <LocalizedClientLink href="/hogar" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Hogar</LocalizedClientLink>
         </nav>
 
-        <div className="hidden md:block w-[1px] h-4 transition-colors bg-white/40 group-data-[scrolled=true]:bg-brand-black/20"></div>
+        {/* Logo centrado */}
+        <div className="flex-shrink-0 z-50 flex-1 flex justify-center">
+          <LocalizedClientLink
+            href="/"
+            className="text-2xl md:text-3xl font-serif font-bold tracking-tight transition-colors text-white group-data-[scrolled=true]:text-brand-black hover:opacity-80"
+            style={{ letterSpacing: '0.1em' }}
+          >
+            LE BON MARCHÉ
+          </LocalizedClientLink>
+        </div>
 
+        {/* Menú derecho (desktop) */}
+        <nav className="hidden md:flex flex-1 justify-start gap-6 text-xs font-bold tracking-widest uppercase">
+          <LocalizedClientLink href="/accesorios" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Accesorios</LocalizedClientLink>
+          <LocalizedClientLink href="/marcas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Marcas</LocalizedClientLink>
+          <LocalizedClientLink href="/mascotas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Mascotas</LocalizedClientLink>
+          <LocalizedClientLink href="/personal" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Personal</LocalizedClientLink>
+          <LocalizedClientLink href="/blog" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Blog</LocalizedClientLink>
+        </nav>
+
+        {/* Acciones e íconos */}
         <div className="flex gap-4 md:gap-6 items-center font-bold tracking-widest text-[10px] md:text-xs text-inherit">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           <SearchModal />

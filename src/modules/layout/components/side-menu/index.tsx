@@ -13,7 +13,15 @@ import { Locale } from "@lib/data/locales"
 
 const SideMenuItems = {
   Inicio: "/",
-  Catálogo: "/store",
+  Ofertas: "/ofertas",
+  Tecnología: "/tecnologia",
+  Sonido: "/sonido",
+  Hogar: "/hogar",
+  Accesorios: "/accesorios",
+  Marcas: "/marcas",
+  Mascotas: "/mascotas",
+  Personal: "/personal",
+  Blog: "/blog",
   "Mi Cuenta": "/account",
   "Mi Bolsa": "/cart",
 }
