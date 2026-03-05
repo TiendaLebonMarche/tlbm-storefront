@@ -53,15 +53,24 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
     }
   }, [isSideMenuOpen, isCartOpen, closeCart])
 
-  // Bloquea el scroll del body cuando el menú está abierto
+  // Bloquea el scroll del body y html cuando el menú está abierto
   useEffect(() => {
     if (isSideMenuOpen) {
+      document.documentElement.style.overflow = "hidden"
       document.body.style.overflow = "hidden"
+      document.documentElement.style.height = "100vh"
+      document.body.style.height = "100vh"
     } else {
+      document.documentElement.style.overflow = "unset"
       document.body.style.overflow = "unset"
+      document.documentElement.style.height = "auto"
+      document.body.style.height = "auto"
     }
     return () => {
+      document.documentElement.style.overflow = "unset"
       document.body.style.overflow = "unset"
+      document.documentElement.style.height = "auto"
+      document.body.style.height = "auto"
     }
   }, [isSideMenuOpen])
 
@@ -88,27 +97,27 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[60] bg-black/20 pointer-events-auto transition-opacity"
+                  className="fixed inset-0 z-[60] bg-black/30 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
-                  style={{backdropFilter:'blur(12px)'}}
+                  style={{backdropFilter:'blur(8px)', WebkitBackdropFilter: 'blur(8px)'}}
                 />
               )}
 
               <Transition
                 show={isSideMenuOpen}
                 as={Fragment}
-                enter="transition transform duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
+                enter="transition transform duration-500 ease-out"
                 enterFrom="-translate-x-full opacity-0"
                 enterTo="translate-x-0 opacity-100"
                 leave="transition transform duration-400 ease-in"
                 leaveFrom="translate-x-0 opacity-100"
                 leaveTo="-translate-x-full opacity-0"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-[100vh] w-[100vw] max-w-none bg-brand-black z-[70] text-white border-none flex flex-col shadow-2xl">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-none bg-brand-black z-[70] text-white border-none flex flex-col shadow-2xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full justify-between px-6 pt-10 pb-6 md:p-8"
+                    className="flex flex-col h-screen justify-between px-6 pt-10 pb-6 md:p-8"
                   >
                     <div className="flex justify-between items-center mb-12">
                       <h2 className="text-xl font-serif font-bold italic">Menu</h2>
