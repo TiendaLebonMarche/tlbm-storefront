@@ -90,7 +90,7 @@ const CartDropdown = ({
 
         {/* Overlay Background when Open (siempre visible y clickeable para cerrar) */}
         <Transition
-          show={cartDropdownOpen}
+          show={isCartOpen}
           as={Fragment}
           enter="transition-opacity duration-300"
           enterFrom="opacity-0"
@@ -110,7 +110,7 @@ const CartDropdown = ({
         </Transition>
 
         <Transition
-          show={cartDropdownOpen}
+          show={isCartOpen}
           as={Fragment}
           enter="transition transform duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
           enterFrom="translate-x-100 opacity-0"
