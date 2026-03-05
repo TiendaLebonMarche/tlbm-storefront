@@ -43,8 +43,9 @@ export default async function Nav() {
         <nav className="hidden md:flex flex-1 justify-start gap-8 text-sm font-bold tracking-widest uppercase">
           <div className="relative group">
             <button className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-none uppercase">Más ▾</button>
-            <div className="absolute left-0 top-full mt-2 hidden group-hover:block bg-white shadow-lg rounded-md min-w-[180px] z-50 border border-gray-100">
-              <ul className="flex flex-col py-2">
+            <div className="absolute left-0 top-full mt-2 min-w-[180px] py-2 px-0 bg-white shadow-2xl rounded-md border border-gray-100 z-[100] hidden group-hover:block"
+                 style={{boxShadow:'0 8px 32px 0 rgba(60,60,60,0.18)'}}>
+              <ul className="flex flex-col">
                 <li><LocalizedClientLink href="/accesorios" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Accesorios</LocalizedClientLink></li>
                 <li><LocalizedClientLink href="/marcas" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Marcas</LocalizedClientLink></li>
                 <li><LocalizedClientLink href="/mascotas" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Mascotas</LocalizedClientLink></li>
