@@ -7,7 +7,7 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
+            setIsScrolled(window.scrollY > 100)
         }
 
         window.addEventListener("scroll", handleScroll)
@@ -28,16 +28,16 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
             <header
                 id="main-header"
                 data-scrolled={isScrolled}
-                className={`group w-full z-40 transition-all duration-300 ${isScrolled
-                        ? "fixed top-0 header-scrolled"
-                        : "absolute py-6 bg-transparent"
+                className={`group w-full z-[60] transition-all duration-300 sticky top-10 ${isScrolled
+                        ? "header-scrolled shadow-md"
+                        : "bg-brand-black"
                     }`}
-                style={{ top: isScrolled ? "0" : "40px" }}
             >
-                <div className="max-w-[95rem] mx-auto px-6 md:px-12 flex justify-between items-center text-white group-data-[scrolled=true]:text-brand-black nav-container">
+                <div className="max-w-[95rem] mx-auto px-6 md:px-12 flex justify-between items-center py-6 text-white group-data-[scrolled=true]:text-brand-black nav-container">
                     {children}
                 </div>
             </header>
         </>
     )
 }
+
