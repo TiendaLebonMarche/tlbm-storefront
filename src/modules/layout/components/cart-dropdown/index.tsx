@@ -82,12 +82,22 @@ const CartDropdown = ({
     >
       <Popover className="relative h-full flex items-center">
         <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors" onClick={open}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.821 4.915M7.5 14h8.25m0 0l-2.5-8m2.5 8l2.5 8M6.75 14l2.5 8M14.25 6H12M12 6v8m0 0H9.75M12 14h2.25" />
-          </svg>
-          <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-gold text-brand-black w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold">
-            {totalItems}
-          </div>
+          {totalItems === 0 ? (
+            // Bolsa delgada cuando está vacía
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+            </svg>
+          ) : (
+            // Bolsa robusta cuando tiene elementos
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
+              <path d="M7 4V3c0-.552.448-1 1-1h8c.552 0 1 .448 1 1v1h5.586L23 7.414V19c0 1.657-1.343 3-3 3H4c-1.657 0-3-1.343-3-3V7.414L7 4zm2 0h6V3H9v1zm10 2H5v12c0 .552.448 1 1 1h12c.552 0 1-.448 1-1V6zM9 9c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1s-1-.448-1-1v-4c0-.552.448-1 1-1zm6 0c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1s-1-.448-1-1v-4c0-.552.448-1 1-1z" />
+            </svg>
+          )}
+          {totalItems > 0 && (
+            <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-gold text-brand-black w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold">
+              {totalItems}
+            </div>
+          )}
         </PopoverButton>
 
         {/* Overlay Background when Open (siempre visible y clickeable para cerrar) */}

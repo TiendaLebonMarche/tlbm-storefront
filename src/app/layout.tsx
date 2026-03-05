@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
   title: {
     template: "%s | Tienda Le Bon Marché",
-    default: "Tienda Le Bon Marché - Lujo, Exotismo y Lifestyle",
+    default: "Tienda Le Bon Marché | Productos Originales & Exóticos | Tienda Virtual en Bucaramanga",
   },
   description: "Descubre una curaduría exclusiva de libros Assouline, relojería de lujo, tecnología y piezas exóticas. Boutique online con envíos a toda Colombia.",
   openGraph: {
