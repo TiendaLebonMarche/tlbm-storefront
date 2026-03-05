@@ -53,6 +53,18 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
     }
   }, [isSideMenuOpen, isCartOpen, closeCart])
 
+  // Bloquea el scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (isSideMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isSideMenuOpen])
+
   return (
     <div className="h-full z-50">
       <div className="flex items-center h-full">
