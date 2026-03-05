@@ -2,6 +2,10 @@ import { Metadata } from "next"
 
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
+import TrustBadges from "@modules/home/components/trust-badges"
+import HotDeals from "@modules/home/components/hot-deals"
+import CustomerReviews from "@modules/home/components/customer-reviews"
+import NewsletterSection from "@modules/home/components/newsletter-section"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -32,6 +36,12 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
+      
+      <TrustBadges />
+
+      <HotDeals />
+
+      <CustomerReviews />
 
       <section id="catalogo" className="bg-white">
         <div className="py-24 content-container">
@@ -154,6 +164,8 @@ export default async function Home(props: {
           </div>
         </div>
       </section>
+
+      <NewsletterSection />
 
       <div className="w-full bg-[#0a0a0a] py-8 border-t border-white/5 overflow-hidden select-none flex items-center justify-center">
         <div className="content-container">

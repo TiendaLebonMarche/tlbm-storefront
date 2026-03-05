@@ -76,9 +76,7 @@ const CartDropdown = ({
 
   return (
     <div
-      className="h-full z-50 flex items-center"
-      onMouseEnter={openAndCancel}
-      onMouseLeave={close}
+      className="h-full z-50 flex items-center relative"
     >
       <Popover className="relative h-full flex items-center">
         <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors" onClick={open}>
@@ -99,6 +97,18 @@ const CartDropdown = ({
             </div>
           )}
         </PopoverButton>
+
+        {/* Botón X para cerrar carrito, visible sobre la bolsa cuando está abierto */}
+        {isCartOpen && (
+          <button
+            onClick={close}
+            className="absolute -top-3 -right-3 bg-brand-gold text-brand-black w-8 h-8 rounded-full flex items-center justify-center text-2xl font-light hover:bg-white hover:text-brand-black transition-all shadow-lg z-50"
+            aria-label="Cerrar bolsa"
+            title="Cerrar bolsa"
+          >
+            &times;
+          </button>
+        )}
 
         {/* Overlay Background when Open (siempre visible y clickeable para cerrar) */}
         <Transition
@@ -140,14 +150,6 @@ const CartDropdown = ({
           >
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
               <h2 className="text-lg font-serif font-bold text-brand-black">Tu Bolsa</h2>
-              <button
-                onClick={close}
-                className="text-2xl text-gray-400 hover:text-black outline-none focus:ring-2 focus:ring-brand-gold rounded-full p-2"
-                aria-label="Cerrar bolsa"
-                tabIndex={0}
-              >
-                &times;
-              </button>
             </div>
 
             {cartState && cartState.items?.length ? (
