@@ -65,7 +65,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {open && (
                 <div
-                  className="fixed inset-0 z-[50] bg-black/80 pointer-events-auto transition-opacity"
+                  className="fixed inset-0 z-[60] bg-black/95 pointer-events-auto transition-opacity"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                   style={{backdropFilter:'blur(2px)'}}
@@ -82,10 +82,10 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 leaveFrom="translate-x-0 opacity-100"
                 leaveTo="-translate-x-full opacity-0"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-full w-[90vw] max-w-[400px] bg-brand-black/95 shadow-2xl flex flex-col z-[51] text-white border-r border-gray-800">
+                <PopoverPanel className="fixed top-0 left-0 h-[100vh] w-[100vw] max-w-none bg-brand-black z-[70] text-white border-none flex flex-col shadow-2xl">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full justify-between px-6 py-8 md:p-8"
+                    className="flex flex-col h-full justify-between px-6 pt-10 pb-6 md:p-8"
                   >
                     <div className="flex justify-between items-center mb-12">
                       <h2 className="text-xl font-serif font-bold italic">Menu</h2>
@@ -94,7 +94,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       </button>
                     </div>
 
-                    <ul className="flex flex-col gap-4 items-start justify-start flex-1 w-full">
+                    <ul className="flex flex-col gap-4 items-start justify-start flex-1 w-full mt-2">
                       {mainMenu.map(({ name, href }) => (
                         <li key={name} className="w-full">
                           <LocalizedClientLink
