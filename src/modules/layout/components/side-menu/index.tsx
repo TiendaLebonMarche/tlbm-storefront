@@ -88,10 +88,10 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[60] bg-black/95 pointer-events-auto transition-opacity"
+                  className="fixed inset-0 z-[60] bg-black/20 pointer-events-auto transition-opacity"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
-                  style={{backdropFilter:'blur(2px)'}}
+                  style={{backdropFilter:'blur(12px)'}}
                 />
               )}
 
