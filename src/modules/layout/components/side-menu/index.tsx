@@ -31,7 +31,6 @@ const secondaryMenu = [
 const extraMenu = [
   { name: "Blog", href: "/blog" },
   { name: "Mi Cuenta", href: "/account" },
-  { name: "Mi Bolsa", href: "/cart", icon: true },
 ]
 
 type SideMenuProps = {
@@ -121,7 +120,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   >
                     <div className="flex justify-between items-center mb-12">
                       <h2 className="text-xl font-serif font-bold italic">Menu</h2>
-                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-3xl text-gray-400 hover:text-white transition-colors">
+                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-5xl font-light text-gray-300 hover:text-white transition-colors leading-none pb-2" title="Cerrar menú">
                         &times;
                       </button>
                     </div>
@@ -162,21 +161,14 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       {/* Separador visual */}
                       <li className="w-full border-t border-gray-700 my-2"></li>
                       {/* Extras */}
-                      {extraMenu.map(({ name, href, icon }) => (
+                      {extraMenu.map(({ name, href }) => (
                         <li key={name} className="w-full">
                           <LocalizedClientLink
                             href={href}
                             className="block w-full text-lg font-semibold uppercase tracking-widest flex items-center gap-2 py-2 px-2 rounded hover:text-brand-gold hover:bg-white/5 transition-colors"
                             onClick={close}
                           >
-                            {icon ? (
-                              <span className="inline-flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-1">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75A.75.75 0 0 1 3 6h18a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H3a.75.75 0 0 1-.75-.75V6.75ZM3 6.75V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25v1.5" />
-                                </svg>
-                                {name}
-                              </span>
-                            ) : name}
+                            {name}
                           </LocalizedClientLink>
                         </li>
                       ))}
