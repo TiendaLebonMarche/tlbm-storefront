@@ -11,20 +11,27 @@ import LanguageSelect from "../language-select"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 
-const SideMenuItems = {
-  Inicio: "/",
-  Ofertas: "/ofertas",
-  Tecnología: "/tecnologia",
-  Sonido: "/sonido",
-  Hogar: "/hogar",
-  "Más: Accesorios": "/accesorios",
-  "Más: Marcas": "/marcas",
-  "Más: Mascotas": "/mascotas",
-  "Más: Personal": "/personal",
-  Blog: "/blog",
-  "Mi Cuenta": "/account",
-  "Mi Bolsa": "/cart",
-}
+
+const mainMenu = [
+  { name: "Inicio", href: "/" },
+  { name: "Ofertas", href: "/ofertas" },
+  { name: "Tecnología", href: "/tecnologia" },
+  { name: "Sonido", href: "/sonido" },
+  { name: "Hogar", href: "/hogar" },
+]
+
+const secondaryMenu = [
+  { name: "Accesorios", href: "/accesorios" },
+  { name: "Marcas", href: "/marcas" },
+  { name: "Mascotas", href: "/mascotas" },
+  { name: "Personal", href: "/personal" },
+]
+
+const extraMenu = [
+  { name: "Blog", href: "/blog" },
+  { name: "Mi Cuenta", href: "/account" },
+  { name: "Mi Bolsa", href: "/cart", icon: true },
+]
 
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -86,21 +93,56 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       </button>
                     </div>
 
-                    <ul className="flex flex-col gap-8 items-start justify-start flex-1">
-                      {Object.entries(SideMenuItems).map(([name, href]) => {
-                        return (
-                          <li key={name}>
-                            <LocalizedClientLink
-                              href={href}
-                              className="text-xl font-bold uppercase tracking-[0.2em] hover:text-brand-gold transition-colors"
-                              onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
-                            >
-                              {name}
-                            </LocalizedClientLink>
-                          </li>
-                        )
-                      })}
+                    <ul className="flex flex-col gap-6 items-start justify-start flex-1">
+                      {mainMenu.map(({ name, href }) => (
+                        <li key={name}>
+                          <LocalizedClientLink
+                            href={href}
+                            className="text-xl font-bold uppercase tracking-[0.2em] hover:text-brand-gold transition-colors"
+                            onClick={close}
+                          >
+                            {name}
+                          </LocalizedClientLink>
+                        </li>
+                      ))}
+                      {/* Submenú 'Más' */}
+                      <li className="w-full">
+                        <details className="group w-full" style={{marginTop:'0.5rem'}}>
+                          <summary className="text-xl font-bold uppercase tracking-[0.2em] hover:text-brand-gold transition-colors cursor-pointer select-none outline-none">Más</summary>
+                          <ul className="pl-4 mt-2 flex flex-col gap-3">
+                            {secondaryMenu.map(({ name, href }) => (
+                              <li key={name}>
+                                <LocalizedClientLink
+                                  href={href}
+                                  className="text-base font-medium uppercase tracking-widest hover:text-brand-gold transition-colors"
+                                  onClick={close}
+                                >
+                                  {name}
+                                </LocalizedClientLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
+                      {/* Extras */}
+                      {extraMenu.map(({ name, href, icon }) => (
+                        <li key={name} className="mt-4">
+                          <LocalizedClientLink
+                            href={href}
+                            className="text-lg font-semibold uppercase tracking-widest flex items-center gap-2 hover:text-brand-gold transition-colors"
+                            onClick={close}
+                          >
+                            {icon ? (
+                              <span className="inline-flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-1">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75A.75.75 0 0 1 3 6h18a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H3a.75.75 0 0 1-.75-.75V6.75ZM3 6.75V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25v1.5" />
+                                </svg>
+                                {name}
+                              </span>
+                            ) : name}
+                          </LocalizedClientLink>
+                        </li>
+                      ))}
                     </ul>
 
                     <div className="flex flex-col gap-y-6 pt-8 border-t border-gray-800">
