@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import "styles/globals.css"
 import GoogleAnalytics from "@modules/common/components/google-analytics"
 import StructuredData from "@modules/common/components/structured-data"
+import { UIProvider } from "@lib/context/ui-context"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -44,7 +45,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         <StructuredData />
-        <main className="relative">{props.children}</main>
+        <UIProvider>
+          <main className="relative">{props.children}</main>
+        </UIProvider>
       </body>
     </html>
   )

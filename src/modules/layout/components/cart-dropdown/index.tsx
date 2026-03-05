@@ -14,6 +14,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Thumbnail from "@modules/products/components/thumbnail"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
+import { useUI } from "@lib/context/ui-context"
 
 const CartDropdown = ({
   cart: cartState,
@@ -23,10 +24,17 @@ const CartDropdown = ({
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
     undefined
   )
-  const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
+  const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu } = useUI()
 
-  const open = () => setCartDropdownOpen(true)
-  const close = () => setCartDropdownOpen(false)
+  // Cierra el menú lateral si se abre el carrito
+  useEffect(() => {
+    if (isCartOpen && isSideMenuOpen) {
+      closeSideMenu()
+    }
+  }, [isCartOpen, isSideMenuOpen, closeSideMenu])
+
+  const open = () => openCart()
+  const close = () => closeCart()
 
   const totalItems =
     cartState?.items?.reduce((acc, item) => {
@@ -73,7 +81,7 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full flex items-center">
-        <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-2 outline-none">
+        <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-2 outline-none" onClick={open}>
           <span className="group-hover:underline decoration-1 underline-offset-4 font-bold tracking-widest text-xs">BOLSA</span>
           <div id="cart-count" className="cart-badge bg-white text-brand-black group-data-[scrolled=true]:bg-brand-black group-data-[scrolled=true]:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors">
             {totalItems}

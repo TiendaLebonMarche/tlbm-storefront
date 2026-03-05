@@ -3,7 +3,8 @@
 import { Popover, PopoverPanel, Transition } from "@headlessui/react"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { Text, clx, useToggleState } from "@medusajs/ui"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
+import { useUI } from "@lib/context/ui-context"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
@@ -43,16 +44,26 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
 
+  const { isSideMenuOpen, openSideMenu, closeSideMenu, isCartOpen, closeCart } = useUI()
+
+  // Cierra el carrito si se abre el menú lateral
+  useEffect(() => {
+    if (isSideMenuOpen && isCartOpen) {
+      closeCart()
+    }
+  }, [isSideMenuOpen, isCartOpen, closeCart])
+
   return (
     <div className="h-full z-50">
       <div className="flex items-center h-full">
-        <Popover className="h-full flex">
+        <Popover className="h-full flex" open={isSideMenuOpen}>
           {({ open, close }) => (
             <>
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
                   className="nav-icon outline-none text-inherit hover:text-brand-gold transition-colors group-hover:underline decoration-1 underline-offset-4"
+                  onClick={openSideMenu}
                 >
                   <span className="hidden md:inline">MENU</span>
                   <span className="md:hidden">
@@ -63,17 +74,17 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 </Popover.Button>
               </div>
 
-              {open && (
+              {isSideMenuOpen && (
                 <div
                   className="fixed inset-0 z-[60] bg-black/95 pointer-events-auto transition-opacity"
-                  onClick={close}
+                  onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
                   style={{backdropFilter:'blur(2px)'}}
                 />
               )}
 
               <Transition
-                show={open}
+                show={isSideMenuOpen}
                 as={Fragment}
                 enter="transition transform duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
                 enterFrom="-translate-x-full opacity-0"
@@ -89,7 +100,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   >
                     <div className="flex justify-between items-center mb-12">
                       <h2 className="text-xl font-serif font-bold italic">Menu</h2>
-                      <button data-testid="close-menu-button" onClick={close} className="text-3xl text-gray-400 hover:text-white transition-colors">
+                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-3xl text-gray-400 hover:text-white transition-colors">
                         &times;
                       </button>
                     </div>
