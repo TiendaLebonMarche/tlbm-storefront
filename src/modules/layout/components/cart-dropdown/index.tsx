@@ -81,9 +81,11 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full flex items-center">
-        <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-2 outline-none" onClick={open}>
-          <span className="group-hover:underline decoration-1 underline-offset-4 font-bold tracking-widest text-xs">BOLSA</span>
-          <div id="cart-count" className="cart-badge bg-white text-brand-black group-data-[scrolled=true]:bg-brand-black group-data-[scrolled=true]:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors">
+        <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors" onClick={open}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.821 4.915M7.5 14h8.25m0 0l-2.5-8m2.5 8l2.5 8M6.75 14l2.5 8M14.25 6H12M12 6v8m0 0H9.75M12 14h2.25" />
+          </svg>
+          <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-gold text-brand-black w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold">
             {totalItems}
           </div>
         </PopoverButton>
