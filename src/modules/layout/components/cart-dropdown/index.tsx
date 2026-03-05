@@ -80,7 +80,7 @@ const CartDropdown = ({
           </div>
         </PopoverButton>
 
-        {/* Overlay Background when Open */}
+        {/* Overlay Background when Open (siempre visible y clickeable para cerrar) */}
         <Transition
           show={cartDropdownOpen}
           as={Fragment}
@@ -91,7 +91,14 @@ const CartDropdown = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={close} />
+          <div
+            className="fixed inset-0 bg-black/50 z-40 cursor-pointer"
+            aria-label="Cerrar bolsa"
+            tabIndex={0}
+            onClick={close}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') close() }}
+            role="button"
+          />
         </Transition>
 
         <Transition
@@ -108,10 +115,19 @@ const CartDropdown = ({
             static
             className="fixed top-0 right-0 h-full w-[400px] max-w-[85%] bg-white shadow-2xl flex flex-col z-50 overflow-hidden"
             data-testid="nav-cart-dropdown"
+            aria-modal="true"
+            role="dialog"
           >
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
               <h2 className="text-lg font-serif font-bold text-brand-black">Tu Bolsa</h2>
-              <button onClick={close} className="text-2xl text-gray-400 hover:text-black outline-none">&times;</button>
+              <button
+                onClick={close}
+                className="text-2xl text-gray-400 hover:text-black outline-none focus:ring-2 focus:ring-brand-gold rounded-full p-2"
+                aria-label="Cerrar bolsa"
+                tabIndex={0}
+              >
+                &times;
+              </button>
             </div>
 
             {cartState && cartState.items?.length ? (
@@ -160,7 +176,10 @@ const CartDropdown = ({
                 <div className="text-center flex flex-col items-center">
                   <p className="text-center text-gray-400 mb-6 font-serif italic text-lg">Tu bolsa está vacía.</p>
                   <LocalizedClientLink href="/store" onClick={close}>
-                    <button className="border border-brand-black py-3 px-8 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-black hover:text-white transition-all">
+                    <button
+                      className="border border-brand-black py-3 px-8 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-black hover:text-white transition-all"
+                      aria-label="Explorar productos"
+                    >
                       Explorar Productos
                     </button>
                   </LocalizedClientLink>
