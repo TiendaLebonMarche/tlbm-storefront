@@ -16,12 +16,12 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
 
     return (
         <>
-            <div id="top-bar" className="bg-brand-black text-white text-[10px] md:text-xs tracking-[0.2em] uppercase overflow-hidden py-3 relative z-50">
-                <div className="animate-marquee whitespace-nowrap inline-block">
-                    <span className="mx-8">✨ Envíos a todo el territorio nacional</span> •
-                    <span className="mx-8">WhatsApp: +57 302 756 7783</span> •
-                    <span className="mx-8">Garantía Ley 1480</span> •
-                    <span className="mx-8">✨ Productos Luxury y Exóticos</span>
+            <div id="top-bar" className="bg-brand-black/80 text-white text-[10px] md:text-xs tracking-[0.2em] uppercase overflow-hidden py-1 relative z-50" style={{fontWeight:400}}>
+                <div className="whitespace-nowrap inline-block opacity-80 text-center w-full">
+                    <span className="mx-4">Envíos a todo el país</span> •
+                    <span className="mx-4">WhatsApp: +57 302 756 7783</span> •
+                    <span className="mx-4">Garantía Ley 1480</span> •
+                    <span className="mx-4">Luxury & Exóticos</span>
                 </div>
             </div>
 

@@ -21,11 +21,11 @@ export default async function Nav() {
     <ClientHeaderWrapper>
       <div className="flex flex-1 items-center justify-between gap-4 md:gap-0">
         {/* Menú izquierdo (desktop) */}
-        <nav className="hidden md:flex flex-1 justify-end gap-6 text-xs font-bold tracking-widest uppercase">
-          <LocalizedClientLink href="/ofertas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Ofertas</LocalizedClientLink>
-          <LocalizedClientLink href="/tecnologia" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Tecnología</LocalizedClientLink>
-          <LocalizedClientLink href="/sonido" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Sonido</LocalizedClientLink>
-          <LocalizedClientLink href="/hogar" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Hogar</LocalizedClientLink>
+        <nav className="hidden md:flex flex-1 justify-end gap-8 text-sm font-bold tracking-widest uppercase">
+          <LocalizedClientLink href="/ofertas" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Ofertas</LocalizedClientLink>
+          <LocalizedClientLink href="/tecnologia" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Tecnología</LocalizedClientLink>
+          <LocalizedClientLink href="/sonido" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Sonido</LocalizedClientLink>
+          <LocalizedClientLink href="/hogar" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Hogar</LocalizedClientLink>
         </nav>
 
         {/* Logo centrado */}
@@ -40,20 +40,28 @@ export default async function Nav() {
         </div>
 
         {/* Menú derecho (desktop) */}
-        <nav className="hidden md:flex flex-1 justify-start gap-6 text-xs font-bold tracking-widest uppercase">
-          <LocalizedClientLink href="/accesorios" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Accesorios</LocalizedClientLink>
-          <LocalizedClientLink href="/marcas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Marcas</LocalizedClientLink>
-          <LocalizedClientLink href="/mascotas" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Mascotas</LocalizedClientLink>
-          <LocalizedClientLink href="/personal" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Personal</LocalizedClientLink>
-          <LocalizedClientLink href="/blog" className="hover:text-brand-gold transition-colors text-white group-data-[scrolled=true]:text-brand-black">Blog</LocalizedClientLink>
+        <nav className="hidden md:flex flex-1 justify-start gap-8 text-sm font-bold tracking-widest uppercase">
+          <div className="relative group">
+            <button className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-none uppercase">Más ▾</button>
+            <div className="absolute left-0 top-full mt-2 hidden group-hover:block bg-white shadow-lg rounded-md min-w-[180px] z-50 border border-gray-100">
+              <ul className="flex flex-col py-2">
+                <li><LocalizedClientLink href="/accesorios" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Accesorios</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/marcas" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Marcas</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/mascotas" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Mascotas</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/personal" className="block px-6 py-2 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors">Personal</LocalizedClientLink></li>
+              </ul>
+            </div>
+          </div>
+          <LocalizedClientLink href="/blog" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Blog</LocalizedClientLink>
         </nav>
 
         {/* Acciones e íconos */}
         <div className="flex gap-4 md:gap-6 items-center font-bold tracking-widest text-[10px] md:text-xs text-inherit">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           <SearchModal />
+          {/* Solo ícono de carrito, sin texto "BOLSA" */}
           <Suspense fallback={<CartButton />}>
-            <CartButton />
+            <CartButton iconOnly />
           </Suspense>
         </div>
       </div>
