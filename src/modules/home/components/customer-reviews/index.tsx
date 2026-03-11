@@ -71,7 +71,7 @@ const CustomerReviews = () => {
 
               {/* Review Text */}
               <p className="text-sm text-gray-700 mb-4 leading-relaxed font-light italic">
-                "{review.text}"
+                &quot;{review.text}&quot;
               </p>
 
               {/* Product Tag */}

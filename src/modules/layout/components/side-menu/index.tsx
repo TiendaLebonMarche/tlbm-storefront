@@ -12,24 +12,17 @@ import LanguageSelect from "../language-select"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 
+import { NAV_LINKS, MORE_LINKS } from "@lib/constants"
 
 const mainMenu = [
   { name: "Inicio", href: "/" },
-  { name: "Ofertas", href: "/ofertas" },
-  { name: "Tecnología", href: "/tecnologia" },
-  { name: "Sonido", href: "/sonido" },
-  { name: "Hogar", href: "/hogar" },
+  ...NAV_LINKS.filter(link => link.href !== "/blog").map(link => ({ name: link.label, href: link.href }))
 ]
 
-const secondaryMenu = [
-  { name: "Accesorios", href: "/accesorios" },
-  { name: "Marcas", href: "/marcas" },
-  { name: "Mascotas", href: "/mascotas" },
-  { name: "Personal", href: "/personal" },
-]
+const secondaryMenu = MORE_LINKS.map(link => ({ name: link.label, href: link.href }))
 
 const extraMenu = [
-  { name: "Blog", href: "/blog" },
+  ...NAV_LINKS.filter(link => link.href === "/blog").map(link => ({ name: link.label, href: link.href })),
   { name: "Mi Cuenta", href: "/account" },
 ]
 
@@ -76,7 +69,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   return (
     <div className="h-full z-50">
       <div className="flex items-center h-full">
-        <Popover className="h-full flex" open={isSideMenuOpen}>
+        <Popover className="h-full flex">
           {({ open, close }) => (
             <>
               <div className="relative flex h-full">
@@ -99,7 +92,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   className="fixed inset-0 z-[60] bg-black/30 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
-                  style={{backdropFilter:'blur(8px)', WebkitBackdropFilter: 'blur(8px)'}}
+                  style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
                 />
               )}
 
@@ -141,9 +134,9 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       <li className="w-full border-t border-gray-600/50 my-3"></li>
                       {/* Submenú 'Más' */}
                       <li className="w-full">
-                        <details className="group w-full" style={{marginTop:'0rem'}}>
+                        <details className="group w-full" style={{ marginTop: '0rem' }}>
                           <summary className="text-lg md:text-xl font-bold uppercase tracking-[0.15em] py-2 px-3 rounded transition-all duration-200 hover:text-brand-gold hover:bg-white/5 hover:pl-4 cursor-pointer select-none outline-none flex items-center border-l-2 border-transparent group-open:border-l-brand-gold">
-                            Más 
+                            Más
                             <span className="ml-3 text-base transition-transform duration-300 group-open:rotate-90">▸</span>
                           </summary>
                           <ul className="pl-6 mt-3 flex flex-col gap-3">

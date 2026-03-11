@@ -9,15 +9,6 @@ const SearchBar = () => {
   const [searchValue, setSearchValue] = useState(searchParams.get("q") || "")
   const [isSearching, setIsSearching] = useState(false)
 
-  // Debounce search
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleSearch(searchValue)
-    }, 500)
-
-    return () => clearTimeout(timer)
-  }, [searchValue])
-
   const handleSearch = useCallback((value: string) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -31,6 +22,15 @@ const SearchBar = () => {
     router.push(`?${params.toString()}`)
     setIsSearching(false)
   }, [searchParams, router])
+
+  // Debounce search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleSearch(searchValue)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [searchValue, handleSearch])
 
   const handleClear = () => {
     setSearchValue("")
@@ -53,7 +53,7 @@ const SearchBar = () => {
           }}
           className="w-full px-5 py-4 border border-gray-200 rounded-lg bg-white text-brand-black placeholder-gray-400 outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/30 transition-all font-light"
         />
-        
+
         {/* Icono de búsqueda */}
         <svg
           xmlns="http://www.w3.org/2000/svg"

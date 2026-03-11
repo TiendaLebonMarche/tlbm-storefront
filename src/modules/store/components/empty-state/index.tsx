@@ -33,7 +33,7 @@ const EmptyState = ({ query, filters = false }: EmptyStateProps) => {
             Sin resultados
           </h3>
           <p className="text-gray-600 font-light mb-2">
-            No encontramos productos que coincidan con "<strong>{query}</strong>"
+            No encontramos productos que coincidan con &quot;<strong>{query}</strong>&quot;
           </p>
           <p className="text-sm text-gray-500 mb-8">
             Intenta con otros términos de búsqueda o navega nuestro catálogo completo

@@ -73,3 +73,18 @@ export const noDivisionCurrencies = [
   "xdr",
   "xau",
 ]
+
+export const NAV_LINKS = [
+  { href: "/ofertas", label: "Ofertas" },
+  { href: "/tecnologia", label: "Tecnología" },
+  { href: "/sonido", label: "Sonido" },
+  { href: "/hogar", label: "Hogar" },
+  { href: "/blog", label: "Blog" },
+]
+
+export const MORE_LINKS = [
+  { href: "/accesorios", label: "Accesorios" },
+  { href: "/marcas", label: "Marcas" },
+  { href: "/mascotas", label: "Mascotas" },
+  { href: "/personal", label: "Personal" },
+]

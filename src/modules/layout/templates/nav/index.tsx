@@ -10,6 +10,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 import NavMenuMore from "@modules/layout/components/nav-menu-more"
+import { NAV_LINKS } from "@lib/constants"
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
@@ -18,6 +19,10 @@ export default async function Nav() {
     getLocale(),
   ])
 
+  // Split links for left and right nav
+  const leftLinks = NAV_LINKS.filter(link => link.href !== "/blog")
+  const rightLinks = NAV_LINKS.filter(link => link.href === "/blog")
+
   return (
     <ClientHeaderWrapper>
       <div className="flex flex-1 items-center w-full gap-6 md:gap-8">
@@ -25,30 +30,15 @@ export default async function Nav() {
         <div className="flex items-center gap-4 md:gap-0 md:flex-1">
           {/* Menú izquierdo (desktop) - con mejor spacing */}
           <nav className="hidden md:flex flex-1 justify-end gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pr-8">
-            <LocalizedClientLink 
-              href="/ofertas" 
-              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
-            >
-              Ofertas
-            </LocalizedClientLink>
-            <LocalizedClientLink 
-              href="/tecnologia" 
-              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
-            >
-              Tecnología
-            </LocalizedClientLink>
-            <LocalizedClientLink 
-              href="/sonido" 
-              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
-            >
-              Sonido
-            </LocalizedClientLink>
-            <LocalizedClientLink 
-              href="/hogar" 
-              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
-            >
-              Hogar
-            </LocalizedClientLink>
+            {leftLinks.map((link) => (
+              <LocalizedClientLink
+                key={link.href}
+                href={link.href}
+                className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+              >
+                {link.label}
+              </LocalizedClientLink>
+            ))}
           </nav>
 
           {/* Search y SideMenu (mobile) */}
@@ -74,26 +64,29 @@ export default async function Nav() {
           {/* Menú derecho (desktop) - con mejor spacing */}
           <nav className="hidden md:flex flex-1 justify-start gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pl-8">
             <NavMenuMore />
-            <LocalizedClientLink 
-              href="/blog" 
-              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
-            >
-              Blog
-            </LocalizedClientLink>
+            {rightLinks.map((link) => (
+              <LocalizedClientLink
+                key={link.href}
+                href={link.href}
+                className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+              >
+                {link.label}
+              </LocalizedClientLink>
+            ))}
           </nav>
 
           {/* Acciones e íconos (desktop) */}
           <div className="hidden md:flex gap-6 items-center font-bold tracking-widest text-xs text-inherit">
             <SearchModal />
             <Suspense fallback={<CartButton />}>
-              <CartButton iconOnly />
+              <CartButton />
             </Suspense>
           </div>
 
           {/* Carrito (mobile) */}
           <div className="md:hidden">
             <Suspense fallback={<CartButton />}>
-              <CartButton iconOnly />
+              <CartButton />
             </Suspense>
           </div>
         </div>

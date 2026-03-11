@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { MORE_LINKS } from "@lib/constants"
 
 export default function NavMenuMore() {
   const [open, setOpen] = useState(false)
@@ -38,10 +39,16 @@ export default function NavMenuMore() {
           style={{ boxShadow: '0 10px 40px 0 rgba(0,0,0,0.15)' }}
         >
           <ul className="flex flex-col">
-            <li><LocalizedClientLink href="/accesorios" className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium">Accesorios</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/marcas" className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium">Marcas</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/mascotas" className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium">Mascotas</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/personal" className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium">Personal</LocalizedClientLink></li>
+            {MORE_LINKS.map((link) => (
+              <li key={link.href}>
+                <LocalizedClientLink
+                  href={link.href}
+                  className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium"
+                >
+                  {link.label}
+                </LocalizedClientLink>
+              </li>
+            ))}
           </ul>
         </div>
       )}

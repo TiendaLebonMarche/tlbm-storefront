@@ -68,7 +68,7 @@ const StoreTemplate = async ({
             <p className="text-xs text-gray-600 font-medium">
               {query && (
                 <span>
-                  Resultados para <span className="font-bold text-brand-black">"{query}"</span>
+                  Resultados para <span className="font-bold text-brand-black">&quot;{query}&quot;</span>
                 </span>
               )}
             </p>

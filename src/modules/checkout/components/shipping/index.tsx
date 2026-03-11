@@ -11,7 +11,7 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import Divider from "@modules/common/components/divider"
 import MedusaRadio from "@modules/common/components/radio"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 
 const PICKUP_OPTION_ON = "__PICKUP_ON"
 const PICKUP_OPTION_OFF = "__PICKUP_OFF"
@@ -70,13 +70,13 @@ const Shipping: React.FC<ShippingProps> = ({
 
   const isOpen = searchParams.get("step") === "delivery"
 
-  const _shippingMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type !== "pickup"
-  )
+  const _shippingMethods = useMemo(() => availableShippingMethods?.filter(
+    (sm: any) => sm.service_zone?.fulfillment_set?.type !== "pickup"
+  ), [availableShippingMethods])
 
-  const _pickupMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type === "pickup"
-  )
+  const _pickupMethods = useMemo(() => availableShippingMethods?.filter(
+    (sm: any) => sm.service_zone?.fulfillment_set?.type === "pickup"
+  ), [availableShippingMethods])
 
   const hasPickupOptions = !!_pickupMethods?.length
 
@@ -101,10 +101,10 @@ const Shipping: React.FC<ShippingProps> = ({
       }
     }
 
-    if (_pickupMethods?.find((m) => m.id === shippingMethodId)) {
+    if (_pickupMethods?.find((m: any) => m.id === shippingMethodId)) {
       setShowPickupOptions(PICKUP_OPTION_ON)
     }
-  }, [availableShippingMethods])
+  }, [availableShippingMethods, _shippingMethods, _pickupMethods, cart.id, shippingMethodId])
 
   const handleEdit = () => {
     router.push(pathname + "?step=delivery", { scroll: false })
@@ -199,7 +199,7 @@ const Shipping: React.FC<ShippingProps> = ({
                     value={showPickupOptions}
                     onChange={(value) => {
                       const id = _pickupMethods.find(
-                        (option) => !option.insufficient_inventory
+                        (option: any) => !option.insufficient_inventory
                       )?.id
 
                       if (id) {
@@ -240,7 +240,7 @@ const Shipping: React.FC<ShippingProps> = ({
                     }
                   }}
                 >
-                  {_shippingMethods?.map((option) => {
+                  {_shippingMethods?.map((option: any) => {
                     const isDisabled =
                       option.price_type === "calculated" &&
                       !isLoadingPrices &&
@@ -315,7 +315,7 @@ const Shipping: React.FC<ShippingProps> = ({
                       }
                     }}
                   >
-                    {_pickupMethods?.map((option) => {
+                    {_pickupMethods?.map((option: any) => {
                       return (
                         <Radio
                           key={option.id}

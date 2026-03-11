@@ -79,7 +79,7 @@ const ShippingAddress = ({
     if (cart && !cart.email && customer?.email) {
       setFormAddress(undefined, customer.email)
     }
-  }, [cart]) // Add cart as a dependency
+  }, [cart, customer?.email, customer?.addresses]) // Add cart and customer info as dependencies
 
   const handleChange = (
     e: React.ChangeEvent<

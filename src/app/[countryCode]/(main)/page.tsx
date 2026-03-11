@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 
+import Image from "next/image"
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
@@ -36,10 +37,10 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
-      
+
       <TrustBadges />
 
-      <HotDeals />
+      <HotDeals countryCode={countryCode} />
 
       <CustomerReviews />
 
@@ -56,7 +57,13 @@ export default async function Home(props: {
       <section className="w-full bg-brand-black overflow-hidden py-0">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative h-[500px] md:h-[700px] overflow-hidden group">
-            <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1600" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Colección Assouline" />
+            <Image
+              src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1600"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              alt="Colección Assouline"
+            />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
           </div>
           <div className="flex flex-col justify-center items-center text-center p-12 md:p-24 lg:p-32">
@@ -95,7 +102,13 @@ export default async function Home(props: {
             ].map((cat) => (
               <div key={cat.title} className="category-card group cursor-pointer flex-shrink-0 w-[280px] md:w-[350px] snap-start">
                 <div className="aspect-[3/4] overflow-hidden relative mb-6">
-                  <img src={cat.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={cat.title} />
+                  <Image
+                    src={cat.img}
+                    fill
+                    sizes="(max-width: 768px) 280px, 350px"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    alt={cat.title}
+                  />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 </div>
                 <div className="text-center">
@@ -144,7 +157,13 @@ export default async function Home(props: {
             ].map((post) => (
               <article key={post.title} className="group cursor-pointer flex flex-col h-full">
                 <div className="overflow-hidden relative aspect-[4/5] mb-6 bg-gray-100 shadow-md transform transition-all duration-700 group-hover:shadow-xl">
-                  <img src={post.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={post.title} />
+                  <Image
+                    src={post.img}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    alt={post.title}
+                  />
                   <span className="absolute top-6 left-6 text-[9px] font-bold uppercase tracking-widest py-2 px-4 bg-white text-brand-black shadow-sm group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
                     {post.tag}
                   </span>
