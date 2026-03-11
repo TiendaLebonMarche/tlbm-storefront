@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Probador Interactivo de Menu y Header - Le Bon Marché</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .device-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .device-btn {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        
+        .device-btn:hover {
+            border-color: #C5A059;
+            color: #C5A059;
+        }
+        
+        .device-btn.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+        
+        .preview-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .device-label {
+            background: #1a1a1a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        iframe {
+            border: none;
+            width: 100%;
+            height: 600px;
+            display: block;
+        }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .checklist-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .checklist-item h3 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist-item ul {
+            list-style: none;
+        }
+        
+        .checklist-item li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .checklist-item li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .results-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .device-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #C5A059;
+        }
+        
+        .device-card strong {
+            display: block;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .device-specs {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .notes {
+            background: #fffbf0;
+            border-left: 4px solid #C5A059;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .status-ok {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>🎯 Probador Interactivo del Menú y Header</h1>
+            <p class="subtitle">Le Bon Marché - Pruebas de Respuesta en Diferentes Dispositivos</p>
+            
+            <div class="device-selector">
+                <button class="device-btn active" onclick="selectDevice(320, '📱 iPhone SE')">📱 320px<br>SE</button>
+                <button class="device-btn" onclick="selectDevice(375, '📱 iPhone 12')">📱 375px<br>iPhone 12</button>
+                <button class="device-btn" onclick="selectDevice(425, '📱 iPhone 15')">📱 425px<br>iPhone 15</button>
+                <button class="device-btn" onclick="selectDevice(768, '📱 iPad')">📱 768px<br>iPad</button>
+                <button class="device-btn" onclick="selectDevice(1024, '💻 iPad Pro')">💻 1024px<br>iPad Pro</button>
+                <button class="device-btn" onclick="selectDevice(1440, '🖥️ Laptop')">🖥️ 1440px<br>Laptop</button>
+                <button class="device-btn" onclick="selectDevice(1920, '🖥️ 4K')">🖥️ 1920px<br>4K</button>
+            </div>
+        </div>
+        
+        <div class="preview-wrapper">
+            <div class="device-label" id="deviceLabel">📱 iPhone SE - 320px</div>
+            <div class="iframe-container">
+                <iframe id="preview" src="http://localhost:3000" style="width:320px;height:600px;"></iframe>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2>📊 Especificaciones del Dispositivo Actual</h2>
+            <div class="breakdown-grid">
+                <div class="device-card">
+                    <strong>Ancho Actual</strong>
+                    <div class="device-specs">
+                        <span id="widthDisplay">320px</span><br>
+                        <small>Logo: text-xl</small><br>
+                        <small>Nav: Hidden (desktop)</small><br>
+                        <small>Top Bar: Hidden</small>
+                    </div>
+                </div>
+                <div class="device-card">
+                    <strong>Elementos Visibles</strong>
+                    <div class="device-specs">
+                        <span id="elementsDisplay">- Logo centrado<br>- Hamburger menu<br>- Search icon<br>- Cart button</span>
+                    </div>
+                </div>
+                <div class="device-card">
+                    <strong>Clases Tailwind Activas</strong>
+                    <div class="device-specs">
+                        <span id="tailwindDisplay">- gap-4 md:gap-8<br>- hidden md:flex<br>- text-xl md:text-2xl</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <strong>💡 Nota Importante:</strong> Las animaciones y estilos pueden verse mejor al abrir la página real en un navegador. 
+                Este es un simulador de tamaño para verificar el layout responsivo. Usa DevTools (F12) en tu navegador para pruebas completas.
+            </div>
+        </div>
+        
+        <div class="checklist">
+            <div class="checklist-item">
+                <h3>✅ Validación General</h3>
+                <ul>
+                    <li><input type="checkbox"> Logo centrado en todos los tamaños</li>
+                    <li><input type="checkbox"> Responsive funciona correctamente</li>
+                    <li><input type="checkbox"> No hay overflow horizontal</li>
+                    <li><input type="checkbox"> Transiciones suaves (300ms)</li>
+                    <li><input type="checkbox"> Scroll detection funciona</li>
+                    <li><input type="checkbox"> Top bar responsive</li>
+                </ul>
+            </div>
+            
+            <div class="checklist-item">
+                <h3>🎨 Animaciones</h3>
+                <ul>
+                    <li><input type="checkbox"> Underline animation on nav links</li>
+                    <li><input type="checkbox"> Logo hover scale effect</li>
+                    <li><input type="checkbox"> Menu items border-left on hover</li>
+                    <li><input type="checkbox"> Menu slide animation 500ms</li>
+                    <li><input type="checkbox"> Close button hover scale</li>
+                    <li><input type="checkbox"> Color transitions smooth</li>
+                </ul>
+            </div>
+            
+            <div class="checklist-item">
+                <h3>📱 Mobile (320-425px)</h3>
+                <ul>
+                    <li><input type="checkbox"> Hamburger icon visible</li>
+                    <li><input type="checkbox"> Side menu opens/closes</li>
+                    <li><input type="checkbox"> Backdrop blur efectivo</li>
+                    <li><input type="checkbox"> Menu items bien espaciados</li>
+                    <li><input type="checkbox"> Close button responsive</li>
+                    <li><input type="checkbox"> Sin overflow en X</li>
+                </ul>
+            </div>
+            
+            <div class="checklist-item">
+                <h3>💻 Desktop (768px+)</h3>
+                <ul>
+                    <li><input type="checkbox"> Nav izquierdo visible</li>
+                    <li><input type="checkbox"> Nav derecho visible</li>
+                    <li><input type="checkbox"> Logo centered between navs</li>
+                    <li><input type="checkbox"> Top bar visible</li>
+                    <li><input type="checkbox"> Professional appearance</li>
+                    <li><input type="checkbox"> Hover effects working</li>
+                </ul>
+            </div>
+            
+            <div class="checklist-item">
+                <h3>🎯 Especificaciones Minimalista</h3>
+                <ul>
+                    <li><input type="checkbox"> Espaciado clean (no cluttered)</li>
+                    <li><input type="checkbox"> Logo como focal point</li>
+                    <li><input type="checkbox"> Subtle animations</li>
+                    <li><input type="checkbox"> Gold accent en hover</li>
+                    <li><input type="checkbox"> Dark theme consistent</li>
+                    <li><input type="checkbox"> Premium look maintained</li>
+                </ul>
+            </div>
+            
+            <div class="checklist-item">
+                <h3>🔍 DevTools Manual Testing</h3>
+                <ul>
+                    <li><input type="checkbox"> DevTools F12 open</li>
+                    <li><input type="checkbox"> Device toolbar active (Ctrl+Shift+M)</li>
+                    <li><input type="checkbox"> Test cada breakpoint</li>
+                    <li><input type="checkbox"> Scroll y verifica shadow</li>
+                    <li><input type="checkbox"> Hover effects working</li>
+                    <li><input type="checkbox"> No console errors</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const devices = {
+            320: { label: '📱 iPhone SE - 320px', width: '320px', height: '600px', specs: '- Logo: text-xl<br>- Nav: Hidden<br>- Top Bar: Hidden<br>- Menu: Full screen hamburger' },
+            375: { label: '📱 iPhone 12 - 375px', width: '375px', height: '600px', specs: '- Logo: text-xl<br>- Nav: Hidden<br>- Top Bar: Hidden<br>- Menu: Full screen hamburger' },
+            425: { label: '📱 iPhone 15 - 425px', width: '425px', height: '600px', specs: '- Logo: text-xl<br>- Nav: Hidden<br>- Top Bar: Hidden<br>- Menu: Full screen hamburger' },
+            768: { label: '📱 iPad - 768px', width: '768px', height: '700px', specs: '- Logo: text-2xl<br>- Nav: Visible (md breakpoint)<br>- Top Bar: Visible<br>- Desktop layout active' },
+            1024: { label: '💻 iPad Pro - 1024px', width: '1024px', height: '700px', specs: '- Logo: text-2xl lg:text-3xl<br>- Nav: Full desktop<br>- Top Bar: Full featured<br>- Optimal spacing (lg breakpoint)' },
+            1440: { label: '🖥️ Laptop - 1440px', width: '1440px', height: '700px', specs: '- Logo: text-3xl<br>- Nav: Desktop full<br>- Gaps: lg:gap-10<br>- Luxury appearance' },
+            1920: { label: '🖥️ 4K Monitor - 1920px', width: '1920px', height: '700px', specs: '- Logo: text-3xl xl:text-4xl<br>- Nav: Ultra-wide layout<br>- Padding: lg:px-12<br>- Professional scale' }
+        };
+        
+        function selectDevice(width, label) {
+            // Update buttons
+            document.querySelectorAll('.device-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.device-btn').classList.add('active');
+            
+            // Update preview
+            const deviceConfig = devices[width];
+            const iframe = document.getElementById('preview');
+            iframe.style.width = deviceConfig.width;
+            
+            // Update labels
+            document.getElementById('deviceLabel').textContent = deviceConfig.label;
+            document.getElementById('widthDisplay').textContent = deviceConfig.width;
+            document.getElementById('elementsDisplay').innerHTML = deviceConfig.specs;
+            
+            // Update tailwind info based on breakpoint
+            if (width <= 425) {
+                document.getElementById('tailwindDisplay').innerHTML = 
+                    '- flex gap-4<br>- hidden md:flex<br>- md:hidden (desktop nav)<br>- text-xl';
+            } else if (width <= 768) {
+                document.getElementById('tailwindDisplay').innerHTML = 
+                    '- flex md:gap-8<br>- hidden md:flex (active)<br>- text-2xl<br>- md breakpoint active';
+            } else {
+                document.getElementById('tailwindDisplay').innerHTML = 
+                    '- flex gap-8 lg:gap-10<br>- lg breakpoint active<br>- text-3xl<br>- max-w-[95rem] container';
+            }
+        }
+        
+        // Initialize
+        selectDevice(320, '📱 iPhone SE');
+    </script>
+</body>
+</html>

@@ -20,40 +20,82 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-      <div className="flex flex-1 items-center justify-between gap-4 md:gap-0">
-        {/* Menú izquierdo (desktop) */}
-        <nav className="hidden md:flex flex-1 justify-end gap-8 text-sm font-bold tracking-widest uppercase">
-          <LocalizedClientLink href="/ofertas" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Ofertas</LocalizedClientLink>
-          <LocalizedClientLink href="/tecnologia" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Tecnología</LocalizedClientLink>
-          <LocalizedClientLink href="/sonido" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Sonido</LocalizedClientLink>
-          <LocalizedClientLink href="/hogar" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Hogar</LocalizedClientLink>
-        </nav>
+      <div className="flex flex-1 items-center w-full gap-6 md:gap-8">
+        {/* Sección Izquierda - Menú y búsqueda */}
+        <div className="flex items-center gap-4 md:gap-0 md:flex-1">
+          {/* Menú izquierdo (desktop) - con mejor spacing */}
+          <nav className="hidden md:flex flex-1 justify-end gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pr-8">
+            <LocalizedClientLink 
+              href="/ofertas" 
+              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+            >
+              Ofertas
+            </LocalizedClientLink>
+            <LocalizedClientLink 
+              href="/tecnologia" 
+              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+            >
+              Tecnología
+            </LocalizedClientLink>
+            <LocalizedClientLink 
+              href="/sonido" 
+              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+            >
+              Sonido
+            </LocalizedClientLink>
+            <LocalizedClientLink 
+              href="/hogar" 
+              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+            >
+              Hogar
+            </LocalizedClientLink>
+          </nav>
 
-        {/* Logo centrado */}
-        <div className="flex-shrink-0 z-50 flex-1 flex justify-center">
+          {/* Search y SideMenu (mobile) */}
+          <div className="flex md:hidden gap-3 items-center">
+            <SearchModal />
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          </div>
+        </div>
+
+        {/* Sección Centro - Logo Centrado */}
+        <div className="flex-shrink-0 z-40 md:flex-1 flex justify-center px-2">
           <LocalizedClientLink
             href="/"
-            className="text-2xl md:text-3xl font-serif font-bold tracking-tight transition-colors text-white group-data-[scrolled=true]:text-brand-black hover:opacity-80"
-            style={{ letterSpacing: '0.1em' }}
+            className="text-xl md:text-2xl lg:text-3xl font-serif font-bold tracking-tight transition-all duration-300 text-white group-data-[scrolled=true]:text-brand-black hover:scale-105 hover:text-brand-gold select-none"
+            style={{ letterSpacing: '0.08em' }}
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
         </div>
 
-        {/* Menú derecho (desktop) */}
-        <nav className="hidden md:flex flex-1 justify-start gap-8 text-sm font-bold tracking-widest uppercase">
-          <NavMenuMore />
-          <LocalizedClientLink href="/blog" className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black">Blog</LocalizedClientLink>
-        </nav>
+        {/* Sección Derecha - Menú y Acciones */}
+        <div className="flex items-center gap-6 md:gap-0 md:flex-1">
+          {/* Menú derecho (desktop) - con mejor spacing */}
+          <nav className="hidden md:flex flex-1 justify-start gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pl-8">
+            <NavMenuMore />
+            <LocalizedClientLink 
+              href="/blog" 
+              className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+            >
+              Blog
+            </LocalizedClientLink>
+          </nav>
 
-        {/* Acciones e íconos */}
-        <div className="flex gap-4 md:gap-6 items-center font-bold tracking-widest text-[10px] md:text-xs text-inherit">
-          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-          <SearchModal />
-          {/* Solo ícono de carrito, sin texto "BOLSA" */}
-          <Suspense fallback={<CartButton />}>
-            <CartButton iconOnly />
-          </Suspense>
+          {/* Acciones e íconos (desktop) */}
+          <div className="hidden md:flex gap-6 items-center font-bold tracking-widest text-xs text-inherit">
+            <SearchModal />
+            <Suspense fallback={<CartButton />}>
+              <CartButton iconOnly />
+            </Suspense>
+          </div>
+
+          {/* Carrito (mobile) */}
+          <div className="md:hidden">
+            <Suspense fallback={<CartButton />}>
+              <CartButton iconOnly />
+            </Suspense>
+          </div>
         </div>
       </div>
     </ClientHeaderWrapper>

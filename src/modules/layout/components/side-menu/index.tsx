@@ -116,21 +116,21 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-none bg-brand-black z-[70] text-white border-none flex flex-col shadow-2xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-screen justify-between px-6 pt-10 pb-6 md:p-8"
+                    className="flex flex-col h-screen justify-between px-5 md:px-8 pt-8 md:pt-10 pb-6 md:pb-8"
                   >
                     <div className="flex justify-between items-center mb-12">
-                      <h2 className="text-xl font-serif font-bold italic">Menu</h2>
-                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-5xl font-light text-gray-300 hover:text-white transition-colors leading-none pb-2" title="Cerrar menú">
+                      <h2 className="text-lg md:text-xl font-serif font-bold italic">Menu</h2>
+                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-3xl md:text-4xl font-light text-gray-400 hover:text-white transition-all duration-200 leading-none pb-1 hover:scale-110" title="Cerrar menú">
                         &times;
                       </button>
                     </div>
 
-                    <ul className="flex flex-col gap-4 items-start justify-start flex-1 w-full mt-2">
+                    <ul className="flex flex-col gap-5 items-start justify-start flex-1 w-full mt-4">
                       {mainMenu.map(({ name, href }) => (
                         <li key={name} className="w-full">
                           <LocalizedClientLink
                             href={href}
-                            className="block w-full text-xl font-bold uppercase tracking-[0.2em] py-2 px-2 rounded hover:text-brand-gold hover:bg-white/5 transition-colors"
+                            className="block w-full text-lg md:text-xl font-bold uppercase tracking-[0.15em] py-2 px-3 rounded transition-all duration-200 hover:text-brand-gold hover:bg-white/5 hover:pl-4 border-l-2 border-transparent hover:border-l-brand-gold"
                             onClick={close}
                           >
                             {name}
@@ -138,17 +138,20 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         </li>
                       ))}
                       {/* Separador visual */}
-                      <li className="w-full border-t border-gray-700 my-2"></li>
+                      <li className="w-full border-t border-gray-600/50 my-3"></li>
                       {/* Submenú 'Más' */}
                       <li className="w-full">
-                        <details className="group w-full" style={{marginTop:'0.5rem'}}>
-                          <summary className="text-xl font-bold uppercase tracking-[0.2em] py-2 px-2 rounded hover:text-brand-gold hover:bg-white/5 transition-colors cursor-pointer select-none outline-none flex items-center">Más <span className="ml-2 text-base">▸</span></summary>
-                          <ul className="pl-4 mt-2 flex flex-col gap-2">
+                        <details className="group w-full" style={{marginTop:'0rem'}}>
+                          <summary className="text-lg md:text-xl font-bold uppercase tracking-[0.15em] py-2 px-3 rounded transition-all duration-200 hover:text-brand-gold hover:bg-white/5 hover:pl-4 cursor-pointer select-none outline-none flex items-center border-l-2 border-transparent group-open:border-l-brand-gold">
+                            Más 
+                            <span className="ml-3 text-base transition-transform duration-300 group-open:rotate-90">▸</span>
+                          </summary>
+                          <ul className="pl-6 mt-3 flex flex-col gap-3">
                             {secondaryMenu.map(({ name, href }) => (
                               <li key={name} className="w-full">
                                 <LocalizedClientLink
                                   href={href}
-                                  className="block w-full text-base font-medium uppercase tracking-widest py-2 px-2 rounded hover:text-brand-gold hover:bg-white/5 transition-colors"
+                                  className="block w-full text-base font-medium uppercase tracking-widest py-2 px-3 rounded transition-all duration-200 hover:text-brand-gold hover:bg-white/5 hover:pl-4 border-l-2 border-transparent hover:border-l-brand-gold"
                                   onClick={close}
                                 >
                                   {name}
@@ -159,13 +162,13 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         </details>
                       </li>
                       {/* Separador visual */}
-                      <li className="w-full border-t border-gray-700 my-2"></li>
+                      <li className="w-full border-t border-gray-600/50 my-3"></li>
                       {/* Extras */}
                       {extraMenu.map(({ name, href }) => (
                         <li key={name} className="w-full">
                           <LocalizedClientLink
                             href={href}
-                            className="block w-full text-lg font-semibold uppercase tracking-widest flex items-center gap-2 py-2 px-2 rounded hover:text-brand-gold hover:bg-white/5 transition-colors"
+                            className="block w-full text-base md:text-lg font-semibold uppercase tracking-[0.15em] flex items-center gap-2 py-2 px-3 rounded transition-all duration-200 hover:text-brand-gold hover:bg-white/5 hover:pl-4 border-l-2 border-transparent hover:border-l-brand-gold"
                             onClick={close}
                           >
                             {name}
