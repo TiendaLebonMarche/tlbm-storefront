@@ -1,0 +1,139 @@
+import { Metadata } from "next"
+import Image from "next/image"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+
+export const metadata: Metadata = {
+  title: "Journal | Tienda Le Bon Marché",
+  description: "Explora nuestras historias, guías y tendencias sobre el mundo del lujo y lifestyle exótico.",
+}
+
+const blogPosts = [
+  {
+    tag: "Boutique",
+    date: "14 MAR 2026",
+    title: "El Renacimiento del Objeto: Curaduría Assouline",
+    description: "Descubre por qué los libros de mesa se han convertido en la pieza central del diseño de interiores contemporáneo.",
+    img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=800"
+  },
+  {
+    tag: "Guía Pro",
+    date: "10 MAR 2026",
+    title: "Alta Fidelidad: El Arte de Escuchar con Passau",
+    description: "Una inmersión profunda en la ingeniería acústica y el diseño atemporal de los sistemas de sonido Passau.",
+    img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800"
+  },
+  {
+    tag: "Editorial",
+    date: "05 MAR 2026",
+    title: "Minimalismo Cálido: Tendencias 2026",
+    description: "Cómo equilibrar la sofisticación del diseño minimalista con la calidez de materiales nobles y exóticos.",
+    img: "https://images.unsplash.com/photo-1512353087810-25dfcd100962?q=80&w=800"
+  },
+  {
+    tag: "Lifestyle",
+    date: "28 FEB 2026",
+    title: "Destinos Exóticos: Inspiración para el Viajero Moderno",
+    description: "Desde las costas de Amalfi hasta los retiros ocultos en Japón, exploramos el lujo de viajar.",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800"
+  },
+  {
+    tag: "Reviews",
+    date: "20 FEB 2026",
+    title: "Relojería de Vanguardia: Más que solo tiempo",
+    description: "Analizamos las complicaciones mecánicas que definen a la nueva era de relojes de diseño.",
+    img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=800"
+  },
+  {
+    tag: "Colección",
+    date: "15 FEB 2026",
+    title: "Esencias de Autor: El arte de la perfumería",
+    description: "Cómo elegir una fragancia que transmita identidad y exclusividad en cada nota.",
+    img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800"
+  }
+]
+
+export default function BlogPage() {
+  return (
+    <div className="bg-white min-h-screen">
+      {/* Editorial Header */}
+      <header className="py-24 md:py-32 border-b border-gray-50">
+        <div className="content-container text-center space-y-6">
+          <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">The Journal</span>
+          <h1 className="text-6xl md:text-8xl font-serif text-brand-black italic leading-[0.9]">
+            Historias <br /> <span className="not-italic">con Propósito</span>
+          </h1>
+          <p className="max-w-xl mx-auto text-gray-400 font-light text-base leading-relaxed pt-4">
+            Crónicas sobre diseño, tecnología y el arte de vivir bien. <br /> Una curaduría de ideas para el coleccionista moderno.
+          </p>
+        </div>
+      </header>
+
+      {/* Blog Grid */}
+      <main className="py-24 md:py-32">
+        <div className="content-container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
+            {blogPosts.map((post) => (
+              <article key={post.title} className="group flex flex-col h-full">
+                <LocalizedClientLink href="#" className="relative aspect-[3/4] overflow-hidden mb-10 bg-gray-50">
+                  <Image
+                    src={post.img}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    alt={post.title}
+                  />
+                  <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </LocalizedClientLink>
+
+                <div className="flex flex-col flex-1">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+                      {post.tag}
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-gray-200" />
+                    <time className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">
+                      {post.date}
+                    </time>
+                  </div>
+
+                  <h2 className="text-3xl font-serif text-brand-black leading-tight mb-6 group-hover:text-brand-gold transition-colors duration-500">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-gray-500 font-light leading-relaxed text-sm mb-8 line-clamp-3">
+                    {post.description}
+                  </p>
+
+                  <div className="mt-auto pt-4 border-t border-gray-100/60">
+                    <LocalizedClientLink href="#" className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
+                      <span className="group-hover:tracking-[0.4em] transition-all">Leer más</span>
+                      <div className="w-8 h-[1px] bg-brand-gold group-hover/link:w-12 transition-all duration-500"></div>
+                    </LocalizedClientLink>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      {/* Newsletter Section Integration (Simple) */}
+      <div className="bg-[#fafafa] py-24 md:py-32">
+        <div className="content-container max-w-2xl text-center space-y-8">
+          <h2 className="text-4xl font-serif text-brand-black italic">Suscríbete al Journal</h2>
+          <p className="text-gray-500 font-light text-sm">Recibe actualizaciones sobre nuevas colecciones y contenido exclusivo directamente en tu bandeja de entrada.</p>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <input 
+              type="email" 
+              placeholder="Tu correo electrónico" 
+              className="flex-1 px-0 py-4 border-b border-gray-300 bg-transparent outline-none focus:border-brand-gold transition-colors text-sm font-light"
+            />
+            <button className="px-12 py-4 bg-brand-black text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-gold transition-colors">
+              Unirse
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

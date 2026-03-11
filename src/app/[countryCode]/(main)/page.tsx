@@ -120,64 +120,69 @@ export default async function Home(props: {
         </div>
       </section>
 
-      <section id="blog" className="py-32 bg-[#fafafa]">
-        <div className="content-container px-6 lg:px-12">
-          <div className="flex flex-col items-center text-center mb-20">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Journal</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-black">El Blog de la Tienda</h2>
-            <p className="mt-4 text-gray-500 font-serif italic text-sm">Noticias, Manuales & Tendencias Exóticas</p>
+      <section id="blog" className="py-24 md:py-32 bg-white">
+        <div className="content-container">
+          <div className="flex flex-col items-center text-center mb-20 space-y-4">
+            <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">Journal</span>
+            <h2 className="text-5xl md:text-6xl font-serif text-brand-black italic">Crónicas de Estilo</h2>
+            <p className="max-w-xl text-gray-500 font-light text-base leading-relaxed">
+              Exploramos las historias detrás de la curaduría, guías de estilo y las últimas tendencias en el mundo del lujo exótico.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             {[
               {
-                tag: "Tendencias",
-                date: "14 FEB 2026",
-                title: "Inspiración Luxury para tu Espacio",
+                tag: "Boutique",
+                date: "MAR 2026",
+                title: "El Renacimiento del Objeto: Curaduría Assouline",
                 img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=800"
               },
               {
-                tag: "Manuales",
-                date: "10 FEB 2026",
-                title: "Guía: Configura tus Gadgets Pro",
+                tag: "Guía Pro",
+                date: "FEB 2026",
+                title: "Alta Fidelidad: El Arte de Escuchar con Passau",
                 img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800"
               },
               {
-                tag: "Noticias",
-                date: "05 FEB 2026",
-                title: "Nueva Colección Importada 2026",
+                tag: "Editorial",
+                date: "FEB 2026",
+                title: "Minimalismo Cálido: Tendencias en Interiores 2026",
                 img: "https://images.unsplash.com/photo-1512353087810-25dfcd100962?q=80&w=800"
-              },
-              {
-                tag: "Reviews",
-                date: "28 ENE 2026",
-                title: "Passau: El Futuro del Sonido Exótico",
-                img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800"
               }
             ].map((post) => (
-              <article key={post.title} className="group cursor-pointer flex flex-col h-full">
-                <div className="overflow-hidden relative aspect-[4/5] mb-6 bg-gray-100 shadow-md transform transition-all duration-700 group-hover:shadow-xl">
+              <article key={post.title} className="group cursor-pointer flex flex-col h-full bg-white">
+                <LocalizedClientLink href="/blog" className="block relative overflow-hidden aspect-[3/4] mb-8 bg-gray-50">
                   <Image
                     src={post.img}
                     fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     alt={post.title}
                   />
-                  <span className="absolute top-6 left-6 text-[9px] font-bold uppercase tracking-widest py-2 px-4 bg-white text-brand-black shadow-sm group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                    {post.tag}
-                  </span>
-                </div>
-                <div className="flex-grow space-y-3">
-                  <time className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">{post.date}</time>
-                  <h3 className="text-xl font-serif text-brand-black leading-tight group-hover:text-brand-gold transition-colors duration-300">
+                  <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </LocalizedClientLink>
+                
+                <div className="flex flex-col flex-1 space-y-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+                      {post.tag}
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-gray-200" />
+                    <time className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">{post.date}</time>
+                  </div>
+                  
+                  <h3 className="text-2xl font-serif text-brand-black leading-snug group-hover:text-brand-gold transition-colors duration-500">
                     {post.title}
                   </h3>
+                  
+                  <div className="pt-6 mt-auto">
+                    <LocalizedClientLink href="/blog" className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
+                      <span className="group-hover:tracking-[0.4em] transition-all">Leer Journal</span>
+                      <div className="w-8 h-[1px] bg-brand-gold group-hover/link:w-12 transition-all duration-500"></div>
+                    </LocalizedClientLink>
+                  </div>
                 </div>
-                <LocalizedClientLink href="/store" className="mt-6 text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-2 text-brand-black hover:text-brand-gold transition-colors group/link">
-                  <span>Leer Artículo</span>
-                  <div className="w-10 h-[1px] bg-brand-black group-hover/link:bg-brand-gold group-hover/link:w-16 transition-all duration-500"></div>
-                </LocalizedClientLink>
               </article>
             ))}
           </div>

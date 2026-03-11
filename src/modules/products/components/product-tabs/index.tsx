@@ -43,50 +43,22 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
-    <div className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-        {product.material && (
-          <div className="border-l-2 border-brand-gold pl-4">
-            <span className="font-semibold text-brand-gold uppercase tracking-widest text-[11px]">
-              Material
+    <div className="py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+        {[
+          { label: "Material", value: product.material },
+          { label: "Origen", value: product.origin_country },
+          { label: "Categoría", value: product.type?.value },
+          { label: "Dimensiones", value: product.length && `${product.length}x${product.width}x${product.height} cm` },
+          { label: "Peso", value: product.weight && `${product.weight}g` }
+        ].filter(i => i.value).map((item, i) => (
+          <div key={i} className="space-y-2 border-b border-gray-50 pb-4">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gold/80 block">
+              {item.label}
             </span>
-            <p className="text-gray-700 mt-1">{product.material}</p>
+            <p className="text-sm text-brand-black/70 font-light">{item.value}</p>
           </div>
-        )}
-        {product.origin_country && (
-          <div className="border-l-2 border-brand-gold pl-4">
-            <span className="font-semibold text-brand-gold uppercase tracking-widest text-[11px]">
-              País de Origen
-            </span>
-            <p className="text-gray-700 mt-1">{product.origin_country}</p>
-          </div>
-        )}
-        {product.type && (
-          <div className="border-l-2 border-brand-gold pl-4">
-            <span className="font-semibold text-brand-gold uppercase tracking-widest text-[11px]">
-              Categoría
-            </span>
-            <p className="text-gray-700 mt-1">{product.type.value}</p>
-          </div>
-        )}
-        {product.weight && (
-          <div className="border-l-2 border-brand-gold pl-4">
-            <span className="font-semibold text-brand-gold uppercase tracking-widest text-[11px]">
-              Peso
-            </span>
-            <p className="text-gray-700 mt-1">{product.weight} g</p>
-          </div>
-        )}
-        {product.length && product.width && product.height && (
-          <div className="border-l-2 border-brand-gold pl-4">
-            <span className="font-semibold text-brand-gold uppercase tracking-widest text-[11px]">
-              Dimensiones
-            </span>
-            <p className="text-gray-700 mt-1">
-              {product.length} x {product.width} x {product.height} cm
-            </p>
-          </div>
-        )}
+        ))}
       </div>
     </div>
   )
@@ -94,47 +66,39 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 
 const ShippingInfoTab = () => {
   return (
-    <div className="py-6">
-      <div className="grid grid-cols-1 gap-y-6">
-        <div className="flex items-start gap-x-4 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0">
-          <div className="flex-shrink-0">
-            <FastDelivery />
+    <div className="py-8">
+      <div className="grid grid-cols-1 gap-y-10">
+        {[
+          {
+            icon: <FastDelivery />,
+            title: "Logística Prioritaria",
+            desc: "Despachos asegurados con tracking en tiempo real para todo el territorio nacional."
+          },
+          {
+            icon: <Refresh />,
+            title: "Políticas de Retorno",
+            desc: "Garantizamos su satisfacción total. Si la pieza no cumple sus expectativas, dispone de 30 días para trámites de cambio."
+          },
+          {
+            icon: <Back />,
+            title: "Garantía de Calidad",
+            desc: "Todas nuestras piezas cumplen con los estándares de calidad de la Ley 1480 y respaldo directo de curaduría."
+          }
+        ].map((item, i) => (
+          <div key={i} className="flex items-start gap-x-6">
+            <div className="flex-shrink-0 text-brand-black p-3 bg-gray-50/50 rounded-full">
+              {item.icon}
+            </div>
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold text-brand-black uppercase tracking-widest block">
+                {item.title}
+              </span>
+              <p className="text-sm text-gray-500 font-light leading-relaxed max-w-lg">
+                {item.desc}
+              </p>
+            </div>
           </div>
-          <div>
-            <span className="font-semibold text-brand-black block mb-2">
-              Envíos Rápidos a todo el País
-            </span>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Recibe tus artículos originales y exóticos en la puerta de tu casa con nuestra logística prioritaria, cubriendo todo el territorio nacional.
-            </p>
-          </div>
-        </div>
-        <div className="flex items-start gap-x-4 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0">
-          <div className="flex-shrink-0">
-            <Refresh />
-          </div>
-          <div>
-            <span className="font-semibold text-brand-black block mb-2">
-              Cambios sin Complicaciones
-            </span>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              ¿No es lo que esperabas? Te facilitamos el proceso de cambio para que la experiencia premium nunca se detenga.
-            </p>
-          </div>
-        </div>
-        <div className="flex items-start gap-x-4">
-          <div className="flex-shrink-0">
-            <Back />
-          </div>
-          <div>
-            <span className="font-semibold text-brand-black block mb-2">
-              Garantía Ley 1480
-            </span>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Total tranquilidad. Ofrecemos respaldo de garantía para asegurar que adquieras productos de la más alta calidad y durabilidad.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
