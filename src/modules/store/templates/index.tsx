@@ -35,57 +35,56 @@ const StoreTemplate = async ({
   })
 
   return (
-    <div className="py-12 bg-gray-50 min-h-screen" data-testid="category-container">
-      <div className="content-container flex flex-col small:flex-row small:items-start gap-x-8">
-        {/* Sidebar - Filtros */}
-        <div className="small:sticky small:top-32 w-full small:w-[280px] flex-shrink-0">
-          <div className="space-y-5">
-            <RefinementList sortBy={sort} />
-            <FilterPanel collections={collections || []} />
-          </div>
+    <div className="py-16 bg-white min-h-screen" data-testid="category-container">
+      <div className="content-container">
+        {/* Editorial Header */}
+        <div className="mb-20 text-center max-w-2xl mx-auto">
+          <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">
+            Curaduría Exclusiva
+          </span>
+          <h1 className="text-5xl md:text-7xl font-serif text-brand-black mb-6" data-testid="store-page-title">
+            Nuestra <span className="italic">Colección</span>
+          </h1>
+          <div className="w-20 h-[1px] bg-brand-gold mx-auto mb-8" />
+          <p className="text-gray-500 text-sm font-light leading-relaxed">
+            Una selección meticulosa de objetos extraordinarios, diseñados para quienes aprecian la autenticidad y el lujo discreto.
+          </p>
         </div>
 
-        {/* Main Content */}
-        <div className="w-full">
-          {/* Header */}
-          <div className="mb-8">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
-              Catálogo
-            </span>
-            <h1 className="text-4xl md:text-5xl font-serif text-brand-black mb-4" data-testid="store-page-title">
-              Nuestra Colección <span className="italic">Exótica</span>
-            </h1>
-            <p className="text-gray-600 text-sm font-light max-w-[400px] leading-relaxed">
-              Curaduría exclusiva de piezas de lujo y tecnología de vanguardia. Descubre productos auténticos y certificados.
-            </p>
+        <div className="flex flex-col medium:flex-row gap-x-12">
+          {/* Sidebar - Filtros más limpios */}
+          <aside className="medium:sticky medium:top-32 w-full medium:w-[240px] flex-shrink-0 mb-12 medium:mb-0">
+            <div className="space-y-10">
+              <SearchBar />
+              <RefinementList sortBy={sort} />
+              <FilterPanel collections={collections || []} />
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Resultados Info - Minimalista */}
+            {query && (
+              <div className="mb-8 pb-4 border-b border-gray-100">
+                <p className="text-xs text-gray-500 uppercase tracking-widest font-medium">
+                  Resultados para: <span className="text-brand-black italic">&quot;{query}&quot;</span>
+                </p>
+              </div>
+            )}
+
+            {/* Productos */}
+            <Suspense fallback={<SkeletonProductGrid />}>
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                countryCode={countryCode}
+                query={query}
+                collection={collection}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+              />
+            </Suspense>
           </div>
-
-          {/* Search Bar */}
-          <SearchBar />
-
-          {/* Resultados Info */}
-          <div className="mb-6 flex items-center justify-between">
-            <p className="text-xs text-gray-600 font-medium">
-              {query && (
-                <span>
-                  Resultados para <span className="font-bold text-brand-black">&quot;{query}&quot;</span>
-                </span>
-              )}
-            </p>
-          </div>
-
-          {/* Productos */}
-          <Suspense fallback={<SkeletonProductGrid />}>
-            <PaginatedProducts
-              sortBy={sort}
-              page={pageNumber}
-              countryCode={countryCode}
-              query={query}
-              collection={collection}
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-            />
-          </Suspense>
         </div>
       </div>
     </div>

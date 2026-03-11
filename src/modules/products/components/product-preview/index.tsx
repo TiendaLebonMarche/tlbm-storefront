@@ -32,81 +32,61 @@ export default async function ProductPreview({
   const isLowStock = totalInventory < 5 && totalInventory > 0
 
   return (
-    <div className="group text-center h-full flex flex-col">
+    <div className="group flex flex-col h-full bg-white transition-all duration-500">
       <LocalizedClientLink href={`/products/${product.handle}`} data-testid="product-wrapper">
-        <div className="relative overflow-hidden bg-gray-100 aspect-square mb-4 group/img">
+        <div className="relative overflow-hidden bg-gray-50 aspect-[3/4] mb-6 group/img shadow-sm hover:shadow-md transition-shadow duration-500">
           <Thumbnail
             thumbnail={product.thumbnail}
             images={product.images}
             size="full"
             isFeatured={isFeatured}
+            className="group-hover/img:scale-105 transition-transform duration-700 ease-out"
           />
 
-          {/* Overlay de hover */}
-          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors duration-300" />
-
-          {/* Badges */}
-          <div className="absolute top-3 right-3 flex flex-col gap-2">
+          {/* Badges - Minimalistas */}
+          <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none">
             {isNew && (
-              <span className="bg-brand-gold text-brand-black text-[9px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-sm shadow-md">
-                Nuevo
+              <span className="bg-white/90 backdrop-blur text-brand-black text-[8px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow-sm border border-gray-100">
+                Lanzamiento
               </span>
             )}
             {isLowStock && (
-              <span className="bg-red-500 text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-sm shadow-md">
-                Últimas
-              </span>
-            )}
-            {totalInventory === 0 && (
-              <span className="bg-gray-600 text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-sm shadow-md">
-                Agotado
+              <span className="bg-white/90 backdrop-blur text-red-600 text-[8px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 shadow-sm border border-red-50/50">
+                Edición Limitada
               </span>
             )}
           </div>
 
-          {/* Stock en esquina inferior */}
-          {totalInventory > 0 && !isLowStock && (
-            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1.5 rounded-sm">
-              <p className="text-[9px] font-bold text-brand-black">
-                {totalInventory} en stock
-              </p>
+          {/* Hover Reveal CTA */}
+          <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <div className="bg-white text-brand-black text-[9px] font-bold uppercase tracking-[0.3em] px-8 py-3 translate-y-4 group-hover/img:translate-y-0 transition-transform duration-500 shadow-xl">
+              Explorar
             </div>
-          )}
+          </div>
         </div>
       </LocalizedClientLink>
 
-      {/* Categoría */}
-      <span className="text-[10px] font-bold uppercase tracking-widest py-1.5 px-3 rounded-sm mb-2 inline-block bg-gray-100 text-gray-700 group-hover:bg-brand-gold group-hover:text-white transition-colors">
-        {product.collection?.title || "Exclusivo"}
-      </span>
+      {/* Content */}
+      <div className="flex flex-col flex-1 px-1">
+        <div className="flex justify-between items-start mb-3">
+          <div className="flex flex-col">
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold mb-1.5">
+              {product.collection?.title || "Exclusivo"}
+            </span>
+            <LocalizedClientLink href={`/products/${product.handle}`}>
+              <h3 className="text-lg font-serif text-brand-black leading-snug hover:text-brand-gold transition-colors" data-testid="product-title">
+                {product.title}
+              </h3>
+            </LocalizedClientLink>
+          </div>
+        </div>
 
-      {/* Tipo */}
-      <p className="text-[9px] text-gray-500 mb-2 uppercase tracking-wide">
-        {product.type?.value || "Luxury"}
-      </p>
-
-      {/* Título */}
-      <LocalizedClientLink href={`/products/${product.handle}`}>
-        <h3 className="text-base font-serif text-brand-black mb-3 line-clamp-2 group-hover:text-brand-gold transition-colors" data-testid="product-title">
-          {product.title}
-        </h3>
-      </LocalizedClientLink>
-
-      {/* Precio */}
-      {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
-
-      {/* CTA - Flex grow para que el botón esté al final */}
-      <div className="mt-auto pt-4">
-        <LocalizedClientLink
-          href={`/products/${product.handle}`}
-          className={`w-full inline-block py-3 px-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-all rounded-sm ${
-            totalInventory === 0
-              ? "border border-gray-300 text-gray-400 bg-gray-50 cursor-not-allowed opacity-50"
-              : "border border-brand-black text-brand-black hover:bg-brand-black hover:text-white hover:border-brand-black"
-          }`}
-        >
-          {totalInventory === 0 ? "Agotado" : "Ver Detalles"}
-        </LocalizedClientLink>
+        <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
+          {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
+          <p className="text-[9px] text-gray-400 uppercase tracking-widest">
+            {product.type?.value || ""}
+          </p>
+        </div>
       </div>
     </div>
   )

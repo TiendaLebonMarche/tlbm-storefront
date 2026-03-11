@@ -45,18 +45,18 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
     selectedCollection || minPrice || maxPrice
 
   return (
-    <div className="border border-gray-200 rounded-lg p-5 bg-white">
-      <div className="flex items-center justify-between mb-6 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h3 className="font-bold text-sm uppercase tracking-widest text-brand-black">
-          Filtros
+    <div className="bg-transparent">
+      <div className="flex items-center justify-between mb-8 cursor-pointer group" onClick={() => setIsOpen(!isOpen)}>
+        <h3 className="font-bold text-[11px] uppercase tracking-[0.25em] text-brand-black group-hover:text-brand-gold transition-colors">
+          Refinar Búsqueda
         </h3>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={1}
           stroke="currentColor"
-          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`w-3 h-3 transition-transform duration-500 ${isOpen ? "rotate-180" : ""}`}
         >
           <path
             strokeLinecap="round"
@@ -67,72 +67,77 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
       </div>
 
       {isOpen && (
-        <>
+        <div className="animate-in fade-in slide-in-from-top-2 duration-700">
           {/* Colecciones */}
           {collections.length > 0 && (
-            <div className="mb-6 pb-6 border-b border-gray-100">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-3">
-                Colección
+            <div className="mb-10">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+                Colecciones
               </h4>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {collections.map((col) => (
-                  <label key={col.id} className="flex items-center gap-2 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="collection"
-                      value={col.id}
-                      checked={selectedCollection === col.id}
-                      onChange={(e) =>
-                        handleFilterChange(
-                          "collection",
-                          e.target.checked ? col.id : null
-                        )
-                      }
-                      className="w-4 h-4 accent-brand-gold rounded"
-                    />
-                    <span className="text-sm text-gray-700 group-hover:text-brand-gold transition-colors">
+                  <label key={col.id} className="flex items-center gap-3 cursor-pointer group">
+                    <div className="relative flex items-center justify-center">
+                      <input
+                        type="radio"
+                        name="collection"
+                        value={col.id}
+                        checked={selectedCollection === col.id}
+                        onChange={(e) =>
+                          handleFilterChange(
+                            "collection",
+                            e.target.checked ? col.id : null
+                          )
+                        }
+                        className="peer appearance-none w-3.5 h-3.5 border border-gray-300 rounded-full checked:border-brand-gold transition-all"
+                      />
+                      <div className="absolute w-1.5 h-1.5 rounded-full bg-brand-gold scale-0 peer-checked:scale-100 transition-transform duration-300" />
+                    </div>
+                    <span className="text-xs text-gray-600 group-hover:text-brand-black transition-colors font-light">
                       {col.title}
                     </span>
                   </label>
                 ))}
-                <button
-                  onClick={() => handleFilterChange("collection", null)}
-                  className="text-[11px] font-bold uppercase tracking-widest text-brand-gold mt-2 hover:underline"
-                >
-                  Limpiar
-                </button>
+                {selectedCollection && (
+                  <button
+                    onClick={() => handleFilterChange("collection", null)}
+                    className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold mt-4 hover:tracking-[0.3em] transition-all"
+                  >
+                    — Limpiar selección
+                  </button>
+                )}
               </div>
             </div>
           )}
 
           {/* Rango de Precio */}
-          <div className="mb-6 pb-6 border-b border-gray-100">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-3">
-              Rango de Precio
+          <div className="mb-10">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+              Inversión
             </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="text-[11px] text-gray-600 mb-1 block">Desde</label>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-gray-400">$</span>
                 <input
                   type="number"
-                  placeholder="Min"
+                  placeholder="Mín"
                   value={minPrice || ""}
                   onChange={(e) =>
                     handleFilterChange("minPrice", e.target.value || null)
                   }
-                  className="w-full px-3 py-2 border border-gray-200 rounded text-sm outline-none focus:border-brand-gold"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-gray-100 bg-transparent text-xs outline-none focus:border-brand-gold transition-colors font-light"
                 />
               </div>
-              <div>
-                <label className="text-[11px] text-gray-600 mb-1 block">Hasta</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-gray-400">$</span>
                 <input
                   type="number"
-                  placeholder="Max"
+                  placeholder="Máx"
                   value={maxPrice || ""}
                   onChange={(e) =>
                     handleFilterChange("maxPrice", e.target.value || null)
                   }
-                  className="w-full px-3 py-2 border border-gray-200 rounded text-sm outline-none focus:border-brand-gold"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-gray-100 bg-transparent text-xs outline-none focus:border-brand-gold transition-colors font-light"
                 />
               </div>
             </div>
@@ -142,12 +147,12 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="w-full py-2 px-3 border border-brand-black text-brand-black text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black hover:text-white transition-all rounded"
+              className="w-full py-4 text-brand-black text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-brand-black hover:text-white transition-all border border-brand-black"
             >
-              Limpiar Filtros
+              Reiniciar Filtros
             </button>
           )}
-        </>
+        </div>
       )}
     </div>
   )

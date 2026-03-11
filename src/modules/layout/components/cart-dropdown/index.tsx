@@ -21,7 +21,7 @@ const CartDropdown = ({
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
-  const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
+  const [activeTimer, setActiveTimer] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
   const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu } = useUI()
@@ -126,7 +126,7 @@ const CartDropdown = ({
             aria-label="Cerrar bolsa"
             tabIndex={0}
             onClick={close}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') close() }}
+            onKeyDown={(e: React.KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') close() }}
             role="button"
           />
         </Transition>
