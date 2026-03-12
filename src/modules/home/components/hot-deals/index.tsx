@@ -82,13 +82,13 @@ export default async function HotDeals({
                 href={`/products/${deal.handle}`}
                 className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-2 block"
               >
-                <div className="relative overflow-hidden aspect-[3/4] mb-5 bg-gray-100 shadow-md">
+                <div className="relative overflow-hidden aspect-square mb-5 bg-white shadow-md p-4">
                   <Image
                     src={deal.image}
                     alt={deal.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 25vw"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Discount Badge */}
                   <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1.5 rounded-full">
@@ -103,14 +103,14 @@ export default async function HotDeals({
                 </div>
 
                 {/* Content */}
-                <div>
+                <div className="flex flex-col flex-1 px-1 text-center items-center">
                   <p className="text-[9px] font-bold uppercase tracking-widest text-gray-500 mb-2">
                     {deal.category}
                   </p>
                   <h3 className="font-serif text-lg text-brand-black mb-3 line-clamp-2 group-hover:text-brand-gold transition-colors">
                     {deal.title}
                   </h3>
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center gap-3 mb-4">
                     <span className="text-sm font-bold text-brand-black">
                       {deal.newPrice}
                     </span>
@@ -118,9 +118,9 @@ export default async function HotDeals({
                       {deal.oldPrice}
                     </span>
                   </div>
-                  <button className="w-full py-2.5 px-3 border border-brand-black text-brand-black text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black hover:text-white transition-all duration-300 rounded-sm">
+                  <span className="w-full py-2.5 px-3 border border-brand-black text-brand-black text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black hover:text-white transition-all duration-300 rounded-sm text-center">
                     Ver Producto
-                  </button>
+                  </span>
                 </div>
               </LocalizedClientLink>
             ))}

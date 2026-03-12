@@ -34,7 +34,7 @@ export default async function ProductPreview({
   return (
     <div className="group flex flex-col h-full bg-white transition-all duration-500">
       <LocalizedClientLink href={`/products/${product.handle}`} data-testid="product-wrapper">
-        <div className="relative overflow-hidden bg-gray-50 aspect-[3/4] mb-6 group/img shadow-sm hover:shadow-md transition-shadow duration-500">
+        <div className="relative overflow-hidden bg-white aspect-square mb-6 group/img shadow-sm hover:shadow-md transition-shadow duration-500 p-4">
           <Thumbnail
             thumbnail={product.thumbnail}
             images={product.images}
@@ -67,9 +67,9 @@ export default async function ProductPreview({
       </LocalizedClientLink>
 
       {/* Content */}
-      <div className="flex flex-col flex-1 px-1">
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex flex-col">
+      <div className="flex flex-col flex-1 px-1 text-center items-center">
+        <div className="flex justify-center items-center mb-3">
+          <div className="flex flex-col items-center">
             <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold mb-1.5">
               {product.collection?.title || "Exclusivo"}
             </span>
@@ -81,7 +81,7 @@ export default async function ProductPreview({
           </div>
         </div>
 
-        <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
+        <div className="mt-auto flex flex-col items-center gap-2 pt-4 border-t border-gray-50 w-full">
           {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
           <p className="text-[9px] text-gray-400 uppercase tracking-widest">
             {product.type?.value || ""}
