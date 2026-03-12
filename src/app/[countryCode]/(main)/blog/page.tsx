@@ -53,9 +53,11 @@ export default function BlogPage() {
                     </time>
                   </div>
 
-                  <h2 className="text-3xl font-serif text-brand-black leading-tight mb-6 group-hover:text-brand-gold transition-colors duration-500">
-                    {post.title}
-                  </h2>
+                  <LocalizedClientLink href={`/blog/${post.handle}`}>
+                    <h2 className="text-3xl font-serif text-brand-black leading-tight mb-6 group-hover:text-brand-gold transition-colors duration-500">
+                      {post.title}
+                    </h2>
+                  </LocalizedClientLink>
 
                   <p className="text-gray-500 font-light leading-relaxed text-sm mb-8 line-clamp-3">
                     {post.description}

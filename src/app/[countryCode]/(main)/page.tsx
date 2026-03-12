@@ -154,9 +154,11 @@ export default async function Home(props: {
                     <time className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">{post.date}</time>
                   </div>
                   
-                  <h3 className="text-2xl font-serif text-brand-black leading-snug group-hover:text-brand-gold transition-colors duration-500">
-                    {post.title}
-                  </h3>
+                  <LocalizedClientLink href={`/blog/${post.handle}`}>
+                    <h3 className="text-2xl font-serif text-brand-black leading-snug group-hover:text-brand-gold transition-colors duration-500">
+                      {post.title}
+                    </h3>
+                  </LocalizedClientLink>
                   
                   <div className="pt-6 mt-auto">
                     <LocalizedClientLink href={`/blog/${post.handle}`} className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
