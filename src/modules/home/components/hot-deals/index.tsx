@@ -53,7 +53,7 @@ export default async function HotDeals({
     })
 
     return (
-      <section className="w-full bg-gradient-to-b from-white to-gray-50 py-20 md:py-28">
+      <section className="w-full bg-gradient-to-b from-white to-gray-50 pt-8 pb-20 md:pt-12 md:pb-28">
         <div className="content-container px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div>

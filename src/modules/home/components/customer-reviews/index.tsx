@@ -37,7 +37,7 @@ const CustomerReviews = () => {
   ]
 
   return (
-    <section className="w-full bg-white py-20 md:py-28">
+    <section className="w-full bg-white pt-10 pb-20 md:pt-12 md:pb-28">
       <div className="content-container px-4 md:px-8">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">

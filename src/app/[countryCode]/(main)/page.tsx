@@ -10,6 +10,7 @@ import NewsletterSection from "@modules/home/components/newsletter-section"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { blogPosts } from "@lib/data/blog"
 
 export const metadata: Metadata = {
   title: "Tienda Le Bon Marché | Originales & Exóticos",
@@ -45,7 +46,7 @@ export default async function Home(props: {
       <CustomerReviews />
 
       <section id="catalogo" className="bg-white">
-        <div className="py-24 content-container">
+        <div className="py-16 md:py-20 content-container">
           <div className="text-center mb-16 px-4">
             <h2 className="text-4xl font-serif text-brand-black mb-3">Productos Exclusivos</h2>
             <div className="w-24 h-[1px] bg-brand-black mx-auto" />
@@ -72,7 +73,7 @@ export default async function Home(props: {
             <p className="text-sm md:text-base text-gray-400 max-w-sm leading-loose mb-12 font-medium uppercase tracking-widest">
               Libros de mesa que son verdaderas obras de arte. Una curaduría de destinos icónicos, moda y diseño para el hogar moderno.
             </p>
-            <LocalizedClientLink href="/store" className="group relative px-10 py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden">
+            <LocalizedClientLink href="/store?q=assouline" className="group relative px-10 py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden">
               <span className="relative z-10">Ver Colección</span>
               <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-0" />
               <span className="absolute inset-0 flex items-center justify-center text-black font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">Ver Colección</span>
@@ -81,7 +82,7 @@ export default async function Home(props: {
         </div>
       </section>
 
-      <section className="bg-white py-24">
+      <section className="bg-white py-16 md:py-20">
         <div className="content-container">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 px-4">
             <div>
@@ -95,12 +96,12 @@ export default async function Home(props: {
 
           <div className="no-scrollbar flex gap-8 overflow-x-auto snap-x px-4 pb-8">
             {[
-              { title: "Relojería", img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=600" },
-              { title: "Decoración", img: "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?q=80&w=600" },
-              { title: "Calzado", img: "https://images.unsplash.com/photo-1543508282-6319a3e2621f?q=80&w=600" },
-              { title: "Fragancias", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600" }
+              { title: "Relojería", handle: "/store?q=reloj", img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=600" },
+              { title: "Sonido", handle: "/categories/parlantes", img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=600" },
+              { title: "Decoración", handle: "/store?q=decoracion", img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800" },
+              { title: "Fragancias", handle: "/store?q=fragancia", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600" }
             ].map((cat) => (
-              <div key={cat.title} className="category-card group cursor-pointer flex-shrink-0 w-[280px] md:w-[350px] snap-start">
+              <LocalizedClientLink key={cat.title} href={cat.handle} className="category-card group cursor-pointer flex-shrink-0 w-[280px] md:w-[350px] snap-start">
                 <div className="aspect-[3/4] overflow-hidden relative mb-6">
                   <Image
                     src={cat.img}
@@ -114,13 +115,13 @@ export default async function Home(props: {
                 <div className="text-center">
                   <h3 className="font-bold text-xs uppercase tracking-[0.3em] text-brand-black group-hover:text-brand-gold transition-colors">{cat.title}</h3>
                 </div>
-              </div>
+              </LocalizedClientLink>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="blog" className="py-24 md:py-32 bg-white">
+      <section id="blog" className="py-16 md:py-20 bg-white">
         <div className="content-container">
           <div className="flex flex-col items-center text-center mb-20 space-y-4">
             <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">Journal</span>
@@ -131,28 +132,9 @@ export default async function Home(props: {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-            {[
-              {
-                tag: "Boutique",
-                date: "MAR 2026",
-                title: "El Renacimiento del Objeto: Curaduría Assouline",
-                img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=800"
-              },
-              {
-                tag: "Guía Pro",
-                date: "FEB 2026",
-                title: "Alta Fidelidad: El Arte de Escuchar con Passau",
-                img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800"
-              },
-              {
-                tag: "Editorial",
-                date: "FEB 2026",
-                title: "Minimalismo Cálido: Tendencias en Interiores 2026",
-                img: "https://images.unsplash.com/photo-1512353087810-25dfcd100962?q=80&w=800"
-              }
-            ].map((post) => (
+            {blogPosts.slice(0, 3).map((post) => (
               <article key={post.title} className="group cursor-pointer flex flex-col h-full bg-white">
-                <LocalizedClientLink href="/blog" className="block relative overflow-hidden aspect-[3/4] mb-8 bg-gray-50">
+                <LocalizedClientLink href={`/blog/${post.handle}`} className="block relative overflow-hidden aspect-[3/4] mb-8 bg-gray-50">
                   <Image
                     src={post.img}
                     fill
@@ -177,7 +159,7 @@ export default async function Home(props: {
                   </h3>
                   
                   <div className="pt-6 mt-auto">
-                    <LocalizedClientLink href="/blog" className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
+                    <LocalizedClientLink href={`/blog/${post.handle}`} className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
                       <span className="group-hover:tracking-[0.4em] transition-all">Leer Journal</span>
                       <div className="w-8 h-[1px] bg-brand-gold group-hover/link:w-12 transition-all duration-500"></div>
                     </LocalizedClientLink>

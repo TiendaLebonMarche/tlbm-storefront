@@ -7,50 +7,7 @@ export const metadata: Metadata = {
   description: "Explora nuestras historias, guías y tendencias sobre el mundo del lujo y lifestyle exótico.",
 }
 
-const blogPosts = [
-  {
-    tag: "Boutique",
-    date: "14 MAR 2026",
-    title: "El Renacimiento del Objeto: Curaduría Assouline",
-    description: "Descubre por qué los libros de mesa se han convertido en la pieza central del diseño de interiores contemporáneo.",
-    img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=800"
-  },
-  {
-    tag: "Guía Pro",
-    date: "10 MAR 2026",
-    title: "Alta Fidelidad: El Arte de Escuchar con Passau",
-    description: "Una inmersión profunda en la ingeniería acústica y el diseño atemporal de los sistemas de sonido Passau.",
-    img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800"
-  },
-  {
-    tag: "Editorial",
-    date: "05 MAR 2026",
-    title: "Minimalismo Cálido: Tendencias 2026",
-    description: "Cómo equilibrar la sofisticación del diseño minimalista con la calidez de materiales nobles y exóticos.",
-    img: "https://images.unsplash.com/photo-1512353087810-25dfcd100962?q=80&w=800"
-  },
-  {
-    tag: "Lifestyle",
-    date: "28 FEB 2026",
-    title: "Destinos Exóticos: Inspiración para el Viajero Moderno",
-    description: "Desde las costas de Amalfi hasta los retiros ocultos en Japón, exploramos el lujo de viajar.",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800"
-  },
-  {
-    tag: "Reviews",
-    date: "20 FEB 2026",
-    title: "Relojería de Vanguardia: Más que solo tiempo",
-    description: "Analizamos las complicaciones mecánicas que definen a la nueva era de relojes de diseño.",
-    img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=800"
-  },
-  {
-    tag: "Colección",
-    date: "15 FEB 2026",
-    title: "Esencias de Autor: El arte de la perfumería",
-    description: "Cómo elegir una fragancia que transmita identidad y exclusividad en cada nota.",
-    img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800"
-  }
-]
+import { blogPosts } from "@lib/data/blog"
 
 export default function BlogPage() {
   return (
@@ -74,7 +31,7 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
             {blogPosts.map((post) => (
               <article key={post.title} className="group flex flex-col h-full">
-                <LocalizedClientLink href="#" className="relative aspect-[3/4] overflow-hidden mb-10 bg-gray-50">
+                <LocalizedClientLink href={`/blog/${post.handle}`} className="relative aspect-[3/4] overflow-hidden mb-10 bg-gray-50">
                   <Image
                     src={post.img}
                     fill
@@ -105,7 +62,7 @@ export default function BlogPage() {
                   </p>
 
                   <div className="mt-auto pt-4 border-t border-gray-100/60">
-                    <LocalizedClientLink href="#" className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
+                    <LocalizedClientLink href={`/blog/${post.handle}`} className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
                       <span className="group-hover:tracking-[0.4em] transition-all">Leer más</span>
                       <div className="w-8 h-[1px] bg-brand-gold group-hover/link:w-12 transition-all duration-500"></div>
                     </LocalizedClientLink>

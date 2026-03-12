@@ -16,7 +16,7 @@ const NewsletterSection = () => {
   }
 
   return (
-    <section className="w-full bg-brand-black text-white py-20 md:py-32 overflow-hidden relative">
+    <section className="w-full bg-brand-black text-white pt-16 pb-20 md:pt-20 md:pb-28 overflow-hidden relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
