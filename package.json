@@ -2,8 +2,8 @@
   "name": "tienda-le-bon-marche",
   "version": "1.0.3",
   "private": true,
-  "author": "Julián",
-  "description": "Storefront optimizado para Tienda Le Bon Marché",
+  "author": "JuliánLamus",
+  "description": "Tienda Le Bon Marché - Tienda virtual en Colombia.",
   "scripts": {
     "dev": "next dev --turbopack -p 8000",
     "build": "next build",

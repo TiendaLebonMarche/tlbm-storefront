@@ -39,24 +39,40 @@ export default async function BlogPostPage({
   return (
     <div className="bg-white min-h-screen">
       {/* Article Header */}
-      <header className="pt-24 pb-16 md:pt-32 md:pb-24 border-b border-gray-50">
-        <div className="content-container max-w-4xl px-4">
-          <div className="flex flex-col items-center text-center space-y-8">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold">
+      <header className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-brand-black">
+        {/* Background Image with Blur & Dark Overlay */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <Image
+            src={post.img}
+            fill
+            priority
+            className="object-cover blur-[10px] scale-110"
+            alt=""
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-black/60 via-brand-black/40 to-white" />
+        </div>
+
+        <div className="content-container max-w-5xl px-4 relative z-10">
+          <div className="flex flex-col items-center text-center space-y-10">
+            <div className="flex items-center gap-6">
+              <span className="text-[11px] font-bold uppercase tracking-[0.5em] text-brand-gold bg-white/5 backdrop-blur-md px-4 py-2 border border-white/10">
                 {post.tag}
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-200" />
-              <time className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">
+              <span className="w-2 h-2 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(196,164,132,0.5)]" />
+              <time className="text-[11px] text-white/70 font-bold uppercase tracking-[0.4em]">
                 {post.date}
               </time>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-brand-black italic leading-[1.1]">
-              {post.title}
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white italic leading-[0.9] drop-shadow-2xl">
+              {post.title.split(':').map((part, i) => (
+                <span key={i} className={i === 1 ? "not-italic block mt-4 text-brand-gold text-4xl md:text-6xl tracking-tight" : ""}>
+                  {part}{i === 0 && post.title.includes(':') ? ':' : ''}
+                </span>
+              ))}
             </h1>
             
-            <p className="max-w-2xl text-xl md:text-2xl text-gray-500 font-light leading-relaxed italic">
+            <p className="max-w-2xl text-xl md:text-3xl text-white/90 font-light leading-relaxed italic border-l-2 border-brand-gold/30 pl-8">
               {post.description}
             </p>
           </div>

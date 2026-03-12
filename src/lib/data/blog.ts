@@ -17,7 +17,7 @@ export const blogPosts = [
       
       <p>En Tienda Le Bon Marché, seleccionamos cuidadosamente los títulos que mejor resuenan con nuestra filosofía de exclusividad y estilo. Invitamos a nuestros clientes a descubrir cómo un simple objeto puede transformar radicalmente la atmósfera de su hogar.</p>
     `,
-    img: "https://images.unsplash.com/photo-1544641013-936ad5c54967?q=80&w=1200"
+    img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1200"
   },
   {
     handle: "alta-fidelidad-arte-escuchar-passau",
@@ -35,9 +35,9 @@ export const blogPosts = [
       
       <p>En esta guía, exploramos cómo configurar tu espacio para obtener la mejor experiencia auditiva. Desde el posicionamiento de los altavoces hasta la elección de la fuente de audio, cada detalle cuenta cuando se busca la máxima fidelidad.</p>
       
-      <p>Descubre cómo la fusión de tecnología y arte crea una sinfonía para los sentidos. Passau es más que un sistema de sonido; es una declaración de principios para quienes aprecian lo extraordinario.</p>
+      <p>Descubre cómo la fusión de tecnología y art crea una sinfonía para los sentidos. Passau es más que un sistema de sonido; es una declaración de principios para quienes aprecian lo extraordinario.</p>
     `,
-    img: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1200"
+    img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=1200"
   },
   {
     handle: "minimalismo-calido-tendencias-2026",
