@@ -71,7 +71,7 @@ export default async function Home(props: {
             <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-6">Exclusividad</span>
             <h2 className="text-4xl md:text-6xl font-serif text-white mb-8 italic leading-tight">Colección <br /> Assouline</h2>
             <p className="text-sm md:text-base text-gray-400 max-w-sm leading-loose mb-12 font-medium uppercase tracking-widest">
-              Libros de mesa que son verdaderas obras de arte. Una curaduría de destinos icónicos, moda y diseño para el hogar moderno.
+              Libros de mesa que son verdaderas obras de arte. Una selección de destinos icónicos, moda y diseño para el hogar moderno.
             </p>
             <LocalizedClientLink href="/store?q=assouline" className="group relative px-10 py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden">
               <span className="relative z-10">Ver Colección</span>
@@ -127,7 +127,7 @@ export default async function Home(props: {
             <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">Journal</span>
             <h2 className="text-5xl md:text-6xl font-serif text-brand-black italic">Crónicas de Estilo</h2>
             <p className="max-w-xl text-gray-500 font-light text-base leading-relaxed">
-              Exploramos las historias detrás de la curaduría, guías de estilo y las últimas tendencias en el mundo del lujo exótico.
+              Exploramos las historias detrás de cada pieza, guías de estilo y las últimas tendencias en el mundo del lujo exótico.
             </p>
           </div>
 

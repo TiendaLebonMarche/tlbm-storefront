@@ -22,7 +22,7 @@ const CustomerReviews = () => {
       rating: 5,
       name: "Ana Rodríguez",
       location: "Bucaramanga",
-      text: "Productos auténticos garantizados. La tienda tiene una curaduría excelente. ¡Volveré a comprar!",
+      text: "Productos auténticos garantizados. La tienda tiene un catálogo excelente. ¡Volveré a comprar!",
       product: "Auriculares Premium",
       avatar: "👩‍🎨",
     },

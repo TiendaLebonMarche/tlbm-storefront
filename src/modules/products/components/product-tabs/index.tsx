@@ -82,7 +82,7 @@ const ShippingInfoTab = () => {
           {
             icon: <Back />,
             title: "Garantía de Calidad",
-            desc: "Todas nuestras piezas cumplen con los estándares de calidad de la Ley 1480 y respaldo directo de curaduría."
+            desc: "Todas nuestras piezas cumplen con los estándares de calidad de la Ley 1480 y respaldo directo de fábrica."
           }
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-x-6">

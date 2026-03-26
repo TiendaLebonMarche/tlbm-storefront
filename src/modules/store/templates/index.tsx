@@ -40,7 +40,7 @@ const StoreTemplate = async ({
         {/* Editorial Header */}
         <div className="mb-20 text-center max-w-2xl mx-auto">
           <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">
-            Curaduría Exclusiva
+            Selección Exclusiva
           </span>
           <h1 className="text-5xl md:text-7xl font-serif text-brand-black mb-6" data-testid="store-page-title">
             Nuestra <span className="italic">Colección</span>

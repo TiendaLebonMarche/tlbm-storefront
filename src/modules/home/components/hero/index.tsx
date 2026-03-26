@@ -19,7 +19,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 md:px-8 max-w-3xl">
         <p className="text-[10px] md:text-xs font-sans tracking-[0.4em] uppercase mb-6 md:mb-8 text-brand-gold font-bold">
-          Curaduría Exclusiva de Lujo
+          Colección Exclusiva de Lujo
         </p>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif mb-4 md:mb-6 italic leading-tight">
@@ -27,7 +27,7 @@ const Hero = () => {
         </h1>
 
         <p className="text-sm md:text-base text-gray-300 mb-10 md:mb-12 font-light leading-relaxed max-w-xl mx-auto">
-          Descubre la curación más exclusiva de productos de lujo: libros Assouline, relojería fina, tecnología premium y piezas únicas que cuentan una historia.
+          Descubre la selección más exclusiva de productos de lujo: libros Assouline, relojería fina, tecnología premium y piezas únicas que cuentan una historia.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">

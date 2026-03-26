@@ -20,7 +20,7 @@ export default function BlogPage() {
             Historias <br /> <span className="not-italic">con Propósito</span>
           </h1>
           <p className="max-w-xl mx-auto text-gray-400 font-light text-base leading-relaxed pt-4">
-            Crónicas sobre diseño, tecnología y el arte de vivir bien. <br /> Una curaduría de ideas para el coleccionista moderno.
+            Crónicas sobre diseño, tecnología y el arte de vivir bien. <br /> Una colección de ideas para el coleccionista moderno.
           </p>
         </div>
       </header>

@@ -3,12 +3,12 @@ export const blogPosts = [
     handle: "renacimiento-objeto-curaduria-assouline",
     tag: "Boutique",
     date: "14 MAR 2026",
-    title: "El Renacimiento del Objeto: Curaduría Assouline",
+    title: "El Renacimiento del Objeto: Colección Assouline",
     description: "Descubre por qué los libros de mesa se han convertido en la pieza central del diseño de interiores contemporáneo.",
     content: `
       <p>En un mundo cada vez más digital, el objeto físico está experimentando un renacimiento sin precedentes. No se trata solo de la funcionalidad, sino del significado, la historia y la estética que un objeto aporta a nuestro entorno más íntimo.</p>
       
-      <p>La curaduría de Assouline ha liderado este movimiento, transformando el libro de mesa en una verdadera obra de arte. Estas piezas no están destinadas a ser leídas una sola vez y guardadas en una estantería; están diseñadas para ser exhibidas, para iniciar conversaciones y para elevar el nivel visual de cualquier habitación.</p>
+      <p>La exquisita selección de Assouline ha liderado este movimiento, transformando el libro de mesa en una verdadera obra de arte. Estas piezas no están destinadas a ser leídas una sola vez y guardadas en una estantería; están diseñadas para ser exhibidas, para iniciar conversaciones y para elevar el nivel visual de cualquier habitación.</p>
       
       <h3>La Estética del Conocimiento</h3>
       <p>Cada volumen de Assouline es una amalgama de fotografía magistral, narrativa cautivadora y una calidad de impresión que roza la perfección. Desde las vibrantes portadas de la serie "Travel" hasta las ediciones Ultimate encuadernadas a mano, estos objetos son un testimonio del lujo tangible.</p>
@@ -68,7 +68,7 @@ export const blogPosts = [
       
       <p>En esta entrega de lifestyle, recorremos algunos de los rincones más fascinantes del planeta. No nos limitamos a los hoteles de cinco estrellas conocidos por todos, sino que nos adentramos en los retiros boutique y las experiencias personalizadas que definen el nuevo estándar del viaje de alto nivel.</p>
       
-      <h3>La Curaduría del Viaje</h3>
+      <h3>La Colección del Viaje</h3>
       <p>Hablamos con expertos que nos revelan sus secretos para descubrir lo inexplorado. Desde cómo conseguir acceso a cenas privadas en palacios históricos hasta los mejores momentos del año para visitar destinos remotos y evitar las multitudes.</p>
       
       <p>El equipaje, la tecnología y el vestuario también son parte esencial de la experiencia. Te recomendamos los esenciales de viaje que combinan elegancia y funcionalidad, asegurando que cada trayecto sea tan placentero como el destino final.</p>
