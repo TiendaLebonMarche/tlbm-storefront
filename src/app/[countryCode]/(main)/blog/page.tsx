@@ -76,20 +76,20 @@ export default function BlogPage() {
         </div>
       </main>
 
-      {/* Newsletter Section Integration (Simple) */}
-      <div className="bg-[#fafafa] py-24 md:py-32">
+      {/* Sales CTA Section */}
+      <div className="bg-brand-black text-white py-24 md:py-32">
         <div className="content-container max-w-2xl text-center space-y-8">
-          <h2 className="text-4xl font-serif text-brand-black italic">Suscríbete al Journal</h2>
-          <p className="text-gray-500 font-light text-sm">Recibe actualizaciones sobre nuevas colecciones y contenido exclusivo directamente en tu bandeja de entrada.</p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <input 
-              type="email" 
-              placeholder="Tu correo electrónico" 
-              className="flex-1 px-0 py-4 border-b border-gray-300 bg-transparent outline-none focus:border-brand-gold transition-colors text-sm font-light"
-            />
-            <button className="px-12 py-4 bg-brand-black text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-gold transition-colors">
-              Unirse
-            </button>
+          <h2 className="text-4xl font-serif italic">¿Listo para probar lo mejor?</h2>
+          <p className="text-gray-300 font-light text-sm leading-relaxed max-w-lg mx-auto">
+            Nos quemamos las pestañas buscando las mejores ofertas y productos únicos, para que usted solo tenga que dar un clic y disfrutar.
+          </p>
+          <div className="pt-4">
+            <LocalizedClientLink 
+              href="/store"
+              className="inline-block px-12 py-4 bg-brand-gold text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-brand-black transition-colors"
+            >
+              Explorar Catálogo
+            </LocalizedClientLink>
           </div>
         </div>
       </div>

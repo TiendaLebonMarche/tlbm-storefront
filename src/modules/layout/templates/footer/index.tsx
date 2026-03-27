@@ -12,7 +12,24 @@ export default async function Footer() {
   const productCategories = await listCategories()
 
   return (
-    <footer className="bg-[#0a0a0a] text-white pt-24 pb-12 px-6 mt-auto border-t border-brand-black/20">
+    <footer className="bg-[#0a0a0a] text-white pt-12 pb-12 px-6 mt-auto border-t border-brand-black/20">
+      
+      {/* Global Sales CTA */}
+      <div className="max-w-[95rem] mx-auto bg-brand-gold/10 border border-brand-gold/20 p-8 md:p-12 mb-20 text-center flex flex-col md:flex-row items-center justify-between gap-8 rounded-sm">
+        <div className="text-left max-w-2xl">
+          <h2 className="text-2xl md:text-3xl font-serif italic text-brand-gold mb-3">¿Listo para probar lo mejor?</h2>
+          <p className="text-gray-400 font-light text-sm md:text-base">
+            Somos los cazadores de calidades. Nos quemamos las pestañas buscando las mejores ofertas globales, productos exóticos y tecnología top para que usted solo tenga que dar un clic.
+          </p>
+        </div>
+        <LocalizedClientLink 
+          href="/store"
+          className="whitespace-nowrap inline-block bg-brand-gold text-brand-black font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] px-10 py-4 hover:bg-white transition-colors"
+        >
+          Ir de Compras
+        </LocalizedClientLink>
+      </div>
+
       <div className="max-w-[95rem] mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
         <div className="flex flex-col gap-y-6">
           <h3 className="font-serif text-3xl text-white tracking-tight leading-none italic">

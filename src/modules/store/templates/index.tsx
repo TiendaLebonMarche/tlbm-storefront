@@ -47,7 +47,7 @@ const StoreTemplate = async ({
           </h1>
           <div className="w-20 h-[1px] bg-brand-gold mx-auto mb-8" />
           <p className="text-gray-500 text-sm font-light leading-relaxed">
-            Una selección meticulosa de objetos extraordinarios, diseñados para quienes aprecian la autenticidad y el lujo discreto.
+            Cazamos por usted los artículos más originales y codiciados del mercado global. Cero "gato por liebre", solo la máxima calidad traída con el mejor servicio.
           </p>
         </div>
 

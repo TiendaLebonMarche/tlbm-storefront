@@ -79,6 +79,7 @@ export const NAV_LINKS = [
   { href: "/tecnologia", label: "Tecnología" },
   { href: "/sonido", label: "Sonido" },
   { href: "/hogar", label: "Hogar" },
+  { href: "/quienes-somos", label: "Quiénes Somos" },
   { href: "/blog", label: "Blog" },
 ]
 

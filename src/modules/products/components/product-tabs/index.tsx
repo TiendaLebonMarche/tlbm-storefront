@@ -72,7 +72,7 @@ const ShippingInfoTab = () => {
           {
             icon: <FastDelivery />,
             title: "Logística Prioritaria",
-            desc: "Despachos asegurados con tracking en tiempo real para todo el territorio nacional."
+            desc: "Despachamos desde Bucaramanga. Entregas en 24h locales o 2 a 5 días hábiles para el resto de Colombia. Rastreo garantizado, aquí no lo dejamos en visto."
           },
           {
             icon: <Refresh />,
@@ -82,7 +82,7 @@ const ShippingInfoTab = () => {
           {
             icon: <Back />,
             title: "Garantía de Calidad",
-            desc: "Todas nuestras piezas cumplen con los estándares de calidad de la Ley 1480 y respaldo directo de fábrica."
+            desc: "Cero 'gato por liebre'. Solo vendemos productos legítimos y originales, con los estándares de calidad de la Ley 1480 y soporte humano por WhatsApp."
           }
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-x-6">
