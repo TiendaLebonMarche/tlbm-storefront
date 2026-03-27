@@ -7,6 +7,7 @@ import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
 import CustomerReviews from "@modules/home/components/customer-reviews"
 import NewsletterSection from "@modules/home/components/newsletter-section"
+import CategoriesCarousel from "@modules/home/components/categories-carousel"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -82,42 +83,22 @@ export default async function Home(props: {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20 overflow-hidden">
         <div className="content-container">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 px-4">
             <div>
-              <span className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Explora por Estilo</span>
-              <h2 className="text-4xl md:text-5xl font-serif text-brand-black italic">Nuestras Categorías</h2>
+              <span className="text-[10px] font-sans uppercase tracking-[0.4em] text-gray-400 mb-3 block">Explora por Estilo</span>
+              <h2 className="text-3xl md:text-4xl font-serif font-light text-black">Nuestras Categorías</h2>
             </div>
-            <LocalizedClientLink href="/store" className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border-b border-brand-gold pb-1 hover:text-brand-gold transition-colors">
+            <LocalizedClientLink
+              href="/store"
+              className="text-[10px] font-light uppercase tracking-[0.3em] text-black border-b border-black pb-1 hover:opacity-50 transition-opacity whitespace-nowrap"
+            >
               Ver Catálogo Completo
             </LocalizedClientLink>
           </div>
 
-          <div className="no-scrollbar flex gap-8 overflow-x-auto snap-x px-4 pb-8">
-            {[
-              { title: "Relojería", handle: "/store?q=reloj", img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=600" },
-              { title: "Sonido", handle: "/categories/parlantes", img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=600" },
-              { title: "Decoración", handle: "/store?q=decoracion", img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800" },
-              { title: "Fragancias", handle: "/store?q=fragancia", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600" }
-            ].map((cat) => (
-              <LocalizedClientLink key={cat.title} href={cat.handle} className="category-card group cursor-pointer flex-shrink-0 w-[280px] md:w-[350px] snap-start">
-                <div className="aspect-[3/4] overflow-hidden relative mb-6">
-                  <Image
-                    src={cat.img}
-                    fill
-                    sizes="(max-width: 768px) 280px, 350px"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    alt={cat.title}
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
-                </div>
-                <div className="text-center">
-                  <h3 className="font-bold text-xs uppercase tracking-[0.3em] text-brand-black group-hover:text-brand-gold transition-colors">{cat.title}</h3>
-                </div>
-              </LocalizedClientLink>
-            ))}
-          </div>
+          <CategoriesCarousel />
         </div>
       </section>
 
