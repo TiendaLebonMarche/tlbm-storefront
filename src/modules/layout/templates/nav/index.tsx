@@ -25,70 +25,51 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-      <div className="flex flex-1 items-center w-full gap-6 md:gap-8">
-        {/* Sección Izquierda - Menú y búsqueda */}
-        <div className="flex items-center gap-4 md:gap-0 md:flex-1">
-          {/* Menú izquierdo (desktop) */}
-          <nav className="hidden md:flex flex-1 justify-end gap-6 lg:gap-8 text-xs lg:text-sm font-light tracking-[0.2em] lowercase md:pr-8">
-            {leftLinks.map((link) => (
+      <div className="flex flex-1 items-center w-full justify-between">
+        
+        {/* Sección Izquierda - Hamburger y Enlaces */}
+        <div className="flex items-center gap-6 md:flex-1">
+          {/* Hamburger (Mobile & Desktop) */}
+          <div className="flex items-center">
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          </div>
+          
+          {/* Enlaces Desktop */}
+          <nav className="hidden md:flex gap-6 lg:gap-8 text-xs font-light tracking-widest uppercase">
+            {NAV_LINKS.map((link) => (
               <LocalizedClientLink
                 key={link.href}
                 href={link.href}
-                className="relative group text-black hover:opacity-50 transition-colors duration-200"
+                className="relative group text-black hover:opacity-50 transition-colors duration-200 uppercase"
               >
                 {link.label}
               </LocalizedClientLink>
             ))}
           </nav>
-
-          {/* Search y SideMenu (mobile) */}
-          <div className="flex md:hidden gap-3 items-center">
-            <SearchModal />
-            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-          </div>
         </div>
 
-        {/* Sección Centro - Logo Centrado */}
-        <div className="flex-shrink-0 z-40 md:flex-1 flex justify-center px-2">
+        {/* Sección Centro - Logo */}
+        <div className="flex-shrink-0 z-40 md:flex-[0.5] flex justify-center">
           <LocalizedClientLink
             href="/"
-            className="text-xl md:text-2xl lg:text-3xl font-serif font-light tracking-widest transition-opacity duration-300 text-black hover:opacity-50 select-none uppercase"
+            className="text-2xl md:text-3xl lg:text-4xl font-serif font-light tracking-[0.1em] text-black hover:opacity-70 transition-opacity uppercase"
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
         </div>
 
-        {/* Sección Derecha - Menú y Acciones */}
-        <div className="flex items-center gap-6 md:gap-0 md:flex-1">
-          {/* Menú derecho (desktop) */}
-          <nav className="hidden md:flex flex-1 justify-start gap-6 lg:gap-8 text-xs lg:text-sm font-light tracking-[0.2em] lowercase md:pl-8">
-            <NavMenuMore />
-            {rightLinks.map((link) => (
-              <LocalizedClientLink
-                key={link.href}
-                href={link.href}
-                className="relative group text-black hover:opacity-50 transition-colors duration-200"
-              >
-                {link.label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
-
-          {/* Acciones e íconos (desktop) */}
-          <div className="hidden md:flex gap-6 items-center font-light tracking-[0.2em] text-xs text-black">
+        {/* Sección Derecha - Iconos (Search, Bag) */}
+        <div className="flex items-center justify-end gap-5 md:gap-6 md:flex-1">
+          <div className="hidden md:flex items-center">
             <SearchModal />
-            <Suspense fallback={<CartButton />}>
-              <CartButton />
-            </Suspense>
           </div>
-
-          {/* Carrito (mobile) */}
-          <div className="md:hidden">
+          <div className="flex items-center">
             <Suspense fallback={<CartButton />}>
               <CartButton />
             </Suspense>
           </div>
         </div>
+
       </div>
     </ClientHeaderWrapper>
   )
