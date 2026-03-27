@@ -4,7 +4,6 @@ import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
@@ -147,62 +146,76 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
-        <div>
-          {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
-              {(product.options || []).map((option) => {
-                return (
-                  <div key={option.id}>
-                    <OptionSelect
-                      option={option}
-                      current={options[option.id]}
-                      updateOption={setOptionValue}
-                      title={option.title ?? ""}
-                      data-testid="product-options"
-                      disabled={!!disabled || isAdding}
-                    />
-                  </div>
-                )
-              })}
-              <Divider />
-            </div>
-          )}
+      <div className="flex flex-col gap-y-5" ref={actionsRef}>
+
+        {/* Selector de variantes (tallas, colores, etc.) */}
+        {(product.variants?.length ?? 0) > 1 && (
+          <div className="flex flex-col gap-y-3 pb-4 border-b border-gray-100">
+            {(product.options || []).map((option) => (
+              <div key={option.id}>
+                <OptionSelect
+                  option={option}
+                  current={options[option.id]}
+                  updateOption={setOptionValue}
+                  title={option.title ?? ""}
+                  data-testid="product-options"
+                  disabled={!!disabled || isAdding}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Precio */}
+        <div className="pb-4">
+          <ProductPrice product={product} variant={selectedVariant} />
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        {/* CTAs estilo Amazon */}
+        <div className="flex flex-col gap-3">
+          {/* Botón principal: Añadir al carrito */}
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            className="w-full h-12 text-sm font-medium tracking-wide border-0 bg-black text-white hover:bg-gray-800 active:bg-gray-900 transition-colors duration-150 rounded-none flex items-center justify-center gap-2"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant && !options
+              ? "Selecciona una variante"
+              : !inStock || !isValidVariant
+                ? "Agotado temporalmente"
+                : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+                    Añadir al carrito
+                  </>
+                )
+            }
+          </Button>
+        </div>
 
-        <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          className="w-full h-12 text-[10px] font-bold uppercase tracking-[0.2em] border border-brand-black bg-brand-black text-white hover:bg-white hover:text-brand-black transition-all rounded-none"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!selectedVariant && !options
-            ? "Selecciona tu variante"
-            : !inStock || !isValidVariant
-              ? "Agotado Temporalmente"
-              : "Agregar a la Bolsa"}
-        </Button>
-        <MobileActions
-          product={product}
-          variant={selectedVariant}
-          options={options}
-          updateOptions={setOptionValue}
-          inStock={inStock}
-          handleAddToCart={handleAddToCart}
-          isAdding={isAdding}
-          show={!inView}
-          optionsDisabled={!!disabled || isAdding}
-        />
       </div>
+
+      <MobileActions
+        product={product}
+        variant={selectedVariant}
+        options={options}
+        updateOptions={setOptionValue}
+        inStock={inStock}
+        handleAddToCart={handleAddToCart}
+        isAdding={isAdding}
+        show={!inView}
+        optionsDisabled={!!disabled || isAdding}
+      />
     </>
   )
 }

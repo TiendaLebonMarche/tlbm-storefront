@@ -4,7 +4,6 @@ import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
-import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
@@ -29,7 +28,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     return notFound()
   }
 
-  // Calcular stock total
   const totalStock = product.variants?.reduce(
     (sum, v) => sum + (v.inventory_quantity || 0),
     0
@@ -42,163 +40,191 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   const isLowStock = totalStock < 5 && totalStock > 0
 
   return (
-    <div className="bg-white">
-      {/* Product Section */}
-      <div className="py-12 md:py-20 lg:py-24">
-        <div className="content-container">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-            {/* Left: Image Gallery - More sticky space */}
-            <div className="w-full lg:w-3/5">
-              <div className="lg:sticky lg:top-32">
-                <ImageGallery images={images} />
-              </div>
+    <div className="bg-white min-h-screen">
+
+      {/* ── BREADCRUMB ── */}
+      <div className="border-b border-gray-100">
+        <div className="content-container py-3">
+          <nav className="flex items-center gap-2 text-[10px] text-gray-400 tracking-widest uppercase font-sans">
+            <LocalizedClientLink href="/" className="hover:text-black transition-colors">Inicio</LocalizedClientLink>
+            <span>/</span>
+            <LocalizedClientLink href="/store" className="hover:text-black transition-colors">Tienda</LocalizedClientLink>
+            {product.collection && (
+              <>
+                <span>/</span>
+                <span className="text-black">{product.collection.title}</span>
+              </>
+            )}
+          </nav>
+        </div>
+      </div>
+
+      {/* ── HERO SECTION: Galería + Info (layout Amazon clásico) ── */}
+      <div className="content-container py-8 lg:py-12">
+        <div className="flex flex-col lg:flex-row gap-8 xl:gap-16">
+
+          {/* COLUMNA IZQUIERDA: Galería — 55% */}
+          <div className="w-full lg:w-[55%]">
+            <div className="lg:sticky lg:top-[5.5rem]">
+              <ImageGallery images={images} />
             </div>
+          </div>
 
-            {/* Right: Product Info */}
-            <div className="w-full lg:w-2/5 flex flex-col gap-y-12">
-              <div className="space-y-8">
-                {/* Breadcrumb - Minimalist */}
-                <div className="flex items-center gap-3 text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">
-                  <LocalizedClientLink href="/store" className="hover:text-brand-gold transition-colors">Boutique</LocalizedClientLink>
-                  <span className="text-gray-200">/</span>
-                  <span className="text-brand-gold">{product.collection?.title || "Exclusivo"}</span>
-                </div>
+          {/* COLUMNA DERECHA: Info + CTA — 45% */}
+          <div className="w-full lg:w-[45%] space-y-0">
 
-                {/* Title & Badges */}
-                <div className="space-y-6">
-                  <div className="flex flex-wrap items-center gap-4">
-                    {isNew && (
-                      <span className="text-[9px] font-sans uppercase tracking-[0.2em] px-3 py-1.5 border border-black text-black">
-                        Lanzamiento
-                      </span>
-                    )}
-                    {isLowStock && (
-                      <span className="text-[9px] font-sans uppercase tracking-[0.2em] px-3 py-1.5 border border-black bg-black text-white">
-                        Edición Limitada
-                      </span>
-                    )}
-                  </div>
-                  
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-black leading-tight font-light" data-testid="product-title">
-                    {product.title}
-                  </h1>
-                </div>
-              </div>
-
-              {/* Price & Primary Actions */}
-              <div className="space-y-10">
-                <div className="pt-8 border-t border-gray-100">
-                  <ProductInfo product={product} />
-                </div>
-
-                <Suspense
-                  fallback={
-                    <ProductActions
-                      disabled={true}
-                      product={product}
-                      region={region}
-                    />
-                  }
-                >
-                  <ProductActionsWrapper id={product.id} region={region} />
-                </Suspense>
-
-                {/* Status Indicator */}
-                {totalStock > 0 ? (
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                      Disponible para despacho inmediato
-                    </span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-3 text-red-500">
-                    <div className="w-2 h-2 rounded-full bg-red-500" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">
-                      Agotado temporalmente
-                    </span>
-                  </div>
+            {/* BLOQUE 1: Badges + Título */}
+            <div className="pb-5 border-b border-gray-100 space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {isNew && (
+                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 border border-black text-black bg-white">
+                    Nuevo
+                  </span>
+                )}
+                {isLowStock && (
+                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 bg-red-600 text-white">
+                    Últimas unidades
+                  </span>
+                )}
+                {product.collection?.title && (
+                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 border border-gray-200 text-gray-500">
+                    {product.collection.title}
+                  </span>
                 )}
               </div>
 
-              {/* Features Accordion - Minimalist */}
-              <div className="pt-12">
-                <ProductTabs product={product} />
-              </div>
+              <h1
+                className="text-2xl md:text-3xl lg:text-4xl font-serif font-light text-black leading-tight"
+                data-testid="product-title"
+              >
+                {product.title}
+              </h1>
 
-              {/* Trust Section - Clean Column */}
-              <div className="grid grid-cols-1 gap-8 py-12 border-t border-gray-100">
-                {[
-                  { icon: "✧", title: "Certificado de Autenticidad", desc: "Garantía de origen para cada pieza." },
-                  { icon: "📦", title: "Envío Prioritario", desc: "Entrega asegurada en 24-48 horas." },
-                  { icon: "↩", title: "Garantía de Satisfacción", desc: "Retorno sin complicaciones por 30 días." }
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-5">
-                    <span className="text-brand-gold text-lg select-none">{item.icon}</span>
-                    <div className="space-y-1">
-                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-brand-black">{item.title}</h4>
-                      <p className="text-[11px] text-gray-500 font-light leading-normal">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Descripción corta */}
+              {product.description && (
+                <p className="text-sm text-gray-500 font-light leading-relaxed">
+                  {product.description}
+                </p>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* FAQ Section - Clean & Centered */}
-      <div className="bg-[#fafafa] py-24 md:py-32">
-        <div className="content-container max-w-3xl">
-          <div className="text-center mb-20 space-y-4">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">Asistencia</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-black italic">Información Útil</h2>
-          </div>
+            {/* BLOQUE 2: Precio + Opciones + CTA ── el núcleo Amazon */}
+            <div className="py-5 border-b border-gray-100">
+              <Suspense
+                fallback={
+                  <ProductActions
+                    disabled={true}
+                    product={product}
+                    region={region}
+                  />
+                }
+              >
+                <ProductActionsWrapper id={product.id} region={region} />
+              </Suspense>
+            </div>
 
-          <div className="space-y-0 divide-y divide-gray-200/60 border-y border-gray-200/60">
-            {[
-              {
-                q: "¿Cómo es el proceso de envío?",
-                a: "Cada pieza es embalada con estándares de galería y despachada por servicios prioritarios para asegurar su integridad."
-              },
-              {
-                q: "¿Ofrecen certificados de garantía?",
-                a: "Sí, todos nuestros productos de catálogo incluyen documentación de autenticidad y garantía de fábrica verificada."
-              },
-              {
-                q: "¿Puedo solicitar una asesoría personalizada?",
-                a: "Nuestros curadores están disponibles vía WhatsApp para brindarle detalles adicionales sobre cualquier pieza de nuestra colección."
-              }
-            ].map((faq, idx) => (
-              <details key={idx} className="group py-8 transition-all">
-                <summary className="font-bold text-sm text-brand-black uppercase tracking-widest cursor-pointer flex items-center justify-between select-none list-none">
-                  {faq.q}
-                  <span className="text-brand-gold group-open:rotate-180 transition-transform duration-500 text-xs">▿</span>
-                </summary>
-                <div className="overflow-hidden group-open:animate-in group-open:fade-in group-open:slide-in-from-top-2">
-                  <p className="text-gray-500 text-sm mt-6 font-light leading-relaxed max-w-2xl">
-                    {faq.a}
-                  </p>
+            {/* BLOQUE 3: Stock Status */}
+            <div className="py-4 border-b border-gray-100">
+              {totalStock > 0 ? (
+                <p className="text-sm font-light">
+                  <span className="text-green-600 font-medium">En stock</span>
+                  <span className="text-gray-400"> — Listo para despacho desde Bucaramanga</span>
+                </p>
+              ) : (
+                <p className="text-sm font-light text-red-500">Agotado temporalmente</p>
+              )}
+              {isLowStock && (
+                <p className="text-xs text-orange-500 mt-1 font-medium">
+                  ⚠ Quedan pocas unidades disponibles
+                </p>
+              )}
+            </div>
+
+            {/* BLOQUE 4: Garantías y beneficios (Amazon Prime style) */}
+            <div className="py-5 border-b border-gray-100 space-y-3">
+              {[
+                {
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                    </svg>
+                  ),
+                  label: "Envío gratuito a Colombia",
+                  sub: "en pedidos superiores a $100.000"
+                },
+                {
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                  ),
+                  label: "Garantía de autenticidad",
+                  sub: "100% original, certificado"
+                },
+                {
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                  ),
+                  label: "Devoluciones en 30 días",
+                  sub: "sin preguntas, sin complicaciones"
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 text-black mt-0.5">{item.icon}</div>
+                  <div>
+                    <p className="text-xs font-medium text-black">{item.label}</p>
+                    <p className="text-[11px] text-gray-400 font-light">{item.sub}</p>
+                  </div>
                 </div>
-              </details>
-            ))}
+              ))}
+            </div>
+
+            {/* BLOQUE 5: Vendido por */}
+            <div className="py-4 space-y-1">
+              <div className="flex gap-2 text-xs text-gray-500">
+                <span className="font-medium text-black">Vendido por:</span>
+                <span>Tienda Le Bon Marché</span>
+              </div>
+              <div className="flex gap-2 text-xs text-gray-500">
+                <span className="font-medium text-black">SKU:</span>
+                <span className="uppercase">{product.id?.slice(-8)}</span>
+              </div>
+              {product.type?.value && (
+                <div className="flex gap-2 text-xs text-gray-500">
+                  <span className="font-medium text-black">Categoría:</span>
+                  <span>{product.type.value}</span>
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Related Products - Editorial Intro */}
-      <div className="bg-white py-24 md:py-32 overflow-hidden">
-        <div className="content-container">
-          <div className="mb-20 text-center">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Complementos</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-brand-black italic leading-tight">También le <br /> <span className="not-italic">podría interesar</span></h2>
+      {/* ── SPECS & FAQ (ancho completo, debajo del fold) ── */}
+      <div className="border-t border-gray-100 bg-[#fafafa]">
+        <div className="content-container py-12 lg:py-16">
+          <div className="max-w-3xl">
+            <ProductTabs product={product} />
           </div>
+        </div>
+      </div>
 
+      {/* ── PRODUCTOS RELACIONADOS ── */}
+      <div className="bg-white py-16 md:py-24 border-t border-gray-100">
+        <div className="content-container">
+          <div className="mb-12">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-gray-400 font-sans mb-3">También te puede interesar</p>
+            <h2 className="text-3xl md:text-4xl font-serif font-light text-black">Productos relacionados</h2>
+          </div>
           <Suspense fallback={<SkeletonRelatedProducts />}>
             <RelatedProducts product={product} countryCode={countryCode} />
           </Suspense>
         </div>
       </div>
+
     </div>
   )
 }
