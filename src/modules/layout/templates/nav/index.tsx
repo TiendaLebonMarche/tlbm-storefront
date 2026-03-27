@@ -9,8 +9,12 @@ import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
-import NavMenuMore from "@modules/layout/components/nav-menu-more"
-import { NAV_LINKS } from "@lib/constants"
+
+// Solo los 2 enlaces más buscados aparecen visibles en el header
+const FEATURED_LINKS = [
+  { href: "/store?category=parlantes", label: "Parlantes" },
+  { href: "/store?category=originales", label: "Originales" },
+]
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
@@ -19,28 +23,22 @@ export default async function Nav() {
     getLocale(),
   ])
 
-  // Split links for left and right nav
-  const leftLinks = NAV_LINKS.filter(link => link.href !== "/blog")
-  const rightLinks = NAV_LINKS.filter(link => link.href === "/blog")
-
   return (
     <ClientHeaderWrapper>
-      <div className="flex flex-1 items-center w-full justify-between">
-        
-        {/* Sección Izquierda - Hamburger y Enlaces */}
-        <div className="flex items-center gap-6 md:flex-1">
-          {/* Hamburger (Mobile & Desktop) */}
-          <div className="flex items-center">
-            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-          </div>
-          
-          {/* Enlaces Desktop */}
-          <nav className="hidden md:flex gap-6 lg:gap-8 text-xs font-light tracking-widest uppercase">
-            {NAV_LINKS.map((link) => (
+      {/* Contenedor principal con posicionamiento relativo para centrar logo con absolute */}
+      <div className="relative flex flex-1 items-center w-full h-full min-h-[3rem]">
+
+        {/* IZQUIERDA: Hamburger + 2 enlaces destacados */}
+        <div className="flex items-center gap-4 lg:gap-6 flex-1">
+          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+
+          {/* 2 categorías destacadas — solo en desktop grande */}
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+            {FEATURED_LINKS.map((link) => (
               <LocalizedClientLink
                 key={link.href}
                 href={link.href}
-                className="relative group text-black hover:opacity-50 transition-colors duration-200 uppercase"
+                className="text-[11px] font-light tracking-[0.2em] uppercase text-black hover:opacity-50 transition-opacity"
               >
                 {link.label}
               </LocalizedClientLink>
@@ -48,18 +46,18 @@ export default async function Nav() {
           </nav>
         </div>
 
-        {/* Sección Centro - Logo */}
-        <div className="flex-shrink-0 z-40 md:flex-[0.5] flex justify-center">
+        {/* CENTRO: Logo — posición absoluta para centrado perfecto sin depender del espacio lateral */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
           <LocalizedClientLink
             href="/"
-            className="text-2xl md:text-3xl lg:text-4xl font-serif font-light tracking-[0.1em] text-black hover:opacity-70 transition-opacity uppercase"
+            className="pointer-events-auto text-[11px] xs:text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-serif font-light tracking-[0.12em] text-black hover:opacity-60 transition-opacity uppercase whitespace-nowrap select-none"
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
         </div>
 
-        {/* Sección Derecha - Iconos (Search, Bag) */}
-        <div className="flex items-center justify-end gap-5 md:gap-6 md:flex-1">
+        {/* DERECHA: Search (desktop) + Cart */}
+        <div className="flex items-center justify-end gap-4 lg:gap-5 flex-1">
           <div className="hidden md:flex items-center">
             <SearchModal />
           </div>
@@ -74,4 +72,3 @@ export default async function Nav() {
     </ClientHeaderWrapper>
   )
 }
-
