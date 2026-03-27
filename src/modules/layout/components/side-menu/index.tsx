@@ -117,7 +117,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           <LocalizedClientLink
                             href={href}
                             className="block w-full text-base md:text-lg font-light uppercase tracking-[0.2em] py-3 border-b border-white/10 text-white hover:text-gray-300 transition-colors duration-200"
-                            onClick={close}
+                            onClick={() => { close(); closeSideMenu(); }}
                           >
                             {name}
                           </LocalizedClientLink>
