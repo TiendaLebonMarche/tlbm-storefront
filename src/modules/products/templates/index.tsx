@@ -68,38 +68,21 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 <div className="space-y-6">
                   <div className="flex flex-wrap items-center gap-4">
                     {isNew && (
-                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 border border-brand-gold text-brand-gold">
+                      <span className="text-[9px] font-sans uppercase tracking-[0.2em] px-3 py-1.5 border border-black text-black">
                         Lanzamiento
                       </span>
                     )}
                     {isLowStock && (
-                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 border border-red-200 text-red-600">
+                      <span className="text-[9px] font-sans uppercase tracking-[0.2em] px-3 py-1.5 border border-black bg-black text-white">
                         Edición Limitada
                       </span>
                     )}
                   </div>
                   
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-black leading-[1.1]" data-testid="product-title">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-black leading-tight font-light" data-testid="product-title">
                     {product.title}
                   </h1>
-
-                  {/* Rating - Subtle */}
-                  <div className="flex items-center gap-4 py-2">
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-3 h-3 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">28 valoraciones</span>
-                  </div>
                 </div>
-
-                {/* Description - Editorial font sizing */}
-                <p className="text-gray-500 font-light leading-relaxed text-base">
-                  {product.description}
-                </p>
               </div>
 
               {/* Price & Primary Actions */}

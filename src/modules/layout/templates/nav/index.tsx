@@ -28,13 +28,13 @@ export default async function Nav() {
       <div className="flex flex-1 items-center w-full gap-6 md:gap-8">
         {/* Sección Izquierda - Menú y búsqueda */}
         <div className="flex items-center gap-4 md:gap-0 md:flex-1">
-          {/* Menú izquierdo (desktop) - con mejor spacing */}
-          <nav className="hidden md:flex flex-1 justify-end gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pr-8">
+          {/* Menú izquierdo (desktop) */}
+          <nav className="hidden md:flex flex-1 justify-end gap-6 lg:gap-8 text-xs lg:text-sm font-light tracking-[0.2em] lowercase md:pr-8">
             {leftLinks.map((link) => (
               <LocalizedClientLink
                 key={link.href}
                 href={link.href}
-                className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+                className="relative group text-black hover:opacity-50 transition-colors duration-200"
               >
                 {link.label}
               </LocalizedClientLink>
@@ -52,8 +52,7 @@ export default async function Nav() {
         <div className="flex-shrink-0 z-40 md:flex-1 flex justify-center px-2">
           <LocalizedClientLink
             href="/"
-            className="text-xl md:text-2xl lg:text-3xl font-serif font-bold tracking-tight transition-all duration-300 text-white group-data-[scrolled=true]:text-brand-black hover:scale-105 hover:text-brand-gold select-none"
-            style={{ letterSpacing: '0.08em' }}
+            className="text-xl md:text-2xl lg:text-3xl font-serif font-light tracking-widest transition-opacity duration-300 text-black hover:opacity-50 select-none uppercase"
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
@@ -61,14 +60,14 @@ export default async function Nav() {
 
         {/* Sección Derecha - Menú y Acciones */}
         <div className="flex items-center gap-6 md:gap-0 md:flex-1">
-          {/* Menú derecho (desktop) - con mejor spacing */}
-          <nav className="hidden md:flex flex-1 justify-start gap-6 lg:gap-8 text-xs lg:text-sm font-bold tracking-widest uppercase md:pl-8">
+          {/* Menú derecho (desktop) */}
+          <nav className="hidden md:flex flex-1 justify-start gap-6 lg:gap-8 text-xs lg:text-sm font-light tracking-[0.2em] lowercase md:pl-8">
             <NavMenuMore />
             {rightLinks.map((link) => (
               <LocalizedClientLink
                 key={link.href}
                 href={link.href}
-                className="relative group text-white group-data-[scrolled=true]:text-brand-black hover:text-brand-gold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-gold after:transition-all after:duration-300 group-hover:after:w-full"
+                className="relative group text-black hover:opacity-50 transition-colors duration-200"
               >
                 {link.label}
               </LocalizedClientLink>
@@ -76,7 +75,7 @@ export default async function Nav() {
           </nav>
 
           {/* Acciones e íconos (desktop) */}
-          <div className="hidden md:flex gap-6 items-center font-bold tracking-widest text-xs text-inherit">
+          <div className="hidden md:flex gap-6 items-center font-light tracking-[0.2em] text-xs text-black">
             <SearchModal />
             <Suspense fallback={<CartButton />}>
               <CartButton />

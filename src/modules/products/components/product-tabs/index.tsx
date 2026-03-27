@@ -14,23 +14,31 @@ type ProductTabsProps = {
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
-      label: "Detalles Exclusivos",
+      label: "Descripción",
+      component: (
+        <div className="py-4">
+          <p className="text-sm font-light text-black font-sans leading-relaxed">{product.description}</p>
+        </div>
+      ),
+    },
+    {
+      label: "Especificaciones Técnicas",
       component: <ProductInfoTab product={product} />,
     },
     {
-      label: "Garantía y Envíos",
+      label: "Envío desde Bucaramanga",
       component: <ShippingInfoTab />,
     },
   ]
 
   return (
-    <div className="w-full">
+    <div className="w-full border-t border-black/10 mt-12">
       <Accordion type="multiple">
         {tabs.map((tab, i) => (
           <Accordion.Item
             key={i}
             title={tab.label}
-            headingSize="medium"
+            headingSize="small"
             value={tab.label}
           >
             {tab.component}
