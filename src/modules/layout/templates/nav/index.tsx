@@ -25,29 +25,35 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-    <div className="relative flex items-center w-full h-full min-h-[3rem] md:min-h-[4rem]">
+    <div className="relative flex items-center w-full h-full min-h-[2.5rem] md:min-h-[3.5rem] gap-2 lg:gap-3">
         
-        {/* IZQUIERDA: Menu Trigger */}
-        <div className="flex items-center flex-1">
-          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+        {/* IZQUIERDA: Menu Pod */}
+        <div className="flex items-center justify-start flex-1">
+          <div className="bg-white/95 backdrop-blur shadow-sm border border-gray-100 rounded-lg px-3 py-1.5 hover:shadow-md transition-all duration-300">
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          </div>
         </div>
 
-        {/* CENTRO: Logo */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
-          <LocalizedClientLink
-            href="/"
-            className="pointer-events-auto text-lg md:text-2xl font-sans font-bold tracking-[0.2em] text-brand-brown hover:opacity-70 transition-all duration-300 uppercase"
-          >
-            LE BON MARCHÉ
-          </LocalizedClientLink>
+        {/* CENTRO: Logo Pod */}
+        <div className="flex items-center justify-center flex-0">
+          <div className="bg-white/95 backdrop-blur shadow-sm border border-gray-100 rounded-lg px-4 py-1.5 hover:shadow-md transition-all duration-300">
+            <LocalizedClientLink
+              href="/"
+              className="pointer-events-auto text-xs md:text-base lg:text-lg font-sans font-bold tracking-[0.2em] text-brand-brown hover:opacity-70 transition-all duration-300 uppercase whitespace-nowrap"
+            >
+              LE BON MARCHÉ
+            </LocalizedClientLink>
+          </div>
         </div>
 
-        {/* DERECHA: Search + Cart */}
-        <div className="flex items-center justify-end gap-3 md:gap-6 flex-1">
-          <SearchModal />
-          <Suspense fallback={<CartButton />}>
-            <CartButton />
-          </Suspense>
+        {/* DERECHA: Icons Pod */}
+        <div className="flex items-center justify-end flex-1">
+          <div className="bg-white/95 backdrop-blur shadow-sm border border-gray-100 rounded-lg px-3 py-1.5 flex items-center gap-3 hover:shadow-md transition-all duration-300">
+            <SearchModal />
+            <Suspense fallback={<div className="w-4 h-4" />}>
+              <CartButton />
+            </Suspense>
+          </div>
         </div>
 
       </div>
