@@ -68,7 +68,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="flex items-center gap-2 outline-none text-brand-brown hover:opacity-70 transition-opacity uppercase tracking-widest text-[10px] font-bold"
+                  className="flex items-center gap-2 outline-none text-inherit hover:opacity-70 transition-opacity uppercase tracking-widest text-[10px] font-bold"
                   onClick={openSideMenu}
                 >
                   <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
