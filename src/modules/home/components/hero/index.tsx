@@ -15,7 +15,7 @@ const HERO_SLIDES = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1616489953149-8647e7e481b4?q=80&w=2600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2600&auto=format&fit=crop",
     smallTitle: "Piezas Únicas",
     title: "Productos <br /> <span className='italic font-light'>exclusivos y Exóticos.</span>",
     cta: "Explorar Colección",
