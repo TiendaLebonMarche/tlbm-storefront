@@ -53,29 +53,29 @@ export default async function HotDeals({
     })
 
     return (
-      <section className="w-full bg-gradient-to-b from-white to-gray-50 pt-8 pb-20 md:pt-12 md:pb-28">
-        <div className="content-container px-4 md:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-            <div>
-              <span className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
-                ⚡ Ofertas Limitadas
+      <section className="w-full bg-white pt-20 pb-20 md:pt-28 md:pb-28 border-b border-gray-100">
+        <div className="content-container px-6">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-10">
+            <div className="max-w-2xl">
+              <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+                ⚡ Algoritmo de Ahorro
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-black italic">
-                Hot Deals
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-bold text-brand-brown leading-tight">
+                Precios de Selección Global
               </h2>
-              <p className="text-gray-600 text-sm mt-3 font-light">
-                Los mejores precios de la temporada
+              <p className="text-brand-gray text-sm md:text-base mt-6 font-normal leading-relaxed">
+                Nuestros rastreadores han detectado estas ofertas exclusivas en el mercado global. Productos de alta gama traídos directamente a Bucaramanga al mejor precio posible.
               </p>
             </div>
             <LocalizedClientLink
               href="/store"
-              className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border-b-2 border-brand-gold pb-2 hover:text-brand-gold transition-colors whitespace-nowrap"
+              className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/30 pb-2 hover:text-brand-olive transition-colors whitespace-nowrap"
             >
               Ver Todas las Ofertas →
             </LocalizedClientLink>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
             {deals.map((deal) => (
               <LocalizedClientLink
                 key={deal.id}

@@ -15,19 +15,19 @@ const HERO_SLIDES = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2600&auto=format&fit=crop",
-    smallTitle: "Curaduría Global",
-    title: "Objetos <br /> <span className='italic font-light'>Singulares.</span>",
-    cta: "Explorar Originales",
+    image: "https://images.unsplash.com/photo-1616489953149-8647e7e481b4?q=80&w=2600&auto=format&fit=crop",
+    smallTitle: "Piezas de Selección",
+    title: "Exótico & <br /> <span className='italic font-light'>Exclusivo.</span>",
+    cta: "Explorar Colección",
     href: "/store?category=originales"
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2600&auto=format&fit=crop",
-    smallTitle: "Lifestyle Luxury",
-    title: "Estética <br /> <span className='italic font-light'>Sin Tiempo.</span>",
-    cta: "Ver Colección",
-    href: "/store?category=assouline"
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2600&auto=format&fit=crop",
+    smallTitle: "Inteligencia Digital",
+    title: "Bots Buscando <br /> <span className='italic font-light'>El Mejor Precio.</span>",
+    cta: "Ver Ofertas",
+    href: "/store?category=ofertas"
   }
 ]
 
