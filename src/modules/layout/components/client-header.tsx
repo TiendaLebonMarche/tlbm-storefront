@@ -8,8 +8,8 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
     return (
         <div className="fixed top-0 left-0 w-full z-[100] transition-all duration-500 transform">
             {/* Top Bar (Always Visible) */}
-            <div id="top-bar" className="bg-transparent text-brand-brown/50 text-[8px] md:text-[9px] tracking-[0.4em] py-3 overflow-hidden font-sans relative z-[101] text-center uppercase transition-all duration-300">
-                <span>Envío gratis por tu primera compra +100k</span>
+            <div id="top-bar" className="bg-white text-brand-brown text-[8px] md:text-[10px] border-b border-gray-100 tracking-[0.3em] py-3 overflow-hidden font-sans relative z-[101] text-center uppercase transition-all duration-300 font-bold">
+                <span>Envios a todo Bucaramanga - Productos originales y exclusivos.</span>
             </div>
 
             <header

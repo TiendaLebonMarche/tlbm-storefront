@@ -52,7 +52,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="relative w-full h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-brand-soft">
+    <section className="relative w-full h-[90vh] md:h-screen flex items-center justify-center overflow-hidden bg-brand-soft">
       {HERO_SLIDES.map((slide, index) => (
         <div 
           key={slide.id}
@@ -74,10 +74,10 @@ const Hero = () => {
           </div>
           
           {/* Sophisticated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
 
           {/* Content Overlay */}
-          <div className={`relative z-20 h-full flex items-center justify-start px-6 md:px-16 lg:px-24 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
+          <div className={`relative z-20 h-full flex items-start justify-start px-6 md:px-16 lg:px-24 pt-32 md:pt-48 lg:pt-56 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
             <div 
               className="max-w-4xl text-white"
               style={{ transform: `translateY(${-scrollY * 0.15}px)` }}
