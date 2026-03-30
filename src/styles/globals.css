@@ -211,3 +211,16 @@
 .delay-300 { animation-delay: 300ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* Logo Dynamic Coloring */
+.text-white .logo-img {
+  filter: brightness(0) invert(1) !important;
+}
+
+.text-brand-brown .logo-img {
+  filter: none !important;
+}
+
+.logo-img {
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+

@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 
 import { listRegions } from "@lib/data/regions"
 import { listLocales } from "@lib/data/locales"
@@ -38,9 +39,16 @@ export default async function Nav() {
           <div className="flex items-center justify-center flex-grow">
             <LocalizedClientLink
               href="/"
-              className="text-lg font-sans font-bold tracking-[0.2em] uppercase whitespace-nowrap"
+              className="flex items-center justify-center"
             >
-              LE BON MARCHÉ
+              <Image 
+                src="/logo.png" 
+                alt="Tienda Le Bon Marché" 
+                width={120} 
+                height={40} 
+                className="logo-img h-8 md:h-10 w-auto object-contain transition-all duration-500"
+                priority
+              />
             </LocalizedClientLink>
           </div>
           
@@ -64,9 +72,16 @@ export default async function Nav() {
         <div className="flex items-center justify-center flex-0">
           <LocalizedClientLink
             href="/"
-            className="pointer-events-auto text-base lg:text-lg font-sans font-bold tracking-[0.2em] hover:opacity-70 transition-all duration-300 uppercase whitespace-nowrap"
+            className="pointer-events-auto flex items-center justify-center hover:opacity-70 transition-all duration-300"
           >
-            LE BON MARCHÉ
+            <Image 
+              src="/logo.png" 
+              alt="Tienda Le Bon Marché" 
+              width={160} 
+              height={50} 
+              className="logo-img h-8 lg:h-10 xl:h-12 w-auto object-contain transition-all duration-500"
+              priority
+            />
           </LocalizedClientLink>
         </div>
 
