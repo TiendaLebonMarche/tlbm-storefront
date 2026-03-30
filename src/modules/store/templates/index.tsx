@@ -35,7 +35,7 @@ const StoreTemplate = async ({
   })
 
   return (
-    <div className="py-16 bg-white min-h-screen" data-testid="category-container">
+    <div className="bg-white min-h-screen" data-testid="category-container">
       <div className="content-container">
         {/* Editorial Header */}
         <div className="mb-20 text-center max-w-2xl mx-auto">

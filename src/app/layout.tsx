@@ -48,6 +48,8 @@ export const metadata: Metadata = {
   },
 }
 
+import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
+
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable}`}>
@@ -55,9 +57,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         <StructuredData />
         <UIProvider>
-          <main className="relative">{props.children}</main>
+          <PagePaddingWrapper>{props.children}</PagePaddingWrapper>
         </UIProvider>
       </body>
     </html>
   )
 }
+

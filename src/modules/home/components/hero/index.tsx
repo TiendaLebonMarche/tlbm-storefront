@@ -77,7 +77,7 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
 
           {/* Content Overlay */}
-          <div className={`relative z-20 h-full flex items-start justify-start px-6 md:px-16 lg:px-24 pt-32 md:pt-48 lg:pt-56 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
+          <div className={`relative z-20 h-full flex items-start justify-start px-6 md:px-16 lg:px-24 pt-40 md:pt-64 lg:pt-80 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
             <div 
               className="max-w-4xl text-white"
               style={{ transform: `translateY(${-scrollY * 0.15}px)` }}
@@ -112,7 +112,7 @@ const Hero = () => {
       ))}
 
       {/* Progress indicators */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
         {HERO_SLIDES.map((_, i) => (
           <button
             key={i}
