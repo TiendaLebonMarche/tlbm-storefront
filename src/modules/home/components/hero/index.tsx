@@ -1,48 +1,130 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Button } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=2600&auto=format&fit=crop",
+    smallTitle: "Acústica de Precisión",
+    title: "Sonido de <br /> <span className='italic font-light'>Alto Nivel.</span>",
+    cta: "Ver Parlantes",
+    href: "/store?category=parlantes"
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2600&auto=format&fit=crop",
+    smallTitle: "Curaduría Global",
+    title: "Objetos <br /> <span className='italic font-light'>Singulares.</span>",
+    cta: "Explorar Originales",
+    href: "/store?category=originales"
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2600&auto=format&fit=crop",
+    smallTitle: "Lifestyle Luxury",
+    title: "Estética <br /> <span className='italic font-light'>Sin Tiempo.</span>",
+    cta: "Ver Colección",
+    href: "/store?category=assouline"
+  }
+]
+
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev === HERO_SLIDES.length - 1 ? 0 : prev + 1))
+    }, 10000)
+
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden bg-brand-soft">
-      {/* Background Image with subtle zoom */}
-      <Image
-        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2600&auto=format&fit=crop"
-        alt="Le Bon Marché - Pure Luxury"
-        fill
-        priority
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] scale-105 group-hover:scale-100"
-      />
-      {/* Sophisticated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30" />
+    <section className="relative w-full h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-brand-soft">
+      {HERO_SLIDES.map((slide, index) => (
+        <div 
+          key={slide.id}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+        >
+          {/* Parallax Background Image with slow zoom and scroll parallax */}
+          <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
+            <Image
+              src={slide.image}
+              alt={slide.smallTitle}
+              fill
+              priority
+              className={`object-cover transition-transform duration-[12000ms] ease-linear ${index === currentSlide ? "scale-110" : "scale-100"}`}
+              style={{ 
+                transformOrigin: 'center',
+                transform: `translateY(${scrollY * 0.3}px) ${index === currentSlide ? "scale(1.1)" : "scale(1)"}`
+              }}
+            />
+          </div>
+          
+          {/* Sophisticated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center text-white px-6 md:px-12 max-w-5xl">
-        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mb-4 block opacity-90">
-          Nueva Edición Limitada
-        </span>
+          {/* Content Overlay */}
+          <div className={`relative z-20 h-full flex items-center justify-start px-6 md:px-16 lg:px-24 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
+            <div 
+              className="max-w-4xl text-white"
+              style={{ transform: `translateY(${-scrollY * 0.15}px)` }}
+            >
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mb-6 block opacity-90 drop-shadow-sm">
+                {slide.smallTitle}
+              </span>
 
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-sans font-bold mb-8 leading-none tracking-tight">
-          Pura <br /> <span className="italic font-light">Elegancia.</span>
-        </h1>
+              <h1 
+                className="text-6xl md:text-8xl lg:text-9xl font-sans font-bold mb-10 leading-none tracking-tight drop-shadow-lg"
+                dangerouslySetInnerHTML={{ __html: slide.title }}
+              />
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-          <LocalizedClientLink
-            href="/store"
-            className="px-10 py-4 bg-white text-brand-brown text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-brand-olive hover:text-white transition-all duration-500 rounded-sm shadow-xl"
-          >
-            Explorar Catálogo
-          </LocalizedClientLink>
-          <LocalizedClientLink
-            href="/store?category=originales"
-            className="px-10 py-4 border border-white/40 bg-white/5 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-white hover:text-brand-brown transition-all duration-500 rounded-sm"
-          >
-            Ver Originales
-          </LocalizedClientLink>
+              <div className="flex flex-col sm:flex-row items-start gap-4 mt-12">
+                <LocalizedClientLink
+                  href={slide.href}
+                  className="px-10 py-5 bg-white text-brand-brown text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-brand-olive hover:text-white transition-all duration-500 rounded-sm shadow-2xl group"
+                >
+                  <span className="group-hover:tracking-[0.4em] transition-all">{slide.cta}</span>
+                </LocalizedClientLink>
+                
+                <LocalizedClientLink
+                  href="/store"
+                  className="px-10 py-5 border border-white/40 bg-white/5 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-white hover:text-brand-brown transition-all duration-500 rounded-sm"
+                >
+                  Catálogo Completo
+                </LocalizedClientLink>
+              </div>
+            </div>
+          </div>
         </div>
+      ))}
+
+      {/* Progress indicators */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+        {HERO_SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentSlide(i)}
+            className={`h-1 transition-all duration-500 ${i === currentSlide ? "w-12 bg-white" : "w-6 bg-white/30"}`}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   )
 }
 
 export default Hero
+
