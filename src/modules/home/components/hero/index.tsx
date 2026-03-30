@@ -16,8 +16,8 @@ const HERO_SLIDES = [
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1616489953149-8647e7e481b4?q=80&w=2600&auto=format&fit=crop",
-    smallTitle: "Piezas de Selección",
-    title: "Exótico & <br /> <span className='italic font-light'>Exclusivo.</span>",
+    smallTitle: "Piezas Únicas",
+    title: "Productos <br /> <span className='italic font-light'>exclusivos y Exóticos.</span>",
     cta: "Explorar Colección",
     href: "/store?category=originales"
   },
@@ -25,7 +25,7 @@ const HERO_SLIDES = [
     id: 3,
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2600&auto=format&fit=crop",
     smallTitle: "Inteligencia Digital",
-    title: "Bots Buscando <br /> <span className='italic font-light'>El Mejor Precio.</span>",
+    title: "Miles de bots buscando <br /> <span className='italic font-light'>ofertas para ti ❤️</span>",
     cta: "Ver Ofertas",
     href: "/store?category=ofertas"
   }
