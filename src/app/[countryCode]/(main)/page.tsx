@@ -40,61 +40,66 @@ export default async function Home(props: {
     <>
       <Hero />
 
-      <TrustBadges />
+      <div className="reveal-up">
+        <TrustBadges />
+      </div>
 
-      <HotDeals countryCode={countryCode} />
+      <div className="reveal-up delay-100">
+        <HotDeals countryCode={countryCode} />
+      </div>
 
-      <CustomerReviews />
+      <div className="reveal-up delay-200">
+        <CustomerReviews />
+      </div>
 
-      <section id="catalogo" className="bg-white">
+      <section id="catalogo" className="bg-white reveal-up delay-300">
         <div className="py-16 md:py-20 content-container">
           <div className="text-center mb-16 px-4">
-            <h2 className="text-4xl font-serif text-brand-black mb-3">Productos Exclusivos</h2>
-            <div className="w-24 h-[1px] bg-brand-black mx-auto" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block">Curaduría</span>
+            <h2 className="text-4xl md:text-5xl font-sans font-bold text-brand-brown mb-3">Piezas de Deseo</h2>
+            <div className="w-16 h-[1px] bg-brand-brown/20 mx-auto mt-6" />
           </div>
           <FeaturedProducts collections={collections} region={region} />
         </div>
       </section>
 
-      <section className="w-full bg-brand-black overflow-hidden py-0">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative h-[500px] md:h-[700px] overflow-hidden group">
+      <section className="w-full bg-brand-soft overflow-hidden py-0 reveal-up">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-center">
+          <div className="relative h-[600px] md:h-[800px] overflow-hidden group">
             <Image
               src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1600"
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
               alt="Colección Assouline"
             />
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
+            <div className="absolute inset-0 bg-brand-brown/10 group-hover:bg-transparent transition-colors duration-1000" />
           </div>
           <div className="flex flex-col justify-center items-center text-center p-12 md:p-24 lg:p-32">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px] mb-6">Exclusividad</span>
-            <h2 className="text-4xl md:text-6xl font-serif text-white mb-8 italic leading-tight">Colección <br /> Assouline</h2>
-            <p className="text-sm md:text-base text-gray-400 max-w-sm leading-loose mb-12 font-medium uppercase tracking-widest">
-              Libros de mesa que son verdaderas obras de arte. Una selección de destinos icónicos, moda y diseño para el hogar moderno.
+            <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6">Exclusividad Editorial</span>
+            <h2 className="text-4xl md:text-6xl font-sans font-bold text-brand-brown mb-8 leading-tight">Colección <br /> <span className="italic font-light">Assouline</span></h2>
+            <p className="text-sm md:text-base text-brand-gray max-w-sm leading-loose mb-12 font-normal">
+              Libros de mesa que son verdaderas obras de arte. Una selección de destinos icónicos, moda y diseño para elevar tu espacio.
             </p>
-            <LocalizedClientLink href="/store?q=assouline" className="group relative px-10 py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden">
-              <span className="relative z-10">Ver Colección</span>
-              <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-0" />
-              <span className="absolute inset-0 flex items-center justify-center text-black font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">Ver Colección</span>
+            <LocalizedClientLink href="/store?q=assouline" className="px-12 py-5 bg-brand-brown text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-olive transition-all duration-500 rounded-sm shadow-xl">
+              Ver Colección Completa
             </LocalizedClientLink>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20 overflow-hidden">
+      <section className="bg-white py-20 md:py-32 overflow-hidden reveal-up">
         <div className="content-container">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 px-4">
             <div>
-              <span className="text-[10px] font-sans uppercase tracking-[0.4em] text-gray-400 mb-3 block">Explora por Estilo</span>
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-black">Nuestras Categorías</h2>
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block">Navegación</span>
+              <h2 className="text-4xl font-sans font-bold text-brand-brown leading-tight">Explora por Estilo</h2>
             </div>
             <LocalizedClientLink
               href="/store"
-              className="text-[10px] font-light uppercase tracking-[0.3em] text-black border-b border-black pb-1 hover:opacity-50 transition-opacity whitespace-nowrap"
+              className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/20 pb-2 hover:text-brand-olive transition-colors whitespace-nowrap"
             >
-              Ver Catálogo Completo
+              Ver Catálogo →
             </LocalizedClientLink>
           </div>
 
@@ -102,49 +107,46 @@ export default async function Home(props: {
         </div>
       </section>
 
-      <section id="blog" className="py-16 md:py-20 bg-white">
-        <div className="content-container">
-          <div className="flex flex-col items-center text-center mb-20 space-y-4">
-            <span className="text-brand-gold font-bold uppercase tracking-[0.4em] text-[10px]">Journal</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-brand-black italic">Crónicas de Estilo</h2>
-            <p className="max-w-xl text-gray-500 font-light text-base leading-relaxed">
-              Exploramos las historias detrás de cada pieza, guías de estilo y las últimas tendencias en el mundo del lujo exótico.
+      <section id="blog" className="py-20 md:py-32 bg-brand-soft reveal-up">
+        <div className="content-container px-6">
+          <div className="flex flex-col items-center text-center mb-24 space-y-4">
+            <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px]">Lifestyle Gallery</span>
+            <h2 className="text-5xl md:text-7xl font-sans font-bold text-brand-brown leading-none">Crónicas de Estilo</h2>
+            <p className="max-w-xl text-brand-gray font-normal text-base md:text-lg leading-relaxed">
+              Descubre las piezas que definen el lujo moderno y las historias detrás de nuestra selección exclusiva.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-            {blogPosts.slice(0, 3).map((post) => (
-              <article key={post.title} className="group cursor-pointer flex flex-col h-full bg-white">
-                <LocalizedClientLink href={`/blog/${post.handle}`} className="block relative overflow-hidden aspect-[3/4] mb-8 bg-gray-50">
+            {blogPosts.slice(0, 3).map((post, idx) => (
+              <article key={post.title} className={`group cursor-pointer flex flex-col h-full bg-white p-4 rounded-sm shadow-sm hover:shadow-xl transition-all duration-500 reveal-up delay-${(idx + 1) * 100}`}>
+                <LocalizedClientLink href={`/blog/${post.handle}`} className="block relative overflow-hidden aspect-[1/1] mb-8 bg-gray-50 rounded-sm">
                   <Image
                     src={post.img}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                     alt={post.title}
                   />
-                  <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-brand-brown/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </LocalizedClientLink>
                 
-                <div className="flex flex-col flex-1 space-y-4">
+                <div className="flex flex-col flex-1 space-y-4 px-2 pb-4 text-center items-center">
                   <div className="flex items-center gap-4">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-olive">
                       {post.tag}
                     </span>
-                    <span className="w-1 h-1 rounded-full bg-gray-200" />
-                    <time className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">{post.date}</time>
                   </div>
                   
                   <LocalizedClientLink href={`/blog/${post.handle}`}>
-                    <h3 className="text-2xl font-serif text-brand-black leading-snug group-hover:text-brand-gold transition-colors duration-500">
+                    <h3 className="text-2xl font-sans font-bold text-brand-brown leading-snug group-hover:text-brand-olive transition-colors duration-500">
                       {post.title}
                     </h3>
                   </LocalizedClientLink>
                   
                   <div className="pt-6 mt-auto">
-                    <LocalizedClientLink href={`/blog/${post.handle}`} className="text-[10px] font-bold uppercase tracking-[0.3em] inline-flex items-center gap-4 text-brand-black group/link">
-                      <span className="group-hover:tracking-[0.4em] transition-all">Leer Journal</span>
-                      <div className="w-8 h-[1px] bg-brand-gold group-hover/link:w-12 transition-all duration-500"></div>
+                    <LocalizedClientLink href={`/blog/${post.handle}`} className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-brown group-hover:tracking-[0.4em] transition-all">
+                      Leer Más →
                     </LocalizedClientLink>
                   </div>
                 </div>
@@ -156,10 +158,10 @@ export default async function Home(props: {
 
       <NewsletterSection />
 
-      <div className="w-full bg-[#0a0a0a] py-8 border-t border-white/5 overflow-hidden select-none flex items-center justify-center">
+      <div className="w-full bg-white py-20 border-t border-gray-100 overflow-hidden select-none flex items-center justify-center">
         <div className="content-container">
-          <h1 className="text-[10vw] md:text-[8vw] leading-none font-serif font-black tracking-tighter text-center whitespace-nowrap opacity-100">
-            <span className="text-white">TIENDALEBON</span><span className="text-brand-gold italic">MARCHE</span>
+          <h1 className="text-[12vw] leading-none font-sans font-black tracking-tighter text-center whitespace-nowrap text-brand-brown opacity-[0.03]">
+            LE BON MARCHÉ
           </h1>
         </div>
       </div>

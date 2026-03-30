@@ -25,7 +25,7 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-      <div className="relative flex items-center w-full h-full min-h-[4rem] px-4 md:px-8">
+    <div className="relative flex items-center w-full h-full min-h-[3rem] md:min-h-[4rem]">
         
         {/* IZQUIERDA: Menu Trigger */}
         <div className="flex items-center flex-1">
@@ -36,14 +36,14 @@ export default async function Nav() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
           <LocalizedClientLink
             href="/"
-            className="pointer-events-auto text-lg md:text-2xl font-sans font-bold tracking-[0.1em] text-brand-brown hover:opacity-70 transition-opacity uppercase"
+            className="pointer-events-auto text-lg md:text-2xl font-sans font-bold tracking-[0.2em] text-brand-brown hover:opacity-70 transition-all duration-300 uppercase"
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
         </div>
 
         {/* DERECHA: Search + Cart */}
-        <div className="flex items-center justify-end gap-2 md:gap-4 flex-1">
+        <div className="flex items-center justify-end gap-3 md:gap-6 flex-1">
           <SearchModal />
           <Suspense fallback={<CartButton />}>
             <CartButton />
