@@ -32,9 +32,9 @@ export default async function ProductPreview({
   const isLowStock = totalInventory < 5 && totalInventory > 0
 
   return (
-    <div className="group flex flex-col h-full bg-white transition-all duration-500">
+    <div className="group flex flex-col h-full bg-white transition-all duration-700">
       <LocalizedClientLink href={`/products/${product.handle}`} data-testid="product-wrapper">
-        <div className="relative overflow-hidden bg-gray-50 aspect-[4/5] mb-4 group/img transition-all duration-500">
+        <div className="relative overflow-hidden bg-brand-soft aspect-square mb-6 group/img transition-all duration-700 rounded-lg">
           <Thumbnail
             thumbnail={product.thumbnail}
             images={product.images}
@@ -45,12 +45,12 @@ export default async function ProductPreview({
           {/* Badges - Minimalistas */}
           <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none z-20">
             {isNew && (
-              <span className="bg-white text-black text-[9px] uppercase tracking-widest px-3 py-1 border border-black/10">
+              <span className="bg-brand-olive text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm">
                 Nuevo
               </span>
             )}
             {isLowStock && (
-              <span className="bg-black text-white text-[9px] uppercase tracking-widest px-3 py-1">
+              <span className="bg-brand-brown text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm">
                 Limitado
               </span>
             )}
@@ -59,14 +59,14 @@ export default async function ProductPreview({
       </LocalizedClientLink>
 
       {/* Content */}
-      <div className="flex flex-col text-center items-center font-sans">
-        <LocalizedClientLink href={`/products/${product.handle}`}>
-          <h3 className="text-[11px] md:text-xs text-black tracking-widest uppercase mb-2 hover:opacity-50 transition-opacity" data-testid="product-title">
+      <div className="flex flex-col text-left items-start font-sans px-1">
+        <LocalizedClientLink href={`/products/${product.handle}`} className="group/title">
+          <h3 className="text-sm md:text-base font-bold text-brand-brown leading-tight mb-2 hover:text-brand-olive transition-colors" data-testid="product-title">
             {product.title}
           </h3>
         </LocalizedClientLink>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-start">
           {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
         </div>
       </div>

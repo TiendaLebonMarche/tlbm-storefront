@@ -28,11 +28,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden bg-white transition-all ease-in-out duration-500",
+        "relative w-full overflow-hidden bg-brand-soft border-none transition-all duration-700 rounded-lg",
         className,
         {
-          "aspect-[4/5]": size !== "square",
-          "aspect-[1/1]": size === "square",
+          "aspect-square": true,
           "w-[180px]": size === "small",
           "w-[290px]": size === "medium",
           "w-[440px]": size === "large",

@@ -68,24 +68,23 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="nav-icon outline-none text-inherit hover:text-brand-gold transition-colors group-hover:underline decoration-1 underline-offset-4"
+                  className="flex items-center gap-2 outline-none text-brand-brown hover:opacity-70 transition-opacity uppercase tracking-widest text-[10px] font-bold"
                   onClick={openSideMenu}
                 >
-                  <span className="hidden md:inline">MENU</span>
-                  <span className="md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                  </span>
+                  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="1.5" fill="currentColor"/>
+                    <rect y="10.5" width="20" height="1.5" fill="currentColor"/>
+                  </svg>
+                  <span>Menu</span>
                 </Popover.Button>
               </div>
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[60] bg-black/30 pointer-events-auto transition-all duration-300"
+                  className="fixed inset-0 z-[60] bg-brand-brown/10 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
-                  style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+                  style={{ backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
                 />
               )}
 
@@ -93,30 +92,32 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 show={isSideMenuOpen}
                 as={Fragment}
                 enter="transition transform duration-500 ease-out"
-                enterFrom="-translate-x-full opacity-0"
-                enterTo="translate-x-0 opacity-100"
+                enterFrom="-translate-x-full"
+                enterTo="translate-x-0"
                 leave="transition transform duration-400 ease-in"
-                leaveFrom="translate-x-0 opacity-100"
-                leaveTo="-translate-x-full opacity-0"
+                leaveFrom="translate-x-0"
+                leaveTo="-translate-x-full"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-none bg-brand-black z-[70] text-white border-none flex flex-col shadow-2xl overflow-y-auto overscroll-contain">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[70] text-brand-brown border-r border-gray-100 flex flex-col shadow-xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-screen justify-between px-5 md:px-8 pt-8 md:pt-10 pb-6 md:pb-8"
+                    className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-10"
                   >
-                    <div className="flex justify-between items-center mb-8">
-                      <span className="text-[10px] font-sans tracking-[0.3em] uppercase text-gray-400">Menú</span>
-                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="text-2xl font-light text-gray-400 hover:text-white transition-all duration-200 leading-none" title="Cerrar menú">
-                        &times;
+                    <div className="flex justify-between items-center mb-12">
+                      <span className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-50">Navegación</span>
+                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="p-2 hover:opacity-50 transition-opacity" title="Cerrar menú">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" strokeWidth="1.5"/>
+                        </svg>
                       </button>
                     </div>
 
                     <ul className="flex flex-col gap-1 items-start justify-start flex-1 w-full">
                       {mainMenu.map(({ name, href }) => (
-                        <li key={name} className="w-full">
+                        <li key={name} className="w-full group">
                           <LocalizedClientLink
                             href={href}
-                            className="block w-full text-base md:text-lg font-light uppercase tracking-[0.2em] py-3 border-b border-white/10 text-white hover:text-gray-300 transition-colors duration-200"
+                            className="block w-full text-lg md:text-xl font-medium py-4 border-b border-gray-50 text-brand-brown group-hover:pl-2 transition-all duration-300"
                             onClick={() => { close(); closeSideMenu(); }}
                           >
                             {name}
@@ -125,8 +126,12 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       ))}
                     </ul>
 
-                    <div className="pt-6 border-t border-white/10">
-                      <Text className="text-[10px] text-gray-600 tracking-widest uppercase">
+                    <div className="pt-10">
+                      <div className="flex flex-col gap-4 mb-8">
+                        <LocalizedClientLink href="/account" className="text-sm font-bold tracking-widest uppercase hover:opacity-50 transition-opacity">Mi Cuenta</LocalizedClientLink>
+                        <LocalizedClientLink href="/cart" className="text-sm font-bold tracking-widest uppercase hover:opacity-50 transition-opacity">Carrito</LocalizedClientLink>
+                      </div>
+                      <Text className="text-[10px] text-gray-400 tracking-widest uppercase">
                         © {new Date().getFullYear()} Le Bon Marché
                       </Text>
                     </div>

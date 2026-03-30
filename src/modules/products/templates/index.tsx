@@ -77,17 +77,17 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="pb-5 border-b border-gray-100 space-y-4">
               <div className="flex flex-wrap gap-2">
                 {isNew && (
-                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 border border-black text-black bg-white">
+                  <span className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] px-3 py-1 bg-brand-olive text-white rounded-sm shadow-sm">
                     Nuevo
                   </span>
                 )}
                 {isLowStock && (
-                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 bg-red-600 text-white">
+                  <span className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] px-3 py-1 bg-brand-brown text-white rounded-sm shadow-sm">
                     Últimas unidades
                   </span>
                 )}
                 {product.collection?.title && (
-                  <span className="text-[9px] font-sans uppercase tracking-[0.25em] px-2.5 py-1 border border-gray-200 text-gray-500">
+                  <span className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] px-3 py-1 border border-brand-brown/10 text-brand-brown/60 rounded-sm">
                     {product.collection.title}
                   </span>
                 )}

@@ -24,10 +24,14 @@ module.exports = {
         brand: {
           black: '#000000', 
           gold: '#000000',
-          gray: '#f9f9f9',
+          gray: '#514848',
           magenta: '#000000',
           slate: '#000000',
-          whatsapp: '#000000'
+          whatsapp: '#000000',
+          olive: '#6A7A66',
+          brown: '#363030',
+          bg: '#FFFFFF',
+          soft: '#F9F9F9'
         },
         grey: {
           0: "#FFFFFF",

@@ -12,97 +12,78 @@ export default async function Footer() {
   const productCategories = await listCategories()
 
   return (
-    <footer className="bg-[#0a0a0a] text-white pt-12 pb-12 px-6 mt-auto border-t border-brand-black/20">
+    <footer className="bg-white text-brand-brown pt-20 pb-16 md:pt-32 md:pb-24 px-6 mt-auto border-t border-gray-100">
       
-      {/* Global Sales CTA */}
-      <div className="max-w-[95rem] mx-auto bg-brand-gold/10 border border-brand-gold/20 p-8 md:p-12 mb-20 text-center flex flex-col md:flex-row items-center justify-between gap-8 rounded-sm">
-        <div className="text-left max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-serif italic text-brand-gold mb-3">¿Listo para probar lo mejor?</h2>
-          <p className="text-gray-400 font-light text-sm md:text-base">
-            Somos los cazadores de calidades. Nos quemamos las pestañas buscando las mejores ofertas globales, productos exóticos y tecnología top para que usted solo tenga que dar un clic.
+      <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24 mb-24">
+        <div className="flex flex-col gap-y-8">
+          <LocalizedClientLink 
+            href="/" 
+            className="text-2xl font-sans font-bold tracking-[0.1em] text-brand-brown uppercase"
+          >
+            LE BON MARCHÉ
+          </LocalizedClientLink>
+          <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
+            Curaduría de productos exóticos, tecnología y piezas de lujo seleccionadas para quienes buscan lo excepcional.
           </p>
-        </div>
-        <LocalizedClientLink 
-          href="/store"
-          className="whitespace-nowrap inline-block bg-brand-gold text-brand-black font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] px-10 py-4 hover:bg-white transition-colors"
-        >
-          Ir de Compras
-        </LocalizedClientLink>
-      </div>
-
-      <div className="max-w-[95rem] mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-        <div className="flex flex-col gap-y-6">
-          <h3 className="font-serif text-3xl text-white tracking-tight leading-none italic">
-            Le <span className="text-brand-gold not-italic font-sans font-bold text-2xl tracking-widest uppercase ml-1">Bon Marché</span>
-          </h3>
-          <p className="text-gray-500 text-xs leading-loose max-w-sm uppercase tracking-wide font-medium">
-            Rastreamos los productos más exóticos del mundo. Gadgets importados y piezas luxury a los mejores precios del mercado.
-          </p>
-          <div className="flex gap-x-6 text-[10px] font-bold tracking-[0.2em] text-gray-400">
-            <a href="https://instagram.com/tiendalebonmarche" className="hover:text-brand-gold transition-all duration-300 transform hover:-translate-y-1" target="_blank" rel="noreferrer underline decoration-brand-gold underline-offset-8">INSTAGRAM</a>
-            <a href="#" className="hover:text-brand-gold transition-all duration-300 transform hover:-translate-y-1">TIKTOK</a>
-            <a href="#" className="hover:text-brand-gold transition-all duration-300 transform hover:-translate-y-1">FACEBOOK</a>
+          <div className="flex gap-x-8 text-[11px] font-bold tracking-[0.2em] text-brand-brown opacity-60">
+            <a href="https://instagram.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">INSTAGRAM</a>
+            <a href="#" className="hover:opacity-100 transition-opacity">FACEBOOK</a>
+            <a href="#" className="hover:opacity-100 transition-opacity">TIKTOK</a>
           </div>
         </div>
 
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-10 text-brand-gold/80 flex items-center gap-2">
-            <span className="w-4 h-[1px] bg-brand-gold/30"></span> COLECCIÓN
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-brand-brown opacity-40">
+            Colección
           </h4>
-          <ul className="space-y-5 text-[11px] uppercase tracking-widest text-gray-500 font-medium">
+          <ul className="space-y-4 text-sm font-medium text-brand-brown">
             {collections && collections.length > 0 ? (
               collections.slice(0, 4).map((c) => (
                 <li key={c.id}>
-                  <LocalizedClientLink className="hover:text-white transition-colors duration-300 flex items-center gap-2 group" href={`/collections/${c.handle}`}>
-                    <span className="w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-3"></span>
+                  <LocalizedClientLink className="hover:text-brand-olive transition-colors duration-300" href={`/collections/${c.handle}`}>
                     {c.title}
                   </LocalizedClientLink>
                 </li>
               ))
             ) : (
               <>
-                <li><LocalizedClientLink href="/store" className="hover:text-white transition-colors">Catálogo</LocalizedClientLink></li>
-                <li><LocalizedClientLink href="/store" className="hover:text-white transition-colors">Novedades</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Catálogo Completo</LocalizedClientLink></li>
+                <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Novedades</LocalizedClientLink></li>
               </>
             )}
-            <li>
-              <LocalizedClientLink href="/store" className="text-brand-gold hover:text-white transition-colors duration-300 pt-2 block">
-                VER TODO EL CATÁLOGO
-              </LocalizedClientLink>
-            </li>
           </ul>
         </div>
 
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-10 text-brand-gold/80 flex items-center gap-2">
-            <span className="w-4 h-[1px] bg-brand-gold/30"></span> SERVICIO
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-brand-brown opacity-40">
+            Ayuda & Soporte
           </h4>
-          <ul className="space-y-5 text-[11px] uppercase tracking-widest text-gray-500 font-medium">
-            <li><LocalizedClientLink href="/store" className="hover:text-white transition">Garantías</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-white transition">Envíos Nacionales</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-white transition">Cambios y Devoluciones</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-white transition">Términos y Condiciones</LocalizedClientLink></li>
+          <ul className="space-y-4 text-sm font-medium text-brand-brown">
+            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Envíos & Entregas</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Garantías</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Términos de Servicio</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Contacto</LocalizedClientLink></li>
           </ul>
         </div>
 
-        <div className="p-8 bg-white/5 border border-white/10 rounded-sm">
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-8 text-brand-gold">EXCLUSIVO</h4>
-          <p className="text-[10px] text-gray-400 mb-6 tracking-widest">ATENCIÓN PERSONALIZADA POR WHATSAPP</p>
-          <a href="https://wa.me/573027567783" className="text-xl md:text-2xl font-serif text-white hover:text-brand-gold transition-all duration-500 block" target="_blank" rel="noreferrer">
+        <div className="flex flex-col gap-y-6">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2 text-brand-brown opacity-40">
+            Contacto Directo
+          </h4>
+          <a href="https://wa.me/573027567783" className="text-xl font-sans font-bold text-brand-brown hover:text-brand-olive transition-colors" target="_blank" rel="noreferrer">
             +57 302 756 7783
           </a>
-          <span className="text-[9px] text-gray-600 tracking-[0.3em] font-medium block mt-6 cursor-default italic uppercase">Premium Concierge</span>
+          <span className="text-[10px] text-brand-gray tracking-widest font-medium uppercase mt-2">Bucaramanga, Colombia</span>
         </div>
       </div>
 
-      <div className="max-w-[95rem] mx-auto border-t border-white/5 pt-12 flex flex-col items-center gap-y-6">
-        <div className="flex gap-x-8 text-[9px] uppercase tracking-[0.3em] font-medium text-gray-700">
-          <LocalizedClientLink href="/store" className="hover:text-white transition">Privacidad</LocalizedClientLink>
-          <LocalizedClientLink href="/store" className="hover:text-white transition">Envío Internacional</LocalizedClientLink>
-          <LocalizedClientLink href="/store" className="hover:text-white transition">FAQ</LocalizedClientLink>
+      <div className="max-w-[90rem] mx-auto border-t border-gray-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-y-6">
+        <div className="text-[10px] text-brand-gray font-medium tracking-[0.1em] opacity-60">
+          &copy; {new Date().getFullYear()} TIENDA LE BON MARCHÉ. TODOS LOS DERECHOS RESERVADOS.
         </div>
-        <div className="text-[10px] text-gray-600 font-medium tracking-[0.2em]">
-          &copy; {new Date().getFullYear()} <span className="text-gray-400">TIENDA LE BON MARCHÉ</span>. TODOS LOS DERECHOS RESERVADOS.
+        <div className="flex gap-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-brand-brown opacity-60">
+          <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">POLÍTICA DE PRIVACIDAD</LocalizedClientLink>
+          <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">FAQ</LocalizedClientLink>
         </div>
       </div>
     </footer>

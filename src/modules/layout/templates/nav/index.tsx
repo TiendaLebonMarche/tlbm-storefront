@@ -25,47 +25,29 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-      {/* Contenedor principal con posicionamiento relativo para centrar logo con absolute */}
-      <div className="relative flex flex-1 items-center w-full h-full min-h-[3rem]">
-
-        {/* IZQUIERDA: Hamburger + 2 enlaces destacados */}
-        <div className="flex items-center gap-4 lg:gap-6 flex-1">
+      <div className="relative flex items-center w-full h-full min-h-[4rem] px-4 md:px-8">
+        
+        {/* IZQUIERDA: Menu Trigger */}
+        <div className="flex items-center flex-1">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-
-          {/* 2 categorías destacadas — solo en desktop grande */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            {FEATURED_LINKS.map((link) => (
-              <LocalizedClientLink
-                key={link.href}
-                href={link.href}
-                className="text-[11px] font-light tracking-[0.2em] uppercase text-black hover:opacity-50 transition-opacity"
-              >
-                {link.label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
         </div>
 
-        {/* CENTRO: Logo — posición absoluta para centrado perfecto sin depender del espacio lateral */}
+        {/* CENTRO: Logo */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
           <LocalizedClientLink
             href="/"
-            className="pointer-events-auto text-[11px] xs:text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-serif font-light tracking-[0.12em] text-black hover:opacity-60 transition-opacity uppercase whitespace-nowrap select-none"
+            className="pointer-events-auto text-lg md:text-2xl font-sans font-bold tracking-[0.1em] text-brand-brown hover:opacity-70 transition-opacity uppercase"
           >
             LE BON MARCHÉ
           </LocalizedClientLink>
         </div>
 
-        {/* DERECHA: Search (desktop) + Cart */}
-        <div className="flex items-center justify-end gap-4 lg:gap-5 flex-1">
-          <div className="hidden md:flex items-center">
-            <SearchModal />
-          </div>
-          <div className="flex items-center">
-            <Suspense fallback={<CartButton />}>
-              <CartButton />
-            </Suspense>
-          </div>
+        {/* DERECHA: Search + Cart */}
+        <div className="flex items-center justify-end gap-2 md:gap-4 flex-1">
+          <SearchModal />
+          <Suspense fallback={<CartButton />}>
+            <CartButton />
+          </Suspense>
         </div>
 
       </div>
