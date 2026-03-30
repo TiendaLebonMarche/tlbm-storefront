@@ -75,7 +75,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                     <rect width="20" height="1.5" fill="currentColor"/>
                     <rect y="10.5" width="20" height="1.5" fill="currentColor"/>
                   </svg>
-                  <span>Menu</span>
+                  <span className="hidden md:inline">Menu</span>
                 </Popover.Button>
               </div>
 

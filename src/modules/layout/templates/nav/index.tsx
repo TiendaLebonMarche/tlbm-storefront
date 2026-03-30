@@ -25,8 +25,36 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-    <div className="relative flex items-center w-full h-full min-h-[2.5rem] md:min-h-[3.5rem] gap-2 lg:gap-3">
-        
+    <div className="w-full flex items-center justify-between">
+      {/* MOBILE HEADER (sm and down): Single Capsule Bar */}
+      <div className="flex md:hidden w-full px-4 pt-2">
+        <div className="bg-white/95 backdrop-blur shadow-lg border border-gray-100 rounded-2xl w-full px-5 py-3.5 flex items-center justify-between">
+          {/* Menu Trigger */}
+          <div className="flex-1">
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          </div>
+          
+          {/* Logo */}
+          <div className="flex items-center justify-center flex-grow">
+            <LocalizedClientLink
+              href="/"
+              className="text-lg font-sans font-bold tracking-[0.2em] text-brand-brown uppercase"
+            >
+              LE BON MARCHÉ
+            </LocalizedClientLink>
+          </div>
+          
+          {/* Cart Icon */}
+          <div className="flex-1 flex justify-end">
+            <Suspense fallback={<div className="w-5 h-5" />}>
+              <CartButton />
+            </Suspense>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP HEADER (md and up): Modular Pods */}
+      <div className="hidden md:flex items-center w-full h-full min-h-[3.5rem] gap-3">
         {/* IZQUIERDA: Menu Pod */}
         <div className="flex items-center justify-start flex-1">
           <div className="bg-white/95 backdrop-blur shadow-sm border border-gray-100 rounded-lg px-3 py-1.5 hover:shadow-md transition-all duration-300">
@@ -39,7 +67,7 @@ export default async function Nav() {
           <div className="bg-white/95 backdrop-blur shadow-sm border border-gray-100 rounded-lg px-4 py-1.5 hover:shadow-md transition-all duration-300">
             <LocalizedClientLink
               href="/"
-              className="pointer-events-auto text-xs md:text-base lg:text-lg font-sans font-bold tracking-[0.2em] text-brand-brown hover:opacity-70 transition-all duration-300 uppercase whitespace-nowrap"
+              className="pointer-events-auto text-base lg:text-lg font-sans font-bold tracking-[0.2em] text-brand-brown hover:opacity-70 transition-all duration-300 uppercase whitespace-nowrap"
             >
               LE BON MARCHÉ
             </LocalizedClientLink>
@@ -55,8 +83,8 @@ export default async function Nav() {
             </Suspense>
           </div>
         </div>
-
       </div>
+    </div>
     </ClientHeaderWrapper>
   )
 }
