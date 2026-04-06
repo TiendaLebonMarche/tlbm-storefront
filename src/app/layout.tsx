@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     template: "%s | Tienda Le Bon Marché",
     default: "Tienda Le Bon Marché | Productos Originales & Exóticos | Tienda Virtual en Bucaramanga",
   },
-  description: "Tienda Le Bon Marché. La selección más exclusiva de libros Assouline, High-End Audio y piezas exóticas. Envíos VIP y asegurados a toda Colombia.",
+  description: "Tienda Le Bon Marché. La boutique online con la selección más original en tecnología, gadgets premium, artículos para el hogar exóticos y libros de colección. Envíos VIP a toda Colombia.",
+  keywords: ["Tienda virtual Bucaramanga", "Gadgets exclusivos Colombia", "Productos originales para el hogar", "Libros de lujo y colección", "Regalos creativos premium", "Tecnología de alta gama Santander", "Decoración exótica", "Compras online seguras", "Le Bon Marche Bucaramanga", "Regalos originales"],
   openGraph: {
     type: "website",
     locale: "es_CO",

@@ -1,6 +1,7 @@
 import { listCategories } from "@lib/data/categories"
 import { listCollections } from "@lib/data/collections"
 import { Text, clx } from "@medusajs/ui"
+import Image from "next/image"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
@@ -18,9 +19,15 @@ export default async function Footer() {
         <div className="flex flex-col gap-y-8">
           <LocalizedClientLink 
             href="/" 
-            className="text-2xl font-sans font-bold tracking-[0.1em] text-brand-brown uppercase"
+            className="flex items-center justify-start hover:opacity-70 transition-all duration-300"
           >
-            LE BON MARCHÉ
+            <Image 
+              src="/logo.png" 
+              alt="Tienda Le Bon Marché" 
+              width={180} 
+              height={50} 
+              className="logo-img h-10 md:h-12 w-auto object-contain"
+            />
           </LocalizedClientLink>
           <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
             Una selección exclusiva de productos exóticos, tecnología y piezas de lujo pensada para los más exigentes. Hecho con pasión en Bucaramanga para toda Colombia.

@@ -37,9 +37,22 @@
   @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   .animate-marquee { animation: marquee-scroll 30s linear infinite; }
   
-  /* Zoom Imágenes */
-  .img-zoom { transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-  .group:hover .img-zoom { transform: scale(1.08); }
+  /* === Savoy Micro-Interactions === */
+  .hover-lift {
+    @apply transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  .img-savoy-zoom {
+    @apply transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] w-full h-full object-cover;
+  }
+  .group:hover .img-savoy-zoom,
+  .group\/img:hover .img-savoy-zoom {
+    @apply scale-[1.03];
+  }
+
+  .btn-savoy {
+    @apply relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:opacity-80 active:scale-[0.98];
+  }
   
   /* Header Glass */
   .header-scrolled {
