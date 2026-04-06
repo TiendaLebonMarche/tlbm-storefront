@@ -24,12 +24,12 @@ const NewsletterSection = () => {
             Novedades Exclusivas
           </span>
           
-          <h2 className="text-4xl md:text-5xl font-sans font-bold mb-6 leading-tight">
-            Únete a la Comunidad
+          <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6 leading-tight max-w-lg mx-auto">
+            Únete a los clientes VIP que ya reciben en Colombia nuestra selección privada
           </h2>
           
           <p className="text-brand-gray text-sm md:text-base max-w-md mx-auto mb-10 font-normal leading-relaxed">
-            Suscríbete para recibir actualizaciones sobre nuevas colecciones, eventos exclusivos y un <span className="font-bold underline decoration-brand-olive underline-offset-4">15% de descuento</span> en tu primer pedido.
+            Suscríbete y recibe acceso prioritario a piezas raras antes de que se agoten, además de un <span className="font-bold underline decoration-brand-olive underline-offset-4">15% de descuento</span> en tu primera compra.
           </p>
 
           {/* Form */}

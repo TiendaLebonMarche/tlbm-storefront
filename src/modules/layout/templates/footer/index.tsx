@@ -23,7 +23,7 @@ export default async function Footer() {
             LE BON MARCHÉ
           </LocalizedClientLink>
           <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
-            Curaduría de productos exóticos, tecnología y piezas de lujo seleccionadas para quienes buscan lo excepcional.
+            Una selección exclusiva de productos exóticos, tecnología y piezas de lujo pensada para los más exigentes. Hecho con pasión en Bucaramanga para toda Colombia.
           </p>
           <div className="flex gap-x-8 text-[11px] font-bold tracking-[0.2em] text-brand-brown opacity-60">
             <a href="https://instagram.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">INSTAGRAM</a>
@@ -68,12 +68,14 @@ export default async function Footer() {
 
         <div className="flex flex-col gap-y-6">
           <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2 text-brand-brown opacity-40">
-            Contacto Directo
+            Atención VIP por WhatsApp
           </h4>
-          <a href="https://wa.me/573027567783" className="text-xl font-sans font-bold text-brand-brown hover:text-brand-olive transition-colors" target="_blank" rel="noreferrer">
+          <p className="text-brand-gray text-xs leading-relaxed max-w-[200px] mb-2">
+            Un gusto saludarte. ¿Buscas algo muy exclusivo o un libro de colección? Escríbenos y nos encargamos de traértelo.
+          </p>
+          <a href="https://wa.me/573027567783" className="text-lg font-sans font-bold text-brand-brown hover:text-brand-olive transition-colors" target="_blank" rel="noreferrer">
             +57 302 756 7783
           </a>
-          <span className="text-[10px] text-brand-gray tracking-widest font-medium uppercase mt-2">Bucaramanga, Colombia</span>
         </div>
       </div>
 

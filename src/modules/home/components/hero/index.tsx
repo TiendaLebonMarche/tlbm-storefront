@@ -10,23 +10,23 @@ const HERO_SLIDES = [
     image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=2600&auto=format&fit=crop",
     smallTitle: "Acústica de Precisión",
     title: "Sonido de <br /> <span className='italic font-light'>Alto Nivel.</span>",
-    cta: "Ver Parlantes",
+    cta: "Descubrir parlantes",
     href: "/store?category=parlantes"
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2600&auto=format&fit=crop",
     smallTitle: "Piezas Únicas",
-    title: "Productos <br /> <span className='italic font-light'>exclusivos y Exóticos.</span>",
-    cta: "Explorar Colección",
+    title: "El lujo de tener <br /> <span className='italic font-light'>algo verdaderamente único.</span>",
+    cta: "Ver colección",
     href: "/store?category=originales"
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2600&auto=format&fit=crop",
-    smallTitle: "Inteligencia Digital",
-    title: "Miles de bots buscando <br /> <span className='italic font-light'>ofertas para ti ❤️</span>",
-    cta: "Ver Ofertas",
+    smallTitle: "Compras Inteligentes",
+    title: "Nuestra tecnología rastrea <br /> <span className='italic font-light'>los mejores precios premium del mundo para ti.</span>",
+    cta: "Ver oportunidades",
     href: "/store?category=ofertas"
   }
 ]
@@ -73,8 +73,8 @@ const Hero = () => {
             />
           </div>
           
-          {/* Sophisticated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+          {/* Subtle overlay for Savoy minimalist look */}
+          <div className="absolute inset-0 bg-black/15" />
 
           {/* Content Overlay */}
           <div className={`relative z-20 h-full flex items-start justify-start px-6 md:px-16 lg:px-24 pt-40 md:pt-64 lg:pt-80 content-container ${index === currentSlide ? "animate-fade-in-top" : ""}`}>
@@ -94,16 +94,9 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row items-start gap-4 mt-12">
                 <LocalizedClientLink
                   href={slide.href}
-                  className="px-10 py-5 bg-white text-brand-brown text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-brand-olive hover:text-white transition-all duration-500 rounded-sm shadow-2xl group"
+                  className="px-12 py-5 bg-white text-brand-brown text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-brand-olive hover:text-white transition-all duration-500 rounded-sm shadow-xl group"
                 >
                   <span className="group-hover:tracking-[0.4em] transition-all">{slide.cta}</span>
-                </LocalizedClientLink>
-                
-                <LocalizedClientLink
-                  href="/store"
-                  className="px-10 py-5 border border-white/40 bg-white/5 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-[0.3em] hover:bg-white hover:text-brand-brown transition-all duration-500 rounded-sm"
-                >
-                  Catálogo Completo
                 </LocalizedClientLink>
               </div>
             </div>
