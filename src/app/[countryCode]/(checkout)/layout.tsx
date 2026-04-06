@@ -21,7 +21,7 @@ export default function CheckoutLayout({
               Regresar a la bolsa
             </span>
             <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
-              Atr\u00e1s
+              Atrás
             </span>
           </LocalizedClientLink>
           <LocalizedClientLink
@@ -29,7 +29,7 @@ export default function CheckoutLayout({
             className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             data-testid="store-link"
           >
-            Le Bon March\u00e9
+            Le Bon Marché
           </LocalizedClientLink>
           <div className="flex-1 basis-0" />
         </nav>

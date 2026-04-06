@@ -12,7 +12,7 @@ import { retrieveCustomer } from "@lib/data/customer"
 
 export const metadata: Metadata = {
   title: "Perfil",
-  description: "Vea y edite su perfil de Le Bon March\u00e9.",
+  description: "Vea y edite su perfil de Le Bon Marché.",
 }
 
 export default async function Profile() {
@@ -28,9 +28,9 @@ export default async function Profile() {
       <div className="mb-8 flex flex-col gap-y-4">
         <h1 className="text-2xl-semi">Perfil</h1>
         <p className="text-base-regular">
-          Consulta y actualiza tu informaci\u00f3n de perfil, incluyendo tu nombre, correo
-          electr\u00f3nico y n\u00famero de tel\u00e9fono. Tambi\u00e9n puedes actualizar tu direcci\u00f3n de facturaci\u00f3n, o cambiar
-          tu contrase\u00f1a.
+          Consulta y actualiza tu información de perfil, incluyendo tu nombre, correo
+          electrónico y número de teléfono. También puedes actualizar tu dirección de facturación, o cambiar
+          tu contraseña.
         </p>
       </div>
       <div className="flex flex-col gap-y-8 w-full">

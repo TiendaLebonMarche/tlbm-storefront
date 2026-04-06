@@ -21,7 +21,7 @@ const Register = ({ setCurrentView }: Props) => {
       data-testid="register-page"
     >
       <h1 className="text-large-semi uppercase mb-6">
-        \u00danete a Le Bon March\u00e9
+        Únete a Le Bon Marché
       </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-4">
         Crea tu perfil y disfruta de una experiencia de compra exclusiva en nuestra tienda.
@@ -43,7 +43,7 @@ const Register = ({ setCurrentView }: Props) => {
             data-testid="last-name-input"
           />
           <Input
-            label="Correo electr\u00f3nico"
+            label="Correo electrónico"
             name="email"
             required
             type="email"
@@ -51,14 +51,14 @@ const Register = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Tel\u00e9fono"
+            label="Teléfono"
             name="phone"
             type="tel"
             autoComplete="tel"
             data-testid="phone-input"
           />
           <Input
-            label="Contrase\u00f1a"
+            label="Contraseña"
             name="password"
             required
             type="password"
@@ -73,14 +73,14 @@ const Register = ({ setCurrentView }: Props) => {
             href="/content/privacy-policy"
             className="underline"
           >
-            Pol\u00edtica de Privacidad
+            Política de Privacidad
           </LocalizedClientLink>{" "}
           y los{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"
           >
-            T\u00e9rminos de Uso
+            Términos de Uso
           </LocalizedClientLink>
           .
         </span>
@@ -89,12 +89,12 @@ const Register = ({ setCurrentView }: Props) => {
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        \u00bfYa tienes cuenta?{" "}
+        ¿Ya tienes cuenta?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Iniciar sesi\u00f3n
+          Iniciar sesión
         </button>
         .
       </span>

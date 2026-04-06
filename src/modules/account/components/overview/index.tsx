@@ -19,7 +19,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
             Hola {customer?.first_name}
           </span>
           <span className="text-small-regular text-ui-fg-base">
-            Sesi\u00f3n iniciada como:{" "}
+            Sesión iniciada como:{" "}
             <span
               className="font-semibold"
               data-testid="customer-email"
@@ -88,7 +88,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                             <div className="grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1">
                               <span className="font-semibold">Fecha del pedido</span>
                               <span className="font-semibold">
-                                N\u00famero de pedido
+                                Número de pedido
                               </span>
                               <span className="font-semibold">
                                 Monto total

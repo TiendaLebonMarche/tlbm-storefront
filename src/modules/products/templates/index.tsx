@@ -231,13 +231,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
             <details className="group border-b border-gray-100 pb-4 cursor-pointer">
               <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
-                \u00bfCu\u00e1les son los tiempos de entrega?
+                ¿Cuáles son los tiempos de entrega?
                 <span className="transition group-open:rotate-180">
                   <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </summary>
               <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
-                Manejamos tiempos r\u00e1pidos: <strong>24 a 48 horas</strong> para Bucaramanga y su \u00e1rea metropolitana, y de <strong>2 a 5 d\u00edas h\u00e1biles</strong> para el resto del pa\u00eds. Todos nuestros env\u00edos viajan asegurados para tu tranquilidad.
+                Manejamos tiempos rápidos: <strong>24 a 48 horas</strong> para Bucaramanga y su área metropolitana, y de <strong>2 a 5 días hábiles</strong> para el resto del país. Todos nuestros envíos viajan asegurados para tu tranquilidad.
               </p>
             </details>
 

@@ -19,21 +19,21 @@ const Login = ({ setCurrentView }: Props) => {
     >
       <h1 className="text-large-semi uppercase mb-6">Bienvenido de nuevo</h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Inicia sesi\u00f3n para acceder a una experiencia de compra mejorada.
+        Inicia sesión para acceder a una experiencia de compra mejorada.
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="Correo electr\u00f3nico"
+            label="Correo electrónico"
             name="email"
             type="email"
-            title="Ingresa un correo electr\u00f3nico v\u00e1lido."
+            title="Ingresa un correo electrónico válido."
             autoComplete="email"
             required
             data-testid="email-input"
           />
           <Input
-            label="Contrase\u00f1a"
+            label="Contraseña"
             name="password"
             type="password"
             autoComplete="current-password"
@@ -43,17 +43,17 @@ const Login = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Iniciar sesi\u00f3n
+          Iniciar sesión
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        \u00bfNo eres miembro?{" "}
+        ¿No eres miembro?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
           data-testid="register-button"
         >
-          \u00danete a nosotros
+          Únete a nosotros
         </button>
         .
       </span>
