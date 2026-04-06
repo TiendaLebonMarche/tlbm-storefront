@@ -60,7 +60,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* ── HERO SECTION: Galería + Info (layout Amazon clásico) ── */}
-      <div className="content-container py-8 lg:py-12">
+      <div className="content-container py-6 lg:py-8">
         <div className="flex flex-col lg:flex-row gap-8 xl:gap-16">
 
           {/* COLUMNA IZQUIERDA: Galería — 55% */}
@@ -205,7 +205,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
       {/* ── SPECS & FAQ (ancho completo, debajo del fold) ── */}
       <div className="border-t border-gray-100 bg-white">
-        <div className="content-container py-12 lg:py-16 flex flex-col lg:flex-row gap-16">
+        <div className="content-container py-10 lg:py-12 flex flex-col lg:flex-row gap-16">
           
           {/* Columna Especificaciones Técnicas */}
           <div className="w-full lg:w-1/2">
@@ -231,13 +231,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
             <details className="group border-b border-gray-100 pb-4 cursor-pointer">
               <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
-                ¿Tienen envíos a mi ciudad?
+                \u00bfCu\u00e1les son los tiempos de entrega?
                 <span className="transition group-open:rotate-180">
                   <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </summary>
               <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
-                Sí, hacemos despachos aéreos y terrestres a <strong>cualquier rincón de Colombia</strong>. Embalamos los productos de lujo con altos estándares de seguridad para que todo llegue en condición impecable a tus manos.
+                Manejamos tiempos r\u00e1pidos: <strong>24 a 48 horas</strong> para Bucaramanga y su \u00e1rea metropolitana, y de <strong>2 a 5 d\u00edas h\u00e1biles</strong> para el resto del pa\u00eds. Todos nuestros env\u00edos viajan asegurados para tu tranquilidad.
               </p>
             </details>
 
@@ -258,7 +258,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* ── PRODUCTOS RELACIONADOS ── */}
-      <div className="bg-white py-16 md:py-24 border-t border-gray-100">
+      <div className="bg-white py-12 md:py-16 border-t border-gray-100">
         <div className="content-container">
           <div className="mb-12">
             <p className="text-[10px] uppercase tracking-[0.4em] text-gray-400 font-sans mb-3">También te puede interesar</p>

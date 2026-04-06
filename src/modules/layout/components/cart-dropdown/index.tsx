@@ -110,7 +110,7 @@ const CartDropdown = ({
             </svg>
           )}
           {totalItems > 0 && (
-            <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-gold text-brand-black w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold">
+            <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-black text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">
               {totalItems}
             </div>
           )}

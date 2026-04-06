@@ -17,7 +17,16 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       label: "Descripción",
       component: (
         <div className="py-4">
-          <p className="text-sm font-light text-black font-sans leading-relaxed">{product.description}</p>
+          <ul className="space-y-4">
+            {product.description?.split("-").filter(line => line.trim().length > 0).map((line, i) => (
+              <li key={i} className="flex items-start gap-4 group">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                <p className="text-sm font-light text-brand-black/80 font-sans leading-relaxed">
+                  {line.trim()}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       ),
     },
@@ -32,7 +41,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   ]
 
   return (
-    <div className="w-full border-t border-black/10 mt-12">
+    <div className="w-full border-t border-black/10 mt-8">
       <Accordion type="multiple">
         {tabs.map((tab, i) => (
           <Accordion.Item
@@ -51,8 +60,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
-    <div className="py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+    <div className="py-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
         {[
           { label: "Material", value: product.material },
           { label: "Origen", value: product.origin_country },
@@ -74,8 +83,8 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 
 const ShippingInfoTab = () => {
   return (
-    <div className="py-8">
-      <div className="grid grid-cols-1 gap-y-10">
+    <div className="py-4">
+      <div className="grid grid-cols-1 gap-y-6">
         {[
           {
             icon: <FastDelivery />,
