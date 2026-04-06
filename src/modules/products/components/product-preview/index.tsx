@@ -33,8 +33,8 @@ export default async function ProductPreview({
 
   return (
     <div className="group flex flex-col h-full bg-white transition-all duration-700">
-      <LocalizedClientLink href={`/products/${product.handle}`} data-testid="product-wrapper">
-        <div className="relative overflow-hidden bg-brand-soft aspect-square mb-6 group/img transition-all duration-700 rounded-lg">
+      <LocalizedClientLink href={`/productos/${product.handle}`} data-testid="product-wrapper">
+        <div className="hover-lift relative overflow-hidden bg-brand-soft aspect-square mb-6 group/img duration-700 rounded-lg">
           <Thumbnail
             thumbnail={product.thumbnail}
             images={product.images}
@@ -42,25 +42,33 @@ export default async function ProductPreview({
             isFeatured={isFeatured}
           />
 
-          {/* Badges - Minimalistas */}
+          {/* Etiquetas con estilo Premium */}
           <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none z-20">
             {isNew && (
-              <span className="bg-brand-olive text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm">
-                Nuevo
+              <span className="bg-brand-olive text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm inline-block w-fit">
+                Novedad
               </span>
             )}
             {isLowStock && (
-              <span className="bg-brand-brown text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm">
-                Limitado
+              <span className="bg-brand-brown/90 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm inline-block w-fit">
+                Últimas uds.
               </span>
             )}
+            {product.collection?.title && (
+              <span className="bg-white/80 backdrop-blur-md text-brand-brown text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm inline-block w-fit">
+                {product.collection.title}
+              </span>
+            )}
+            <span className="bg-[#cca300] text-black text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-sm inline-block w-fit">
+               100% Original
+            </span>
           </div>
         </div>
       </LocalizedClientLink>
 
       {/* Content */}
       <div className="flex flex-col text-left items-start font-sans px-1">
-        <LocalizedClientLink href={`/products/${product.handle}`} className="group/title">
+        <LocalizedClientLink href={`/productos/${product.handle}`} className="group/title">
           <h3 className="text-sm md:text-base font-bold text-brand-brown leading-tight mb-2 hover:text-brand-olive transition-colors" data-testid="product-title">
             {product.title}
           </h3>

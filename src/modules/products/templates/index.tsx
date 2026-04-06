@@ -204,11 +204,56 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* ── SPECS & FAQ (ancho completo, debajo del fold) ── */}
-      <div className="border-t border-gray-100 bg-[#fafafa]">
-        <div className="content-container py-12 lg:py-16">
-          <div className="max-w-3xl">
+      <div className="border-t border-gray-100 bg-white">
+        <div className="content-container py-12 lg:py-16 flex flex-col lg:flex-row gap-16">
+          
+          {/* Columna Especificaciones Técnicas */}
+          <div className="w-full lg:w-1/2">
+            <h3 className="text-xl font-serif text-black mb-6">Detalles Técnicos</h3>
             <ProductTabs product={product} />
           </div>
+
+          {/* Columna FAQ y Confianza */}
+          <div className="w-full lg:w-1/2 space-y-6">
+            <h3 className="text-xl font-serif text-black mb-6">Preguntas Frecuentes (FAQ)</h3>
+            
+            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
+                ¿El producto es 100% original?
+                <span className="transition group-open:rotate-180">
+                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
+                ¡Totalmente! En <strong>Tienda Le Bon Marché</strong> trabajamos directamente con distribuidores oficiales globales. Cada artículo se envía con sus sellos, etiquetas y cajas originales de fábrica para garantizar la máxima calidad y autenticidad.
+              </p>
+            </details>
+
+            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
+                ¿Tienen envíos a mi ciudad?
+                <span className="transition group-open:rotate-180">
+                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
+                Sí, hacemos despachos aéreos y terrestres a <strong>cualquier rincón de Colombia</strong>. Embalamos los productos de lujo con altos estándares de seguridad para que todo llegue en condición impecable a tus manos.
+              </p>
+            </details>
+
+            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
+                ¿Qué hago si ocurre algún inconveniente?
+                <span className="transition group-open:rotate-180">
+                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
+                Estás respaldado. Tienes <strong>garantía de satisfacción</strong>. Si notas algo inusual o necesitas ayuda técnica, nuestro equipo en WhatsApp te acompañará en tiempo real para resolver el caso sin dudarlo.
+              </p>
+            </details>
+          </div>
+
         </div>
       </div>
 

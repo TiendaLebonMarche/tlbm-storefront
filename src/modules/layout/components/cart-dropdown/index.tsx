@@ -57,6 +57,24 @@ const CartDropdown = ({
     open()
   }
 
+  const handleWhatsAppAsesor = () => {
+    if (!cartState?.items || cartState.items.length === 0) return
+
+    let message = "Holaa, vengo de la tienda virtual, Me interesan estos productos, necesito asesoría para comprarlos.\n\n"
+    
+    cartState.items.forEach((item, index) => {
+      message += `Producto #${index + 1} :\n`
+      message += `Nombre: ${item.title}\n`
+      message += `Opción/Color: ${item.variant?.title || 'N/A'}\n`
+      message += `Cantidad: ${item.quantity}\n`
+      const price = convertToLocale({ amount: item.unit_price * item.quantity, currency_code: cartState.currency_code })
+      message += `Subtotal: ${price}\n\n`
+    })
+
+    const encodedMessage = encodeURIComponent(message)
+    window.open(`https://wa.me/573027567783?text=${encodedMessage}`, '_blank')
+  }
+
   useEffect(() => {
     return () => {
       if (activeTimer) {
@@ -160,7 +178,7 @@ const CartDropdown = ({
                     .map((item) => (
                       <div className="flex justify-between items-center bg-gray-50 p-3" key={item.id} data-testid="cart-item">
                         <div className="flex gap-4 items-center flex-1">
-                          <LocalizedClientLink href={`/products/${item.product_handle}`} className="w-16 h-16 flex-shrink-0">
+                          <LocalizedClientLink href={`/productos/${item.product_handle}`} className="w-16 h-16 flex-shrink-0">
                             <Thumbnail thumbnail={item.thumbnail} images={item.variant?.product?.images} size="square" className="w-full h-full object-cover" />
                           </LocalizedClientLink>
                           <div className="text-sm">
@@ -184,11 +202,14 @@ const CartDropdown = ({
                     </span>
                   </div>
                   <LocalizedClientLink href="/cart" passHref onClick={close}>
-                    <button className="w-full border border-black text-black py-4 mb-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white transition">
+                    <button className="btn-savoy w-full border border-black text-black py-4 mb-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white transition">
                       Ver Bolsa y Pagar
                     </button>
                   </LocalizedClientLink>
-                  <button onClick={() => window.open('https://wa.me/573027567783', '_blank')} className="w-full bg-brand-whatsapp text-white py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-green-600 transition">
+                  <button 
+                    onClick={handleWhatsAppAsesor} 
+                    className="relative overflow-hidden w-full bg-brand-whatsapp text-white py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition shadow-[0_0_15px_rgba(37,211,102,0.5)] animate-[pulse_3s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+                  >
                     Asesoría en WhatsApp
                   </button>
                 </div>

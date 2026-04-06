@@ -79,7 +79,7 @@ export default async function HotDeals({
             {deals.map((deal) => (
               <LocalizedClientLink
                 key={deal.id}
-                href={`/products/${deal.handle}`}
+                href={`/productos/${deal.handle}`}
                 className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-2 block"
               >
                 <div className="relative overflow-hidden aspect-square mb-5 bg-white shadow-md p-4">
