@@ -97,36 +97,24 @@ const CartDropdown = ({
       className="h-full z-50 flex items-center relative"
     >
       <Popover className="relative h-full flex items-center">
-        <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors" onClick={open}>
-          {totalItems === 0 ? (
-            // Bolsa vacía - delgada con outline
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-          ) : (
-            // Bolsa llena - robusta y gorda (filled)
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-              <path d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-          )}
-          {totalItems > 0 && (
-            <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-black text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">
-              {totalItems}
-            </div>
-          )}
-        </PopoverButton>
-
-        {/* Botón X para cerrar carrito, visible sobre la bolsa cuando está abierto */}
-        {isCartOpen && (
-          <button
-            onClick={close}
-            className="absolute -top-3 -right-3 bg-brand-gold text-brand-black w-8 h-8 rounded-full flex items-center justify-center text-2xl font-light hover:bg-white hover:text-brand-black transition-all shadow-lg z-50"
-            aria-label="Cerrar bolsa"
-            title="Cerrar bolsa"
-          >
-            &times;
-          </button>
-        )}
+          <PopoverButton className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors" onClick={open} data-testid="nav-cart-link">
+            {totalItems === 0 ? (
+              // Bolsa vacía - delgada con outline
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            ) : (
+              // Bolsa llena - robusta y gorda (filled)
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
+                <path d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            )}
+            {totalItems > 0 && (
+              <div id="cart-count" className="absolute -top-2 -right-2 bg-brand-black text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">
+                {totalItems}
+              </div>
+            )}
+          </PopoverButton>
 
         {/* Overlay Background when Open (siempre visible y clickeable para cerrar) */}
         <Transition
@@ -140,7 +128,7 @@ const CartDropdown = ({
           leaveTo="opacity-0"
         >
           <div
-            className="fixed inset-0 bg-black/50 z-40 cursor-pointer"
+            className="fixed inset-0 bg-brand-black/40 z-[200] cursor-pointer"
             aria-label="Cerrar bolsa"
             tabIndex={0}
             onClick={close}
@@ -153,21 +141,28 @@ const CartDropdown = ({
           show={isCartOpen}
           as={Fragment}
           enter="transition transform duration-400 cubic-bezier(0.16, 1, 0.3, 1)"
-          enterFrom="translate-x-100 opacity-0"
+          enterFrom="translate-x-full opacity-0"
           enterTo="translate-x-0 opacity-100"
           leave="transition transform duration-400 ease-in"
           leaveFrom="translate-x-0 opacity-100"
-          leaveTo="translate-x-100 opacity-0"
+          leaveTo="translate-x-full opacity-0"
         >
           <PopoverPanel
             static
-            className="fixed top-0 right-0 h-full w-[400px] max-w-[85%] bg-white shadow-2xl flex flex-col z-50 overflow-hidden"
+            className="fixed top-0 right-0 h-screen w-[420px] max-w-[100vw] bg-white shadow-2xl flex flex-col z-[300] overflow-hidden"
             data-testid="nav-cart-dropdown"
             aria-modal="true"
             role="dialog"
           >
-            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-              <h2 className="text-lg font-serif font-bold text-brand-black">Tu Bolsa</h2>
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+              <h2 className="text-xl font-serif font-bold text-brand-black">Tu Bolsa</h2>
+              <button
+                onClick={close}
+                className="w-10 h-10 flex items-center justify-center text-3xl font-light hover:rotate-90 transition-transform duration-300"
+                aria-label="Cerrar bolsa"
+              >
+                &times;
+              </button>
             </div>
 
             {cartState && cartState.items?.length ? (
