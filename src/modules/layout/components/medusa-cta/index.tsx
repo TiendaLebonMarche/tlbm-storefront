@@ -1,19 +1,9 @@
 import { Text } from "@medusajs/ui"
 
-import Medusa from "../../../common/icons/medusa"
-import NextJs from "../../../common/icons/nextjs"
-
 const MedusaCTA = () => {
   return (
-    <Text className="flex gap-x-2 txt-compact-small-plus items-center">
-      Powered by
-      <a href="https://www.medusajs.com" target="_blank" rel="noreferrer">
-        <Medusa fill="#9ca3af" className="fill-[#9ca3af]" />
-      </a>
-      &
-      <a href="https://nextjs.org" target="_blank" rel="noreferrer">
-        <NextJs fill="#9ca3af" />
-      </a>
+    <Text className="flex gap-x-2 txt-compact-small-plus items-center text-gray-400">
+      &copy; {new Date().getFullYear()} Le Bon March\u00e9. Todos los derechos reservados.
     </Text>
   )
 }
