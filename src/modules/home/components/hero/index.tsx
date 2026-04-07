@@ -46,7 +46,7 @@ const Hero = () => {
   const kawsScale = useTransform(
     scrollY, 
     [0, 800], 
-    [isMobile ? 0.96 : 0.8, isMobile ? 0.85 : 0.72]
+    [isMobile ? 1.12 : 0.92, isMobile ? 1.0 : 0.82]
   ) 
   
   const kawsRotate = useTransform(scrollY, [0, 800], [0, -4])

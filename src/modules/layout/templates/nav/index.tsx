@@ -46,7 +46,7 @@ export default async function Nav() {
                 alt="Tienda Le Bon Marché" 
                 width={140} 
                 height={50} 
-                className="logo-img h-10 w-auto object-contain transition-all duration-500"
+                className="logo-img h-12 w-auto object-contain transition-all duration-500"
                 priority
               />
             </LocalizedClientLink>
@@ -90,7 +90,7 @@ export default async function Nav() {
               alt="Tienda Le Bon Marché" 
               width={200} 
               height={60} 
-              className="logo-img h-11 lg:h-12 xl:h-14 w-auto object-contain transition-all duration-500"
+              className="logo-img h-13 lg:h-14 xl:h-16 w-auto object-contain transition-all duration-500"
               priority
             />
           </LocalizedClientLink>
