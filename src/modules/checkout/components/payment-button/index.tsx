@@ -57,15 +57,17 @@ const StripePaymentButton = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
-    await placeOrder()
-      .catch((err) => {
-        if (!err.message?.includes("NEXT_REDIRECT")) {
-          setErrorMessage(err.message)
-        }
-      })
-      .finally(() => {
-        setSubmitting(false)
-      })
+    try {
+      await placeOrder()
+    } catch (err: any) {
+      // Si el error es una redirección interna, la ignoramos para que Next.js la maneje
+      if (err.message?.includes("NEXT_REDIRECT") || err.digest?.includes("NEXT_REDIRECT")) {
+        return
+      }
+      setErrorMessage(err.message || "Error al procesar el pago. Por favor intenta de nuevo.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const stripe = useStripe()
@@ -120,6 +122,7 @@ const StripePaymentButton = ({
           }
 
           setErrorMessage(error.message || null)
+          setSubmitting(false)
           return
         }
 
@@ -158,20 +161,20 @@ const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
-    await placeOrder()
-      .catch((err) => {
-        if (!err.message?.includes("NEXT_REDIRECT")) {
-          setErrorMessage(err.message)
-        }
-      })
-      .finally(() => {
-        setSubmitting(false)
-      })
+    try {
+      await placeOrder()
+    } catch (err: any) {
+      if (err.message?.includes("NEXT_REDIRECT") || err.digest?.includes("NEXT_REDIRECT")) {
+        return
+      }
+      setErrorMessage(err.message || "Error al completar la compra.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handlePayment = () => {
     setSubmitting(true)
-
     onPaymentCompleted()
   }
 

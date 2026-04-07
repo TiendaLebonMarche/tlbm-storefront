@@ -14,7 +14,7 @@ export default function PagePaddingWrapper({ children }: { children: React.React
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
 
   return (
-    <main className={`relative transition-all duration-300 ${!isHome ? "pt-32 md:pt-40 lg:pt-48" : ""}`}>
+    <main className={`relative transition-all duration-300 overflow-x-hidden w-full ${!isHome ? "pt-32 md:pt-40 lg:pt-48" : ""}`}>
       {children}
     </main>
   )
