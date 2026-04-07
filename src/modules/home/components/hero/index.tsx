@@ -9,7 +9,7 @@ const Hero = () => {
   const { scrollY } = useScroll()
 
   // Movimiento suave y dinámico (Efecto Inmersivo)
-  const springConfig = { stiffness: 45, damping: 25, restDelta: 0.001 }
+  const springConfig = { stiffness: 35, damping: 30, restDelta: 0.001 }
   const xSpring = useSpring(0, springConfig)
   const ySpring = useSpring(0, springConfig)
 
@@ -76,15 +76,19 @@ const Hero = () => {
       {/* 1. SECCIÓN DE CONTENIDO (TEXTOS INDEPENDIENTES) */}
       <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-44 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-y-12 pointer-events-none select-none">
         
-        {/* BLOQUE IZQUIERDA: Editorial */}
+        {/* BLOQUE IZQUIERDA: Editorial (Now main heading) */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-12 lg:max-w-md"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-12 lg:max-w-xl"
         >
-          <div className="max-w-[400px]">
-            <p className="font-serif italic text-brand-brown text-lg md:text-2xl lg:text-3xl leading-[1.1] tracking-tight reveal-up">
-              Donde el arte encuentra la tecnología, cada hallazgo es una chimba. ———
-            </p>
+          <div className="max-w-[700px]">
+            <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-up">
+              LA PRIMERA<br />
+              TIENDA VIRTUAL EN<br />
+              BUCARAMANGA, DONDE<br />
+              MILES DE BOTS BUSCAN<br />
+              LO MÁS TOP PARA TI ❤️
+            </h1>
           </div>
           
           {/* Oculto en Responsive: R Selección IA */}
@@ -100,23 +104,14 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* BLOQUE DERECHA: Título Principal */}
+        {/* BLOQUE DERECHA: Descripción Disruptiva */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col items-center text-center lg:items-end lg:text-right -mt-4 lg:mt-0"
         >
-          <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-right">
-            LA PRIMERA<br />
-            TIENDA VIRTUAL EN<br />
-            BUCARAMANGA, DONDE<br />
-            MILES DE BOTS BUSCAN<br />
-            LO MÁS TOP PARA TI ❤️
-          </h1>
-          
-          {/* Descripción Disruptiva y Actualizada */}
-          <div className="mt-8 lg:mt-12 max-w-[450px] reveal-right delay-200">
+          <div className="mt-8 lg:mt-12 max-w-[500px] reveal-right delay-200">
             <p className="font-sans text-brand-brown text-sm md:text-base lg:text-lg leading-relaxed uppercase tracking-tighter">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, se ponga palido el <span className="font-black italic text-brand-brown">bro!</span>
+              <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, el <span className="font-black italic text-brand-brown">bro se desmaye!</span>
             </p>
           </div>
         </motion.div>
