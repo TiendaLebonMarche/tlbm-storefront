@@ -182,9 +182,7 @@ const CartDropdown = ({
                             <LineItemPrice item={item} style="tight" currencyCode={cartState.currency_code} className="text-gray-500 font-medium" />
                           </div>
                         </div>
-                        <DeleteButton id={item.id} className="text-red-400 text-xl hover:text-red-600 bg-transparent" data-testid="cart-item-remove-button">
-                          &times;
-                        </DeleteButton>
+                        <DeleteButton id={item.id} className="text-red-400 hover:text-red-600 bg-transparent" data-testid="cart-item-remove-button" />
                       </div>
                     ))}
                 </div>
