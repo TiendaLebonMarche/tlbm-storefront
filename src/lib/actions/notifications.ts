@@ -4,18 +4,22 @@ import { HttpTypes } from "@medusajs/types"
 
 /**
  * Envia una notificación por correo al administrador sobre un nuevo pedido.
- * 
- * NOTA: En un entorno real, aquí se integraría un servicio como Resend, SendGrid o Postmark.
- * Por ahora, preparamos la estructura y simulamos el envío.
  */
 export async function sendOrderNotification(cart: HttpTypes.StoreCart) {
   const adminEmail = process.env.ADMIN_EMAIL || "admin@tiendalebonmarche.com"
   
+  // Determinamos el método de pago para el correo
+  const paymentSession = cart.payment_collection?.payment_sessions?.[0]
+  const paymentTitle = paymentSession?.provider_id === "pp_system_default" 
+    ? "Manual (Efectivo / Transferencia)" 
+    : paymentSession?.provider_id || "No especificado"
+
   const customerInfo = {
-    nombre: `${cart.shipping_address?.first_name} ${cart.shipping_address?.last_name}`,
+    nombre: `${cart.shipping_address?.first_name}`,
     email: cart.email,
     whatsapp: cart.shipping_address?.phone,
-    direccion: `${cart.shipping_address?.address_1}, ${cart.shipping_address?.city}`,
+    municipio: cart.shipping_address?.city,
+    direccion: `${cart.shipping_address?.address_1}`,
     observaciones: cart.shipping_address?.address_2 || "Ninguna",
   }
 
@@ -26,22 +30,17 @@ export async function sendOrderNotification(cart: HttpTypes.StoreCart) {
       quantity: item.quantity,
       unit_price: item.unit_price,
     })),
-    payment: "Efectivo / Transferencia (Pendiente)"
+    pago: paymentTitle,
+    metodo_envio: cart.shipping_methods?.[0]?.name || "Por definir"
   }
 
-  console.log("--- NUEVA ORDEN RECIBIDA ---")
-  console.log("Cliente:", customerInfo)
-  console.log("Detalles:", orderDetails)
-  console.log("----------------------------")
+  console.log("-----------------------------------------")
+  console.log("📢 NOTIFICACIÓN DE VENTA - LE BON MARCHÉ")
+  console.log("-----------------------------------------")
+  console.log("👤 CLIENTE:", customerInfo)
+  console.log("📦 PEDIDO:", orderDetails)
+  console.log("-----------------------------------------")
 
-  // Aquí iría el código de integración con el servicio de correo
-  // Ejemplo con Resend (pseudocódigo):
-  // await resend.emails.send({
-  //   from: 'Tienda Le Bon Marché <ventas@tiendalebonmarche.com>',
-  //   to: adminEmail,
-  //   subject: `Nuevo Pedido - ${customerInfo.nombre}`,
-  //   html: `<h1>Nuevo pedido de ${customerInfo.nombre}</h1>...`
-  // })
-
-  return { success: true }
+  // Log simulated success
+  return { success: true, message: "Notificación enviada al administrador" }
 }

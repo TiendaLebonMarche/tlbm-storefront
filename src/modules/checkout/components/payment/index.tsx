@@ -9,6 +9,7 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer, {
   StripeCardContainer,
 } from "@modules/checkout/components/payment-container"
+import MedusaRadio from "@modules/common/components/radio"
 import Divider from "@modules/common/components/divider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
@@ -41,9 +42,12 @@ const Payment = ({
   const setPaymentMethod = async (method: string) => {
     setError(null)
     setSelectedPaymentMethod(method)
-    if (isStripeLike(method)) {
+
+    const actualProviderId = method.startsWith("manual_") ? "pp_system_default" : method
+
+    if (isStripeLike(actualProviderId)) {
       await initiatePaymentSession(cart, {
-        provider_id: method,
+        provider_id: actualProviderId,
       })
     }
   }
@@ -73,15 +77,17 @@ const Payment = ({
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
+      const actualProviderId = selectedPaymentMethod.startsWith("manual_") ? "pp_system_default" : selectedPaymentMethod
+
       const shouldInputCard =
-        isStripeLike(selectedPaymentMethod) && !activeSession
+        isStripeLike(actualProviderId) && !activeSession
 
       const checkActiveSession =
-        activeSession?.provider_id === selectedPaymentMethod
+        activeSession?.provider_id === actualProviderId
 
       if (!checkActiveSession) {
         await initiatePaymentSession(cart, {
-          provider_id: selectedPaymentMethod,
+          provider_id: actualProviderId,
         })
       }
 
@@ -140,24 +146,33 @@ const Payment = ({
                 value={selectedPaymentMethod}
                 onChange={(value: string) => setPaymentMethod(value)}
               >
-                {availablePaymentMethods.map((paymentMethod) => (
-                  <div key={paymentMethod.id}>
-                    {isStripeLike(paymentMethod.id) ? (
-                      <StripeCardContainer
-                        paymentProviderId={paymentMethod.id}
-                        selectedPaymentOptionId={selectedPaymentMethod}
-                        paymentInfoMap={paymentInfoMap}
-                        setCardBrand={setCardBrand}
-                        setError={setError}
-                        setCardComplete={setCardComplete}
+                {availablePaymentMethods.flatMap((paymentMethod) => {
+                  if (paymentMethod.id === "pp_system_default") {
+                    return [
+                      { ...paymentMethod, id: "manual_efectivo", title: "1. Efectivo" },
+                      { ...paymentMethod, id: "manual_transferencia", title: "2. Transferencia (Nequi/Daviplata/BreB)" }
+                    ]
+                  }
+                  return [paymentMethod]
+                }).map((paymentMethod) => (
+                  <div key={paymentMethod.id} className={clx(
+                    "flex items-center justify-between py-5 border-2 rounded-3xl px-8 mb-4 hover:border-brand-olive transition-all cursor-pointer",
+                    {
+                      "border-brand-olive bg-brand-soft/20":
+                        selectedPaymentMethod === paymentMethod.id,
+                      "border-gray-100": selectedPaymentMethod !== paymentMethod.id,
+                    }
+                  )}
+                  onClick={() => setPaymentMethod(paymentMethod.id)}
+                  >
+                    <div className="flex items-center gap-x-4">
+                      <MedusaRadio
+                        checked={selectedPaymentMethod === paymentMethod.id}
                       />
-                    ) : (
-                      <PaymentContainer
-                        paymentInfoMap={paymentInfoMap}
-                        paymentProviderId={paymentMethod.id}
-                        selectedPaymentOptionId={selectedPaymentMethod}
-                      />
-                    )}
+                      <span className="text-base font-bold text-brand-brown">
+                        {paymentMethod.title}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </RadioGroup>
@@ -185,7 +200,7 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto"
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={
@@ -194,9 +209,9 @@ const Payment = ({
             }
             data-testid="submit-payment-button"
           >
-            {!activeSession && isStripeLike(selectedPaymentMethod)
-              ? "Ingresar información de pago"
-              : "Revisar y Confirmar"}
+            {selectedPaymentMethod === "manual_efectivo" || selectedPaymentMethod === "manual_transferencia"
+              ? "Revisar Compra"
+              : "Continuar"}
           </Button>
         </div>
 
@@ -211,8 +226,9 @@ const Payment = ({
                   className="txt-medium text-ui-fg-subtle"
                   data-testid="payment-method-summary"
                 >
-                  {paymentInfoMap[activeSession?.provider_id]?.title ||
-                    activeSession?.provider_id}
+                  {selectedPaymentMethod === "manual_efectivo" ? "1. Efectivo" : 
+                   selectedPaymentMethod === "manual_transferencia" ? "2. Transferencia (Nequi/Daviplata/BreB)" :
+                   paymentInfoMap[activeSession?.provider_id]?.title || activeSession?.provider_id}
                 </Text>
               </div>
               <div className="flex flex-col w-1/3">

@@ -84,7 +84,7 @@ const Addresses = ({
               </div>
             )}
             <SubmitButton className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto" data-testid="submit-address-button">
-              Continuar a Envíos
+              Continuar compra
             </SubmitButton>
             <ErrorMessage error={message} data-testid="address-error-message" />
           </div>

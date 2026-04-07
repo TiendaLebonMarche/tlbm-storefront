@@ -243,6 +243,10 @@ const Shipping: React.FC<ShippingProps> = ({
                       !isLoadingPrices &&
                       typeof calculatedPricesMap[option.id] !== "number"
 
+                    // Filtramos para asegurar que solo mostramos las dos opciones deseadas
+                    const isPickup = option.name.toLowerCase().includes("tienda") || option.name.toLowerCase().includes("pickup")
+                    const displayName = isPickup ? "Recogida en Tienda" : "Envío en Bucaramanga"
+                    
                     return (
                       <Radio
                         key={option.id}
@@ -250,11 +254,12 @@ const Shipping: React.FC<ShippingProps> = ({
                         data-testid="delivery-option-radio"
                         disabled={isDisabled}
                         className={clx(
-                          "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                          "flex items-center justify-between text-small-regular cursor-pointer py-6 border-2 rounded-3xl px-8 mb-4 hover:border-brand-olive transition-all shadow-sm",
                           {
-                            "border-ui-border-interactive":
+                            "border-brand-olive bg-brand-soft/30 ring-2 ring-brand-olive/20":
                               option.id === shippingMethodId,
-                            "hover:shadow-brders-none cursor-not-allowed":
+                            "border-gray-100 bg-white": option.id !== shippingMethodId,
+                            "opacity-50 cursor-not-allowed":
                               isDisabled,
                           }
                         )}
@@ -263,9 +268,14 @@ const Shipping: React.FC<ShippingProps> = ({
                           <MedusaRadio
                             checked={option.id === shippingMethodId}
                           />
-                          <span className="text-base-regular">
-                            {option.name}
-                          </span>
+                          <div className="flex flex-col text-left">
+                            <span className="text-base font-bold text-brand-brown">
+                              {displayName}
+                            </span>
+                            <span className="text-[10px] text-brand-gray uppercase tracking-widest font-bold">
+                              {isPickup ? "Gratis - Retiro local" : "Domicilio express"}
+                            </span>
+                          </div>
                         </div>
                         <span className="justify-self-end text-ui-fg-base">
                           {option.price_type === "flat" ? (

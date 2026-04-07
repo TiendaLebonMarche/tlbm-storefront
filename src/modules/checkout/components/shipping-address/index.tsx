@@ -123,17 +123,6 @@ const ShippingAddress = ({
         />
         
         <Input
-          label="WhatsApp / Celular *"
-          name="shipping_address.phone"
-          autoComplete="tel"
-          value={formData["shipping_address.phone"]}
-          onChange={handleChange}
-          required
-          className="rounded-full px-6 py-4"
-          data-testid="shipping-phone-input"
-        />
-
-        <Input
           label="Correo Electrónico *"
           name="email"
           type="email"
@@ -142,8 +131,19 @@ const ShippingAddress = ({
           value={formData.email}
           onChange={handleChange}
           required
-          className="rounded-full px-6 py-4"
+          className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
           data-testid="shipping-email-input"
+        />
+
+        <Input
+          label="WhatsApp / Celular *"
+          name="shipping_address.phone"
+          autoComplete="tel"
+          value={formData["shipping_address.phone"]}
+          onChange={handleChange}
+          required
+          className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
+          data-testid="shipping-phone-input"
         />
 
         <div className="flex flex-col">
@@ -172,7 +172,7 @@ const ShippingAddress = ({
             value={formData["shipping_address.address_1"]}
             onChange={handleChange}
             required
-            className="rounded-full px-6 py-4"
+            className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
             data-testid="shipping-address-input"
           />
         </div>
@@ -183,7 +183,7 @@ const ShippingAddress = ({
             name="shipping_address.address_2"
             value={formData["shipping_address.address_2"]}
             onChange={handleChange}
-            className="rounded-full px-6 py-4"
+            className="rounded-full px-6 py-4 border-2 border-gray-100 focus:border-brand-olive transition-all bg-gray-50/30"
             data-testid="shipping-address-2-input"
           />
         </div>
