@@ -59,7 +59,9 @@ const StripePaymentButton = ({
   const onPaymentCompleted = async () => {
     await placeOrder()
       .catch((err) => {
-        setErrorMessage(err.message)
+        if (!err.message?.includes("NEXT_REDIRECT")) {
+          setErrorMessage(err.message)
+        }
       })
       .finally(() => {
         setSubmitting(false)
@@ -158,7 +160,9 @@ const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: 
   const onPaymentCompleted = async () => {
     await placeOrder()
       .catch((err) => {
-        setErrorMessage(err.message)
+        if (!err.message?.includes("NEXT_REDIRECT")) {
+          setErrorMessage(err.message)
+        }
       })
       .finally(() => {
         setSubmitting(false)

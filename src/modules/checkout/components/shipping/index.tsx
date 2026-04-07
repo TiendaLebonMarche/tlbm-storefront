@@ -159,11 +159,15 @@ const Shipping: React.FC<ShippingProps> = ({
                       !isLoadingPrices &&
                       typeof calculatedPricesMap[option.id] !== "number"
 
-                    const isPickup = option.service_zone?.fulfillment_set?.type === "pickup" || 
-                                     option.name.toLowerCase().includes("tienda") || 
-                                     option.name.toLowerCase().includes("pickup")
+                    const isPickup = option.name.toLowerCase().includes("tienda") || 
+                                     option.name.toLowerCase().includes("pickup") ||
+                                     option.service_zone?.fulfillment_set?.type === "pickup"
+                    
+                    const isBucaramanga = option.name.toLowerCase().includes("bucaramanga") || 
+                                          !isPickup
                     
                     const displayName = isPickup ? "Recogida en Tienda" : "Envío en Bucaramanga"
+                    const subLabel = isPickup ? "Gratis - Retiro local" : "Domicilio express"
                     
                     return (
                       <Radio
@@ -191,7 +195,7 @@ const Shipping: React.FC<ShippingProps> = ({
                               {displayName}
                             </span>
                             <span className="text-[10px] text-brand-gray uppercase tracking-widest font-bold">
-                              {isPickup ? "Gratis - Retiro local" : "Domicilio express"}
+                              {subLabel}
                             </span>
                           </div>
                         </div>
