@@ -147,20 +147,20 @@ const Hero = () => {
       {/* 3. METADATA EN LA BASE */}
       <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pb-12 flex flex-col md:flex-row justify-between items-end gap-6 text-brand-brown/40 select-none">
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Title —</span>
-          <span className="font-sans font-bold text-xs md:text-sm">ANTIGRAVITY ECOMMERCE</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Tienda —</span>
+          <span className="font-sans font-bold text-xs md:text-sm">LE BON MARCHÉ</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Date —</span>
-          <span className="font-sans font-bold text-xs md:text-sm">07.04.2026</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Slogan —</span>
+          <span className="font-sans font-bold text-xs md:text-sm uppercase">Productos Exoticos & Originales.</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Time —</span>
-          <span className="font-sans font-bold text-xs md:text-sm">11:30 GMT-5</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Ubicacion —</span>
+          <span className="font-sans font-bold text-xs md:text-sm uppercase">BUCARAMANGA, SANTANDER</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Theme —</span>
-          <span className="font-sans font-bold text-xs md:text-sm uppercase">SMART SELECTION</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">By —</span>
+          <span className="font-sans font-bold text-xs md:text-sm uppercase">TIENDA LE BON MARCHÉ</span>
         </div>
       </div>
 
