@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Fetch all products
     const { response: { products } } = await listProducts({
-        countryCode: "us", // Default base to US
+        countryCode: "co", // Default base to Colombia
         queryParams: { limit: 100 },
     })
 

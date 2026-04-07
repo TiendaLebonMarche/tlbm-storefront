@@ -110,90 +110,31 @@ const ShippingAddress = ({
           />
         </Container>
       )}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
-          label="Nombres"
+          label="Nombre y Apellidos *"
           name="shipping_address.first_name"
-          autoComplete="given-name"
+          autoComplete="name"
           value={formData["shipping_address.first_name"]}
           onChange={handleChange}
           required
+          className="rounded-full px-6 py-4"
           data-testid="shipping-first-name-input"
         />
+        
         <Input
-          label="Apellidos"
-          name="shipping_address.last_name"
-          autoComplete="family-name"
-          value={formData["shipping_address.last_name"]}
+          label="WhatsApp / Celular *"
+          name="shipping_address.phone"
+          autoComplete="tel"
+          value={formData["shipping_address.phone"]}
           onChange={handleChange}
           required
-          data-testid="shipping-last-name-input"
+          className="rounded-full px-6 py-4"
+          data-testid="shipping-phone-input"
         />
+
         <Input
-          label="Dirección"
-          name="shipping_address.address_1"
-          autoComplete="address-line1"
-          value={formData["shipping_address.address_1"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-address-input"
-        />
-        <Input
-          label="Empresa (Opcional)"
-          name="shipping_address.company"
-          value={formData["shipping_address.company"]}
-          onChange={handleChange}
-          autoComplete="organization"
-          data-testid="shipping-company-input"
-        />
-        <Input
-          label="Código Postal"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-postal-code-input"
-        />
-        <Input
-          label="Ciudad"
-          name="shipping_address.city"
-          autoComplete="address-level2"
-          value={formData["shipping_address.city"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-city-input"
-        />
-        <CountrySelect
-          name="shipping_address.country_code"
-          autoComplete="country"
-          region={cart?.region}
-          value={formData["shipping_address.country_code"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-country-select"
-        />
-        <Input
-          label="Departamento / Estado"
-          name="shipping_address.province"
-          autoComplete="address-level1"
-          value={formData["shipping_address.province"]}
-          onChange={handleChange}
-          data-testid="shipping-province-input"
-        />
-      </div>
-      <div className="my-8">
-        <Checkbox
-          label="Usar la misma dirección para facturación"
-          name="same_as_billing"
-          checked={checked}
-          onChange={onChange}
-          data-testid="billing-address-checkbox"
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <Input
-          label="Correo Electrónico"
+          label="Correo Electrónico *"
           name="email"
           type="email"
           title="Ingresa un correo válido."
@@ -201,15 +142,66 @@ const ShippingAddress = ({
           value={formData.email}
           onChange={handleChange}
           required
+          className="rounded-full px-6 py-4"
           data-testid="shipping-email-input"
         />
-        <Input
-          label="Teléfono"
-          name="shipping_address.phone"
-          autoComplete="tel"
-          value={formData["shipping_address.phone"]}
-          onChange={handleChange}
-          data-testid="shipping-phone-input"
+
+        <div className="flex flex-col">
+          <label className="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2 ml-4">Municipio *</label>
+          <select
+            name="shipping_address.city"
+            value={formData["shipping_address.city"]}
+            onChange={handleChange}
+            required
+            className="w-full rounded-full border border-gray-200 px-6 py-4 bg-white focus:ring-2 focus:ring-brand-olive text-sm outline-none transition-all appearance-none"
+            data-testid="shipping-city-select"
+          >
+            <option value="">Selecciona un municipio</option>
+            <option value="Bucaramanga">Bucaramanga</option>
+            <option value="Floridablanca">Floridablanca</option>
+            <option value="Giron">Girón</option>
+            <option value="Piedecuesta">Piedecuesta</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-2">
+          <Input
+            label="Dirección Completa (Indispensable para el flete) *"
+            name="shipping_address.address_1"
+            autoComplete="address-line1"
+            value={formData["shipping_address.address_1"]}
+            onChange={handleChange}
+            required
+            className="rounded-full px-6 py-4"
+            data-testid="shipping-address-input"
+          />
+        </div>
+
+        <div className="md:col-span-2">
+          <Input
+            label="Observaciones de dirección (Opcional)"
+            name="shipping_address.address_2"
+            value={formData["shipping_address.address_2"]}
+            onChange={handleChange}
+            className="rounded-full px-6 py-4"
+            data-testid="shipping-address-2-input"
+          />
+        </div>
+
+        {/* Hidden internal fields to satisfy Medusa validation without cluttering the UI */}
+        <input type="hidden" name="shipping_address.last_name" value={formData["shipping_address.first_name"]} />
+        <input type="hidden" name="shipping_address.country_code" value="co" />
+        <input type="hidden" name="shipping_address.postal_code" value="680001" />
+        <input type="hidden" name="shipping_address.province" value="Santander" />
+      </div>
+
+      <div className="my-8">
+        <Checkbox
+          label="Usar la misma dirección para facturación"
+          name="same_as_billing"
+          checked={checked}
+          onChange={onChange}
+          data-testid="billing-address-checkbox"
         />
       </div>
     </>

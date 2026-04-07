@@ -33,18 +33,18 @@ const NewsletterSection = () => {
           </p>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0 mb-6 border-b border-brand-brown/20 pb-2 group focus-within:border-brand-olive transition-colors">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 mb-8">
             <input
               type="email"
-              placeholder="Tu dirección de correo electrónico"
+              placeholder="Tu correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 px-4 py-3 bg-transparent text-brand-brown placeholder-brand-brown/40 text-sm outline-none"
+              className="flex-1 rounded-full px-8 py-4 bg-white border border-gray-100 placeholder-gray-400 text-sm outline-none focus:ring-2 focus:ring-brand-olive transition-all shadow-sm"
             />
             <button
               type="submit"
-              className="px-6 py-3 text-brand-brown font-bold uppercase text-[10px] tracking-[0.3em] hover:text-brand-olive transition-colors whitespace-nowrap"
+              className="pill-button bg-brand-brown text-white hover:bg-brand-olive transition-all"
             >
               Suscribir
             </button>

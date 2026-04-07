@@ -39,8 +39,12 @@
   
   /* === Savoy Micro-Interactions === */
   .hover-lift {
-    @apply transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg;
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    @apply transition-all duration-500 hover:-translate-y-2;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  }
+  .hover-lift:hover {
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
   }
   
   .img-savoy-zoom {
@@ -98,15 +102,21 @@
       .carousel-card { width: 320px; }
   }
   
-  /* Ajuste Categorías 9:16 */
+  /* Ajuste Categorías Soft */
   .category-card {
       min-width: calc(50% - 12px);
       scroll-snap-align: start;
+      @apply rounded-[2rem] overflow-hidden;
   }
   @media(min-width: 768px){
       .category-card {
           min-width: calc(25% - 18px); 
+          @apply rounded-[2.5rem];
       }
+  }
+
+  .pill-button {
+    @apply rounded-full px-8 py-4 font-bold uppercase tracking-widest text-[10px] transition-all duration-300;
   }
 
   input:focus ~ label,
@@ -200,6 +210,14 @@
 
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
+  }
+
+  .soft-card {
+    @apply bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50;
+  }
+  
+  .input-pill {
+    @apply w-full rounded-full border border-gray-200 px-6 py-4 focus:ring-2 focus:ring-brand-olive focus:border-transparent outline-none transition-all;
   }
 }
 

@@ -40,7 +40,7 @@ const Summary = ({ cart }: SummaryProps) => {
         data-testid="checkout-button"
         className="mt-4"
       >
-        <Button className="w-full h-14 bg-brand-black hover:bg-brand-gold text-white hover:text-black font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 rounded-none shadow-xl border-none">
+        <Button className="w-full pill-button h-14 bg-brand-brown hover:bg-brand-olive text-white font-bold uppercase tracking-[0.2em] text-[10px] transition-all duration-500 shadow-xl border-none">
           Finalizar Pedido
         </Button>
       </LocalizedClientLink>

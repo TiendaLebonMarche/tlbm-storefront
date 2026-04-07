@@ -34,7 +34,7 @@ export default async function ProductPreview({
   return (
     <div className="group flex flex-col h-full bg-white transition-all duration-700">
       <LocalizedClientLink href={`/productos/${product.handle}`} data-testid="product-wrapper">
-        <div className="hover-lift relative overflow-hidden bg-brand-soft aspect-square mb-6 group/img duration-700 rounded-lg">
+        <div className="hover-lift relative overflow-hidden bg-brand-soft aspect-square mb-6 group/img duration-700 rounded-[2rem]">
           <Thumbnail
             thumbnail={product.thumbnail}
             images={product.images}

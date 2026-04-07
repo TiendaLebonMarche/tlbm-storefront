@@ -1,10 +1,13 @@
+import { getBaseURL } from "@lib/util/env"
+
 export default function StructuredData() {
+    const baseUrl = getBaseURL()
     const schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Tienda Le Bon Marché",
-        "url": "https://tlbm-storefront.vercel.app",
-        "logo": "https://tlbm-storefront.vercel.app/logo.png",
+        "url": baseUrl,
+        "logo": `${baseUrl}/logo.png`,
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+573027567783",

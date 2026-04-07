@@ -183,7 +183,7 @@ export default function ProductActions({
               isAdding ||
               !isValidVariant
             }
-            className="w-full h-12 text-sm font-medium tracking-wide border-0 bg-black text-white hover:bg-gray-800 active:bg-gray-900 transition-colors duration-150 rounded-none flex items-center justify-center gap-2"
+            className="w-full pill-button h-14 text-[10px] font-bold uppercase tracking-[0.2em] bg-brand-brown text-white hover:bg-brand-olive transition-all duration-300 flex items-center justify-center gap-2 shadow-lg border-none"
             isLoading={isAdding}
             data-testid="add-product-button"
           >

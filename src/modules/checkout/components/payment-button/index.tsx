@@ -37,7 +37,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       )
     case isManual(paymentSession?.provider_id):
       return (
-        <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
+        <ManualTestPaymentButton notReady={notReady} cart={cart} data-testid={dataTestId} />
       )
     default:
       return <Button disabled>Selecciona un método de pago</Button>
@@ -57,6 +57,9 @@ const StripePaymentButton = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
+    // Notify admin
+    import("@lib/actions/notifications").then(m => m.sendOrderNotification(cart as any))
+
     await placeOrder()
       .catch((err) => {
         setErrorMessage(err.message)
@@ -151,11 +154,14 @@ const StripePaymentButton = ({
   )
 }
 
-const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
+const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: HttpTypes.StoreCart }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
+    // Notify admin
+    import("@lib/actions/notifications").then(m => m.sendOrderNotification(cart as any))
+
     await placeOrder()
       .catch((err) => {
         setErrorMessage(err.message)
