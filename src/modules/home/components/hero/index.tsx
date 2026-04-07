@@ -74,12 +74,12 @@ const Hero = () => {
       </div>
 
       {/* 1. SECCIÓN DE CONTENIDO (TEXTOS INDEPENDIENTES) */}
-      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-28 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-2 gap-y-6 lg:gap-y-12 pointer-events-none select-none">
+      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-44 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-y-12 pointer-events-none select-none">
         
         {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col gap-6 lg:gap-12 lg:max-w-md"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-12 lg:max-w-md"
         >
           <div className="max-w-[400px]">
             <p className="font-serif italic text-brand-brown text-lg md:text-2xl lg:text-3xl leading-[1.1] tracking-tight reveal-up">
@@ -103,7 +103,7 @@ const Hero = () => {
         {/* BLOQUE DERECHA: Título Principal */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col lg:items-end text-left lg:text-right -mt-4 lg:mt-0"
+          className="flex flex-col items-center text-center lg:items-end lg:text-right -mt-4 lg:mt-0"
         >
           <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-right">
             LA PRIMERA<br />
