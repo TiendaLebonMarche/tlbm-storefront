@@ -57,9 +57,6 @@ const StripePaymentButton = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
-    // Notify admin
-    import("@lib/actions/notifications").then(m => m.sendOrderNotification(cart as any))
-
     await placeOrder()
       .catch((err) => {
         setErrorMessage(err.message)
@@ -159,9 +156,6 @@ const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onPaymentCompleted = async () => {
-    // Notify admin
-    import("@lib/actions/notifications").then(m => m.sendOrderNotification(cart as any))
-
     await placeOrder()
       .catch((err) => {
         setErrorMessage(err.message)

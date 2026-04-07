@@ -217,38 +217,40 @@ const Payment = ({
 
         <div className={isOpen ? "hidden" : "block"}>
           {cart && paymentReady && activeSession ? (
-            <div className="flex items-start gap-x-1 w-full">
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
+            <div className="flex flex-col small:flex-row items-start gap-y-6 lg:gap-x-12 w-full bg-brand-soft/10 p-6 rounded-3xl border border-brand-soft/20">
+              <div className="flex flex-col w-full small:w-1/2" data-testid="payment-method-summary">
+                <Text className="txt-medium-plus text-ui-fg-base mb-2 font-bold uppercase tracking-widest text-[10px]">
                   Método de pago
                 </Text>
-                <Text
-                  className="txt-medium text-ui-fg-subtle"
-                  data-testid="payment-method-summary"
-                >
+                <Text className="txt-medium text-brand-brown font-serif italic text-lg leading-tight">
                   {selectedPaymentMethod === "manual_efectivo" ? "1. Efectivo" : 
                    selectedPaymentMethod === "manual_transferencia" ? "2. Transferencia (Nequi/Daviplata/BreB)" :
                    paymentInfoMap[activeSession?.provider_id]?.title || activeSession?.provider_id}
                 </Text>
               </div>
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
+              <div className="flex flex-col w-full small:w-1/2">
+                <Text className="txt-medium-plus text-ui-fg-base mb-2 font-bold uppercase tracking-widest text-[10px]">
                   Detalles del pago
                 </Text>
                 <div
-                  className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
+                  className="flex gap-4 txt-medium text-ui-fg-subtle items-center"
                   data-testid="payment-details-summary"
                 >
-                  <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-brand-brown/10 text-brand-brown">
                     {paymentInfoMap[selectedPaymentMethod]?.icon || (
                       <CreditCard />
                     )}
-                  </Container>
-                  <Text>
-                    {isStripeLike(selectedPaymentMethod) && cardBrand
-                      ? cardBrand
-                      : "Pago Pendiente"}
-                  </Text>
+                  </div>
+                  <div className="flex flex-col">
+                    <Text className="font-bold text-brand-brown">
+                      {isStripeLike(selectedPaymentMethod) && cardBrand
+                        ? cardBrand
+                        : "Pago Pendiente"}
+                    </Text>
+                    <Text className="text-xs text-brand-gray">
+                      {isStripeLike(selectedPaymentMethod) ? "Procesado por Stripe" : "Verificar con el vendedor"}
+                    </Text>
+                  </div>
                 </div>
               </div>
             </div>

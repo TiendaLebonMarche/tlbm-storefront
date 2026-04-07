@@ -428,10 +428,19 @@ export async function placeOrder(cartId?: string) {
 
   if (cartRes?.type === "order") {
     const countryCode =
-      cartRes.order.shipping_address?.country_code?.toLowerCase()
+      cartRes.order.shipping_address?.country_code?.toLowerCase() || "co"
 
     const orderCacheTag = await getCacheTag("orders")
     revalidateTag(orderCacheTag)
+
+    // Notify admin - We call it here on the server to ensure it happens
+    try {
+      const { sendOrderNotification } = await import("@lib/actions/notifications")
+      await sendOrderNotification(cartRes.order as any)
+    } catch (error) {
+      console.error("Error sending admin notification:", error)
+      // We don't block the redirect if notification fails
+    }
 
     removeCartId()
     redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)

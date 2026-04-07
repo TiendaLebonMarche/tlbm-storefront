@@ -5,8 +5,8 @@ import Eye from "@modules/common/icons/eye"
 import EyeOff from "@modules/common/icons/eye-off"
 
 type InputProps = Omit<
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
-  "placeholder"
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size"
 > & {
   label: string
   errors?: Record<string, unknown>
@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={name}
             onClick={() => inputRef.current?.focus()}
-            className="flex items-center justify-center mx-6 px-1 transition-all absolute duration-300 top-4 -z-1 origin-0 text-ui-fg-subtle peer-focus:top-1 peer-focus:text-[10px] peer-focus:text-brand-olive peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-[10px] uppercase tracking-widest font-bold font-sans"
+            className="flex items-center justify-center mx-6 px-1 transition-all absolute duration-300 top-4 -z-1 origin-0 text-ui-fg-subtle peer-focus:top-2 peer-focus:text-[11px] peer-focus:text-brand-olive peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[11px] uppercase tracking-widest font-bold font-sans"
           >
             {label}
             {required && <span className="text-rose-500 ml-1">*</span>}

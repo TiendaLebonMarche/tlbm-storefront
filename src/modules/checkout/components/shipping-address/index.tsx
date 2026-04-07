@@ -110,7 +110,7 @@ const ShippingAddress = ({
           />
         </Container>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-x-6">
         <Input
           label="Nombre y Apellidos *"
           name="shipping_address.first_name"
@@ -139,6 +139,7 @@ const ShippingAddress = ({
           label="WhatsApp / Celular *"
           name="shipping_address.phone"
           autoComplete="tel"
+          placeholder="Ej: +57 300 123 4567"
           value={formData["shipping_address.phone"]}
           onChange={handleChange}
           required
@@ -153,7 +154,7 @@ const ShippingAddress = ({
             value={formData["shipping_address.city"]}
             onChange={handleChange}
             required
-            className="w-full rounded-full border border-gray-200 px-6 py-4 bg-white focus:ring-2 focus:ring-brand-olive text-sm outline-none transition-all appearance-none"
+            className="w-full h-14 rounded-3xl border-2 border-gray-100 px-6 bg-white focus:outline-none focus:ring-4 focus:ring-brand-olive/10 focus:border-brand-olive text-sm transition-all appearance-none text-brand-brown font-medium shadow-sm"
             data-testid="shipping-city-select"
           >
             <option value="">Selecciona un municipio</option>
