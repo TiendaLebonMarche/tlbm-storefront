@@ -8,8 +8,8 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
 
-  // Movimiento suave y dinámico para el personaje (Efecto Parallax Vivo)
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 }
+  // Movimiento suave y dinámico (Efecto Inmersivo)
+  const springConfig = { stiffness: 45, damping: 25, restDelta: 0.001 } // Más suave aún
   const xSpring = useSpring(0, springConfig)
   const ySpring = useSpring(0, springConfig)
 
@@ -19,8 +19,8 @@ const Hero = () => {
       const { innerWidth, innerHeight } = window
       const x = (clientX / innerWidth) - 0.5
       const y = (clientY / innerHeight) - 0.5
-      xSpring.set(x * 55) 
-      ySpring.set(y * 55)
+      xSpring.set(x * 40) 
+      ySpring.set(y * 40)
     }
 
     const container = containerRef.current
@@ -30,19 +30,20 @@ const Hero = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [xSpring, ySpring])
 
-  // Parallax de scroll: Profundidad y escala
-  const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 150])
-  const kawsScale = useTransform(scrollY, [0, 600], [1.1, 1.0]) 
-  const kawsRotate = useTransform(scrollY, [0, 800], [0, -6])
+  // Parallax de scroll súper fluido
+  // Reducimos la escala inicial un 20%+ para balancear el diseño (0.8)
+  const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 180])
+  const kawsScale = useTransform(scrollY, [0, 800], [0.8, 0.72]) 
+  const kawsRotate = useTransform(scrollY, [0, 800], [0, -4])
   
   // Opacidad y movimiento de salida para los textos
-  const contentOpacity = useTransform(scrollY, [0, 400], [1, 0])
-  const contentTranslate = useTransform(scrollY, [0, 400], [0, -40])
+  const contentOpacity = useTransform(scrollY, [0, 350], [1, 0])
+  const contentTranslate = useTransform(scrollY, [0, 350], [0, -50])
 
   return (
     <section 
       ref={containerRef}
-      className="relative w-full h-[100vh] min-h-[800px] flex flex-col items-center justify-between overflow-hidden bg-[#F2F2E1] font-sans"
+      className="relative w-full h-[100vh] min-h-[750px] flex flex-col items-center justify-between overflow-hidden bg-[#F2F2E1] font-sans"
     >
       {/* Capa de textura sutil de papel premium */}
       <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply z-0">
@@ -55,7 +56,7 @@ const Hero = () => {
       </div>
 
       {/* 1. SECCIÓN DE CONTENIDO (TEXTOS INDEPENDIENTES) */}
-      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-32 md:pt-44 grid grid-cols-1 lg:grid-cols-2 gap-y-12 pointer-events-none select-none">
+      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-32 md:pt-44 lg:pt-52 grid grid-cols-1 lg:grid-cols-2 gap-y-12 pointer-events-none select-none">
         
         {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
@@ -85,7 +86,7 @@ const Hero = () => {
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col lg:items-end text-left lg:text-right"
         >
-          <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[3.2rem] leading-[0.85] tracking-tighter uppercase reveal-right">
+          <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-right">
             LA PRIMERA<br />
             TIENDA VIRTUAL EN<br />
             BUCARAMANGA, DONDE<br />
@@ -93,17 +94,17 @@ const Hero = () => {
             LO MÁS TOP PARA TI ❤️
           </h1>
           
-          {/* Descripción Disruptiva y Santandereana */}
+          {/* Descripción Disruptiva */}
           <div className="mt-10 lg:mt-12 max-w-[450px] reveal-right delay-200">
             <p className="font-sans text-brand-brown text-sm md:text-base lg:text-lg leading-relaxed uppercase tracking-tighter">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, al Bro le de la <span className="font-black italic text-brand-brown">Pálida!</span>
+              <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios,<br /> al Bro le de la <span className="font-black italic text-brand-brown">Pálida!</span>
             </p>
           </div>
         </motion.div>
       </div>
 
-      {/* 2. ELEMENTO CENTRAL: KAWS COMPANION UPSCALE (OPTIMIZADO) */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none pt-24 lg:pt-16 pb-12">
+      {/* 2. ELEMENTO CENTRAL: KAWS COMPANION (REDUCIDO -20%) */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none pt-32 lg:pt-24 pb-12">
         <motion.div
            style={{
              x: xSpring,
@@ -112,15 +113,15 @@ const Hero = () => {
              scale: kawsScale,
              rotate: kawsRotate,
            }}
-           className="relative h-[90%] w-full max-w-5xl flex items-center justify-center"
+           className="relative h-[90%] w-full max-w-4xl flex items-center justify-center"
         >
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775593561/upscalemedia-transformed_2_mckxtd.png" 
               alt="KAWS Companion Premium"
-              width={1400}
-              height={1400}
-              className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.18)]"
+              width={1200}
+              height={1200}
+              className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.15)]"
               priority
               quality={90}
             />
