@@ -21,32 +21,6 @@ type ShippingProps = {
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
 }
 
-function formatAddress(address: HttpTypes.StoreCartAddress) {
-  if (!address) {
-    return ""
-  }
-
-  let ret = ""
-
-  if (address.address_1) {
-    ret += ` ${address.address_1}`
-  }
-
-  if (address.address_2) {
-    ret += `, ${address.address_2}`
-  }
-
-  if (address.postal_code) {
-    ret += `, ${address.postal_code} ${address.city}`
-  }
-
-  if (address.country_code) {
-    ret += `, ${address.country_code.toUpperCase()}`
-  }
-
-  return ret
-}
-
 const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
@@ -54,8 +28,6 @@ const Shipping: React.FC<ShippingProps> = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
 
-  const [showPickupOptions, setShowPickupOptions] =
-    useState<string>(PICKUP_OPTION_OFF)
   const [calculatedPricesMap, setCalculatedPricesMap] = useState<
     Record<string, number>
   >({})
@@ -70,21 +42,11 @@ const Shipping: React.FC<ShippingProps> = ({
 
   const isOpen = searchParams.get("step") === "delivery"
 
-  const _shippingMethods = useMemo(() => availableShippingMethods?.filter(
-    (sm: any) => sm.service_zone?.fulfillment_set?.type !== "pickup"
-  ), [availableShippingMethods])
-
-  const _pickupMethods = useMemo(() => availableShippingMethods?.filter(
-    (sm: any) => sm.service_zone?.fulfillment_set?.type === "pickup"
-  ), [availableShippingMethods])
-
-  const hasPickupOptions = !!_pickupMethods?.length
-
   useEffect(() => {
     setIsLoadingPrices(true)
 
-    if (_shippingMethods?.length) {
-      const promises = _shippingMethods
+    if (availableShippingMethods?.length) {
+      const promises = availableShippingMethods
         .filter((sm) => sm.price_type === "calculated")
         .map((sm) => calculatePriceForShippingOption(sm.id, cart.id))
 
@@ -93,18 +55,16 @@ const Shipping: React.FC<ShippingProps> = ({
           const pricesMap: Record<string, number> = {}
           res
             .filter((r) => r.status === "fulfilled")
-            .forEach((p) => (pricesMap[p.value?.id || ""] = p.value?.amount!))
+            .forEach((p) => (pricesMap[(p as any).value?.id || ""] = (p as any).value?.amount!))
 
           setCalculatedPricesMap(pricesMap)
           setIsLoadingPrices(false)
         })
+      } else {
+        setIsLoadingPrices(false)
       }
     }
-
-    if (_pickupMethods?.find((m: any) => m.id === shippingMethodId)) {
-      setShowPickupOptions(PICKUP_OPTION_ON)
-    }
-  }, [availableShippingMethods, _shippingMethods, _pickupMethods, cart.id, shippingMethodId])
+  }, [availableShippingMethods, cart.id])
 
   const handleEdit = () => {
     router.push(pathname + "?step=delivery", { scroll: false })
@@ -119,13 +79,6 @@ const Shipping: React.FC<ShippingProps> = ({
     variant: "shipping" | "pickup"
   ) => {
     setError(null)
-
-    if (variant === "pickup") {
-      setShowPickupOptions(PICKUP_OPTION_ON)
-    } else {
-      setShowPickupOptions(PICKUP_OPTION_OFF)
-    }
-
     let currentId: string | null = null
     setIsLoading(true)
     setShippingMethodId((prev) => {
@@ -136,7 +89,6 @@ const Shipping: React.FC<ShippingProps> = ({
     await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
       .catch((err) => {
         setShippingMethodId(currentId)
-
         setError(err.message)
       })
       .finally(() => {
@@ -182,7 +134,7 @@ const Shipping: React.FC<ShippingProps> = ({
           )}
       </div>
       {isOpen ? (
-        <>
+        <div className="pb-8">
           <div className="grid">
             <div className="flex flex-col">
               <span className="font-medium txt-medium text-ui-fg-base mb-4">
@@ -191,60 +143,26 @@ const Shipping: React.FC<ShippingProps> = ({
             </div>
             <div data-testid="delivery-options-container">
               <div className="pb-8 md:pt-0 pt-2">
-                {hasPickupOptions && (
-                  <RadioGroup
-                    value={showPickupOptions}
-                    onChange={(value) => {
-                      const id = _pickupMethods.find(
-                        (option: any) => !option.insufficient_inventory
-                      )?.id
-
-                      if (id) {
-                        handleSetShippingMethod(id, "pickup")
-                      }
-                    }}
-                  >
-                    <Radio
-                      value={PICKUP_OPTION_ON}
-                      data-testid="delivery-option-radio"
-                      className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
-                        {
-                          "border-ui-border-interactive":
-                            showPickupOptions === PICKUP_OPTION_ON,
-                        }
-                      )}
-                    >
-                      <div className="flex items-center gap-x-4">
-                        <MedusaRadio
-                          checked={showPickupOptions === PICKUP_OPTION_ON}
-                        />
-                        <span className="text-base-regular">
-                          Recogida en Tienda
-                        </span>
-                      </div>
-                      <span className="justify-self-end text-ui-fg-base">
-                        -
-                      </span>
-                    </Radio>
-                  </RadioGroup>
-                )}
                 <RadioGroup
                   value={shippingMethodId}
                   onChange={(v) => {
                     if (v) {
-                      return handleSetShippingMethod(v, "shipping")
+                      const method = availableShippingMethods?.find(m => m.id === v)
+                      const isPickup = (method as any)?.service_zone?.fulfillment_set?.type === "pickup"
+                      return handleSetShippingMethod(v, isPickup ? "pickup" : "shipping")
                     }
                   }}
                 >
-                  {_shippingMethods?.map((option: any) => {
+                  {availableShippingMethods?.map((option: any) => {
                     const isDisabled =
                       option.price_type === "calculated" &&
                       !isLoadingPrices &&
                       typeof calculatedPricesMap[option.id] !== "number"
 
-                    // Filtramos para asegurar que solo mostramos las dos opciones deseadas
-                    const isPickup = option.name.toLowerCase().includes("tienda") || option.name.toLowerCase().includes("pickup")
+                    const isPickup = option.service_zone?.fulfillment_set?.type === "pickup" || 
+                                     option.name.toLowerCase().includes("tienda") || 
+                                     option.name.toLowerCase().includes("pickup")
+                    
                     const displayName = isPickup ? "Recogida en Tienda" : "Envío en Bucaramanga"
                     
                     return (
@@ -277,8 +195,8 @@ const Shipping: React.FC<ShippingProps> = ({
                             </span>
                           </div>
                         </div>
-                        <span className="justify-self-end text-ui-fg-base">
-                          {option.price_type === "flat" ? (
+                        <span className="justify-self-end text-ui-fg-base font-bold">
+                          {option.amount !== undefined && option.amount !== null ? (
                             convertToLocale({
                               amount: option.amount!,
                               currency_code: cart?.currency_code,
@@ -288,10 +206,10 @@ const Shipping: React.FC<ShippingProps> = ({
                               amount: calculatedPricesMap[option.id],
                               currency_code: cart?.currency_code,
                             })
-                          ) : isLoadingPrices ? (
+                          ) : isLoadingPrices && option.price_type === "calculated" ? (
                             <Loader />
                           ) : (
-                            "-"
+                            "Gratis"
                           )}
                         </span>
                       </Radio>
@@ -302,74 +220,6 @@ const Shipping: React.FC<ShippingProps> = ({
             </div>
           </div>
 
-          {showPickupOptions === PICKUP_OPTION_ON && (
-            <div className="grid">
-              <div className="flex flex-col">
-                <span className="font-medium txt-medium text-ui-fg-base">
-                  Tienda Físcia
-                </span>
-                <span className="mb-4 text-ui-fg-muted txt-medium">
-                  Elige tu punto de retiro
-                </span>
-              </div>
-              <div data-testid="delivery-options-container">
-                <div className="pb-8 md:pt-0 pt-2">
-                  <RadioGroup
-                    value={shippingMethodId}
-                    onChange={(v) => {
-                      if (v) {
-                        return handleSetShippingMethod(v, "pickup")
-                      }
-                    }}
-                  >
-                    {_pickupMethods?.map((option: any) => {
-                      return (
-                        <Radio
-                          key={option.id}
-                          value={option.id}
-                          disabled={option.insufficient_inventory}
-                          data-testid="delivery-option-radio"
-                          className={clx(
-                            "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
-                            {
-                              "border-ui-border-interactive":
-                                option.id === shippingMethodId,
-                              "hover:shadow-brders-none cursor-not-allowed":
-                                option.insufficient_inventory,
-                            }
-                          )}
-                        >
-                          <div className="flex items-start gap-x-4">
-                            <MedusaRadio
-                              checked={option.id === shippingMethodId}
-                            />
-                            <div className="flex flex-col">
-                              <span className="text-base-regular">
-                                {option.name}
-                              </span>
-                              <span className="text-base-regular text-ui-fg-muted">
-                                {formatAddress(
-                                  option.service_zone?.fulfillment_set?.location
-                                    ?.address
-                                )}
-                              </span>
-                            </div>
-                          </div>
-                          <span className="justify-self-end text-ui-fg-base">
-                            {convertToLocale({
-                              amount: option.amount!,
-                              currency_code: cart?.currency_code,
-                            })}
-                          </span>
-                        </Radio>
-                      )
-                    })}
-                  </RadioGroup>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div>
             <ErrorMessage
               error={error}
@@ -377,30 +227,30 @@ const Shipping: React.FC<ShippingProps> = ({
             />
             <Button
               size="large"
-              className="mt"
+              className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto"
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0]}
+              disabled={!shippingMethodId}
               data-testid="submit-delivery-option-button"
             >
               Continuar al Pago
             </Button>
           </div>
-        </>
+        </div>
       ) : (
         <div>
           <div className="text-small-regular">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
+              <div className="flex flex-col w-full bg-brand-soft/5 p-4 rounded-2xl border border-brand-soft/20">
+                <Text className="txt-medium-plus text-ui-fg-base mb-1 font-bold">
                   Método Escogido
                 </Text>
-                <Text className="txt-medium text-ui-fg-subtle">
-                  {cart.shipping_methods!.at(-1)!.name}{" "}
-                  {convertToLocale({
+                <Text className="txt-medium text-brand-brown">
+                  {cart.shipping_methods!.at(-1)!.name.toLowerCase().includes("tienda") ? "Recogida en Tienda" : "Envío en Bucaramanga"}{" "}
+                  ({convertToLocale({
                     amount: cart.shipping_methods!.at(-1)!.amount!,
                     currency_code: cart?.currency_code,
-                  })}
+                  })})
                 </Text>
               </div>
             )}
