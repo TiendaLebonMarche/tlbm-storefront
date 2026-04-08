@@ -1,6 +1,7 @@
 import { Text, clx } from "@medusajs/ui"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import React from "react"
+import { Plus } from "lucide-react"
 
 type AccordionItemProps = AccordionPrimitive.AccordionItemProps & {
   title: string
@@ -14,6 +15,7 @@ type AccordionItemProps = AccordionPrimitive.AccordionItemProps & {
   complete?: boolean
   active?: boolean
   triggerable?: boolean
+  className?: string
   children: React.ReactNode
 }
 
@@ -27,7 +29,9 @@ const Accordion: React.FC<AccordionProps> & {
   Item: React.FC<AccordionItemProps>
 } = ({ children, ...props }) => {
   return (
-    <AccordionPrimitive.Root {...props}>{children}</AccordionPrimitive.Root>
+    <AccordionPrimitive.Root {...props} className="w-full">
+      {children}
+    </AccordionPrimitive.Root>
   )
 }
 
@@ -47,37 +51,47 @@ const Item: React.FC<AccordionItemProps> = ({
     <AccordionPrimitive.Item
       {...props}
       className={clx(
-        "border-b border-gray-200 last:border-b",
-        "py-5",
+        "border-b border-gray-100 last:border-b-0",
+        "py-4",
         className
       )}
     >
       <AccordionPrimitive.Header className="px-0">
-        <div className="flex flex-col">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Text className="text-brand-black font-semibold text-sm uppercase tracking-wider">
-                {title}
-              </Text>
-            </div>
-            <AccordionPrimitive.Trigger>
-              {customTrigger || <MorphingTrigger />}
-            </AccordionPrimitive.Trigger>
-          </div>
-          {subtitle && (
-            <Text as="span" size="small" className="mt-1 text-gray-500">
-              {subtitle}
-            </Text>
+        <AccordionPrimitive.Trigger
+          className={clx(
+            "flex w-full items-center justify-between text-left transition-all",
+            "[&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0",
+            "[&[data-state=open]>svg]:rotate-180"
           )}
-        </div>
+        >
+          <div className="flex flex-col">
+            <Text className="text-brand-black font-semibold text-sm uppercase tracking-wider">
+              {title}
+            </Text>
+            {subtitle && (
+              <Text as="span" size="small" className="mt-1 text-gray-500">
+                {subtitle}
+              </Text>
+            )}
+          </div>
+          {customTrigger || (
+            <Plus
+              size={16}
+              strokeWidth={2}
+              className="shrink-0 opacity-60 transition-transform duration-200"
+              aria-hidden="true"
+            />
+          )}
+        </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Header>
       <AccordionPrimitive.Content
         forceMount={forceMountContent}
         className={clx(
-          "radix-state-closed:animate-accordion-close radix-state-open:animate-accordion-open radix-state-closed:pointer-events-none px-0 mt-4"
+          "overflow-hidden text-sm transition-all",
+          "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
         )}
       >
-        <div className="text-gray-600 space-y-3 text-sm leading-relaxed">
+        <div className="text-gray-600 space-y-3 text-sm leading-relaxed pt-4">
           {description && <Text>{description}</Text>}
           <div className="w-full">{children}</div>
         </div>
@@ -87,26 +101,5 @@ const Item: React.FC<AccordionItemProps> = ({
 }
 
 Accordion.Item = Item
-
-const MorphingTrigger = () => {
-  return (
-    <div className="text-brand-gold hover:text-brand-black transition-colors relative p-1">
-      <svg
-        className="w-5 h-5 transition-transform duration-300 group-radix-state-open:rotate-180"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m19.5 8.25l-7.5 7.5-7.5-7.5"
-        />
-      </svg>
-    </div>
-  )
-}
 
 export default Accordion

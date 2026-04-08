@@ -10,6 +10,7 @@ import { HttpTypes } from "@medusajs/types"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -217,41 +218,34 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <div className="w-full lg:w-1/2 space-y-6">
             <h3 className="text-xl font-serif text-black mb-6">Preguntas Frecuentes (FAQ)</h3>
             
-            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
-              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
-                ¿El producto es 100% original?
-                <span className="transition group-open:rotate-180">
-                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </summary>
-              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
-                ¡Totalmente! En <strong>Tienda Le Bon Marché</strong> trabajamos directamente con distribuidores oficiales globales. Cada artículo se envía con sus sellos, etiquetas y cajas originales de fábrica para garantizar la máxima calidad y autenticidad.
-              </p>
-            </details>
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-sm font-medium text-black hover:no-underline">
+                  ¿El producto es 100% original?
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500 font-light leading-relaxed">
+                  ¡Totalmente! En <strong>Tienda Le Bon Marché</strong> trabajamos directamente con distribuidores oficiales globales. Cada artículo se envía con sus sellos, etiquetas y cajas originales de fábrica para garantizar la máxima calidad y autenticidad.
+                </AccordionContent>
+              </AccordionItem>
 
-            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
-              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
-                ¿Cuáles son los tiempos de entrega?
-                <span className="transition group-open:rotate-180">
-                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </summary>
-              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
-                Manejamos tiempos rápidos: <strong>24 a 48 horas</strong> para Bucaramanga y su área metropolitana, y de <strong>2 a 5 días hábiles</strong> para el resto del país. Todos nuestros envíos viajan asegurados para tu tranquilidad.
-              </p>
-            </details>
+              <AccordionItem value="item-2">
+                <AccordionTrigger className="text-sm font-medium text-black hover:no-underline">
+                  ¿Cuáles son los tiempos de entrega?
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500 font-light leading-relaxed">
+                  Manejamos tiempos rápidos: <strong>24 a 48 horas</strong> para Bucaramanga y su área metropolitana, y de <strong>2 a 5 días hábiles</strong> para el resto del país. Todos nuestros envíos viajan asegurados para tu tranquilidad.
+                </AccordionContent>
+              </AccordionItem>
 
-            <details className="group border-b border-gray-100 pb-4 cursor-pointer">
-              <summary className="flex justify-between items-center font-medium text-sm text-black list-none">
-                ¿Qué hago si ocurre algún inconveniente?
-                <span className="transition group-open:rotate-180">
-                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </summary>
-              <p className="text-gray-500 text-sm mt-3 leading-relaxed font-light">
-                Estás respaldado. Tienes <strong>garantía de satisfacción</strong>. Si notas algo inusual o necesitas ayuda técnica, nuestro equipo en WhatsApp te acompañará en tiempo real para resolver el caso sin dudarlo.
-              </p>
-            </details>
+              <AccordionItem value="item-3">
+                <AccordionTrigger className="text-sm font-medium text-black hover:no-underline">
+                  ¿Qué hago si ocurre algún inconveniente?
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500 font-light leading-relaxed">
+                  Estás respaldado. Tienes <strong>garantía de satisfacción</strong>. Si notas algo inusual o necesitas ayuda técnica, nuestro equipo en WhatsApp te acompañará en tiempo real para resolver el caso sin dudarlo.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
 
         </div>

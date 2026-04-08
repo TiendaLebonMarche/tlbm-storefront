@@ -5,7 +5,7 @@ import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
-import CustomerReviews from "@modules/home/components/customer-reviews"
+import AnimatedTestimonialsSection from "@modules/home/components/animated-testimonials"
 import NewsletterSection from "@modules/home/components/newsletter-section"
 import CategoriesCarousel from "@modules/home/components/categories-carousel"
 import { listCollections } from "@lib/data/collections"
@@ -49,7 +49,7 @@ export default async function Home(props: {
       </div>
 
       <div className="reveal-up delay-200">
-        <CustomerReviews />
+        <AnimatedTestimonialsSection />
       </div>
 
       <section id="catalogo" className="bg-white reveal-up delay-300">
