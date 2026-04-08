@@ -11,6 +11,7 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
 import { Blog7 } from "@/components/ui/blog7"
+import MostSoldSection from "@modules/home/components/most-sold"
 
 export const metadata: Metadata = {
   title: "Tienda Le Bon Marché | Originales & Exóticos",
@@ -56,6 +57,8 @@ export default async function Home(props: {
       </section>
 
       <CategoriesGrid />
+
+      <MostSoldSection countryCode={countryCode} />
 
 
       <Blog7

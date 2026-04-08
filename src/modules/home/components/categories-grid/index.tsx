@@ -9,7 +9,7 @@ const CATEGORIES = [
   {
     title: "Mundo Tech",
     handle: "/categories/mundo-tech",
-    img: "https://images.unsplash.com/photo-1483050801566-510f8a3010e4?q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200",
     size: "huge", // 2x2
     description: "Innovación de vanguardia para el estilo de vida digital."
   },
@@ -46,7 +46,7 @@ const CATEGORIES = [
   {
     title: "Smartwatch",
     handle: "/categories/smartwatch",
-    img: "https://images.unsplash.com/photo-1544117518-e7963210278a?q=80&w=600",
+    img: "https://images.unsplash.com/photo-1508685096489-7a689bdcd046?q=80&w=600",
     size: "small", // 1x1
   },
   {
@@ -64,7 +64,7 @@ const CATEGORIES = [
   {
     title: "Ofertones",
     handle: "/categories/oferton",
-    img: "https://images.unsplash.com/photo-1620987278429-ca17826ddb85?q=80&w=600",
+    img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=600",
     size: "small", // 1x1
   }
 ]
@@ -135,10 +135,11 @@ export default function CategoriesGrid() {
                     fill
                     sizes={cat.size === "huge" ? "33vw" : "16vw"}
                     className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                    priority={cat.size === "huge"}
                   />
                   
                   {/* Minimalist readability overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
                   {/* Text Content */}
                   <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end text-white">
@@ -147,11 +148,6 @@ export default function CategoriesGrid() {
                     } font-serif font-bold uppercase tracking-tight`}>
                       {cat.title}
                     </h3>
-                    {cat.description && (
-                      <p className="mt-2 text-[10px] text-white/90 line-clamp-1 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                        {cat.description}
-                      </p>
-                    )}
                   </div>
                 </LocalizedClientLink>
               </motion.div>
