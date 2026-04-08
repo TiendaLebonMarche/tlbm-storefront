@@ -6,8 +6,7 @@ import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
 import AnimatedTestimonialsSection from "@modules/home/components/animated-testimonials"
 import NewsletterSection from "@modules/home/components/newsletter-section"
-import CategoriesCarousel from "@modules/home/components/categories-carousel"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import CategoriesGrid from "@modules/home/components/categories-grid"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
@@ -56,24 +55,7 @@ export default async function Home(props: {
         <HeroSection2 />
       </section>
 
-      <section className="bg-white py-20 md:py-32 overflow-hidden reveal-up">
-        <div className="content-container">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 px-4">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block">Navegación</span>
-              <h2 className="text-4xl font-sans font-bold text-brand-brown leading-tight">Explora por Estilo</h2>
-            </div>
-            <LocalizedClientLink
-              href="/store"
-              className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/20 pb-2 hover:text-brand-olive transition-colors whitespace-nowrap"
-            >
-              Ver Catálogo →
-            </LocalizedClientLink>
-          </div>
-
-          <CategoriesCarousel />
-        </div>
-      </section>
+      <CategoriesGrid />
 
 
       <Blog7
