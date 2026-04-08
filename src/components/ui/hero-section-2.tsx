@@ -69,12 +69,12 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
       <motion.section
         ref={ref}
         className={cn(
-          "relative flex w-full flex-col overflow-hidden bg-background text-foreground md:flex-row",
+          "relative flex w-full flex-col overflow-hidden md:flex-row",
           className
         )}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, margin: "100px" }}
         variants={containerVariants}
         {...(props as any)}
       >
@@ -137,7 +137,7 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
           }}
           initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
           whileInView={{ clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0% 100%)' }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 1.2, ease: "circOut" as any }}
         >
         </motion.div>
