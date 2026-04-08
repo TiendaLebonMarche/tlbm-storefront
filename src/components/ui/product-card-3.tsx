@@ -8,7 +8,7 @@ import {
 import { Button } from "./button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { motion } from "framer-motion"
+import { motion, useMotionValue } from "framer-motion"
 
 export interface ProductItem {
   id: string
@@ -32,6 +32,7 @@ export const ProductMostSold = ({
 }: ProductMostSoldProps) => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [windowWidth, setWindowWidth] = React.useState(0)
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -41,28 +42,33 @@ export const ProductMostSold = ({
   }, [])
 
   const isMobile = windowWidth < 768
-
+  const cardWidth = isMobile ? windowWidth * 0.85 : 380
+  const gap = isMobile ? 16 : 24
+  
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1))
   }
 
   const handleNext = () => {
-    // On desktop we show 3, so max index is items.length - 3
     const max = isMobile ? items.length - 1 : items.length - 3
     setCurrentIndex((prev) => Math.min(max, prev + 1))
   }
 
-  // Animation calculation:
-  // On Mobile: Center the card.
-  // On Desktop: Align with the container on the left.
+  // Drag logic to update index
+  const onDragEnd = (event: any, info: any) => {
+    const threshold = cardWidth / 4
+    if (info.offset.x < -threshold) {
+      handleNext()
+    } else if (info.offset.x > threshold) {
+      handlePrev()
+    }
+  }
+
   const getX = () => {
     if (isMobile) {
-      // 85vw width, centered.
-      return `calc(50% - (85vw / 2) - (${currentIndex} * (85vw + 16px)))`
+      return `calc(50% - (${cardWidth}px / 2) - (${currentIndex} * (${cardWidth}px + ${gap}px)))`
     }
-    // Desktop: 380px width, start at container margin (approx).
-    // But better: Use a simple relative transform from the container start.
-    return `-${currentIndex * (380 + 24)}px`
+    return `-${currentIndex * (cardWidth + gap)}px`
   }
 
   return (
@@ -100,9 +106,13 @@ export const ProductMostSold = ({
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative" ref={containerRef}>
           <motion.div
-            className="flex gap-4 md:gap-6"
+            className="flex gap-4 md:gap-6 cursor-grab active:cursor-grabbing"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }} // Elastic drag centered around its animate position
+            dragElastic={0.2}
+            onDragEnd={onDragEnd}
             animate={{ x: getX() }}
             transition={{
               type: "spring",
