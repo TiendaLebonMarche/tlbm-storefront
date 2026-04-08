@@ -56,31 +56,6 @@ export default async function Home(props: {
         <HeroSection2 />
       </section>
 
-      <section className="w-full bg-brand-soft overflow-hidden py-0 reveal-up">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-center">
-          <div className="relative h-[600px] md:h-[800px] overflow-hidden group">
-            <Image
-              src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1600"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
-              alt="Colección Assouline"
-            />
-            <div className="absolute inset-0 bg-brand-brown/10 group-hover:bg-transparent transition-colors duration-1000" />
-          </div>
-          <div className="flex flex-col justify-center items-center text-center p-12 md:p-24 lg:p-32">
-            <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6">Exclusividad Editorial</span>
-            <h2 className="text-4xl md:text-6xl font-sans font-bold text-brand-brown mb-8 leading-tight">Colección <br /> <span className="italic font-light">Assouline</span></h2>
-            <p className="text-sm md:text-base text-brand-gray max-w-sm leading-loose mb-12 font-normal">
-              Libros de mesa que son verdaderas obras de arte. Una selección de destinos icónicos, moda y diseño para elevar tu espacio.
-            </p>
-            <LocalizedClientLink href="/store?q=assouline" className="px-12 py-5 bg-brand-brown text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-olive transition-all duration-500 rounded-sm shadow-xl">
-              Ver Colección Completa
-            </LocalizedClientLink>
-          </div>
-        </div>
-      </section>
-
       <section className="bg-white py-20 md:py-32 overflow-hidden reveal-up">
         <div className="content-container">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 px-4">
