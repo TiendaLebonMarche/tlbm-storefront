@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 import Image from "next/image"
-import FeaturedProducts from "@modules/home/components/featured-products"
+import HeroSection2 from "@modules/home/components/hero-section-2"
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
@@ -53,14 +53,7 @@ export default async function Home(props: {
       </div>
 
       <section id="catalogo" className="bg-white reveal-up delay-300">
-        <div className="py-16 md:py-20 content-container">
-          <div className="text-center mb-16 px-4">
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block">Curaduría</span>
-            <h2 className="text-4xl md:text-5xl font-sans font-bold text-brand-brown mb-3">Piezas de Deseo</h2>
-            <div className="w-16 h-[1px] bg-brand-brown/20 mx-auto mt-6" />
-          </div>
-          <FeaturedProducts collections={collections} region={region} />
-        </div>
+        <HeroSection2 />
       </section>
 
       <section className="w-full bg-brand-soft overflow-hidden py-0 reveal-up">
