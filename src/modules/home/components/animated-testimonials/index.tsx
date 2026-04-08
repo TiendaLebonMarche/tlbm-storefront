@@ -18,7 +18,7 @@ export interface Testimonial {
 
 export interface AnimatedTestimonialsProps {
   title?: string
-  subtitle?: string
+  subtitle?: React.ReactNode
   badgeText?: string
   testimonials?: Testimonial[]
   autoRotateInterval?: number
@@ -103,8 +103,8 @@ export function AnimatedTestimonials({
           <motion.div variants={itemVariants} className="flex flex-col justify-center">
             <div className="space-y-6">
               {badgeText && (
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary">
-                  <Star className="mr-1 h-3.5 w-3.5 fill-primary" />
+                <div className="flex items-center gap-2 text-sm font-medium text-brand-brown">
+                  <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                   <span>{badgeText}</span>
                 </div>
               )}
@@ -202,6 +202,13 @@ export function AnimatedTestimonials({
 export default function AnimatedTestimonialsSection() {
   return (
     <AnimatedTestimonials
+      badgeText="Nuestros clientes felices"
+      title="Amamos nuestros clientes"
+      subtitle={
+        <>
+          <span className="font-bold italic">Para Le Bon Marché</span>, nuestros clientes son lo mas importante, cada dia mejorando nuestros procesos y servicios.
+        </>
+      }
       testimonials={[
         {
           id: 1,
@@ -231,7 +238,7 @@ export default function AnimatedTestimonialsSection() {
           avatar: "https://randomuser.me/api/portraits/men/46.jpg",
         },
       ]}
-      trustedCompanies={["Google", "Microsoft", "Airbnb", "Spotify", "Netflix"]}
+
     />
   );
 }
