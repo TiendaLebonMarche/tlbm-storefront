@@ -1,244 +1,147 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
-import { Quote, Star } from "lucide-react"
-import { motion, useAnimation, useInView } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect } from "react"
+import Image from "next/image"
 
-export interface Testimonial {
-  id: number
-  name: string
-  role: string
-  company: string
-  content: string
-  rating: number
-  avatar: string
-}
-
-export interface AnimatedTestimonialsProps {
-  title?: string
-  subtitle?: React.ReactNode
-  badgeText?: string
-  testimonials?: Testimonial[]
-  autoRotateInterval?: number
-  trustedCompanies?: string[]
-  trustedCompaniesTitle?: string
-  className?: string
-}
-
-export function AnimatedTestimonials({
-  title = "Loved by the community",
-  subtitle = "Don't just take our word for it. See what developers and companies have to say about our starter template.",
-  badgeText = "Trusted by developers",
-  testimonials = [],
-  autoRotateInterval = 6000,
-  trustedCompanies = [],
-  trustedCompaniesTitle = "Trusted by developers from companies worldwide",
-  className,
-}: AnimatedTestimonialsProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  // Refs for scroll animations
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
-  const controls = useAnimation()
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: "Claudia Mendoza",
+    location: "Bogotá, Colombia",
+    text: "La calidad de los productos es incomparable. Compré un reloj inteligente y el diseño es tan sofisticado que parece una pieza de joyería. La atención en Bucaramanga fue impecable.",
+    rating: 5,
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600"
+  },
+  {
+    id: 2,
+    name: "Andrés Villamizar",
+    location: "Bucaramanga, Santander",
+    text: "Buscaba algo único para mi oficina y encontré unos gadgets exóticos que no había visto en ninguna otra parte del país. El envío fue rápido y el empaque muy premium.",
+    rating: 5,
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600"
+  },
+  {
+    id: 3,
+    name: "Isabella Santamaría",
+    location: "Medellín, Colombia",
+    text: "Le Bon Marché se ha convertido en mi tienda favorita para regalos. Todo lo que venden tiene ese toque de exclusividad que busco. El proceso de compra es muy sencillo.",
+    rating: 5,
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600"
   }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut" as any,
-      },
-    },
-  }
-
-  // Trigger animations when section comes into view
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible")
-    }
-  }, [isInView, controls])
-
-  // Auto rotate testimonials
-  useEffect(() => {
-    if (autoRotateInterval <= 0 || testimonials.length <= 1) return
-
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length)
-    }, autoRotateInterval)
-
-    return () => clearInterval(interval)
-  }, [autoRotateInterval, testimonials.length])
-
-  if (testimonials.length === 0) {
-    return null
-  }
-
-  return (
-    <section ref={sectionRef} id="testimonials" className={`py-24 overflow-hidden bg-muted/30 ${className || ""}`}>
-      <div className="px-4 md:px-6">
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={containerVariants}
-          className="grid grid-cols-1 gap-16 w-full max-w-6xl mx-auto md:grid-cols-2 lg:gap-24"
-        >
-          {/* Left side: Heading and navigation */}
-          <motion.div variants={itemVariants} className="flex flex-col justify-center">
-            <div className="space-y-6">
-              {badgeText && (
-                <div className="flex items-center gap-2 text-sm font-medium text-brand-brown">
-                  <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                  <span>{badgeText}</span>
-                </div>
-              )}
-
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{title}</h2>
-
-              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed">{subtitle}</p>
-
-              <div className="flex items-center gap-3 pt-4">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveIndex(index)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      activeIndex === index ? "w-10 bg-primary" : "w-2.5 bg-muted-foreground/30"
-                    }`}
-                    aria-label={`View testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right side: Testimonial cards */}
-          <motion.div variants={itemVariants} className="relative h-full md:mr-10 min-h-[300px] md:min-h-[400px]">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                className="absolute inset-0"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{
-                  opacity: activeIndex === index ? 1 : 0,
-                  x: activeIndex === index ? 0 : 100,
-                  scale: activeIndex === index ? 1 : 0.9,
-                }}
-                transition={{ duration: 0.5, ease: "easeInOut" as any }}
-                style={{ zIndex: activeIndex === index ? 10 : 0 }}
-              >
-                <div className="bg-card border shadow-lg rounded-xl p-8 h-full flex flex-col">
-                  <div className="mb-6 flex gap-2">
-                    {Array(testimonial.rating)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-500 text-yellow-500" />
-                      ))}
-                  </div>
-
-                  <div className="relative mb-6 flex-1">
-                    <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/20 rotate-180" />
-                    <p className="relative z-10 text-lg font-medium leading-relaxed">"{testimonial.content}"</p>
-                  </div>
-
-                  <Separator className="my-4" />
-
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12 border">
-                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                      <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="font-semibold text-foreground">{testimonial.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {testimonial.role}, {testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Decorative elements */}
-            <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-xl bg-primary/5"></div>
-            <div className="absolute -top-6 -right-6 h-24 w-24 rounded-xl bg-primary/5"></div>
-          </motion.div>
-        </motion.div>
-
-        {/* Logo cloud */}
-        {trustedCompanies.length > 0 && (
-          <motion.div variants={itemVariants} initial="hidden" animate={controls} className="mt-24 text-center">
-            <h3 className="text-sm font-medium text-muted-foreground mb-8">{trustedCompaniesTitle}</h3>
-            <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
-              {trustedCompanies.map((company) => (
-                <div key={company} className="text-2xl font-semibold text-muted-foreground/50">
-                  {company}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </div>
-    </section>
-  )
-}
+]
 
 export default function AnimatedTestimonialsSection() {
-  return (
-    <AnimatedTestimonials
-      badgeText="Nuestros clientes felices"
-      title="Amamos nuestros clientes"
-      subtitle={
-        <>
-          <span className="font-bold italic">Para Le Bon Marché</span>, nuestros clientes son lo mas importante, cada dia mejorando nuestros procesos y servicios.
-        </>
-      }
-      testimonials={[
-        {
-          id: 1,
-          name: "Alex Johnson",
-          role: "Full Stack Developer",
-          company: "TechFlow",
-          content: "This starter template saved me weeks of setup time. The Supabase integration is flawless, and the UI components are beautiful and easy to customize. Worth every penny!",
-          rating: 5,
-          avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-        },
-        {
-          id: 2,
-          name: "Sarah Miller",
-          role: "Frontend Engineer",
-          company: "DesignHub",
-          content: "I've used many starter templates, but this one stands out for its clean architecture and attention to detail. The TypeScript support is excellent, and the documentation is comprehensive.",
-          rating: 5,
-          avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-        },
-        {
-          id: 3,
-          name: "Michael Chen",
-          role: "Product Manager",
-          company: "InnovateLabs",
-          content: "Our team was able to launch our MVP in record time thanks to this template. The authentication flow and user management features worked right out of the box. Highly recommended!",
-          rating: 5,
-          avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-        },
-      ]}
+  const [active, setActive] = useState(0)
 
-    />
-  );
+  const handleNext = () => setActive((prev) => (prev + 1) % TESTIMONIALS.length)
+  const handlePrev = () => setActive((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
+
+  useEffect(() => {
+    const timer = setInterval(handleNext, 8000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <section className="bg-white py-24 md:py-32 overflow-hidden border-t border-gray-100">
+      <div className="content-container px-6">
+        <div className="text-center mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block"
+          >
+            Experiencias Reales
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-sans font-bold text-brand-brown leading-tight tracking-tighter italic"
+          >
+            Opiniones reales de nuestros clientes
+          </motion.h2>
+        </div>
+
+        <div className="max-w-6xl mx-auto relative px-4">
+          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            {/* Image Section */}
+            <div className="relative w-full md:w-1/2 aspect-square md:aspect-[4/5] lg:aspect-square overflow-hidden rounded-sm shadow-2xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image 
+                    src={TESTIMONIALS[active].img} 
+                    alt={TESTIMONIALS[active].name}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-brand-brown/10 mix-blend-multiply" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Content Section */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center py-8">
+              <Quote className="size-12 text-brand-olive/20 mb-8" />
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="space-y-8"
+                >
+                  <div className="flex gap-1">
+                    {[...Array(TESTIMONIALS[active].rating)].map((_, i) => (
+                      <Star key={i} className="size-4 fill-brand-olive text-brand-olive" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-brand-brown leading-relaxed tracking-tight italic">
+                    "{TESTIMONIALS[active].text}"
+                  </p>
+                  
+                  <div>
+                    <h4 className="text-lg font-bold text-brand-brown uppercase tracking-widest">{TESTIMONIALS[active].name}</h4>
+                    <p className="text-sm text-brand-gray/60 font-medium">{TESTIMONIALS[active].location}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Controls */}
+              <div className="flex gap-4 mt-12">
+                <button 
+                  onClick={handlePrev}
+                  className="size-12 rounded-full border border-brand-brown/10 flex items-center justify-center hover:bg-brand-brown hover:text-white transition-all group"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                <button 
+                  onClick={handleNext}
+                  className="size-12 rounded-full border border-brand-brown/10 flex items-center justify-center hover:bg-brand-brown hover:text-white transition-all group"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 -z-10 pointer-events-none" />
+    </section>
+  )
 }

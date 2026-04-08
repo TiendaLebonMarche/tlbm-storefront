@@ -4,14 +4,13 @@ import * as React from "react"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
 } from "./card"
 import { Button } from "./button"
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { motion } from "framer-motion"
 
 export interface ProductItem {
   id: string
@@ -34,42 +33,22 @@ export const ProductMostSold = ({
   items,
 }: ProductMostSoldProps) => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
-  const itemsToShow = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 3
-  }
-
-  // To solve responsiveness in a simple way for the carousel transform
-  const [windowWidth, setWindowWidth] = React.useState(0)
-
-  React.useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
-  const currentItemsToShow = windowWidth < 640 ? itemsToShow.mobile : windowWidth < 1024 ? itemsToShow.tablet : itemsToShow.desktop
-  
-  const canGoPrev = currentIndex > 0
-  const canGoNext = currentIndex < items.length - currentItemsToShow
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   const handlePrev = () => {
-    if (canGoPrev) {
-      setCurrentIndex((prevIndex) => prevIndex - 1)
-    }
+    setCurrentIndex((prev) => Math.max(0, prev - 1))
   }
 
   const handleNext = () => {
-    if (canGoNext) {
-      setCurrentIndex((prevIndex) => prevIndex + 1)
-    }
+    setCurrentIndex((prev) => Math.min(items.length - 1, prev + 1))
   }
 
+  // Effect to handle scroll into view or manual transition
+  // We'll use a transform approach that centers the active index
+  
   return (
-    <section className="w-full bg-[#f8f8f8] py-20 md:py-32">
-      <div className="content-container px-6">
+    <section className="w-full bg-[#f8f8f8] py-20 md:py-32 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between mb-12 gap-6">
           <div className="text-center md:text-left">
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block">Selección VIP</span>
@@ -85,9 +64,8 @@ export const ProductMostSold = ({
               variant="outline"
               size="icon"
               onClick={handlePrev}
-              disabled={!canGoPrev}
+              disabled={currentIndex === 0}
               className="rounded-full border-brand-brown/10 hover:border-brand-brown/30 bg-white"
-              aria-label="Anterior"
             >
               <ChevronLeft className="h-5 w-5 text-brand-brown" />
             </Button>
@@ -95,43 +73,59 @@ export const ProductMostSold = ({
               variant="outline"
               size="icon"
               onClick={handleNext}
-              disabled={!canGoNext}
+              disabled={currentIndex === items.length - 1}
               className="rounded-full border-brand-brown/10 hover:border-brand-brown/30 bg-white"
-              aria-label="Siguiente"
             >
               <ChevronRight className="h-5 w-5 text-brand-brown" />
             </Button>
           </div>
         </div>
 
-        <div className="relative overflow-hidden">
-          <div
-            className="flex gap-6 transition-transform duration-700 cubic-bezier(0.4, 0, 0.2, 1)"
-            style={{ transform: `translateX(-${currentIndex * (100 / currentItemsToShow)}%)` }}
+        <div className="relative h-full">
+          {/* We use a motion div for smooth, centered transitions */}
+          <motion.div
+            className="flex gap-6 cursor-grab active:cursor-grabbing"
+            animate={{
+               // The logic here: 
+               // We want the item at currentIndex to be at the center.
+               // Mobile: item is ~85% width. Offset is (100% - 85%) / 2 for the first one.
+               // But simpler: use a center-aligned container and transform.
+               x: `calc(50% - (var(--card-width) / 2) - (${currentIndex} * (var(--card-width) + 24px)))`
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30
+            }}
+            style={{
+              // @ts-ignore
+              "--card-width": "min(85vw, 380px)",
+            }}
           >
-            {items.map((item) => (
-              <div
+            {items.map((item, index) => (
+              <motion.div
                 key={item.id}
-                className="flex-shrink-0 w-full group"
-                style={{ flexBasis: `calc((100% / ${currentItemsToShow}) - (24px * ${currentItemsToShow - 1} / ${currentItemsToShow}))` }}
+                className="flex-shrink-0"
+                animate={{
+                  opacity: currentIndex === index ? 1 : 0.4,
+                  scale: currentIndex === index ? 1 : 0.95,
+                }}
+                style={{
+                  width: "var(--card-width)"
+                }}
               >
-                <Card className="border-0 bg-white shadow-sm group-hover:shadow-xl transition-all duration-500 overflow-hidden h-full flex flex-col">
+                <Card className="border-0 bg-white shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden h-full flex flex-col rounded-none md:rounded-lg">
                   <LocalizedClientLink href={`/products/${item.handle}`} className="block relative aspect-[4/5] overflow-hidden bg-gray-50">
                     <img
                       src={item.imageSrc}
                       alt={item.name}
-                      className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-brand-brown/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-4 left-0 right-0 px-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <Button className="w-full bg-brand-brown text-white hover:bg-brand-olive border-0 rounded-none h-12 text-[10px] font-bold uppercase tracking-[0.2em]">
-                        Ver Detalles
-                      </Button>
-                    </div>
                   </LocalizedClientLink>
                   <CardHeader className="p-6 pb-2">
                     <div className="flex justify-between items-start gap-2 mb-2">
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-olive bg-brand-soft px-2 py-0.5">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-olive bg-brand-soft px-2 py-0.5">
                         {item.category}
                       </span>
                       <span className="text-sm font-black text-brand-brown tracking-tighter">
@@ -139,22 +133,22 @@ export const ProductMostSold = ({
                       </span>
                     </div>
                     <LocalizedClientLink href={`/products/${item.handle}`}>
-                      <h3 className="text-xl font-serif font-bold text-brand-brown leading-tight group-hover:text-brand-olive transition-colors lines-clamp-2">
+                      <h3 className="text-xl md:text-2xl font-serif font-bold text-brand-brown leading-tight">
                         {item.name}
                       </h3>
                     </LocalizedClientLink>
                   </CardHeader>
-                  <CardContent className="p-6 pt-0 mt-auto">
-                    <div className="w-full h-[1px] bg-gray-100 my-4" />
-                    <div className="flex items-center justify-between text-brand-gray/60">
-                      <span className="text-[9px] font-bold uppercase tracking-widest">Original & Exótico</span>
-                      <ShoppingCart className="size-4 opacity-40" />
-                    </div>
-                  </CardContent>
+                  <div className="p-6 pt-2 mt-auto">
+                    <LocalizedClientLink href={`/products/${item.handle}`}>
+                      <Button className="w-full bg-brand-brown text-white hover:bg-brand-olive border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em]">
+                        Comprar Ahora
+                      </Button>
+                    </LocalizedClientLink>
+                  </div>
                 </Card>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
