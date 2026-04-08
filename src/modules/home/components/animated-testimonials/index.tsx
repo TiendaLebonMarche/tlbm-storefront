@@ -1,147 +1,136 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState, useEffect } from "react"
-import Image from "next/image"
+import { motion } from "framer-motion"
+import { Star, Quote } from "lucide-react"
 
 const TESTIMONIALS = [
   {
     id: 1,
     name: "Claudia Mendoza",
     location: "Bogotá, Colombia",
-    text: "La calidad de los productos es incomparable. Compré un reloj inteligente y el diseño es tan sofisticado que parece una pieza de joyería. La atención en Bucaramanga fue impecable.",
-    rating: 5,
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600"
+    text: "La calidad de los productos es incomparable. El diseño es tan sofisticado que parece una pieza de joyería. La atención fue impecable.",
+    size: "large"
   },
   {
     id: 2,
-    name: "Andrés Villamizar",
-    location: "Bucaramanga, Santander",
-    text: "Buscaba algo único para mi oficina y encontré unos gadgets exóticos que no había visto en ninguna otra parte del país. El envío fue rápido y el empaque muy premium.",
-    rating: 5,
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600"
+    name: "Andrés V.",
+    location: "Bucaramanga",
+    text: "Buscaba algo único para mi oficina y encontré gadgets exóticos increíbles. El envío fue rápido y muy premium.",
+    size: "small"
   },
   {
     id: 3,
-    name: "Isabella Santamaría",
-    location: "Medellín, Colombia",
-    text: "Le Bon Marché se ha convertido en mi tienda favorita para regalos. Todo lo que venden tiene ese toque de exclusividad que busco. El proceso de compra es muy sencillo.",
-    rating: 5,
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600"
+    name: "Isabella S.",
+    location: "Medellín",
+    text: "Le Bon Marché se ha convertido en mi tienda favorita para regalos. Todo tiene un toque de exclusividad único.",
+    size: "medium"
+  },
+  {
+    id: 4,
+    name: "Ricardo Ortiz",
+    location: "Cali",
+    text: "Una experiencia de lujo desde la web hasta la entrega. Recomendado 100% para amantes de la tecnología original.",
+    size: "small"
+  },
+  {
+    id: 5,
+    name: "Elena G.",
+    location: "Bucaramanga",
+    text: "Diseño impecable y funcionalidad superior en cada pieza. Una joya nacional.",
+    size: "medium"
   }
 ]
 
-export default function AnimatedTestimonialsSection() {
-  const [active, setActive] = useState(0)
-
-  const handleNext = () => setActive((prev) => (prev + 1) % TESTIMONIALS.length)
-  const handlePrev = () => setActive((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
-
-  useEffect(() => {
-    const timer = setInterval(handleNext, 8000)
-    return () => clearInterval(timer)
-  }, [])
-
+export default function TestimonialsSection() {
   return (
-    <section className="bg-white py-24 md:py-32 overflow-hidden border-t border-gray-100">
+    <section className="bg-white py-24 md:py-40 overflow-hidden relative">
       <div className="content-container px-6">
-        <div className="text-center mb-20">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-4 block"
-          >
-            Experiencias Reales
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-sans font-bold text-brand-brown leading-tight tracking-tighter italic"
-          >
-            Opiniones reales de nuestros clientes
-          </motion.h2>
-        </div>
-
-        <div className="max-w-6xl mx-auto relative px-4">
-          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-            {/* Image Section */}
-            <div className="relative w-full md:w-1/2 aspect-square md:aspect-[4/5] lg:aspect-square overflow-hidden rounded-sm shadow-2xl">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, scale: 1.1 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute inset-0"
-                >
-                  <Image 
-                    src={TESTIMONIALS[active].img} 
-                    alt={TESTIMONIALS[active].name}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-brand-brown/10 mix-blend-multiply" />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Content Section */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center py-8">
-              <Quote className="size-12 text-brand-olive/20 mb-8" />
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="space-y-8"
-                >
-                  <div className="flex gap-1">
-                    {[...Array(TESTIMONIALS[active].rating)].map((_, i) => (
-                      <Star key={i} className="size-4 fill-brand-olive text-brand-olive" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-brand-brown leading-relaxed tracking-tight italic">
-                    "{TESTIMONIALS[active].text}"
-                  </p>
-                  
-                  <div>
-                    <h4 className="text-lg font-bold text-brand-brown uppercase tracking-widest">{TESTIMONIALS[active].name}</h4>
-                    <p className="text-sm text-brand-gray/60 font-medium">{TESTIMONIALS[active].location}</p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Controls */}
-              <div className="flex gap-4 mt-12">
-                <button 
-                  onClick={handlePrev}
-                  className="size-12 rounded-full border border-brand-brown/10 flex items-center justify-center hover:bg-brand-brown hover:text-white transition-all group"
-                >
-                  <ChevronLeft className="size-5" />
-                </button>
-                <button 
-                  onClick={handleNext}
-                  className="size-12 rounded-full border border-brand-brown/10 flex items-center justify-center hover:bg-brand-brown hover:text-white transition-all group"
-                >
-                  <ChevronRight className="size-5" />
-                </button>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Header Info */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="size-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-bold text-brand-brown">
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-olive">+2000 Clientes</span>
               </div>
-            </div>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-bold text-brand-brown leading-[0.9] tracking-tighter italic mb-8">
+                Opiniones reales de nuestros clientes
+              </h2>
+              <p className="max-w-md text-brand-gray/60 leading-relaxed font-medium">
+                La satisfacción de quienes confían en nosotros es el pilar de Le Bon Marché. Descubre por qué somos la referencia en lujo y exclusividad.
+              </p>
+              
+              <div className="mt-12 flex items-center gap-6">
+                <div>
+                  <div className="text-3xl font-bold text-brand-brown">4.9/5</div>
+                  <div className="flex gap-0.5 mt-1">
+                    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="size-3 fill-brand-olive text-brand-olive" />)}
+                  </div>
+                </div>
+                <div className="h-10 w-[1px] bg-gray-100" />
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray/40">CALIFICACIÓN PROMEDIO</div>
+              </div>
+            </motion.div>
           </div>
+
+          {/* Testimonials Bento/Mosaic */}
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {TESTIMONIALS.map((t, idx) => (
+              <motion.div
+                key={t.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={cn(
+                  "p-8 rounded-none border border-gray-50 bg-[#fafafa] flex flex-col justify-between hover:bg-white hover:border-brand-brown/10 hover:shadow-2xl transition-all duration-700",
+                  t.size === "large" ? "md:col-span-2 md:min-h-[280px]" : "md:col-span-1"
+                )}
+              >
+                <Quote className="size-6 text-brand-olive/20 mb-6" />
+                
+                <p className={cn(
+                  "text-brand-brown leading-relaxed mb-8",
+                  t.size === "large" ? "text-xl md:text-2xl font-medium tracking-tight" : "text-sm font-medium"
+                )}>
+                  "{t.text}"
+                </p>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-[11px] font-bold uppercase tracking-widest text-brand-brown">{t.name}</h4>
+                    <p className="text-[9px] text-brand-gray/40 uppercase font-bold tracking-tighter">{t.location}</p>
+                  </div>
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="size-2.5 fill-brand-olive/40 text-brand-olive/40" />)}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </div>
-
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 -z-10 pointer-events-none" />
+      
+      {/* Decorative pattern */}
+       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-100 to-transparent" />
     </section>
   )
+}
+
+function cn(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
 }
