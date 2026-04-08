@@ -87,7 +87,7 @@ export default async function PaginatedProducts({
     const max = maxPrice ? parseFloat(maxPrice) : Infinity
 
     products = products.filter((p) => {
-      const price = p.variants?.[0]?.calculated_price || 0
+      const price = (p.variants?.[0]?.calculated_price as any as number) || 0
       return price >= min && price <= max
     })
   }
