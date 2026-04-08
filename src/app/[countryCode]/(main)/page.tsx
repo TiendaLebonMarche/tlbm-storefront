@@ -153,7 +153,7 @@ export default async function Home(props: {
 
       <div className="w-full bg-white py-20 border-t border-gray-100 overflow-hidden select-none flex items-center justify-center">
         <div className="content-container">
-          <h1 className="text-[12vw] leading-none font-sans font-black tracking-tighter text-center whitespace-nowrap text-brand-brown opacity-[0.03]">
+          <h1 className="text-[12vw] leading-none font-sans font-black tracking-tighter text-center whitespace-nowrap text-gray-200">
             LE BON MARCHÉ
           </h1>
         </div>

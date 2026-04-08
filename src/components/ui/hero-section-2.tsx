@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { cn } from "@/lib/utils";
 import { motion } from 'framer-motion';
@@ -14,7 +16,7 @@ const InfoIcon = ({ type }: { type: 'website' | 'phone' | 'address' }) => {
 };
 
 // Prop types for the HeroSection component
-interface HeroSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+interface HeroSectionProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   logo?: {
     url: string;
     alt: string;
@@ -35,7 +37,7 @@ interface HeroSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(
+const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
   ({ className, logo, slogan, title, subtitle, callToAction, backgroundImage, contactInfo, ...props }, ref) => {
     
     // Animation variants for the container to orchestrate children animations
@@ -58,7 +60,7 @@ const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(
         opacity: 1,
         transition: {
           duration: 0.5,
-          ease: "easeOut",
+          ease: "easeOut" as any,
         },
       },
     };
@@ -74,7 +76,7 @@ const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
-        {...props}
+        {...(props as any)}
       >
         {/* Left Side: Content */}
         <div className="flex w-full flex-col justify-between p-8 md:w-1/2 md:p-12 lg:w-3/5 lg:p-16">
@@ -136,7 +138,7 @@ const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(
           initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
           whileInView={{ clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0% 100%)' }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.2, ease: "circOut" }}
+          transition={{ duration: 1.2, ease: "circOut" as any }}
         >
         </motion.div>
       </motion.section>
