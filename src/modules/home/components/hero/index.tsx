@@ -82,7 +82,7 @@ const Hero = () => {
           className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1"
         >
           <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[340px] xl:max-w-[400px]">
-            <h1 className="text-brand-brown font-sans font-black text-[22px] md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up">
+            <h1 className="text-brand-brown font-sans font-black text-[22px] md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up-hero">
               LA PRIMERA<br />
               TIENDA VIRTUAL<br />
               <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-1 underline decoration-brand-brown/30 decoration-2 underline-offset-4">En Bucaramanga</span>
@@ -93,7 +93,6 @@ const Hero = () => {
           </div>
         </motion.div>
         
-        {/* BLOQUE CENTRAL: FIGURA (En mobile se inserta visualmente aquí en el flujo si es necesario) */}
         {/* BLOQUE CENTRAL: FIGURA SPACER (Solo visible en mobile para el flujo vertical) */}
         <div className="w-full lg:min-h-[1px] order-2 h-[35vh] md:h-[40vh] lg:h-auto" />
 
@@ -102,7 +101,7 @@ const Hero = () => {
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-2 lg:mt-0 order-1 lg:order-3"
         >
-          <div className="max-w-[280px] md:max-w-[360px] lg:pr-4 reveal-right delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
+          <div className="max-w-[280px] md:max-w-[360px] lg:pr-4 reveal-right-hero delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
             <p className="font-sans text-brand-brown text-[15px] md:text-lg lg:text-[13px] leading-tight uppercase tracking-tighter">
               <span className="font-black italic underline decoration-[#A6FF00] decoration-[6px] underline-offset-4">NORMAL,</span> QUE NO AGUANTEN LA PRESIÓN,<br />
               <span className="mt-1 block">MANEJAMOS PRODUCTOS ORIGINALES Y EXÓTICOS.</span>
@@ -162,22 +161,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap');
-        @keyframes revealUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes revealRight {
-          from { opacity: 0; transform: translateX(60px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .reveal-up { opacity: 0; animation: revealUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .reveal-right { opacity: 0; animation: revealRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-100 { animation-delay: 250ms; }
-        .delay-200 { animation-delay: 500ms; }
-        .font-serif { font-family: 'Playfair Display', serif !important; }
-      `}</style>
+
     </section>
   )
 }

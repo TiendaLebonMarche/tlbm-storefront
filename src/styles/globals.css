@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap');
 
 :root {
   --brand-olive: #6A7A66;
@@ -258,3 +257,30 @@
   transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap');
+
+/* === HERO & CUSTOM ANIMATIONS === */
+@keyframes reveal-up-hero {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-right-hero {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.reveal-up-hero { opacity: 0; animation: reveal-up-hero 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.reveal-right-hero { opacity: 0; animation: reveal-right-hero 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.font-serif { font-family: 'Playfair Display', serif !important; }
+
+/* === MARQUEE ANIMATION FIXED === */
+@keyframes marquee-fixed {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee-fixed { 
+  display: inline-flex;
+  animation: marquee-fixed 30s linear infinite; 
+}

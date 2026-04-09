@@ -135,13 +135,19 @@ export const ProductMostSold = ({
               >
                 <Card className="border-0 bg-white shadow-sm hover:shadow-xl transition-all duration-700 overflow-hidden h-full flex flex-col group rounded-none md:rounded-lg">
                   <LocalizedClientLink href={`/products/${item.handle}`} className="block relative aspect-[4/5] overflow-hidden bg-gray-50">
-                    <Image
-                      src={item.imageSrc}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 768px) 85vw, 380px"
-                      className="h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-105"
-                    />
+                    {item.imageSrc ? (
+                      <Image
+                        src={item.imageSrc}
+                        alt={item.name}
+                        fill
+                        sizes="(max-width: 768px) 85vw, 380px"
+                        className="h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-[10px] uppercase font-bold tracking-widest">
+                        Sin imagen
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-brand-brown/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </LocalizedClientLink>
                   <CardHeader className="p-6 pb-2">

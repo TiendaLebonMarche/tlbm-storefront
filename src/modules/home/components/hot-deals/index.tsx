@@ -16,7 +16,7 @@ export default async function HotDeals({
       queryParams: {
         limit: 4,
       },
-    })
+    }).catch(() => ({ response: { products: [] } }))
 
     const products = response?.products || []
 

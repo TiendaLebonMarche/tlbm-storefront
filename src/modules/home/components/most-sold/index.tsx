@@ -8,11 +8,13 @@ export default async function MostSoldSection({ countryCode }: { countryCode: st
 
   if (!region) return null
 
-  // Fetch products
-  const { response: { products } } = await listProducts({
+  // Fetch products safely
+  const data = await listProducts({
     countryCode,
     queryParams: { limit: 50 } // Fetch more to shuffle
-  })
+  }).catch(() => null)
+
+  const products = data?.response?.products
 
   if (!products || products.length === 0) return null
 
