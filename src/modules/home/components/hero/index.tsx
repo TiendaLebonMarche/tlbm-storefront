@@ -42,14 +42,14 @@ const Hero = () => {
   // Parallax de scroll súper fluido
   const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 150])
   
-  // Escala dinámica: +20% en móvil (aprox 0.96) vs 0.8 en desktop
+  // Escala dinámica perfeccionada para CERO solapamiento
   const kawsScale = useTransform(
     scrollY, 
     [0, 800], 
-    [isMobile ? 0.62 : 0.72, isMobile ? 0.52 : 0.62]
+    [isMobile ? 0.38 : 0.48, isMobile ? 0.3 : 0.4]
   ) 
   
-  const kawsRotate = useTransform(scrollY, [0, 800], [0, -4])
+  const kawsRotate = useTransform(scrollY, [0, 800], [0, -3])
   
   // Efecto Blur progresivo al hacer scroll para legibilidad
   const kawsBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(12px)"])
@@ -73,44 +73,36 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* 1. SECCIÓN DE CONTENIDO (TEXTOS INDEPENDIENTES) */}
-      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-44 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-y-12 pointer-events-none select-none">
+      {/* 1. SECCIÓN DE CONTENIDO (GRID DE 3 COLUMNAS PARA EVITAR SOLAPE) */}
+      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-3 items-center lg:items-start pointer-events-none select-none gap-y-8 lg:gap-x-12">
         
-        {/* BLOQUE IZQUIERDA: Editorial (Now main heading) */}
+        {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-12 lg:max-w-xl"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full"
         >
-          <div className="max-w-[700px]">
-            <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-up drop-shadow-[0_2px_10px_rgba(242,242,225,0.8)]">
+          <div className="max-w-[260px] md:max-w-[500px] lg:w-full">
+            <h1 className="text-brand-brown font-sans font-black text-xl md:text-3xl lg:text-[2.2rem] leading-[1] tracking-tighter uppercase reveal-up">
               LA PRIMERA<br />
-              TIENDA VIRTUAL EN<br />
-              BUCARAMANGA, DONDE<br />
-              MILES DE BOTS BUSCAN<br />
-              LO MÁS TOP PARA TI ❤️
+              TIENDA VIRTUAL<br />
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.6rem] block lg:my-1">en Bucaramanga</span><br />
+              <span className="text-[0.85em] md:text-[0.9em]">CON UN EJERCITO DE BOTS,</span><br />
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.6rem] block lg:my-1">buscando los mejores productos</span><br />
+              PARA TI ❤️
             </h1>
           </div>
-          
-          {/* Oculto en Responsive: R Selección IA */}
-          <div className="hidden lg:flex flex-col gap-4 reveal-up delay-100">
-             <div className="w-14 h-14 rounded-full border border-brand-brown/10 flex items-center justify-center text-[10px] font-bold text-brand-brown/30 mb-1">
-               R
-             </div>
-             <div className="max-w-[220px]">
-               <p className="font-sans font-bold text-[12px] text-brand-brown/50 uppercase tracking-widest leading-relaxed">
-                 R Los elegidos de la IA /<br />Inteligencia que la rompe.
-               </p>
-             </div>
-          </div>
         </motion.div>
+        
+        {/* BLOQUE CENTRAL: Espacio reservado para la figura (Oculto en stack mobile) */}
+        <div className="hidden lg:block w-full h-[1px]" />
 
         {/* BLOQUE DERECHA: Descripción Disruptiva */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-end lg:text-right -mt-4 lg:mt-0"
+          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[280px] mt-2 lg:mt-0"
         >
-          <div className="mt-8 lg:mt-12 max-w-[500px] reveal-right delay-200">
-            <p className="font-sans text-brand-brown text-sm md:text-base lg:text-lg leading-relaxed uppercase tracking-tighter">
+          <div className="lg:mt-12 max-w-[240px] md:max-w-[280px] reveal-right delay-200">
+            <p className="font-sans text-brand-brown text-[10px] md:text-sm lg:text-sm leading-relaxed uppercase tracking-tighter">
               <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, el <span className="font-black italic text-brand-brown">bro se desmaye!</span>
             </p>
           </div>
@@ -118,33 +110,26 @@ const Hero = () => {
       </div>
 
       {/* 2. ELEMENTO CENTRAL: KAWS COMPANION (DINÁMICO) */}
-      <div className="absolute inset-0 flex items-end justify-center lg:justify-end z-10 pointer-events-none">
+      <div className="absolute inset-0 flex items-end justify-center z-10 pointer-events-none">
         <motion.div
            style={{
              x: xSpring,
              y: ySpring,
-             translateY: kawsTranslateY,
+             translateY: useTransform(scrollY, [0, 800], [isMobile ? 120 : 80, 200]),
              scale: kawsScale,
              rotate: kawsRotate,
              filter: kawsBlur,
            }}
-           className="relative h-[80%] md:h-[85%] lg:h-[90%] w-full max-w-[120rem] flex items-end justify-center lg:justify-end"
+           className="relative h-full w-full max-w-[140rem] flex items-end justify-center z-10"
         >
-          <div className="relative w-full lg:w-2/5 h-full flex flex-col items-center justify-end lg:items-end lg:pr-32">
-            {/* Sombra de contacto en el "suelo" - Refinada y Premium */}
-            <motion.div 
-              style={{ scaleX: useTransform(scrollY, [0, 500], [1, 1.5]), opacity: useTransform(scrollY, [0, 500], [0.1, 0.02]) }}
-              className="absolute bottom-[5px] w-2/3 h-12 bg-black/30 blur-3xl rounded-[100%] z-0 left-1/2 -translate-x-1/2 lg:left-auto lg:right-32 lg:translate-x-0"
-            />
-            
-            <div className="relative w-full h-full flex items-end justify-center lg:justify-end overflow-visible">
+          <div className="relative w-full lg:w-3/4 h-full flex flex-col items-center justify-end">
+            <div className="relative w-full h-full flex items-end justify-center overflow-visible">
               <Image
-                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775750283/upscalemedia-transformed_3_mbu5oc.png" 
+                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png" 
                 alt="KAWS Companion Premium"
-                width={1200}
-                height={1200}
-                className="object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.08)] opacity-100 transition-all duration-300 contrast-[1.02] brightness-[1.05]"
-                style={{ maskImage: 'linear-gradient(to bottom, black 94%, transparent 100%)' }}
+                width={1600}
+                height={1600}
+                className="object-contain object-bottom opacity-100 transition-all duration-300 contrast-[1.3] brightness-[1.1] saturate-[1.3]"
                 priority
                 quality={100}
               />
@@ -153,30 +138,30 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Degradado sutil de profundidad en la base - Muy suave */}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/[0.03] to-transparent z-[11] pointer-events-none" />
+      {/* Degradado removed as per user instruction "NO debe llevar sombras" */}
 
-      {/* 3. METADATA EN LA BASE */}
-      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pb-12 flex flex-col md:flex-row justify-between items-end gap-6 text-brand-brown/40 select-none">
-        <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Tienda —</span>
-          <span className="font-sans font-bold text-xs md:text-sm">LE BON MARCHÉ</span>
+      {/* 3. METADATA EN LA BASE - Reposicionada para evitar solapamiento */}
+      <div className="absolute bottom-6 left-0 z-30 w-full px-6 md:px-16 lg:px-24 flex flex-wrap justify-center md:justify-between items-end gap-x-8 gap-y-2 text-brand-brown/40 select-none pointer-events-none">
+        <div className="flex flex-col items-center md:items-start group">
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Tienda —</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px]">LE BON MARCHÉ</span>
         </div>
-        <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Slogan —</span>
-          <span className="font-sans font-bold text-xs md:text-sm uppercase">Productos Exoticos & Originales.</span>
+        <div className="flex flex-col items-center md:items-start group">
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Slogan —</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">Productos Exoticos.</span>
         </div>
-        <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">Ubicacion —</span>
-          <span className="font-sans font-bold text-xs md:text-sm uppercase">BUCARAMANGA, SANTANDER</span>
+        <div className="flex flex-col items-center md:items-start group">
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Ubicacion —</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">BUCARAMANGA</span>
         </div>
-        <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-1">By —</span>
-          <span className="font-sans font-bold text-xs md:text-sm uppercase">TIENDA LE BON MARCHÉ</span>
+        <div className="flex flex-col items-center md:items-start group">
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">By —</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">TLBM®</span>
         </div>
       </div>
 
       <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap');
         @keyframes revealUp {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
@@ -189,6 +174,7 @@ const Hero = () => {
         .reveal-right { opacity: 0; animation: revealRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-100 { animation-delay: 250ms; }
         .delay-200 { animation-delay: 500ms; }
+        .font-serif { font-family: 'Playfair Display', serif !important; }
       `}</style>
     </section>
   )
