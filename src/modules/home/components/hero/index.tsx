@@ -76,29 +76,28 @@ const Hero = () => {
       {/* 1. SECCIÓN DE CONTENIDO (DISTRIBUCIÓN ADAPTATIVA) */}
       <div className="relative z-30 w-full px-4 md:px-12 lg:px-14 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-[1.1fr_2.5fr_1.1fr] items-center lg:items-start pointer-events-none select-none gap-y-4 lg:gap-x-0">
         
-        {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1 mt-6 lg:mt-0"
         >
-          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[360px] xl:max-w-[420px]">
-            <h1 className="text-brand-brown font-sans font-medium text-[16px] md:text-xl lg:text-[1.3rem] xl:text-[1.5rem] leading-[1.3] tracking-tight uppercase reveal-up-hero">
-              La primera <span className="font-serif italic font-black normal-case text-[1.25em] lg:text-[1.4em] text-brand-brown inline-block">Tienda Virtual</span><br />
-              <span className="block mt-1 md:mt-2">En <span className="font-serif italic font-black normal-case text-[1.25em] lg:text-[1.4em] text-brand-brown underline decoration-brand-brown/20 underline-offset-4">Bucaramanga</span></span>
+          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[480px] xl:max-w-[550px]">
+            <h1 className="text-brand-brown font-sans font-medium text-[16px] md:text-xl lg:text-xl xl:text-2xl leading-[1.3] tracking-tight uppercase reveal-up-hero">
+              La primera <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown inline-block">Tienda Virtual</span><br />
+              <span className="block mt-1 md:mt-2">En <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown underline decoration-brand-brown/20 underline-offset-4">Bucaramanga</span></span>
               <span className="text-[0.7em] md:text-[0.75em] block mt-6 opacity-70 font-bold tracking-[0.2em]">Con un ejército de bots,</span>
-              <span className="block mt-1">Buscando los <span className="font-serif italic font-black normal-case text-[1.15em] lg:text-[1.25em] text-brand-brown">Mejores Productos</span></span>
+              <span className="block mt-1">Buscando los <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown">Mejores Productos</span></span>
               <span className="block mt-4 md:mt-6 font-black text-2xl md:text-3xl lg:text-4xl tracking-tighter">PARA TI ❤️</span>
             </h1>
           </div>
         </motion.div>
         
         {/* BLOQUE CENTRAL: FIGURA SPACER (Solo visible en mobile para el flujo vertical) */}
-        <div className="w-full lg:min-h-[1px] order-2 h-[35vh] md:h-[40vh] lg:h-auto" />
+        <div className="w-full lg:min-h-[1px] order-2 h-[20vh] md:h-[25vh] lg:h-auto" />
 
-        {/* BLOQUE DERECHA: Slogans Progresivos */}
+        {/* BLOQUE DERECHA: Slogans (Top in mobile, Right in desktop) */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-2 lg:mt-0 order-1 lg:order-3"
+          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-0 lg:mt-0 order-1 lg:order-3"
         >
           <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[500px] lg:pr-4 reveal-right-hero delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
             <p className="font-sans text-brand-brown text-[14px] md:text-lg lg:text-xl xl:text-2xl leading-[1.1] uppercase tracking-tighter text-center lg:text-right">
@@ -116,7 +115,7 @@ const Hero = () => {
            style={{
              x: xSpring,
              y: ySpring,
-             translateY: useTransform(scrollY, [0, 800], [isMobile ? 140 : 100, 240]),
+             translateY: useTransform(scrollY, [0, 800], [isMobile ? 40 : 100, 240]),
              scale: kawsScale,
              rotate: kawsRotate,
              filter: kawsBlur,
