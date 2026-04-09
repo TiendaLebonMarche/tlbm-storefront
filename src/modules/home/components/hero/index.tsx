@@ -46,7 +46,7 @@ const Hero = () => {
   const kawsScale = useTransform(
     scrollY, 
     [0, 800], 
-    [isMobile ? 1.12 : 0.92, isMobile ? 1.0 : 0.82]
+    [isMobile ? 0.62 : 0.72, isMobile ? 0.52 : 0.62]
   ) 
   
   const kawsRotate = useTransform(scrollY, [0, 800], [0, -4])
@@ -82,7 +82,7 @@ const Hero = () => {
           className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-12 lg:max-w-xl"
         >
           <div className="max-w-[700px]">
-            <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-up">
+            <h1 className="text-brand-brown font-sans font-black text-3xl md:text-5xl lg:text-[2.8rem] leading-[0.85] tracking-tighter uppercase reveal-up drop-shadow-[0_2px_10px_rgba(242,242,225,0.8)]">
               LA PRIMERA<br />
               TIENDA VIRTUAL EN<br />
               BUCARAMANGA, DONDE<br />
@@ -118,7 +118,7 @@ const Hero = () => {
       </div>
 
       {/* 2. ELEMENTO CENTRAL: KAWS COMPANION (DINÁMICO) */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none pt-28 lg:pt-24 pb-12">
+      <div className="absolute inset-0 flex items-end justify-center lg:justify-end z-10 pointer-events-none">
         <motion.div
            style={{
              x: xSpring,
@@ -128,21 +128,33 @@ const Hero = () => {
              rotate: kawsRotate,
              filter: kawsBlur,
            }}
-           className="relative h-[90%] w-full max-w-4xl flex items-center justify-center"
+           className="relative h-[80%] md:h-[85%] lg:h-[90%] w-full max-w-[120rem] flex items-end justify-center lg:justify-end"
         >
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775593561/upscalemedia-transformed_2_mckxtd.png" 
-              alt="KAWS Companion Premium"
-              width={1200}
-              height={1200}
-              className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.15)]"
-              priority
-              quality={90}
+          <div className="relative w-full lg:w-2/5 h-full flex flex-col items-center justify-end lg:items-end lg:pr-32">
+            {/* Sombra de contacto en el "suelo" - Refinada y Premium */}
+            <motion.div 
+              style={{ scaleX: useTransform(scrollY, [0, 500], [1, 1.5]), opacity: useTransform(scrollY, [0, 500], [0.1, 0.02]) }}
+              className="absolute bottom-[5px] w-2/3 h-12 bg-black/30 blur-3xl rounded-[100%] z-0 left-1/2 -translate-x-1/2 lg:left-auto lg:right-32 lg:translate-x-0"
             />
+            
+            <div className="relative w-full h-full flex items-end justify-center lg:justify-end overflow-visible">
+              <Image
+                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775750283/upscalemedia-transformed_3_mbu5oc.png" 
+                alt="KAWS Companion Premium"
+                width={1200}
+                height={1200}
+                className="object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.08)] opacity-100 transition-all duration-300 contrast-[1.02] brightness-[1.05]"
+                style={{ maskImage: 'linear-gradient(to bottom, black 94%, transparent 100%)' }}
+                priority
+                quality={100}
+              />
+            </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Degradado sutil de profundidad en la base - Muy suave */}
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/[0.03] to-transparent z-[11] pointer-events-none" />
 
       {/* 3. METADATA EN LA BASE */}
       <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pb-12 flex flex-col md:flex-row justify-between items-end gap-6 text-brand-brown/40 select-none">
