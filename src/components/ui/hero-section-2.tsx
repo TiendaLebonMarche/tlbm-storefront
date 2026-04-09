@@ -4,6 +4,7 @@ import React from 'react';
 import { cn } from "@/lib/utils";
 import { motion } from 'framer-motion';
 import { Globe, Phone, MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 // Icon component for contact details
 const InfoIcon = ({ type }: { type: 'website' | 'phone' | 'address' }) => {
@@ -85,7 +86,11 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
                 <motion.header className="mb-12" variants={itemVariants}>
                     {logo && (
                         <div className="flex items-center">
-                            {logo.url && <img src={logo.url} alt={logo.alt} className="mr-3 h-8" />}
+                            {logo.url && (
+                                <div className="relative mr-3 h-8 w-8">
+                                    <Image src={logo.url} alt={logo.alt} fill className="object-contain" />
+                                </div>
+                            )}
                             <div>
                                 {logo.text && <p className="text-lg font-bold text-brand-brown uppercase">{logo.text}</p>}
                                 {slogan && <p className="text-[10px] tracking-[0.4em] text-brand-olive uppercase font-bold mt-1">{slogan}</p>}

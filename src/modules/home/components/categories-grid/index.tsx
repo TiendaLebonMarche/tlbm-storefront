@@ -15,7 +15,7 @@ const CATEGORIES = [
   },
   {
     title: "Audio & Sonido",
-    handle: "/categories/audio-&-sonido",
+    handle: "/categories/audio-sonido",
     img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800",
     size: "wide", // 2x1
   },
@@ -33,7 +33,7 @@ const CATEGORIES = [
   },
   {
     title: "Gamer & Oficina",
-    handle: "/categories/gamer-&-oficina",
+    handle: "/categories/gamer-oficina",
     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800",
     size: "wide", // 2x1
   },

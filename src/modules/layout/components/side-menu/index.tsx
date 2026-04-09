@@ -104,20 +104,20 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                     className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-10"
                   >
                     <div className="flex justify-between items-center mb-12">
-                      <span className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-50">Navegación</span>
-                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="p-2 hover:opacity-50 transition-opacity" title="Cerrar menú">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" strokeWidth="1.5"/>
+                      <span className="text-[10px] font-bold tracking-[0.4em] uppercase opacity-40">Explorar — Navegación</span>
+                      <button data-testid="close-menu-button" onClick={closeSideMenu} className="p-2 hover:rotate-90 transition-transform duration-500" title="Cerrar menú">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                         </svg>
                       </button>
                     </div>
 
-                    <ul className="flex flex-col gap-1 items-start justify-start flex-1 w-full">
-                      {mainMenu.map(({ name, href }) => (
-                        <li key={name} className="w-full group">
+                    <ul className="flex flex-col gap-2 items-start justify-start flex-1 w-full translate-y-4">
+                      {mainMenu.map(({ name, href }, index) => (
+                        <li key={name} className="w-full group overflow-hidden">
                           <LocalizedClientLink
                             href={href}
-                            className="block w-full text-lg md:text-xl font-medium py-4 border-b border-gray-50 text-brand-brown group-hover:pl-2 transition-all duration-300"
+                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-brown transform transition-all duration-700 delay-[${index * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
                             onClick={() => { close(); closeSideMenu(); }}
                           >
                             {name}

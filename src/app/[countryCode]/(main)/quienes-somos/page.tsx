@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import Image from "next/image"
 import { getBaseURL } from "@lib/util/env"
 
 export const metadata: Metadata = {
@@ -30,7 +31,13 @@ export default function AboutUsPage() {
         {/* Story Block 1 - Image Left, Text Right */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32">
           <div className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden">
-             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Editorial Story" className="absolute inset-0 w-full h-full object-cover" />
+             <Image 
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" 
+                alt="Editorial Story" 
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="absolute inset-0 w-full h-full object-cover" 
+             />
           </div>
           <div className="space-y-6 text-center md:text-left">
             <h2 className="text-3xl font-serif italic text-black">Bucaramanga para el mundo</h2>
@@ -47,7 +54,7 @@ export default function AboutUsPage() {
         {/* Highlight Phrase - Centered */}
         <div className="py-24 border-y border-black/10 my-32 text-center max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-light text-black italic leading-[1.2]">
-            "Mil cerebros buscando lo extraordinario para usted."
+            &quot;Mil cerebros buscando lo extraordinario para usted.&quot;
           </h2>
         </div>
 
@@ -64,7 +71,13 @@ export default function AboutUsPage() {
             </p>
           </div>
           <div className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden md:order-2 order-1">
-             <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop" alt="Curation Team" className="absolute inset-0 w-full h-full object-cover" />
+             <Image 
+                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop" 
+                alt="Curation Team" 
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="absolute inset-0 w-full h-full object-cover" 
+             />
           </div>
         </div>
 

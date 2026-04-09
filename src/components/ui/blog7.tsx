@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import LocalizedClientLink from "@modules/common/components/localized-client-link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface Post {
   id: string;
@@ -77,11 +78,15 @@ const Blog7 = ({
                 {/* Image */}
                 <div className="aspect-[16/9] w-full overflow-hidden">
                   <LocalizedClientLink href={post.url} className="block w-full h-full">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
                   </LocalizedClientLink>
                 </div>
 

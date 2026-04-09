@@ -42,11 +42,11 @@ const Hero = () => {
   // Parallax de scroll súper fluido
   const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 150])
   
-  // Escala HEROICA perfeccionada (Máximo tamaño permitido sin colisión)
+  // Escala HEROICA perfeccionada (Ajuste para mobile grande)
   const kawsScale = useTransform(
     scrollY, 
     [0, 800], 
-    [isMobile ? 0.46 : 0.74, isMobile ? 0.38 : 0.62]
+    [isMobile ? 0.58 : 0.74, isMobile ? 0.45 : 0.62]
   ) 
   
   const kawsRotate = useTransform(scrollY, [0, 800], [0, -3])
@@ -73,37 +73,39 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* 1. SECCIÓN DE CONTENIDO (GRID ULTRA-REFORZADO DE 3 COLUMNAS) */}
-      <div className="relative z-30 w-full px-4 md:px-12 lg:px-14 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-[1.1fr_2.5fr_1.1fr] items-center lg:items-start pointer-events-none select-none gap-y-8 lg:gap-x-0">
+      {/* 1. SECCIÓN DE CONTENIDO (DISTRIBUCIÓN ADAPTATIVA) */}
+      <div className="relative z-30 w-full px-4 md:px-12 lg:px-14 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-[1.1fr_2.5fr_1.1fr] items-center lg:items-start pointer-events-none select-none gap-y-4 lg:gap-x-0">
         
         {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1"
         >
-          <div className="max-w-[260px] md:max-w-[450px] lg:max-w-[340px] xl:max-w-[400px]">
-            <h1 className="text-brand-brown font-sans font-black text-xl md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up">
+          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[340px] xl:max-w-[400px]">
+            <h1 className="text-brand-brown font-sans font-black text-[22px] md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up">
               LA PRIMERA<br />
               TIENDA VIRTUAL<br />
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-0.5">en Bucaramanga</span><br />
-              <span className="text-[0.85em] md:text-[0.9em]">CON UN EJERCITO DE BOTS,</span><br />
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-0.5">buscando los mejores productos</span><br />
-              PARA TI ❤️
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-1 underline decoration-brand-brown/30 decoration-2 underline-offset-4">En Bucaramanga</span>
+              <span className="text-[0.75em] md:text-[0.8em] block mt-2">CON UN EJERCITO DE BOTS,</span>
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block mt-1">BUSCANDO LOS MEJORES <span className="underline decoration-brand-brown/30 decoration-2 underline-offset-4">PRODUCTOS</span></span>
+              <span className="block mt-2 font-black">PARA TI ❤️</span>
             </h1>
           </div>
         </motion.div>
         
-        {/* BLOQUE CENTRAL: Espacio reservado para la figura (Oculto en stack mobile) */}
-        <div className="hidden lg:block w-full h-[1px]" />
+        {/* BLOQUE CENTRAL: FIGURA (En mobile se inserta visualmente aquí en el flujo si es necesario) */}
+        {/* BLOQUE CENTRAL: FIGURA SPACER (Solo visible en mobile para el flujo vertical) */}
+        <div className="w-full lg:min-h-[1px] order-2 h-[35vh] md:h-[40vh] lg:h-auto" />
 
-        {/* BLOQUE DERECHA: Descripción Disruptiva */}
+        {/* BLOQUE DERECHA: Slogans Progresivos */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[300px] mt-2 lg:mt-0"
+          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-2 lg:mt-0 order-1 lg:order-3"
         >
-          <div className="lg:mt-12 max-w-[240px] md:max-w-[280px] lg:pr-4 reveal-right delay-200">
-            <p className="font-sans text-brand-brown text-[10px] md:text-sm lg:text-[12px] leading-relaxed uppercase tracking-tighter">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, el <span className="font-black italic text-brand-brown">bro se desmaye!</span>
+          <div className="max-w-[280px] md:max-w-[360px] lg:pr-4 reveal-right delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
+            <p className="font-sans text-brand-brown text-[15px] md:text-lg lg:text-[13px] leading-tight uppercase tracking-tighter">
+              <span className="font-black italic underline decoration-[#A6FF00] decoration-[6px] underline-offset-4">NORMAL,</span> QUE NO AGUANTEN LA PRESIÓN,<br />
+              <span className="mt-1 block">MANEJAMOS PRODUCTOS ORIGINALES Y EXÓTICOS.</span>
             </p>
           </div>
         </motion.div>
@@ -143,20 +145,20 @@ const Hero = () => {
       {/* 3. METADATA EN LA BASE - Reposicionada para evitar solapamiento */}
       <div className="absolute bottom-6 left-0 z-30 w-full px-6 md:px-16 lg:px-24 flex flex-wrap justify-center md:justify-between items-end gap-x-8 gap-y-2 text-brand-brown/40 select-none pointer-events-none">
         <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Tienda —</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px]">LE BON MARCHÉ</span>
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap">Tienda ---</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] whitespace-nowrap">LE BON MARCHÉ</span>
         </div>
         <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Slogan —</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">Productos Exoticos.</span>
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">SLOGAN ---</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">PRODUCTOS ORIGINALES Y EXÓTICOS</span>
         </div>
         <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">Ubicacion —</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">BUCARAMANGA</span>
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">UBICACION ---</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">BUCARAMANGA</span>
         </div>
         <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity">By —</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase">TLBM®</span>
+          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">BY ---</span>
+          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">TLBM®</span>
         </div>
       </div>
 

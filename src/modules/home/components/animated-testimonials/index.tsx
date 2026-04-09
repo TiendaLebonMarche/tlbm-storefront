@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Star, Quote } from "lucide-react"
+import { cn } from "@lib/utils"
 
 const TESTIMONIALS = [
   {
@@ -106,7 +106,7 @@ export default function TestimonialsSection() {
                   "text-brand-brown leading-relaxed mb-8",
                   t.size === "large" ? "text-xl md:text-2xl font-medium tracking-tight" : "text-sm font-medium"
                 )}>
-                  "{t.text}"
+                  &quot;{t.text}&quot;
                 </p>
                 
                 <div className="flex items-center justify-between">
@@ -131,6 +131,4 @@ export default function TestimonialsSection() {
   )
 }
 
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+
