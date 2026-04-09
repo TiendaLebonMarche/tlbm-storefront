@@ -5,7 +5,6 @@ import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
 import AnimatedTestimonialsSection from "@modules/home/components/animated-testimonials"
-import NewsletterSection from "@modules/home/components/newsletter-section"
 import CategoriesGrid from "@modules/home/components/categories-grid"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
@@ -79,10 +78,8 @@ export default async function Home(props: {
         }))}
       />
 
-      <NewsletterSection />
-
-      <div className="w-full bg-white py-20 border-t border-gray-100 overflow-hidden select-none">
-        <h1 className="text-[12vw] leading-none font-sans font-black tracking-tighter text-center w-full text-gray-200">
+      <div className="w-full bg-white pt-24 pb-12 border-t border-gray-100 overflow-hidden select-none reveal-up">
+        <h1 className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap">
           LEBONMARCHÉ
         </h1>
       </div>
