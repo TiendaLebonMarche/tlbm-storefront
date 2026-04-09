@@ -11,6 +11,7 @@ import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
 import { Blog7 } from "@/components/ui/blog7"
 import MostSoldSection from "@modules/home/components/most-sold"
+import BrandStatement from "@modules/home/components/brand-statement"
 
 export const metadata: Metadata = {
   title: "Tienda Le Bon Marché | Originales & Exóticos",
@@ -51,7 +52,11 @@ export default async function Home(props: {
         <AnimatedTestimonialsSection />
       </div>
 
-      <section id="catalogo" className="bg-white reveal-up delay-300">
+      <div className="reveal-up delay-300">
+        <BrandStatement />
+      </div>
+
+      <section id="catalogo" className="bg-white reveal-up delay-500">
         <HeroSection2 />
       </section>
 
