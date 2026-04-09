@@ -42,11 +42,11 @@ const Hero = () => {
   // Parallax de scroll súper fluido
   const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 150])
   
-  // Escala dinámica perfeccionada para CERO solapamiento
+  // Escala HEROICA perfeccionada (Máximo tamaño permitido sin colisión)
   const kawsScale = useTransform(
     scrollY, 
     [0, 800], 
-    [isMobile ? 0.38 : 0.48, isMobile ? 0.3 : 0.4]
+    [isMobile ? 0.46 : 0.74, isMobile ? 0.38 : 0.62]
   ) 
   
   const kawsRotate = useTransform(scrollY, [0, 800], [0, -3])
@@ -73,21 +73,21 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* 1. SECCIÓN DE CONTENIDO (GRID DE 3 COLUMNAS PARA EVITAR SOLAPE) */}
-      <div className="relative z-30 w-full px-6 md:px-16 lg:px-24 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-3 items-center lg:items-start pointer-events-none select-none gap-y-8 lg:gap-x-12">
+      {/* 1. SECCIÓN DE CONTENIDO (GRID ULTRA-REFORZADO DE 3 COLUMNAS) */}
+      <div className="relative z-30 w-full px-4 md:px-12 lg:px-14 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-[1.1fr_2.5fr_1.1fr] items-center lg:items-start pointer-events-none select-none gap-y-8 lg:gap-x-0">
         
         {/* BLOQUE IZQUIERDA: Editorial */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full"
         >
-          <div className="max-w-[260px] md:max-w-[500px] lg:w-full">
-            <h1 className="text-brand-brown font-sans font-black text-xl md:text-3xl lg:text-[2.2rem] leading-[1] tracking-tighter uppercase reveal-up">
+          <div className="max-w-[260px] md:max-w-[450px] lg:max-w-[340px] xl:max-w-[400px]">
+            <h1 className="text-brand-brown font-sans font-black text-xl md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up">
               LA PRIMERA<br />
               TIENDA VIRTUAL<br />
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.6rem] block lg:my-1">en Bucaramanga</span><br />
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-0.5">en Bucaramanga</span><br />
               <span className="text-[0.85em] md:text-[0.9em]">CON UN EJERCITO DE BOTS,</span><br />
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.6rem] block lg:my-1">buscando los mejores productos</span><br />
+              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-0.5">buscando los mejores productos</span><br />
               PARA TI ❤️
             </h1>
           </div>
@@ -99,10 +99,10 @@ const Hero = () => {
         {/* BLOQUE DERECHA: Descripción Disruptiva */}
         <motion.div 
           style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[280px] mt-2 lg:mt-0"
+          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[300px] mt-2 lg:mt-0"
         >
-          <div className="lg:mt-12 max-w-[240px] md:max-w-[280px] reveal-right delay-200">
-            <p className="font-sans text-brand-brown text-[10px] md:text-sm lg:text-sm leading-relaxed uppercase tracking-tighter">
+          <div className="lg:mt-12 max-w-[240px] md:max-w-[280px] lg:pr-4 reveal-right delay-200">
+            <p className="font-sans text-brand-brown text-[10px] md:text-sm lg:text-[12px] leading-relaxed uppercase tracking-tighter">
               <span className="font-black italic underline decoration-[#A6FF00] decoration-4">NORMAL</span> que por nuestros precios, el <span className="font-black italic text-brand-brown">bro se desmaye!</span>
             </p>
           </div>
@@ -115,7 +115,7 @@ const Hero = () => {
            style={{
              x: xSpring,
              y: ySpring,
-             translateY: useTransform(scrollY, [0, 800], [isMobile ? 120 : 80, 200]),
+             translateY: useTransform(scrollY, [0, 800], [isMobile ? 140 : 100, 240]),
              scale: kawsScale,
              rotate: kawsRotate,
              filter: kawsBlur,
