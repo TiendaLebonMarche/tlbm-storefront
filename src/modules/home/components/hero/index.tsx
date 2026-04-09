@@ -4,68 +4,87 @@ import { useEffect, useState, useRef } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Image from "next/image"
 
+/*
+  ARQUITECTURA HERO:
+  
+  MÓVIL (<md)  → Natural flow con 3 zonas apiladas:
+    1. [Slogan]      — z-30, fondo crema, sin overlap posible
+    2. [Figura]      — flex-1, la figura crece para ocupar el espacio disponible
+    3. [H1 + CTA]    — z-30, fondo crema, sin overlap posible
+    (metadata en bottom absolute sobre la zona del h1)
+
+  TABLET/DESKTOP (≥md) → Grid 3 columnas, figura absolute centrada
+    Izquierda: H1 | Centro: spacer | Derecha: Slogan
+    Figura: absolute inset-0, anchored to bottom center
+
+  Header heights (FIJOS):
+    Marquee:       text-[10px] + py-2.5 = ~32px
+    Nav mobile:    logo h-[52px] + py-2    = ~68px  → Total mobile: ~100px
+    Nav desktop:   min-h-[76px]            = ~76px  → Total desktop: ~108px
+*/
+
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
 
-  // Movimiento suave y dinámico (Efecto Inmersivo)
   const springConfig = { stiffness: 35, damping: 30, restDelta: 0.001 }
   const xSpring = useSpring(0, springConfig)
   const ySpring = useSpring(0, springConfig)
 
-  // Detectamos si es móvil de forma simple para el escalado
   const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
+    const check = () => {
+      setIsMobile(window.innerWidth < 768)
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024)
+    }
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
   }, [])
 
+  // Mouse parallax — sólo desktop
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-      const { innerWidth, innerHeight } = window
-      const x = (clientX / innerWidth) - 0.5
-      const y = (clientY / innerHeight) - 0.5
-      xSpring.set(x * 40) 
-      ySpring.set(y * 40)
+    if (isMobile || isTablet) return
+    const handle = (e: MouseEvent) => {
+      xSpring.set((e.clientX / window.innerWidth - 0.5) * 40)
+      ySpring.set((e.clientY / window.innerHeight - 0.5) * 40)
     }
+    window.addEventListener("mousemove", handle)
+    return () => window.removeEventListener("mousemove", handle)
+  }, [xSpring, ySpring, isMobile, isTablet])
 
-    const container = containerRef.current
-    if (container) {
-      window.addEventListener("mousemove", handleMouseMove)
-    }
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [xSpring, ySpring])
-
-  // Parallax de scroll súper fluido
-  const kawsTranslateY = useTransform(scrollY, [0, 800], [0, 150])
-  
-  // Escala HEROICA perfeccionada (Ajuste para mobile grande)
-  const kawsScale = useTransform(
-    scrollY, 
-    [0, 800], 
-    [isMobile ? 0.58 : 0.74, isMobile ? 0.45 : 0.62]
-  ) 
-  
+  // ── Animaciones DESKTOP: scroll parallax de la figura ────────────────────
+  const kawsTranslateY = useTransform(
+    scrollY, [0, 800],
+    [isTablet ? 80 : 110, isTablet ? 210 : 290]
+  )
+  const kawsScaleStart = isTablet ? 0.80 : 0.82
+  const kawsScaleEnd   = isTablet ? 0.65 : 0.70
+  const kawsScale  = useTransform(scrollY, [0, 800], [kawsScaleStart, kawsScaleEnd])
   const kawsRotate = useTransform(scrollY, [0, 800], [0, -3])
-  
-  // Efecto Blur progresivo al hacer scroll para legibilidad
-  const kawsBlur = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(12px)"])
+  const kawsBlur   = useTransform(scrollY, [0, 500], ["blur(0px)", "blur(14px)"])
 
-  // Opacidad y movimiento de salida para los textos
-  const contentOpacity = useTransform(scrollY, [0, 450], [1, 0])
-  const contentTranslate = useTransform(scrollY, [0, 450], [0, -60])
+  // Textos desaparecen al hacer scroll
+  const contentOpacity = useTransform(scrollY, [0, 400], [1, 0])
+  const contentY       = useTransform(scrollY, [0, 400], [0, -45])
+
+  // ── Animaciones MÓVIL: scroll parallax de la figura ──────────────────────
+  const mobileKawsY     = useTransform(scrollY, [0, 600], [0, 60])
+  const mobileKawsScale = useTransform(scrollY, [0, 600], [1, 0.9])
+  const mobileKawsBlur  = useTransform(scrollY, [0, 400], ["blur(0px)", "blur(8px)"])
+  const mobileContentOp = useTransform(scrollY, [0, 350], [1, 0])
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative w-full h-[100vh] min-h-[700px] flex flex-col items-center justify-between overflow-hidden bg-[#F2F2E1] font-sans"
+      className="relative w-full overflow-hidden bg-[#F2F2E1] font-sans"
+      style={{ minHeight: "100svh" }}
     >
-      {/* Capa de textura sutil de papel premium */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply z-0">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      {/* Textura de papel premium */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-multiply z-0">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <filter id="noise">
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
           </filter>
@@ -73,94 +92,190 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* 1. SECCIÓN DE CONTENIDO (DISTRIBUCIÓN ADAPTATIVA) */}
-      <div className="relative z-30 w-full px-4 md:px-12 lg:px-14 pt-32 md:pt-40 lg:pt-52 grid grid-cols-1 lg:grid-cols-[1.1fr_2.5fr_1.1fr] items-center lg:items-start pointer-events-none select-none gap-y-4 lg:gap-x-0">
-        
-        <motion.div 
-          style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1 mt-6 lg:mt-0"
+      {/* ══════════════════════════════════════════════════════════════════
+          LAYOUT MÓVIL (<md) — Natural flow, 3 zonas sin overlap posible
+         ══════════════════════════════════════════════════════════════════ */}
+      <div className="md:hidden flex flex-col" style={{ minHeight: "100svh", paddingTop: "100px" }}>
+
+        {/* ZONA 1: SLOGAN — aparece right under the header */}
+        <motion.div
+          style={{ opacity: mobileContentOp }}
+          className="flex-none w-full px-5 pt-4 pb-3 flex flex-col items-center text-center z-30 reveal-right-hero delay-200 pointer-events-none select-none"
         >
-          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[480px] xl:max-w-[550px]">
-            <h1 className="text-brand-brown font-sans font-medium text-[16px] md:text-xl lg:text-xl xl:text-2xl leading-[1.3] tracking-tight uppercase reveal-up-hero">
-              La primera <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown inline-block">Tienda Virtual</span><br />
-              <span className="block mt-1 md:mt-2">En <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown underline decoration-brand-brown/20 underline-offset-4">Bucaramanga</span></span>
-              <span className="text-[0.7em] md:text-[0.75em] block mt-6 opacity-70 font-bold tracking-[0.2em]">Con un ejército de bots,</span>
-              <span className="block mt-1">Buscando los <span className="font-serif italic font-black normal-case text-[1.1em] text-brand-brown">Mejores Productos</span></span>
-              <span className="block mt-4 md:mt-6 font-black text-2xl md:text-3xl lg:text-4xl tracking-tighter">PARA TI ❤️</span>
+          <p className="font-sans text-brand-brown text-[11.5px] leading-[1.25] uppercase tracking-tight max-w-[270px]">
+            <span className="font-black italic underline decoration-[#A6FF00] decoration-[3px] underline-offset-[-1px]">
+              NORMAL, QUE NO AGUANTEN LA PRESIÓN,
+            </span>
+            <span className="mt-2 block font-bold opacity-70">MANEJAMOS PRODUCTOS</span>
+            <span className="block font-black text-[1.1em]">ORIGINALES Y EXÓTICOS</span>
+          </p>
+        </motion.div>
+
+        {/* ZONA 2: FIGURA — flex-1, crece para ocupar el espacio restante */}
+        {/* La figura está DENTRO del flujo, no es absolute */}
+        <div className="flex-1 relative flex items-end justify-center overflow-hidden min-h-[220px]">
+          <motion.div
+            style={{
+              translateY: mobileKawsY,
+              scale: mobileKawsScale,
+              filter: mobileKawsBlur,
+            }}
+            className="absolute bottom-0 left-0 right-0 flex items-end justify-center h-full"
+          >
+            <Image
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png"
+              alt="KAWS Companion Premium"
+              width={1600}
+              height={1600}
+              className="object-contain object-bottom w-auto max-h-full contrast-[1.3] brightness-[1.05] saturate-[1.25]"
+              priority
+              quality={100}
+            />
+          </motion.div>
+        </div>
+
+        {/* ZONA 3: H1 + CTA — fondo sólido, SIEMPRE legible */}
+        <motion.div
+          style={{ opacity: mobileContentOp }}
+          className="flex-none w-full bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1] to-[#F2F2E1]/0 pt-6 pb-12 px-5 flex flex-col items-center text-center z-30 reveal-up-hero pointer-events-none select-none"
+        >
+          <div className="max-w-[280px]">
+            <h1 className="text-brand-brown font-sans text-[15px] font-medium leading-[1.4] tracking-tight uppercase">
+              La primera{" "}
+              <span className="font-serif italic font-black normal-case text-[1.15em]">Tienda Virtual</span>
+              <br />
+              <span className="block mt-1">
+                En{" "}
+                <span className="font-serif italic font-black normal-case text-[1.15em] underline decoration-brand-brown/20 underline-offset-4">
+                  Bucaramanga
+                </span>
+              </span>
+              <span className="block mt-4 text-[0.7em] opacity-60 font-bold tracking-[0.18em]">
+                Con un ejército de bots,
+              </span>
+              <span className="block mt-0.5">
+                Buscando los{" "}
+                <span className="font-serif italic font-black normal-case text-[1.15em]">Mejores Productos</span>
+              </span>
+              <span className="block mt-3 font-black text-[1.7em] tracking-tighter">PARA TI ❤️</span>
             </h1>
           </div>
         </motion.div>
-        
-        {/* BLOQUE CENTRAL: FIGURA SPACER (Solo visible en mobile para el flujo vertical) */}
-        <div className="w-full lg:min-h-[1px] order-2 h-[20vh] md:h-[25vh] lg:h-auto" />
+      </div>
 
-        {/* BLOQUE DERECHA: Slogans (Top in mobile, Right in desktop) */}
-        <motion.div 
-          style={{ opacity: contentOpacity, y: contentTranslate }}
-          className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-0 lg:mt-0 order-1 lg:order-3"
+      {/* METADATA (mobile only) — absolute bottom, encima del h1 */}
+      <div className="md:hidden absolute bottom-3 left-0 z-40 w-full px-4 flex flex-wrap justify-between items-end gap-x-2 gap-y-1 text-brand-brown/40 select-none pointer-events-none">
+        {[
+          { label: "Tienda ---", value: "LE BON MARCHÉ" },
+          { label: "Slogan ---", value: "PROD. ORIG. Y EX." },
+          { label: "Ubic. ---", value: "BUCARAMANGA" },
+          { label: "By ---", value: "TLBM®" },
+        ].map(({ label, value }) => (
+          <div key={label} className="flex flex-col items-start">
+            <span className="text-[7px] uppercase tracking-[0.25em] font-black opacity-20 mb-0.5 whitespace-nowrap">{label}</span>
+            <span className="font-sans font-bold text-[7.5px] uppercase whitespace-nowrap">{value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          LAYOUT TABLET + DESKTOP (≥md) — Grid 3 cols, figura absolute
+         ══════════════════════════════════════════════════════════════════ */}
+
+      {/* FIGURA absolute — z-10 (siempre DETRÁS de los textos z-30) */}
+      <div className="hidden md:flex absolute inset-0 items-end justify-center z-10 pointer-events-none">
+        <motion.div
+          style={{
+            x: xSpring,
+            y: ySpring,
+            translateY: kawsTranslateY,
+            scale: kawsScale,
+            rotate: kawsRotate,
+            filter: kawsBlur,
+          }}
+          className="relative h-full w-full flex items-end justify-center"
         >
-          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[500px] lg:pr-4 reveal-right-hero delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
-            <p className="font-sans text-brand-brown text-[14px] md:text-lg lg:text-xl xl:text-2xl leading-[1.1] uppercase tracking-tighter text-center lg:text-right">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-[4px] md:decoration-[8px] underline-offset-[-2px] md:underline-offset-[-4px]">NORMAL, QUE NO AGUANTEN LA PRESION,</span><br />
-              <span className="mt-4 block font-bold opacity-80">MANEJAMOS PRODUCTOS</span>
-              <span className="block font-black text-[1.1em] md:text-[1.2em]">ORIGINALES Y EXÓTICOS</span>
+          <div className="relative w-[85%] lg:w-3/4 xl:w-[70%] h-full flex items-end justify-center">
+            <Image
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png"
+              alt="KAWS Companion Premium"
+              width={1600}
+              height={1600}
+              className="object-contain object-bottom transition-all duration-300 contrast-[1.3] brightness-[1.05] saturate-[1.25]"
+              priority
+              quality={100}
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* TEXTOS GRID desktop — z-30 */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="
+          hidden md:grid
+          relative z-30 w-full pointer-events-none select-none
+          grid-cols-[1fr_1.8fr_1fr] lg:grid-cols-[1fr_2.2fr_1fr] items-start
+          pt-[120px] lg:pt-[132px]
+          px-6 md:px-8 lg:px-14 xl:px-20
+        "
+      >
+        {/* Izquierda: H1 */}
+        <div className="flex flex-col items-start text-left pt-8 lg:pt-10 reveal-up-hero">
+          <div className="max-w-[320px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[480px]">
+            <h1 className="text-brand-brown font-sans text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] font-medium leading-[1.35] tracking-tight uppercase">
+              La primera{" "}
+              <span className="font-serif italic font-black normal-case text-[1.15em]">Tienda Virtual</span>
+              <br />
+              <span className="block mt-1.5">
+                En{" "}
+                <span className="font-serif italic font-black normal-case text-[1.15em] underline decoration-brand-brown/20 underline-offset-4">
+                  Bucaramanga
+                </span>
+              </span>
+              <span className="block mt-6 text-[0.72em] opacity-60 font-bold tracking-[0.2em]">
+                Con un ejército de bots,
+              </span>
+              <span className="block mt-1">
+                Buscando los{" "}
+                <span className="font-serif italic font-black normal-case text-[1.15em]">Mejores Productos</span>
+              </span>
+              <span className="block mt-6 font-black text-[1.7em] tracking-tighter">PARA TI ❤️</span>
+            </h1>
+          </div>
+        </div>
+
+        {/* Centro: spacer para la figura absolute */}
+        <div />
+
+        {/* Derecha: Slogan */}
+        <div className="flex flex-col items-end text-right pt-8 lg:pt-10 reveal-right-hero delay-200">
+          <div className="max-w-[300px] lg:max-w-[380px] xl:max-w-[420px]">
+            <p className="font-sans text-brand-brown text-[13px] lg:text-[17px] xl:text-[20px] leading-[1.15] uppercase tracking-tight text-right">
+              <span className="font-black italic underline decoration-[#A6FF00] decoration-[4px] lg:decoration-[6px] underline-offset-[-2px] lg:underline-offset-[-3px]">
+                NORMAL, QUE NO AGUANTEN LA PRESIÓN,
+              </span>
+              <span className="mt-4 block font-bold opacity-75">MANEJAMOS PRODUCTOS</span>
+              <span className="block font-black text-[1.1em] lg:text-[1.2em]">ORIGINALES Y EXÓTICOS</span>
             </p>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
-      {/* 2. ELEMENTO CENTRAL: KAWS COMPANION (DINÁMICO) */}
-      <div className="absolute inset-0 flex items-end justify-center z-10 pointer-events-none">
-        <motion.div
-           style={{
-             x: xSpring,
-             y: ySpring,
-             translateY: useTransform(scrollY, [0, 800], [isMobile ? 40 : 100, 240]),
-             scale: kawsScale,
-             rotate: kawsRotate,
-             filter: kawsBlur,
-           }}
-           className="relative h-full w-full max-w-[140rem] flex items-end justify-center z-10"
-        >
-          <div className="relative w-full lg:w-3/4 h-full flex flex-col items-center justify-end">
-            <div className="relative w-full h-full flex items-end justify-center overflow-visible">
-              <Image
-                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png" 
-                alt="KAWS Companion Premium"
-                width={1600}
-                height={1600}
-                className="object-contain object-bottom opacity-100 transition-all duration-300 contrast-[1.3] brightness-[1.1] saturate-[1.3]"
-                priority
-                quality={100}
-              />
-            </div>
+      {/* METADATA desktop — absolute bottom */}
+      <div className="hidden md:flex absolute bottom-4 left-0 z-30 w-full px-12 lg:px-20 flex-wrap justify-between items-end gap-x-6 gap-y-1 text-brand-brown/40 select-none pointer-events-none">
+        {[
+          { label: "Tienda ---", value: "LE BON MARCHÉ" },
+          { label: "Slogan ---", value: "PRODUCTOS ORIGINALES Y EXÓTICOS" },
+          { label: "Ubicación ---", value: "BUCARAMANGA" },
+          { label: "By ---", value: "TLBM®" },
+        ].map(({ label, value }) => (
+          <div key={label} className="flex flex-col items-start group">
+            <span className="text-[7px] uppercase tracking-[0.3em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap">{label}</span>
+            <span className="font-sans font-bold text-[10px] uppercase whitespace-nowrap">{value}</span>
           </div>
-        </motion.div>
+        ))}
       </div>
-
-      {/* Degradado removed as per user instruction "NO debe llevar sombras" */}
-
-      {/* 3. METADATA EN LA BASE - Reposicionada para evitar solapamiento */}
-      <div className="absolute bottom-6 left-0 z-30 w-full px-6 md:px-16 lg:px-24 flex flex-wrap justify-center md:justify-between items-end gap-x-8 gap-y-2 text-brand-brown/40 select-none pointer-events-none">
-        <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap">Tienda ---</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] whitespace-nowrap">LE BON MARCHÉ</span>
-        </div>
-        <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">SLOGAN ---</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">PRODUCTOS ORIGINALES Y EXÓTICOS</span>
-        </div>
-        <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">UBICACION ---</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">BUCARAMANGA</span>
-        </div>
-        <div className="flex flex-col items-center md:items-start group">
-          <span className="text-[8px] uppercase tracking-[0.4em] font-black opacity-20 mb-0.5 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase">BY ---</span>
-          <span className="font-sans font-bold text-[9px] md:text-[11px] uppercase whitespace-nowrap">TLBM®</span>
-        </div>
-      </div>
-
-
     </section>
   )
 }

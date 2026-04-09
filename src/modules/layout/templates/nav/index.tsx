@@ -27,42 +27,37 @@ export default async function Nav() {
   return (
     <ClientHeaderWrapper>
     <div className="w-full flex items-center justify-between min-h-[4rem]">
-      {/* MOBILE HEADER (sm and down): Perfectly Centered Logo */}
-      <div className="flex md:hidden w-full px-4 pt-2">
-        <div className="w-full px-4 py-3 flex items-center justify-between transition-colors">
-          {/* Menu Trigger - Left (fixed width container) */}
-          <div className="w-10">
-            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-          </div>
-          
-          {/* Logo - Center (Centered with flex-1) */}
-          <div className="flex-1 flex items-center justify-center">
-            <LocalizedClientLink
-              href="/"
-              className="flex items-center justify-center"
-            >
-              <Image 
-                src="/logo.png" 
-                alt="Tienda Le Bon Marché" 
-                width={140} 
-                height={50} 
-                className="logo-img h-12 w-auto object-contain transition-all duration-500"
-                priority
-              />
-            </LocalizedClientLink>
-          </div>
-          
-          {/* Cart Icon - Right (fixed width container matching Left) */}
-          <div className="w-10 flex justify-end">
-            <Suspense fallback={<div className="w-5 h-5" />}>
-              <CartButton />
-            </Suspense>
-          </div>
+      {/* MOBILE HEADER (<md): Logo centrado, menu izq, cart der */}
+      <div className="flex md:hidden w-full px-5 py-2">
+        {/* Menu - left */}
+        <div className="flex-none w-10 flex items-center">
+          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+        </div>
+
+        {/* Logo - center */}
+        <div className="flex-1 flex items-center justify-center">
+          <LocalizedClientLink href="/" className="flex items-center justify-center">
+            <Image
+              src="/logo.png"
+              alt="Tienda Le Bon Marché"
+              width={160}
+              height={56}
+              className="logo-img h-[52px] w-auto object-contain transition-all duration-500"
+              priority
+            />
+          </LocalizedClientLink>
+        </div>
+
+        {/* Cart - right */}
+        <div className="flex-none w-10 flex items-center justify-end">
+          <Suspense fallback={<div className="w-5 h-5" />}>
+            <CartButton />
+          </Suspense>
         </div>
       </div>
 
-      {/* DESKTOP HEADER (md and up): Balanced Proportions */}
-      <div className="hidden md:flex items-center w-full h-full min-h-[4.5rem] px-10">
+      {/* DESKTOP HEADER (≥md): tres zonas equilibradas */}
+      <div className="hidden md:flex items-center w-full h-full min-h-[76px] px-8 md:px-10 lg:px-14">
         {/* IZQUIERDA: Menu Group (33% of width) */}
         <div className="flex items-center justify-start flex-1 gap-8">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
@@ -85,12 +80,12 @@ export default async function Nav() {
             href="/"
             className="pointer-events-auto flex items-center justify-center hover:opacity-70 transition-all duration-300"
           >
-            <Image 
-              src="/logo.png" 
-              alt="Tienda Le Bon Marché" 
-              width={200} 
-              height={60} 
-              className="logo-img h-13 lg:h-14 xl:h-16 w-auto object-contain transition-all duration-500"
+            <Image
+              src="/logo.png"
+              alt="Tienda Le Bon Marché"
+              width={220}
+              height={64}
+              className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-500"
               priority
             />
           </LocalizedClientLink>
