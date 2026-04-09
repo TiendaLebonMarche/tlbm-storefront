@@ -81,14 +81,13 @@ const Hero = () => {
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 lg:gap-8 w-full order-3 lg:order-1"
         >
-          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[340px] xl:max-w-[400px]">
-            <h1 className="text-brand-brown font-sans font-black text-[22px] md:text-3xl lg:text-[1.7rem] xl:text-[2rem] leading-[0.95] tracking-tighter uppercase reveal-up-hero">
-              LA PRIMERA<br />
-              TIENDA VIRTUAL<br />
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block lg:my-1 underline decoration-brand-brown/30 decoration-2 underline-offset-4">En Bucaramanga</span>
-              <span className="text-[0.75em] md:text-[0.8em] block mt-2">CON UN EJERCITO DE BOTS,</span>
-              <span className="font-serif italic font-bold normal-case tracking-tight text-brand-brown lg:text-[2.1rem] xl:text-[2.4rem] block mt-1">BUSCANDO LOS MEJORES <span className="underline decoration-brand-brown/30 decoration-2 underline-offset-4">PRODUCTOS</span></span>
-              <span className="block mt-2 font-black">PARA TI ❤️</span>
+          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[360px] xl:max-w-[420px]">
+            <h1 className="text-brand-brown font-sans font-medium text-[16px] md:text-xl lg:text-[1.3rem] xl:text-[1.5rem] leading-[1.3] tracking-tight uppercase reveal-up-hero">
+              La primera <span className="font-serif italic font-black normal-case text-[1.25em] lg:text-[1.4em] text-brand-brown inline-block">Tienda Virtual</span><br />
+              <span className="block mt-1 md:mt-2">En <span className="font-serif italic font-black normal-case text-[1.25em] lg:text-[1.4em] text-brand-brown underline decoration-brand-brown/20 underline-offset-4">Bucaramanga</span></span>
+              <span className="text-[0.7em] md:text-[0.75em] block mt-6 opacity-70 font-bold tracking-[0.2em]">Con un ejército de bots,</span>
+              <span className="block mt-1">Buscando los <span className="font-serif italic font-black normal-case text-[1.15em] lg:text-[1.25em] text-brand-brown">Mejores Productos</span></span>
+              <span className="block mt-4 md:mt-6 font-black text-2xl md:text-3xl lg:text-4xl tracking-tighter">PARA TI ❤️</span>
             </h1>
           </div>
         </motion.div>
@@ -101,10 +100,11 @@ const Hero = () => {
           style={{ opacity: contentOpacity, y: contentTranslate }}
           className="flex flex-col items-center text-center lg:items-end lg:text-right w-full lg:max-w-[340px] mt-2 lg:mt-0 order-1 lg:order-3"
         >
-          <div className="max-w-[280px] md:max-w-[360px] lg:pr-4 reveal-right-hero delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
-            <p className="font-sans text-brand-brown text-[15px] md:text-lg lg:text-[13px] leading-tight uppercase tracking-tighter">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-[6px] underline-offset-4">NORMAL,</span> QUE NO AGUANTEN LA PRESIÓN,<br />
-              <span className="mt-1 block">MANEJAMOS PRODUCTOS ORIGINALES Y EXÓTICOS.</span>
+          <div className="max-w-[280px] md:max-w-[450px] lg:max-w-[500px] lg:pr-4 reveal-right-hero delay-200 lg:mt-12 flex flex-col items-center lg:items-end">
+            <p className="font-sans text-brand-brown text-[14px] md:text-lg lg:text-xl xl:text-2xl leading-[1.1] uppercase tracking-tighter text-center lg:text-right">
+              <span className="font-black italic underline decoration-[#A6FF00] decoration-[4px] md:decoration-[8px] underline-offset-[-2px] md:underline-offset-[-4px]">NORMAL, QUE NO AGUANTEN LA PRESION,</span><br />
+              <span className="mt-4 block font-bold opacity-80">MANEJAMOS PRODUCTOS</span>
+              <span className="block font-black text-[1.1em] md:text-[1.2em]">ORIGINALES Y EXÓTICOS</span>
             </p>
           </div>
         </motion.div>
