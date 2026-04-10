@@ -142,25 +142,20 @@ const Hero = () => {
           style={{ opacity: mobileContentOp }}
           className="flex-none w-full bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1]/95 to-transparent pt-24 pb-14 px-5 flex flex-col items-center text-center z-30 reveal-up-hero pointer-events-none select-none relative"
         >
-          <div className="max-w-[280px] drop-shadow-[0px_0px_12px_rgba(242,242,225,1)] relative z-10">
-            <h1 className="text-brand-brown font-sans text-[15px] font-medium leading-[1.4] tracking-tight uppercase">
-              La primera{" "}
-              <span className="font-serif italic font-black normal-case text-[1.15em]">Tienda Virtual</span>
+          <div className="max-w-[300px] drop-shadow-[0px_0px_12px_rgba(242,242,225,1)] relative z-10">
+            <h1 className="text-brand-brown font-sans text-[16px] font-light leading-[1.4] tracking-wide relative">
+              La primera <span className="font-serif italic font-medium">tienda virtual</span>
               <br />
-              <span className="block mt-1">
-                En{" "}
-                <span className="font-serif italic font-black normal-case text-[1.15em] underline decoration-brand-brown/20 underline-offset-4">
-                  Bucaramanga
-                </span>
-              </span>
-              <span className="block mt-4 text-[0.7em] opacity-60 font-bold tracking-[0.18em]">
+              en <span className="font-medium tracking-tight">Bucaramanga</span>.
+              <span className="block mt-5 text-[0.75em] font-medium opacity-50 tracking-[0.16em] uppercase">
                 Con un ejército de bots,
               </span>
-              <span className="block mt-0.5">
-                Buscando los{" "}
-                <span className="font-serif italic font-black normal-case text-[1.15em]">Mejores Productos</span>
+              <span className="block mt-1.5">
+                buscando los <span className="font-serif italic font-medium opacity-90">mejores productos</span>
               </span>
-              <span className="block mt-3 font-black text-[1.7em] tracking-tighter">PARA TI ❤️</span>
+              <span className="block mt-4 text-[1.15em] font-medium tracking-widest uppercase items-center justify-center flex gap-1.5">
+                Para ti <span className="text-[0.6em] mt-0.5 opacity-90 grayscale-[0.2]">❤️</span>
+              </span>
             </h1>
           </div>
         </motion.div>
@@ -225,25 +220,20 @@ const Hero = () => {
       >
         {/* Izquierda: H1 */}
         <div className="flex flex-col items-start text-left pt-8 lg:pt-10 reveal-up-hero">
-          <div className="max-w-[320px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[480px]">
-            <h1 className="text-brand-brown font-sans text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] font-medium leading-[1.35] tracking-tight uppercase">
-              La primera{" "}
-              <span className="font-serif italic font-black normal-case text-[1.15em]">Tienda Virtual</span>
+          <div className="max-w-[340px] md:max-w-[400px] lg:max-w-[460px] xl:max-w-[500px]">
+            <h1 className="text-brand-brown font-sans text-[17px] md:text-[19px] lg:text-[22px] xl:text-[26px] font-light leading-[1.35] tracking-wide relative">
+              La primera <span className="font-serif italic font-medium">tienda virtual</span>
               <br />
-              <span className="block mt-1.5">
-                En{" "}
-                <span className="font-serif italic font-black normal-case text-[1.15em] underline decoration-brand-brown/20 underline-offset-4">
-                  Bucaramanga
-                </span>
-              </span>
-              <span className="block mt-6 text-[0.72em] opacity-60 font-bold tracking-[0.2em]">
+              en <span className="font-medium tracking-tight">Bucaramanga</span>.
+              <span className="block mt-6 md:mt-8 text-[0.7em] font-medium opacity-50 tracking-[0.2em] uppercase">
                 Con un ejército de bots,
               </span>
-              <span className="block mt-1">
-                Buscando los{" "}
-                <span className="font-serif italic font-black normal-case text-[1.15em]">Mejores Productos</span>
+              <span className="block mt-2">
+                buscando los <span className="font-serif italic font-medium opacity-90">mejores productos</span>
               </span>
-              <span className="block mt-6 font-black text-[1.7em] tracking-tighter">PARA TI ❤️</span>
+              <span className="block mt-5 md:mt-6 text-[1.15em] font-medium tracking-widest uppercase flex items-center justify-start gap-2">
+                Para ti <span className="text-[0.6em] relative top-0.5 opacity-90 grayscale-[0.2]">❤️</span>
+              </span>
             </h1>
           </div>
         </div>
