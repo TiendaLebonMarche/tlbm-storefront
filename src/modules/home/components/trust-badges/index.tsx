@@ -1,5 +1,7 @@
 "use client"
 
+import React from "react"
+
 const TrustBadges = () => {
   const badges = [
     {
@@ -49,14 +51,18 @@ const TrustBadges = () => {
       <div className="content-container px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
           {badges.map((badge, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center group">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-brand-soft text-brand-olive mb-6 transition-transform duration-500 group-hover:scale-110">
-                {badge.icon}
+            <div key={idx} className="flex flex-col items-center text-center group px-4">
+              <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-brand-soft text-brand-olive mb-8 transition-all duration-700 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 shadow-sm">
+                {React.cloneElement(badge.icon as React.ReactElement, { 
+                  width: "36", 
+                  height: "36",
+                  className: "md:w-10 md:h-10 transition-colors duration-700"
+                })}
               </div>
-              <h3 className="font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand-brown mb-3">
+              <h3 className="font-sans font-black text-sm md:text-lg uppercase tracking-[0.4em] text-brand-brown mb-4">
                 {badge.title}
               </h3>
-              <p className="text-[11px] md:text-sm text-brand-gray/70 leading-relaxed max-w-[200px] font-normal">
+              <p className="text-xs md:text-base text-brand-gray/70 leading-relaxed max-w-[280px] font-medium">
                 {badge.description}
               </p>
             </div>
