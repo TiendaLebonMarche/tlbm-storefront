@@ -54,10 +54,10 @@ export const ProductMostSold = ({
       <div className="relative w-full overflow-hidden select-none touch-pan-y">
         <motion.div
           className="flex gap-4 md:gap-6 px-4"
-          initial={{ x: "-50%" }}
-          animate={{ x: isPaused ? undefined : "0%" }}
+          initial={{ x: "0%" }}
+          animate={{ x: isPaused ? undefined : "-50%" }}
           transition={{
-            duration: 70, // Slightly slower than categories for visual variety
+            duration: 90, // Slower than categories for better visibility of products
             repeat: Infinity,
             ease: "linear",
             repeatType: "loop"
