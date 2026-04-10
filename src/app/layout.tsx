@@ -53,7 +53,7 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  userScalable: false,
+  userScalable: true,
 }
 
 import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"

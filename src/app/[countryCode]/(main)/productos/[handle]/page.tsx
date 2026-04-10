@@ -128,12 +128,40 @@ export default async function ProductPage(props: Props) {
     notFound()
   }
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: pricedProduct.title,
+    image: images.map((i) => i.url),
+    description: pricedProduct.description || `Descubre ${pricedProduct.title} en Tienda Le Bon Marché.`,
+    sku: pricedProduct.variants?.[0]?.sku || "",
+    brand: {
+      "@type": "Brand",
+      name: "Le Bon Marché"
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://www.tiendalebonmarche.com/${params.countryCode}/productos/${pricedProduct.handle}`,
+      priceCurrency: region.currency_code.toUpperCase(),
+      price: (pricedProduct.variants?.[0] as any)?.calculated_price || 0,
+      availability: pricedProduct.variants?.some((v) => (v.inventory_quantity ?? 0) > 0)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+    }
+  }
+
   return (
-    <ProductTemplate
-      product={pricedProduct}
-      region={region}
-      countryCode={params.countryCode}
-      images={images}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <ProductTemplate
+        product={pricedProduct}
+        region={region}
+        countryCode={params.countryCode}
+        images={images}
+      />
+    </>
   )
 }
