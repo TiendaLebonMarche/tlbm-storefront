@@ -49,16 +49,12 @@ export default async function Home(props: {
       </div>
 
       <div className="reveal-up delay-200">
-        <AnimatedTestimonialsSection />
-      </div>
-
-      <div className="reveal-up delay-300">
         <BrandStatement />
       </div>
 
-      <section id="catalogo" className="bg-white reveal-up delay-500">
-        <HeroSection2 />
-      </section>
+      <div className="reveal-up delay-300">
+        <AnimatedTestimonialsSection />
+      </div>
 
       <CategoriesMarquee />
 
@@ -67,7 +63,7 @@ export default async function Home(props: {
 
       <Blog7
         tagline="Lifestyle & Tendencias"
-        heading="Crónicas de Estilo"
+        heading="Blog Le Bon Marché - El blog de tu tienda en bucaramanga."
         description="Descubre las piezas que definen el lujo moderno y las historias detrás de nuestra selección exclusiva. Inspiración editorial para los más exigentes."
         buttonText="Ver todos los artículos"
         buttonUrl="/blog"

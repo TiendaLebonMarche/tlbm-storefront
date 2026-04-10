@@ -14,9 +14,9 @@ const BrandStatement = () => {
           duration={0.8}
         >
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-sans font-black tracking-tighter leading-[0.9] text-brand-brown uppercase">
-            Somos la mejor tienda virtual<br />
+            LA MEJOR TIENDA VIRTUAL<br />
             <span className="inline-block bg-brand-brown text-[#F2F2E1] px-5 py-2 rounded-sm mt-4">
-              Le Bon Marché.
+              (EN BUCARAMANGA.)
             </span>
           </h2>
         </TextBlockAnimation>
