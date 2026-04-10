@@ -67,8 +67,8 @@ export default function CategoriesMarquee() {
   const duplicatedCategories = [...CATEGORIES, ...CATEGORIES, ...CATEGORIES]
 
   return (
-    <section className="bg-[#fafaf5] py-20 md:py-32 overflow-hidden border-y border-stone-200/50">
-      <div className="px-6 mb-16 text-center">
+    <section className="bg-[#fafaf5] py-16 md:py-24 overflow-hidden border-y border-stone-200/50">
+      <div className="px-6 mb-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,10 +87,10 @@ export default function CategoriesMarquee() {
       <div className="relative w-full overflow-hidden select-none touch-pan-y">
         <motion.div 
           className="flex gap-4 md:gap-8 px-4"
-          initial={{ x: 0 }}
-          animate={{ x: isPaused ? undefined : "-50%" }}
+          initial={{ x: "-50%" }}
+          animate={{ x: isPaused ? undefined : "0%" }}
           transition={{
-            duration: 40,
+            duration: 60,
             repeat: Infinity,
             ease: "linear",
             repeatType: "loop"

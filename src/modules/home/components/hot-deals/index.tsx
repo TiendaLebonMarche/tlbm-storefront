@@ -53,9 +53,9 @@ export default async function HotDeals({
     })
 
     return (
-      <section className="w-full bg-white pt-20 pb-20 md:pt-28 md:pb-28 border-b border-gray-100">
+      <section className="w-full bg-white py-16 md:py-24 border-b border-gray-100">
         <div className="content-container px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
               <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
                 ⚡ Algoritmo de Ahorro

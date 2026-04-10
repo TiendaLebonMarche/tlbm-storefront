@@ -5,7 +5,7 @@ import TextBlockAnimation from "@/components/ui/text-block-animation"
 
 const BrandStatement = () => {
   return (
-    <section className="w-full bg-[#F2F2E1] py-32 md:py-48 flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section className="w-full bg-[#F2F2E1] py-20 md:py-28 flex flex-col items-center justify-center px-6 overflow-hidden">
       <div className="max-w-5xl w-full text-center">
         <TextBlockAnimation
           blockColor="#363030" // brand-brown

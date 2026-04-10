@@ -42,8 +42,8 @@ const Blog7 = ({
   posts,
 }: Blog7Props) => {
   return (
-    <section className="py-20 md:py-32 bg-brand-soft">
-      <div className="content-container px-6 flex flex-col items-center gap-16">
+    <section className="py-16 md:py-24 bg-brand-soft">
+      <div className="content-container px-6 flex flex-col items-center gap-12">
         {/* Header */}
         <div className="text-center max-w-2xl">
           <Badge variant="secondary" className="mb-6 uppercase tracking-[0.2em] text-[10px] font-bold text-brand-olive bg-white border-0 shadow-sm">

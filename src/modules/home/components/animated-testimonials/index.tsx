@@ -44,7 +44,7 @@ const TESTIMONIALS = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-white py-24 md:py-40 overflow-hidden relative">
+    <section className="bg-white py-16 md:py-28 overflow-hidden relative">
       <div className="content-container px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
