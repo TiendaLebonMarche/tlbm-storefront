@@ -93,16 +93,42 @@ const Hero = () => {
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════
-          LAYOUT MÓVIL (<md) — Natural flow, 3 zonas sin overlap posible
+          LAYOUT MÓVIL (<md) — Absolute figure & overlapping text with proper contrast
          ══════════════════════════════════════════════════════════════════ */}
-      <div className="md:hidden flex flex-col" style={{ minHeight: "100svh", paddingTop: "100px" }}>
+      <div className="md:hidden flex flex-col justify-between relative" style={{ minHeight: "100svh", paddingTop: "100px" }}>
 
-        {/* ZONA 1: SLOGAN — aparece right under the header */}
+        {/* ZONA 2: FIGURA — En background abosluto al doble de su tamaño */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none" style={{ top: "80px", bottom: "160px" }}>
+          <motion.div
+            style={{
+              translateY: mobileKawsY,
+              scale: mobileKawsScale,
+              filter: mobileKawsBlur,
+            }}
+            className="relative w-full h-full flex items-center justify-center mt-8"
+          >
+            <Image
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png"
+              alt="KAWS Companion Premium"
+              width={1600}
+              height={1600}
+              // Escala aumentada a aprox 2x y object-cover forzando a llenar verticalmente sin romper boundaries
+              className="object-contain w-[180%] max-w-[220%] sm:w-[150%] scale-[1.35] origin-center contrast-[1.3] brightness-[1.05] saturate-[1.25]"
+              priority
+              quality={100}
+            />
+          </motion.div>
+        </div>
+
+        {/* ZONA 1: SLOGAN — Texto superpuesto superior */}
         <motion.div
           style={{ opacity: mobileContentOp }}
-          className="flex-none w-full px-5 pt-4 pb-3 flex flex-col items-center text-center z-30 reveal-right-hero delay-200 pointer-events-none select-none"
+          className="flex-none w-full px-5 pt-6 pb-3 flex flex-col items-center text-center z-30 reveal-right-hero delay-200 pointer-events-none select-none relative"
         >
-          <p className="font-sans text-brand-brown text-[11.5px] leading-[1.25] uppercase tracking-tight max-w-[270px]">
+          {/* Difuminado suave por detrás del texto para contraste con la imagen negra gigante */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F2F2E1]/90 via-[#F2F2E1]/60 to-transparent blur-sm z-[-1]" />
+          
+          <p className="font-sans text-brand-brown text-[11.5px] leading-[1.25] uppercase tracking-tight max-w-[270px] drop-shadow-[0px_0px_10px_rgba(242,242,225,1)]">
             <span className="font-black italic underline decoration-[#A6FF00] decoration-[3px] underline-offset-[-1px]">
               NORMAL, QUE NO AGUANTEN LA PRESIÓN,
             </span>
@@ -111,35 +137,12 @@ const Hero = () => {
           </p>
         </motion.div>
 
-        {/* ZONA 2: FIGURA — flex-1, crece para ocupar el espacio restante */}
-        {/* La figura está DENTRO del flujo, no es absolute */}
-        <div className="flex-1 relative flex items-end justify-center overflow-hidden min-h-[220px]">
-          <motion.div
-            style={{
-              translateY: mobileKawsY,
-              scale: mobileKawsScale,
-              filter: mobileKawsBlur,
-            }}
-            className="absolute bottom-0 left-0 right-0 flex items-end justify-center h-full"
-          >
-            <Image
-              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png"
-              alt="KAWS Companion Premium"
-              width={1600}
-              height={1600}
-              className="object-contain object-bottom w-auto max-h-full contrast-[1.3] brightness-[1.05] saturate-[1.25]"
-              priority
-              quality={100}
-            />
-          </motion.div>
-        </div>
-
-        {/* ZONA 3: H1 + CTA — fondo sólido, SIEMPRE legible */}
+        {/* ZONA 3: H1 + CTA — Texto superpuesto inferior */}
         <motion.div
           style={{ opacity: mobileContentOp }}
-          className="flex-none w-full bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1] to-[#F2F2E1]/0 pt-6 pb-12 px-5 flex flex-col items-center text-center z-30 reveal-up-hero pointer-events-none select-none"
+          className="flex-none w-full bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1]/95 to-transparent pt-24 pb-14 px-5 flex flex-col items-center text-center z-30 reveal-up-hero pointer-events-none select-none relative"
         >
-          <div className="max-w-[280px]">
+          <div className="max-w-[280px] drop-shadow-[0px_0px_12px_rgba(242,242,225,1)] relative z-10">
             <h1 className="text-brand-brown font-sans text-[15px] font-medium leading-[1.4] tracking-tight uppercase">
               La primera{" "}
               <span className="font-serif italic font-black normal-case text-[1.15em]">Tienda Virtual</span>
