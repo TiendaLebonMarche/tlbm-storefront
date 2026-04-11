@@ -31,6 +31,7 @@
   "exclude": [
     "node_modules",
     ".next",
+    ".yarn",
     ".nyc_output",
     "coverage",
     "jest-coverage"

@@ -19,7 +19,12 @@ const FEATURED_LINKS = [
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
-    listRegions().then((regions: StoreRegion[]) => regions),
+    listRegions()
+      .then((regions: StoreRegion[]) => regions)
+      .catch((err) => {
+        console.warn("Nav: Failed to fetch regions, using empty fallback.")
+        return []
+      }),
     listLocales(),
     getLocale(),
   ])

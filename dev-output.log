@@ -1,0 +1,332 @@
+   ▲ Next.js 15.0.7
+   - Local:        http://localhost:8000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 3.8s
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 1839ms (91 modules)
+ ○ Compiling /[countryCode] ...
+
+[1m[33mwarn[39m[22m - The class `duration-[1.5s]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `duration-&lsqb;1.5s&rsqb;` to silence this warning.
+
+[1m[33mwarn[39m[22m - The class `duration-[1200ms]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `duration-&lsqb;1200ms&rsqb;` to silence this warning.
+
+[1m[33mwarn[39m[22m - The class `duration-[2s]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `duration-&lsqb;2s&rsqb;` to silence this warning.
+
+[1m[33mwarn[39m[22m - The class `ease-[cubic-bezier(0.19,1,0.22,1)]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.19,1,0.22,1)&rsqb;` to silence this warning.
+
+[1m[33mwarn[39m[22m - The class `ease-[cubic-bezier(0.25,0.46,0.45,0.94)]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.25,0.46,0.45,0.94)&rsqb;` to silence this warning.
+ ✓ Compiled /[countryCode] in 83.8s (6133 modules)
+ ✓ Compiled in 7.4s (2634 modules)
+ ✓ Compiled in 1343ms (2620 modules)
+MEDUSA_BACKEND_URL: https://backend-ixlt-production.up.railway.app
+PUBLISHABLE_KEY: pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758
+Initiating Medusa client with default headers:
+ {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+MEDUSA_BACKEND_URL: https://backend-ixlt-production.up.railway.app
+PUBLISHABLE_KEY: pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758
+Initiating Medusa client with default headers:
+ {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/regions
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/customers/me?fields=%2Aorders
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/regions
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/customers/me?fields=%2Aorders
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 401
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/regions
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/locales
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/collections?fields=%2Aproducts&limit=100&offset=0
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 200
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/collections?fields=id%2C%20handle%2C%20title&limit=100&offset=0
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 200
+
+Received response with status 200
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/collections?fields=id%2C%20handle%2C%20title&limit=100&offset=0
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 401
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/regions
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/locales
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/collections?fields=%2Aproducts&limit=100&offset=0
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 200
+
+Received response with status 404
+
+Received response with status 200
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/product-categories?fields=%2Acategory_children%2C%20%2Aproducts%2C%20%2Aparent_category%2C%20%2Aparent_category.parent_category&limit=100
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 200
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/products?limit=4&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/products?limit=50&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 404
+
+Received response with status 200
+
+Received response with status 200
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/product-categories?fields=%2Acategory_children%2C%20%2Aproducts%2C%20%2Aparent_category%2C%20%2Aparent_category.parent_category&limit=100
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/products?limit=4&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Performing request to:
+ URL: https://backend-ixlt-production.up.railway.app/store/products?limit=50&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C
+ Headers: {
+  "accept": "application/json",
+  "content-type": "application/json",
+  "x-publishable-api-key": "pk_a039ffb1e9fbc224244706a34f9e9bd752a70ea775b291696c31f146179c3758",
+  "authorization": "<REDACTED>"
+}
+
+Received response with status 200
+
+Received response with status 200
+
+Received response with status 200
+
+Received response with status 200
+
+Received response with status 200
+
+ GET /co 200 in 100450ms
+ │ GET https://backend-ixlt-production.up.railway.app/store/customers/me?fields=%2Aorders 401 in 1083ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/regions 200 in 1283ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/regions 200 in 179ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/locales 404 in 458ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/collections?fields=%2Aproducts&limit=100&offset=0 200 in 657ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/collections?fields=id%2C%20handle%2C%20title&limit=100&offset=0 200 in 525ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/product-categories?fields=%2Acategory_children%2C%20%2Aproducts%2C%20%2Aparent_category%2C%20%2Aparent_category.parent_category&limit=100 200 in 723ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/products?limit=4&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C 200 in 2255ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/products?limit=50&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C 200 in 3597ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+Received response with status 200
+
+ GET /co 200 in 11036ms
+ │ GET https://backend-ixlt-production.up.railway.app/store/regions 200 in 1236ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/customers/me?fields=%2Aorders 401 in 1485ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/regions 200 in 1ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/locales 404 in 752ms (cache skip)
+ │ │ Cache skipped reason: (cache-control: no-cache (hard refresh))
+ │ GET https://backend-ixlt-production.up.railway.app/store/collections?fields=id%2C%20handle%2C%20title&limit=100&offset=0 200 in 1040ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/collections?fields=%2Aproducts&limit=100&offset=0 200 in 790ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/product-categories?fields=%2Acategory_children%2C%20%2Aproducts%2C%20%2Aparent_category%2C%20%2Aparent_category.parent_category&limit=100 200 in 406ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/products?limit=4&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C 200 in 1944ms (cache hit)
+ │ GET https://backend-ixlt-production.up.railway.app/store/products?limit=50&offset=0&region_id=reg_01KJ8ST7DTG6GXF5MPSAT3XTMC&fields=%2Avariants.calculated_price%2C%2Bvariants.inventory_quantity%2C%2Avariants.images%2C%2Bmetadata%2C%2Btags%2C 200 in 3932ms (cache hit)
+[Error [TimeoutError]: The operation was aborted due to timeout] {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+ ○ Compiling /_error ...
+[Error [TimeoutError]: The operation was aborted due to timeout] {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}

@@ -37,16 +37,23 @@ async function getRegionMap(cacheId: string) {
       const json = await response.json()
 
       if (!response.ok) {
+        console.error("Middleware fetch error:", json.message)
         throw new Error(json.message)
       }
 
       return json
+    }).catch(err => {
+      console.error("Middleware connection error: Is the Medusa backend running?", err.message)
+      return { regions: [] }
     })
 
     if (!regions?.length) {
-      throw new Error(
-        "No regions found. Please set up regions in your Medusa Admin."
-      )
+       // Return a default region mapping to prevent crash during development if backend is down
+       if (process.env.NODE_ENV === "development") {
+         console.warn("Middleware: No regions found or backend unreachable. Using fallback mapping for development.")
+       } else {
+         throw new Error("No regions found. Please set up regions in your Medusa Admin.")
+       }
     }
 
     // Create a map of country codes to regions.
@@ -114,7 +121,13 @@ export async function middleware(request: NextRequest) {
 
   const regionMap = await getRegionMap(cacheId)
 
-  const countryCode = regionMap && (await getCountryCode(request, regionMap))
+  let countryCode = regionMap && (await getCountryCode(request, regionMap))
+
+  // Fallback for development if no country code could be determined (common when backend is down)
+  if (!countryCode && process.env.NODE_ENV === "development") {
+    countryCode = "co"
+    console.warn("Middleware: Unable to determine country code. Falling back to 'co' for development.")
+  }
 
   const urlHasCountryCode =
     countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
@@ -149,6 +162,10 @@ export async function middleware(request: NextRequest) {
     response = NextResponse.redirect(`${redirectUrl}`, 307)
   } else if (!urlHasCountryCode && !countryCode) {
     // Handle case where no valid country code exists (empty regions)
+    if (process.env.NODE_ENV === "development") {
+        // Double fallback for safety
+        return NextResponse.redirect(`${request.nextUrl.origin}/co${redirectPath}${queryString}`, 307)
+    }
     return new NextResponse(
       "No valid regions configured. Please set up regions with countries in your Medusa Admin.",
       { status: 500 }

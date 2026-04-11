@@ -168,8 +168,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                     </svg>
                   ),
-                  label: "Devoluciones en 30 días",
-                  sub: "sin preguntas, sin complicaciones"
+                  label: "Cumplimiento Legal y Retracto",
+                  sub: "Protección Ley 1480 de 2011"
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
@@ -243,6 +243,16 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-500 font-light leading-relaxed">
                   Estás respaldado. Tienes <strong>garantía de satisfacción</strong>. Si notas algo inusual o necesitas ayuda técnica, nuestro equipo en WhatsApp te acompañará en tiempo real para resolver el caso sin dudarlo.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-4">
+                <AccordionTrigger className="text-sm font-medium text-black hover:no-underline">
+                  Políticas de Garantía y Retracto
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-500 font-light leading-relaxed">
+                  Cuentas con derecho de retracto dentro de los <strong>5 días hábiles</strong> posteriores a la entrega (Ley 1480 de 2011).
+                  Además, te protegemos con garantía por defectos de fabricación (12 meses en tecnología, 3 meses en accesorios). <LocalizedClientLink href="/politica-de-devoluciones" className="text-brand-olive underline hover:opacity-80 transition-opacity">Ver proceso detallado</LocalizedClientLink>.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
