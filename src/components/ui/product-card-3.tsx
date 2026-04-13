@@ -74,7 +74,7 @@ export const ProductMostSold = ({
               className="w-[280px] md:w-[350px] flex-shrink-0"
             >
               <Card className="border-0 bg-white shadow-sm hover:shadow-2xl transition-all duration-700 overflow-hidden h-full flex flex-col group rounded-none">
-                <LocalizedClientLink href={`/products/${item.handle}`} className="block relative aspect-[4/5] overflow-hidden bg-gray-50">
+                <LocalizedClientLink href={`/productos/${item.handle}`} className="block relative aspect-[4/5] overflow-hidden bg-gray-50">
                   {item.imageSrc ? (
                     <Image
                       src={item.imageSrc}
@@ -105,14 +105,14 @@ export const ProductMostSold = ({
                       {item.price}
                     </span>
                   </div>
-                  <LocalizedClientLink href={`/products/${item.handle}`}>
+                  <LocalizedClientLink href={`/productos/${item.handle}`}>
                     <h3 className="text-lg md:text-xl font-serif font-bold text-brand-brown leading-tight h-14 line-clamp-2 hover:text-brand-olive transition-colors">
                       {item.name}
                     </h3>
                   </LocalizedClientLink>
                 </CardHeader>
                 <div className="p-6 pt-2 mt-auto bg-white">
-                  <LocalizedClientLink href={`/products/${item.handle}`}>
+                  <LocalizedClientLink href={`/productos/${item.handle}`}>
                     <Button className="w-full bg-brand-brown text-white hover:bg-brand-olive border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg shadow-black/5 group-hover:shadow-brand-brown/20">
                       Explorar Detalle
                     </Button>

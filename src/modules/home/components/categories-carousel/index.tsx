@@ -12,7 +12,7 @@ const CATEGORIES = [
   },
   {
     title: "Sonido",
-    handle: "/categories/parlantes",
+    handle: "/store?q=parlante",
     img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=600",
   },
   {

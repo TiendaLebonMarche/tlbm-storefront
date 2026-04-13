@@ -8,52 +8,52 @@ import { useEffect, useRef, useState } from "react"
 const CATEGORIES = [
   {
     title: "Mundo Tech",
-    handle: "/categories/mundo-tech",
+    handle: "/store?q=tech",
     img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200",
   },
   {
     title: "Audio & Sonido",
-    handle: "/categories/audio-sonido",
+    handle: "/store?q=audio",
     img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800",
   },
   {
     title: "Gadgets Exóticos",
-    handle: "/categories/gadgets-exoticos",
+    handle: "/store?q=gadgets",
     img: "https://images.unsplash.com/photo-1558679908-541bcf1249ff?q=80&w=600",
   },
   {
     title: "Starlink",
-    handle: "/categories/starlink",
+    handle: "/store?q=starlink",
     img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600",
   },
   {
     title: "Gamer & Oficina",
-    handle: "/categories/gamer-oficina",
+    handle: "/store?q=gamer",
     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800",
   },
   {
     title: "Drones",
-    handle: "/categories/drones",
+    handle: "/store?q=drone",
     img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?q=80&w=800",
   },
   {
     title: "Smartwatch",
-    handle: "/categories/smartwatch",
+    handle: "/store?q=smartwatch",
     img: "https://images.unsplash.com/photo-1508685096489-7a689bdcd046?q=80&w=600",
   },
   {
     title: "Parlantes",
-    handle: "/categories/parlantes",
+    handle: "/store?q=parlante",
     img: "https://images.unsplash.com/photo-1589003077984-894e133dabab?q=80&w=600",
   },
   {
     title: "Decoración Oficina",
-    handle: "/categories/decoracion-oficina",
+    handle: "/store?q=decoracion",
     img: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=600",
   },
   {
     title: "Ofertones",
-    handle: "/categories/oferton",
+    handle: "/store?q=oferta",
     img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=600",
   }
 ]
