@@ -35,7 +35,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       component: <ProductInfoTab product={product} />,
     },
     {
-      label: "Envío desde Bucaramanga",
+      label: "Envíos, Retracto y Garantías",
       component: <ShippingInfoTab />,
     },
   ]
@@ -88,22 +88,22 @@ const ShippingInfoTab = () => {
         {[
           {
             icon: <FastDelivery />,
-            title: "Logística Prioritaria",
-            desc: "Despachamos desde Bucaramanga. Entregas en 24h locales o 2 a 5 días hábiles para el resto de Colombia. Rastreo garantizado, aquí no lo dejamos en visto."
+            title: "Modelo Fast-Track & Nacional",
+            desc: "Bucaramanga AM: Entrega garantizada en 24h. Resto de Colombia: Depende de transportadoras externas (2 a 5 días hábiles). Rastreo incluido."
           },
           {
             icon: <Refresh />,
-            title: "Políticas de Retorno",
-            desc: "Garantizamos su satisfacción total. Si la pieza no cumple sus expectativas, dispone de 30 días para trámites de cambio."
+            title: "Derecho de Retracto (Ley 1480/2011)",
+            desc: "Tienes 5 días hábiles tras recibir el producto para devolverlo si cambias de opinión. El costo del flete de retorno corre por cuenta del comprador."
           },
           {
             icon: <Back />,
-            title: "Garantía de Calidad",
-            desc: "Cero 'gato por liebre'. Solo vendemos productos legítimos y originales, con los estándares de calidad de la Ley 1480 y soporte humano por WhatsApp."
+            title: "Garantías & Reversión de Pago",
+            desc: "Reembolso protegido y reversión de pago por ley ante producto fallido. Ofrecemos soporte directo por WhatsApp, sin robots para tus quejas."
           }
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-x-6">
-            <div className="flex-shrink-0 text-brand-black p-3 bg-gray-50/50 rounded-full">
+            <div className="flex-shrink-0 text-brand-olive p-3 bg-brand-olive/10 rounded-full">
               {item.icon}
             </div>
             <div className="space-y-2">

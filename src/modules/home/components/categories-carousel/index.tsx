@@ -107,7 +107,7 @@ export default function CategoriesCarousel() {
                 transition: "opacity 600ms ease, transform 600ms ease",
               }}
             >
-              <LocalizedClientLink href={cat.handle} className="group block">
+              <div className="group block cursor-default">
                 <div className="aspect-[3/4] overflow-hidden relative bg-gray-50">
                   <Image
                     src={cat.img}
@@ -141,7 +141,7 @@ export default function CategoriesCarousel() {
                     {cat.title}
                   </h3>
                 </div>
-              </LocalizedClientLink>
+              </div>
             </div>
           )
         })}

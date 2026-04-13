@@ -63,24 +63,27 @@ export default async function Footer() {
 
         <div>
           <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-brand-brown opacity-40">
-            Ayuda & Soporte
+            Legal & Soporte
           </h4>
           <ul className="space-y-4 text-sm font-medium text-brand-brown">
-            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Envíos & Entregas</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Garantías</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Términos de Servicio</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/store" className="hover:text-brand-olive transition-colors">Contacto</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/legal/terminos" className="hover:text-brand-olive transition-colors">Términos y Condiciones</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/legal/privacidad" className="hover:text-brand-olive transition-colors">Privacidad y Habeas Data</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/legal/devoluciones" className="hover:text-brand-olive transition-colors">Garantías y Devoluciones</LocalizedClientLink></li>
+            <li><LocalizedClientLink href="/legal/envios" className="hover:text-brand-olive transition-colors">Envíos & Entregas</LocalizedClientLink></li>
           </ul>
         </div>
 
-        <div className="flex flex-col gap-y-6">
+        <div className="flex flex-col gap-y-4">
           <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2 text-brand-brown opacity-40">
-            Atención VIP por WhatsApp
+            Contacto & Empresa
           </h4>
-          <p className="text-brand-gray text-xs leading-relaxed max-w-[200px] mb-2">
-            Un gusto saludarte. ¿Buscas algo muy exclusivo o un libro de colección? Escríbenos y nos encargamos de traértelo.
-          </p>
-          <a href="https://wa.me/573027567783" className="text-lg font-sans font-bold text-brand-brown hover:text-brand-olive transition-colors" target="_blank" rel="noreferrer">
+          <div className="text-brand-gray text-xs leading-relaxed max-w-[250px] space-y-1">
+            <p className="font-bold text-brand-brown">Tienda Le Bon Marché</p>
+            <p>NIT: 901.000.000-X</p>
+            <p>Bucaramanga, Santander, Colombia</p>
+            <p className="mt-2"><a href="mailto:soporte@tiendalebonmarche.com" className="hover:text-brand-olive underline underline-offset-2">soporte@tiendalebonmarche.com</a></p>
+          </div>
+          <a href="https://wa.me/573027567783" className="text-xl mt-2 font-sans font-bold text-brand-brown hover:text-brand-olive transition-colors" target="_blank" rel="noreferrer">
             +57 302 756 7783
           </a>
         </div>
