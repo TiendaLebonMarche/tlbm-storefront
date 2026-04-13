@@ -1,63 +1,80 @@
 import { Metadata } from "next"
-import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Términos y Condiciones | Tienda Le Bon Marché",
   description: "Términos y condiciones de uso y compra en nuestra plataforma.",
 }
 
+const SIDEBAR_LINKS = [
+  { label: "Términos y Condiciones", href: "/legal/terminos", active: true },
+  { label: "Privacidad y Habeas Data", href: "/legal/privacidad", active: false },
+  { label: "Garantías y Devoluciones", href: "/legal/devoluciones", active: false },
+  { label: "Envíos y Entregas", href: "/legal/envios", active: false },
+]
+
 export default function TerminosPage() {
   return (
-    <div className="bg-[#fafaf5] min-h-screen pb-20">
-      {/* Hero */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] bg-brand-brown">
-        <Image
-          src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2000"
-          alt="Términos y Condiciones legales"
-          fill
-          className="object-cover opacity-40 mix-blend-overlay"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#fafaf5] to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-brand-gold mb-4">
-            Marco Legal Corporativo
-          </span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">
-            Términos y Condiciones
-          </h1>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 -mt-16 md:-mt-24 relative z-10">
-        <div className="bg-white p-8 md:p-16 shadow-2xl border border-gray-100 rounded-sm">
-          <div className="prose prose-lg max-w-none text-brand-gray">
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mb-4">1. Aspectos Generales</h2>
-            <p>
-              Bienvenido a Tienda Le Bon Marché. El presente documento establece el contrato de adhesión bajo el cual usted, como usuario y consumidor, accede a los servicios, productos y plataforma tecnológica administrada por nuestra compañía (con domicilio en Bucaramanga, Colombia). Las presentes normas se rigen bajo la Ley 1480 de 2011 (Estatuto del Consumidor).
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">2. Uso del Sitio y Precios</h2>
-            <p>
-              Nos reservamos el derecho de modificar o actualizar la información del catálogo en cualquier momento. Utilizamos sistemas de <strong>Inteligencia Artificial (Bots de arbitraje)</strong> diseñados exclusiva y éticamente para asegurar que usted acceda a los precios más competitivos del mercado transfronterizo. Todos los precios están en pesos colombianos (COP) e incluyen IVA salvo que se indique lo contrario.
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">3. Proceso de Compra y Reversión del Pago</h2>
-            <p>
-              Toda compra está sujeta a verificación de stock y aprobación bancaria. De acuerdo con la normatividad colombiana, procede la <strong>Reversión del Pago</strong> cuando usted sea objeto de fraude, la transacción no haya sido autorizada, o el producto adquirido no sea recibido en los plazos estipulados o difiera drásticamente de lo ofertado. Dicha solicitud deberá notificarse a soporte@tiendalebonmarche.com en un plazo máximo de 5 días hábiles siguientes al evento.
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">4. Propiedad Intelectual y Restricciones</h2>
-            <p>
-              El contenido audiovisual, código, diseño y curaduría ("look and feel") son propiedad exclusiva de Tienda Le Bon Marché. Se prohíbe la reproducción total o parcial con fines comerciales sin autorización expresa.
-            </p>
-
-            <div className="mt-16 p-6 bg-brand-soft border-l-4 border-brand-olive">
-              <p className="text-sm font-bold text-brand-brown m-0 uppercase tracking-widest">
-                Última actualización: Agosto de 2024
-              </p>
+    <div className="bg-[#fafaf5] min-h-screen pt-32 pb-32 selection:bg-brand-olive/20">
+      <div className="max-w-[85rem] mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+          {/* Sidebar - Sticky */}
+          <aside className="lg:w-1/4 flex-shrink-0">
+            <div className="sticky top-40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-10 block">
+                Marco Legal
+              </span>
+              <nav className="flex flex-col gap-y-6 text-sm font-sans">
+                {SIDEBAR_LINKS.map((link) => (
+                  <a 
+                    key={link.href}
+                    href={link.href} 
+                    className={`transition-colors duration-300 ${link.active ? 'text-[#322214] font-bold' : 'text-gray-500 hover:text-[#322214]'}`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
             </div>
-          </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="lg:w-3/4 max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#322214] mb-16 tracking-tight leading-tight">
+              Términos y Condiciones
+            </h1>
+            
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#322214] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-gray-600 prose-p:font-light prose-p:leading-loose text-gray-600 max-w-none">
+              
+              <p className="text-xl md:text-2xl font-serif text-[#322214] leading-relaxed mb-16">
+                Bienvenido a Tienda Le Bon Marché. Este documento establece el contrato de adhesión bajo el cual usted accede a nuestros servicios y plataforma, rigiéndonos bajo la Ley 1480 de 2011 (Estatuto del Consumidor).
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Uso del Sitio y Algoritmos</h2>
+              <p>
+                Nos reservamos el derecho de modificar o actualizar la información del catálogo en cualquier momento. Utilizamos <strong>Sistemas de Arbitraje (Bots)</strong> diseñados ética y exclusivamente para asegurar que usted acceda a los precios más competitivos del mercado transfronterizo. 
+              </p>
+              <p>
+                Todos los precios listados se expresan en pesos colombianos (COP), contemplando los impuestos requeridos por la legislación aduanera y tributaria, salvo indicación expresa contraria en la ficha de producto.
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Reversión de Pago y Seguridad</h2>
+              <p>
+                De acuerdo con la normatividad nacional, procede la figura de Reversión del Pago en circunstancias taxativas: si usted es objeto de fraude, la transacción no fue autorizada, o el producto adquirido difiere drásticamente de lo ofertado u omitió entregarse. Esta solicitud debe tramitarse dentro de los cinco (5) días hábiles siguientes al evento escribiendo a <strong>soporte@tiendalebonmarche.com</strong>.
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Propiedad Intelectual</h2>
+              <p>
+                El diseño de interfaces, selección tipográfica, código, paleta cromática y la curaduría curatorial ("look and feel") de esta plataforma están protegidos por derechos de autor. Su reproducción, scraping comercial o copia parasitaria están estrictamente prohibidas y son sujetas de acción legal.
+              </p>
+
+              <div className="mt-24 pt-8 border-t border-gray-200">
+                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+                  Última revisión: Octubre 2024
+                </p>
+              </div>
+
+            </div>
+          </main>
         </div>
       </div>
     </div>

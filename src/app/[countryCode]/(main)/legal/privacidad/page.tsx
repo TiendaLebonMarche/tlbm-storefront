@@ -1,71 +1,82 @@
 import { Metadata } from "next"
-import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Privacidad y Habeas Data | Tienda Le Bon Marché",
   description: "Política de tratamiento de datos y privacidad.",
 }
 
+const SIDEBAR_LINKS = [
+  { label: "Términos y Condiciones", href: "/legal/terminos", active: false },
+  { label: "Privacidad y Habeas Data", href: "/legal/privacidad", active: true },
+  { label: "Garantías y Devoluciones", href: "/legal/devoluciones", active: false },
+  { label: "Envíos y Entregas", href: "/legal/envios", active: false },
+]
+
 export default function PrivacidadPage() {
   return (
-    <div className="bg-[#fafaf5] min-h-screen pb-20">
-      {/* Hero */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] bg-[#322214]">
-        <Image
-          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000"
-          alt="Seguridad y Protección de Datos"
-          fill
-          className="object-cover opacity-30 mix-blend-overlay"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#fafaf5] to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-brand-gold mb-4">
-            Ley 1581 de 2012
-          </span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">
-            Privacidad y Habeas Data
-          </h1>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 -mt-16 md:-mt-24 relative z-10">
-        <div className="bg-white p-8 md:p-16 shadow-2xl border border-gray-100 rounded-sm">
-          <div className="prose prose-lg max-w-none text-brand-gray">
-            
-            <p className="font-bold text-brand-brown text-xl mb-8">
-              En Tienda Le Bon Marché la privacidad no es letra pequeña, es parte de nuestro servicio premium. Nos tomamos en serio la custodia de su información bajo estrictos estándares criptográficos (SSL).
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mb-4">1. Finalidad en el Uso de Datos</h2>
-            <p>
-              Requerimos información primaria (nombre, correo, celular y dirección física civil) estrictamente para:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mt-4 mb-8">
-              <li>Efectuar la logística, despacho y entrega eficiente mediante nuestro modelo Fast-Track y operadores nacionales.</li>
-              <li>Tramitar la facturación electrónica correspondiente.</li>
-              <li>Atención personalizada directa (VIP) a través de canales como WhatsApp.</li>
-            </ul>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">2. Transparencia Algorítmica e Inteligencia Artificial</h2>
-            <p>
-              Como pilar de nuestro modelo de negocio, Tienda Le Bon Marché integra algoritmos de recopilación automatizada ("bots") e Inteligencia Artificial para el monitoreo y arbitraje de precios globales de proveedores exóticos y tecnológicos. Los datos de navegación de nuestros usuarios nos permiten afinar este modelo matemático para encontrar oportunidades reales y ofrecer el <strong>mejor precio ético posible</strong> en Colombia, mitigando la asimetría de la información a su favor. No comercializamos su data con terceros ajenos al ecosistema de compra.
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">3. Seguridad Transaccional</h2>
-            <p>
-              Toda su experiencia, especialmente la pasarela de pagos, se procesa bajo conexiones seguras <code>HTTPS</code> e infraestructuras con certificación bancaria internacional. Nosotros no almacenamos los datos completos de su tarjeta de crédito.
-            </p>
-
-            <h2 className="text-2xl font-serif font-bold text-brand-brown mt-12 mb-4">4. Política de Cookies</h2>
-            <p>
-              Utilizamos <strong>cookies técnicas estrictamente necesarias</strong> requeridas para mantener activa su sesión, habilitar el carrito de compras nativo de nuestro ecosistema (MedusaJS) y validar los tokens de seguridad.
-            </p>
-
-            <div className="mt-12 pt-8 border-t border-gray-100 flex items-center justify-between">
-              <p className="text-sm">Para consultas sobre sus datos o ejercer sus derechos de actualización/supresión, escríbanos a: <strong>soporte@tiendalebonmarche.com</strong></p>
+    <div className="bg-[#fafaf5] min-h-screen pt-32 pb-32 selection:bg-brand-olive/20">
+      <div className="max-w-[85rem] mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+          {/* Sidebar - Sticky */}
+          <aside className="lg:w-1/4 flex-shrink-0">
+            <div className="sticky top-40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-10 block">
+                Marco Legal
+              </span>
+              <nav className="flex flex-col gap-y-6 text-sm font-sans">
+                {SIDEBAR_LINKS.map((link) => (
+                  <a 
+                    key={link.href}
+                    href={link.href} 
+                    className={`transition-colors duration-300 ${link.active ? 'text-[#322214] font-bold' : 'text-gray-500 hover:text-[#322214]'}`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
             </div>
-          </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="lg:w-3/4 max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#322214] mb-16 tracking-tight leading-tight">
+              Privacidad y <br className="hidden md:block" /> Habeas Data
+            </h1>
+            
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#322214] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-gray-600 prose-p:font-light prose-li:text-gray-600 prose-li:font-light prose-p:leading-loose text-gray-600 max-w-none">
+              
+              <p className="text-xl md:text-2xl font-serif text-[#322214] leading-relaxed mb-16">
+                En Tienda Le Bon Marché la privacidad no es letra pequeña, es parte de nuestro servicio premium. Nos tomamos en serio la custodia de su información bajo estrictos estándares.
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Finalidad y Uso de Datos</h2>
+              <p>
+                Bajo la Ley 1581 de 2012, informamos que requerimos su información primaria y civil únicamente para:
+              </p>
+              <ul className="mb-10 mt-4 space-y-3">
+                <li>Ejecutar nuestra logística de despachos y el modelo Fast-Track.</li>
+                <li>Tramitar correctamente la facturación electrónica requerida por la DIAN.</li>
+                <li>Brindar atención VIP por medio de nuestros asesores directos.</li>
+              </ul>
+
+              <h2 className="text-3xl mt-16 mb-6">Inteligencia Artificial y Transparencia</h2>
+              <p>
+                Como pilar arquitectónico de Le Bon Marché, integramos algoritmos automatizados ("bots") para el <strong>arbitraje de precios internacionales</strong>. Utilizamos metadatos de navegación anónima para afinar este motor predictivo, asegurando neutralizar la asimetría del mercado a su favor, garantizando importaciones a costos justos. Jamás comercializamos estos perfiles algorítmicos.
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Criptografía y Cookies</h2>
+              <p>
+                Toda experiencia transaccional fluye en conductos cifrados <code>HTTPS</code> e infraestructuras certificadas a nivel bancario. Respecto a los rastreadores web, empleamos un sistema minimalista de <strong>Cookies Técnicas</strong>; son obligatorias para conservar el estado de su cesta de compras (sistema MedusaJS) y auditar la seguridad de sus pagos.
+              </p>
+
+              <div className="mt-24 pt-8 border-t border-gray-200">
+                <p className="text-sm font-light italic">
+                  Para ejercer rectificación o supresión inmediata de sus bases, envíe un oficio digital a <strong>soporte@tiendalebonmarche.com</strong>.
+                </p>
+              </div>
+
+            </div>
+          </main>
         </div>
       </div>
     </div>
