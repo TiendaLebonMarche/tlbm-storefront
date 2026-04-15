@@ -27,7 +27,7 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
 
-  const springConfig = { stiffness: 35, damping: 30, restDelta: 0.001 }
+  const springConfig = { stiffness: 25, damping: 45, restDelta: 0.001 }
   const xSpring = useSpring(0, springConfig)
   const ySpring = useSpring(0, springConfig)
 
@@ -128,12 +128,12 @@ const Hero = () => {
           {/* Difuminado suave por detrás del texto para contraste con la imagen negra gigante */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#F2F2E1]/90 via-[#F2F2E1]/60 to-transparent blur-sm z-[-1]" />
           
-          <p className="font-sans text-brand-brown text-[11.5px] leading-[1.25] uppercase tracking-tight max-w-[270px] drop-shadow-[0px_0px_10px_rgba(242,242,225,1)]">
-            <span className="font-black italic underline decoration-[#A6FF00] decoration-[3px] underline-offset-[-1px]">
+          <p className="font-sans text-brand-brown text-[12px] leading-[1.3] uppercase tracking-[0.05em] max-w-[280px] drop-shadow-[0px_0px_12px_rgba(242,242,225,1)]">
+            <span className="font-extrabold italic underline decoration-[#A6FF00]/80 decoration-[3px] underline-offset-[3px] transition-all duration-500 hover:decoration-[#A6FF00]">
               NORMAL, QUE NO AGUANTEN LA PRESIÓN,
             </span>
-            <span className="mt-2 block font-bold opacity-70">MANEJAMOS PRODUCTOS</span>
-            <span className="block font-black text-[1.1em]">ORIGINALES Y EXÓTICOS</span>
+            <span className="mt-3 block font-medium opacity-80 tracking-wider">MANEJAMOS PRODUCTOS</span>
+            <span className="block font-black text-[1.15em] tracking-wide mt-0.5">ORIGINALES Y EXÓTICOS</span>
           </p>
         </motion.div>
 
@@ -143,18 +143,18 @@ const Hero = () => {
           className="flex-none w-full bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1]/95 to-transparent pt-24 pb-14 px-5 flex flex-col items-center text-center z-30 reveal-up-hero pointer-events-none select-none relative"
         >
           <div className="max-w-[300px] drop-shadow-[0px_0px_12px_rgba(242,242,225,1)] relative z-10">
-            <h1 className="text-brand-brown font-sans text-[16px] font-light leading-[1.4] tracking-wide relative">
-              La primera <span className="font-serif italic font-medium">tienda virtual</span>
+            <h1 className="text-brand-brown font-sans text-[17px] font-light leading-[1.45] tracking-[0.02em] relative">
+              La primera <span className="font-serif italic font-normal tracking-normal">tienda virtual</span>
               <br />
-              en <span className="font-medium tracking-tight">Bucaramanga</span>.
-              <span className="block mt-5 text-[0.75em] font-medium opacity-50 tracking-[0.16em] uppercase">
+              en <span className="font-normal tracking-[0.05em]">Bucaramanga</span>.
+              <span className="block mt-6 text-[0.7em] font-light opacity-60 tracking-[0.25em] uppercase transition-opacity duration-500">
                 Con un ejército de bots,
               </span>
-              <span className="block mt-1.5">
-                buscando los <span className="font-serif italic font-medium opacity-90">mejores productos</span>
+              <span className="block mt-2">
+                buscando los <span className="font-serif italic font-normal opacity-90 tracking-normal">mejores productos</span>
               </span>
-              <span className="block mt-4 text-[1.15em] font-medium tracking-widest uppercase items-center justify-center flex gap-1.5">
-                Para ti <span className="text-[0.6em] mt-0.5 opacity-90 grayscale-[0.2]">❤️</span>
+              <span className="block mt-5 text-[1.2em] font-light tracking-[0.2em] uppercase items-center justify-center flex gap-2">
+                Para ti <span className="text-[0.65em] mt-0.5 opacity-80 grayscale-[0.3] hover:scale-110 transition-transform duration-300">❤️</span>
               </span>
             </h1>
           </div>
@@ -221,18 +221,18 @@ const Hero = () => {
         {/* Izquierda: H1 */}
         <div className="flex flex-col items-start text-left pt-8 lg:pt-10 reveal-up-hero">
           <div className="max-w-[340px] md:max-w-[400px] lg:max-w-[460px] xl:max-w-[500px]">
-            <h1 className="text-brand-brown font-sans text-[17px] md:text-[19px] lg:text-[22px] xl:text-[26px] font-light leading-[1.35] tracking-wide relative">
-              La primera <span className="font-serif italic font-medium">tienda virtual</span>
+            <h1 className="text-brand-brown font-sans text-[18px] md:text-[20px] lg:text-[24px] xl:text-[28px] font-light leading-[1.4] tracking-[0.03em] relative transition-all duration-700 ease-out">
+              La primera <span className="font-serif italic font-normal tracking-normal">tienda virtual</span>
               <br />
-              en <span className="font-medium tracking-tight">Bucaramanga</span>.
-              <span className="block mt-6 md:mt-8 text-[0.7em] font-medium opacity-50 tracking-[0.2em] uppercase">
+              en <span className="font-normal tracking-[0.05em]">Bucaramanga</span>.
+              <span className="block mt-7 md:mt-9 text-[0.65em] font-light opacity-60 tracking-[0.25em] uppercase hover:opacity-80 transition-opacity duration-500">
                 Con un ejército de bots,
               </span>
-              <span className="block mt-2">
-                buscando los <span className="font-serif italic font-medium opacity-90">mejores productos</span>
+              <span className="block mt-2.5">
+                buscando los <span className="font-serif italic font-normal opacity-90 tracking-normal">mejores productos</span>
               </span>
-              <span className="block mt-5 md:mt-6 text-[1.15em] font-medium tracking-widest uppercase flex items-center justify-start gap-2">
-                Para ti <span className="text-[0.6em] relative top-0.5 opacity-90 grayscale-[0.2]">❤️</span>
+              <span className="block mt-6 md:mt-8 text-[1.1em] font-light tracking-[0.2em] uppercase flex items-center justify-start gap-2.5">
+                Para ti <span className="text-[0.65em] relative top-0.5 opacity-80 grayscale-[0.3] hover:scale-110 transition-transform duration-300 cursor-default">❤️</span>
               </span>
             </h1>
           </div>
@@ -244,12 +244,12 @@ const Hero = () => {
         {/* Derecha: Slogan */}
         <div className="flex flex-col items-end text-right pt-8 lg:pt-10 reveal-right-hero delay-200">
           <div className="max-w-[300px] lg:max-w-[380px] xl:max-w-[420px]">
-            <p className="font-sans text-brand-brown text-[13px] lg:text-[17px] xl:text-[20px] leading-[1.15] uppercase tracking-tight text-right">
-              <span className="font-black italic underline decoration-[#A6FF00] decoration-[4px] lg:decoration-[6px] underline-offset-[-2px] lg:underline-offset-[-3px]">
+            <p className="font-sans text-brand-brown text-[14px] lg:text-[18px] xl:text-[21px] leading-[1.2] uppercase tracking-[0.05em] text-right transition-all duration-700">
+              <span className="font-extrabold italic underline decoration-[#A6FF00]/80 decoration-[3px] lg:decoration-[5px] underline-offset-[3px] transition-all duration-500 hover:decoration-[#A6FF00]">
                 NORMAL, QUE NO AGUANTEN LA PRESIÓN,
               </span>
-              <span className="mt-4 block font-bold opacity-75">MANEJAMOS PRODUCTOS</span>
-              <span className="block font-black text-[1.1em] lg:text-[1.2em]">ORIGINALES Y EXÓTICOS</span>
+              <span className="mt-4 block font-medium opacity-80 tracking-wider">MANEJAMOS PRODUCTOS</span>
+              <span className="block font-black text-[1.15em] lg:text-[1.25em] tracking-wide mt-1">ORIGINALES Y EXÓTICOS</span>
             </p>
           </div>
         </div>
