@@ -100,10 +100,15 @@ const Hero = () => {
         {/* BLOQUE SUPERIOR: HEADER TEXT */}
         <div className="w-full flex-none pt-12 pb-6 px-6 z-30">
           <motion.div style={{ opacity: mobileContentOp, y: mobileKawsY }} className="flex flex-col gap-4 text-center items-center">
-            <h1 className="text-brand-brown font-serif text-[42px] font-normal leading-[1] tracking-[-0.02em] relative">
+            <h1 className="text-brand-brown font-serif text-[46px] font-normal leading-[1] tracking-[-0.02em] relative z-20">
               Tienda Virtual
               <br />
-              <span className="font-sans italic font-light tracking-[0.02em] text-[26px] opacity-80">Bucaramanga.</span>
+              <span className="relative inline-block font-sans italic font-light tracking-[0.02em] text-[32px] opacity-90 mt-2">
+                Bucaramanga.
+                <svg className="absolute w-[105%] h-[16px] -bottom-[6px] -left-[2.5%] text-brand-olive/80" viewBox="0 0 200 20" preserveAspectRatio="none">
+                  <path d="M5,15 Q50,5 100,12 T195,15" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+              </span>
             </h1>
             <p className="mt-1 text-[13px] font-sans font-light tracking-[0.05em] opacity-70 text-brand-brown max-w-[280px]">
               Ejército de bots buscando los mejores productos.
@@ -193,15 +198,20 @@ const Hero = () => {
         {/* Izquierda: H1 */}
         <div className="flex flex-col items-start text-left pt-8 lg:pt-10 reveal-up-hero">
           <div className="max-w-[340px] md:max-w-[400px] lg:max-w-[460px] xl:max-w-[500px]">
-            <h1 className="text-brand-brown font-sans text-[18px] md:text-[20px] lg:text-[24px] xl:text-[28px] font-light leading-[1.4] tracking-[0.03em] relative transition-all duration-700 ease-out">
-              La primera <span className="font-serif italic font-normal tracking-normal">tienda virtual</span>
+            <h1 className="text-brand-brown font-sans text-[20px] md:text-[22px] lg:text-[26px] xl:text-[32px] font-light leading-[1.3] tracking-[0.01em] relative transition-all duration-700 ease-out z-20">
+              La primera <span className="font-serif italic font-normal tracking-wide text-[1.1em]">tienda virtual</span>
               <br />
-              en <span className="font-normal tracking-[0.05em]">Bucaramanga</span>.
-              <span className="block mt-7 md:mt-9 text-[0.65em] font-light opacity-60 tracking-[0.25em] uppercase hover:opacity-80 transition-opacity duration-500">
+              en <span className="relative inline-block font-serif italic text-[1.25em] font-medium tracking-[0.02em] mt-1 pr-1">
+                Bucaramanga.
+                <svg className="absolute w-[105%] h-[16px] xl:h-[20px] -bottom-[4px] xl:-bottom-[6px] -left-[2.5%] text-[#A6FF00]" viewBox="0 0 200 20" preserveAspectRatio="none">
+                  <path d="M5,15 Q50,5 100,12 T195,15" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+                </svg>
+              </span>
+              <span className="block mt-7 md:mt-10 text-[0.6em] font-sans font-medium opacity-50 tracking-[0.25em] uppercase hover:opacity-80 transition-opacity duration-500">
                 Con un ejército de bots,
               </span>
-              <span className="block mt-2.5">
-                buscando los <span className="font-serif italic font-normal opacity-90 tracking-normal">mejores productos</span>
+              <span className="block mt-2 font-sans font-light">
+                buscando los <span className="font-serif italic font-normal opacity-90 tracking-normal text-[1.05em]">mejores productos</span>
               </span>
               <span className="block mt-6 md:mt-8 text-[1.1em] font-light tracking-[0.2em] uppercase flex items-center justify-start gap-2.5">
                 Para ti <span className="text-[0.65em] relative top-0.5 opacity-80 grayscale-[0.3] hover:scale-110 transition-transform duration-300 cursor-default">❤️</span>
@@ -217,11 +227,14 @@ const Hero = () => {
         <div className="flex flex-col items-end text-right pt-8 lg:pt-10 reveal-right-hero delay-200">
           <div className="max-w-[300px] lg:max-w-[380px] xl:max-w-[420px]">
             <p className="font-sans text-brand-brown text-[14px] lg:text-[18px] xl:text-[21px] leading-[1.2] uppercase tracking-[0.05em] text-right transition-all duration-700">
-              <span className="font-extrabold italic underline decoration-[#A6FF00]/80 decoration-[3px] lg:decoration-[5px] underline-offset-[3px] transition-all duration-500 hover:decoration-[#A6FF00]">
+              <span className="relative inline-block font-extrabold italic text-[1.1em]">
                 NORMAL, QUE NO AGUANTEN LA PRESIÓN,
+                <svg className="absolute w-[102%] h-[12px] xl:h-[16px] -bottom-[4px] -left-[1%] text-[#A6FF00]" viewBox="0 0 200 20" preserveAspectRatio="none">
+                  <path d="M2,16 Q45,2 100,10 T198,14" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                </svg>
               </span>
-              <span className="mt-4 block font-medium opacity-80 tracking-wider">MANEJAMOS PRODUCTOS</span>
-              <span className="block font-black text-[1.15em] lg:text-[1.25em] tracking-wide mt-1">ORIGINALES Y EXÓTICOS</span>
+              <span className="mt-5 block font-medium opacity-70 tracking-wider text-[0.9em]">MANEJAMOS PRODUCTOS</span>
+              <span className="block font-black text-[1.25em] lg:text-[1.35em] tracking-wider mt-1.5 font-serif italic">ORIGINALES Y EXÓTICOS</span>
             </p>
           </div>
         </div>
