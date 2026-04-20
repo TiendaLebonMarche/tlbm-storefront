@@ -93,62 +93,58 @@ const Hero = () => {
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════
-          LAYOUT MÓVIL (<md) — Minimalista & Estructurado (Grid tech)
+          LAYOUT MÓVIL (<md) — Satoshi Storefront (Luxury Minimalist)
          ══════════════════════════════════════════════════════════════════ */}
       <div className="md:hidden flex flex-col relative w-full pt-[80px]" style={{ minHeight: "100svh" }}>
         
         {/* BLOQUE SUPERIOR: HEADER TEXT */}
-        <div className="w-full flex-none pt-4 pb-6 px-5 border-b border-brand-brown/10 z-30 bg-[#F2F2E1]">
-          <motion.div style={{ opacity: mobileContentOp, y: mobileKawsY }} className="flex flex-col gap-2">
-            <p className="font-mono text-[10px] uppercase tracking-[0.15em] opacity-50">SZN 2026 // ORIGINALES</p>
-            <h1 className="text-brand-brown font-sans text-[28px] font-black leading-[1.1] tracking-tighter uppercase relative">
+        <div className="w-full flex-none pt-12 pb-6 px-6 z-30">
+          <motion.div style={{ opacity: mobileContentOp, y: mobileKawsY }} className="flex flex-col gap-4 text-center items-center">
+            <h1 className="text-brand-brown font-serif text-[42px] font-normal leading-[1] tracking-[-0.02em] relative">
               Tienda Virtual
               <br />
-              <span className="font-serif italic font-normal tracking-normal text-[26px]">Bucaramanga</span>.
+              <span className="font-sans italic font-light tracking-[0.02em] text-[26px] opacity-80">Bucaramanga.</span>
             </h1>
-            <p className="mt-2 text-[11px] font-medium tracking-wide opacity-80 uppercase max-w-[280px]">
+            <p className="mt-1 text-[13px] font-sans font-light tracking-[0.05em] opacity-70 text-brand-brown max-w-[280px]">
               Ejército de bots buscando los mejores productos.
             </p>
           </motion.div>
         </div>
 
         {/* BLOQUE CENTRAL: IMAGEN */}
-        <div className="relative flex-1 w-full min-h-[350px] overflow-hidden bg-[#F2F2E1]/50 border-b border-brand-brown/10 flex items-center justify-center">
+        <div className="relative flex-1 w-full min-h-[400px] flex items-center justify-center z-10 pointer-events-none">
           <motion.div
             style={{
               translateY: mobileKawsY,
               scale: mobileKawsScale,
               filter: mobileKawsBlur,
             }}
-            className="absolute inset-0 w-full h-full flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center p-6"
           >
             <Image
               src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1775753741/upscalemedia-transformed_4_e0iqwf.png"
               alt="KAWS Companion Premium"
               width={1600}
               height={1600}
-              className="object-contain w-[140%] max-w-[160%] scale-[1.1] origin-center contrast-[1.25] brightness-[1.05] saturate-[1.1]"
+              className="object-contain w-full h-full contrast-[1.25] brightness-[1.05] saturate-[1.1]"
               priority
               quality={100}
             />
           </motion.div>
         </div>
 
-        {/* BLOQUE INFERIOR: METADATA GRID */}
-        <div className="w-full flex-none grid grid-cols-2 divide-x divide-brand-brown/10 border-b border-brand-brown/10 bg-[#F2F2E1] z-30">
-          <div className="px-5 py-4 flex flex-col justify-center">
-            <span className="text-[8px] uppercase tracking-[0.2em] font-black opacity-30 mb-1">NORMAL, QUE NO AGUANTEN LA PRESIÓN</span>
-            <span className="font-sans font-bold text-[10px] uppercase">PRODUCTOS ORIGINALES</span>
+        {/* BLOQUE INFERIOR: METADATA & CTA */}
+        <div className="w-full flex-none bg-gradient-to-t from-[#F2F2E1] via-[#F2F2E1] to-transparent z-30 pt-12 pb-10 px-6">
+          <div className="flex flex-col items-center text-center gap-8">
+            <div className="space-y-2">
+              <span className="block text-[10px] font-sans uppercase tracking-[0.25em] font-semibold text-brand-brown opacity-60">NORMAL, QUE NO AGUANTEN LA PRESIÓN</span>
+              <span className="block font-serif italic text-[18px] text-brand-brown tracking-wide">Productos Originales y Exóticos</span>
+            </div>
+            
+            <button className="px-10 py-3.5 bg-brand-brown text-[#F2F2E1] font-sans font-medium uppercase text-[12px] tracking-[0.2em] transition-all duration-300 hover:bg-brand-black w-full max-w-[280px]">
+              Explorar
+            </button>
           </div>
-          <div className="px-5 py-4 flex flex-col justify-center relative overflow-hidden group">
-            <span className="text-[8px] uppercase tracking-[0.2em] font-black opacity-30 mb-1">TIENDA ---</span>
-            <span className="font-sans font-bold text-[10px] uppercase">LE BON MARCHÉ</span>
-          </div>
-        </div>
-
-        {/* CTA FINAL */}
-        <div className="w-full flex-none py-4 flex items-center justify-center bg-brand-brown text-[#F2F2E1] uppercase font-bold text-[11px] tracking-[0.2em] z-30">
-          Explorar Productos
         </div>
       </div>
 
