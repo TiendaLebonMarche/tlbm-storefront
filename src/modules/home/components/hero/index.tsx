@@ -9,12 +9,13 @@ const SLIDES = [
   {
     id: 1,
     title: "AUDIOPREMIUM",
-    subtitle: "COLLECCIÓN DE PARLANTES",
+    subtitle: "COLECCIÓN DE PARLANTES",
     description: "Sonido envolvente. Diseño que desafía la gravedad.",
     buttonText: "Explorar Sonido",
     buttonLink: "/store?category=parlantes",
     image: "/images/hero/speakers.png",
     align: "left",
+    hoverColor: "bg-[#50652a]",
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ const SLIDES = [
     buttonLink: "/store?category=bolsos",
     image: "/images/hero/bags.png",
     align: "right",
+    hoverColor: "bg-[#8b5a2b]",
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const SLIDES = [
     buttonLink: "/store?category=tech",
     image: "/images/hero/tech.png",
     align: "center",
+    hoverColor: "bg-[#0ea5e9]",
   }
 ]
 
@@ -72,12 +75,12 @@ const Hero = () => {
               src={SLIDES[current].image}
               alt={SLIDES[current].title}
               fill
-              className="object-cover brightness-[0.7]"
+              className="object-cover brightness-[0.9]"
               priority
             />
             {/* Gradient Overlay for texture/depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 opacity-40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 opacity-30" />
           </motion.div>
 
           {/* Content Wrapper */}
@@ -127,14 +130,14 @@ const Hero = () => {
                   className="inline-flex items-center group overflow-hidden"
                 >
                   <div className="bg-white text-black px-10 py-4 font-sans font-bold uppercase text-[12px] tracking-[0.2em] relative z-10 group-hover:text-white transition-colors duration-500 rounded-none border border-white">
-                    <span className="flex items-center gap-4">
+                    <span className="flex items-center gap-4 relative z-10">
                       {SLIDES[current].buttonText}
                       <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-500 group-hover:translate-x-2">
                         <path d="M13 1L17 5L13 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         <path d="M1 5H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </span>
-                    <div className="absolute inset-0 bg-black translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 z-[-1]" />
+                    <div className={`absolute inset-0 ${SLIDES[current].hoverColor} translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 z-[-1]`} />
                   </div>
                 </Link>
               </motion.div>
@@ -164,7 +167,7 @@ const Hero = () => {
 
           {/* Vertical Decoration - Left */}
           <div className="absolute left-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-10 z-20">
-             <span className="rotate-90 text-white/20 text-[10px] font-bold tracking-[0.3em] uppercase whitespace-nowrap">EXTREME LUXURY</span>
+             <span className="rotate-90 text-white/40 text-[10px] font-bold tracking-[0.3em] uppercase whitespace-nowrap">ENVÍOS BUCARAMANGA</span>
              <div className="w-[1px] h-20 bg-white/10" />
              <span className="text-white font-bold text-[10px] tracking-widest">0{current + 1}</span>
           </div>

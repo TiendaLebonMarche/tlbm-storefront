@@ -61,20 +61,6 @@ export default async function Nav() {
           {/* IZQUIERDA: Menu Group (33% of width) */}
           <div className="flex items-center justify-start flex-1 gap-10">
             <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-            <nav className="flex items-center gap-8">
-              {FEATURED_LINKS.map((link) => (
-                <LocalizedClientLink
-                  key={link.href}
-                  href={link.href}
-                  className="group relative overflow-hidden py-1"
-                >
-                  <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.3em] text-[#322214] transition-colors duration-500 group-hover:text-black">
-                    {link.label}
-                  </span>
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-black/40 origin-right scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:origin-left group-hover:scale-x-100" />
-                </LocalizedClientLink>
-              ))}
-            </nav>
           </div>
 
           {/* CENTRO: Logo Pod (Centered in remaining space) */}
