@@ -68,14 +68,17 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="flex items-center gap-2 outline-none text-inherit hover:opacity-70 transition-opacity uppercase tracking-widest text-[10px] font-bold"
+                  className="group flex items-center gap-2 outline-none text-inherit uppercase tracking-widest text-[10px] font-bold"
                   onClick={openSideMenu}
                 >
-                  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="20" height="1.5" fill="currentColor"/>
-                    <rect y="10.5" width="20" height="1.5" fill="currentColor"/>
-                  </svg>
-                  <span className="hidden md:inline">Menu</span>
+                  <div className="relative flex flex-col justify-center items-center w-5 h-5 overflow-hidden">
+                    <span className="absolute h-[1.5px] w-full bg-current transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] -translate-y-[3px] group-hover:-translate-y-[4px]"></span>
+                    <span className="absolute h-[1.5px] w-full bg-current transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-[3px] group-hover:translate-y-[4px]"></span>
+                  </div>
+                  <span className="hidden md:flex flex-col overflow-hidden h-[14px]">
+                    <span className="leading-none transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-full">MENU</span>
+                    <span className="leading-none absolute translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-y-0">MENU</span>
+                  </span>
                 </Popover.Button>
               </div>
 

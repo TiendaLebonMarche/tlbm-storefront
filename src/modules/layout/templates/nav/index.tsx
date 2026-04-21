@@ -26,80 +26,87 @@ export default async function Nav() {
 
   return (
     <ClientHeaderWrapper>
-    <div className="w-full flex items-center justify-between min-h-[4rem]">
-      {/* MOBILE HEADER (<md): Logo centrado, menu izq, cart der */}
-      <div className="flex md:hidden w-full px-5 py-2">
-        {/* Menu - left */}
-        <div className="flex-none w-10 flex items-center">
-          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+      <div className="w-full flex items-center justify-between min-h-full">
+        {/* MOBILE HEADER (<md): Logo centrado, menu izq, cart der */}
+        <div className="flex md:hidden w-full px-5 h-full items-center">
+          {/* Menu - left */}
+          <div className="flex-none w-16 flex items-center justify-start">
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          </div>
+
+          {/* Logo - center */}
+          <div className="flex-1 flex items-center justify-center">
+            <LocalizedClientLink href="/" className="group flex items-center justify-center pointer-events-auto">
+              <Image
+                src="/logo.png"
+                alt="Tienda Le Bon Marché"
+                width={160}
+                height={56}
+                className="logo-img h-[48px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-hover:opacity-80"
+                priority
+              />
+            </LocalizedClientLink>
+          </div>
+
+          {/* Cart - right */}
+          <div className="flex-none w-16 flex items-center justify-end gap-4">
+            <Suspense fallback={<div className="w-5 h-5" />}>
+              <CartButton />
+            </Suspense>
+          </div>
         </div>
 
-        {/* Logo - center */}
-        <div className="flex-1 flex items-center justify-center">
-          <LocalizedClientLink href="/" className="flex items-center justify-center">
-            <Image
-              src="/logo.png"
-              alt="Tienda Le Bon Marché"
-              width={160}
-              height={56}
-              className="logo-img h-[52px] w-auto object-contain transition-all duration-500"
-              priority
-            />
-          </LocalizedClientLink>
-        </div>
+        {/* DESKTOP HEADER (≥md): tres zonas equilibradas */}
+        <div className="hidden md:flex items-center w-full h-full px-8 md:px-10 lg:px-14">
+          {/* IZQUIERDA: Menu Group (33% of width) */}
+          <div className="flex items-center justify-start flex-1 gap-10">
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+            <nav className="flex items-center gap-8">
+              {FEATURED_LINKS.map((link) => (
+                <LocalizedClientLink
+                  key={link.href}
+                  href={link.href}
+                  className="group relative overflow-hidden py-1"
+                >
+                  <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.3em] text-[#322214] transition-colors duration-500 group-hover:text-black">
+                    {link.label}
+                  </span>
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-black/40 origin-right scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:origin-left group-hover:scale-x-100" />
+                </LocalizedClientLink>
+              ))}
+            </nav>
+          </div>
 
-        {/* Cart - right */}
-        <div className="flex-none w-10 flex items-center justify-end">
-          <Suspense fallback={<div className="w-5 h-5" />}>
-            <CartButton />
-          </Suspense>
+          {/* CENTRO: Logo Pod (Centered in remaining space) */}
+          <div className="flex items-center justify-center flex-none px-6">
+            <LocalizedClientLink
+              href="/"
+              className="group pointer-events-auto flex items-center justify-center"
+            >
+              <Image
+                src="/logo.png"
+                alt="Tienda Le Bon Marché"
+                width={220}
+                height={64}
+                className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-hover:opacity-70"
+                priority
+              />
+            </LocalizedClientLink>
+          </div>
+
+          {/* DERECHA: Icons Group (33% of width matching Left) */}
+          <div className="flex items-center justify-end flex-1 gap-8">
+            <div className="group relative overflow-hidden py-1 flex items-center cursor-pointer transition-opacity duration-300 hover:opacity-70">
+              <SearchModal />
+            </div>
+            <div className="group relative overflow-hidden py-1 flex items-center cursor-pointer transition-opacity duration-300 hover:opacity-70">
+              <Suspense fallback={<div className="w-5 h-5" />}>
+                <CartButton />
+              </Suspense>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* DESKTOP HEADER (≥md): tres zonas equilibradas */}
-      <div className="hidden md:flex items-center w-full h-full min-h-[76px] px-8 md:px-10 lg:px-14">
-        {/* IZQUIERDA: Menu Group (33% of width) */}
-        <div className="flex items-center justify-start flex-1 gap-8">
-          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-          <nav className="flex items-center gap-6">
-            {FEATURED_LINKS.map((link) => (
-              <LocalizedClientLink
-                key={link.href}
-                href={link.href}
-                className="text-[11px] font-bold uppercase tracking-[0.3em] hover:opacity-50 transition-opacity"
-              >
-                {link.label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
-        </div>
-
-        {/* CENTRO: Logo Pod (Centered in remaining space) */}
-        <div className="flex items-center justify-center flex-none px-6">
-          <LocalizedClientLink
-            href="/"
-            className="pointer-events-auto flex items-center justify-center hover:opacity-70 transition-all duration-300"
-          >
-            <Image
-              src="/logo.png"
-              alt="Tienda Le Bon Marché"
-              width={220}
-              height={64}
-              className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-500"
-              priority
-            />
-          </LocalizedClientLink>
-        </div>
-
-        {/* DERECHA: Icons Group (33% of width matching Left) */}
-        <div className="flex items-center justify-end flex-1 gap-8">
-          <SearchModal />
-          <Suspense fallback={<div className="w-5 h-5" />}>
-            <CartButton />
-          </Suspense>
-        </div>
-      </div>
-    </div>
     </ClientHeaderWrapper>
   )
 }

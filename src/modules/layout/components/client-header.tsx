@@ -18,7 +18,7 @@ import { usePathname } from "next/navigation"
     Desktop = 32 + 76 = 108px → hero pt uses 136px (gives 28px breathing room)
 */
 export default function ClientHeader({ children }: { children: React.ReactNode }) {
-  const isScrolled = useScrollThreshold(10)
+  const isScrolled = useScrollThreshold(50)
   const pathname = usePathname()
 
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
@@ -27,48 +27,44 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
     <div
       className={`
         fixed top-0 left-0 w-full z-[100] text-black
-        transition-all duration-500
+        transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
         ${isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]"
-          : "bg-[#F2F2E1]/70 backdrop-blur-sm"
+          ? "bg-white/80 backdrop-blur-xl shadow-[0_1px_20px_0_rgba(0,0,0,0.05)]"
+          : "bg-transparent backdrop-blur-none"
         }
       `}
     >
-      {/* ── MARQUEE TOP BAR ──────────────────────────────────────────────
-          Height: text-[10px] line-height ~12px + py-2.5 (20px) = 32px fixed
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── MARQUEE TOP BAR ────────────────────────────────────────────── */}
       <div
         id="top-bar"
-        className="
-          bg-black text-white text-[10px]
-          tracking-[0.22em] py-2.5
-          overflow-hidden font-sans uppercase font-black
-          border-b border-white/5
-        "
+        className={`
+          bg-[#1a1a1a] text-[#f4f4f4] text-[9px] md:text-[10px]
+          tracking-[0.25em] font-sans uppercase font-medium
+          overflow-hidden border-b border-white/10
+          transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
+          ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[36px] py-2.5 opacity-100"}
+        `}
       >
-        <div className="flex whitespace-nowrap animate-marquee-fixed">
-          <span className="mx-6">Envíos a todo Bucaramanga — Productos originales y exclusivos.</span>
-          <span className="mx-6">Envíos a todo Bucaramanga — Productos originales y exclusivos.</span>
-          <span className="mx-6">Envíos a todo Bucaramanga — Productos originales y exclusivos.</span>
-          <span className="mx-6">Envíos a todo Bucaramanga — Productos originales y exclusivos.</span>
+        <div className="flex whitespace-nowrap animate-marquee-fixed w-full items-center h-full">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="mx-8 flex items-center">
+              Envíos a todo Bucaramanga <span className="mx-4 text-white/30">•</span> Productos originales y exclusivos
+            </span>
+          ))}
         </div>
       </div>
 
       {/* ── MAIN NAV ────────────────────────────────────────────────────── */}
       <header
         id="main-header"
-        className="mx-auto w-full"
+        className="mx-auto w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]"
       >
-        {/* 
-          Wrapper height explicit per breakpoint:
-          Mobile : min-h-[68px] (logo h-[52px] + py-2 = 8+8 = 68)
-          Desktop: min-h-[72px] 
-        */}
-        <div className="
+        <div className={`
           max-w-[95rem] mx-auto
           flex justify-between items-center
-          min-h-[68px] md:min-h-[76px]
-        ">
+          transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
+          ${isScrolled ? "min-h-[60px] md:min-h-[68px]" : "min-h-[68px] md:min-h-[80px]"}
+        `}>
           {children}
         </div>
       </header>
