@@ -11,11 +11,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 
-// Solo los 2 enlaces más buscados aparecen visibles en el header
-const FEATURED_LINKS = [
-  { href: "/store?category=parlantes", label: "Parlantes" },
-  { href: "/store?category=originales", label: "Originales" },
-]
+const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
@@ -27,71 +23,63 @@ export default async function Nav() {
   return (
     <ClientHeaderWrapper>
       <div className="w-full flex items-center justify-between min-h-full">
-        {/* MOBILE HEADER (<md): Logo centrado, menu izq, cart der */}
+
+        {/* MOBILE (<md): hamburger left · logo center · cart right */}
         <div className="flex md:hidden w-full px-5 h-full items-center">
-          {/* Menu - left */}
-          <div className="flex-none w-16 flex items-center justify-start">
+          <div className="flex-none w-12 flex items-center justify-start">
             <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           </div>
 
-          {/* Logo - center */}
           <div className="flex-1 flex items-center justify-center">
-            <LocalizedClientLink href="/" className="pointer-events-auto flex items-center justify-center">
+            <LocalizedClientLink href="/" className="pointer-events-auto">
               <Image
-                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
+                src={LOGO_URL}
                 alt="Tienda Le Bon Marché"
                 width={1822}
                 height={548}
-                className="w-[180px] h-auto object-contain"
+                className="w-[140px] h-auto object-contain"
                 priority
               />
             </LocalizedClientLink>
           </div>
 
-          {/* Cart - right */}
-          <div className="flex-none w-16 flex items-center justify-end gap-4">
+          <div className="flex-none w-12 flex items-center justify-end">
             <Suspense fallback={<div className="w-5 h-5" />}>
               <CartButton />
             </Suspense>
           </div>
         </div>
 
-        {/* DESKTOP HEADER (≥md): tres zonas equilibradas */}
-        <div className="hidden md:flex items-center w-full h-full px-8 md:px-10 lg:px-14">
-          {/* IZQUIERDA: Menu Group (33% of width) */}
-          <div className="flex items-center justify-start flex-1 gap-10">
+        {/* DESKTOP (≥md): menu left · logo center · icons right */}
+        <div className="hidden md:flex items-center w-full h-full px-10 lg:px-14">
+          {/* Left */}
+          <div className="flex items-center justify-start flex-1">
             <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           </div>
 
-          {/* CENTRO: Logo Pod (Centered in remaining space) */}
-          <div className="flex items-center justify-center flex-none px-6">
-            <LocalizedClientLink
-              href="/"
-              className="pointer-events-auto flex items-center justify-center"
-            >
+          {/* Center */}
+          <div className="flex items-center justify-center flex-none px-8">
+            <LocalizedClientLink href="/" className="pointer-events-auto">
               <Image
-                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
+                src={LOGO_URL}
                 alt="Tienda Le Bon Marché"
                 width={1822}
                 height={548}
-                className="w-[200px] md:w-[240px] lg:w-[280px] xl:w-[320px] h-auto object-contain"
+                className="w-[200px] md:w-[240px] lg:w-[280px] h-auto object-contain"
                 priority
               />
             </LocalizedClientLink>
           </div>
 
-          {/* DERECHA: Icons Group (33% of width matching Left) */}
-          <div className="flex items-center justify-end flex-1 gap-8">
-            <div className="group relative overflow-hidden py-1 flex items-center cursor-pointer transition-opacity duration-300 hover:opacity-70">
-              <SearchModal />
-            </div>
-            <div className="group relative overflow-hidden py-1 flex items-center cursor-pointer transition-opacity duration-300 hover:opacity-70">
-              <Suspense fallback={<div className="w-5 h-5" />}>
-                <CartButton />
-              </Suspense>
-            </div>
+          {/* Right */}
+          <div className="flex items-center justify-end flex-1 gap-7">
+            <SearchModal />
+            <Suspense fallback={<div className="w-5 h-5" />}>
+              <CartButton />
+            </Suspense>
           </div>
         </div>
+
       </div>
     </ClientHeaderWrapper>
   )

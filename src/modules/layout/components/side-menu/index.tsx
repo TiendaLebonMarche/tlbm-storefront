@@ -9,7 +9,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 
-import { NAV_LINKS, MORE_LINKS } from "@lib/constants"
+
 
 const mainMenu = [
   { name: "Inicio", href: "/" },

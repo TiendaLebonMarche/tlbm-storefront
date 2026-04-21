@@ -22,11 +22,11 @@ export default async function Footer() {
             className="flex items-center justify-start hover:opacity-70 transition-all duration-300"
           >
             <Image 
-              src="/logo.png" 
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
               alt="Tienda Le Bon Marché" 
-              width={180} 
-              height={50} 
-              className="logo-img h-10 md:h-12 w-auto object-contain"
+              width={1822} 
+              height={548} 
+              className="w-[160px] h-auto object-contain"
             />
           </LocalizedClientLink>
           <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
