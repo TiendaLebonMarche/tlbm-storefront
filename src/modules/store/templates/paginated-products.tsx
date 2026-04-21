@@ -108,12 +108,14 @@ export default async function PaginatedProducts({
         />
       ) : (
         <>
-          <div className="mb-6 text-xs text-gray-600 font-medium">
-            Mostrando {startIndex + 1} - {Math.min(endIndex, products.length)} de{" "}
-            <span className="font-bold text-brand-black">{products.length} productos</span>
+          <div className="mb-8 pb-3 border-b border-gray-100 flex items-center justify-between">
+            <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] font-medium">
+              {startIndex + 1}–{Math.min(endIndex, products.length)} de{" "}
+              <span className="font-bold text-brand-brown">{products.length}</span> productos
+            </p>
           </div>
           <ul
-            className="grid grid-cols-2 w-full small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8 mb-12"
+            className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 mb-16"
             data-testid="products-list"
           >
             {paginatedProducts.map((p) => {
