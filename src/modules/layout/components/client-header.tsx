@@ -26,13 +26,17 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
   return (
     <div
       className={`
-        fixed top-0 left-0 w-full z-[100] text-black
+        fixed top-0 left-0 w-full z-[100] group/header
         transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
         ${isScrolled
-          ? "bg-white/80 backdrop-blur-xl shadow-[0_1px_20px_0_rgba(0,0,0,0.05)]"
-          : "bg-transparent backdrop-blur-none"
+          ? "bg-white/80 backdrop-blur-xl shadow-[0_1px_20px_0_rgba(0,0,0,0.05)] text-black"
+          : isHome
+            ? "bg-transparent backdrop-blur-none text-white"
+            : "bg-transparent backdrop-blur-none text-black"
         }
       `}
+      data-scrolled={isScrolled}
+      data-home={isHome}
     >
       {/* ── MARQUEE TOP BAR ────────────────────────────────────────────── */}
       <div

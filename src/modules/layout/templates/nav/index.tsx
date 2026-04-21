@@ -38,11 +38,11 @@ export default async function Nav() {
           <div className="flex-1 flex items-center justify-center">
             <LocalizedClientLink href="/" className="group flex items-center justify-center pointer-events-auto">
               <Image
-                src="/logo.png"
+                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
                 width={160}
                 height={56}
-                className="logo-img h-[48px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-hover:opacity-80"
+                className="logo-img h-[48px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-hover:opacity-80 group-data-[scrolled=true]/header:invert group-data-[home=false]/header:invert"
                 priority
               />
             </LocalizedClientLink>
@@ -70,11 +70,11 @@ export default async function Nav() {
               className="group pointer-events-auto flex items-center justify-center"
             >
               <Image
-                src="/logo.png"
+                src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
                 width={220}
                 height={64}
-                className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-hover:opacity-70"
+                className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-hover:opacity-70 group-data-[scrolled=true]/header:invert group-data-[home=false]/header:invert"
                 priority
               />
             </LocalizedClientLink>
