@@ -36,13 +36,13 @@ export default async function Nav() {
 
           {/* Logo - center */}
           <div className="flex-1 flex items-center justify-center">
-            <LocalizedClientLink href="/" className="group flex items-center justify-center pointer-events-auto">
+            <LocalizedClientLink href="/" className="pointer-events-auto flex items-center justify-center">
               <Image
                 src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
                 width={1822}
                 height={548}
-                className="logo-img h-[56px] w-auto object-contain transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-data-[scrolled=true]/header:scale-90"
+                className="w-[180px] h-auto object-contain"
                 priority
               />
             </LocalizedClientLink>
@@ -67,14 +67,14 @@ export default async function Nav() {
           <div className="flex items-center justify-center flex-none px-6">
             <LocalizedClientLink
               href="/"
-              className="group pointer-events-auto flex items-center justify-center"
+              className="pointer-events-auto flex items-center justify-center"
             >
               <Image
                 src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
                 width={1822}
                 height={548}
-                className="logo-img h-[64px] md:h-[72px] lg:h-[84px] xl:h-[96px] w-auto object-contain transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-data-[scrolled=true]/header:scale-90"
+                className="w-[200px] md:w-[240px] lg:w-[280px] xl:w-[320px] h-auto object-contain"
                 priority
               />
             </LocalizedClientLink>
