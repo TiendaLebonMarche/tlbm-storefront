@@ -40,9 +40,9 @@ export default async function Nav() {
               <Image
                 src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
-                width={160}
-                height={56}
-                className="logo-img h-[48px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-hover:opacity-80 group-data-[scrolled=true]/header:invert group-data-[home=false]/header:invert"
+                width={1822}
+                height={548}
+                className="logo-img h-[56px] w-auto object-contain transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-95 group-data-[scrolled=true]/header:scale-90"
                 priority
               />
             </LocalizedClientLink>
@@ -72,9 +72,9 @@ export default async function Nav() {
               <Image
                 src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
                 alt="Tienda Le Bon Marché"
-                width={220}
-                height={64}
-                className="logo-img h-[48px] md:h-[52px] lg:h-[56px] xl:h-[60px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-hover:opacity-70 group-data-[scrolled=true]/header:invert group-data-[home=false]/header:invert"
+                width={1822}
+                height={548}
+                className="logo-img h-[64px] md:h-[72px] lg:h-[84px] xl:h-[96px] w-auto object-contain transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[0.97] group-data-[scrolled=true]/header:scale-90"
                 priority
               />
             </LocalizedClientLink>
