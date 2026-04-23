@@ -23,9 +23,16 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <label className="text-sm font-semibold text-brand-black uppercase tracking-wider">
-        {title}
-      </label>
+      <div className="flex items-center justify-between">
+        <label className="text-xs font-semibold text-brand-brown uppercase tracking-[0.2em] font-sans">
+          {title}
+        </label>
+        {current && (
+          <span className="text-xs text-gray-400 font-light">
+            {current}
+          </span>
+        )}
+      </div>
       <div className="flex flex-wrap gap-2" data-testid={dataTestId}>
         {filteredOptions.map((v) => {
           const isSelected = v === current
@@ -34,13 +41,13 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
               onClick={() => updateOption(option.id, v)}
               key={v}
               className={clx(
-                "px-4 py-2 text-sm font-medium transition-all duration-200 rounded",
+                "min-w-[48px] px-5 py-2.5 text-[11px] font-medium tracking-wide transition-all duration-200 uppercase",
                 {
-                  "border-2 border-brand-gold bg-white text-brand-black":
+                  "border-2 border-brand-brown bg-brand-brown text-white":
                     isSelected,
-                  "border border-gray-300 bg-white text-gray-600 hover:border-brand-gold hover:text-brand-black":
+                  "border border-gray-200 bg-white text-gray-600 hover:border-brand-brown hover:text-brand-brown":
                     !isSelected && !disabled,
-                  "border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed":
+                  "border border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed":
                     disabled,
                 }
               )}

@@ -37,6 +37,7 @@ export default function ProductActions({
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [addedSuccess, setAddedSuccess] = useState(false)
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -135,6 +136,9 @@ export default function ProductActions({
       if (error) {
         throw new Error(error)
       }
+
+      setAddedSuccess(true)
+      setTimeout(() => setAddedSuccess(false), 2500)
     } catch (error: any) {
       console.error("DEBUG - Error al añadir a la bolsa:", error)
       const message = error?.message || "Error desconocido de conexión"
@@ -146,11 +150,11 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-5" ref={actionsRef}>
+      <div className="flex flex-col gap-y-6" ref={actionsRef}>
 
         {/* Selector de variantes (tallas, colores, etc.) */}
         {(product.variants?.length ?? 0) > 1 && (
-          <div className="flex flex-col gap-y-3 pb-4 border-b border-gray-100">
+          <div className="flex flex-col gap-y-4">
             {(product.options || []).map((option) => (
               <div key={option.id}>
                 <OptionSelect
@@ -167,14 +171,14 @@ export default function ProductActions({
         )}
 
         {/* Precio */}
-        <div className="pb-4">
+        <div className="py-1">
           <ProductPrice product={product} variant={selectedVariant} />
         </div>
 
-        {/* CTAs estilo Amazon */}
+        {/* CTAs */}
         <div className="flex flex-col gap-3">
           {/* Botón principal: Añadir al carrito */}
-          <Button
+          <button
             onClick={handleAddToCart}
             disabled={
               !inStock ||
@@ -183,24 +187,37 @@ export default function ProductActions({
               isAdding ||
               !isValidVariant
             }
-            className="w-full pill-button h-14 text-[10px] font-bold uppercase tracking-[0.2em] bg-brand-brown text-white hover:bg-brand-olive transition-all duration-300 flex items-center justify-center gap-2 shadow-lg border-none"
-            isLoading={isAdding}
+            className={`w-full h-14 text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3 ${
+              addedSuccess
+                ? 'bg-brand-olive text-white'
+                : !inStock || !selectedVariant || !isValidVariant
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-brand-brown text-white hover:bg-black active:scale-[0.98]'
+            }`}
             data-testid="add-product-button"
           >
-            {!selectedVariant && !options
-              ? "Selecciona una variante"
-              : !inStock || !isValidVariant
-                ? "Agotado temporalmente"
-                : (
-                  <>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                    </svg>
-                    Añadir al carrito
-                  </>
-                )
-            }
-          </Button>
+            {isAdding ? (
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : addedSuccess ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                Añadido a tu bolsa
+              </>
+            ) : !selectedVariant && !options ? (
+              "Selecciona una variante"
+            ) : !inStock || !isValidVariant ? (
+              "Agotado temporalmente"
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
+                Añadir a mi bolsa
+              </>
+            )}
+          </button>
         </div>
 
       </div>

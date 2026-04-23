@@ -18,40 +18,37 @@ export default function ProductPrice({
   const selectedPrice = variant ? variantPrice : cheapestPrice
 
   if (!selectedPrice) {
-    return <div className="block w-32 h-9 bg-gray-100 animate-pulse" />
+    return <div className="block w-32 h-9 bg-gray-50 animate-pulse" />
   }
 
   return (
-    <div className="flex flex-col text-ui-fg-base">
-      <span
-        className={clx("text-xl-semi", {
-          "text-ui-fg-interactive": selectedPrice.price_type === "sale",
-        })}
-      >
-        {!variant && "From "}
+    <div className="flex items-baseline gap-3">
+      {selectedPrice.price_type === "sale" && (
         <span
-          data-testid="product-price"
-          data-value={selectedPrice.calculated_price_number}
+          className="text-base text-gray-400 line-through font-light"
+          data-testid="original-product-price"
+          data-value={selectedPrice.original_price_number}
         >
-          {selectedPrice.calculated_price}
+          {selectedPrice.original_price}
         </span>
+      )}
+      <span
+        className={clx(
+          "text-2xl md:text-3xl font-semibold tracking-tight text-brand-brown font-sans",
+          {
+            "text-brand-brown": selectedPrice.price_type !== "sale",
+          }
+        )}
+        data-testid="product-price"
+        data-value={selectedPrice.calculated_price_number}
+      >
+        {!variant && "Desde "}
+        {selectedPrice.calculated_price}
       </span>
       {selectedPrice.price_type === "sale" && (
-        <>
-          <p>
-            <span className="text-ui-fg-subtle">Original: </span>
-            <span
-              className="line-through"
-              data-testid="original-product-price"
-              data-value={selectedPrice.original_price_number}
-            >
-              {selectedPrice.original_price}
-            </span>
-          </p>
-          <span className="text-ui-fg-interactive">
-            -{selectedPrice.percentage_diff}%
-          </span>
-        </>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-brand-olive px-2.5 py-1">
+          -{selectedPrice.percentage_diff}%
+        </span>
       )}
     </div>
   )
