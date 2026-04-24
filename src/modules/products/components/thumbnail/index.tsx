@@ -60,14 +60,14 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute inset-0 object-contain object-center p-1 sm:p-2 md:p-4 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:group-hover/thumb:scale-[1.03]"
+      className="absolute inset-0 object-contain object-center p-0 md:p-2 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:group-hover/thumb:scale-[1.03] mix-blend-multiply"
       draggable={false}
       quality={85}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
     />
   ) : (
-    <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-gray-50/50">
+    <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-transparent">
       <PlaceholderImage size={24} />
     </div>
   )

@@ -1,11 +1,8 @@
 import { listProductsWithSort } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
-import ProductPreview from "@modules/products/components/product-preview"
-import { Pagination } from "@modules/store/components/pagination"
+import InfiniteProducts from "@modules/store/components/infinite-products"
 import EmptyState from "@modules/store/components/empty-state"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-
-const PRODUCT_LIMIT = 12
 
 type PaginatedProductsParams = {
   limit: number
@@ -39,7 +36,7 @@ export default async function PaginatedProducts({
   maxPrice?: string
 }) {
   const queryParams: PaginatedProductsParams = {
-    limit: 100, // Aumentamos para filtrar localmente
+    limit: 100, // Fetch all for infinite scroll locally
   }
 
   if (collectionId) {
@@ -65,7 +62,7 @@ export default async function PaginatedProducts({
   }
 
   let {
-    response: { products, count },
+    response: { products },
   } = await listProductsWithSort({
     page: 1,
     queryParams,
@@ -93,12 +90,6 @@ export default async function PaginatedProducts({
     })
   }
 
-  // Paginar manualmente
-  const startIndex = (page - 1) * PRODUCT_LIMIT
-  const endIndex = startIndex + PRODUCT_LIMIT
-  const paginatedProducts = products.slice(startIndex, endIndex)
-  const totalPages = Math.ceil(products.length / PRODUCT_LIMIT)
-
   return (
     <>
       {products.length === 0 ? (
@@ -107,33 +98,7 @@ export default async function PaginatedProducts({
           filters={!!(collection || minPrice || maxPrice)}
         />
       ) : (
-        <>
-          <div className="mb-8 pb-3 border-b border-gray-100 flex items-center justify-between">
-            <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] font-medium">
-              {startIndex + 1}–{Math.min(endIndex, products.length)} de{" "}
-              <span className="font-bold text-brand-brown">{products.length}</span> productos
-            </p>
-          </div>
-          <ul
-            className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 mb-16"
-            data-testid="products-list"
-          >
-            {paginatedProducts.map((p) => {
-              return (
-                <li key={p.id}>
-                  <ProductPreview product={p} region={region} />
-                </li>
-              )
-            })}
-          </ul>
-          {totalPages > 1 && (
-            <Pagination
-              data-testid="product-pagination"
-              page={page}
-              totalPages={totalPages}
-            />
-          )}
-        </>
+        <InfiniteProducts initialProducts={products} region={region} />
       )}
     </>
   )

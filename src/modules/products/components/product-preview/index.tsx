@@ -6,7 +6,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 
-export default async function ProductPreview({
+export default function ProductPreview({
   product,
   isFeatured,
   region,
@@ -61,47 +61,35 @@ export default async function ProductPreview({
             Ver Producto
           </span>
         </div>
-
-        {/* Badges top-left */}
-        <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col gap-1.5 pointer-events-none z-20">
-          {isNew && (
-            <span className="bg-brand-olive text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
-              Nuevo
-            </span>
-          )}
-          {isLowStock && (
-            <span className="bg-brand-brown text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
-              Últimas uds.
-            </span>
-          )}
-        </div>
-
-        {/* Authentic badge top-right */}
-        <div className="absolute top-2 right-2 md:top-3 md:right-3 pointer-events-none z-20">
-          <span className="text-brand-brown/40 text-[6px] md:text-[7px] font-bold uppercase tracking-[0.15em] px-2 py-1">
-            Original
-          </span>
-        </div>
       </LocalizedClientLink>
 
       {/* Info block */}
-      <div className="flex flex-col pt-3 md:pt-4 pb-1 px-1 md:px-0 flex-1">
-        {/* Category + Price row */}
-        <div className="flex items-center justify-between mb-1.5 md:mb-2 gap-2">
-          {category ? (
-            <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.25em] text-brand-olive truncate">
-              {category}
-            </span>
-          ) : (
-            <span />
-          )}
-          <div className="flex-shrink-0">
-            {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
+      <div className="flex flex-col items-center text-center pt-3 md:pt-4 pb-1 px-1 md:px-0 flex-1">
+        {/* Badges / Labels centered */}
+        {(isNew || isLowStock) && (
+          <div className="flex flex-wrap justify-center gap-1.5 mb-2">
+            {isNew && (
+              <span className="bg-brand-olive text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+                Nuevo
+              </span>
+            )}
+            {isLowStock && (
+              <span className="bg-brand-brown text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+                Últimas uds.
+              </span>
+            )}
           </div>
-        </div>
+        )}
+
+        {/* Category */}
+        {category && (
+          <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.25em] text-brand-olive truncate mb-1">
+            {category}
+          </span>
+        )}
 
         {/* Title */}
-        <LocalizedClientLink href={`/productos/${product.handle}`}>
+        <LocalizedClientLink href={`/productos/${product.handle}`} className="mb-1.5">
           <h3
             className="text-xs md:text-sm font-semibold text-brand-brown leading-snug line-clamp-2 hover:text-brand-olive transition-colors duration-300 font-sans"
             data-testid="product-title"
@@ -109,6 +97,11 @@ export default async function ProductPreview({
             {product.title}
           </h3>
         </LocalizedClientLink>
+
+        {/* Price */}
+        <div className="mt-auto flex justify-center">
+          {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
+        </div>
       </div>
     </article>
   )
