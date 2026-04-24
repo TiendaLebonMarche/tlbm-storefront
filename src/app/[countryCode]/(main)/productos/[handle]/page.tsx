@@ -80,7 +80,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const product = await listProducts({
     countryCode: params.countryCode,
     queryParams: { handle },
-  }).then(({ response }) => response.products[0])
+  }).then(({ response }) => response.products[0]).catch(() => null)
 
   if (!product) {
     notFound()
@@ -120,13 +120,13 @@ export default async function ProductPage(props: Props) {
   const pricedProduct = await listProducts({
     countryCode: params.countryCode,
     queryParams: { handle: params.handle },
-  }).then(({ response }) => response.products[0])
-
-  const images = getImagesForVariant(pricedProduct, selectedVariantId)
+  }).then(({ response }) => response.products[0]).catch(() => null)
 
   if (!pricedProduct) {
     notFound()
   }
+
+  const images = getImagesForVariant(pricedProduct, selectedVariantId)
 
   const productSchema = {
     "@context": "https://schema.org",
