@@ -7,12 +7,17 @@ import { HttpTypes } from "@medusajs/types"
 type InfiniteProductsProps = {
   initialProducts: any[]
   region: HttpTypes.StoreRegion
+  gridClass?: string
+  limit?: number
 }
 
-const PRODUCT_LIMIT = 12
-
-export default function InfiniteProducts({ initialProducts, region }: InfiniteProductsProps) {
-  const [displayedCount, setDisplayedCount] = useState(PRODUCT_LIMIT)
+export default function InfiniteProducts({ 
+  initialProducts, 
+  region,
+  gridClass = "grid grid-cols-2 small:grid-cols-3 medium:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 mb-8",
+  limit = 12
+}: InfiniteProductsProps) {
+  const [displayedCount, setDisplayedCount] = useState(limit)
   const [isLoading, setIsLoading] = useState(false)
   const observerTarget = useRef<HTMLDivElement>(null)
 
@@ -25,7 +30,7 @@ export default function InfiniteProducts({ initialProducts, region }: InfinitePr
         if (entries[0].isIntersecting && hasMore && !isLoading) {
           setIsLoading(true)
           setTimeout(() => {
-            setDisplayedCount((prev) => prev + PRODUCT_LIMIT)
+            setDisplayedCount((prev) => prev + limit)
             setIsLoading(false)
           }, 3000)
         }
@@ -42,7 +47,7 @@ export default function InfiniteProducts({ initialProducts, region }: InfinitePr
         observer.unobserve(observerTarget.current)
       }
     }
-  }, [hasMore, isLoading])
+  }, [hasMore, isLoading, limit])
 
   return (
     <>
@@ -54,7 +59,7 @@ export default function InfiniteProducts({ initialProducts, region }: InfinitePr
       </div>
 
       <ul
-        className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 mb-8"
+        className={gridClass}
         data-testid="products-list"
       >
         {productsToShow.map((p) => {
