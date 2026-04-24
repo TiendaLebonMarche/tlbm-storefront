@@ -34,8 +34,8 @@ export default async function Footer() {
           </p>
           <div className="flex gap-x-8 text-[11px] font-bold tracking-[0.2em] text-brand-brown opacity-60">
             <a href="https://instagram.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">INSTAGRAM</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">FACEBOOK</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">TIKTOK</a>
+            <a href="https://facebook.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">FACEBOOK</a>
+            <a href="https://tiktok.com/@tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">TIKTOK</a>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export default async function Footer() {
           &copy; {new Date().getFullYear()} TIENDA LE BON MARCHÉ. TODOS LOS DERECHOS RESERVADOS.
         </div>
         <div className="flex gap-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-brand-brown opacity-60">
-          <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">POLÍTICA DE PRIVACIDAD</LocalizedClientLink>
+          <LocalizedClientLink href="/legal/privacidad" className="hover:opacity-100 transition-opacity">POLÍTICA DE PRIVACIDAD</LocalizedClientLink>
           <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">FAQ</LocalizedClientLink>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import Link from "next/link"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const SLIDES = [
   {
@@ -12,7 +12,7 @@ const SLIDES = [
     subtitle: "COLECCIÓN DE PARLANTES",
     description: "Sonido envolvente. Diseño que desafía la gravedad.",
     buttonText: "Explorar Sonido",
-    buttonLink: "/store?category=parlantes",
+    buttonLink: "/store",
     image: "/images/hero/speakers.png",
     align: "left",
     hoverColor: "bg-[#50652a]",
@@ -23,7 +23,7 @@ const SLIDES = [
     subtitle: "BOLSOS & MALETINES",
     description: "La elegancia funcional para el profesional moderno.",
     buttonText: "Ver Colección",
-    buttonLink: "/store?category=bolsos",
+    buttonLink: "/store",
     image: "/images/hero/bags.png",
     align: "right",
     hoverColor: "bg-[#8b5a2b]",
@@ -34,7 +34,7 @@ const SLIDES = [
     subtitle: "DRONES & STARLINK",
     description: "Conectividad sin fronteras. Accesorios de otro nivel.",
     buttonText: "Descubrir Tech",
-    buttonLink: "/store?category=tech",
+    buttonLink: "/store",
     image: "/images/hero/tech.png",
     align: "center",
     hoverColor: "bg-[#0ea5e9]",
@@ -125,7 +125,7 @@ const Hero = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.9 }}
               >
-                <Link
+                <LocalizedClientLink
                   href={SLIDES[current].buttonLink}
                   className="inline-flex items-center group overflow-hidden"
                 >
@@ -139,7 +139,7 @@ const Hero = () => {
                     </span>
                     <div className={`absolute inset-0 ${SLIDES[current].hoverColor} translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 z-[-1]`} />
                   </div>
-                </Link>
+                </LocalizedClientLink>
               </motion.div>
             </div>
           </div>

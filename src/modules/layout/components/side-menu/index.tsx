@@ -13,11 +13,10 @@ import { Locale } from "@lib/data/locales"
 
 const mainMenu = [
   { name: "Inicio", href: "/" },
-  { name: "Parlantes", href: "/store?category=parlantes" },
-  { name: "Originales", href: "/store?category=originales" },
-  { name: "Tecnología", href: "/tecnologia" },
-  { name: "Hogar", href: "/hogar" },
-  { name: "Ofertas", href: "/ofertas" },
+  { name: "Tienda", href: "/store" },
+  { name: "Parlantes", href: "/store" },
+  { name: "Tecnología", href: "/store" },
+  { name: "Ofertas", href: "/store" },
   { name: "Blog", href: "/blog" },
   { name: "Quiénes Somos", href: "/quienes-somos" },
 ]
