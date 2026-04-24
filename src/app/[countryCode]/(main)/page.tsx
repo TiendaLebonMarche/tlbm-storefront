@@ -5,7 +5,6 @@ import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
 import AnimatedTestimonialsSection from "@modules/home/components/animated-testimonials"
-import CategoriesMarquee from "@modules/home/components/categories-marquee"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
@@ -55,8 +54,6 @@ export default async function Home(props: {
       <div className="reveal-up delay-300">
         <AnimatedTestimonialsSection />
       </div>
-
-      <CategoriesMarquee />
 
       <MostSoldSection countryCode={countryCode} />
 
