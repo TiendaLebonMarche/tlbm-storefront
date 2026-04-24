@@ -28,7 +28,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden bg-white border-none transition-all duration-700 rounded-none",
+        "relative w-full overflow-hidden bg-transparent border-none transition-all duration-700 rounded-none",
         className,
         {
           "aspect-square": true,
@@ -44,7 +44,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         <ImageOrPlaceholder image={initialImage} />
         {/* Hover image */}
         {hoverImage && hoverImage !== initialImage && (
-          <div className="absolute inset-0 opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-700 z-10 w-full h-full bg-white">
+          <div className="absolute inset-0 opacity-0 lg:group-hover/thumb:opacity-100 transition-opacity duration-700 z-10 w-full h-full bg-transparent">
             <ImageOrPlaceholder image={hoverImage} />
           </div>
         )}
@@ -60,14 +60,14 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute inset-0 object-contain object-center p-4 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover/thumb:scale-[1.03]"
+      className="absolute inset-0 object-contain object-center p-1 sm:p-2 md:p-4 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:group-hover/thumb:scale-[1.03]"
       draggable={false}
       quality={85}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
     />
   ) : (
-    <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-gray-50">
+    <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-gray-50/50">
       <PlaceholderImage size={24} />
     </div>
   )
