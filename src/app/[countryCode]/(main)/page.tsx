@@ -36,51 +36,54 @@ export default async function Home(props: {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-0">
       <Hero />
 
       <div className="reveal-up">
         <TrustBadges />
       </div>
 
-      <div className="reveal-up delay-100">
+      <div className="reveal-up">
         <HotDeals countryCode={countryCode} />
       </div>
 
-      <div className="reveal-up delay-200">
+      <div className="reveal-up">
         <BrandStatement />
       </div>
 
-      <div className="reveal-up delay-300">
+      <div className="reveal-up">
         <AnimatedTestimonialsSection />
       </div>
 
-      <MostSoldSection countryCode={countryCode} />
+      <div className="reveal-up">
+        <MostSoldSection countryCode={countryCode} />
+      </div>
 
-
-      <Blog7
-        tagline="Lifestyle & Tendencias"
-        heading="Blog Le Bon Marché - El blog de tu tienda en bucaramanga."
-        description="Descubre las piezas que definen el lujo moderno y las historias detrás de nuestra selección exclusiva. Inspiración editorial para los más exigentes."
-        buttonText="Ver todos los artículos"
-        buttonUrl="/blog"
-        posts={blogPosts.slice(0, 3).map((post, idx) => ({
-          id: `post-${idx}`,
-          title: post.title,
-          summary: post.img ? "Una selección exclusiva de piezas y tendencias del mundo luxury, traída directamente a tu pantalla." : "",
-          label: post.tag,
-          author: "Le Bon Marché",
-          published: "2024",
-          url: `/blog/${post.handle}`,
-          image: post.img,
-        }))}
-      />
+      <div className="reveal-up">
+        <Blog7
+          tagline="Lifestyle & Tendencias"
+          heading="Blog Le Bon Marché - El blog de tu tienda en bucaramanga."
+          description="Descubre las piezas que definen el lujo moderno y las historias detrás de nuestra selección exclusiva. Inspiración editorial para los más exigentes."
+          buttonText="Ver todos los artículos"
+          buttonUrl="/blog"
+          posts={blogPosts.slice(0, 3).map((post, idx) => ({
+            id: `post-${idx}`,
+            title: post.title,
+            summary: post.img ? "Una selección exclusiva de piezas y tendencias del mundo luxury, traída directamente a tu pantalla." : "",
+            label: post.tag,
+            author: "Le Bon Marché",
+            published: "2024",
+            url: `/blog/${post.handle}`,
+            image: post.img,
+          }))}
+        />
+      </div>
 
       <div className="w-full bg-white pt-24 pb-12 border-t border-gray-100 overflow-hidden select-none reveal-up">
         <h1 className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap">
           LEBONMARCHÉ
         </h1>
       </div>
-    </>
+    </div>
   )
 }
