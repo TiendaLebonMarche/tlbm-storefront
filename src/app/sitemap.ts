@@ -6,111 +6,76 @@ import { blogPosts } from '@lib/data/blog'
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 /**
- * Generates a valid W3C date string for sitemap
+ * Generates a clean YYYY-MM-DD date string for sitemap compatibility
  */
-const getValidDate = (date: any): Date => {
-    const d = new Date(date)
-    return isNaN(d.getTime()) ? new Date() : d
+const formatDate = (date: any): string => {
+  const d = new Date(date)
+  return isNaN(d.getTime()) ? new Date().toISOString().split('T')[0] : d.toISOString().split('T')[0]
 }
 
 /**
- * Sanitizes handles to ensure they exist and don't have leading/trailing slashes
+ * Sanitizes handles: trims and removes accidental slashes
  */
-const sanitizeHandle = (handle: string | undefined | null): string => {
-    if (!handle) return ""
-    return handle.trim().replace(/^\/+|\/+$/g, "")
+const sanitize = (h: string | null | undefined): string => {
+  if (!h) return ""
+  return h.trim().replace(/^\/+|\/+$/g, "")
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    // Fetch all products
-    const { response: { products } } = await listProducts({
-        countryCode: "co",
-        queryParams: { limit: 200 },
-    }).catch(() => ({ response: { products: [] } }))
+  // Fetch products for 'co' region
+  const { response: { products } } = await listProducts({
+    countryCode: "co",
+    queryParams: { limit: 200 },
+  }).catch(() => ({ response: { products: [] } }))
 
-    // Fetch all categories
-    const categories = await listCategories().catch(() => [])
+  // Fetch all categories
+  const categories = await listCategories().catch(() => [])
 
-    // Static pages
-    const staticEntries: MetadataRoute.Sitemap = [
-        {
-            url: encodeURI(`${BASE_URL}/co`),
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 1.0,
-        },
-        {
-            url: encodeURI(`${BASE_URL}/co/store`),
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 0.9,
-        },
-        {
-            url: encodeURI(`${BASE_URL}/co/quienes-somos`),
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: encodeURI(`${BASE_URL}/co/blog`),
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.7,
-        },
-        {
-            url: encodeURI(`${BASE_URL}/co/legal/terminos`),
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        {
-            url: encodeURI(`${BASE_URL}/co/legal/privacidad`),
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-    ]
+  // 1. Static Core Pages
+  const staticEntries: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/co`, lastModified: formatDate(new Date()), changeFrequency: 'daily', priority: 1.0 },
+    { url: `${BASE_URL}/co/store`, lastModified: formatDate(new Date()), changeFrequency: 'daily', priority: 0.9 },
+    { url: `${BASE_URL}/co/quienes-somos`, lastModified: formatDate(new Date()), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/co/blog`, lastModified: formatDate(new Date()), changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${BASE_URL}/co/legal/terminos`, lastModified: formatDate(new Date()), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE_URL}/co/legal/privacidad`, lastModified: formatDate(new Date()), changeFrequency: 'yearly', priority: 0.3 },
+  ]
 
-    // Product pages
-    const productEntries: MetadataRoute.Sitemap = products
-        .filter(p => !!p.handle)
-        .map((product) => ({
-            url: encodeURI(`${BASE_URL}/co/productos/${sanitizeHandle(product.handle)}`),
-            lastModified: getValidDate(product.updated_at),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        }))
+  // 2. Dynamic Product Pages
+  const productEntries: MetadataRoute.Sitemap = products
+    .filter(p => !!p.handle)
+    .map(p => ({
+      url: encodeURI(`${BASE_URL}/co/productos/${sanitize(p.handle)}`),
+      lastModified: formatDate(p.updated_at),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    }))
 
-    // Category pages
-    const categoryEntries: MetadataRoute.Sitemap = categories
-        .filter(c => !!c.handle)
-        .map((category) => ({
-            url: encodeURI(`${BASE_URL}/co/categories/${sanitizeHandle(category.handle)}`),
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.7,
-        }))
+  // 3. Dynamic Category Pages
+  const categoryEntries: MetadataRoute.Sitemap = categories
+    .filter(c => !!c.handle)
+    .map(c => ({
+      url: encodeURI(`${BASE_URL}/co/categories/${sanitize(c.handle)}`),
+      lastModified: formatDate(new Date()),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    }))
 
-    // Blog entries
-    const blogEntries: MetadataRoute.Sitemap = blogPosts
-        .filter(post => !!post.handle)
-        .map((post) => ({
-            url: encodeURI(`${BASE_URL}/co/blog/${sanitizeHandle(post.handle)}`),
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.6,
-        }))
+  // 4. Blog Posts
+  const blogEntries: MetadataRoute.Sitemap = blogPosts
+    .filter(b => !!b.handle)
+    .map(b => ({
+      url: encodeURI(`${BASE_URL}/co/blog/${sanitize(b.handle)}`),
+      lastModified: formatDate(new Date()),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }))
 
-    // Merge and deduplicate by URL
-    const allEntries = [
-        ...staticEntries,
-        ...productEntries,
-        ...categoryEntries,
-        ...blogEntries,
-    ]
+  // Combined unique entries to prevent duplicates and ensure clean XML structure
+  const allEntries = [...staticEntries, ...productEntries, ...categoryEntries, ...blogEntries]
+  
+  // Deduplicate by URL using Map
+  const uniqueEntries = Array.from(new Map(allEntries.map(e => [e.url, e])).values())
 
-    // Final deduplication to be extra safe
-    const uniqueEntries = Array.from(new Map(allEntries.map(item => [item.url, item])).values())
-
-    return uniqueEntries
+  return uniqueEntries
 }
