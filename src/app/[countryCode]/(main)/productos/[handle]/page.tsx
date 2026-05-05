@@ -164,7 +164,7 @@ export default async function ProductPage(props: Props) {
       "url": BASE_URL
     },
     "seller": {
-      "@type": "Organization",
+      "@type": "OnlineStore",
       "name": "Tienda Le Bon Marché",
       "url": BASE_URL,
       "telephone": "+573027567783"
@@ -183,7 +183,7 @@ export default async function ProductPage(props: Props) {
         : "https://schema.org/OutOfStock",
       "itemCondition": "https://schema.org/NewCondition",
       "seller": {
-        "@type": "Organization",
+        "@type": "OnlineStore",
         "name": "Tienda Le Bon Marché"
       },
       "shippingDetails": {

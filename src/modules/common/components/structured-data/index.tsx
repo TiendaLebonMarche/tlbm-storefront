@@ -9,7 +9,7 @@ export default function StructuredData() {
   // 1. Organization Schema — completo con sameAs, contactPoint, address
   const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Store", "OnlineStore"],
     "@id": `${BASE_URL}/#organization`,
     "name": "Tienda Le Bon Marché",
     "alternateName": ["Le Bon Marche", "LeBonMarché", "TLBM"],
