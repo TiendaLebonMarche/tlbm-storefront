@@ -65,7 +65,7 @@ export default async function Nav() {
                 alt="Tienda Le Bon Marché"
                 width={1822}
                 height={548}
-                className="w-[200px] md:w-[240px] lg:w-[280px] h-auto object-contain"
+                className="w-[160px] md:w-[190px] lg:w-[220px] h-auto object-contain"
                 priority
               />
             </LocalizedClientLink>

@@ -14,7 +14,7 @@ type InfiniteProductsProps = {
 export default function InfiniteProducts({ 
   initialProducts, 
   region,
-  gridClass = "grid grid-cols-2 small:grid-cols-3 medium:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 mb-8",
+  gridClass = "grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 small:gap-x-8 medium:gap-x-10 gap-y-10 mb-8",
   limit = 12
 }: InfiniteProductsProps) {
   const [displayedCount, setDisplayedCount] = useState(limit)

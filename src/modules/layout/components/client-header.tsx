@@ -67,7 +67,7 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
           max-w-[95rem] mx-auto
           flex justify-between items-center
           transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
-          ${isScrolled ? "min-h-[60px] md:min-h-[68px] py-3 lg:py-4" : "min-h-[68px] md:min-h-[80px] py-4 lg:py-6"}
+          ${isScrolled ? "min-h-[56px] md:min-h-[60px] py-2 lg:py-3" : "min-h-[64px] md:min-h-[76px] py-3 lg:py-4"}
         `}>
           {children}
         </div>

@@ -55,7 +55,7 @@ const TrustBadges = () => {
               <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-brand-soft text-brand-olive mb-8 transition-all duration-700 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 shadow-sm">
                 {badge.icon}
               </div>
-              <h3 className="font-sans font-black text-sm md:text-lg uppercase tracking-[0.4em] text-brand-brown mb-4">
+              <h3 className="font-sans font-bold text-xs md:text-sm uppercase tracking-[0.3em] text-brand-brown mb-4">
                 {badge.title}
               </h3>
               <p className="text-xs md:text-base text-brand-gray/70 leading-relaxed max-w-[280px] font-medium">

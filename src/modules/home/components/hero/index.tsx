@@ -104,7 +104,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-white font-sans text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-6"
+                className="text-white font-sans text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none mb-6"
               >
                 {SLIDES[current].title.split(" ").map((word, i) => (
                   <span key={i} className="block">{word}</span>
