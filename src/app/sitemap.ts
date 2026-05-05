@@ -14,11 +14,16 @@ const formatDate = (date: any): string => {
 }
 
 /**
- * Sanitizes handles: trims and removes accidental slashes
+ * Sanitizes handles: trims, removes accidental slashes, and URL-encodes segments
+ * to ensure XML compatibility (e.g., handling '&' correctly).
  */
 const sanitize = (h: string | null | undefined): string => {
   if (!h) return ""
-  return h.trim().replace(/^\/+|\/+$/g, "")
+  return h.trim()
+    .replace(/^\/+|\/+$/g, "")
+    .split('/')
+    .map(part => encodeURIComponent(part))
+    .join('/')
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -45,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const productEntries: MetadataRoute.Sitemap = products
     .filter(p => !!p.handle)
     .map(p => ({
-      url: encodeURI(`${BASE_URL}/co/productos/${sanitize(p.handle)}`),
+      url: `${BASE_URL}/co/productos/${sanitize(p.handle)}`,
       lastModified: formatDate(p.updated_at),
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -55,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categoryEntries: MetadataRoute.Sitemap = categories
     .filter(c => !!c.handle)
     .map(c => ({
-      url: encodeURI(`${BASE_URL}/co/categories/${sanitize(c.handle)}`),
+      url: `${BASE_URL}/co/categories/${sanitize(c.handle)}`,
       lastModified: formatDate(new Date()),
       changeFrequency: 'weekly',
       priority: 0.7,
@@ -65,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogEntries: MetadataRoute.Sitemap = blogPosts
     .filter(b => !!b.handle)
     .map(b => ({
-      url: encodeURI(`${BASE_URL}/co/blog/${sanitize(b.handle)}`),
+      url: `${BASE_URL}/co/blog/${sanitize(b.handle)}`,
       lastModified: formatDate(new Date()),
       changeFrequency: 'monthly',
       priority: 0.6,
