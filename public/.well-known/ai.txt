@@ -1,0 +1,46 @@
+# AI Crawler Permissions — Tienda Le Bon Marché
+# https://www.tiendalebonmarche.com
+
+# General AI crawlers: allowed
+User-agent: *
+Allow: /
+
+# Specific AI systems
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Disallow sensitive areas for all
+User-agent: *
+Disallow: /checkout
+Disallow: /account
+Disallow: /cart
+Disallow: /api/
+
+# Site info
+Site: https://www.tiendalebonmarche.com
+Sitemap: https://www.tiendalebonmarche.com/sitemap.xml
+LLMs: https://www.tiendalebonmarche.com/llms.txt
+Summary: https://www.tiendalebonmarche.com/ai/summary.json
+FAQ: https://www.tiendalebonmarche.com/ai/faq.json
+Service: https://www.tiendalebonmarche.com/ai/service.json

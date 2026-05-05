@@ -13,7 +13,7 @@ const EmptyCartMessage = () => {
       </Text>
       <div>
         <InteractiveLink href="/store" className="text-brand-gold hover:text-brand-black transition-colors font-bold uppercase tracking-[0.3em] text-xs">
-          Explorar el Catálogo
+          Ver Catálogo
         </InteractiveLink>
       </div>
     </div>

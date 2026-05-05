@@ -12,10 +12,23 @@ import { Blog7 } from "@/components/ui/blog7"
 import MostSoldSection from "@modules/home/components/most-sold"
 import BrandStatement from "@modules/home/components/brand-statement"
 
+const BASE_URL = "https://www.tiendalebonmarche.com"
+
 export const metadata: Metadata = {
-  title: "Tienda Le Bon Marché | Originales & Exóticos",
+  title: "Tienda Le Bon Marché | Productos Originales & Exóticos — Bucaramanga",
   description:
-    "Tienda online de productos luxury, tecnología, decoración y lifestyle en Bucaramanga, Colombia. Envíos a todo el país.",
+    "Boutique online en Bucaramanga con tecnología premium, gadgets exclusivos, decoración exótica y libros de colección. Envíos VIP a toda Colombia. Descubre lo extraordinario.",
+  alternates: {
+    canonical: `${BASE_URL}/co`,
+  },
+  openGraph: {
+    title: "Tienda Le Bon Marché | Originales & Exóticos — Bucaramanga",
+    description: "Tecnología premium, gadgets, decoración exótica y libros de colección. Boutique virtual en Bucaramanga con envíos a toda Colombia.",
+    url: `${BASE_URL}/co`,
+    type: "website",
+    locale: "es_CO",
+    siteName: "Tienda Le Bon Marché",
+  },
 }
 
 export default async function Home(props: {
@@ -79,10 +92,10 @@ export default async function Home(props: {
         />
       </div>
 
-      <div className="w-full bg-white pt-24 pb-12 border-t border-gray-100 overflow-hidden select-none reveal-up">
-        <h1 className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap">
+      <div className="w-full bg-white pt-24 pb-12 border-t border-gray-100 overflow-hidden reveal-up" aria-hidden="true">
+        <p className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap select-none" role="presentation">
           LEBONMARCHÉ
-        </h1>
+        </p>
       </div>
     </div>
   )

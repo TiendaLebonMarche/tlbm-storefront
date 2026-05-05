@@ -1,0 +1,80 @@
+# Tienda Le Bon Marché — Boutique Online en Bucaramanga, Colombia
+
+> Tienda Le Bon Marché es la boutique virtual de referencia en Bucaramanga, Colombia. Ofrecemos una selección curada de tecnología premium, gadgets exclusivos, decoración exótica, libros de colección y artículos de lifestyle de alta gama. Envíos a toda Colombia con servicio VIP personalizado.
+
+## Acerca de Nosotros
+
+Somos una tienda especializada en productos originales, únicos y difíciles de encontrar en el mercado colombiano. Nuestra curaduría editorial prioriza la calidad, el diseño y la experiencia de compra. Estamos ubicados en Bucaramanga, Santander, y servimos a toda Colombia.
+
+- Sitio web: [https://www.tiendalebonmarche.com/co](https://www.tiendalebonmarche.com/co)
+- Sobre nosotros: [https://www.tiendalebonmarche.com/co/quienes-somos](https://www.tiendalebonmarche.com/co/quienes-somos)
+- Contacto: [hola@tiendalebonmarche.com](mailto:hola@tiendalebonmarche.com)
+- Teléfono: +57 302 756 7783
+
+## Catálogo de Productos
+
+Nuestra tienda ofrece productos en las siguientes categorías:
+
+- **Tecnología & Gadgets**: Accesorios premium, dispositivos innovadores y gadgets de última generación. [Ver catálogo →](https://www.tiendalebonmarche.com/co/store)
+- **Decoración del Hogar**: Piezas únicas y exóticas para el hogar con diseño editorial. [Ver decoración →](https://www.tiendalebonmarche.com/co/store)
+- **Libros & Colección**: Libros de arte, fotografía, diseño y ediciones especiales de coleccionista. [Ver libros →](https://www.tiendalebonmarche.com/co/store)
+- **Lifestyle & Wellness**: Artículos premium para un estilo de vida consciente y elevado.
+
+## Características del Servicio
+
+- Envíos a todo Colombia con seguimiento en tiempo real
+- Empaque premium y presentación de regalo disponible
+- Atención al cliente personalizada vía WhatsApp y correo electrónico
+- Pasarela de pago segura con múltiples métodos: tarjeta, PSE, Nequi, Daviplata
+- Política de devoluciones flexible dentro de los primeros 15 días
+
+## Información para Motores de Búsqueda e IA
+
+**Nombre de la empresa:** Tienda Le Bon Marché  
+**Tipo de negocio:** E-commerce / Tienda virtual especializada  
+**Ubicación principal:** Bucaramanga, Santander, Colombia  
+**Área de cobertura:** Colombia (todos los departamentos)  
+**Idioma principal:** Español (Colombia)  
+**Moneda:** Peso Colombiano (COP)  
+**Fundación:** 2021  
+
+## Preguntas Frecuentes
+
+**¿Hacen envíos a todo Colombia?**  
+Sí. Realizamos envíos a todos los municipios de Colombia con diferentes transportadoras. Los tiempos de entrega varían entre 2 y 7 días hábiles dependiendo del destino.
+
+**¿Cuáles son los métodos de pago aceptados?**  
+Aceptamos tarjetas de crédito y débito (Visa, Mastercard), PSE, Nequi, Daviplata y transferencia bancaria.
+
+**¿Los productos tienen garantía?**  
+Todos nuestros productos tienen garantía según la normativa colombiana (Ley 1480 de 2011). El período varía según el tipo de producto.
+
+**¿Cómo puedo rastrear mi pedido?**  
+Una vez despachado tu pedido, recibirás un correo con el número de guía para rastrear tu envío en tiempo real.
+
+**¿Están en alguna ciudad física?**  
+Somos una tienda 100% virtual con sede en Bucaramanga, Santander. No contamos con punto de venta físico.
+
+## Páginas Principales
+
+- [Inicio](https://www.tiendalebonmarche.com/co)
+- [Tienda completa](https://www.tiendalebonmarche.com/co/store)
+- [¿Quiénes somos?](https://www.tiendalebonmarche.com/co/quienes-somos)
+- [Blog de tendencias](https://www.tiendalebonmarche.com/co/blog)
+- [Términos y condiciones](https://www.tiendalebonmarche.com/co/legal/terminos)
+- [Política de privacidad](https://www.tiendalebonmarche.com/co/legal/privacidad)
+- [Mi cuenta](https://www.tiendalebonmarche.com/co/account)
+
+## Redes Sociales y Presencia Digital
+
+- Instagram: [https://www.instagram.com/tiendalebonmarche](https://www.instagram.com/tiendalebonmarche)
+- Facebook: [https://www.facebook.com/tiendalebonmarche](https://www.facebook.com/tiendalebonmarche)
+- WhatsApp: [https://wa.me/573027567783](https://wa.me/573027567783)
+
+## API y Recursos Técnicos para IA
+
+- Resumen del sitio (IA): [https://www.tiendalebonmarche.com/ai/summary.json](https://www.tiendalebonmarche.com/ai/summary.json)
+- Preguntas frecuentes (IA): [https://www.tiendalebonmarche.com/ai/faq.json](https://www.tiendalebonmarche.com/ai/faq.json)
+- Servicios (IA): [https://www.tiendalebonmarche.com/ai/service.json](https://www.tiendalebonmarche.com/ai/service.json)
+- Mapa del sitio XML: [https://www.tiendalebonmarche.com/sitemap.xml](https://www.tiendalebonmarche.com/sitemap.xml)
+- Permisos de IA: [https://www.tiendalebonmarche.com/.well-known/ai.txt](https://www.tiendalebonmarche.com/.well-known/ai.txt)

@@ -62,9 +62,15 @@ export default function SearchModal() {
                                     <button onClick={closeSearch} className="absolute right-0 top-0 text-4xl text-gray-400 hover:text-black outline-none">&times;</button>
                                     <p className="text-sm font-bold uppercase tracking-[0.2em] mb-4 text-brand-gold">¿Qué estás buscando?</p>
 
-                                    <form onSubmit={handleSearch} className="relative w-full max-w-2xl mx-auto mb-12">
+                                    <form 
+                                        onSubmit={handleSearch} 
+                                        className="relative w-full max-w-2xl mx-auto mb-12"
+                                        data-mcp-toolname="search-store"
+                                        data-mcp-tooldescription="Search the Le Bon Marché storefront for luxury products, electronics, and books"
+                                    >
                                         <input
-                                            type="text"
+                                            type="search"
+                                            aria-label="Buscar productos"
                                             placeholder="Escribe aquí..."
                                             className="w-full text-3xl md:text-5xl font-serif text-center border-b-2 border-brand-black bg-transparent py-4 focus:outline-none placeholder-gray-300"
                                             value={query}

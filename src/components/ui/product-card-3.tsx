@@ -114,7 +114,7 @@ export const ProductMostSold = ({
                 <div className="p-6 pt-2 mt-auto bg-white">
                   <LocalizedClientLink href={`/productos/${item.handle}`}>
                     <Button className="w-full bg-brand-brown text-white hover:bg-brand-olive border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg shadow-black/5 group-hover:shadow-brand-brown/20">
-                      Explorar Detalle
+                      Ver Producto
                     </Button>
                   </LocalizedClientLink>
                 </div>

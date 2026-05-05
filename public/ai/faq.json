@@ -1,0 +1,92 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "name": "Preguntas Frecuentes — Tienda Le Bon Marché",
+  "url": "https://www.tiendalebonmarche.com/ai/faq.json",
+  "about": {
+    "@type": "Organization",
+    "name": "Tienda Le Bon Marché"
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es Tienda Le Bon Marché?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tienda Le Bon Marché es una boutique online colombiana con sede en Bucaramanga, Santander. Nos especializamos en la venta de productos originales, exclusivos y difíciles de encontrar: tecnología premium, gadgets innovadores, decoración exótica, libros de colección y artículos de lifestyle de alta calidad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacen envíos a todo Colombia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Realizamos envíos a todos los municipios de Colombia. Los tiempos de entrega varían entre 2 y 7 días hábiles dependiendo del destino. Trabajamos con las principales transportadoras del país para garantizar entregas seguras y oportunas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuáles son los métodos de pago aceptados?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aceptamos tarjetas de crédito y débito Visa y Mastercard, PSE (Pago Seguro en Línea), Nequi, Daviplata y transferencia bancaria. Todas las transacciones están protegidas con cifrado SSL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Los productos tienen garantía?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Todos los productos cumplen con la garantía establecida por la normativa colombiana (Ley 1480 del Estatuto del Consumidor). El período de garantía varía según el tipo de producto, generalmente entre 3 meses y 1 año."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo puedo rastrear mi pedido?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Una vez despachado tu pedido, recibirás un correo electrónico con el número de guía de envío para rastrear tu paquete en tiempo real a través del sitio web de la transportadora asignada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tienen tienda física en Bucaramanga?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Somos una tienda 100% virtual con sede operativa en Bucaramanga, Santander. No contamos con punto de venta físico. Puedes contactarnos por WhatsApp al +57 302 756 7783 o por correo a hola@tiendalebonmarche.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo hacer devoluciones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Contamos con una política de devoluciones flexible dentro de los primeros 15 días calendario desde la recepción del producto, siempre que esté en condiciones originales sin uso. Puedes gestionar tu devolución escribiéndonos a hola@tiendalebonmarche.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué tipo de productos venden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vendemos tecnología premium y gadgets innovadores, decoración del hogar con estilo editorial y piezas exóticas, libros de arte y ediciones especiales de coleccionista, y artículos de lifestyle y wellness de alta gama. Cada producto es cuidadosamente seleccionado por su calidad, diseño y originalidad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo contactar con el servicio al cliente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes contactarnos a través de: WhatsApp al +57 302 756 7783, correo electrónico a hola@tiendalebonmarche.com, o a través del formulario en nuestra página de contacto. Respondemos en un máximo de 24 horas hábiles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es seguro comprar en Tienda Le Bon Marché?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Nuestra tienda opera bajo protocolo HTTPS con certificado SSL, cumple con la Ley 1581 de Protección de Datos de Colombia y utiliza pasarelas de pago certificadas. Tu información personal y financiera está completamente protegida."
+      }
+    }
+  ]
+}

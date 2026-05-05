@@ -214,9 +214,9 @@ const CartDropdown = ({
                   <LocalizedClientLink href="/store" onClick={close}>
                     <button
                       className="border border-brand-black py-3 px-8 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-black hover:text-white transition-all"
-                      aria-label="Explorar productos"
+                      aria-label="Ver catálogo de productos"
                     >
-                      Explorar Productos
+                      Ver Catálogo
                     </button>
                   </LocalizedClientLink>
                 </div>

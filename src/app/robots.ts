@@ -5,11 +5,45 @@ export default function robots(): MetadataRoute.Robots {
     const baseUrl = getBaseURL()
 
     return {
-        rules: {
-            userAgent: '*',
-            allow: '/',
-            disallow: ['/cart', '/checkout', '/account', '/admin'],
-        },
+        rules: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: ['/cart', '/checkout', '/account', '/api/'],
+            },
+            // AI crawlers — allow full indexing for AI discoverability
+            {
+                userAgent: 'GPTBot',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+            {
+                userAgent: 'Claude-Web',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+            {
+                userAgent: 'anthropic-ai',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+            {
+                userAgent: 'Google-Extended',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+            {
+                userAgent: 'PerplexityBot',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+            {
+                userAgent: 'cohere-ai',
+                allow: '/',
+                disallow: ['/checkout', '/account', '/api/'],
+            },
+        ],
         sitemap: `${baseUrl}/sitemap.xml`,
+        host: baseUrl,
     }
 }

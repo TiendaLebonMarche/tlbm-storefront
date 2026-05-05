@@ -3,9 +3,22 @@ import { Metadata } from "next"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import StoreTemplate from "@modules/store/templates"
 
+const BASE_URL = "https://www.tiendalebonmarche.com"
+
 export const metadata: Metadata = {
-  title: "Catálogo - Tienda Le Bon Marché",
-  description: "Explora nuestra exclusiva colección de productos de lujo, tecnología y lifestyle.",
+  title: "Catálogo de Productos | Tienda Le Bon Marché",
+  description: "Descubre nuestra selección curada de tecnología premium, gadgets exclusivos, decoración exótica y libros de colección. Boutique virtual en Bucaramanga con envíos a toda Colombia.",
+  alternates: {
+    canonical: `${BASE_URL}/co/store`,
+  },
+  openGraph: {
+    title: "Catálogo de Productos | Tienda Le Bon Marché",
+    description: "Tecnología premium, gadgets, decoración exótica y libros de colección. Envíos a toda Colombia desde Bucaramanga.",
+    url: `${BASE_URL}/co/store`,
+    siteName: "Tienda Le Bon Marché",
+    type: "website",
+    locale: "es_CO",
+  },
 }
 
 type Params = {

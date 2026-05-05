@@ -1,0 +1,99 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Tienda Le Bon Marché",
+  "alternateName": ["Le Bon Marche Bucaramanga", "TLBM", "LeBonMarche Colombia"],
+  "url": "https://www.tiendalebonmarche.com",
+  "description": "Tienda Le Bon Marché es la boutique online especializada en productos originales y exclusivos en Bucaramanga, Colombia. Ofrecemos tecnología premium, gadgets innovadores, decoración exótica, libros de colección y artículos de lifestyle de alta gama. Envíos VIP a toda Colombia.",
+  "inLanguage": "es-CO",
+  "audience": {
+    "@type": "Audience",
+    "geographicArea": {
+      "@type": "Country",
+      "name": "Colombia"
+    }
+  },
+  "brand": {
+    "@type": "Brand",
+    "name": "Le Bon Marché",
+    "slogan": "Originales & Exóticos"
+  },
+  "founder": {
+    "@type": "Organization",
+    "name": "Tienda Le Bon Marché"
+  },
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Bucaramanga",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bucaramanga",
+      "addressRegion": "Santander",
+      "addressCountry": "CO"
+    }
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Colombia"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Catálogo Le Bon Marché",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Tecnología & Gadgets",
+        "description": "Accesorios y dispositivos tecnológicos premium"
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Decoración del Hogar",
+        "description": "Piezas exóticas y únicas para decoración"
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Libros & Colección",
+        "description": "Libros de arte, fotografía y ediciones especiales"
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Lifestyle & Wellness",
+        "description": "Artículos premium para estilo de vida elevado"
+      }
+    ]
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+573027567783",
+    "email": "hola@tiendalebonmarche.com",
+    "contactType": "customer service",
+    "availableLanguage": "Spanish",
+    "areaServed": "CO",
+    "contactOption": "TollFree"
+  },
+  "sameAs": [
+    "https://www.instagram.com/tiendalebonmarche",
+    "https://www.facebook.com/tiendalebonmarche",
+    "https://wa.me/573027567783"
+  ],
+  "mainContentOfPage": "E-commerce de productos originales, tecnología premium y decoración exclusiva con envíos a toda Colombia desde Bucaramanga.",
+  "keywords": [
+    "tienda virtual Bucaramanga",
+    "gadgets exclusivos Colombia",
+    "productos originales Colombia",
+    "boutique online Santander",
+    "tecnología premium Colombia",
+    "decoración exótica",
+    "libros de colección",
+    "regalos originales Colombia"
+  ],
+  "llmInfo": {
+    "summary": "Le Bon Marché es un e-commerce colombiano con sede en Bucaramanga que vende productos premium, gadgets, decoración y libros de colección con envíos a toda Colombia.",
+    "category": "E-commerce / Retail",
+    "subcategory": "Boutique especializada / Productos premium",
+    "primaryLanguage": "Español",
+    "currency": "COP",
+    "shippingArea": "Colombia",
+    "established": "2021"
+  }
+}

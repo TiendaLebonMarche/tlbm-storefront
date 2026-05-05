@@ -11,7 +11,7 @@ const SLIDES = [
     title: "AUDIOPREMIUM",
     subtitle: "COLECCIÓN DE PARLANTES",
     description: "Sonido envolvente. Diseño que desafía la gravedad.",
-    buttonText: "Explorar Sonido",
+    buttonText: "Ver Parlantes",
     buttonLink: "/store",
     image: "/images/hero/speakers.png",
     align: "left",
@@ -73,7 +73,7 @@ const Hero = () => {
           >
             <Image
               src={SLIDES[current].image}
-              alt={SLIDES[current].title}
+              alt={`${SLIDES[current].subtitle} — Tienda Le Bon Marché Bucaramanga`}
               fill
               className="object-cover brightness-[0.9]"
               priority

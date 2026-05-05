@@ -1,0 +1,69 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Tienda Virtual Le Bon Marché",
+  "description": "Servicio de e-commerce especializado en productos premium, originales y exclusivos con envíos a toda Colombia desde Bucaramanga, Santander.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Tienda Le Bon Marché",
+    "url": "https://www.tiendalebonmarche.com",
+    "logo": "https://www.tiendalebonmarche.com/logo.png",
+    "telephone": "+573027567783",
+    "email": "hola@tiendalebonmarche.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bucaramanga",
+      "addressRegion": "Santander",
+      "addressCountry": "CO"
+    },
+    "sameAs": [
+      "https://www.instagram.com/tiendalebonmarche",
+      "https://www.facebook.com/tiendalebonmarche"
+    ]
+  },
+  "serviceType": "Retail E-commerce",
+  "category": "Online Shopping / Boutique",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Colombia",
+    "identifier": "CO"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://www.tiendalebonmarche.com/co/store",
+    "servicePhone": "+573027567783",
+    "serviceSmsNumber": "+573027567783",
+    "availableLanguage": {
+      "@type": "Language",
+      "name": "Spanish",
+      "alternateName": "es"
+    }
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "COP",
+    "availability": "https://schema.org/InStock",
+    "offerCount": "100+",
+    "seller": {
+      "@type": "Organization",
+      "name": "Tienda Le Bon Marché"
+    }
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Catálogo de Productos Premium",
+    "itemListElement": [
+      { "@type": "OfferCatalog", "name": "Tecnología & Gadgets Premium" },
+      { "@type": "OfferCatalog", "name": "Decoración del Hogar Exótica" },
+      { "@type": "OfferCatalog", "name": "Libros & Ediciones Especiales" },
+      { "@type": "OfferCatalog", "name": "Lifestyle & Wellness" }
+    ]
+  },
+  "termsOfService": "https://www.tiendalebonmarche.com/co/legal/terminos",
+  "privacyPolicy": "https://www.tiendalebonmarche.com/co/legal/privacidad",
+  "paymentAccepted": ["Credit Card", "Debit Card", "PSE", "Nequi", "Daviplata", "Bank Transfer"],
+  "currenciesAccepted": "COP",
+  "additionalType": "https://schema.org/OnlineBusiness",
+  "slogan": "Originales & Exóticos",
+  "keywords": "tienda virtual Bucaramanga, gadgets Colombia, productos exclusivos, boutique online Colombia"
+}

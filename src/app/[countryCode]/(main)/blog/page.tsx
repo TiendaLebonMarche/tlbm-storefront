@@ -2,9 +2,22 @@ import { Metadata } from "next"
 import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
+const BASE_URL = "https://www.tiendalebonmarche.com"
+
 export const metadata: Metadata = {
-  title: "Journal | Tienda Le Bon Marché",
-  description: "Explora nuestras historias, guías y tendencias sobre el mundo del lujo y lifestyle exótico.",
+  title: "Blog & Journal | Tienda Le Bon Marché — Bucaramanga",
+  description: "Tendencias, lifestyle y selección editorial exclusiva de Le Bon Marché. Crónicas sobre diseño, tecnología y el arte de vivir bien desde Bucaramanga, Colombia.",
+  alternates: {
+    canonical: `${BASE_URL}/co/blog`,
+  },
+  openGraph: {
+    title: "Blog Le Bon Marché — Lifestyle & Tendencias",
+    description: "Crónicas sobre diseño, tecnología premium y el arte de vivir bien. Boutique virtual en Bucaramanga.",
+    url: `${BASE_URL}/co/blog`,
+    siteName: "Tienda Le Bon Marché",
+    type: "website",
+    locale: "es_CO",
+  },
 }
 
 import { blogPosts } from "@lib/data/blog"
@@ -88,7 +101,7 @@ export default function BlogPage() {
               href="/store"
               className="inline-block px-12 py-4 bg-brand-gold text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-brand-black transition-colors"
             >
-              Explorar Catálogo
+              Ver Catálogo
             </LocalizedClientLink>
           </div>
         </div>

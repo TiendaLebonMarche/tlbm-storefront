@@ -33,9 +33,15 @@ const NewsletterSection = () => {
           </p>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 mb-8">
+          <form 
+            onSubmit={handleSubmit} 
+            className="flex flex-col sm:flex-row gap-4 mb-8"
+            data-mcp-toolname="subscribe-newsletter"
+            data-mcp-tooldescription="Subscribe to the Le Bon Marché VIP newsletter for exclusive products and discounts"
+          >
             <input
               type="email"
+              aria-label="Correo electrónico para suscripción"
               placeholder="Tu correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
