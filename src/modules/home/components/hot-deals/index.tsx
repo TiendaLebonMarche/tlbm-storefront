@@ -48,12 +48,12 @@ export default async function HotDeals({
           </div>
 
           <div className="w-full">
-            {/* Responsive grid: 2 cols mobile, 3 cols small desktop, 4 cols medium/large desktop */}
+            {/* Responsive grid: 2 cols mobile, 3 cols small/medium/large desktop */}
             <InfiniteProducts 
               initialProducts={products} 
               region={region} 
-              gridClass="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 small:gap-x-8 medium:gap-x-12 gap-y-12 mb-8"
-              limit={8}
+              gridClass="grid grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-12 mb-8"
+              limit={9}
             />
           </div>
         </div>

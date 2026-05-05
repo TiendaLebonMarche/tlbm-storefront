@@ -53,8 +53,8 @@ export default function ProductPreview({
           alt={product.title || "Producto Le Bon Marché"}
         />
 
-        {/* Elegant hover overlay */}
-        <div className="absolute inset-0 bg-black/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+        {/* Elegant white hover overlay */}
+        <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
         {/* CTA pill on hover */}
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 transition-all duration-500 ease-out z-20 pointer-events-none">
