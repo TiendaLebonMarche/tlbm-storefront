@@ -58,12 +58,29 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
-  const metadata = {
-    title: `${collection.title} | Le Bon Marché`,
-    description: `Colección ${collection.title}`,
-  } as Metadata
+  const BASE_URL = "https://www.tiendalebonmarche.com"
+  const canonicalUrl = `${BASE_URL}/${params.countryCode}/collections/${params.handle}`
+  const description = `Explora la colección ${collection.title} en Tienda Le Bon Marché. Descubre productos originales, exóticos y de alta gama seleccionados especialmente para ti.`
 
-  return metadata
+  return {
+    title: `${collection.title} | Colecciones Le Bon Marché`,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `${collection.title} | Tienda Le Bon Marché`,
+      description,
+      url: canonicalUrl,
+      siteName: "Tienda Le Bon Marché",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${collection.title} | Le Bon Marché`,
+      description,
+    }
+  }
 }
 
 export default async function CollectionPage(props: Props) {

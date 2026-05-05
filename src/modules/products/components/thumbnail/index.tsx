@@ -12,6 +12,7 @@ type ThumbnailProps = {
   isFeatured?: boolean
   className?: string
   "data-testid"?: string
+  alt?: string
 }
 
 const Thumbnail: React.FC<ThumbnailProps> = ({
@@ -21,6 +22,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   isFeatured,
   className,
   "data-testid": dataTestid,
+  alt = "Producto Le Bon Marché",
 }) => {
   const initialImage = thumbnail || images?.[0]?.url
   const hoverImage = images?.[1]?.url || initialImage // fallback to initial if no 2nd image
@@ -41,11 +43,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       data-testid={dataTestid}
     >
       <div className="group/thumb relative w-full h-full">
-        <ImageOrPlaceholder image={initialImage} />
+        <ImageOrPlaceholder image={initialImage} alt={alt} />
         {/* Hover image */}
         {hoverImage && hoverImage !== initialImage && (
           <div className="absolute inset-0 opacity-0 lg:group-hover/thumb:opacity-100 transition-opacity duration-700 z-10 w-full h-full bg-transparent">
-            <ImageOrPlaceholder image={hoverImage} />
+            <ImageOrPlaceholder image={hoverImage} alt={`${alt} - vista secundaria`} />
           </div>
         )}
       </div>
@@ -55,11 +57,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
 const ImageOrPlaceholder = ({
   image,
-}: { image?: string }) => {
+  alt,
+}: { image?: string; alt?: string }) => {
   return image ? (
     <Image
       src={image}
-      alt="Thumbnail"
+      alt={alt || "Producto Le Bon Marché"}
       className="absolute inset-0 object-contain object-center p-0 md:p-2 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:group-hover/thumb:scale-[1.03] mix-blend-multiply"
       draggable={false}
       quality={85}

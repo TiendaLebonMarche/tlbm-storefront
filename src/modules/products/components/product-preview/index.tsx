@@ -50,6 +50,7 @@ export default function ProductPreview({
           images={product.images}
           size="full"
           isFeatured={isFeatured}
+          alt={product.title || "Producto Le Bon Marché"}
         />
 
         {/* Elegant hover overlay */}

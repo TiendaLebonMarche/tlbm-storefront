@@ -6,9 +6,10 @@ import { useState, useCallback } from "react"
 
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
+  productTitle?: string
 }
 
-const ImageGallery = ({ images }: ImageGalleryProps) => {
+const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
@@ -30,6 +31,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   }
 
   const selectedImage = images[selectedImageIndex]
+  const baseAlt = productTitle || "Producto Le Bon Marché"
 
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-3 w-full">
@@ -45,12 +47,12 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   ? "ring-1 ring-brand-brown ring-offset-2"
                   : "opacity-50 hover:opacity-100"
               }`}
-              title={`Ver imagen ${idx + 1}`}
+              title={`Ver ${baseAlt} - imagen ${idx + 1}`}
             >
               {image.url && (
                 <Image
                   src={image.url}
-                  alt={`Imagen ${idx + 1}`}
+                  alt={`${baseAlt} - miniatura ${idx + 1}`}
                   fill
                   className="object-contain p-1.5 bg-white"
                   sizes="72px"
@@ -71,7 +73,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         {selectedImage?.url && (
           <Image
             src={selectedImage.url}
-            alt="Imagen principal del producto"
+            alt={`${baseAlt} - imagen principal`}
             fill
             className={`object-contain p-8 transition-all duration-500 ${
               isZoomed ? 'scale-[2]' : 'scale-100'

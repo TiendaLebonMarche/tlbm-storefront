@@ -71,7 +71,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           {/* LEFT: Gallery — 55% */}
           <div className="w-full lg:w-[55%]">
             <div className="lg:sticky lg:top-24">
-              <ImageGallery images={images} />
+              <ImageGallery images={images} productTitle={product.title} />
             </div>
           </div>
 

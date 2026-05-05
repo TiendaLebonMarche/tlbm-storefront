@@ -47,19 +47,29 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   try {
     const productCategory = await getCategoryByHandle(params.category)
 
-    const title = productCategory.name
-    const description = productCategory.description ?? `Explora nuestra colección de ${title} en Tienda Le Bon Marché. Selección exclusiva y exótica.`
+    const title = `${productCategory.name} | Categorías Le Bon Marché`
+    const description = productCategory.description ?? `Explora nuestra selección exclusiva de ${productCategory.name} en Tienda Le Bon Marché. Gadgets, tecnología y decoración premium con envíos a toda Colombia.`
+    
+    const BASE_URL = "https://www.tiendalebonmarche.com"
+    const canonicalUrl = `${BASE_URL}/${params.countryCode}/categories/${params.category.join("/")}`
 
     return {
       title,
       description,
       alternates: {
-        canonical: `${params.category.join("/")}`,
+        canonical: canonicalUrl,
       },
       openGraph: {
-        title: `${title} | Tienda Le Bon Marché`,
+        title: `${productCategory.name} | Tienda Le Bon Marché`,
         description,
+        url: canonicalUrl,
         siteName: "Tienda Le Bon Marché",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${productCategory.name} | Le Bon Marché`,
+        description,
       }
     }
   } catch (error) {
