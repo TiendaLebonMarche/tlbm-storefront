@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Button, clx } from "@medusajs/ui"
-import React, { Fragment, useMemo, useState, useEffect } from "react"
+import React, { Fragment, useMemo } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import ChevronDown from "@modules/common/icons/chevron-down"
@@ -35,7 +35,6 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   optionsDisabled,
 }) => {
   const { state, open, close } = useToggleState()
-  const [isFooterInView, setIsFooterInView] = useState(false)
 
   const price = getProductPrice({
     product: product,
@@ -51,35 +50,18 @@ const MobileActions: React.FC<MobileActionsProps> = ({
     return variantPrice || cheapestPrice || null
   }, [price])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setIsFooterInView(entries[0].isIntersecting)
-      },
-      { threshold: 0.1 }
-    )
-
-    const footer = document.getElementById("footer-brand-text")
-    if (footer) observer.observe(footer)
-
-    return () => {
-      if (footer) observer.unobserve(footer)
-    }
-  }, [])
-
   const isSimple = isSimpleProduct(product)
-  const shouldShow = show && !isFooterInView
 
   return (
     <>
       <div
         className={clx("lg:hidden inset-x-0 bottom-0 fixed z-50", {
-          "pointer-events-none": !shouldShow,
+          "pointer-events-none": !show,
         })}
       >
         <Transition
           as={Fragment}
-          show={shouldShow}
+          show={show}
           enter="transition ease-in-out duration-500"
           enterFrom="translate-y-full opacity-0"
           enterTo="translate-y-0 opacity-100"
@@ -88,7 +70,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveTo="translate-y-full opacity-0"
         >
           <div
-            className="bg-white/95 backdrop-blur-2xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-gray-100 shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
+            className="bg-white/80 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-gray-100 shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
             data-testid="mobile-actions"
           >
             <div className="flex items-baseline justify-between w-full">

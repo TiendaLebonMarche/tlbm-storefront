@@ -282,7 +282,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
       <Reveal>
         <div className="border-t border-gray-100 bg-gray-50/30">
-          <div className="content-container py-16 lg:py-24">
+          <div className="content-container py-12 lg:py-16">
             <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
               
               {/* Left: Technical Details */}
@@ -363,9 +363,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
       {/* ── RELATED PRODUCTS ── */}
       <Reveal>
-        <div className="bg-white py-20 lg:py-32 border-t border-gray-100">
+        <div className="bg-white py-16 lg:py-20 border-t border-gray-100">
           <div className="content-container">
-            <div className="mb-16 text-center max-w-xl mx-auto space-y-4">
+            <div className="mb-12 text-center max-w-xl mx-auto space-y-4">
               <p className="text-[9px] uppercase tracking-[0.6em] text-brand-brown/40 font-sans">Selección Exclusiva</p>
               <h2 className="text-4xl md:text-5xl font-serif font-normal text-brand-brown leading-tight">Piezas que complementan tu estilo</h2>
             </div>

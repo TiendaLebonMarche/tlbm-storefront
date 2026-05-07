@@ -15,7 +15,7 @@ export default async function Footer() {
   return (
     <footer className="bg-white text-brand-brown pt-12 pb-12 md:pt-20 md:pb-16 px-6 mt-auto border-t border-gray-100">
       
-      <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24 mb-12">
+      <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-24 mb-6">
         <div className="flex flex-col gap-y-8">
           <LocalizedClientLink 
             href="/" 
@@ -89,7 +89,7 @@ export default async function Footer() {
         </div>
       </div>
 
-      <div className="max-w-[90rem] mx-auto border-t border-gray-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-y-6">
+      <div className="max-w-[90rem] mx-auto border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-y-6">
         <div className="text-[10px] text-brand-gray font-medium tracking-[0.1em] opacity-60">
           &copy; {new Date().getFullYear()} TIENDA LE BON MARCHÉ. TODOS LOS DERECHOS RESERVADOS.
         </div>
@@ -98,8 +98,8 @@ export default async function Footer() {
           <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">FAQ</LocalizedClientLink>
         </div>
       </div>
-      <div id="footer-brand-text" className="w-full bg-white pt-24 pb-48 lg:pb-12 border-t border-gray-100 overflow-hidden reveal-up" aria-hidden="true">
-        <p className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap select-none" role="presentation">
+      <div id="footer-brand-text" className="w-full bg-white pt-6 pb-12 border-t border-gray-100 overflow-hidden reveal-up">
+        <p className="text-[12.5vw] leading-[0.8] font-sans font-black tracking-[-0.07em] text-center w-full text-black uppercase whitespace-nowrap select-none" role="presentation">
           LEBONMARCHÉ
         </p>
       </div>
