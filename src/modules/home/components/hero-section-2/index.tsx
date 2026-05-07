@@ -12,14 +12,14 @@ export default function HeroSectionDemo() {
             alt: "Le Bon Marché",
             text: "Le Bon Marché"
         }}
-        slogan="Curaduría Exclusiva"
+        slogan="Selección Exclusiva"
         title={
           <>
             Piezas de <br />
             <span className="italic font-light">Deseo</span>
           </>
         }
-        subtitle="Explora una cuidada selección y curaduría exótica de piezas únicas que elevarán tu espacio y enriquecerán tu entorno con elementos sofisticados que inspiran innovación."
+        subtitle="Explora una cuidada selección exótica de piezas únicas que elevarán tu espacio y enriquecerán tu entorno con elementos sofisticados que inspiran innovación."
         callToAction={{
           text: "VER CATÁLOGO →",
           href: "/store",

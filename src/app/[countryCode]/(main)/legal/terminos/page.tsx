@@ -64,7 +64,7 @@ export default function TerminosPage() {
 
               <h2 className="text-3xl mt-16 mb-6">Propiedad Intelectual</h2>
               <p>
-                El diseño de interfaces, selección tipográfica, código, paleta cromática y la curaduría curatorial ("look and feel") de esta plataforma están protegidos por derechos de autor. Su reproducción, scraping comercial o copia parasitaria están estrictamente prohibidas y son sujetas de acción legal.
+                El diseño de interfaces, selección tipográfica, código, paleta cromática y la selección curatorial ("look and feel") de esta plataforma están protegidos por derechos de autor. Su reproducción, scraping comercial o copia parasitaria están estrictamente prohibidas y son sujetas de acción legal.
               </p>
 
               <div className="mt-24 pt-8 border-t border-gray-200">

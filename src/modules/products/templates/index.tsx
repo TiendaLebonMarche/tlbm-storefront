@@ -1,3 +1,5 @@
+import { HttpTypes } from "@medusajs/types"
+import { notFound } from "next/navigation"
 import React, { Suspense } from "react"
 
 import ImageGallery from "@modules/products/components/image-gallery"
@@ -5,12 +7,10 @@ import ProductActions from "@modules/products/components/product-actions"
 import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
-import { notFound } from "next/navigation"
-import { HttpTypes } from "@medusajs/types"
-
 import ProductActionsWrapper from "./product-actions-wrapper"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import Reveal from "@modules/common/components/reveal"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -68,7 +68,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       <div className="content-container py-8 lg:py-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 xl:gap-28 items-start">
 
-          {/* LEFT: Gallery — 55% */}
+          {/* LEFT: Gallery — 58% */}
           <div className="w-full lg:w-[58%]">
             <div className="lg:sticky lg:top-32">
               <ImageGallery images={images} productTitle={product.title} />
@@ -253,97 +253,101 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
-      <div className="border-t border-gray-100 bg-gray-50/30">
-        <div className="content-container py-16 lg:py-24">
-          <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
-            
-            {/* Left: Technical Details */}
-            <div className="w-full lg:w-[45%]">
-              <div className="mb-12">
-                <p className="text-[9px] uppercase tracking-[0.5em] text-brand-brown/40 font-sans mb-4">Información técnica</p>
-                <h3 className="text-3xl md:text-4xl font-serif text-brand-brown leading-tight">Detalles que marcan la diferencia</h3>
-              </div>
-              <ProductTabs product={product} />
-            </div>
-
-            {/* Right: FAQ + WhatsApp Help */}
-            <div className="w-full lg:w-[55%] space-y-12">
-              <div className="mb-12 lg:mb-16">
-                <p className="text-[9px] uppercase tracking-[0.5em] text-brand-brown/40 font-sans mb-4">Preguntas y dudas</p>
-                <h3 className="text-3xl md:text-4xl font-serif text-brand-brown leading-tight">Servicio al cliente</h3>
-              </div>
+      <Reveal>
+        <div className="border-t border-gray-100 bg-gray-50/30">
+          <div className="content-container py-16 lg:py-24">
+            <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
               
-              <Accordion type="single" collapsible className="w-full space-y-2">
-                <AccordionItem value="item-1" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
-                  <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
-                    ¿Cuál es el origen de este producto?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
-                    Nuestras piezas son curadas globalmente y finalizadas artesanalmente en Colombia. Garantizamos procesos éticos y materiales de la más alta pureza en cada detalle.
-                  </AccordionContent>
-                </AccordionItem>
+              {/* Left: Technical Details */}
+              <div className="w-full lg:w-[45%]">
+                <div className="mb-12">
+                  <p className="text-[9px] uppercase tracking-[0.5em] text-brand-brown/40 font-sans mb-4">Información técnica</p>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-brown leading-tight">Detalles que marcan la diferencia</h3>
+                </div>
+                <ProductTabs product={product} />
+              </div>
 
-                <AccordionItem value="item-2" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
-                  <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
-                    Tiempos y logística de entrega
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
-                    <strong className="font-medium text-brand-brown">24 horas</strong> para entregas locales en Bucaramanga. De <strong className="font-medium text-brand-brown">2 a 5 días</strong> para envíos nacionales via Coordinadora o Servientrega.
-                  </AccordionContent>
-                </AccordionItem>
+              {/* Right: FAQ + WhatsApp Help */}
+              <div className="w-full lg:w-[55%] space-y-12">
+                <div className="mb-12 lg:mb-16">
+                  <p className="text-[9px] uppercase tracking-[0.5em] text-brand-brown/40 font-sans mb-4">Preguntas y dudas</p>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-brown leading-tight">Servicio al cliente</h3>
+                </div>
+                
+                <Accordion type="single" collapsible className="w-full space-y-2">
+                  <AccordionItem value="item-1" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
+                      ¿Cuál es el origen de este producto?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
+                      Contamos con <strong className="font-medium text-brand-brown">bots inteligentes siempre activos</strong> buscando las mejores piezas globales para traerlas a nuestra selección. Garantizamos productos <strong className="font-medium text-brand-brown">100% originales</strong> con trazabilidad completa desde su origen.
+                    </AccordionContent>
+                  </AccordionItem>
 
-                <AccordionItem value="item-3" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
-                  <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
-                    Política de garantía TLBM
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
-                    Cuentas con garantía total contra defectos de fabricación. Además, aplicamos el derecho de retracto de 5 días hábiles para que compres con absoluta tranquilidad.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                  <AccordionItem value="item-2" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
+                      Tiempos y logística de entrega
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
+                      <strong className="font-medium text-brand-brown">24 horas</strong> para entregas locales en Bucaramanga. De <strong className="font-medium text-brand-brown">2 a 5 días</strong> para envíos nacionales via Coordinadora o Servientrega.
+                    </AccordionContent>
+                  </AccordionItem>
 
-              {/* WhatsApp Premium Support */}
-              <div className="bg-brand-brown p-10 mt-8 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
-                <div className="relative z-10 space-y-6">
-                  <div>
-                    <p className="text-[10px] font-bold text-brand-olive uppercase tracking-[0.3em] mb-3">Asistencia Personalizada</p>
-                    <h4 className="text-2xl font-serif text-white leading-snug">¿Deseas atención directa de un asesor?</h4>
+                  <AccordionItem value="item-3" className="border border-gray-100 bg-white px-6 transition-all duration-300 hover:border-gray-200">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-brown hover:no-underline font-sans py-6 uppercase tracking-wider">
+                      Política de garantía TLBM
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-500 font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
+                      Cuentas con garantía total contra defectos de fabricación. Además, aplicamos el derecho de retracto de 5 días hábiles para que compres con absoluta tranquilidad.
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+
+                {/* WhatsApp Premium Support */}
+                <div className="bg-brand-brown p-10 mt-8 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
+                  <div className="relative z-10 space-y-6">
+                    <div>
+                      <p className="text-[10px] font-bold text-brand-olive uppercase tracking-[0.3em] mb-3">Asistencia Personalizada</p>
+                      <h4 className="text-2xl font-serif text-white leading-snug">¿Deseas atención directa de un asesor?</h4>
+                    </div>
+                    <p className="text-sm text-brand-soft/60 font-light leading-relaxed max-w-sm">
+                      Nuestro equipo experto está disponible en tiempo real para guiarte en tu elección o resolver dudas técnicas.
+                    </p>
+                    <a 
+                      href="https://wa.me/573027567783" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white border-b border-brand-olive/50 pb-1 hover:border-brand-olive transition-all duration-300"
+                    >
+                      Conversar por WhatsApp
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-brand-olive">
+                        <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                      </svg>
+                    </a>
                   </div>
-                  <p className="text-sm text-brand-soft/60 font-light leading-relaxed max-w-sm">
-                    Nuestro equipo experto está disponible en tiempo real para guiarte en tu elección o resolver dudas técnicas.
-                  </p>
-                  <a 
-                    href="https://wa.me/573001234567" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white border-b border-brand-olive/50 pb-1 hover:border-brand-olive transition-all duration-300"
-                  >
-                    Conversar por WhatsApp
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-brand-olive">
-                      <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-                    </svg>
-                  </a>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* ── RELATED PRODUCTS ── */}
-      <div className="bg-white py-20 lg:py-32 border-t border-gray-100">
-        <div className="content-container">
-          <div className="mb-16 text-center max-w-xl mx-auto space-y-4">
-            <p className="text-[9px] uppercase tracking-[0.6em] text-brand-brown/40 font-sans">Curaduría Exclusiva</p>
-            <h2 className="text-4xl md:text-5xl font-serif font-normal text-brand-brown leading-tight">Piezas que complementan tu estilo</h2>
+      <Reveal>
+        <div className="bg-white py-20 lg:py-32 border-t border-gray-100">
+          <div className="content-container">
+            <div className="mb-16 text-center max-w-xl mx-auto space-y-4">
+              <p className="text-[9px] uppercase tracking-[0.6em] text-brand-brown/40 font-sans">Selección Exclusiva</p>
+              <h2 className="text-4xl md:text-5xl font-serif font-normal text-brand-brown leading-tight">Piezas que complementan tu estilo</h2>
+            </div>
+            <Suspense fallback={<SkeletonRelatedProducts />}>
+              <RelatedProducts product={product} countryCode={countryCode} />
+            </Suspense>
           </div>
-          <Suspense fallback={<SkeletonRelatedProducts />}>
-            <RelatedProducts product={product} countryCode={countryCode} />
-          </Suspense>
         </div>
-      </div>
+      </Reveal>
 
     </div>
   )

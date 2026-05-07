@@ -96,7 +96,7 @@ export default function AboutUsPage() {
             <div className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden">
                <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
-                  alt="Equipo de curaduría de productos — Tienda Le Bon Marché Bucaramanga"
+                  alt="Equipo de selección de productos — Tienda Le Bon Marché Bucaramanga"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="absolute inset-0 w-full h-full object-cover"
