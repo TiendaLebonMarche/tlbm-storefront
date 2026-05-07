@@ -18,33 +18,46 @@ export default async function RelatedProducts({
     return null
   }
 
-  // edit this function to define your related products logic
-  const queryParams: HttpTypes.StoreProductListParams = {}
+  // Define query params with higher limit and broader criteria
+  const queryParams: HttpTypes.StoreProductListParams = {
+    limit: 50, // Fetch more to shuffle for variety
+    is_giftcard: false,
+  }
+
   if (region?.id) {
     queryParams.region_id = region.id
   }
+
+  // Use collection or categories for relevance
   if (product.collection_id) {
     queryParams.collection_id = [product.collection_id]
+  } else if (product.categories && product.categories.length > 0) {
+    queryParams.category_id = product.categories.map(c => c.id)
   }
-  if (product.tags) {
-    queryParams.tag_id = product.tags
-      .map((t) => t.id)
-      .filter(Boolean) as string[]
-  }
-  queryParams.is_giftcard = false
 
-  const products = await listProducts({
+  let { response: { products } } = await listProducts({
     queryParams,
     countryCode,
-  }).then(({ response }) => {
-    return response.products.filter(
-      (responseProduct) => responseProduct.id !== product.id
-    )
   })
+
+  // If we have very few products, broaden the search to the whole store
+  if (products.length < 10) {
+    const fallbackData = await listProducts({
+      queryParams: { limit: 50, is_giftcard: false, region_id: region.id },
+      countryCode,
+    })
+    products = fallbackData.response.products
+  }
+
+  // Shuffle and filter out the current product
+  const filteredProducts = products
+    .filter((p) => p.id !== product.id)
+    .sort(() => 0.5 - Math.random()) // Randomize for variety
+    .slice(0, 20) // Limit to 20 for the infinite scroll
 
   if (!products.length) {
     return null
   }
 
-  return <RelatedProductsList products={products} region={region} />
+  return <RelatedProductsList products={filteredProducts} region={region} />
 }
