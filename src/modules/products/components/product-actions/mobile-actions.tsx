@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Button, clx } from "@medusajs/ui"
-import React, { Fragment, useMemo } from "react"
+import React, { Fragment, useMemo, useState, useEffect } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import ChevronDown from "@modules/common/icons/chevron-down"
@@ -35,6 +35,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   optionsDisabled,
 }) => {
   const { state, open, close } = useToggleState()
+  const [isFooterInView, setIsFooterInView] = useState(false)
 
   const price = getProductPrice({
     product: product,
@@ -50,44 +51,61 @@ const MobileActions: React.FC<MobileActionsProps> = ({
     return variantPrice || cheapestPrice || null
   }, [price])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsFooterInView(entries[0].isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    const footer = document.getElementById("footer-brand-text")
+    if (footer) observer.observe(footer)
+
+    return () => {
+      if (footer) observer.unobserve(footer)
+    }
+  }, [])
+
   const isSimple = isSimpleProduct(product)
+  const shouldShow = show && !isFooterInView
 
   return (
     <>
       <div
         className={clx("lg:hidden inset-x-0 bottom-0 fixed z-50", {
-          "pointer-events-none": !show,
+          "pointer-events-none": !shouldShow,
         })}
       >
         <Transition
           as={Fragment}
-          show={show}
-          enter="ease-in-out duration-500"
+          show={shouldShow}
+          enter="transition ease-in-out duration-500"
           enterFrom="translate-y-full opacity-0"
           enterTo="translate-y-0 opacity-100"
-          leave="ease-in duration-300"
+          leave="transition ease-in duration-300"
           leaveFrom="translate-y-0 opacity-100"
           leaveTo="translate-y-full opacity-0"
         >
           <div
-            className="bg-white/90 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 w-full border-t border-gray-100 shadow-[0_-10px_40px_rgba(0,0,0,0.04)]"
+            className="bg-white/95 backdrop-blur-2xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-gray-100 shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
             data-testid="mobile-actions"
           >
             <div className="flex items-baseline justify-between w-full">
-              <div className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-sans mb-0.5">Producto Seleccionado</span>
-                <span className="text-sm font-serif text-brand-brown truncate max-w-[180px]" data-testid="mobile-title">{product.title}</span>
+              <div className="flex flex-col gap-y-1">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-sans font-bold">Producto Seleccionado</span>
+                <span className="text-sm font-serif text-brand-brown truncate max-w-[200px]" data-testid="mobile-title">{product.title}</span>
               </div>
               
               {selectedPrice ? (
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-end gap-y-0.5">
                    {selectedPrice.price_type === "sale" && (
                     <span className="line-through text-[10px] text-gray-300 font-light font-sans">
                       {selectedPrice.original_price}
                     </span>
                   )}
                   <span
-                    className={clx("text-lg font-semibold text-brand-brown font-sans leading-none", {
+                    className={clx("text-xl font-black text-brand-brown font-sans tracking-tighter leading-none", {
                       "text-brand-brown": selectedPrice.price_type === "sale",
                     })}
                   >
@@ -105,26 +123,26 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               {!isSimple && (
                 <button
                   onClick={open}
-                  className="w-full h-14 border border-gray-100 bg-gray-50/50 flex items-center justify-between px-4 text-[10px] font-bold uppercase tracking-widest text-brand-brown transition-all"
+                  className="w-full h-14 border border-gray-100 bg-gray-50/50 flex items-center justify-between px-5 text-[10px] font-bold uppercase tracking-widest text-brand-brown hover:bg-gray-50 transition-colors"
                   data-testid="mobile-actions-button"
                 >
-                  <span className="truncate max-w-[100px]">
+                  <span className="truncate max-w-[120px]">
                     {variant
                       ? Object.values(options).join(" / ")
-                      : "Opciones"}
+                      : "Elegir Talla"}
                   </span>
-                  <ChevronDown className="w-3 h-3 text-brand-brown/40" />
+                  <ChevronDown className="w-3.5 h-3.5 text-brand-brown/40" />
                 </button>
               )}
               <button
                 onClick={handleAddToCart}
                 disabled={!inStock || !variant || isAdding}
                 className={clx(
-                  "w-full h-14 text-[10px] font-bold uppercase tracking-[0.25em] transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-brown/5",
+                  "w-full h-14 text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand-brown/10 relative overflow-hidden",
                   {
                     "bg-brand-brown text-white active:scale-95": inStock && variant && !isAdding,
-                    "bg-gray-100 text-gray-400 cursor-not-allowed": !inStock || !variant,
-                    "opacity-80": isAdding
+                    "bg-gray-100 text-gray-300 cursor-not-allowed border border-gray-50": !inStock || !variant,
+                    "opacity-90": isAdding
                   }
                 )}
                 data-testid="mobile-cart-button"
@@ -136,7 +154,12 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 ) : !inStock ? (
                   "Agotado"
                 ) : (
-                  "Añadir"
+                  <>
+                    <span>Añadir</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                      <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                    </svg>
+                  </>
                 )}
               </button>
             </div>
@@ -144,7 +167,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
         </Transition>
       </div>
       <Transition appear show={state} as={Fragment}>
-        <Dialog as="div" className="relative z-[75]" onClose={close}>
+        <Dialog as="div" className="relative z-[150]" onClose={close}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -154,7 +177,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gray-700 bg-opacity-75 backdrop-blur-sm" />
+            <div className="fixed inset-0 bg-brand-brown/40 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed bottom-0 inset-x-0">
@@ -162,28 +185,29 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
+                enterFrom="opacity-100 translate-y-full"
+                enterTo="opacity-100 translate-y-0"
                 leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-100 translate-y-full"
               >
                 <Dialog.Panel
-                  className="w-full h-full transform overflow-hidden text-left flex flex-col gap-y-3"
+                  className="w-full transform overflow-hidden text-left flex flex-col gap-y-0 bg-white rounded-t-3xl shadow-2xl"
                   data-testid="mobile-actions-modal"
                 >
-                  <div className="w-full flex justify-end pr-6">
+                  <div className="w-full flex justify-between items-center px-8 py-6 border-b border-gray-100">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-brown/40">Opciones Disponibles</span>
                     <button
                       onClick={close}
-                      className="bg-white w-12 h-12 rounded-full text-ui-fg-base flex justify-center items-center"
+                      className="bg-gray-50 w-10 h-10 rounded-full text-brand-brown flex justify-center items-center hover:bg-gray-100 transition-colors"
                       data-testid="close-modal-button"
                     >
-                      <X />
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
-                  <div className="bg-white px-6 py-12">
+                  <div className="bg-white px-8 py-10">
                     {(product.variants?.length ?? 0) > 1 && (
-                      <div className="flex flex-col gap-y-6">
+                      <div className="flex flex-col gap-y-8">
                         {(product.options || []).map((option) => {
                           return (
                             <div key={option.id}>
@@ -199,6 +223,14 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                         })}
                       </div>
                     )}
+                  </div>
+                  <div className="p-8 bg-gray-50/50">
+                    <button 
+                      onClick={close}
+                      className="w-full h-14 bg-brand-brown text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all"
+                    >
+                      Confirmar Selección
+                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

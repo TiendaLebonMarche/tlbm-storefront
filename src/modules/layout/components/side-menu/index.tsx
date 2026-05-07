@@ -79,7 +79,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[60] bg-brand-brown/10 pointer-events-auto transition-all duration-300"
+                  className="fixed inset-0 z-[155] bg-brand-brown/10 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
                   style={{ backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
@@ -96,7 +96,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[70] text-brand-brown border-r border-gray-100 flex flex-col shadow-xl overflow-y-auto overscroll-contain">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[160] text-brand-brown border-r border-gray-100 flex flex-col shadow-xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-10"
