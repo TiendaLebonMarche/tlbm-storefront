@@ -62,73 +62,83 @@ const MobileActions: React.FC<MobileActionsProps> = ({
         <Transition
           as={Fragment}
           show={show}
-          enter="ease-in-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
+          enter="ease-in-out duration-500"
+          enterFrom="translate-y-full opacity-0"
+          enterTo="translate-y-0 opacity-100"
           leave="ease-in duration-300"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          leaveFrom="translate-y-0 opacity-100"
+          leaveTo="translate-y-full opacity-0"
         >
           <div
-            className="bg-white flex flex-col gap-y-3 justify-center items-center text-large-regular p-4 h-full w-full border-t border-gray-200"
+            className="bg-white/90 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 w-full border-t border-gray-100 shadow-[0_-10px_40px_rgba(0,0,0,0.04)]"
             data-testid="mobile-actions"
           >
-            <div className="flex items-center gap-x-2">
-              <span data-testid="mobile-title">{product.title}</span>
-              <span>—</span>
+            <div className="flex items-baseline justify-between w-full">
+              <div className="flex flex-col">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-sans mb-0.5">Producto Seleccionado</span>
+                <span className="text-sm font-serif text-brand-brown truncate max-w-[180px]" data-testid="mobile-title">{product.title}</span>
+              </div>
+              
               {selectedPrice ? (
-                <div className="flex items-end gap-x-2 text-ui-fg-base">
-                  {selectedPrice.price_type === "sale" && (
-                    <p>
-                      <span className="line-through text-small-regular">
-                        {selectedPrice.original_price}
-                      </span>
-                    </p>
+                <div className="flex flex-col items-end">
+                   {selectedPrice.price_type === "sale" && (
+                    <span className="line-through text-[10px] text-gray-300 font-light font-sans">
+                      {selectedPrice.original_price}
+                    </span>
                   )}
                   <span
-                    className={clx({
-                      "text-ui-fg-interactive":
-                        selectedPrice.price_type === "sale",
+                    className={clx("text-lg font-semibold text-brand-brown font-sans leading-none", {
+                      "text-brand-brown": selectedPrice.price_type === "sale",
                     })}
                   >
                     {selectedPrice.calculated_price}
                   </span>
                 </div>
               ) : (
-                <div></div>
+                <div />
               )}
             </div>
-            <div className={clx("grid grid-cols-2 w-full gap-x-4", {
+
+            <div className={clx("grid grid-cols-2 w-full gap-x-3", {
               "!grid-cols-1": isSimple
             })}>
-              {!isSimple && <Button
-                onClick={open}
-                variant="secondary"
-                className="w-full"
-                data-testid="mobile-actions-button"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <span>
+              {!isSimple && (
+                <button
+                  onClick={open}
+                  className="w-full h-14 border border-gray-100 bg-gray-50/50 flex items-center justify-between px-4 text-[10px] font-bold uppercase tracking-widest text-brand-brown transition-all"
+                  data-testid="mobile-actions-button"
+                >
+                  <span className="truncate max-w-[100px]">
                     {variant
                       ? Object.values(options).join(" / ")
-                      : "Seleccionar Opciones"}
+                      : "Opciones"}
                   </span>
-                  <ChevronDown />
-                </div>
-              </Button>}
-              <Button
+                  <ChevronDown className="w-3 h-3 text-brand-brown/40" />
+                </button>
+              )}
+              <button
                 onClick={handleAddToCart}
-                disabled={!inStock || !variant}
-                className="w-full bg-brand-black text-white hover:bg-brand-gold hover:border-brand-gold transition-colors"
-                isLoading={isAdding}
+                disabled={!inStock || !variant || isAdding}
+                className={clx(
+                  "w-full h-14 text-[10px] font-bold uppercase tracking-[0.25em] transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-brown/5",
+                  {
+                    "bg-brand-brown text-white active:scale-95": inStock && variant && !isAdding,
+                    "bg-gray-100 text-gray-400 cursor-not-allowed": !inStock || !variant,
+                    "opacity-80": isAdding
+                  }
+                )}
                 data-testid="mobile-cart-button"
               >
-                {!variant
-                  ? "Selecciona tu variante"
-                  : !inStock
-                    ? "Agotado Temporalmente"
-                    : "Añadir a mi Bolsa"}
-              </Button>
+                {isAdding ? (
+                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                ) : !variant ? (
+                  "Seleccionar"
+                ) : !inStock ? (
+                  "Agotado"
+                ) : (
+                  "Añadir"
+                )}
+              </button>
             </div>
           </div>
         </Transition>

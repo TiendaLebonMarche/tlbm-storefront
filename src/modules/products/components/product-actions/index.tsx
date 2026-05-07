@@ -187,34 +187,37 @@ export default function ProductActions({
               isAdding ||
               !isValidVariant
             }
-            className={`w-full h-14 text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3 ${
+            className={`w-full h-16 text-[11px] font-bold uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-4 relative overflow-hidden group/btn ${
               addedSuccess
                 ? 'bg-brand-olive text-white'
                 : !inStock || !selectedVariant || !isValidVariant
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-brand-brown text-white hover:bg-black active:scale-[0.98]'
+                  ? 'bg-gray-50 text-gray-300 cursor-not-allowed border border-gray-100'
+                  : 'bg-brand-brown text-white hover:bg-black active:scale-[0.97] shadow-xl shadow-brand-brown/5'
             }`}
             data-testid="add-product-button"
           >
+            {/* Hover shine effect */}
+            <div className="absolute inset-0 bg-white/5 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />
+            
             {isAdding ? (
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
             ) : addedSuccess ? (
               <>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 animate-bounce">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
-                Añadido a tu bolsa
+                <span>Añadido con éxito</span>
               </>
             ) : !selectedVariant && !options ? (
-              "Selecciona una variante"
+              "Elige tus opciones"
             ) : !inStock || !isValidVariant ? (
-              "Agotado temporalmente"
+              "Agotado por ahora"
             ) : (
               <>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-5 h-5 transition-transform duration-500 group-hover/btn:scale-110 group-hover/btn:-rotate-12">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
-                Añadir a mi bolsa
+                <span>Añadir a mi bolsa</span>
               </>
             )}
           </button>

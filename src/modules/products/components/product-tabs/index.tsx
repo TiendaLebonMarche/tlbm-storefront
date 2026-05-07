@@ -1,33 +1,38 @@
 "use client"
 
+import React, { useState } from "react"
+import { clx } from "@medusajs/ui"
+import { HttpTypes } from "@medusajs/types"
+
 import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
-
-import Accordion from "./accordion"
-import { HttpTypes } from "@medusajs/types"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
 }
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
+  const [activeTab, setActiveTab] = useState(0)
+
   const tabs = [
     {
       label: "Descripción",
       component: (
-        <div className="py-4">
+        <div className="py-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
           {product.description ? (
-            <ul className="space-y-3">
-              {product.description.split("-").filter(line => line.trim().length > 0).map((line, i) => (
-                <li key={i} className="flex items-start gap-3 group">
-                  <span className="w-1 h-1 rounded-full bg-brand-brown/30 mt-2 flex-shrink-0" />
-                  <p className="text-sm font-light text-gray-600 font-sans leading-relaxed">
-                    {line.trim()}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <div className="max-w-2xl">
+               <ul className="space-y-4">
+                {product.description.split("-").filter(line => line.trim().length > 0).map((line, i) => (
+                  <li key={i} className="flex items-start gap-4 group">
+                    <span className="w-1.5 h-px bg-brand-brown/20 mt-2.5 flex-shrink-0 transition-all duration-500 group-hover:w-3 group-hover:bg-brand-olive" />
+                    <p className="text-[15px] font-light text-gray-500 font-sans leading-relaxed">
+                      {line.trim()}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : (
             <p className="text-sm text-gray-400 font-light italic">No hay descripción disponible para este producto.</p>
           )}
@@ -36,28 +41,50 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     },
     {
       label: "Especificaciones",
-      component: <ProductInfoTab product={product} />,
+      component: (
+        <div className="py-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
+           <ProductInfoTab product={product} />
+        </div>
+      )
     },
     {
-      label: "Envíos y Garantías",
-      component: <ShippingInfoTab />,
+      label: "Envíos y Retornos",
+      component: (
+        <div className="py-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
+          <ShippingInfoTab />
+        </div>
+      )
     },
   ]
 
   return (
     <div className="w-full">
-      <Accordion type="multiple">
+      {/* Tab Headers */}
+      <div className="flex items-center gap-10 border-b border-gray-100 overflow-x-auto no-scrollbar">
         {tabs.map((tab, i) => (
-          <Accordion.Item
+          <button
             key={i}
-            title={tab.label}
-            headingSize="small"
-            value={tab.label}
+            onClick={() => setActiveTab(i)}
+            className={clx(
+              "pb-4 text-[11px] font-bold uppercase tracking-[0.25em] transition-all duration-300 relative whitespace-nowrap",
+              {
+                "text-brand-brown": activeTab === i,
+                "text-gray-300 hover:text-gray-500": activeTab !== i,
+              }
+            )}
           >
-            {tab.component}
-          </Accordion.Item>
+            {tab.label}
+            {activeTab === i && (
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-brown animate-in fade-in zoom-in-x duration-500" />
+            )}
+          </button>
         ))}
-      </Accordion>
+      </div>
+
+      {/* Tab Content */}
+      <div className="min-h-[200px]">
+        {tabs[activeTab].component}
+      </div>
     </div>
   )
 }

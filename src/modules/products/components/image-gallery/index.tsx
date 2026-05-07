@@ -37,15 +37,15 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
     <div className="flex flex-col-reverse lg:flex-row gap-3 w-full">
       {/* Thumbnails */}
       {images.length > 1 && (
-        <div className="flex lg:flex-col gap-2 w-full lg:w-[72px] flex-shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[600px] no-scrollbar">
+        <div className="flex lg:flex-col gap-3 w-full lg:w-[80px] flex-shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[700px] no-scrollbar">
           {images.map((image, idx) => (
             <button
               key={image.id}
               onClick={() => setSelectedImageIndex(idx)}
-              className={`relative aspect-square flex-shrink-0 w-16 lg:w-full overflow-hidden transition-all duration-300 ${
+              className={`relative aspect-[3/4] flex-shrink-0 w-20 lg:w-full overflow-hidden transition-all duration-700 ease-in-out ${
                 selectedImageIndex === idx
-                  ? "ring-1 ring-brand-brown ring-offset-2"
-                  : "opacity-50 hover:opacity-100"
+                  ? "border border-brand-brown opacity-100"
+                  : "border border-transparent opacity-40 hover:opacity-100"
               }`}
               title={`Ver ${baseAlt} - imagen ${idx + 1}`}
             >
@@ -54,8 +54,8 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
                   src={image.url}
                   alt={`${baseAlt} - miniatura ${idx + 1}`}
                   fill
-                  className="object-contain p-1.5 bg-white"
-                  sizes="72px"
+                  className="object-cover bg-white"
+                  sizes="80px"
                 />
               )}
             </button>
@@ -75,12 +75,12 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
             src={selectedImage.url}
             alt={`${baseAlt} - imagen principal`}
             fill
-            className={`object-contain p-8 transition-all duration-500 ${
+            className={`object-cover transition-all duration-1000 ease-in-out ${
               isZoomed ? 'scale-[2]' : 'scale-100'
             }`}
             style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
             priority
-            sizes="(max-width: 768px) 90vw, 55vw"
+            sizes="(max-width: 768px) 100vw, 60vw"
           />
         )}
 
