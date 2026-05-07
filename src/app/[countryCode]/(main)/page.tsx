@@ -92,11 +92,6 @@ export default async function Home(props: {
         />
       </div>
 
-      <div className="w-full bg-white pt-24 pb-12 border-t border-gray-100 overflow-hidden reveal-up" aria-hidden="true">
-        <p className="text-[13.1vw] leading-[0.8] font-sans font-black tracking-[-0.05em] text-center w-full text-black uppercase whitespace-nowrap select-none" role="presentation">
-          LEBONMARCHÉ
-        </p>
-      </div>
     </div>
   )
 }

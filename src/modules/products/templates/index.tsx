@@ -80,22 +80,27 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             
             {/* Header: Collection + Title + Rating */}
             <div className="space-y-6 pb-8 border-b border-gray-100/60">
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
                   {product.collection?.title && (
-                    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-brown/40 font-sans">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-brown/40 font-sans border-r border-gray-200 pr-3">
                       {product.collection.title}
                     </span>
                   )}
+                  {product.categories?.map((cat) => (
+                    <span key={cat.id} className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-olive bg-brand-soft px-2 py-0.5 font-sans">
+                      {cat.name}
+                    </span>
+                  ))}
                   {isNew && (
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] px-2 py-1 bg-brand-olive/10 text-brand-olive font-sans rounded-sm">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] px-2 py-1 bg-brand-brown text-white font-sans rounded-sm ml-auto">
                       Recién llegado
                     </span>
                   )}
                 </div>
                 
                 <h1
-                  className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-serif font-normal text-brand-brown leading-[1.1] tracking-tight"
+                  className="text-4xl md:text-5xl lg:text-5xl xl:text-7xl font-serif font-normal text-brand-brown leading-[1.1] tracking-tight"
                   data-testid="product-title"
                 >
                   {product.title}
@@ -118,7 +123,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
               {/* Short description / Intro */}
               {product.description && (
-                <div className="text-[15px] text-gray-500 font-light leading-relaxed font-sans max-w-lg">
+                <div className="text-[16px] text-gray-500 font-light leading-relaxed font-sans max-w-xl">
                   {product.description.split('-')[0]?.trim() || product.description.substring(0, 160)}
                 </div>
               )}
@@ -230,22 +235,44 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             {/* Divider */}
             <div className="w-full h-px bg-gray-50" />
 
-            {/* Seller info */}
-            <div className="py-8 space-y-3">
-              <div className="flex items-center justify-between text-[11px] font-sans">
-                <span className="font-medium text-brand-brown uppercase tracking-widest">Atelier</span>
-                <span className="font-light text-gray-400">Tienda Le Bon Marché</span>
-              </div>
-              <div className="flex items-center justify-between text-[11px] font-sans">
-                <span className="font-medium text-brand-brown uppercase tracking-widest">Referencia</span>
-                <span className="uppercase font-light text-gray-400 font-mono tracking-tighter">{product.variants?.[0]?.sku || product.id?.slice(-12).toUpperCase()}</span>
-              </div>
-              {product.material && (
-                <div className="flex items-center justify-between text-[11px] font-sans">
-                  <span className="font-medium text-brand-brown uppercase tracking-widest">Composición</span>
-                  <span className="font-light text-gray-400">{product.material}</span>
+            {/* Seller info & Dynamic Metadata */}
+            <div className="py-8 space-y-6">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                <div className="flex flex-col gap-y-1">
+                  <span className="text-[9px] font-bold text-brand-brown uppercase tracking-widest opacity-40">Atelier</span>
+                  <span className="text-sm font-medium text-brand-brown">Tienda Le Bon Marché</span>
                 </div>
-              )}
+                <div className="flex flex-col gap-y-1">
+                  <span className="text-[9px] font-bold text-brand-brown uppercase tracking-widest opacity-40">Referencia SKU</span>
+                  <span className="text-sm font-medium text-brand-brown uppercase tracking-tighter font-mono">
+                    {product.variants?.[0]?.sku || product.id?.slice(-8).toUpperCase()}
+                  </span>
+                </div>
+                {product.material && (
+                  <div className="flex flex-col gap-y-1">
+                    <span className="text-[9px] font-bold text-brand-brown uppercase tracking-widest opacity-40">Composición</span>
+                    <span className="text-sm font-medium text-brand-brown">{product.material}</span>
+                  </div>
+                )}
+                {product.origin_country && (
+                  <div className="flex flex-col gap-y-1">
+                    <span className="text-[9px] font-bold text-brand-brown uppercase tracking-widest opacity-40">Procedencia</span>
+                    <span className="text-sm font-medium text-brand-brown">{product.origin_country}</span>
+                  </div>
+                )}
+                
+                {/* MedusaJS Custom Metadata Mapping */}
+                {Object.entries(metadata).slice(0, 4).map(([key, value]) => (
+                  <div key={key} className="flex flex-col gap-y-1">
+                    <span className="text-[9px] font-bold text-brand-brown uppercase tracking-widest opacity-40 capitalize">
+                      {key.replace(/_/g, ' ')}
+                    </span>
+                    <span className="text-sm font-medium text-brand-brown">
+                      {String(value)}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>
