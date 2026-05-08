@@ -246,6 +246,27 @@
 .delay-300 { animation-delay: 300ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* === PRODUCT CARD SCROLL REVEAL === */
+@keyframes product-card-in {
+  0%   { opacity: 0; transform: translateY(28px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.product-card-hidden {
+  opacity: 0;
+}
+
+.product-card-reveal {
+  animation: product-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.product-card-reveal.stagger-0 { animation-delay: 0ms; }
+.product-card-reveal.stagger-1 { animation-delay: 80ms; }
+.product-card-reveal.stagger-2 { animation-delay: 160ms; }
+.product-card-reveal.stagger-3 { animation-delay: 240ms; }
+.product-card-reveal.stagger-4 { animation-delay: 320ms; }
+.product-card-reveal.stagger-5 { animation-delay: 400ms; }
+
 /* Logo Dynamic Coloring */
 .text-white .logo-img {
   filter: brightness(0) invert(1) !important;
