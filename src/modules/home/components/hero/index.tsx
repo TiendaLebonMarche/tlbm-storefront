@@ -6,7 +6,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const SLIDE_TIME = 8000
-const TRANSITION_MS = 1300
+const TRANSITION_MS = 1000 // Reduced for snappier feel
 
 const SLIDES = [
   {
@@ -72,8 +72,8 @@ const BRANDS = [
 ]
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0)      // For backgrounds
-  const [textIdx, setTextIdx] = useState(0)      // For text (immediate update)
+  const [current, setCurrent] = useState(0)
+  const [textIdx, setTextIdx] = useState(0)
   const [incoming, setIncoming] = useState<number | null>(null)
   const [progKey, setProgKey] = useState(0)
 
@@ -104,10 +104,8 @@ export default function Hero() {
     clearAllTimers()
     busyRef.current = true
     
-    // TEXT: Update immediately to start its animation with the wipe
+    // START BOTH IMMEDIATELY
     setTextIdx(next)
-    
-    // BG: Start wipe animation
     setIncoming(next)
 
     transTimerRef.current = setTimeout(() => {
@@ -208,14 +206,14 @@ export default function Hero() {
           background-size: cover;
           opacity: 0;
           transform: scale(1.1);
-          transition: opacity 600ms ease, transform 2000ms ease;
+          transition: opacity 500ms ease, transform 1500ms ease;
           will-change: opacity, transform, clip-path;
         }
         .tlbm-bg.is-active { opacity: 1; transform: scale(1); }
         .tlbm-bg.is-incoming {
           z-index: 1;
           opacity: 1;
-          transform: scale(1.05);
+          transform: scale(1.03);
           clip-path: inset(0 100% 0 0);
           animation: tlbm-reveal var(--trans-ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -315,7 +313,7 @@ export default function Hero() {
         .tlbm-progress-bar { display: block; width: 100%; height: 100%; background: #00e5ff; box-shadow: 0 0 16px rgba(0,229,255,.6); transform-origin: left; transform: scaleX(0); animation: tlbm-progress var(--slide-ms) linear forwards; }
 
         @keyframes tlbm-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        @keyframes tlbm-reveal { from { clip-path: inset(0 100% 0 0); transform: scale(1.1); } to { clip-path: inset(0 0 0 0); transform: scale(1); } }
+        @keyframes tlbm-reveal { from { clip-path: inset(0 100% 0 0); transform: scale(1.05); } to { clip-path: inset(0 0 0 0); transform: scale(1); } }
         @keyframes tlbm-sheen { 0%,22% { background-position: 115% 50%; } 56%,100% { background-position: -95% 50%; } }
 
         @media (max-width: 760px) {
@@ -336,7 +334,6 @@ export default function Hero() {
         .tlbm-mq-track { display: flex; align-items: center; gap: 32px; padding-right: 32px; }
         .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 74px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
         .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
-        .tlbm-brand span { color: #111; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; text-align: center; line-height: 1.1; }
         @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
@@ -360,19 +357,19 @@ export default function Hero() {
           <AnimatePresence>
             <motion.article
               key={textIdx}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
               transition={{
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1]
+                duration: 0.5,
+                ease: "easeOut"
               }}
               className={`tlbm-slide align-${SLIDES[textIdx].align}`}
             >
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.4 }}
+                transition={{ delay: 0.05, duration: 0.3 }}
                 className="tlbm-eyebrow"
               >
                 {SLIDES[textIdx].eyebrow}
@@ -381,7 +378,7 @@ export default function Hero() {
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
                 className="tlbm-title"
               >
                 {SLIDES[textIdx].title}
@@ -390,7 +387,7 @@ export default function Hero() {
               <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.15, duration: 0.4 }}
                 className="tlbm-copy"
               >
                 {SLIDES[textIdx].copy}
@@ -399,7 +396,7 @@ export default function Hero() {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
                 className="tlbm-actions"
               >
                 <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
@@ -448,13 +445,9 @@ export default function Hero() {
                     src={`https://cdn.simpleicons.org/${slug}/11151f`}
                     alt={label}
                     onError={(e) => {
-                      const img = e.currentTarget
-                      img.style.display = "none"
-                      const fb = img.nextElementSibling as HTMLElement
-                      if (fb) fb.style.display = "flex"
+                      e.currentTarget.style.display = "none"
                     }}
                   />
-                  <span style={{ display: "none" }}>{label}</span>
                 </div>
               ))}
             </div>
