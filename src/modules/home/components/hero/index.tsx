@@ -66,7 +66,6 @@ const BRANDS = [
   { slug: "passau", label: "PASSAU" },
 ]
 
-// ── Component ─────────────────────────────────────────────────────────────────
 export default function Hero() {
   const [current, setCurrent] = useState(0)
   const [incoming, setIncoming] = useState<number | null>(null)
@@ -100,7 +99,7 @@ export default function Hero() {
     busyRef.current = true
     setIncoming(next)
 
-    // Sync state update: we keep the background animating, but content swaps according to the transition phase
+    // Background transition duration
     transTimerRef.current = setTimeout(() => {
       currentRef.current = next
       setCurrent(next)
@@ -327,8 +326,6 @@ export default function Hero() {
         .tlbm-mq-track { display: flex; align-items: center; gap: 20px; padding-right: 20px; }
         .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 70px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
         .tlbm-brand img { max-width: 100%; max-height: 32px; object-fit: contain; }
-        .tlbm-brand span { display: none; color: #111; font-weight: 800; font-size: 0.8rem; }
-        @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
       {/* ─── HERO ─── */}
@@ -348,50 +345,49 @@ export default function Hero() {
         <canvas ref={canvasRef} className="tlbm-wave" />
 
         <div className="tlbm-inner">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <motion.article
               key={current}
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 1.02 }}
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -60 }}
               transition={{
-                duration: 0.9,
-                ease: [0.16, 1, 0.3, 1],
-                delay: 0.2
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
               }}
               className={`tlbm-slide align-${SLIDES[current].align}`}
             >
               <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
                 className="tlbm-eyebrow"
               >
                 {SLIDES[current].eyebrow}
               </motion.p>
 
               <motion.h1
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
                 className="tlbm-title"
               >
                 {SLIDES[current].title}
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
                 className="tlbm-copy"
               >
                 {SLIDES[current].copy}
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
                 className="tlbm-actions"
               >
                 <LocalizedClientLink href={SLIDES[current].href} className="tlbm-btn">
@@ -441,11 +437,8 @@ export default function Hero() {
                     alt={label}
                     onError={(e) => {
                       e.currentTarget.style.display = "none"
-                      const fb = e.currentTarget.nextElementSibling as HTMLElement
-                      if (fb) fb.style.display = "inline"
                     }}
                   />
-                  <span>{label}</span>
                 </div>
               ))}
             </div>
