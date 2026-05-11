@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 // ── Constants ────────────────────────────────────────────────────────────────
@@ -71,7 +72,6 @@ export default function Hero() {
   const [incoming, setIncoming] = useState<number | null>(null)
   const [progKey, setProgKey] = useState(0)
 
-  // Refs for timer control & transitioning guard (avoids stale closures)
   const busyRef = useRef(false)
   const slideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const transTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -100,6 +100,7 @@ export default function Hero() {
     busyRef.current = true
     setIncoming(next)
 
+    // Sync state update: we keep the background animating, but content swaps according to the transition phase
     transTimerRef.current = setTimeout(() => {
       currentRef.current = next
       setCurrent(next)
@@ -110,7 +111,6 @@ export default function Hero() {
     }, TRANSITION_MS)
   }
 
-  // Bootstrap autoplay
   useEffect(() => {
     setProgKey(k => k + 1)
     scheduleNext(0)
@@ -120,16 +120,13 @@ export default function Hero() {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Wave canvas
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext("2d")
     if (!ctx) return
-
     const mobile = () => window.innerWidth <= 760
     let cW = 0, cH = 0
-
     function resize() {
       const pr = Math.min(window.devicePixelRatio || 1, mobile() ? 1.4 : 2)
       cW = window.innerWidth; cH = window.innerHeight
@@ -139,7 +136,6 @@ export default function Hero() {
       canvas!.style.height = `${cH}px`
       ctx!.setTransform(pr, 0, 0, pr, 0, 0)
     }
-
     function draw(t: number = 0) {
       ctx!.clearRect(0, 0, cW, cH)
       ctx!.lineWidth = 1
@@ -151,16 +147,13 @@ export default function Hero() {
         for (let p = 0; p <= pts; p++) {
           const x = (p / pts) * cW
           const base = cH * 0.22 + l * 22
-          const y = base
-            + Math.sin(p * 0.18 + t * 0.00045 + l * 0.32) * 32
-            + Math.cos(p * 0.09 + t * 0.00028 + l) * 18
+          const y = base + Math.sin(p * 0.18 + t * 0.00045 + l * 0.32) * 32 + Math.cos(p * 0.09 + t * 0.00028 + l) * 18
           p === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)
         }
         ctx!.stroke()
       }
       rafRef.current = requestAnimationFrame(draw)
     }
-
     resize()
     draw()
     window.addEventListener("resize", resize)
@@ -182,7 +175,6 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        /* ── Tokens ── */
         .tlbm-hero {
           --accent: #1f7aff;
           --accent-dk: #075ad6;
@@ -191,10 +183,6 @@ export default function Hero() {
           --max-w: 1120px;
           --slide-ms: ${SLIDE_TIME}ms;
           --trans-ms: ${TRANSITION_MS}ms;
-        }
-
-        /* ── Hero wrapper ── */
-        .tlbm-hero {
           position: relative;
           isolation: isolate;
           min-height: 100vh;
@@ -203,7 +191,6 @@ export default function Hero() {
           background: #090b10;
         }
 
-        /* ── Slide backgrounds ── */
         .tlbm-bg {
           position: absolute;
           inset: 0;
@@ -211,32 +198,27 @@ export default function Hero() {
           background-position: var(--pos, center);
           background-size: cover;
           opacity: 0;
-          transform: scale(1.08);
-          transition: opacity 400ms ease, transform 1600ms ease;
-          will-change: opacity, transform;
+          transform: scale(1.1);
+          transition: opacity 600ms ease, transform 2000ms ease;
+          will-change: opacity, transform, clip-path;
         }
         .tlbm-bg.is-active { opacity: 1; transform: scale(1); }
         .tlbm-bg.is-incoming {
           z-index: 1;
           opacity: 1;
-          transform: scale(1.02);
+          transform: scale(1.05);
           clip-path: inset(0 100% 0 0);
-          animation: tlbm-reveal var(--trans-ms) cubic-bezier(0.12,0.76,0.34,1) forwards;
+          animation: tlbm-reveal var(--trans-ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* ── Overlays ── */
         .tlbm-overlay {
           position: absolute; inset: 0; z-index: 2; pointer-events: none;
           background:
             linear-gradient(90deg,rgba(4,7,13,.54) 0%,rgba(4,7,13,.28) 48%,rgba(4,7,13,.08) 100%),
             linear-gradient(0deg,rgba(4,7,13,.38) 0%,rgba(4,7,13,.04) 48%,rgba(4,7,13,.28) 100%);
         }
-        .tlbm-wave {
-          position: absolute; inset: 0; z-index: 3;
-          width: 100%; height: 100%; opacity: .28; pointer-events: none;
-        }
+        .tlbm-wave { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; opacity: .28; pointer-events: none; }
 
-        /* ── Inner grid ── */
         .tlbm-inner {
           position: relative; z-index: 4;
           width: min(var(--max-w), calc(100% - 40px));
@@ -245,55 +227,30 @@ export default function Hero() {
           padding: clamp(88px,12vh,150px) 0 clamp(98px,14vh,150px);
         }
 
-        /* ── Slides ── */
         .tlbm-slide {
-          grid-area: 1/1; max-width: 720px;
-          opacity: 0; transform: translateX(-40px); pointer-events: none;
-          transition:
-            opacity 800ms cubic-bezier(0.12,0.78,0.36,1),
-            transform 800ms cubic-bezier(0.12,0.78,0.36,1);
-        }
-        /* Active slide state */
-        .tlbm-slide.is-active:not(.is-leaving) { opacity: 1; transform: translateX(0); pointer-events: auto; }
-        
-        /* Outgoing state */
-        .tlbm-slide.is-leaving {
-          opacity: 0; transform: translateX(40px);
-          transition: opacity 400ms ease, transform 400ms ease;
+          grid-area: 1/1;
+          max-width: 720px;
+          display: flex;
+          flex-direction: column;
         }
 
-        /* Incoming state - synchronized with wipe */
-        .tlbm-slide.is-entering {
-          opacity: 1; transform: translateX(0);
-          transition: opacity 800ms ease 500ms, transform 800ms ease 500ms;
-          pointer-events: auto;
-        }
+        .tlbm-slide.align-left { align-items: flex-start; text-align: left; justify-self: start; }
+        .tlbm-slide.align-center { align-items: center; text-align: center; justify-self: center; }
+        .tlbm-slide.align-right { align-items: flex-end; text-align: right; justify-self: end; }
 
-        .tlbm-slide.align-center { justify-self: center; text-align: center; }
-        .tlbm-slide.align-center .tlbm-eyebrow { justify-content: center; }
-        .tlbm-slide.align-center .tlbm-eyebrow::before { display: none; }
-        .tlbm-slide.align-center .tlbm-actions { justify-content: center; }
-
-        .tlbm-slide.align-right { justify-self: end; text-align: right; }
-        .tlbm-slide.align-right .tlbm-eyebrow { justify-content: flex-end; }
-        .tlbm-slide.align-right .tlbm-actions { justify-content: flex-end; }
-
-        /* ── Eyebrow ── */
         .tlbm-eyebrow {
           display: inline-flex; align-items: center; gap: 12px;
           margin: 0 0 18px; color: var(--muted);
           font-size: .78rem; font-weight: 800;
           letter-spacing: .16em; text-transform: uppercase;
         }
-        .tlbm-eyebrow::before {
-          content: ""; width: 42px; height: 1px; background: var(--accent);
-        }
+        .tlbm-eyebrow::before { content: ""; width: 42px; height: 1px; background: var(--accent); }
+        .tlbm-slide.align-center .tlbm-eyebrow::before { display: none; }
 
-        /* ── Title ── */
         .tlbm-title {
-          margin: 0; max-width: 10ch;
+          margin: 0; max-width: 12ch;
           font-family: var(--font-inter, Inter, ui-sans-serif, system-ui, sans-serif);
-          font-size: clamp(3rem,9vw,6.8rem);
+          font-size: clamp(2.8rem, 8vw, 6.5rem);
           font-weight: 900; line-height: .92;
           color: transparent;
           background: linear-gradient(104deg,#fff 0%,#fff 38%,#d9fbff 50%,#fff 62%,#fff 100%);
@@ -303,271 +260,192 @@ export default function Hero() {
           animation: tlbm-sheen 6.8s cubic-bezier(.42,0,.2,1) infinite;
         }
 
-        /* ── Copy ── */
         .tlbm-copy {
           max-width: 560px; margin: 24px 0 0;
           font-family: var(--font-fraunces, Georgia, serif);
           color: var(--muted);
-          font-size: clamp(1.08rem,1.9vw,1.3rem);
-          font-weight: 500; line-height: 1.48;
+          font-size: clamp(1rem, 1.8vw, 1.25rem);
+          font-weight: 500; line-height: 1.5;
         }
 
-        /* ── Actions ── */
-        .tlbm-actions {
-          display: flex; align-items: center;
-          flex-wrap: wrap; gap: 14px; margin-top: 34px;
-        }
+        .tlbm-actions { display: flex; align-items: center; gap: 14px; margin-top: 34px; }
         .tlbm-btn {
           display: inline-flex; align-items: center; justify-content: center;
-          min-height: 52px; padding: 0 26px;
-          border: 1px solid transparent; border-radius: 6px;
-          color: #fff; background: var(--accent);
+          min-height: 52px; padding: 0 32px;
+          border-radius: 6px; color: #fff; background: var(--accent);
           box-shadow: 0 14px 34px rgba(31,122,255,.28);
           font-family: var(--font-public-sans, Inter, ui-sans-serif, system-ui, sans-serif);
           font-size: .86rem; font-weight: 800;
           letter-spacing: .08em; text-decoration: none; text-transform: uppercase;
-          transition: transform 180ms ease, background 180ms ease;
+          transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .tlbm-btn:hover { background: var(--accent-dk); transform: translateY(-2px); }
+        .tlbm-btn:hover { background: var(--accent-dk); transform: translateY(-3px) scale(1.02); }
 
-        /* ── Controls ── */
         .tlbm-controls {
-          position: absolute;
-          right: max(20px, calc((100vw - var(--max-w)) / 2));
-          bottom: 36px; z-index: 5;
-          display: flex; align-items: center; gap: 12px;
+          position: absolute; right: max(20px, calc((100vw - var(--max-w)) / 2));
+          bottom: 36px; z-index: 5; display: flex; align-items: center; gap: 12px;
         }
         .tlbm-ctrl {
-          display: inline-grid; place-items: center;
-          width: 42px; height: 42px;
+          display: inline-grid; place-items: center; width: 44px; height: 44px;
           border: 1px solid var(--line); border-radius: 999px;
           color: #fff; background: rgba(8,10,16,.44);
           cursor: pointer; backdrop-filter: blur(12px);
-          transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+          transition: all 200ms ease;
         }
-        .tlbm-ctrl:hover {
-          border-color: rgba(255,255,255,.56);
-          background: rgba(255,255,255,.16); transform: translateY(-1px); outline: none;
-        }
-        .tlbm-ctrl svg { width: 18px; height: 18px; }
+        .tlbm-ctrl:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.1); transform: scale(1.1); }
+        .tlbm-ctrl svg { width: 20px; height: 20px; }
 
-        .tlbm-dots { display: flex; align-items: center; gap: 8px; }
+        .tlbm-dots { display: flex; align-items: center; gap: 10px; }
         .tlbm-dot {
-          display: inline-grid; place-items: center;
-          width: 12px; height: 12px; padding: 0;
-          border: 1px solid var(--line); border-radius: 999px;
-          background: rgba(255,255,255,.36);
-          cursor: pointer; transition: all 180ms ease;
+          width: 12px; height: 12px; padding: 0; border: 1px solid var(--line); border-radius: 999px;
+          background: rgba(255,255,255,.3); cursor: pointer; transition: all 300ms ease;
         }
-        .tlbm-dot:hover { border-color: rgba(255,255,255,.56); background: rgba(255,255,255,.16); }
-        .tlbm-dot.is-active { width: 34px; border-color: transparent; background: #fff; }
+        .tlbm-dot.is-active { width: 36px; border-color: transparent; background: #fff; }
 
-        /* ── Progress ── */
-        .tlbm-progress {
-          position: absolute; left: 0; bottom: 0; z-index: 5;
-          width: 100%; height: 4px; overflow: hidden;
-          background: rgba(255,255,255,.16);
-        }
-        .tlbm-progress-bar {
-          display: block; width: 100%; height: 100%;
-          background: #00e5ff;
-          box-shadow: 0 0 16px rgba(0,229,255,.65);
-          transform-origin: left; transform: scaleX(0);
-          animation: tlbm-progress var(--slide-ms) linear forwards;
-        }
+        .tlbm-progress { position: absolute; left: 0; bottom: 0; z-index: 5; width: 100%; height: 4px; overflow: hidden; background: rgba(255,255,255,.1); }
+        .tlbm-progress-bar { display: block; width: 100%; height: 100%; background: #00e5ff; box-shadow: 0 0 16px rgba(0,229,255,.6); transform-origin: left; transform: scaleX(0); animation: tlbm-progress var(--slide-ms) linear forwards; }
 
-        /* ── Brand marquee ── */
-        .tlbm-marquee {
-          overflow: hidden; background: #fff;
-          border-top: 1px solid rgba(10,12,18,.08);
-          border-bottom: 1px solid rgba(10,12,18,.08);
-          padding: 24px 0;
-        }
-        .tlbm-mq-inner {
-          display: flex; width: max-content;
-          animation: tlbm-marquee 46s linear infinite;
-          will-change: transform;
-        }
-        .tlbm-mq-track {
-          display: flex; align-items: center;
-          gap: 18px; padding-right: 18px;
-        }
-        .tlbm-brand {
-          display: inline-flex; align-items: center; justify-content: center;
-          flex: 0 0 auto;
-          width: clamp(132px,14vw,180px); height: 74px;
-          padding: 16px 24px;
-          border: 1px solid rgba(11,14,22,.08); border-radius: 8px;
-          background: #fff; box-shadow: 0 12px 34px rgba(10,14,24,.06);
-        }
-        .tlbm-brand img { display: block; max-width: 100%; max-height: 34px; object-fit: contain; }
-        .tlbm-brand span {
-          color: #11151f; font-size: .82rem; font-weight: 900;
-          letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
-        }
-        .tlbm-brand-fb { display: none; }
-
-        /* ── Keyframes ── */
         @keyframes tlbm-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        @keyframes tlbm-reveal {
-          from { clip-path: inset(0 100% 0 0); transform: scale(1.035); }
-          to   { clip-path: inset(0 0% 0 0);   transform: scale(1); }
-        }
-        @keyframes tlbm-marquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-        @keyframes tlbm-sheen {
-          0%,22%   { background-position: 115% 50%; }
-          56%,100% { background-position: -95% 50%; }
-        }
+        @keyframes tlbm-reveal { from { clip-path: inset(0 100% 0 0); transform: scale(1.1); } to { clip-path: inset(0 0 0 0); transform: scale(1); } }
+        @keyframes tlbm-sheen { 0%,22% { background-position: 115% 50%; } 56%,100% { background-position: -95% 50%; } }
 
-        /* ── Mobile ── */
         @media (max-width: 760px) {
-          .tlbm-inner {
-            width: min(100% - 28px, var(--max-w));
-            padding-top: 76px; padding-bottom: 146px; align-items: end;
-          }
-          .tlbm-title { max-width: 9ch; font-size: clamp(2.65rem,15vw,4.4rem); line-height: .94; }
-          .tlbm-bg { background-position: var(--pos-mobile, var(--pos, center)); }
-
-          .tlbm-slide.align-center,
-          .tlbm-slide.align-right { justify-self: start; text-align: left; }
-          .tlbm-slide.align-center .tlbm-eyebrow,
-          .tlbm-slide.align-right  .tlbm-eyebrow { justify-content: flex-start; }
-          .tlbm-slide.align-center .tlbm-eyebrow::before { display: block; }
-          .tlbm-slide.align-center .tlbm-actions,
-          .tlbm-slide.align-right  .tlbm-actions { justify-content: flex-start; }
-          .tlbm-copy { margin-top: 18px; max-width: 22rem; font-size: clamp(1rem,4.7vw,1.14rem); }
-          .tlbm-actions { flex-direction: column; align-items: stretch; }
+          .tlbm-inner { width: 100%; padding: 80px 24px 140px; align-items: center; }
+          .tlbm-slide { justify-self: center !important; align-items: center !important; text-align: center !important; max-width: 100%; }
+          .tlbm-eyebrow::before { display: block !important; }
+          .tlbm-title { font-size: clamp(2.4rem, 12vw, 3.8rem); max-width: 10ch; }
+          .tlbm-copy { font-size: 1.05rem; margin-top: 20px; max-width: 90%; }
+          .tlbm-actions { flex-direction: column; width: 100%; }
           .tlbm-btn { width: 100%; }
-          .tlbm-controls { left: 14px; right: 14px; bottom: 30px; justify-content: center; }
-          .tlbm-ctrl { width: 38px; height: 38px; }
+          .tlbm-controls { left: 0; right: 0; bottom: 30px; justify-content: center; }
+          .tlbm-ctrl { width: 40px; height: 40px; }
           .tlbm-dot.is-active { width: 28px; }
-          .tlbm-marquee { padding: 18px 0; }
-          .tlbm-mq-inner { animation-duration: 36s; }
-          .tlbm-mq-track { gap: 12px; padding-right: 12px; }
-          .tlbm-brand { width: 128px; height: 62px; padding: 14px 18px; }
-          .tlbm-brand img { max-height: 28px; }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          .tlbm-bg,
-          .tlbm-slide { transition-duration: 0.01ms !important; }
-          .tlbm-bg.is-incoming { animation-duration: 0.01ms !important; }
-          .tlbm-mq-inner { animation: tlbm-marquee 46s linear infinite !important; }
-        }
+        .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; }
+        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 50s linear infinite; }
+        .tlbm-mq-track { display: flex; align-items: center; gap: 20px; padding-right: 20px; }
+        .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 70px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
+        .tlbm-brand img { max-width: 100%; max-height: 32px; object-fit: contain; }
+        .tlbm-brand span { display: none; color: #111; font-weight: 800; font-size: 0.8rem; }
+        @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
-      {/* ─── HERO SECTION ─── */}
-      <section className="tlbm-hero" aria-label="Promociones destacadas">
-
-        {/* Backgrounds */}
+      {/* ─── HERO ─── */}
+      <section className="tlbm-hero">
         {SLIDES.map((s, i) => (
           <div
             key={i}
-            className={`tlbm-bg${i === current ? " is-active" : ""}${i === incoming ? " is-incoming" : ""}`}
+            className={`tlbm-bg${i === (incoming ?? current) ? " is-active" : ""}${i === incoming ? " is-incoming" : ""}`}
             style={{
               backgroundImage: `url('${s.bg}')`,
               ["--pos" as string]: s.bgPos,
-              ["--pos-mobile" as string]: s.bgPosMobile,
             }}
           />
         ))}
 
-        <div className="tlbm-overlay" aria-hidden="true" />
-        <canvas ref={canvasRef} className="tlbm-wave" aria-hidden="true" />
+        <div className="tlbm-overlay" />
+        <canvas ref={canvasRef} className="tlbm-wave" />
 
-        {/* Slide content */}
         <div className="tlbm-inner">
-          {SLIDES.map((s, i) => {
-            const Tag = s.tag as "h1" | "h2"
-            return (
-              <article
-                key={i}
-                className={`tlbm-slide align-${s.align}
-                  ${i === current ? " is-active" : ""}
-                  ${incoming !== null && i === current ? " is-leaving" : ""}
-                  ${i === incoming ? " is-entering" : ""}
-                `}
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={current}
+              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 1.02 }}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.2
+              }}
+              className={`tlbm-slide align-${SLIDES[current].align}`}
+            >
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="tlbm-eyebrow"
               >
-                <p className="tlbm-eyebrow">{s.eyebrow}</p>
-                <Tag className="tlbm-title">{s.title}</Tag>
-                <p className="tlbm-copy">{s.copy}</p>
-                <div className="tlbm-actions">
-                  <LocalizedClientLink href={s.href} className="tlbm-btn">
-                    {s.btn}
-                  </LocalizedClientLink>
-                </div>
-              </article>
-            )
-          })}
+                {SLIDES[current].eyebrow}
+              </motion.p>
+
+              <motion.h1
+                initial={{ opacity: 0, filter: "blur(10px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="tlbm-title"
+              >
+                {SLIDES[current].title}
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+                className="tlbm-copy"
+              >
+                {SLIDES[current].copy}
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+                className="tlbm-actions"
+              >
+                <LocalizedClientLink href={SLIDES[current].href} className="tlbm-btn">
+                  {SLIDES[current].btn}
+                </LocalizedClientLink>
+              </motion.div>
+            </motion.article>
+          </AnimatePresence>
         </div>
 
-        {/* Navigation controls */}
-        <div className="tlbm-controls" aria-label="Controles del carrusel">
-          <button
-            className="tlbm-ctrl"
-            type="button"
-            aria-label="Slide anterior"
-            onClick={() => handleNav(-1)}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <div className="tlbm-controls">
+          <button className="tlbm-ctrl" onClick={() => handleNav(-1)}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M15 18l-6-6 6-6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-
-          <div className="tlbm-dots" role="tablist" aria-label="Elegir promoción">
+          <div className="tlbm-dots">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
                 className={`tlbm-dot${i === current ? " is-active" : ""}`}
-                type="button"
-                role="tab"
-                aria-label={`Mostrar promoción ${i + 1}`}
-                aria-selected={i === current}
                 onClick={() => handleDot(i)}
               />
             ))}
           </div>
-
-          <button
-            className="tlbm-ctrl"
-            type="button"
-            aria-label="Slide siguiente"
-            onClick={() => handleNav(1)}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
-              <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          <button className="tlbm-ctrl" onClick={() => handleNav(1)}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 6l6 6-6 6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>
 
-        {/* Progress bar */}
-        <div className="tlbm-progress" aria-hidden="true">
+        <div className="tlbm-progress">
           <span key={progKey} className="tlbm-progress-bar" />
         </div>
       </section>
 
-      {/* ─── BRAND MARQUEE ─── */}
-      <section className="tlbm-marquee" aria-label="Marcas disponibles">
+      {/* ─── MARQUEE ─── */}
+      <section className="tlbm-marquee">
         <div className="tlbm-mq-inner">
-          {[false, true].map((isDupe) => (
-            <div key={String(isDupe)} className="tlbm-mq-track" aria-hidden={isDupe || undefined}>
+          {[0, 1].map((copy) => (
+            <div key={copy} className="tlbm-mq-track">
               {BRANDS.map(({ slug, label }) => (
                 <div key={slug} className="tlbm-brand">
                   <img
                     src={`https://cdn.simpleicons.org/${slug}/11151f`}
-                    alt={isDupe ? "" : label}
-                    loading="lazy"
+                    alt={label}
                     onError={(e) => {
-                      const img = e.currentTarget
-                      img.style.display = "none"
-                      const fb = img.nextElementSibling as HTMLElement | null
+                      e.currentTarget.style.display = "none"
+                      const fb = e.currentTarget.nextElementSibling as HTMLElement
                       if (fb) fb.style.display = "inline"
                     }}
                   />
-                  <span className="tlbm-brand-fb">{label}</span>
+                  <span>{label}</span>
                 </div>
               ))}
             </div>
