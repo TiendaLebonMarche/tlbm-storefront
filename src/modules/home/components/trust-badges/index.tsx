@@ -52,13 +52,13 @@ const TrustBadges = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
           {badges.map((badge, idx) => (
             <div key={idx} className="flex flex-col items-center text-center group px-4">
-              <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-brand-soft text-brand-olive mb-8 transition-all duration-700 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 shadow-sm">
+              <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-gray-50 text-black mb-8 transition-all duration-700 group-hover:bg-black group-hover:text-white group-hover:scale-110 shadow-sm border border-gray-100">
                 {badge.icon}
               </div>
-              <h3 className="font-sans font-bold text-xs md:text-sm uppercase tracking-[0.3em] text-brand-brown mb-4">
+              <h3 className="font-sans font-bold text-xs md:text-sm uppercase tracking-[0.3em] text-gray-900 mb-4">
                 {badge.title}
               </h3>
-              <p className="text-xs md:text-base text-brand-gray/70 leading-relaxed max-w-[280px] font-medium">
+              <p className="text-xs md:text-base text-gray-500 leading-relaxed max-w-[280px] font-medium">
                 {badge.description}
               </p>
             </div>

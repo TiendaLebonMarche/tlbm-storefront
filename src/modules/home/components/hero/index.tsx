@@ -6,7 +6,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const SLIDE_TIME = 8000
-const TRANSITION_MS = 1000 // Reduced for snappier feel
+const TRANSITION_MS = 1000
 
 const SLIDES = [
   {
@@ -50,9 +50,9 @@ const SLIDES = [
 const BRANDS = [
   { slug: "xiaomi", label: "Xiaomi" },
   { slug: "samsung", label: "Samsung" },
-  { slug: "redmi", label: "Redmi" },
+  { slug: "redmi", label: "Redmi" }, // Fallback to text
   { slug: "acer", label: "Acer" },
-  { slug: "passau", label: "Passau" },
+  { slug: "passau", label: "Passau" }, // Fallback to text
   { slug: "sony", label: "Sony" },
   { slug: "jbl", label: "JBL" },
   { slug: "puma", label: "PUMA" },
@@ -60,7 +60,7 @@ const BRANDS = [
   { slug: "nike", label: "NIKE" },
   { slug: "champion", label: "Champion" },
   { slug: "underarmour", label: "Under Armour" },
-  { slug: "and1", label: "AND1" },
+  { slug: "and1", label: "AND1" }, // Fallback to text
   { slug: "insta360", label: "Insta360" },
   { slug: "starlink", label: "Starlink" },
   { slug: "dji", label: "DJI" },
@@ -103,11 +103,8 @@ export default function Hero() {
     }
     clearAllTimers()
     busyRef.current = true
-    
-    // START BOTH IMMEDIATELY
     setTextIdx(next)
     setIncoming(next)
-
     transTimerRef.current = setTimeout(() => {
       currentRef.current = next
       setCurrent(next)
@@ -330,14 +327,19 @@ export default function Hero() {
         }
 
         .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; }
-        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 50s linear infinite; }
-        .tlbm-mq-track { display: flex; align-items: center; gap: 32px; padding-right: 32px; }
-        .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 74px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
+        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 60s linear infinite; }
+        .tlbm-mq-track { display: flex; align-items: center; gap: 40px; padding-right: 40px; }
+        .tlbm-brand { 
+          display: flex; align-items: center; justify-content: center; 
+          width: 160px; height: 74px; padding: 12px; 
+          border: 1px solid rgba(0,0,0,.04); border-radius: 12px; 
+          background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); 
+        }
         .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
+        .tlbm-brand span { color: #111; font-weight: 900; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; }
         @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
-      {/* ─── HERO ─── */}
       <section className="tlbm-hero">
         {SLIDES.map((s, i) => (
           <div
@@ -360,45 +362,19 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.02 }}
-              transition={{
-                duration: 0.5,
-                ease: "easeOut"
-              }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className={`tlbm-slide align-${SLIDES[textIdx].align}`}
             >
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05, duration: 0.3 }}
-                className="tlbm-eyebrow"
-              >
+              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05, duration: 0.3 }} className="tlbm-eyebrow">
                 {SLIDES[textIdx].eyebrow}
               </motion.p>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.4 }}
-                className="tlbm-title"
-              >
+              <motion.h1 initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }} className="tlbm-title">
                 {SLIDES[textIdx].title}
               </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15, duration: 0.4 }}
-                className="tlbm-copy"
-              >
+              <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.4 }} className="tlbm-copy">
                 {SLIDES[textIdx].copy}
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-                className="tlbm-actions"
-              >
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="tlbm-actions">
                 <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
                   {SLIDES[textIdx].btn}
                 </LocalizedClientLink>
@@ -415,11 +391,7 @@ export default function Hero() {
           </button>
           <div className="tlbm-dots">
             {SLIDES.map((_, i) => (
-              <button
-                key={i}
-                className={`tlbm-dot${i === textIdx ? " is-active" : ""}`}
-                onClick={() => handleDot(i)}
-              />
+              <button key={i} className={`tlbm-dot${i === textIdx ? " is-active" : ""}`} onClick={() => handleDot(i)} />
             ))}
           </div>
           <button className="tlbm-ctrl" onClick={() => handleNav(1)}>
@@ -434,7 +406,6 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ─── MARQUEE ─── */}
       <section className="tlbm-marquee">
         <div className="tlbm-mq-inner">
           {[0, 1].map((copy) => (
@@ -445,9 +416,13 @@ export default function Hero() {
                     src={`https://cdn.simpleicons.org/${slug}/11151f`}
                     alt={label}
                     onError={(e) => {
-                      e.currentTarget.style.display = "none"
+                      const img = e.currentTarget
+                      img.style.display = "none"
+                      const fb = img.nextElementSibling as HTMLElement
+                      if (fb) fb.style.display = "block"
                     }}
                   />
+                  <span style={{ display: "none" }}>{label}</span>
                 </div>
               ))}
             </div>
