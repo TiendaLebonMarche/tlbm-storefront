@@ -248,12 +248,26 @@ export default function Hero() {
         /* ── Slides ── */
         .tlbm-slide {
           grid-area: 1/1; max-width: 720px;
-          opacity: 0; transform: translateX(-86px); pointer-events: none;
+          opacity: 0; transform: translateX(-40px); pointer-events: none;
           transition:
-            opacity 780ms cubic-bezier(0.12,0.78,0.36,1),
-            transform 780ms cubic-bezier(0.12,0.78,0.36,1);
+            opacity 800ms cubic-bezier(0.12,0.78,0.36,1),
+            transform 800ms cubic-bezier(0.12,0.78,0.36,1);
         }
-        .tlbm-slide.is-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        /* Active slide state */
+        .tlbm-slide.is-active:not(.is-leaving) { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        
+        /* Outgoing state */
+        .tlbm-slide.is-leaving {
+          opacity: 0; transform: translateX(40px);
+          transition: opacity 400ms ease, transform 400ms ease;
+        }
+
+        /* Incoming state - synchronized with wipe */
+        .tlbm-slide.is-entering {
+          opacity: 1; transform: translateX(0);
+          transition: opacity 800ms ease 500ms, transform 800ms ease 500ms;
+          pointer-events: auto;
+        }
 
         .tlbm-slide.align-center { justify-self: center; text-align: center; }
         .tlbm-slide.align-center .tlbm-eyebrow { justify-content: center; }
@@ -471,7 +485,11 @@ export default function Hero() {
             return (
               <article
                 key={i}
-                className={`tlbm-slide align-${s.align}${i === current ? " is-active" : ""}`}
+                className={`tlbm-slide align-${s.align}
+                  ${i === current ? " is-active" : ""}
+                  ${incoming !== null && i === current ? " is-leaving" : ""}
+                  ${i === incoming ? " is-entering" : ""}
+                `}
               >
                 <p className="tlbm-eyebrow">{s.eyebrow}</p>
                 <Tag className="tlbm-title">{s.title}</Tag>
