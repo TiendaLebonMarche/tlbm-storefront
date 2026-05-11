@@ -48,26 +48,32 @@ const SLIDES = [
 ] as const
 
 const BRANDS = [
+  { slug: "xiaomi", label: "Xiaomi" },
+  { slug: "samsung", label: "Samsung" },
+  { slug: "redmi", label: "Redmi" },
   { slug: "acer", label: "Acer" },
+  { slug: "passau", label: "Passau" },
   { slug: "sony", label: "Sony" },
   { slug: "jbl", label: "JBL" },
   { slug: "puma", label: "PUMA" },
-  { slug: "nike", label: "NIKE" },
   { slug: "adidas", label: "ADIDAS" },
-  { slug: "underarmour", label: "UNDER ARMOR" },
-  { slug: "xiaomi", label: "XIAOMI" },
-  { slug: "samsung", label: "SAMSUNG" },
-  { slug: "redmi", label: "REDMI" },
-  { slug: "insta360", label: "INSTA360" },
+  { slug: "nike", label: "NIKE" },
+  { slug: "champion", label: "Champion" },
+  { slug: "underarmour", label: "Under Armour" },
+  { slug: "and1", label: "AND1" },
+  { slug: "insta360", label: "Insta360" },
+  { slug: "starlink", label: "Starlink" },
   { slug: "dji", label: "DJI" },
-  { slug: "starlink", label: "STARLINK" },
-  { slug: "dell", label: "DELL" },
-  { slug: "champion", label: "CHAMPIONS" },
-  { slug: "passau", label: "PASSAU" },
+  { slug: "dell", label: "Dell" },
+  { slug: "logitech", label: "Mouse" },
+  { slug: "opencode", label: "OpenCode" },
+  { slug: "kyzona", label: "Kyzona" },
+  { slug: "monsterenergy", label: "Monster" },
 ]
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0)
+  const [current, setCurrent] = useState(0)      // For backgrounds
+  const [textIdx, setTextIdx] = useState(0)      // For text (immediate update)
   const [incoming, setIncoming] = useState<number | null>(null)
   const [progKey, setProgKey] = useState(0)
 
@@ -97,9 +103,13 @@ export default function Hero() {
     }
     clearAllTimers()
     busyRef.current = true
+    
+    // TEXT: Update immediately to start its animation with the wipe
+    setTextIdx(next)
+    
+    // BG: Start wipe animation
     setIncoming(next)
 
-    // Background transition duration
     transTimerRef.current = setTimeout(() => {
       currentRef.current = next
       setCurrent(next)
@@ -323,9 +333,11 @@ export default function Hero() {
 
         .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; }
         .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 50s linear infinite; }
-        .tlbm-mq-track { display: flex; align-items: center; gap: 20px; padding-right: 20px; }
-        .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 70px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
-        .tlbm-brand img { max-width: 100%; max-height: 32px; object-fit: contain; }
+        .tlbm-mq-track { display: flex; align-items: center; gap: 32px; padding-right: 32px; }
+        .tlbm-brand { display: flex; align-items: center; justify-content: center; width: 160px; height: 74px; padding: 12px; border: 1px solid rgba(0,0,0,.04); border-radius: 12px; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); }
+        .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
+        .tlbm-brand span { color: #111; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; text-align: center; line-height: 1.1; }
+        @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
       {/* ─── HERO ─── */}
@@ -333,7 +345,7 @@ export default function Hero() {
         {SLIDES.map((s, i) => (
           <div
             key={i}
-            className={`tlbm-bg${i === (incoming ?? current) ? " is-active" : ""}${i === incoming ? " is-incoming" : ""}`}
+            className={`tlbm-bg${i === current ? " is-active" : ""}${i === incoming ? " is-incoming" : ""}`}
             style={{
               backgroundImage: `url('${s.bg}')`,
               ["--pos" as string]: s.bgPos,
@@ -347,51 +359,51 @@ export default function Hero() {
         <div className="tlbm-inner">
           <AnimatePresence>
             <motion.article
-              key={current}
-              initial={{ opacity: 0, x: 60 }}
+              key={textIdx}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -60 }}
+              exit={{ opacity: 0, x: -40 }}
               transition={{
-                duration: 0.8,
+                duration: 0.7,
                 ease: [0.16, 1, 0.3, 1]
               }}
-              className={`tlbm-slide align-${SLIDES[current].align}`}
+              className={`tlbm-slide align-${SLIDES[textIdx].align}`}
             >
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
                 className="tlbm-eyebrow"
               >
-                {SLIDES[current].eyebrow}
+                {SLIDES[textIdx].eyebrow}
               </motion.p>
 
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
                 className="tlbm-title"
               >
-                {SLIDES[current].title}
+                {SLIDES[textIdx].title}
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className="tlbm-copy"
               >
-                {SLIDES[current].copy}
+                {SLIDES[textIdx].copy}
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
                 className="tlbm-actions"
               >
-                <LocalizedClientLink href={SLIDES[current].href} className="tlbm-btn">
-                  {SLIDES[current].btn}
+                <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
+                  {SLIDES[textIdx].btn}
                 </LocalizedClientLink>
               </motion.div>
             </motion.article>
@@ -408,7 +420,7 @@ export default function Hero() {
             {SLIDES.map((_, i) => (
               <button
                 key={i}
-                className={`tlbm-dot${i === current ? " is-active" : ""}`}
+                className={`tlbm-dot${i === textIdx ? " is-active" : ""}`}
                 onClick={() => handleDot(i)}
               />
             ))}
@@ -436,9 +448,13 @@ export default function Hero() {
                     src={`https://cdn.simpleicons.org/${slug}/11151f`}
                     alt={label}
                     onError={(e) => {
-                      e.currentTarget.style.display = "none"
+                      const img = e.currentTarget
+                      img.style.display = "none"
+                      const fb = img.nextElementSibling as HTMLElement
+                      if (fb) fb.style.display = "flex"
                     }}
                   />
+                  <span style={{ display: "none" }}>{label}</span>
                 </div>
               ))}
             </div>
