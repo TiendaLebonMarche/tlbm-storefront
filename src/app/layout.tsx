@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Playfair_Display, Fraunces, Public_Sans } from "next/font/google"
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "styles/globals.css"
@@ -16,6 +16,20 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   style: ["normal", "italic"],
+  display: "swap",
+})
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  weight: ["400", "500", "600"],
+  display: "swap",
+})
+
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-public-sans",
+  weight: ["600", "700", "800", "900"],
   display: "swap",
 })
 
@@ -99,7 +113,7 @@ import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${publicSans.variable}`}>
       <head>
         {/* RSS Feed for AI and content discovery */}
         <link
