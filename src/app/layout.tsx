@@ -128,6 +128,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${publicSans.variable}`}>
       <head>
+        {/* Preconnect to optimize asset connection speed (Core Web Vitals) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         {/* RSS Feed for AI and content discovery */}
         <link
           rel="alternate"

@@ -1,7 +1,9 @@
 import { clx } from "@medusajs/ui"
 
-import { getProductPrice } from "@lib/util/get-product-price"
+import { useProductPrice } from "@lib/hooks/use-product-price"
 import { HttpTypes } from "@medusajs/types"
+import { convertToLocale } from "@lib/util/money"
+import { motion } from "framer-motion"
 
 export default function ProductPrice({
   product,
@@ -10,7 +12,7 @@ export default function ProductPrice({
   product: HttpTypes.StoreProduct
   variant?: HttpTypes.StoreProductVariant
 }) {
-  const { cheapestPrice, variantPrice } = getProductPrice({
+  const { cheapestPrice, variantPrice } = useProductPrice({
     product,
     variantId: variant?.id,
   })
@@ -21,34 +23,62 @@ export default function ProductPrice({
     return <div className="block w-32 h-9 bg-gray-50 animate-pulse" />
   }
 
+  const savings = selectedPrice.price_type === "sale" && selectedPrice.original_price_number && selectedPrice.calculated_price_number
+    ? selectedPrice.original_price_number - selectedPrice.calculated_price_number
+    : 0
+
+  const formattedSavings = savings > 0 && selectedPrice.currency_code
+    ? convertToLocale({ amount: savings, currency_code: selectedPrice.currency_code })
+    : null
+
   return (
-    <div className="flex items-baseline gap-3">
-      {selectedPrice.price_type === "sale" && (
-        <span
-          className="text-base text-gray-400 line-through font-light"
-          data-testid="original-product-price"
-          data-value={selectedPrice.original_price_number}
-        >
-          {selectedPrice.original_price}
-        </span>
-      )}
-      <span
-        className={clx(
-          "text-2xl md:text-3xl font-semibold tracking-tight text-brand-brown font-sans",
-          {
-            "text-brand-brown": selectedPrice.price_type !== "sale",
-          }
+    <div className="flex flex-col gap-2">
+      <div className="flex items-baseline gap-3">
+        {selectedPrice.price_type === "sale" && (
+          <span
+            className="text-base text-gray-400 line-through font-light"
+            data-testid="original-product-price"
+            data-value={selectedPrice.original_price_number}
+          >
+            {selectedPrice.original_price}
+          </span>
         )}
-        data-testid="product-price"
-        data-value={selectedPrice.calculated_price_number}
-      >
-        {!variant && "Desde "}
-        {selectedPrice.calculated_price}
-      </span>
-      {selectedPrice.price_type === "sale" && (
-        <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-brand-olive px-2.5 py-1">
-          -{selectedPrice.percentage_diff}%
+        <span
+          className={clx(
+            "text-3xl md:text-4xl font-semibold tracking-tight text-brand-brown font-sans",
+            {
+              "text-brand-brown": selectedPrice.price_type !== "sale",
+            }
+          )}
+          data-testid="product-price"
+          data-value={selectedPrice.calculated_price_number}
+        >
+          {!variant && "Desde "}
+          {selectedPrice.calculated_price}
         </span>
+      </div>
+
+      {selectedPrice.price_type === "sale" && (
+        <div className="flex items-center gap-2 mt-0.5">
+          <motion.span
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="text-[9px] font-bold uppercase tracking-wider text-white bg-red-600 px-2.5 py-1"
+          >
+            -{selectedPrice.percentage_diff}%
+          </motion.span>
+          {formattedSavings && (
+            <motion.span
+              initial={{ x: -10, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+              className="text-[10px] font-semibold text-red-600 tracking-wide font-sans bg-red-50 px-2 py-0.5 rounded-sm"
+            >
+              Ahorras {formattedSavings}
+            </motion.span>
+          )}
+        </div>
       )}
     </div>
   )

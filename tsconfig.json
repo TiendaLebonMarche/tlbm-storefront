@@ -33,6 +33,8 @@
     ".next",
     ".nyc_output",
     "coverage",
-    "jest-coverage"
+    "jest-coverage",
+    "e2e",
+    "**/__tests__"
   ]
 }

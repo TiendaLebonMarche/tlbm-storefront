@@ -3,6 +3,7 @@
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 import { useState, useCallback } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
@@ -70,19 +71,30 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setIsZoomed(false)}
       >
-        {selectedImage?.url && (
-          <Image
-            src={selectedImage.url}
-            alt={`${baseAlt} - imagen principal`}
-            fill
-            className={`object-cover transition-all duration-1000 ease-in-out ${
-              isZoomed ? 'scale-[2]' : 'scale-100'
-            }`}
-            style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
-            priority
-            sizes="(max-width: 768px) 100vw, 60vw"
-          />
-        )}
+        <AnimatePresence mode="wait">
+          {selectedImage?.url && (
+            <motion.div
+              key={selectedImage.id}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={selectedImage.url}
+                alt={`${baseAlt} - imagen principal`}
+                fill
+                className={`object-cover transition-all duration-1000 ease-in-out ${
+                  isZoomed ? 'scale-[2]' : 'scale-100'
+                }`}
+                style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
+                priority
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Subtle border overlay */}
         <div className="absolute inset-0 border border-gray-100/40 pointer-events-none z-10" />

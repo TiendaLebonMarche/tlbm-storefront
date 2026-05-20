@@ -1,16 +1,24 @@
 import { HttpTypes } from "@medusajs/types"
 import { notFound } from "next/navigation"
 import React, { Suspense } from "react"
+import dynamic from "next/dynamic"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
-import ProductTabs from "@modules/products/components/product-tabs"
-import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Reveal from "@modules/common/components/reveal"
+
+const ProductTabs = dynamic(() => import("@modules/products/components/product-tabs"), {
+  ssr: true,
+})
+
+const RelatedProducts = dynamic(() => import("@modules/products/components/related-products"), {
+  ssr: true,
+  loading: () => <SkeletonRelatedProducts />,
+})
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
