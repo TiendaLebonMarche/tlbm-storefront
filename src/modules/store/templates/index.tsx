@@ -80,7 +80,7 @@ const StoreTemplate = async ({
               <div className="mb-6 pb-4 border-b border-gray-100">
                 <p className="text-[10px] text-gray-400 uppercase tracking-[0.3em] font-medium">
                   Resultados para:{" "}
-                  <span className="text-brand-brown font-bold italic">"{query}"</span>
+                  <span className="text-brand-brown font-bold italic">&quot;{query}&quot;</span>
                 </p>
               </div>
             )}

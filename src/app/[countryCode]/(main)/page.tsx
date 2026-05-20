@@ -11,19 +11,20 @@ import { blogPosts } from "@lib/data/blog"
 import { Blog7 } from "@/components/ui/blog7"
 import MostSoldSection from "@modules/home/components/most-sold"
 import BrandStatement from "@modules/home/components/brand-statement"
+import Reveal from "@modules/common/components/reveal"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 export const metadata: Metadata = {
-  title: "Tienda Le Bon Marché | Productos Originales & Exóticos — Bucaramanga",
+  title: "Tienda Le Bon Marché Bucaramanga | Productos Originales & Exóticos",
   description:
-    "Boutique online en Bucaramanga con tecnología premium, gadgets exclusivos, decoración exótica y libros de colección. Envíos VIP a toda Colombia. Descubre lo extraordinario.",
+    "Tienda Le Bon Marché en Bucaramanga: tecnología de lujo, gadgets exóticos, parlantes originales, smartwatch original y oficina premium. ¡Los mejores precios y descuentos en Bucaramanga con envíos VIP a toda Colombia!",
   alternates: {
     canonical: `${BASE_URL}/co`,
   },
   openGraph: {
-    title: "Tienda Le Bon Marché | Originales & Exóticos — Bucaramanga",
-    description: "Tecnología premium, gadgets, decoración exótica y libros de colección. Boutique virtual en Bucaramanga con envíos a toda Colombia.",
+    title: "Tienda Le Bon Marché Bucaramanga | Productos Originales & Exóticos",
+    description: "Tecnología de lujo, gadgets exóticos, parlantes y smartwatch original en Bucaramanga. Tu tienda virtual premium con los mejores precios.",
     url: `${BASE_URL}/co`,
     type: "website",
     locale: "es_CO",
@@ -52,27 +53,27 @@ export default async function Home(props: {
     <div className="flex flex-col gap-0">
       <Hero />
 
-      <div className="reveal-up">
+      <Reveal>
         <TrustBadges />
-      </div>
+      </Reveal>
 
-      <div className="reveal-up">
+      <Reveal>
         <HotDeals countryCode={countryCode} />
-      </div>
+      </Reveal>
 
-      <div className="reveal-up">
+      <Reveal>
         <BrandStatement />
-      </div>
+      </Reveal>
 
-      <div className="reveal-up">
+      <Reveal>
         <AnimatedTestimonialsSection />
-      </div>
+      </Reveal>
 
-      <div className="reveal-up">
+      <Reveal>
         <MostSoldSection countryCode={countryCode} />
-      </div>
+      </Reveal>
 
-      <div className="reveal-up">
+      <Reveal>
         <Blog7
           tagline="Lifestyle & Tendencias"
           heading="Blog Le Bon Marché - El blog de tu tienda en bucaramanga."
@@ -90,7 +91,7 @@ export default async function Home(props: {
             image: post.img,
           }))}
         />
-      </div>
+      </Reveal>
 
     </div>
   )

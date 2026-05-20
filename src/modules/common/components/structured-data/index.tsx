@@ -21,7 +21,7 @@ export default function StructuredData() {
       "height": 512,
       "caption": "Tienda Le Bon Marché — Boutique Online Colombia"
     },
-    "description": "Tienda Le Bon Marché es la boutique virtual de referencia en Bucaramanga, Colombia. Vendemos tecnología premium, gadgets exclusivos, decoración exótica, libros de colección y lifestyle de alta gama con envíos a toda Colombia.",
+    "description": "Tienda Le Bon Marché es la tienda virtual en Bucaramanga líder en productos importados, gadgets exóticos, tecnología de lujo, parlantes originales y smartwatch original en Bucaramanga. Como tienda retail premium y tienda gamer y oficina premium en Bucaramanga, ofrecemos productos exclusivos con los mejores precios y descuentos en Bucaramanga.",
     "slogan": "Originales & Exóticos",
     "foundingDate": "2021",
     "foundingLocation": {
@@ -64,10 +64,10 @@ export default function StructuredData() {
       "@type": "OfferCatalog",
       "name": "Catálogo Le Bon Marché",
       "itemListElement": [
-        { "@type": "OfferCatalog", "name": "Tecnología & Gadgets" },
-        { "@type": "OfferCatalog", "name": "Decoración del Hogar" },
-        { "@type": "OfferCatalog", "name": "Libros & Colección" },
-        { "@type": "OfferCatalog", "name": "Lifestyle & Wellness" }
+        { "@type": "OfferCatalog", "name": "Tecnología de lujo & Gadgets exóticos" },
+        { "@type": "OfferCatalog", "name": "Parlantes originales & Smartwatch original" },
+        { "@type": "OfferCatalog", "name": "Tienda gamer y oficina premium" },
+        { "@type": "OfferCatalog", "name": "Decoración del Hogar & Libros de Colección" }
       ]
     }
   }
@@ -154,6 +154,7 @@ export default function StructuredData() {
     "@type": ["OnlineStore", "LocalBusiness"],
     "@id": `${BASE_URL}/#localbusiness`,
     "name": "Tienda Le Bon Marché",
+    "description": "Tienda virtual en Bucaramanga de tecnología de lujo, gadgets exóticos, parlantes originales, smartwatch original y oficina gamer premium con envíos VIP a toda Colombia.",
     "image": `${BASE_URL}/logo.png`,
     "url": BASE_URL,
     "telephone": "+573027567783",

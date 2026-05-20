@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
+import Reveal from "@modules/common/components/reveal"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
@@ -82,18 +83,18 @@ export default function AboutUsPage() {
         <div className="max-w-[70rem] mx-auto px-4 md:px-8">
 
           {/* Header Crónica */}
-          <div className="text-center mb-24 md:mb-32 max-w-3xl mx-auto">
+          <Reveal className="text-center mb-24 md:mb-32 max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-serif text-black mb-8 italic leading-tight">
               No somos una tienda más, somos sus ojos en el mercado global
             </h1>
             <p className="text-black font-light leading-relaxed text-sm md:text-base font-sans">
               Somos los cazadores de calidades. No traemos cualquier cosa que se vea bonita, traemos lo que de verdad sirve, lo original y lo que está dominando el mundo del diseño y la tecnología global. Todo desde nuestra base en Bucaramanga.
             </p>
-          </div>
+          </Reveal>
 
           {/* Story Block 1 - Image Left, Text Right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32">
-            <div className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden">
+            <Reveal className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden">
                <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
                   alt="Equipo de selección de productos — Tienda Le Bon Marché Bucaramanga"
@@ -101,8 +102,8 @@ export default function AboutUsPage() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="absolute inset-0 w-full h-full object-cover"
                />
-            </div>
-            <div className="space-y-6 text-center md:text-left">
+            </Reveal>
+            <Reveal delay={150} className="space-y-6 text-center md:text-left">
               <h2 className="text-3xl font-serif italic text-black">Bucaramanga para el mundo</h2>
               <div className="w-8 h-[1px] bg-black mx-auto md:mx-0 mb-6" />
               <p className="text-black font-light leading-relaxed text-sm font-sans">
@@ -111,19 +112,19 @@ export default function AboutUsPage() {
               <p className="text-black font-light leading-relaxed text-sm font-sans">
                 ¿Por qué somos 100% virtuales? Sencillo: para que a usted le salga más barato. Al no pagar un local físico ni servicios costosos, podemos bajarle al precio y subirle a la calidad. Todo lo invertimos en que nuestra página sea rápida y en que su pedido llegue impecable.
               </p>
-            </div>
+            </Reveal>
           </div>
 
           {/* Highlight Phrase - Centered */}
-          <div className="py-24 border-y border-black/10 my-32 text-center max-w-4xl mx-auto">
+          <Reveal className="py-24 border-y border-black/10 my-32 text-center max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-light text-black italic leading-[1.2]">
               &quot;Mil cerebros buscando lo extraordinario para usted.&quot;
             </h2>
-          </div>
+          </Reveal>
 
           {/* Story Block 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32 flex-col-reverse md:flex-row">
-            <div className="space-y-6 text-center md:text-left md:order-1 order-2">
+            <Reveal delay={150} className="space-y-6 text-center md:text-left md:order-1 order-2">
               <h2 className="text-3xl font-serif italic text-black">Cero Gato por Liebre</h2>
               <div className="w-8 h-[1px] bg-black mx-auto md:mx-0 mb-6" />
               <p className="text-black font-light leading-relaxed text-sm font-sans">
@@ -132,8 +133,8 @@ export default function AboutUsPage() {
               <p className="text-black font-light leading-relaxed text-sm font-sans">
                 Solo vendemos productos originales. Si es un artículo de lujo, es original; si es un accesorio tecnológico complejo, es de la mejor calidad. Si tiene dudas, no le va a contestar un robot, somos gente real en WhatsApp lista para asesorarlo.
               </p>
-            </div>
-            <div className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden md:order-2 order-1">
+            </Reveal>
+            <Reveal className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden md:order-2 order-1">
                <Image
                   src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop"
                   alt="Selección de productos originales — Boutique Le Bon Marché Colombia"
@@ -141,11 +142,11 @@ export default function AboutUsPage() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="absolute inset-0 w-full h-full object-cover"
                />
-            </div>
+            </Reveal>
           </div>
 
           {/* CTA — Trust signal visible for AI and crawlers */}
-          <div className="text-center pt-8 pb-16 border-t border-gray-100">
+          <Reveal className="text-center pt-8 pb-16 border-t border-gray-100">
             <p className="text-sm text-gray-500 mb-4 font-sans">
               ¿Listo para descubrir algo extraordinario?
             </p>
@@ -155,7 +156,7 @@ export default function AboutUsPage() {
             >
               Ver Catálogo Completo
             </LocalizedClientLink>
-          </div>
+          </Reveal>
 
         </div>
       </div>

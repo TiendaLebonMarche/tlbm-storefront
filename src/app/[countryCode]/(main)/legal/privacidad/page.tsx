@@ -61,7 +61,7 @@ export default function PrivacidadPage() {
 
               <h2 className="text-3xl mt-16 mb-6">Inteligencia Artificial y Transparencia</h2>
               <p>
-                Como pilar arquitectónico de Le Bon Marché, integramos algoritmos automatizados ("bots") para el <strong>arbitraje de precios internacionales</strong>. Utilizamos metadatos de navegación anónima para afinar este motor predictivo, asegurando neutralizar la asimetría del mercado a su favor, garantizando importaciones a costos justos. Jamás comercializamos estos perfiles algorítmicos.
+                Como pilar arquitectónico de Le Bon Marché, integramos algoritmos automatizados (&quot;bots&quot;) para el <strong>arbitraje de precios internacionales</strong>. Utilizamos metadatos de navegación anónima para afinar este motor predictivo, asegurando neutralizar la asimetría del mercado a su favor, garantizando importaciones a costos justos. Jamás comercializamos estos perfiles algorítmicos.
               </p>
 
               <h2 className="text-3xl mt-16 mb-6">Criptografía y Cookies</h2>
