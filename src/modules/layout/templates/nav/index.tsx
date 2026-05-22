@@ -11,7 +11,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 
-const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779482684/logo-TLBM-nlanco_njck5j.png"
+import ClientLogo from "@modules/layout/components/client-logo"
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
@@ -32,14 +32,7 @@ export default async function Nav() {
 
           <div className="flex-1 flex items-center justify-center">
             <LocalizedClientLink href="/" className="pointer-events-auto">
-              <Image
-                src={LOGO_URL}
-                alt="Tienda Le Bon Marché"
-                width={1822}
-                height={548}
-                className="w-[140px] h-auto object-contain"
-                priority
-              />
+              <ClientLogo isMobile={true} />
             </LocalizedClientLink>
           </div>
 
@@ -60,14 +53,7 @@ export default async function Nav() {
           {/* Center */}
           <div className="flex items-center justify-center flex-none px-8">
             <LocalizedClientLink href="/" className="pointer-events-auto">
-              <Image
-                src={LOGO_URL}
-                alt="Tienda Le Bon Marché"
-                width={1822}
-                height={548}
-                className="w-[160px] md:w-[190px] lg:w-[220px] h-auto object-contain"
-                priority
-              />
+              <ClientLogo isMobile={false} />
             </LocalizedClientLink>
           </div>
 

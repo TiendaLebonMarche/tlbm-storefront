@@ -22,11 +22,11 @@ export default async function Footer() {
             className="flex items-center justify-start hover:opacity-70 transition-all duration-300"
           >
             <Image 
-              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779482684/logo-TLBM-nlanco_njck5j.png"
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779483302/logo-TLBM-negro_tn0vbl.png"
               alt="Tienda Le Bon Marché" 
               width={1822} 
               height={548} 
-              className="w-[160px] h-auto object-contain"
+              className="w-[200px] md:w-[260px] lg:w-[300px] h-auto object-contain"
             />
           </LocalizedClientLink>
           <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
