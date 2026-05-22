@@ -4,8 +4,8 @@ import Image from "next/image"
 import { useScrollThreshold } from "@lib/hooks/use-scroll-threshold"
 import { usePathname } from "next/navigation"
 
-const LOGO_WHITE = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779484254/logo-blanco_1_t0wgiw.png"
-const LOGO_BLACK = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779484254/logo-negro_1_f1i3cn.png"
+const LOGO_WHITE = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779485389/T-logo-blanco-LBM_mcccmw.png"
+const LOGO_BLACK = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779485388/T-logo-negro-LBM_aec5jr.png"
 
 export default function ClientLogo({ isMobile = false }: { isMobile?: boolean }) {
   const isScrolled = useScrollThreshold(50)
@@ -27,8 +27,8 @@ export default function ClientLogo({ isMobile = false }: { isMobile?: boolean })
         className={`
           h-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
           ${isMobile 
-            ? (isScrolled ? "w-[120px]" : "w-[160px]") 
-            : (isScrolled ? "w-[160px] md:w-[180px] lg:w-[200px]" : "w-[200px] md:w-[240px] lg:w-[280px]")
+            ? (isScrolled ? "w-[140px]" : "w-[200px]") 
+            : (isScrolled ? "w-[180px] md:w-[200px] lg:w-[220px]" : "w-[240px] md:w-[280px] lg:w-[340px]")
           }
         `}
         priority

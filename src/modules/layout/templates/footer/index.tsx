@@ -22,7 +22,7 @@ export default async function Footer() {
             className="flex items-center justify-start hover:opacity-70 transition-all duration-300"
           >
             <Image 
-              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779484254/logo-negro_1_f1i3cn.png"
+              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779485388/T-logo-negro-LBM_aec5jr.png"
               alt="Tienda Le Bon Marché" 
               width={1822} 
               height={548} 
