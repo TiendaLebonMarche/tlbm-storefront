@@ -11,7 +11,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 
-const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1776805039/upscalemedia-transformed_5_tkeab1.png"
+const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1779482684/logo-TLBM-nlanco_njck5j.png"
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
