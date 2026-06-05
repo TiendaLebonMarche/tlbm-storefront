@@ -13,23 +13,39 @@ export default function ClientLogo({ isMobile = false }: { isMobile?: boolean })
   
   // Home page starts transparent, so we need the white logo at the very top.
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
-  
   const showWhiteLogo = isHome && !isScrolled
-  const logoSrc = showWhiteLogo ? LOGO_WHITE : LOGO_BLACK
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div 
+      className={`
+        relative flex items-center justify-center
+        transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+        ${isMobile 
+          ? (isScrolled ? "w-[140px]" : "w-[200px]") 
+          : (isScrolled ? "w-[180px] md:w-[200px] lg:w-[220px] 2xl:w-[260px]" : "w-[240px] md:w-[280px] lg:w-[340px] 2xl:w-[400px]")
+        }
+      `}
+      style={{ aspectRatio: "1822/548" }}
+    >
       <Image
-        src={logoSrc}
-        alt="Tienda Le Bon Marché"
-        width={1822}
-        height={548}
+        src={LOGO_WHITE}
+        alt="Tienda Le Bon Marché White"
+        fill
+        sizes="(max-width: 768px) 200px, 400px"
         className={`
-          h-auto object-contain transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
-          ${isMobile 
-            ? (isScrolled ? "w-[140px]" : "w-[200px]") 
-            : (isScrolled ? "w-[180px] md:w-[200px] lg:w-[220px] 2xl:w-[260px]" : "w-[240px] md:w-[280px] lg:w-[340px] 2xl:w-[400px]")
-          }
+          object-contain transition-opacity duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+          ${showWhiteLogo ? "opacity-100" : "opacity-0"}
+        `}
+        priority
+      />
+      <Image
+        src={LOGO_BLACK}
+        alt="Tienda Le Bon Marché Black"
+        fill
+        sizes="(max-width: 768px) 200px, 400px"
+        className={`
+          object-contain transition-opacity duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+          ${showWhiteLogo ? "opacity-0" : "opacity-100"}
         `}
         priority
       />
