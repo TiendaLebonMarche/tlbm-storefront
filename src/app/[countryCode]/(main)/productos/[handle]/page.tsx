@@ -144,7 +144,11 @@ export default async function ProductPage(props: Props) {
   const currencyCode = region.currency_code.toUpperCase()
   const firstVariant = pricedProduct.variants?.[0] as any
   const price = firstVariant?.calculated_price || firstVariant?.original_price || 0
-  const isInStock = pricedProduct.variants?.some((v) => (v.inventory_quantity ?? 0) > 0)
+  const isInStock = pricedProduct.variants?.some((v) => {
+    // In Medusa v2, inventory_quantity may be null (managed via inventory items)
+    if (v.inventory_quantity === null || v.inventory_quantity === undefined) return true
+    return (v.inventory_quantity ?? 0) > 0
+  })
 
   // Rich Product Schema — compliant with Google Rich Results requirements
   const productSchema = {

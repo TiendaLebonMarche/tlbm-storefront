@@ -19,9 +19,15 @@ export default function ProductPreview({
 
   const totalInventory =
     product.variants?.reduce(
-      (sum, v) => sum + (v.inventory_quantity || 0),
+      (sum, v) => {
+        // In Medusa v2, inventory_quantity may be null (managed via inventory items)
+        if (v.inventory_quantity === null || v.inventory_quantity === undefined) {
+          return sum + 999 // Available (stock managed separately)
+        }
+        return sum + (v.inventory_quantity || 0)
+      },
       0
-    ) || 0
+    ) || 999
 
   const isNew = product.created_at
     ? new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)

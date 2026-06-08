@@ -105,9 +105,11 @@ export default function ProductActions({
     }
 
     // If there is inventory available, we can add to cart
+    // In Medusa v2, inventory_quantity may be null when using inventory items
     if (
       selectedVariant?.manage_inventory &&
-      (selectedVariant?.inventory_quantity || 0) > 0
+      ((selectedVariant?.inventory_quantity ?? -1) === -1 ||
+        (selectedVariant?.inventory_quantity || 0) > 0)
     ) {
       return true
     }
