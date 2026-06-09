@@ -142,7 +142,8 @@ export default function ProductActions({
       }
 
       setAddedSuccess(true)
-      openCart()
+      // Esperar a que el carrito se refresque antes de abrir el sidebar
+      setTimeout(() => openCart(), 500)
       setTimeout(() => setAddedSuccess(false), 2500)
     } catch (error: any) {
       console.error("DEBUG - Error al añadir a la bolsa:", error)

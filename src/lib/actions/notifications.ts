@@ -3,38 +3,35 @@
 import { HttpTypes } from "@medusajs/types"
 
 /**
- * Envía un email de confirmación de orden al cliente usando Mailgun API.
+ * Envía un email de confirmación de orden al cliente usando Resend API.
  * No lanza errores para no interrumpir el flujo de checkout.
  */
-async function sendMailgunEmail(to: string, subject: string, html: string) {
-  const apiKey = process.env.MAILGUN_API_KEY
-  const domain = process.env.MAILGUN_DOMAIN
-  const baseUrl = process.env.MAILGUN_BASE_URL || "https://api.mailgun.net"
+async function sendResendEmail(to: string, subject: string, html: string) {
+  const apiKey = process.env.RESEND_API_KEY
 
-  if (!apiKey || !domain) {
-    console.warn("sendOrderEmail: MAILGUN_API_KEY o MAILGUN_DOMAIN no configurados")
-    return { success: false, error: "Mailgun not configured" }
+  if (!apiKey) {
+    console.warn("sendOrderEmail: RESEND_API_KEY no configurado")
+    return { success: false, error: "Resend not configured" }
   }
 
-  const formData = new URLSearchParams()
-  formData.append("from", `Tienda Le Bon Marché <no-reply@${domain}>`)
-  formData.append("to", to)
-  formData.append("subject", subject)
-  formData.append("html", html)
-
   try {
-    const res = await fetch(`${baseUrl}/v3/${domain}/messages`, {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Basic ${Buffer.from(`api:${apiKey}`).toString("base64")}`,
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
       },
-      body: formData.toString(),
+      body: JSON.stringify({
+        from: "Tienda Le Bon Marché <no-reply@tiendalebonmarche.com>",
+        to: [to],
+        subject: subject,
+        html: html,
+      }),
     })
 
     if (!res.ok) {
       const errorText = await res.text()
-      console.error("sendOrderEmail: Mailgun error", res.status, errorText)
+      console.error("sendOrderEmail: Resend error", res.status, errorText)
       return { success: false, error: errorText }
     }
 
@@ -217,7 +214,7 @@ export async function sendOrderNotification(cartOrOrder: any, customerEmail?: st
 
     // Enviar email de confirmación al cliente si tenemos su email
     if (email && email !== "No proporcionado") {
-      const emailResult = await sendMailgunEmail(
+      const emailResult = await sendResendEmail(
         email,
         `Tu orden #${orderDetails.display_id || orderDetails.id} está confirmada — Tienda Le Bon Marché`,
         buildOrderConfirmationEmail(cartOrOrder)
