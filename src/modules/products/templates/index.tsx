@@ -138,7 +138,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* Short description / Intro */}
               {product.description && (
                 <div className="text-[16px] text-gray-500 font-light leading-relaxed font-sans max-w-xl">
-                  {product.description.split('-')[0]?.trim() || product.description.substring(0, 160)}
+                  {product.description.includes('\n') 
+                    ? product.description.split('\n').map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i < product.description.split('\n').length - 1 && <br />}
+                        </span>
+                      ))
+                    : product.description}
                 </div>
               )}
             </div>

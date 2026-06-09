@@ -2,7 +2,7 @@
 
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 type ImageGalleryProps = {
@@ -14,6 +14,24 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
+
+  // Navegación con teclado
+  const goNext = useCallback(() => {
+    setSelectedImageIndex((prev) => (prev + 1) % images.length)
+  }, [images.length])
+
+  const goPrev = useCallback(() => {
+    setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length)
+  }, [images.length])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goPrev()
+      if (e.key === "ArrowRight") goNext()
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [goNext, goPrev])
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!isZoomed) return
