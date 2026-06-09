@@ -46,7 +46,8 @@ const CartDropdown = ({
 
   const timedOpen = () => {
     open()
-    // Sin auto-cierre — la barra se cierra solo cuando el usuario hace clic fuera o en la X
+    const timer = setTimeout(close, 8000)
+    setActiveTimer(timer)
   }
 
   const openAndCancel = () => {
