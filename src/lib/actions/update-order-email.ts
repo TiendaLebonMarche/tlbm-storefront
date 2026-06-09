@@ -35,7 +35,7 @@ export async function updateOrderEmail(orderId: string, email: string) {
 
     const { token } = await authRes.json()
 
-    // 2. Actualizar la orden con el email
+    // 2. Actualizar la orden con el email en metadata (Medusa v2 no permite actualizar order.email después de creada)
     const updateRes = await fetch(`${backendUrl}/admin/orders/${orderId}`, {
       method: "POST",
       headers: {
@@ -43,7 +43,9 @@ export async function updateOrderEmail(orderId: string, email: string) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        email: email,
+        metadata: {
+          customer_email: email,
+        },
       }),
     })
 
