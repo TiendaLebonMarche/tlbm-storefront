@@ -422,7 +422,7 @@ export async function placeOrder(cartId?: string) {
     cartRes = await sdk.store.cart.complete(id, {}, headers)
   } catch (error: any) {
     console.error("placeOrder error:", error)
-    throw error
+    throw new Error(error?.message || error?.toString?.() || "Error al completar la compra")
   }
 
   const cartCacheTag = await getCacheTag("carts")
@@ -448,7 +448,12 @@ export async function placeOrder(cartId?: string) {
     redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
   }
 
-  return cartRes.cart
+  // If we get here, the cart wasn't completed — return the cart state
+  if (cartRes?.cart) {
+    return cartRes.cart
+  }
+
+  throw new Error("No se pudo completar la orden. Verifica los datos e intenta de nuevo.")
 }
 
 /**
