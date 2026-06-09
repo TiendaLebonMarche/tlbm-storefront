@@ -28,7 +28,7 @@ module.exports = {
           magenta: '#000000',
           slate: '#000000',
           whatsapp: '#25D366',
-          olive: '#6A7A66',
+          olive: '#000000',
           brown: '#363030',
           bg: '#FFFFFF',
           soft: '#F9F9F9'

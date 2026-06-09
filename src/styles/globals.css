@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 :root {
-  --brand-olive: #6A7A66;
+  --brand-olive: #000000;
   --brand-brown: #363030;
   --brand-gray: #514848;
 }

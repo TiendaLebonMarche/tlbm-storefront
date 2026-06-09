@@ -148,7 +148,7 @@ function FreeShippingInline({
           <div>
             {price.target_reached ? (
               <div className="flex items-center gap-1.5">
-                <CheckCircleSolid className="text-green-500 inline-block" />{" "}
+                <CheckCircleSolid className="text-brand-black inline-block" />{" "}
                 Free Shipping unlocked!
               </div>
             ) : (
@@ -174,10 +174,10 @@ function FreeShippingInline({
         <div className="flex justify-between gap-1">
           <div
             className={clx(
-              "bg-gradient-to-r from-zinc-400 to-zinc-500 h-1 rounded-full max-w-full duration-500 ease-in-out",
-              {
-                "from-green-400 to-green-500": price.target_reached,
-              }
+            "bg-gradient-to-r from-zinc-400 to-zinc-500 h-1 rounded-full max-w-full duration-500 ease-in-out",
+            {
+              "from-zinc-400 to-zinc-800": price.target_reached,
+            }
             )}
             style={{ width: `${price.remaining_percentage}%` }}
           ></div>
@@ -224,7 +224,7 @@ function FreeShippingPopup({
               <div>
                 {price.target_reached ? (
                   <div className="flex items-center gap-1.5">
-                    <CheckCircleSolid className="text-green-500 inline-block" />{" "}
+                    <CheckCircleSolid className="text-brand-black inline-block" />{" "}
                     Free Shipping unlocked!
                   </div>
                 ) : (
@@ -252,7 +252,7 @@ function FreeShippingPopup({
                 className={clx(
                   "bg-gradient-to-r from-zinc-400 to-zinc-500 h-1.5 rounded-full max-w-full duration-500 ease-in-out",
                   {
-                    "from-green-400 to-green-500": price.target_reached,
+                    "from-zinc-400 to-zinc-800": price.target_reached,
                   }
                 )}
                 style={{ width: `${price.remaining_percentage}%` }}
