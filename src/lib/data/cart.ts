@@ -350,6 +350,7 @@ export async function submitPromotionForm(
 
 // TODO: Pass a POJO instead of a form entity here
 export async function setAddresses(currentState: unknown, formData: FormData) {
+  let countryCode = "co"
   try {
     if (!formData) {
       throw new Error("No form data found when setting addresses")
@@ -391,14 +392,17 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         province: formData.get("billing_address.province"),
         phone: formData.get("billing_address.phone"),
       }
+
     await updateCart(data)
+
+    // Only redirect if updateCart succeeded
+    countryCode = (formData.get("shipping_address.country_code") as string) || "co"
+    redirect(
+      `/${countryCode}/checkout?step=delivery`
+    )
   } catch (e: any) {
     return e.message
   }
-
-  redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
-  )
 }
 
 /**
