@@ -417,13 +417,27 @@ export async function placeOrder(cartId?: string) {
     ...(await getAuthHeaders()),
   }
 
+  // Refrescar carrito antes de completar para asegurar datos actualizados
+  try {
+    const cart = await retrieveCart(id)
+    if (!cart?.email || !cart?.shipping_address?.first_name) {
+      console.warn("placeOrder: carrito sin datos de cliente completos", {
+        email: cart?.email,
+        name: cart?.shipping_address?.first_name,
+        phone: cart?.shipping_address?.phone,
+      })
+      return { error: "Completa tus datos de envío antes de confirmar la compra." }
+    }
+  } catch (e) {
+    console.error("placeOrder: error al verificar carrito:", e)
+  }
+
   let cartRes
   try {
     cartRes = await sdk.store.cart.complete(id, {}, headers)
   } catch (error: any) {
     console.error("placeOrder error:", error)
     const message = error.message || "Error del servidor al procesar el pago"
-    // Verificar si hay detalles adicionales
     if (error.statusText) {
       console.error("Status:", error.statusText, error.status)
     }
