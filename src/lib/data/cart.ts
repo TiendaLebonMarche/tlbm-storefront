@@ -403,6 +403,10 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
       `/${countryCode}/checkout?step=delivery`
     )
   } catch (e: any) {
+    // NEXT_REDIRECT es parte normal del flujo de Next.js — no atraparlo
+    if (e.digest?.includes("NEXT_REDIRECT")) {
+      throw e
+    }
     return e.message
   }
 }
