@@ -5,6 +5,7 @@ import "styles/globals.css"
 import GoogleAnalytics from "@modules/common/components/google-analytics"
 import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
+import WhatsAppFloat from "@modules/layout/components/whatsapp-float"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -170,6 +171,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <StructuredData />
         <UIProvider>
           <PagePaddingWrapper>{props.children}</PagePaddingWrapper>
+          <WhatsAppFloat />
         </UIProvider>
       </body>
     </html>
