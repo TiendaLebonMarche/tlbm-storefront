@@ -43,7 +43,7 @@ const Payment = ({
     setError(null)
     setSelectedPaymentMethod(method)
 
-    const actualProviderId = method.startsWith("manual_") ? "pp_system_default" : method
+    const actualProviderId = method.startsWith("manual_") ? "pp_efectivo-payment_efectivo" : method
 
     if (isStripeLike(actualProviderId)) {
       await initiatePaymentSession(cart, {
@@ -77,7 +77,7 @@ const Payment = ({
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const actualProviderId = selectedPaymentMethod.startsWith("manual_") ? "pp_system_default" : selectedPaymentMethod
+      const actualProviderId = selectedPaymentMethod.startsWith("manual_") ? "pp_efectivo-payment_efectivo" : selectedPaymentMethod
 
       const shouldInputCard =
         isStripeLike(actualProviderId) && !activeSession
@@ -147,7 +147,7 @@ const Payment = ({
                 onChange={(value: string) => setPaymentMethod(value)}
               >
                 {availablePaymentMethods.flatMap((paymentMethod) => {
-                  if (paymentMethod.id === "pp_system_default") {
+                  if (paymentMethod.id === "pp_system_default" || paymentMethod.id?.includes("efectivo")) {
                     return [
                       { ...paymentMethod, id: "manual_efectivo", title: "1. Efectivo" },
                       { ...paymentMethod, id: "manual_transferencia", title: "2. Transferencia (Nequi/Daviplata/BreB)" }
