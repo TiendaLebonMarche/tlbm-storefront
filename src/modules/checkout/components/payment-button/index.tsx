@@ -61,10 +61,14 @@ const StripePaymentButton = ({
 
   const onPaymentCompleted = async () => {
     try {
-      await placeOrder()
+      const result = await placeOrder()
+      if (result?.error) {
+        setErrorMessage(result.error)
+        return
+      }
     } catch (err: any) {
       // Si el error es una redirección interna, la ignoramos para que Next.js la maneje
-      if (err.message?.includes("NEXT_REDIRECT") || err.digest?.includes("NEXT_REDIRECT")) {
+      if (err.digest?.includes("NEXT_REDIRECT")) {
         return
       }
       setErrorMessage(err.message || "Error al procesar el pago. Por favor intenta de nuevo.")
@@ -165,7 +169,11 @@ const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: 
 
   const onPaymentCompleted = async () => {
     try {
-      await placeOrder()
+      const result = await placeOrder()
+      if (result?.error) {
+        setErrorMessage(result.error)
+        return
+      }
     } catch (err: any) {
       if (err.message?.includes("NEXT_REDIRECT") || err.digest?.includes("NEXT_REDIRECT")) {
         return

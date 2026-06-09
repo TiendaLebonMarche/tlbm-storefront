@@ -410,7 +410,7 @@ export async function placeOrder(cartId?: string) {
   const id = cartId || (await getCartId())
 
   if (!id) {
-    throw new Error("No existing cart found when placing an order")
+    return { error: "No se encontró el carrito. Por favor intenta de nuevo." }
   }
 
   const headers = {
@@ -422,7 +422,12 @@ export async function placeOrder(cartId?: string) {
     cartRes = await sdk.store.cart.complete(id, {}, headers)
   } catch (error: any) {
     console.error("placeOrder error:", error)
-    throw new Error(error?.message || error?.toString?.() || "Error al completar la compra")
+    const message = error.message || "Error del servidor al procesar el pago"
+    // Verificar si hay detalles adicionales
+    if (error.statusText) {
+      console.error("Status:", error.statusText, error.status)
+    }
+    return { error: message }
   }
 
   const cartCacheTag = await getCacheTag("carts")
@@ -453,7 +458,7 @@ export async function placeOrder(cartId?: string) {
     return cartRes.cart
   }
 
-  throw new Error("No se pudo completar la orden. Verifica los datos e intenta de nuevo.")
+  return { error: "No se pudo completar la orden. Verifica los datos e intenta de nuevo." }
 }
 
 /**
