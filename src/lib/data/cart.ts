@@ -428,6 +428,7 @@ export async function placeOrder(cartId?: string) {
   }
 
   // Refrescar carrito antes de completar para asegurar datos actualizados
+  let cartEmail = ""
   try {
     const cart = await retrieveCart(id)
     if (!cart?.email || !cart?.shipping_address?.first_name) {
@@ -437,6 +438,15 @@ export async function placeOrder(cartId?: string) {
         phone: cart?.shipping_address?.phone,
       })
       return { error: "Completa tus datos de envío antes de confirmar la compra." }
+    }
+    cartEmail = cart.email
+    // Guardar el email en el metadata del carrito como respaldo para Medusa v2
+    try {
+      await sdk.store.cart.update(cart.id, {
+        metadata: { customer_email: cart.email },
+      }, {}, headers)
+    } catch (metaErr) {
+      console.warn("placeOrder: no se pudo guardar email en metadata del carrito:", metaErr)
     }
   } catch (e) {
     console.error("placeOrder: error al verificar carrito:", e)
@@ -469,12 +479,10 @@ export async function placeOrder(cartId?: string) {
       const { updateOrderEmail } = await import(
         "@lib/actions/update-order-email"
       )
-      const customerEmail = (
-        await retrieveCart(id).catch(() => null)
-      )?.email
-      if (customerEmail) {
-        // No esperamos — no debe bloquear el redirect
-        updateOrderEmail(cartRes.order.id, customerEmail)
+      if (cartEmail) {
+        updateOrderEmail(cartRes.order.id, cartEmail)
+      } else {
+        console.warn("placeOrder: no se pudo capturar cartEmail para updateOrderEmail")
       }
     } catch (error) {
       console.error("Error updating order email:", error)
