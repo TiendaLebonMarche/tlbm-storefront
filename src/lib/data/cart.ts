@@ -374,9 +374,6 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         country_code: formData.get("shipping_address.country_code"),
         province: formData.get("shipping_address.province"),
         phone: formData.get("shipping_address.phone"),
-        metadata: {
-          customer_email: emailValue,
-        },
       },
       email: emailValue,
     } as any
@@ -463,7 +460,23 @@ export async function placeOrder(cartId?: string) {
     const orderCacheTag = await getCacheTag("orders")
     revalidateTag(orderCacheTag)
 
-    // Notify admin - We call it here on the server to ensure it happens
+    // Guardar email en la orden vía admin API (Medusa v2 bug: no copia cart.email)
+    try {
+      const { updateOrderEmail } = await import(
+        "@lib/actions/update-order-email"
+      )
+      const customerEmail = (
+        await retrieveCart(id).catch(() => null)
+      )?.email
+      if (customerEmail) {
+        // No esperamos — no debe bloquear el redirect
+        updateOrderEmail(cartRes.order.id, customerEmail)
+      }
+    } catch (error) {
+      console.error("Error updating order email:", error)
+    }
+
+    // Notify admin
     try {
       const { sendOrderNotification } = await import("@lib/actions/notifications")
       await sendOrderNotification(cartRes.order as any)
