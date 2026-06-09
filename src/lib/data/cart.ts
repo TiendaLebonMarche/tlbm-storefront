@@ -417,14 +417,16 @@ export async function placeOrder(cartId?: string) {
     ...(await getAuthHeaders()),
   }
 
-  const cartRes = await sdk.store.cart
-    .complete(id, {}, headers)
-    .then(async (cartRes) => {
-      const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag)
-      return cartRes
-    })
-    .catch(medusaError)
+  let cartRes
+  try {
+    cartRes = await sdk.store.cart.complete(id, {}, headers)
+  } catch (error: any) {
+    console.error("placeOrder error:", error)
+    throw error
+  }
+
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
 
   if (cartRes?.type === "order") {
     const countryCode =
