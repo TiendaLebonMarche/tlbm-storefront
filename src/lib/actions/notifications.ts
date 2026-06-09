@@ -173,14 +173,16 @@ function buildOrderConfirmationEmail(order: any) {
  * y un email de confirmación al cliente.
  * Totalmente defensiva para evitar interrumpir el flujo de compra.
  */
-export async function sendOrderNotification(cartOrOrder: any, customerEmail?: string) {
+export async function sendOrderNotification(cartOrOrder: any, customerEmail?: string, cartShipping?: any) {
   try {
     if (!cartOrOrder) return { success: false, error: "No order data" }
 
     const adminEmail = process.env.ADMIN_EMAIL || "admin@tiendalebonmarche.com"
 
     // Extraemos información de forma segura
-    const shipping = cartOrOrder.shipping_address
+    // Prioridad: datos explícitos del carrito (cartShipping) > datos de la orden
+    // Esto resuelve el bug de Medusa v2 que no transfiere shipping_address al hacer complete()
+    const shipping = cartShipping || cartOrOrder.shipping_address || {}
     // Usar el email recibido explícitamente, o fallback a order.email, o metadata
     const email = customerEmail || cartOrOrder.email || shipping?.metadata?.customer_email
 
@@ -214,10 +216,12 @@ export async function sendOrderNotification(cartOrOrder: any, customerEmail?: st
 
     // Enviar email de confirmación al cliente si tenemos su email
     if (email && email !== "No proporcionado") {
+      // Combinar datos de la orden con datos del carrito para el email
+      const emailData = { ...cartOrOrder, shipping_address: shipping }
       const emailResult = await sendResendEmail(
         email,
         `Tu orden #${orderDetails.display_id || orderDetails.id} está confirmada — Tienda Le Bon Marché`,
-        buildOrderConfirmationEmail(cartOrOrder)
+        buildOrderConfirmationEmail(emailData)
       )
 
       if (emailResult.success) {

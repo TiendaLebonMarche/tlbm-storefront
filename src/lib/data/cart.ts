@@ -491,7 +491,7 @@ export async function placeOrder(cartId?: string) {
     // Notify admin
     try {
       const { sendOrderNotification } = await import("@lib/actions/notifications")
-      await sendOrderNotification(cartRes.order as any, cartEmail)
+      await sendOrderNotification(cartRes.order as any, cartEmail, cart.shipping_address)
     } catch (error) {
       console.error("Error sending admin notification:", error)
       // We don't block the redirect if notification fails
