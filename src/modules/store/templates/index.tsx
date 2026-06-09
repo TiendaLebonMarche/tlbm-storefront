@@ -8,6 +8,7 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { listCollections } from "@lib/data/collections"
 
 import PaginatedProducts from "./paginated-products"
+import ActiveFilters from "../components/active-filters"
 
 const StoreTemplate = async ({
   sortBy,
@@ -75,6 +76,9 @@ const StoreTemplate = async ({
 
           {/* ── Main Grid ── */}
           <div className="flex-1 min-w-0">
+            {/* Active filter badges */}
+            <ActiveFilters />
+
             {/* Active search label */}
             {query && (
               <div className="mb-6 pb-4 border-b border-gray-100">
