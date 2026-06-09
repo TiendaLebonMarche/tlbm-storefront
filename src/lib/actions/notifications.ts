@@ -176,7 +176,7 @@ function buildOrderConfirmationEmail(order: any) {
  * y un email de confirmación al cliente.
  * Totalmente defensiva para evitar interrumpir el flujo de compra.
  */
-export async function sendOrderNotification(cartOrOrder: any) {
+export async function sendOrderNotification(cartOrOrder: any, customerEmail?: string) {
   try {
     if (!cartOrOrder) return { success: false, error: "No order data" }
 
@@ -184,7 +184,8 @@ export async function sendOrderNotification(cartOrOrder: any) {
 
     // Extraemos información de forma segura
     const shipping = cartOrOrder.shipping_address
-    const email = cartOrOrder.email || shipping?.metadata?.customer_email
+    // Usar el email recibido explícitamente, o fallback a order.email, o metadata
+    const email = customerEmail || cartOrOrder.email || shipping?.metadata?.customer_email
 
     const customerInfo = {
       nombre: shipping?.first_name
