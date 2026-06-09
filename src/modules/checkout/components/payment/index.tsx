@@ -176,6 +176,34 @@ const Payment = ({
                   </div>
                 ))}
               </RadioGroup>
+
+              {selectedPaymentMethod === "manual_transferencia" && (
+                <div className="bg-brand-soft/10 border border-brand-soft/30 rounded-3xl p-6 mb-6">
+                  <p className="text-sm font-bold text-brand-brown uppercase tracking-widest mb-3">
+                    📋 Datos para Transferencia
+                  </p>
+                  <div className="space-y-2 text-brand-brown text-sm">
+                    <p className="flex justify-between">
+                      <span className="font-semibold">💚 Daviplata:</span>
+                      <span className="font-mono">3104489218</span>
+                    </p>
+                    <p className="flex justify-between">
+                      <span className="font-semibold">🔗 Llave Bre-B:</span>
+                      <span className="font-mono">@3104489218</span>
+                    </p>
+                    <p className="flex justify-between">
+                      <span className="font-semibold">🏦 Llave Bre-B 2:</span>
+                      <span className="font-mono">@Plenti31059</span>
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-brand-soft/30">
+                    <p className="text-xs text-brand-gray">
+                      Una vez realizado el pago, comparte el comprobante con nosotros y confirmaremos tu pedido. 
+                      El pedido se procesará una vez recibamos la confirmación del pago.
+                    </p>
+                  </div>
+                </div>
+              )}
             </>
           )}
 
