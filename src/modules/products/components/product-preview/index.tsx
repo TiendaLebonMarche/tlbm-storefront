@@ -39,7 +39,9 @@ export default function ProductPreview({
   // Soporta: key "badge" para texto directo, o cualquier key=>valor como badge
   const metadata = (product as any).metadata as Record<string, string> | null
   const customBadge = metadata?.badge || 
-    (metadata ? Object.values(metadata)[0] : null) || null
+    (metadata && Object.keys(metadata).length > 0 
+      ? `${Object.keys(metadata)[0]}: ${Object.values(metadata)[0]}`
+      : null) || null
 
   const category =
     product.collection?.title ||
@@ -82,7 +84,7 @@ export default function ProductPreview({
         {(isNew || isLowStock || customBadge) && (
           <div className="flex flex-wrap justify-center gap-1.5 mb-2">
             {customBadge && (
-              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+              <span className="bg-pink-600 text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
                 {customBadge}
               </span>
             )}

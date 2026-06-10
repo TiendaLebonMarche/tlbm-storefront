@@ -91,13 +91,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           {/* LEFT: Gallery — 58% */}
           <div className="w-full lg:w-[58%]">
             <div className="lg:sticky lg:top-32 relative">
-              {metadataBadge && (
-                <div className="absolute top-3 right-3 z-30 -rotate-6">
-                  <span className="bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-600 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] px-2.5 py-1 md:px-3 md:py-1.5 shadow-lg shadow-yellow-900/30 border border-yellow-400/30">
-                    {metadataBadge}
-                  </span>
-                </div>
-              )}
               <ImageGallery images={images} productTitle={product.title} />
             </div>
           </div>
