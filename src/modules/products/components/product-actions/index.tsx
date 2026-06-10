@@ -12,6 +12,7 @@ import ProductPrice from "../product-price"
 import MobileActions from "./mobile-actions"
 import { useRouter } from "next/navigation"
 import { useUI } from "@lib/context/ui-context"
+import { trackAddToCart, trackViewItem } from "@lib/util/analytics"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -139,6 +140,17 @@ export default function ProductActions({
 
       if (result && 'cart' in result) {
         setAddedSuccess(true)
+        // Track add_to_cart for GTM
+        trackAddToCart({
+          id: selectedVariant.id || product.id,
+          name: product.title || "Producto",
+          price: selectedVariant?.calculated_price
+            ? parseFloat(selectedVariant.calculated_price)
+            : 0,
+          quantity: 1,
+          category: product.collection?.title || undefined,
+          variant: selectedVariant?.title || undefined,
+        })
         // Abrir el sidebar SOLO después de tener el carrito actualizado
         openCart()
         setTimeout(() => setAddedSuccess(false), 2500)

@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { trackWhatsAppClick } from "@lib/util/analytics"
+import { usePathname } from "next/navigation"
 
 const WHATSAPP_NUMBER = "573027567783"
 const WHATSAPP_COLOR = "#25D366"
@@ -11,12 +13,17 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 
 const WhatsAppFloat = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     // Mostrar después de un breve delay para no interferir con carga inicial
     const timer = setTimeout(() => setIsVisible(true), 1500)
     return () => clearTimeout(timer)
   }, [])
+
+  const handleClick = () => {
+    trackWhatsAppClick(pathname)
+  }
 
   if (!isVisible) return null
 
@@ -25,6 +32,7 @@ const WhatsAppFloat = () => {
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className="fixed bottom-6 right-6 z-[400] flex items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group"
       style={{ backgroundColor: WHATSAPP_COLOR }}
       aria-label="Contactar por WhatsApp"
