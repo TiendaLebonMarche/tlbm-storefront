@@ -182,12 +182,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 {totalStock > 0 ? (
                   <>
                     <div className="relative flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-brand-black/40 animate-ping absolute" />
-                      <div className="w-2 h-2 rounded-full bg-brand-black relative" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/30 animate-ping absolute" />
+                      <div className="w-2 h-2 rounded-full bg-green-500 relative" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-brand-black font-sans">Disponible</p>
-                      <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestro atelier en Bucaramanga</p>
+                      <p className="text-sm font-medium text-green-700 font-sans">Disponible</p>
+                      <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestra dirección principal</p>
                     </div>
                   </>
                 ) : (
