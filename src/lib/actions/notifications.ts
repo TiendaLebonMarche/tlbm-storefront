@@ -2,6 +2,41 @@
 
 import { HttpTypes } from "@medusajs/types"
 
+const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
+const TG_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "-1003778973247"
+
+/**
+ * Envía un mensaje al canal de Telegram usando el bot de notificaciones.
+ */
+async function sendTelegramNotification(text: string) {
+  if (!TG_BOT_TOKEN) {
+    console.warn("sendTelegram: TELEGRAM_BOT_TOKEN no configurado")
+    return
+  }
+  try {
+    const res = await fetch(
+      `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TG_CHAT_ID,
+          text: text,
+          parse_mode: "Markdown",
+        }),
+      }
+    )
+    if (!res.ok) {
+      const err = await res.text()
+      console.warn("sendTelegram: error", res.status, err)
+    } else {
+      console.log("✅ Notificación enviada a Telegram")
+    }
+  } catch (err) {
+    console.warn("sendTelegram: error de conexión:", err)
+  }
+}
+
 /**
  * Envía un email de confirmación de orden al cliente usando Resend API.
  * No lanza errores para no interrumpir el flujo de checkout.
@@ -169,9 +204,11 @@ function buildOrderConfirmationEmail(order: any) {
 }
 
 /**
- * Envía una notificación por correo al administrador sobre un nuevo pedido
- * y un email de confirmación al cliente.
- * Totalmente defensiva para evitar interrumpir el flujo de compra.
+ * Envía notificaciones cuando se crea una orden nueva:
+ * 1. Email de confirmación al cliente vía Resend
+ * 2. Mensaje al canal de Telegram vía el bot Gerente de Ventas
+ *
+ * Totalmente defensiva para no interrumpir el flujo de compra.
  */
 export async function sendOrderNotification(cartOrOrder: any, customerEmail?: string, cartShipping?: any) {
   try {
@@ -214,9 +251,8 @@ export async function sendOrderNotification(cartOrOrder: any, customerEmail?: st
     console.log("📦 RESUMEN:", orderDetails)
     console.log("-----------------------------------------")
 
-    // Enviar email de confirmación al cliente si tenemos su email
+    // --- 1. Enviar email de confirmación al cliente ---
     if (email && email !== "No proporcionado") {
-      // Combinar datos de la orden con datos del carrito para el email
       const emailData = { ...cartOrOrder, shipping_address: shipping }
       const emailResult = await sendResendEmail(
         email,
@@ -230,6 +266,31 @@ export async function sendOrderNotification(cartOrOrder: any, customerEmail?: st
         console.warn(`⚠️ No se pudo enviar email a ${email}:`, emailResult.error)
       }
     }
+
+    // --- 2. Enviar notificación a Telegram ---
+    const itemsLines = (cartOrOrder.items || []).map((item: any) => {
+      const qty = item.quantity || 1
+      const unitPrice = item.unit_price || 0
+      return `  ${qty}x ${item.title}\n     $${unitPrice.toLocaleString("es-CO")} c/u → $${(unitPrice * qty).toLocaleString("es-CO")}`
+    })
+
+    const displayId = orderDetails.display_id || cartOrOrder.id?.slice(-8) || ""
+    const total = orderDetails.total || 0
+    
+    let tgMsg = `🆕 *NUEVA VENTA #${displayId}*\n`
+    tgMsg += `━━━━━━━━━━━━━━━━━━━━\n\n`
+    tgMsg += `🆕 *Estado:* PENDIENTE — Pago por confirmar\n\n`
+    tgMsg += `📧 *Email:* ${customerInfo.email}\n`
+    tgMsg += `👤 *Nombre:* ${customerInfo.nombre}\n`
+    tgMsg += `📞 *WhatsApp:* ${customerInfo.whatsapp}\n`
+    tgMsg += `📍 *Dirección:* ${customerInfo.direccion}, ${customerInfo.municipio}\n\n`
+    tgMsg += `━━━ *PRODUCTOS* ━━━\n`
+    tgMsg += `${itemsLines.join("\n")}\n\n`
+    tgMsg += `━━━ *TOTALES* ━━━\n`
+    tgMsg += `  Total: $${total.toLocaleString("es-CO")} COP\n`
+    tgMsg += `━━━━━━━━━━━━━━━━━━━━\n`
+
+    await sendTelegramNotification(tgMsg)
 
     return { success: true }
   } catch (err) {
