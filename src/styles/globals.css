@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 :root {
-  --brand-olive: #000000;
+  --brand-olive: #50652a;
   --brand-brown: #363030;
   --brand-gray: #514848;
 }
@@ -294,6 +294,45 @@
 
 .reveal-up-hero { opacity: 0; animation: reveal-up-hero 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .reveal-right-hero { opacity: 0; animation: reveal-right-hero 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* === CHECKOUT & CART TRANSITIONS === */
+@keyframes fade-in-up {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-up-d1 { animation-delay: 100ms; }
+.fade-in-up-d2 { animation-delay: 200ms; }
+
+/* === CART ITEM TRANSITIONS === */
+.cart-item-enter {
+  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cart-item-exit {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth scroll behavior for checkout steps */
+.checkout-step {
+  scroll-margin-top: 2rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* === HOVER LIFT FOR ALL CARDS === */
+.hover-lift-subtle {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.hover-lift-subtle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
 
 .font-serif { font-family: 'Playfair Display', serif !important; }
 

@@ -35,6 +35,9 @@ export default function ProductPreview({
 
   const isLowStock = totalInventory < 5 && totalInventory > 0
 
+  // Custom badge from product metadata (set in admin panel)
+  const customBadge = (product as any).metadata?.badge || null
+
   const category =
     product.collection?.title ||
     (product as any).categories?.[0]?.name ||
@@ -73,8 +76,13 @@ export default function ProductPreview({
       {/* Info block */}
       <div className="flex flex-col items-center text-center pt-3 md:pt-4 pb-1 px-1 md:px-0 flex-1">
         {/* Badges / Labels centered */}
-        {(isNew || isLowStock) && (
+        {(isNew || isLowStock || customBadge) && (
           <div className="flex flex-wrap justify-center gap-1.5 mb-2">
+            {customBadge && (
+              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+                {customBadge}
+              </span>
+            )}
             {isNew && (
               <span className="bg-brand-olive text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
                 Nuevo

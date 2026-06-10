@@ -1,6 +1,5 @@
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ChevronDown from "@modules/common/icons/chevron-down"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
 
 export default function CheckoutLayout({
   children,
@@ -9,24 +8,24 @@ export default function CheckoutLayout({
 }) {
   return (
     <div className="w-full bg-white relative small:min-h-screen">
-      <div className="h-16 bg-white border-b ">
+      <div className="h-16 bg-white border-b border-gray-100">
         <nav className="flex h-full items-center content-container justify-between">
           <LocalizedClientLink
             href="/cart"
-            className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0"
+            className="text-[10px] uppercase tracking-[0.3em] text-brand-gray flex items-center gap-x-2 flex-1 basis-0 hover:text-brand-brown transition-colors duration-300"
             data-testid="back-to-cart-link"
           >
-            <ChevronDown className="rotate-90" size={16} />
-            <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
+            <ChevronDown className="rotate-90" size={14} />
+            <span className="mt-px hidden small:block font-bold">
               Regresar a la bolsa
             </span>
-            <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
+            <span className="mt-px block small:hidden font-bold">
               Atrás
             </span>
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/"
-            className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+            className="font-serif text-lg italic text-brand-brown hover:text-brand-olive transition-colors duration-300"
             data-testid="store-link"
           >
             Le Bon Marché
@@ -35,8 +34,10 @@ export default function CheckoutLayout({
         </nav>
       </div>
       <div className="relative" data-testid="checkout-container">{children}</div>
-      <div className="py-4 w-full flex items-center justify-center">
-        <MedusaCTA />
+      <div className="py-6 w-full flex items-center justify-center">
+        <p className="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-medium">
+          &copy; {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.
+        </p>
       </div>
     </div>
   )
