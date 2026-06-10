@@ -429,8 +429,10 @@ export async function placeOrder(cartId?: string) {
 
   // Refrescar carrito antes de completar para asegurar datos actualizados
   let cartEmail = ""
+  let cartRef: any = null
   try {
     const cart = await retrieveCart(id)
+    cartRef = cart
     if (!cart?.email || !cart?.shipping_address?.first_name) {
       console.warn("placeOrder: carrito sin datos de cliente completos", {
         email: cart?.email,
@@ -491,7 +493,7 @@ export async function placeOrder(cartId?: string) {
     // Notify admin
     try {
       const { sendOrderNotification } = await import("@lib/actions/notifications")
-      await sendOrderNotification(cartRes.order as any, cartEmail, cart.shipping_address)
+      await sendOrderNotification(cartRes.order as any, cartEmail, cartRef?.shipping_address)
     } catch (error) {
       console.error("Error sending admin notification:", error)
       // We don't block the redirect if notification fails
