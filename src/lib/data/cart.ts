@@ -164,7 +164,9 @@ export async function addToCart({
         if (fulfillmentCacheTag) revalidateTag(fulfillmentCacheTag)
       })
 
-    return null // Éxito
+    // Obtener carrito actualizado después de agregar el item
+    const updatedCart = await sdk.store.cart.retrieve(cart.id, {}, headers)
+    return { cart: updatedCart.cart } // Éxito con carrito actualizado
   } catch (error: any) {
     console.error("DEBUG - Fallo crítico en addToCart:", error)
     // Devolvemos el mensaje descriptivo. Si es un error de conexión, medusaError ahora lo devolverá limpio.

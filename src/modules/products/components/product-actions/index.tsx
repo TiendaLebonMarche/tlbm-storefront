@@ -131,20 +131,20 @@ export default function ProductActions({
     setIsAdding(true)
 
     try {
-      const error = await addToCart({
+      const result = await addToCart({
         variantId: selectedVariant.id,
         quantity: 1,
         countryCode,
       })
 
-      if (error) {
-        throw new Error(error)
+      if (result && 'cart' in result) {
+        setAddedSuccess(true)
+        // Abrir el sidebar SOLO después de tener el carrito actualizado
+        openCart()
+        setTimeout(() => setAddedSuccess(false), 2500)
+      } else if (result) {
+        throw new Error(result as string)
       }
-
-      setAddedSuccess(true)
-      // Esperar a que el carrito se refresque antes de abrir el sidebar
-      setTimeout(() => openCart(), 500)
-      setTimeout(() => setAddedSuccess(false), 2500)
     } catch (error: any) {
       console.error("DEBUG - Error al añadir a la bolsa:", error)
       const message = error?.message || "Error desconocido de conexión"

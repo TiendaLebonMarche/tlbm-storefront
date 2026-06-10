@@ -99,8 +99,9 @@ const CartDropdown = ({
   const pathname = usePathname()
 
   // Abre automáticamente cuando cambia el número de items
+  // Solo en páginas que NO son de producto (desde producto lo abre handleAddToCart)
   useEffect(() => {
-    if (itemRef.current !== totalItems && !pathname.includes("/cart")) {
+    if (itemRef.current !== totalItems && !pathname.includes("/cart") && !pathname.includes("/productos/")) {
       timedOpen()
     }
   }, [totalItems, timedOpen, pathname])
