@@ -41,7 +41,7 @@ export const ProductMostSold = ({
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black mb-4 block underline underline-offset-8 decoration-brand-olive/20">Selección VIP</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black mb-4 block underline underline-offset-8 decoration-brand-gray/30">Selección VIP</span>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-bold text-brand-black tracking-tighter italic leading-none uppercase">
             {title}
           </h2>
@@ -113,7 +113,7 @@ export const ProductMostSold = ({
                 </CardHeader>
                 <div className="p-6 pt-2 mt-auto bg-white">
                   <LocalizedClientLink href={`/productos/${item.handle}`}>
-                    <Button className="w-full bg-brand-black text-white hover:bg-brand-black border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg shadow-black/5 group-hover:shadow-brand-brown/20">
+                    <Button className="w-full bg-brand-black text-white hover:bg-brand-black border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg shadow-black/5 group-hover:shadow-black/20">
                       Ver Producto
                     </Button>
                   </LocalizedClientLink>

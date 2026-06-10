@@ -326,6 +326,16 @@
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+@keyframes cart-badge-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.cart-badge-pop {
+  animation: cart-badge-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* === HOVER LIFT FOR ALL CARDS === */
 .hover-lift-subtle {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;

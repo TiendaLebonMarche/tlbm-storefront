@@ -109,7 +109,16 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
                 style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
                 priority
                 sizes="(max-width: 768px) 100vw, 60vw"
+                onError={(e) => {
+                  const target = e.currentTarget as HTMLImageElement
+                  target.style.display = 'none'
+                  const fallback = target.parentElement?.querySelector('.image-fallback')
+                  if (fallback) (fallback as HTMLElement).style.display = 'flex'
+                }}
               />
+              <div className="image-fallback hidden absolute inset-0 bg-brand-gray-light/20 items-center justify-center">
+                <p className="text-gray-300 text-xs tracking-[0.3em] uppercase font-sans">Sin imagen</p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

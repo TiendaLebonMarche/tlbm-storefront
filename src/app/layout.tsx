@@ -127,7 +127,7 @@ import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${publicSans.variable}`}>
+    <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${publicSans.variable} scroll-smooth`}>
       <head>
         {/* Preconnect to optimize asset connection speed (Core Web Vitals) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

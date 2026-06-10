@@ -65,8 +65,8 @@ export default function ProductPreview({
         {/* Elegant white hover overlay */}
         <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
-        {/* CTA pill on hover */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 transition-all duration-500 ease-out z-20 pointer-events-none">
+        {/* CTA pill on hover — visible desde md: (768px) */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500 ease-out z-20 pointer-events-none">
           <span className="bg-brand-black text-white text-[8px] font-semibold uppercase tracking-[0.3em] px-4 md:px-6 py-2 md:py-2.5 whitespace-nowrap">
             Ver Producto
           </span>
