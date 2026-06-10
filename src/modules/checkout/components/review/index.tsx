@@ -1,58 +1,57 @@
 "use client"
 
-import { Heading, Text, clx } from "@medusajs/ui"
-
+import { clx } from "@medusajs/ui"
+import { CheckCircleSolid } from "@medusajs/icons"
+import { HttpTypes } from "@medusajs/types"
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
 
-const Review = ({ cart }: { cart: any }) => {
+const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
   const searchParams = useSearchParams()
-
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
-
   const isOpen = searchParams.get("step") === "review"
-
-  const paidByGiftcard =
-    cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
-
+  const paidByGiftcard = cart?.gift_cards?.length > 0 && cart?.total === 0
   const previousStepsCompleted =
-    cart.shipping_address &&
-    cart.shipping_methods.length > 0 &&
-    (cart.payment_collection || paidByGiftcard)
+    cart?.shipping_address &&
+    cart?.shipping_methods?.length > 0 &&
+    (cart?.payment_collection?.payment_sessions?.length > 0 || paidByGiftcard)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white checkout-step">
       <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
-            {
-              "opacity-50 pointer-events-none select-none": !isOpen,
-            }
-          )}
-        >
-          Revisión y Términos
-        </Heading>
+        <h2 className={clx("text-xl md:text-2xl font-serif italic text-brand-black flex items-center gap-2", {
+          "opacity-50 pointer-events-none select-none": !isOpen && !previousStepsCompleted,
+        })}>
+          Revisar Compra
+          {isOpen && previousStepsCompleted && <CheckCircleSolid className="text-brand-black" />}
+        </h2>
       </div>
       {isOpen && previousStepsCompleted && (
-        <>
-          <div className="flex items-start gap-x-3 w-full mb-6 max-w-2xl bg-brand-gray-light/20 border border-brand-gray-light p-4 rounded-md">
-            <input
-              type="checkbox"
-              id="terms-checkbox"
-              className="mt-1 w-5 h-5 accent-brand-olive border-gray-300 rounded text-brand-black focus:ring-brand-black cursor-pointer"
-              checked={acceptedTerms}
-              onChange={(e) => setAcceptedTerms(e.target.checked)}
-            />
-            <label htmlFor="terms-checkbox" className="text-sm font-medium text-brand-black cursor-pointer">
-              He leído y acepto los <a href="/legal/terminos" target="_blank" className="underline hover:text-brand-black font-bold">Términos y Condiciones</a> (incluyendo Derecho de Retracto, Reversión del Pago y Políticas de Envío Fast-Track), así como la <a href="/legal/privacidad" target="_blank" className="underline hover:text-brand-black font-bold">Política de Privacidad y Tratamiento de Datos (Habeas Data)</a> con nuestra IA de arbitraje.
-            </label>
+        <div className="flex items-start gap-x-1 w-full mb-6">
+          <div className="w-full">
+            <div className="mb-4 pb-4 border-b border-brand-gray-light">
+              <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-brand-black mb-1">Términos</span>
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 rounded border-brand-gray-light text-brand-black focus:ring-brand-black/30"
+                  data-testid="terms-checkbox"
+                  required
+                />
+                <span className="text-xs text-brand-gray leading-relaxed group-hover:text-brand-black transition-colors">
+                  Acepto los{" "}
+                  <a href="/legal/terminos" target="_blank" className="underline font-semibold">Términos y Condiciones</a>
+                  {" "}y la{" "}
+                  <a href="/legal/privacidad" target="_blank" className="underline font-semibold">Política de Privacidad</a>
+                  {" "}de Le Bon Marché.
+                </span>
+              </label>
+            </div>
           </div>
-          <PaymentButton cart={cart} data-testid="submit-order-button" disabled={!acceptedTerms} />
-        </>
+        </div>
       )}
+      <div className="flex gap-4">
+        <PaymentButton cart={cart} data-testid="submit-order-button" disabled={!previousStepsCompleted || !isOpen} />
+      </div>
     </div>
   )
 }
