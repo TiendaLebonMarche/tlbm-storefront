@@ -442,13 +442,26 @@ export async function placeOrder(cartId?: string) {
       return { error: "Completa tus datos de envío antes de confirmar la compra." }
     }
     cartEmail = cart.email
-    // Guardar el email en el metadata del carrito como respaldo para Medusa v2
+    // Guardar TODOS los datos del cliente en metadata como respaldo para Medusa v2
+    const sa = cart.shipping_address || {}
+    // No sobrescribir metadata anterior, extenderlo
+    const existingMeta = cart.metadata || {}
     try {
       await sdk.store.cart.update(cart.id, {
-        metadata: { customer_email: cart.email },
+        metadata: {
+          ...existingMeta,
+          customer_email: cart.email,
+          customer_first_name: sa.first_name || "",
+          customer_last_name: sa.last_name || "",
+          customer_full_name: `${sa.first_name || ""} ${sa.last_name || ""}`.trim(),
+          customer_phone: sa.phone || "",
+          customer_address: sa.address_1 || "",
+          customer_city: sa.city || "",
+          customer_province: sa.province || "",
+        },
       }, {}, headers)
     } catch (metaErr) {
-      console.warn("placeOrder: no se pudo guardar email en metadata del carrito:", metaErr)
+      console.warn("placeOrder: no se pudo guardar metadata en el carrito:", metaErr)
     }
   } catch (e) {
     console.error("placeOrder: error al verificar carrito:", e)
