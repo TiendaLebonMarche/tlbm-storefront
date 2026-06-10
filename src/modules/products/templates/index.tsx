@@ -58,9 +58,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   const tags = (product as any).tags || []
   const metadata = (product as any).metadata || {}
 
-  // Badge from metadata — primer valor disponible
+  // Badge from metadata — formato "{key}: {value}" o "badge" directo
   const metadataBadge = metadata?.badge || 
-    (Object.keys(metadata).length > 0 ? Object.values(metadata)[0] : null) || null
+    (Object.keys(metadata).length > 0 
+      ? `${Object.keys(metadata)[0]}: ${Object.values(metadata)[0]}`
+      : null) || null
 
   return (
     <div className="bg-white min-h-screen selection:bg-brand-black/10">
@@ -90,8 +92,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <div className="w-full lg:w-[58%]">
             <div className="lg:sticky lg:top-32 relative">
               {metadataBadge && (
-                <div className="absolute top-4 left-4 z-30">
-                  <span className="bg-brand-black text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] px-3 py-1.5 md:px-4 md:py-2 shadow-lg">
+                <div className="absolute top-3 right-3 z-30 -rotate-6">
+                  <span className="bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-600 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] px-2.5 py-1 md:px-3 md:py-1.5 shadow-lg shadow-yellow-900/30 border border-yellow-400/30">
                     {metadataBadge}
                   </span>
                 </div>
