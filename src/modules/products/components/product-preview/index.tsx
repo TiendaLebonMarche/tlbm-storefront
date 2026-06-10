@@ -36,7 +36,10 @@ export default function ProductPreview({
   const isLowStock = totalInventory < 5 && totalInventory > 0
 
   // Custom badge from product metadata (set in admin panel)
-  const customBadge = (product as any).metadata?.badge || null
+  // Soporta: key "badge" para texto directo, o cualquier key=>valor como badge
+  const metadata = (product as any).metadata as Record<string, string> | null
+  const customBadge = metadata?.badge || 
+    (metadata ? Object.values(metadata)[0] : null) || null
 
   const category =
     product.collection?.title ||
