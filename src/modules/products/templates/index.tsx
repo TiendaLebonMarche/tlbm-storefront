@@ -58,11 +58,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   const tags = (product as any).tags || []
   const metadata = (product as any).metadata || {}
 
-  // Badge from metadata — formato "{key}: {value}" o "badge" directo
-  const metadataBadge = metadata?.badge || 
-    (Object.keys(metadata).length > 0 
-      ? `${Object.keys(metadata)[0]}: ${Object.values(metadata)[0]}`
-      : null) || null
+  // Tag badge — busca tag que empiece con "Producto"
+  const tagBadge = (tags as Array<{id: string; value: string}>)
+    ?.find((t: any) => t.value?.toLowerCase().startsWith("producto"))
+    ?.value || null
 
   return (
     <div className="bg-white min-h-screen selection:bg-brand-black/10">
