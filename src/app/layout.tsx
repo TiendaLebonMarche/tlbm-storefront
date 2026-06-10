@@ -129,6 +129,17 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${publicSans.variable} scroll-smooth`}>
       <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P7ZD7RQP');`,
+          }}
+        />
+
         {/* Preconnect to optimize asset connection speed (Core Web Vitals) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -167,6 +178,16 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <meta name="distribution" content="global" />
       </head>
       <body className="antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-P7ZD7RQP"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         <StructuredData />
         <UIProvider>
