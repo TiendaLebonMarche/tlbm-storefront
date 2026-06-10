@@ -79,7 +79,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[155] bg-brand-brown/10 pointer-events-auto transition-all duration-300"
+                  className="fixed inset-0 z-[155] bg-brand-black/10 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
                   style={{ backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
@@ -96,7 +96,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[160] text-brand-brown border-r border-gray-100 flex flex-col shadow-xl overflow-y-auto overscroll-contain">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[160] text-brand-black border-r border-brand-gray-light flex flex-col shadow-xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-10"
@@ -115,7 +115,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         <li key={name} className="w-full group overflow-hidden">
                           <LocalizedClientLink
                             href={href}
-                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-brown transform transition-all duration-700 delay-[${index * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
+                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 delay-[${index * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
                             onClick={() => { close(); closeSideMenu(); }}
                           >
                             {name}
@@ -129,7 +129,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         <LocalizedClientLink href="/account" className="text-sm font-bold tracking-widest uppercase hover:opacity-50 transition-opacity">Mi Cuenta</LocalizedClientLink>
                         <LocalizedClientLink href="/cart" className="text-sm font-bold tracking-widest uppercase hover:opacity-50 transition-opacity">Carrito</LocalizedClientLink>
                       </div>
-                      <Text className="text-[10px] text-gray-400 tracking-widest uppercase">
+                      <Text className="text-[10px] text-brand-gray tracking-widest uppercase">
                         © {new Date().getFullYear()} Le Bon Marché
                       </Text>
                     </div>

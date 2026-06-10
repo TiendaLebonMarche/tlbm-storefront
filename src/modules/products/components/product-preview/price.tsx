@@ -8,7 +8,7 @@ export default function PreviewPrice({ price }: { price: VariantPrice }) {
     <div className="flex items-center gap-2">
       {price.price_type === "sale" && (
         <span
-          className="line-through text-[10px] text-gray-400 font-medium"
+          className="line-through text-[10px] text-brand-gray font-medium"
           data-testid="original-price"
         >
           {price.original_price}
@@ -16,7 +16,7 @@ export default function PreviewPrice({ price }: { price: VariantPrice }) {
       )}
       <span
         className={clx(
-          "text-sm font-black text-brand-brown tracking-tight",
+          "text-sm font-black text-brand-black tracking-tight",
           { "text-red-600": price.price_type === "sale" }
         )}
         data-testid="price"

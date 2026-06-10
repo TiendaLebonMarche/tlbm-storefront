@@ -51,7 +51,7 @@ const Item: React.FC<AccordionItemProps> = ({
     <AccordionPrimitive.Item
       {...props}
       className={clx(
-        "border-b border-gray-100 last:border-b-0",
+        "border-b border-brand-gray-light last:border-b-0",
         "py-4",
         className
       )}
@@ -69,7 +69,7 @@ const Item: React.FC<AccordionItemProps> = ({
               {title}
             </Text>
             {subtitle && (
-              <Text as="span" size="small" className="mt-1 text-gray-500">
+              <Text as="span" size="small" className="mt-1 text-brand-gray">
                 {subtitle}
               </Text>
             )}
@@ -91,7 +91,7 @@ const Item: React.FC<AccordionItemProps> = ({
           "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
         )}
       >
-        <div className="text-gray-600 space-y-3 text-sm leading-relaxed pt-4">
+        <div className="text-brand-gray space-y-3 text-sm leading-relaxed pt-4">
           {description && <Text>{description}</Text>}
           <div className="w-full">{children}</div>
         </div>

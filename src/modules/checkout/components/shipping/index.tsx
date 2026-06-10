@@ -125,7 +125,7 @@ const Shipping: React.FC<ShippingProps> = ({
             <Text>
               <button
                 onClick={handleEdit}
-                className="text-brand-brown underline hover:text-brand-olive font-bold text-sm"
+                className="text-brand-black underline hover:text-brand-black font-bold text-sm"
                 data-testid="edit-delivery-button"
               >
                 Editar
@@ -176,11 +176,11 @@ const Shipping: React.FC<ShippingProps> = ({
                         data-testid="delivery-option-radio"
                         disabled={isDisabled}
                         className={clx(
-                          "flex items-center justify-between text-small-regular cursor-pointer py-6 border-2 rounded-3xl px-8 mb-4 hover:border-brand-olive transition-all shadow-sm",
+                          "flex items-center justify-between text-small-regular cursor-pointer py-6 border-2 rounded-3xl px-8 mb-4 hover:border-brand-black transition-all shadow-sm",
                           {
-                            "border-brand-olive bg-brand-soft/30 ring-2 ring-brand-olive/20":
+                            "border-brand-black bg-brand-gray-light/30 ring-2 ring-brand-olive/20":
                               option.id === shippingMethodId,
-                            "border-gray-100 bg-white": option.id !== shippingMethodId,
+                            "border-brand-gray-light bg-white": option.id !== shippingMethodId,
                             "opacity-50 cursor-not-allowed":
                               isDisabled,
                           }
@@ -191,7 +191,7 @@ const Shipping: React.FC<ShippingProps> = ({
                             checked={option.id === shippingMethodId}
                           />
                           <div className="flex flex-col text-left">
-                            <span className="text-base font-bold text-brand-brown">
+                            <span className="text-base font-bold text-brand-black">
                               {displayName}
                             </span>
                             <span className="text-[10px] text-brand-gray uppercase tracking-widest font-bold">
@@ -231,7 +231,7 @@ const Shipping: React.FC<ShippingProps> = ({
             />
             <Button
               size="large"
-              className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto"
+              className="mt-6 pill-button bg-brand-black hover:bg-brand-black text-white w-full sm:w-auto"
               onClick={handleSubmit}
               isLoading={isLoading}
               disabled={!shippingMethodId}
@@ -245,11 +245,11 @@ const Shipping: React.FC<ShippingProps> = ({
         <div>
           <div className="text-small-regular">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
-              <div className="flex flex-col w-full bg-brand-soft/5 p-4 rounded-2xl border border-brand-soft/20">
+              <div className="flex flex-col w-full bg-brand-gray-light/5 p-4 rounded-2xl border border-brand-soft/20">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1 font-bold">
                   Método Escogido
                 </Text>
-                <Text className="txt-medium text-brand-brown">
+                <Text className="txt-medium text-brand-black">
                   {cart.shipping_methods!.at(-1)!.name.toLowerCase().includes("tienda") ? "Recogida en Tienda" : "Envío en Bucaramanga"}{" "}
                   ({convertToLocale({
                     amount: cart.shipping_methods!.at(-1)!.amount!,

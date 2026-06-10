@@ -16,11 +16,11 @@ const NewsletterSection = () => {
   }
 
   return (
-    <section className="w-full bg-brand-soft text-brand-brown pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden relative">
+    <section className="w-full bg-brand-gray-light text-brand-black pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden relative">
       <div className="content-container px-4 md:px-8 relative z-10">
         <div className="max-w-xl mx-auto text-center">
           {/* Header */}
-          <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+          <span className="text-brand-black font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
             Novedades Exclusivas
           </span>
           
@@ -46,11 +46,11 @@ const NewsletterSection = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 rounded-full px-8 py-4 bg-white border border-gray-100 placeholder-gray-400 text-sm outline-none focus:ring-2 focus:ring-brand-olive transition-all shadow-sm"
+              className="flex-1 rounded-full px-8 py-4 bg-white border border-brand-gray-light placeholder-gray-400 text-sm outline-none focus:ring-2 focus:ring-brand-black transition-all shadow-sm"
             />
             <button
               type="submit"
-              className="pill-button bg-brand-brown text-white hover:bg-brand-olive transition-all"
+              className="pill-button bg-brand-black text-white hover:bg-brand-black transition-all"
             >
               Suscribir
             </button>
@@ -58,13 +58,13 @@ const NewsletterSection = () => {
 
           {/* Success Message */}
           {isSubmitted && (
-            <p className="text-brand-olive text-sm font-bold mb-6 transition-all">
+            <p className="text-brand-black text-sm font-bold mb-6 transition-all">
               ✓ ¡Gracias! Revisa tu email para el beneficio exclusivo.
             </p>
           )}
 
           {/* Privacy Note */}
-          <p className="text-[10px] text-brand-brown/50 font-medium tracking-wide">
+          <p className="text-[10px] text-brand-black/50 font-medium tracking-wide">
             Al suscribirte, aceptas nuestra política de privacidad.
           </p>
 

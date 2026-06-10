@@ -20,7 +20,7 @@ export default function ProductPrice({
   const selectedPrice = variant ? variantPrice : cheapestPrice
 
   if (!selectedPrice) {
-    return <div className="block w-32 h-9 bg-gray-50 animate-pulse" />
+    return <div className="block w-32 h-9 bg-brand-gray-light/20 animate-pulse" />
   }
 
   const savings = selectedPrice.price_type === "sale" && selectedPrice.original_price_number && selectedPrice.calculated_price_number
@@ -36,7 +36,7 @@ export default function ProductPrice({
       <div className="flex items-baseline gap-3">
         {selectedPrice.price_type === "sale" && (
           <span
-            className="text-base text-gray-400 line-through font-light"
+            className="text-base text-brand-gray line-through font-light"
             data-testid="original-product-price"
             data-value={selectedPrice.original_price_number}
           >
@@ -45,9 +45,9 @@ export default function ProductPrice({
         )}
         <span
           className={clx(
-            "text-3xl md:text-4xl font-semibold tracking-tight text-brand-brown font-sans",
+            "text-3xl md:text-4xl font-semibold tracking-tight text-brand-black font-sans",
             {
-              "text-brand-brown": selectedPrice.price_type !== "sale",
+              "text-brand-black": selectedPrice.price_type !== "sale",
             }
           )}
           data-testid="product-price"

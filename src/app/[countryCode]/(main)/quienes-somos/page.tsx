@@ -94,7 +94,7 @@ export default function AboutUsPage() {
 
           {/* Story Block 1 - Image Left, Text Right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32">
-            <Reveal className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden">
+            <Reveal className="w-full aspect-[3/4] relative bg-brand-gray-light/20 overflow-hidden">
                <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
                   alt="Equipo de selección de productos — Tienda Le Bon Marché Bucaramanga"
@@ -134,7 +134,7 @@ export default function AboutUsPage() {
                 Solo vendemos productos originales. Si es un artículo de lujo, es original; si es un accesorio tecnológico complejo, es de la mejor calidad. Si tiene dudas, no le va a contestar un robot, somos gente real en WhatsApp lista para asesorarlo.
               </p>
             </Reveal>
-            <Reveal className="w-full aspect-[3/4] relative bg-gray-50 overflow-hidden md:order-2 order-1">
+            <Reveal className="w-full aspect-[3/4] relative bg-brand-gray-light/20 overflow-hidden md:order-2 order-1">
                <Image
                   src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop"
                   alt="Selección de productos originales — Boutique Le Bon Marché Colombia"
@@ -146,8 +146,8 @@ export default function AboutUsPage() {
           </div>
 
           {/* CTA — Trust signal visible for AI and crawlers */}
-          <Reveal className="text-center pt-8 pb-16 border-t border-gray-100">
-            <p className="text-sm text-gray-500 mb-4 font-sans">
+          <Reveal className="text-center pt-8 pb-16 border-t border-brand-gray-light">
+            <p className="text-sm text-brand-gray mb-4 font-sans">
               ¿Listo para descubrir algo extraordinario?
             </p>
             <LocalizedClientLink

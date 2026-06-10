@@ -152,7 +152,7 @@ const StripePaymentButton = ({
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
-        className="w-full pill-button h-14 bg-brand-brown hover:bg-brand-olive text-white font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 shadow-xl border-none disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full pill-button h-14 bg-brand-black hover:bg-brand-black text-white font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 shadow-xl border-none disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Confirmar Compra
       </Button>
@@ -198,7 +198,7 @@ const ManualTestPaymentButton = ({ notReady, cart }: { notReady: boolean, cart: 
         onClick={handlePayment}
         size="large"
         data-testid="submit-order-button"
-        className="w-full pill-button h-14 bg-brand-brown hover:bg-brand-olive text-white font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 shadow-xl border-none disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full pill-button h-14 bg-brand-black hover:bg-brand-black text-white font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 shadow-xl border-none disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Confirmar Compra
       </Button>

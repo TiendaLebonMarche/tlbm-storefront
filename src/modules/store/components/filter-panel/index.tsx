@@ -47,7 +47,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
   return (
     <div className="bg-transparent">
       <div className="flex items-center justify-between mb-8 cursor-pointer group" onClick={() => setIsOpen(!isOpen)}>
-        <h3 className="font-bold text-[11px] uppercase tracking-[0.25em] text-brand-black group-hover:text-brand-gold transition-colors">
+        <h3 className="font-bold text-[11px] uppercase tracking-[0.25em] text-brand-black group-hover:text-brand-black transition-colors">
           Refinar Búsqueda
         </h3>
         <svg
@@ -71,7 +71,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
           {/* Colecciones */}
           {collections.length > 0 && (
             <div className="mb-10">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
                 Colecciones
               </h4>
               <div className="space-y-4">
@@ -89,11 +89,11 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                             e.target.checked ? col.id : null
                           )
                         }
-                        className="peer appearance-none w-3.5 h-3.5 border border-gray-300 rounded-full checked:border-brand-gold transition-all"
+                        className="peer appearance-none w-3.5 h-3.5 border border-gray-300 rounded-full checked:border-brand-black transition-all"
                       />
-                      <div className="absolute w-1.5 h-1.5 rounded-full bg-brand-gold scale-0 peer-checked:scale-100 transition-transform duration-300" />
+                      <div className="absolute w-1.5 h-1.5 rounded-full bg-brand-black scale-0 peer-checked:scale-100 transition-transform duration-300" />
                     </div>
-                    <span className="text-xs text-gray-600 group-hover:text-brand-black transition-colors font-light">
+                    <span className="text-xs text-brand-gray group-hover:text-brand-black transition-colors font-light">
                       {col.title}
                     </span>
                   </label>
@@ -101,7 +101,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                 {selectedCollection && (
                   <button
                     onClick={() => handleFilterChange("collection", null)}
-                    className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-gold mt-4 hover:tracking-[0.3em] transition-all"
+                    className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-black mt-4 hover:tracking-[0.3em] transition-all"
                   >
                     — Limpiar selección
                   </button>
@@ -112,12 +112,12 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
 
           {/* Rango de Precio */}
           <div className="mb-10">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
               Inversión
             </h4>
             <div className="grid grid-cols-2 gap-3">
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-gray-400">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-brand-gray">$</span>
                 <input
                   type="number"
                   placeholder="Mín"
@@ -125,11 +125,11 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                   onChange={(e) =>
                     handleFilterChange("minPrice", e.target.value || null)
                   }
-                  className="w-full pl-6 pr-3 py-2.5 border-b border-gray-100 bg-transparent text-xs outline-none focus:border-brand-gold transition-colors font-light"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
                 />
               </div>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-gray-400">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[9px] text-brand-gray">$</span>
                 <input
                   type="number"
                   placeholder="Máx"
@@ -137,7 +137,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                   onChange={(e) =>
                     handleFilterChange("maxPrice", e.target.value || null)
                   }
-                  className="w-full pl-6 pr-3 py-2.5 border-b border-gray-100 bg-transparent text-xs outline-none focus:border-brand-gold transition-colors font-light"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
                 />
               </div>
             </div>

@@ -32,7 +32,7 @@ export default function CookieBanner() {
           transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
           className="fixed bottom-0 left-0 right-0 z-[100] px-4 pb-4 md:px-6 md:pb-6 pointer-events-none flex justify-center"
         >
-          <div className="w-full max-w-4xl bg-brand-brown/95 backdrop-blur-xl shadow-2xl rounded-sm p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pointer-events-auto border border-white/10">
+          <div className="w-full max-w-4xl bg-brand-black/95 backdrop-blur-xl shadow-2xl rounded-sm p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pointer-events-auto border border-white/10">
             <div className="flex-1 space-y-3">
               <h3 className="text-white font-serif text-lg font-bold leading-none">Transparencia y Privacidad (Habeas Data)</h3>
               <p className="text-white/70 text-xs md:text-sm leading-relaxed max-w-2xl">
@@ -48,7 +48,7 @@ export default function CookieBanner() {
                 Saber más
               </Button>
               <Button 
-                className="w-full md:w-auto bg-brand-olive text-white outline-none ring-0 focus:ring-0 border-0 shadow-lg shadow-black/20 hover:bg-brand-olive/80 transition-all duration-300"
+                className="w-full md:w-auto bg-brand-black text-white outline-none ring-0 focus:ring-0 border-0 shadow-lg shadow-black/20 hover:bg-brand-black/80 transition-all duration-300"
                 onClick={handleAccept}
               >
                 Aceptar todo

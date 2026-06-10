@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder=" "
             required={required}
             className={clx(
-              "pt-6 pb-2 block w-full h-14 px-6 mt-0 bg-white border-2 rounded-3xl appearance-none focus:outline-none focus:ring-4 focus:ring-brand-olive/10 border-gray-100 focus:border-brand-olive transition-all duration-300 shadow-sm peer",
+              "pt-6 pb-2 block w-full h-14 px-6 mt-0 bg-white border-2 rounded-3xl appearance-none focus:outline-none focus:ring-4 focus:ring-brand-black/10 border-brand-gray-light focus:border-brand-black transition-all duration-300 shadow-sm peer",
               className
             )}
             {...props}
@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={name}
             onClick={() => inputRef.current?.focus()}
-            className="flex items-center justify-center mx-6 px-1 transition-all absolute duration-300 top-4 -z-1 origin-0 text-ui-fg-subtle peer-focus:top-2 peer-focus:text-[11px] peer-focus:text-brand-olive peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[11px] uppercase tracking-widest font-bold font-sans"
+            className="flex items-center justify-center mx-6 px-1 transition-all absolute duration-300 top-4 -z-1 origin-0 text-ui-fg-subtle peer-focus:top-2 peer-focus:text-[11px] peer-focus:text-brand-black peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[11px] uppercase tracking-widest font-bold font-sans"
           >
             {label}
             {required && <span className="text-rose-500 ml-1">*</span>}

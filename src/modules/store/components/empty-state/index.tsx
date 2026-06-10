@@ -17,7 +17,7 @@ const EmptyState = ({ query, filters = false }: EmptyStateProps) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-16 h-16 mx-auto text-gray-400 opacity-50"
+          className="w-16 h-16 mx-auto text-brand-gray opacity-50"
         >
           <path
             strokeLinecap="round"
@@ -32,10 +32,10 @@ const EmptyState = ({ query, filters = false }: EmptyStateProps) => {
           <h3 className="text-2xl font-serif text-brand-black mb-2 italic">
             Sin resultados
           </h3>
-          <p className="text-gray-600 font-light mb-2">
+          <p className="text-brand-gray font-light mb-2">
             No encontramos productos que coincidan con &quot;<strong>{query}</strong>&quot;
           </p>
-          <p className="text-sm text-gray-500 mb-8">
+          <p className="text-sm text-brand-gray mb-8">
             Intenta con otros términos de búsqueda o navega nuestro catálogo completo
           </p>
         </>
@@ -44,7 +44,7 @@ const EmptyState = ({ query, filters = false }: EmptyStateProps) => {
           <h3 className="text-2xl font-serif text-brand-black mb-2 italic">
             No hay productos disponibles
           </h3>
-          <p className="text-gray-600 font-light mb-8">
+          <p className="text-brand-gray font-light mb-8">
             {filters
               ? "Intenta ajustar tus filtros"
               : "Vuelve más tarde para descubrir más"}

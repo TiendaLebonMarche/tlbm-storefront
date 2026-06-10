@@ -62,7 +62,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
       <motion.div
         ref={ref}
         className={cn(
-          "bg-white text-brand-brown border border-gray-100 rounded-lg overflow-hidden w-full p-6 md:p-8",
+          "bg-white text-brand-black border border-brand-gray-light rounded-lg overflow-hidden w-full p-6 md:p-8",
           className
         )}
         variants={cardVariants}
@@ -79,7 +79,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1.5fr] gap-8 items-center">
           {/* Column 1: Image */}
           <div className="flex flex-col items-center gap-4">
-            <div className="relative group w-full aspect-square max-w-[200px] mx-auto bg-gray-50/50 rounded-xl p-4">
+            <div className="relative group w-full aspect-square max-w-[200px] mx-auto bg-brand-gray-light/20/50 rounded-xl p-4">
               <LocalizedClientLink href={productUrl} className="block w-full h-full">
                 <Image
                   src={imageUrl}
@@ -101,7 +101,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
               >
                 <Heart
                   className={cn(
-                    "h-5 w-5 text-gray-400 transition-colors",
+                    "h-5 w-5 text-brand-gray transition-colors",
                     isWishlisted && "fill-red-500 text-red-500"
                   )}
                 />
@@ -113,16 +113,16 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           {/* Column 2: Product Details */}
           <div className="flex flex-col gap-3">
             {category && (
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-olive">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-black">
                 {category}
               </span>
             )}
             <LocalizedClientLink href={productUrl}>
-              <h2 className="text-xl md:text-2xl font-serif font-semibold text-brand-brown hover:text-brand-olive transition-colors">{title}</h2>
+              <h2 className="text-xl md:text-2xl font-serif font-semibold text-brand-black hover:text-brand-black transition-colors">{title}</h2>
             </LocalizedClientLink>
             
             <div className="flex items-center gap-3 text-sm text-brand-gray mt-1">
-              <div className="bg-brand-olive text-white px-2 py-0.5 rounded flex items-center gap-1">
+              <div className="bg-brand-black text-white px-2 py-0.5 rounded flex items-center gap-1">
                 <span className="font-medium text-xs">{rating.toFixed(1)}</span>
                 <Star className="h-3 w-3 fill-white" />
               </div>
@@ -141,11 +141,11 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           </div>
 
           {/* Column 3: Pricing and CTA */}
-          <div className="flex flex-col gap-3 justify-center md:items-end text-left md:text-right border-t md:border-t-0 md:border-l border-gray-100 pt-6 md:pt-0 md:pl-8">
+          <div className="flex flex-col gap-3 justify-center md:items-end text-left md:text-right border-t md:border-t-0 md:border-l border-brand-gray-light pt-6 md:pt-0 md:pl-8">
             <div className="flex items-end md:items-center gap-2 justify-start md:justify-end">
-              <h3 className="text-3xl font-bold text-brand-brown">{price}</h3>
+              <h3 className="text-3xl font-bold text-brand-black">{price}</h3>
               {isAssured && (
-                <ShieldCheck className="h-6 w-6 text-brand-olive mb-1" strokeWidth={1.5} />
+                <ShieldCheck className="h-6 w-6 text-brand-black mb-1" strokeWidth={1.5} />
               )}
             </div>
             
@@ -154,13 +154,13 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 <span className="text-brand-gray line-through">
                   {originalPrice}
                 </span>
-                <span className="text-brand-olive font-semibold">{discount} Off</span>
+                <span className="text-brand-black font-semibold">{discount} Off</span>
               </div>
             )}
             
             <div className="mt-6 w-full md:w-auto">
               <LocalizedClientLink href={productUrl}>
-                <Button className="w-full md:w-auto px-8 py-5 text-xs font-bold uppercase tracking-widest bg-brand-brown hover:bg-brand-olive transition-colors">
+                <Button className="w-full md:w-auto px-8 py-5 text-xs font-bold uppercase tracking-widest bg-brand-black hover:bg-brand-black transition-colors">
                   COMPRAR AHORA
                 </Button>
               </LocalizedClientLink>

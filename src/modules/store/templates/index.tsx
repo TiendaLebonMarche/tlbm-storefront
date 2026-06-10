@@ -38,21 +38,21 @@ const StoreTemplate = async ({
     <div className="bg-white min-h-screen" data-testid="category-container">
       
       {/* ── Editorial Store Header ── */}
-      <div className="border-b border-gray-100 pt-8 pb-10 px-6">
+      <div className="border-b border-brand-gray-light pt-8 pb-10 px-6">
         <div className="content-container">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-3 block">
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-black mb-3 block">
                 Selección Exclusiva — Le Bon Marché
               </span>
               <h1
-                className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-brown leading-none tracking-tighter"
+                className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-black leading-none tracking-tighter"
                 data-testid="store-page-title"
               >
                 Nuestra <em className="italic font-light">Colección</em>
               </h1>
             </div>
-            <p className="text-gray-400 text-xs font-light leading-relaxed max-w-xs md:text-right">
+            <p className="text-brand-gray text-xs font-light leading-relaxed max-w-xs md:text-right">
               Artículos originales y codiciados del mercado global,{" "}
               traídos con el mejor servicio a Bucaramanga.
             </p>
@@ -81,10 +81,10 @@ const StoreTemplate = async ({
 
             {/* Active search label */}
             {query && (
-              <div className="mb-6 pb-4 border-b border-gray-100">
-                <p className="text-[10px] text-gray-400 uppercase tracking-[0.3em] font-medium">
+              <div className="mb-6 pb-4 border-b border-brand-gray-light">
+                <p className="text-[10px] text-brand-gray uppercase tracking-[0.3em] font-medium">
                   Resultados para:{" "}
-                  <span className="text-brand-brown font-bold italic">&quot;{query}&quot;</span>
+                  <span className="text-brand-black font-bold italic">&quot;{query}&quot;</span>
                 </p>
               </div>
             )}

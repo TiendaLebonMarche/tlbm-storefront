@@ -5,7 +5,7 @@ import { HeroSection } from '@/components/ui/hero-section-2';
 
 export default function HeroSectionDemo() {
   return (
-    <div className="w-full bg-brand-soft">
+    <div className="w-full bg-brand-gray-light">
       <HeroSection
         logo={{
             url: "",

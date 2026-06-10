@@ -131,7 +131,7 @@ const ShippingAddress = ({
           value={formData.email}
           onChange={handleChange}
           required
-          className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
+          className="rounded-full px-6 py-4 border-2 border-brand-gray-light focus:border-brand-black transition-all"
           data-testid="shipping-email-input"
         />
 
@@ -143,18 +143,18 @@ const ShippingAddress = ({
           value={formData["shipping_address.phone"]}
           onChange={handleChange}
           required
-          className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
+          className="rounded-full px-6 py-4 border-2 border-brand-gray-light focus:border-brand-black transition-all"
           data-testid="shipping-phone-input"
         />
 
         <div className="flex flex-col">
-          <label className="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2 ml-4">Municipio *</label>
+          <label className="text-xs font-bold uppercase tracking-widest text-brand-black mb-2 ml-4">Municipio *</label>
           <select
             name="shipping_address.city"
             value={formData["shipping_address.city"]}
             onChange={handleChange}
             required
-            className="w-full h-14 rounded-3xl border-2 border-gray-100 px-6 bg-white focus:outline-none focus:ring-4 focus:ring-brand-olive/10 focus:border-brand-olive text-sm transition-all appearance-none text-brand-brown font-medium shadow-sm"
+            className="w-full h-14 rounded-3xl border-2 border-brand-gray-light px-6 bg-white focus:outline-none focus:ring-4 focus:ring-brand-black/10 focus:border-brand-black text-sm transition-all appearance-none text-brand-black font-medium shadow-sm"
             data-testid="shipping-city-select"
           >
             <option value="">Selecciona un municipio</option>
@@ -173,7 +173,7 @@ const ShippingAddress = ({
             value={formData["shipping_address.address_1"]}
             onChange={handleChange}
             required
-            className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-brand-olive transition-all"
+            className="rounded-full px-6 py-4 border-2 border-brand-gray-light focus:border-brand-black transition-all"
             data-testid="shipping-address-input"
           />
         </div>
@@ -184,7 +184,7 @@ const ShippingAddress = ({
             name="shipping_address.address_2"
             value={formData["shipping_address.address_2"]}
             onChange={handleChange}
-            className="rounded-full px-6 py-4 border-2 border-gray-100 focus:border-brand-olive transition-all bg-gray-50/30"
+            className="rounded-full px-6 py-4 border-2 border-brand-gray-light focus:border-brand-black transition-all bg-brand-gray-light/20/30"
             data-testid="shipping-address-2-input"
           />
         </div>

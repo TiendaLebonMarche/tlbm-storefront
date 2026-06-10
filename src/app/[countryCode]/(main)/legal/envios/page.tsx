@@ -14,13 +14,13 @@ const SIDEBAR_LINKS = [
 
 export default function EnviosPage() {
   return (
-    <div className="bg-[#fafaf5] min-h-screen pt-32 pb-32 selection:bg-brand-olive/20">
+    <div className="bg-[#FFFFFF] min-h-screen pt-32 pb-32 selection:bg-brand-black/20">
       <div className="max-w-[85rem] mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
           {/* Sidebar - Sticky */}
           <aside className="lg:w-1/4 flex-shrink-0">
             <div className="sticky top-40">
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-10 block">
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black mb-10 block">
                 Marco Legal
               </span>
               <nav className="flex flex-col gap-y-6 text-sm font-sans">
@@ -28,7 +28,7 @@ export default function EnviosPage() {
                   <a 
                     key={link.href}
                     href={link.href} 
-                    className={`transition-colors duration-300 ${link.active ? 'text-[#322214] font-bold' : 'text-gray-500 hover:text-[#322214]'}`}
+                    className={`transition-colors duration-300 ${link.active ? 'text-[#000000] font-bold' : 'text-brand-gray hover:text-[#000000]'}`}
                   >
                     {link.label}
                   </a>
@@ -39,13 +39,13 @@ export default function EnviosPage() {
 
           {/* Main Content */}
           <main className="lg:w-3/4 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#322214] mb-16 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#000000] mb-16 tracking-tight leading-tight">
               Envíos y Entregas
             </h1>
             
-            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#322214] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-gray-600 prose-p:font-light prose-li:text-gray-600 prose-li:font-light prose-p:leading-loose text-gray-600 max-w-none">
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-li:text-brand-gray prose-li:font-light prose-p:leading-loose text-brand-gray max-w-none">
               
-              <p className="text-xl md:text-2xl font-serif text-[#322214] leading-relaxed mb-16">
+              <p className="text-xl md:text-2xl font-serif text-[#000000] leading-relaxed mb-16">
                 Cuando invierte en tecnología exótica o artículos premium, la puntualidad no es opcional. Hemos estructurado nuestra red logística desde nuestro centro en Bucaramanga.
               </p>
 

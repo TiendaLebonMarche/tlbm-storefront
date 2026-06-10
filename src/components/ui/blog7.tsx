@@ -42,14 +42,14 @@ const Blog7 = ({
   posts,
 }: Blog7Props) => {
   return (
-    <section className="py-16 md:py-24 bg-brand-soft">
+    <section className="py-16 md:py-24 bg-brand-gray-light">
       <div className="content-container px-6 flex flex-col items-center gap-12">
         {/* Header */}
         <div className="text-center max-w-2xl">
-          <Badge variant="secondary" className="mb-6 uppercase tracking-[0.2em] text-[10px] font-bold text-brand-olive bg-white border-0 shadow-sm">
+          <Badge variant="secondary" className="mb-6 uppercase tracking-[0.2em] text-[10px] font-bold text-brand-black bg-white border-0 shadow-sm">
             {tagline}
           </Badge>
-          <h2 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-brand-brown leading-tight">
+          <h2 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-brand-black leading-tight">
             {heading}
           </h2>
           <p className="mb-8 text-brand-gray text-sm md:text-base leading-relaxed">
@@ -57,7 +57,7 @@ const Blog7 = ({
           </p>
           <LocalizedClientLink
             href={buttonUrl}
-            className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/30 pb-2 hover:text-brand-olive hover:border-brand-olive transition-all duration-300"
+            className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-brand-black border-b border-brand-black/30 pb-2 hover:text-brand-black hover:border-brand-black transition-all duration-300"
           >
             {buttonText}
             <ArrowRight className="size-3" />
@@ -78,7 +78,7 @@ const Blog7 = ({
                 {/* Image */}
                 <div className="aspect-[16/9] w-full overflow-hidden">
                   <LocalizedClientLink href={post.url} className="block w-full h-full">
-                    <div className="relative h-full w-full bg-gray-50">
+                    <div className="relative h-full w-full bg-brand-gray-light/20">
                       {post.image ? (
                         <Image
                           src={post.image}
@@ -88,7 +88,7 @@ const Blog7 = ({
                           className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-[10px] uppercase font-bold tracking-widest">
+                        <div className="w-full h-full flex items-center justify-center text-brand-gray text-[10px] uppercase font-bold tracking-widest">
                           Sin imagen
                         </div>
                       )}
@@ -97,10 +97,10 @@ const Blog7 = ({
                 </div>
 
                 <CardHeader className="pb-2">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-olive mb-2 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-black mb-2 block">
                     {post.label}
                   </span>
-                  <h3 className="text-lg md:text-xl font-serif font-semibold text-brand-brown leading-snug group-hover:text-brand-olive transition-colors duration-300">
+                  <h3 className="text-lg md:text-xl font-serif font-semibold text-brand-black leading-snug group-hover:text-brand-black transition-colors duration-300">
                     <LocalizedClientLink href={post.url}>
                       {post.title}
                     </LocalizedClientLink>
@@ -116,7 +116,7 @@ const Blog7 = ({
                     <span className="text-[10px] text-brand-gray/60 font-medium">{post.published} · {post.author}</span>
                     <LocalizedClientLink
                       href={post.url}
-                      className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-brown hover:text-brand-olive transition-colors group/link"
+                      className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-black hover:text-brand-black transition-colors group/link"
                     >
                       Leer
                       <ArrowRight className="size-3 transition-transform duration-300 group-hover/link:translate-x-1" />

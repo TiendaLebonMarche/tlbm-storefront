@@ -25,7 +25,7 @@ export default function NavMenuMore() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="hover:text-brand-gold hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-none uppercase font-bold tracking-widest text-sm"
+        className="hover:text-brand-black hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-none uppercase font-bold tracking-widest text-sm"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="true"
         aria-expanded={open}
@@ -43,7 +43,7 @@ export default function NavMenuMore() {
               <li key={link.href}>
                 <LocalizedClientLink
                   href={link.href}
-                  className="block px-6 py-3 text-brand-black hover:text-brand-gold hover:bg-gray-50 transition-colors text-sm font-medium"
+                  className="block px-6 py-3 text-brand-black hover:text-brand-black hover:bg-brand-gray-light/30 transition-colors text-sm font-medium"
                 >
                   {link.label}
                 </LocalizedClientLink>

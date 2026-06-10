@@ -57,15 +57,15 @@ const ActiveFilters = () => {
   if (filters.length === 0) return null
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-6 pb-4 border-b border-gray-100">
-      <span className="text-[9px] uppercase tracking-[0.2em] text-gray-400 font-medium mr-1">
+    <div className="flex flex-wrap items-center gap-2 mb-6 pb-4 border-b border-brand-gray-light">
+      <span className="text-[9px] uppercase tracking-[0.2em] text-brand-gray font-medium mr-1">
         Filtros:
       </span>
       {filters.map((f) => (
         <button
           key={f.key}
           onClick={() => removeFilter(f.key)}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 text-[10px] text-brand-black font-medium rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all group"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-gray-light/20 border border-brand-gray-light text-[10px] text-brand-black font-medium rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all group"
         >
           {f.label}
           <svg
@@ -74,7 +74,7 @@ const ActiveFilters = () => {
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-2.5 h-2.5 text-gray-400 group-hover:text-brand-black transition-colors"
+            className="w-2.5 h-2.5 text-brand-gray group-hover:text-brand-black transition-colors"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -82,7 +82,7 @@ const ActiveFilters = () => {
       ))}
       <button
         onClick={clearAll}
-        className="text-[9px] uppercase tracking-[0.2em] text-gray-400 hover:text-red-500 transition-colors ml-2 underline underline-offset-2"
+        className="text-[9px] uppercase tracking-[0.2em] text-brand-gray hover:text-red-500 transition-colors ml-2 underline underline-offset-2"
       >
         Limpiar todo
       </button>

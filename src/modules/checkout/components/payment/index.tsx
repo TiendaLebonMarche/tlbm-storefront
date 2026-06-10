@@ -130,7 +130,7 @@ const Payment = ({
           <Text>
             <button
               onClick={handleEdit}
-              className="text-brand-brown underline hover:text-brand-olive font-bold text-sm"
+              className="text-brand-black underline hover:text-brand-black font-bold text-sm"
               data-testid="edit-payment-button"
             >
               Editar
@@ -156,11 +156,11 @@ const Payment = ({
                   return [paymentMethod]
                 }).map((paymentMethod) => (
                   <div key={paymentMethod.id} className={clx(
-                    "flex items-center justify-between py-5 border-2 rounded-3xl px-8 mb-4 hover:border-brand-olive transition-all cursor-pointer",
+                    "flex items-center justify-between py-5 border-2 rounded-3xl px-8 mb-4 hover:border-brand-black transition-all cursor-pointer",
                     {
-                      "border-brand-olive bg-brand-soft/20":
+                      "border-brand-black bg-brand-gray-light/20":
                         selectedPaymentMethod === paymentMethod.id,
-                      "border-gray-100": selectedPaymentMethod !== paymentMethod.id,
+                      "border-brand-gray-light": selectedPaymentMethod !== paymentMethod.id,
                     }
                   )}
                   onClick={() => setPaymentMethod(paymentMethod.id)}
@@ -169,7 +169,7 @@ const Payment = ({
                       <MedusaRadio
                         checked={selectedPaymentMethod === paymentMethod.id}
                       />
-                      <span className="text-base font-bold text-brand-brown">
+                      <span className="text-base font-bold text-brand-black">
                         {paymentMethod.title}
                       </span>
                     </div>
@@ -178,11 +178,11 @@ const Payment = ({
               </RadioGroup>
 
               {selectedPaymentMethod === "manual_transferencia" && (
-                <div className="bg-brand-soft/10 border border-brand-soft/30 rounded-3xl p-6 mb-6">
-                  <p className="text-sm font-bold text-brand-brown uppercase tracking-widest mb-3">
+                <div className="bg-brand-gray-light/10 border border-brand-soft/30 rounded-3xl p-6 mb-6">
+                  <p className="text-sm font-bold text-brand-black uppercase tracking-widest mb-3">
                     📋 Datos para Transferencia
                   </p>
-                  <div className="space-y-2 text-brand-brown text-sm">
+                  <div className="space-y-2 text-brand-black text-sm">
                     <p className="flex justify-between">
                       <span className="font-semibold">💚 Daviplata:</span>
                       <span className="font-mono">3104489218</span>
@@ -228,7 +228,7 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto"
+            className="mt-6 pill-button bg-brand-black hover:bg-brand-black text-white w-full sm:w-auto"
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={
@@ -245,12 +245,12 @@ const Payment = ({
 
         <div className={isOpen ? "hidden" : "block"}>
           {cart && paymentReady && activeSession ? (
-            <div className="flex flex-col small:flex-row items-start gap-y-6 lg:gap-x-12 w-full bg-brand-soft/10 p-6 rounded-3xl border border-brand-soft/20">
+            <div className="flex flex-col small:flex-row items-start gap-y-6 lg:gap-x-12 w-full bg-brand-gray-light/10 p-6 rounded-3xl border border-brand-soft/20">
               <div className="flex flex-col w-full small:w-1/2" data-testid="payment-method-summary">
                 <Text className="txt-medium-plus text-ui-fg-base mb-2 font-bold uppercase tracking-widest text-[10px]">
                   Método de pago
                 </Text>
-                <Text className="txt-medium text-brand-brown font-serif italic text-lg leading-tight">
+                <Text className="txt-medium text-brand-black font-serif italic text-lg leading-tight">
                   {selectedPaymentMethod === "manual_efectivo" ? "1. Efectivo" : 
                    selectedPaymentMethod === "manual_transferencia" ? "2. Transferencia (Nequi/Daviplata/BreB)" :
                    paymentInfoMap[activeSession?.provider_id]?.title || activeSession?.provider_id}
@@ -264,13 +264,13 @@ const Payment = ({
                   className="flex gap-4 txt-medium text-ui-fg-subtle items-center"
                   data-testid="payment-details-summary"
                 >
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-brand-brown/10 text-brand-brown">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-brand-black/10 text-brand-black">
                     {paymentInfoMap[selectedPaymentMethod]?.icon || (
                       <CreditCard />
                     )}
                   </div>
                   <div className="flex flex-col">
-                    <Text className="font-bold text-brand-brown">
+                    <Text className="font-bold text-brand-black">
                       {isStripeLike(selectedPaymentMethod) && cardBrand
                         ? cardBrand
                         : "Pago Pendiente"}

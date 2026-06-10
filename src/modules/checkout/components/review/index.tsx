@@ -38,16 +38,16 @@ const Review = ({ cart }: { cart: any }) => {
       </div>
       {isOpen && previousStepsCompleted && (
         <>
-          <div className="flex items-start gap-x-3 w-full mb-6 max-w-2xl bg-gray-50 border border-gray-100 p-4 rounded-md">
+          <div className="flex items-start gap-x-3 w-full mb-6 max-w-2xl bg-brand-gray-light/20 border border-brand-gray-light p-4 rounded-md">
             <input
               type="checkbox"
               id="terms-checkbox"
-              className="mt-1 w-5 h-5 accent-brand-olive border-gray-300 rounded text-brand-olive focus:ring-brand-olive cursor-pointer"
+              className="mt-1 w-5 h-5 accent-brand-olive border-gray-300 rounded text-brand-black focus:ring-brand-black cursor-pointer"
               checked={acceptedTerms}
               onChange={(e) => setAcceptedTerms(e.target.checked)}
             />
-            <label htmlFor="terms-checkbox" className="text-sm font-medium text-brand-brown cursor-pointer">
-              He leído y acepto los <a href="/legal/terminos" target="_blank" className="underline hover:text-brand-olive font-bold">Términos y Condiciones</a> (incluyendo Derecho de Retracto, Reversión del Pago y Políticas de Envío Fast-Track), así como la <a href="/legal/privacidad" target="_blank" className="underline hover:text-brand-olive font-bold">Política de Privacidad y Tratamiento de Datos (Habeas Data)</a> con nuestra IA de arbitraje.
+            <label htmlFor="terms-checkbox" className="text-sm font-medium text-brand-black cursor-pointer">
+              He leído y acepto los <a href="/legal/terminos" target="_blank" className="underline hover:text-brand-black font-bold">Términos y Condiciones</a> (incluyendo Derecho de Retracto, Reversión del Pago y Políticas de Envío Fast-Track), así como la <a href="/legal/privacidad" target="_blank" className="underline hover:text-brand-black font-bold">Política de Privacidad y Tratamiento de Datos (Habeas Data)</a> con nuestra IA de arbitraje.
             </label>
           </div>
           <PaymentButton cart={cart} data-testid="submit-order-button" disabled={!acceptedTerms} />

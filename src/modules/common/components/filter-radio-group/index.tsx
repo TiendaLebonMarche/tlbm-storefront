@@ -21,7 +21,7 @@ const FilterRadioGroup = ({
 }: FilterRadioGroupProps) => {
   return (
     <div className="flex flex-col gap-y-6">
-      <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-gold border-b border-gray-100 pb-2">
+      <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-black border-b border-brand-gray-light pb-2">
         {title}
       </h3>
       <RadioGroup data-testid={dataTestId} onValueChange={handleChange} value={value}>
@@ -43,7 +43,7 @@ const FilterRadioGroup = ({
                   "relative pl-6 text-xs tracking-wider transition-all duration-300 hover:cursor-pointer flex items-center gap-x-2 font-medium",
                   {
                     "text-brand-black font-semibold": i.value === value,
-                    "text-gray-400 hover:text-brand-black": i.value !== value,
+                    "text-brand-gray hover:text-brand-black": i.value !== value,
                   }
                 )}
                 data-testid="radio-label"
@@ -54,7 +54,7 @@ const FilterRadioGroup = ({
                   className={clx(
                     "absolute left-0 w-3 h-[1px] transition-all duration-300",
                     {
-                      "bg-brand-gold w-4": i.value === value,
+                      "bg-brand-black w-4": i.value === value,
                       "bg-gray-200 w-0 group-hover:w-2": i.value !== value,
                     }
                   )}

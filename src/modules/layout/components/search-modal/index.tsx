@@ -25,7 +25,7 @@ export default function SearchModal() {
         <>
             <button
                 onClick={openSearch}
-                className="nav-icon hover:text-brand-olive relative flex items-center outline-none transition-colors"
+                className="nav-icon hover:text-brand-black relative flex items-center outline-none transition-colors"
                 aria-label="Buscar"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -59,8 +59,8 @@ export default function SearchModal() {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <DialogPanel className="relative transform overflow-hidden text-center transition-all sm:w-full sm:max-w-4xl p-6">
-                                    <button onClick={closeSearch} className="absolute right-0 top-0 text-4xl text-gray-400 hover:text-black outline-none">&times;</button>
-                                    <p className="text-sm font-bold uppercase tracking-[0.2em] mb-4 text-brand-gold">¿Qué estás buscando?</p>
+                                    <button onClick={closeSearch} className="absolute right-0 top-0 text-4xl text-brand-gray hover:text-black outline-none">&times;</button>
+                                    <p className="text-sm font-bold uppercase tracking-[0.2em] mb-4 text-brand-black">¿Qué estás buscando?</p>
 
                                     <form 
                                         onSubmit={handleSearch} 
@@ -78,13 +78,13 @@ export default function SearchModal() {
                                             autoFocus
                                         />
                                         <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-brand-black hover:text-brand-gold transition duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-brand-black hover:text-brand-black transition duration-300">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                             </svg>
                                         </button>
                                     </form>
 
-                                    <div className="flex justify-center gap-8 text-sm font-medium text-gray-500">
+                                    <div className="flex justify-center gap-8 text-sm font-medium text-brand-gray">
                                         <LocalizedClientLink href="/store" onClick={closeSearch} className="hover:text-black transition uppercase tracking-wider text-xs border-b border-transparent hover:border-black pb-1">Novedades</LocalizedClientLink>
                                         <LocalizedClientLink href="/store" onClick={closeSearch} className="hover:text-black transition uppercase tracking-wider text-xs border-b border-transparent hover:border-black pb-1">Colecciones Especiales</LocalizedClientLink>
                                     </div>

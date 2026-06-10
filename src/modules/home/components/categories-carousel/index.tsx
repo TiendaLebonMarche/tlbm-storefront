@@ -108,7 +108,7 @@ export default function CategoriesCarousel() {
               }}
             >
               <div className="group block cursor-default">
-                <div className="aspect-[3/4] overflow-hidden relative bg-gray-50">
+                <div className="aspect-[3/4] overflow-hidden relative bg-brand-gray-light/20">
                   <Image
                     src={cat.img}
                     fill

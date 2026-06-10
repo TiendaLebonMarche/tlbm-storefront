@@ -4,9 +4,10 @@
 @tailwind utilities;
 
 :root {
-  --brand-olive: #50652a;
-  --brand-brown: #363030;
-  --brand-gray: #514848;
+  --brand-navy: #00154A;
+  --brand-blue: #1A3B8F;
+  --brand-gray: #8A8D96;
+  --brand-gray-light: #BEC1C8;
 }
 
 
@@ -31,7 +32,7 @@
       width: 100%;
       position: relative;
       background-color: #FFFFFF !important;
-      color: #363030;
+      color: #000000;
   }
 
   /* Animación Marquee */
@@ -158,7 +159,7 @@
   }
 
   .contrast-btn {
-    @apply px-4 py-2 border border-brand-brown rounded-lg hover:bg-brand-olive hover:border-brand-olive hover:text-white transition-colors duration-200 ease-in text-brand-brown;
+    @apply px-4 py-2 border border-brand-black rounded-lg hover:bg-brand-black hover:border-brand-black hover:text-white transition-colors duration-200 ease-in text-brand-black;
   }
 
   .text-xsmall-regular {
@@ -218,7 +219,7 @@
   }
   
   .input-pill {
-    @apply w-full rounded-full border border-gray-200 px-6 py-4 focus:ring-2 focus:ring-brand-olive focus:border-transparent outline-none transition-all;
+    @apply w-full rounded-full border border-brand-gray-light px-6 py-4 focus:ring-2 focus:ring-brand-black focus:border-transparent outline-none transition-all;
   }
 }
 
@@ -272,7 +273,7 @@
   filter: brightness(0) invert(1) !important;
 }
 
-.text-brand-brown .logo-img {
+.text-brand-black .logo-img {
   filter: none !important;
 }
 

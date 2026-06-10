@@ -62,15 +62,15 @@ const RelatedProductsList: React.FC<RelatedProductsListProps> = ({ products, reg
       <div ref={observerTarget} className="flex flex-col items-center justify-center py-12 mt-8 border-t border-gray-50">
         {isLoading ? (
           <div className="flex flex-col items-center animate-in fade-in duration-500">
-             <div className="w-5 h-5 border-2 border-brand-brown/20 border-t-brand-brown rounded-full animate-spin mb-4" />
-             <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-brown/40">
+             <div className="w-5 h-5 border-2 border-brand-black/20 border-t-brand-brown rounded-full animate-spin mb-4" />
+             <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-black/40">
                Cargando selección...
              </p>
           </div>
         ) : hasMore ? (
           <div className="h-4 w-px bg-gray-100" />
         ) : (
-          <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-brown/20">
+          <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-black/20">
             Has llegado al final de la colección
           </p>
         )}

@@ -97,12 +97,12 @@ export default function CategoriesGrid() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-olive mb-3 block">Navegación</span>
-            <h2 className="text-3xl md:text-5xl font-sans font-bold text-brand-brown italic">Categorías más vendidas</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black mb-3 block">Navegación</span>
+            <h2 className="text-3xl md:text-5xl font-sans font-bold text-brand-black italic">Categorías más vendidas</h2>
           </motion.div>
           <LocalizedClientLink
             href="/store"
-            className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/10 pb-1 hover:text-brand-olive hover:border-brand-olive transition-all whitespace-nowrap mb-1"
+            className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border-b border-brand-black/10 pb-1 hover:text-brand-black hover:border-brand-black transition-all whitespace-nowrap mb-1"
           >
             Catálogo Completo →
           </LocalizedClientLink>
@@ -126,7 +126,7 @@ export default function CategoriesGrid() {
               <motion.div 
                 key={cat.title}
                 variants={itemVariants}
-                className={`${gridClasses} group relative overflow-hidden bg-gray-50 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-500`}
+                className={`${gridClasses} group relative overflow-hidden bg-brand-gray-light/20 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-500`}
               >
                 <LocalizedClientLink href={cat.handle} className="block w-full h-full">
                   <Image 

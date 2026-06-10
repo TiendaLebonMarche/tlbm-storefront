@@ -25,14 +25,14 @@ export default async function HotDeals({
     if (products.length === 0) return null
 
     return (
-      <section className="w-full bg-white py-16 md:py-24 border-b border-gray-100">
+      <section className="w-full bg-white py-16 md:py-24 border-b border-brand-gray-light">
         <div className="content-container px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
-              <span className="text-brand-olive font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+              <span className="text-brand-black font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
                 ⚡ Selección Curada
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-black tracking-tighter text-brand-brown leading-[0.9]">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-black tracking-tighter text-brand-black leading-[0.9]">
                 Precios de Selección Global
               </h2>
               <p className="text-brand-gray text-sm md:text-base mt-6 font-normal leading-relaxed">
@@ -41,7 +41,7 @@ export default async function HotDeals({
             </div>
             <LocalizedClientLink
               href="/store"
-              className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-brown border-b border-brand-brown/30 pb-2 hover:text-brand-olive transition-colors whitespace-nowrap"
+              className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border-b border-brand-black/30 pb-2 hover:text-brand-black transition-colors whitespace-nowrap"
             >
               Ver Catálogo Completo →
             </LocalizedClientLink>

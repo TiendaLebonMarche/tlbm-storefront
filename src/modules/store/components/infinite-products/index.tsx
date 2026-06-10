@@ -93,13 +93,13 @@ export default function InfiniteProducts({
   return (
     <>
       {/* Counter bar */}
-      <div className="mb-8 pb-3 border-b border-gray-100 flex items-center justify-between">
-        <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] font-medium">
+      <div className="mb-8 pb-3 border-b border-brand-gray-light flex items-center justify-between">
+        <p className="text-[9px] text-brand-gray uppercase tracking-[0.3em] font-medium">
           Mostrando {Math.min(displayedCount, initialProducts.length)} de{" "}
-          <span className="font-bold text-brand-brown">{initialProducts.length}</span> productos
+          <span className="font-bold text-brand-black">{initialProducts.length}</span> productos
         </p>
         {!hasMore && initialProducts.length > 0 && (
-          <span className="text-[9px] text-brand-olive uppercase tracking-[0.2em] font-bold">
+          <span className="text-[9px] text-brand-black uppercase tracking-[0.2em] font-bold">
             Catálogo completo ✓
           </span>
         )}
@@ -120,10 +120,10 @@ export default function InfiniteProducts({
           <div className="flex flex-col items-center gap-3">
             {/* Branded spinner */}
             <div className="relative w-8 h-8">
-              <div className="absolute inset-0 rounded-full border-2 border-brand-brown/10" />
+              <div className="absolute inset-0 rounded-full border-2 border-brand-black/10" />
               <div className="absolute inset-0 rounded-full border-2 border-t-brand-brown border-r-transparent border-b-transparent border-l-transparent animate-spin" />
             </div>
-            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-brown/60">
+            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/60">
               Cargando Selección…
             </p>
           </div>
@@ -132,13 +132,13 @@ export default function InfiniteProducts({
         {!hasMore && !isLoading && initialProducts.length > 0 && (
           <div className="flex flex-col items-center gap-3 py-4">
             <div className="flex items-center gap-4">
-              <div className="h-px w-12 bg-brand-brown/15" />
-              <span className="text-[8px] uppercase tracking-[0.5em] text-brand-brown/30 font-bold">
+              <div className="h-px w-12 bg-brand-black/15" />
+              <span className="text-[8px] uppercase tracking-[0.5em] text-brand-black/30 font-bold">
                 Fin de la Selección
               </span>
-              <div className="h-px w-12 bg-brand-brown/15" />
+              <div className="h-px w-12 bg-brand-black/15" />
             </div>
-            <p className="text-[9px] text-gray-400 tracking-[0.15em] font-light">
+            <p className="text-[9px] text-brand-gray tracking-[0.15em] font-light">
               Has visto todos los productos disponibles
             </p>
           </div>

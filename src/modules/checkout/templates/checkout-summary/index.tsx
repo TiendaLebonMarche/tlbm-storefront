@@ -6,7 +6,7 @@ const CheckoutSummary = ({ cart }: { cart: any }) => {
   return (
     <div className="sticky top-0 flex flex-col-reverse small:flex-col gap-y-8 py-8 small:py-0">
       <div className="w-full bg-white flex flex-col">
-        <div className="border-t border-gray-100 my-6 small:hidden" />
+        <div className="border-t border-brand-gray-light my-6 small:hidden" />
         <h2 className="text-2xl md:text-3xl font-serif italic text-brand-black">
           En tu Bolsa
         </h2>

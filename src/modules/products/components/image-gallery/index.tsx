@@ -43,7 +43,7 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full bg-gray-50 aspect-[4/5] flex items-center justify-center">
+      <div className="w-full bg-brand-gray-light/20 aspect-[4/5] flex items-center justify-center">
         <p className="text-gray-300 text-xs tracking-[0.3em] uppercase font-sans">Sin imagen</p>
       </div>
     )
@@ -63,7 +63,7 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
               onClick={() => setSelectedImageIndex(idx)}
               className={`relative aspect-[3/4] flex-shrink-0 w-20 lg:w-full overflow-hidden transition-all duration-700 ease-in-out ${
                 selectedImageIndex === idx
-                  ? "border border-brand-brown opacity-100"
+                  ? "border border-brand-black opacity-100"
                   : "border border-transparent opacity-40 hover:opacity-100"
               }`}
               title={`Ver ${baseAlt} - imagen ${idx + 1}`}
@@ -115,13 +115,13 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
         </AnimatePresence>
 
         {/* Subtle border overlay */}
-        <div className="absolute inset-0 border border-gray-100/40 pointer-events-none z-10" />
+        <div className="absolute inset-0 border border-brand-gray-light/40 pointer-events-none z-10" />
 
         {/* Zoom hint */}
         {!isZoomed && (
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
             <div className="bg-white/80 backdrop-blur-sm p-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-4 h-4 text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-4 h-4 text-brand-gray">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0010.606 10.606zM10.5 7.5v6m3-3h-6" />
               </svg>
             </div>
@@ -130,7 +130,7 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
 
         {/* Counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-4 text-[10px] text-gray-400 tracking-[0.2em] font-sans z-20">
+          <div className="absolute bottom-4 left-4 text-[10px] text-brand-gray tracking-[0.2em] font-sans z-20">
             {String(selectedImageIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
           </div>
         )}

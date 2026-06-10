@@ -33,16 +33,16 @@ export default async function OrderCompletedTemplate({
           data-testid="order-complete-container"
         >
           {/* ── Encabezado de Éxito ── */}
-          <div className="text-center mb-6 pb-6 border-b border-gray-100">
-            <div className="w-16 h-16 bg-brand-olive/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-brand-olive">
+          <div className="text-center mb-6 pb-6 border-b border-brand-gray-light">
+            <div className="w-16 h-16 bg-brand-black/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-brand-black">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h1 className="text-3xl md:text-4xl font-serif font-bold text-brand-brown mb-2">
+            <h1 className="text-3xl md:text-4xl font-serif font-bold text-brand-black mb-2">
               ¡Muchas Gracias!
             </h1>
-            <p className="text-gray-500 text-lg font-light">
+            <p className="text-brand-gray text-lg font-light">
               Tu orden se ha realizado con éxito.
             </p>
           </div>
@@ -72,7 +72,7 @@ export default async function OrderCompletedTemplate({
           <OrderDetails order={order} />
 
           <div className="mt-4">
-            <h2 className="text-xl font-serif font-bold text-brand-brown mb-4">
+            <h2 className="text-xl font-serif font-bold text-brand-black mb-4">
               Resumen de tu Orden
             </h2>
             <Items order={order} />
@@ -83,8 +83,8 @@ export default async function OrderCompletedTemplate({
           <PaymentDetails order={order} />
 
           {/* ── Botón de WhatsApp ── */}
-          <div className="mt-4 pt-6 border-t border-gray-100 text-center">
-            <p className="text-sm text-gray-500 mb-4 font-light">
+          <div className="mt-4 pt-6 border-t border-brand-gray-light text-center">
+            <p className="text-sm text-brand-gray mb-4 font-light">
               ¿Tienes alguna duda sobre tu orden?
             </p>
             <a

@@ -43,10 +43,10 @@ export default function CategoryTemplate({
           <RefinementList sortBy={sort} data-testid="sort-by-container" />
         </div>
         <div className="w-full">
-          <div className="mb-12 border-b border-gray-100 pb-8 flex flex-col gap-y-4">
+          <div className="mb-12 border-b border-brand-gray-light pb-8 flex flex-col gap-y-4">
             {/* Breadcrumbs */}
-            <div className="flex items-center gap-x-2 text-[10px] uppercase tracking-widest text-gray-400">
-              <LocalizedClientLink href="/store" className="hover:text-brand-gold transition-colors">
+            <div className="flex items-center gap-x-2 text-[10px] uppercase tracking-widest text-brand-gray">
+              <LocalizedClientLink href="/store" className="hover:text-brand-black transition-colors">
                 Tienda
               </LocalizedClientLink>
               {parents && parents.reverse().map((parent) => (
@@ -54,14 +54,14 @@ export default function CategoryTemplate({
                   <span className="text-gray-300">/</span>
                   <LocalizedClientLink
                     href={`/categories/${parent.handle}`}
-                    className="hover:text-brand-gold transition-colors"
+                    className="hover:text-brand-black transition-colors"
                   >
                     {parent.name}
                   </LocalizedClientLink>
                 </span>
               ))}
               <span className="text-gray-300">/</span>
-              <span className="text-brand-gold font-bold">{category.name}</span>
+              <span className="text-brand-black font-bold">{category.name}</span>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -70,7 +70,7 @@ export default function CategoryTemplate({
                   {category.name}
                 </h1>
                 {category.description && (
-                  <p className="mt-4 text-gray-500 text-sm max-w-[600px] leading-relaxed italic font-serif">
+                  <p className="mt-4 text-brand-gray text-sm max-w-[600px] leading-relaxed italic font-serif">
                     &ldquo;{category.description}&rdquo;
                   </p>
                 )}
@@ -83,7 +83,7 @@ export default function CategoryTemplate({
                   <LocalizedClientLink
                     key={c.id}
                     href={`/categories/${c.handle}`}
-                    className="px-4 py-2 border border-gray-100 bg-gray-50/50 text-brand-black text-[10px] uppercase tracking-widest font-bold hover:bg-brand-black hover:text-white transition-all duration-300 rounded-full"
+                    className="px-4 py-2 border border-brand-gray-light bg-brand-gray-light/20/50 text-brand-black text-[10px] uppercase tracking-widest font-bold hover:bg-brand-black hover:text-white transition-all duration-300 rounded-full"
                   >
                     {c.name}
                   </LocalizedClientLink>

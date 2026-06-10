@@ -40,11 +40,11 @@ const Summary = ({ cart }: SummaryProps) => {
         data-testid="checkout-button"
         className="mt-4"
       >
-        <Button className="w-full pill-button h-14 bg-brand-brown hover:bg-brand-olive text-white font-bold uppercase tracking-[0.2em] text-[10px] transition-all duration-500 shadow-xl border-none">
+        <Button className="w-full pill-button h-14 bg-brand-black hover:bg-brand-black text-white font-bold uppercase tracking-[0.2em] text-[10px] transition-all duration-500 shadow-xl border-none">
           Finalizar Pedido
         </Button>
       </LocalizedClientLink>
-      <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest mt-2">
+      <p className="text-[10px] text-center text-brand-gray uppercase tracking-widest mt-2">
         Pago seguro & Garantía Le Bon Marché
       </p>
     </div>

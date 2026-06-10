@@ -13,9 +13,9 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
   const items = cart?.items
   return (
     <div className="flex flex-col gap-y-6">
-      <div className="pb-6 border-b border-gray-100 flex items-center justify-between">
+      <div className="pb-6 border-b border-brand-gray-light flex items-center justify-between">
         <h1 className="text-4xl md:text-5xl font-serif text-brand-black italic">Mi Bolsa</h1>
-        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">
+        <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gray font-bold">
           {items?.length || 0} Artículos
         </span>
       </div>

@@ -53,7 +53,7 @@ const Addresses = ({
           <Text>
             <button
               onClick={handleEdit}
-              className="text-brand-brown underline hover:text-brand-olive font-bold text-sm"
+              className="text-brand-black underline hover:text-brand-black font-bold text-sm"
               data-testid="edit-address-button"
             >
               Editar
@@ -83,7 +83,7 @@ const Addresses = ({
                 <BillingAddress cart={cart} />
               </div>
             )}
-            <SubmitButton className="mt-6 pill-button bg-brand-brown hover:bg-brand-olive text-white w-full sm:w-auto" data-testid="submit-address-button">
+            <SubmitButton className="mt-6 pill-button bg-brand-black hover:bg-brand-black text-white w-full sm:w-auto" data-testid="submit-address-button">
               Continuar compra
             </SubmitButton>
             <ErrorMessage error={message} data-testid="address-error-message" />

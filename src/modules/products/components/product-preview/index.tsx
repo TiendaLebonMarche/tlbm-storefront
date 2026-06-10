@@ -52,7 +52,7 @@ export default function ProductPreview({
         className="block relative overflow-hidden aspect-square bg-transparent"
       >
         {/* Subtle border instead of bg color mismatch */}
-        <div className="absolute inset-0 border border-gray-100/60 z-10 pointer-events-none" />
+        <div className="absolute inset-0 border border-brand-gray-light/60 z-10 pointer-events-none" />
         
         <Thumbnail
           thumbnail={product.thumbnail}
@@ -67,7 +67,7 @@ export default function ProductPreview({
 
         {/* CTA pill on hover */}
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 transition-all duration-500 ease-out z-20 pointer-events-none">
-          <span className="bg-brand-brown text-white text-[8px] font-semibold uppercase tracking-[0.3em] px-4 md:px-6 py-2 md:py-2.5 whitespace-nowrap">
+          <span className="bg-brand-black text-white text-[8px] font-semibold uppercase tracking-[0.3em] px-4 md:px-6 py-2 md:py-2.5 whitespace-nowrap">
             Ver Producto
           </span>
         </div>
@@ -84,12 +84,12 @@ export default function ProductPreview({
               </span>
             )}
             {isNew && (
-              <span className="bg-brand-olive text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
                 Nuevo
               </span>
             )}
             {isLowStock && (
-              <span className="bg-brand-brown text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
                 Últimas uds.
               </span>
             )}
@@ -98,7 +98,7 @@ export default function ProductPreview({
 
         {/* Category */}
         {category && (
-          <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.25em] text-brand-olive truncate mb-1">
+          <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.25em] text-brand-black truncate mb-1">
             {category}
           </span>
         )}
@@ -106,7 +106,7 @@ export default function ProductPreview({
         {/* Title */}
         <LocalizedClientLink href={`/productos/${product.handle}`} className="mb-1.5">
           <h3
-            className="text-xs md:text-sm font-semibold text-brand-brown leading-snug line-clamp-2 hover:text-brand-olive transition-colors duration-300 font-sans"
+            className="text-xs md:text-sm font-semibold text-brand-black leading-snug line-clamp-2 hover:text-brand-black transition-colors duration-300 font-sans"
             data-testid="product-title"
           >
             {product.title}

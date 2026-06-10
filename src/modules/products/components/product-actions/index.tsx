@@ -195,10 +195,10 @@ export default function ProductActions({
             }
             className={`w-full h-16 text-[11px] font-bold uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-4 relative overflow-hidden group/btn ${
               addedSuccess
-                ? 'bg-brand-olive text-white'
+                ? 'bg-brand-black text-white'
                 : !inStock || !selectedVariant || !isValidVariant
-                  ? 'bg-gray-50 text-gray-300 cursor-not-allowed border border-gray-100'
-                  : 'bg-brand-brown text-white hover:bg-black active:scale-[0.97] shadow-xl shadow-brand-brown/5'
+                  ? 'bg-brand-gray-light/20 text-gray-300 cursor-not-allowed border border-brand-gray-light'
+                  : 'bg-brand-black text-white hover:bg-black active:scale-[0.97] shadow-xl shadow-brand-brown/5'
             }`}
             data-testid="add-product-button"
           >

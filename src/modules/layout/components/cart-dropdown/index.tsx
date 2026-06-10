@@ -139,7 +139,7 @@ const CartDropdown = ({
     <div className="h-full z-50 flex items-center relative">
       <Popover className="relative h-full flex items-center">
         <PopoverButton
-          className="nav-icon text-inherit hover:text-brand-gold relative flex items-center gap-1.5 outline-none transition-colors"
+          className="nav-icon text-inherit hover:text-brand-black relative flex items-center gap-1.5 outline-none transition-colors"
           onClick={open}
           data-testid="nav-cart-link"
         >
@@ -205,13 +205,13 @@ const CartDropdown = ({
             role="dialog"
           >
             {/* Header */}
-            <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+            <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-brand-gray-light flex justify-between items-center bg-white sticky top-0 z-10">
               <h2 className="text-lg sm:text-xl font-serif font-bold text-brand-black tracking-tight">
                 Tu Bolsa
               </h2>
               <button
                 onClick={close}
-                className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-2xl sm:text-3xl font-light text-gray-400 hover:text-brand-black hover:rotate-90 transition-all duration-300 rounded-full hover:bg-gray-50"
+                className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-2xl sm:text-3xl font-light text-brand-gray hover:text-brand-black hover:rotate-90 transition-all duration-300 rounded-full hover:bg-brand-gray-light/30"
                 aria-label="Cerrar bolsa"
               >
                 &times;
@@ -226,7 +226,7 @@ const CartDropdown = ({
                     .sort((a, b) => ((a.created_at ?? "") > (b.created_at ?? "") ? -1 : 1))
                     .map((item) => (
                       <div
-                        className="flex justify-between items-center bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors group"
+                        className="flex justify-between items-center bg-brand-gray-light/20 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors group"
                         key={item.id}
                         data-testid="cart-item"
                       >
@@ -246,14 +246,14 @@ const CartDropdown = ({
                             <p className="font-bold text-brand-black truncate">
                               {item.title}
                             </p>
-                            <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5">
+                            <p className="text-[10px] sm:text-xs text-brand-gray mt-0.5">
                               Cantidad: {item.quantity}
                             </p>
                             <LineItemPrice
                               item={item}
                               style="tight"
                               currencyCode={cartState.currency_code}
-                              className="text-gray-500 font-medium text-xs sm:text-sm mt-0.5"
+                              className="text-brand-gray font-medium text-xs sm:text-sm mt-0.5"
                             />
                           </div>
                         </div>
@@ -267,10 +267,10 @@ const CartDropdown = ({
                 </div>
 
                 {/* Footer */}
-                <div className="px-5 py-4 sm:px-6 sm:py-5 border-t border-gray-100 bg-white">
+                <div className="px-5 py-4 sm:px-6 sm:py-5 border-t border-brand-gray-light bg-white">
                   {/* Subtotal */}
                   <div className="flex justify-between items-center mb-5">
-                    <span className="text-xs font-semibold tracking-widest uppercase text-gray-600">
+                    <span className="text-xs font-semibold tracking-widest uppercase text-brand-gray">
                       Subtotal
                     </span>
                     <span
@@ -314,7 +314,7 @@ const CartDropdown = ({
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-16 h-16 text-gray-200 mb-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                   </svg>
-                  <p className="text-center text-gray-400 mb-6 font-serif italic text-lg">
+                  <p className="text-center text-brand-gray mb-6 font-serif italic text-lg">
                     Tu bolsa está vacía.
                   </p>
                   <LocalizedClientLink href="/store" onClick={close}>

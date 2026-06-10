@@ -70,13 +70,13 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveTo="translate-y-full opacity-0"
         >
           <div
-            className="bg-white/80 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-gray-100 shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
+            className="bg-white/80 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-brand-gray-light shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
             data-testid="mobile-actions"
           >
             <div className="flex items-baseline justify-between w-full">
               <div className="flex flex-col gap-y-1">
-                <span className="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-sans font-bold">Producto Seleccionado</span>
-                <span className="text-sm font-serif text-brand-brown truncate max-w-[200px]" data-testid="mobile-title">{product.title}</span>
+                <span className="text-[9px] uppercase tracking-[0.3em] text-brand-gray font-sans font-bold">Producto Seleccionado</span>
+                <span className="text-sm font-serif text-brand-black truncate max-w-[200px]" data-testid="mobile-title">{product.title}</span>
               </div>
               
               {selectedPrice ? (
@@ -87,8 +87,8 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                     </span>
                   )}
                   <span
-                    className={clx("text-xl font-black text-brand-brown font-sans tracking-tighter leading-none", {
-                      "text-brand-brown": selectedPrice.price_type === "sale",
+                    className={clx("text-xl font-black text-brand-black font-sans tracking-tighter leading-none", {
+                      "text-brand-black": selectedPrice.price_type === "sale",
                     })}
                   >
                     {selectedPrice.calculated_price}
@@ -105,7 +105,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               {!isSimple && (
                 <button
                   onClick={open}
-                  className="w-full h-14 border border-gray-100 bg-gray-50/50 flex items-center justify-between px-5 text-[10px] font-bold uppercase tracking-widest text-brand-brown hover:bg-gray-50 transition-colors"
+                  className="w-full h-14 border border-brand-gray-light bg-brand-gray-light/20/50 flex items-center justify-between px-5 text-[10px] font-bold uppercase tracking-widest text-brand-black hover:bg-brand-gray-light/30 transition-colors"
                   data-testid="mobile-actions-button"
                 >
                   <span className="truncate max-w-[120px]">
@@ -113,7 +113,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                       ? Object.values(options).join(" / ")
                       : "Elegir Talla"}
                   </span>
-                  <ChevronDown className="w-3.5 h-3.5 text-brand-brown/40" />
+                  <ChevronDown className="w-3.5 h-3.5 text-brand-black/40" />
                 </button>
               )}
               <button
@@ -122,7 +122,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 className={clx(
                   "w-full h-14 text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand-brown/10 relative overflow-hidden",
                   {
-                    "bg-brand-brown text-white active:scale-95": inStock && variant && !isAdding,
+                    "bg-brand-black text-white active:scale-95": inStock && variant && !isAdding,
                     "bg-gray-100 text-gray-300 cursor-not-allowed border border-gray-50": !inStock || !variant,
                     "opacity-90": isAdding
                   }
@@ -159,7 +159,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-brand-brown/40 backdrop-blur-md" />
+            <div className="fixed inset-0 bg-brand-black/40 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed bottom-0 inset-x-0">
@@ -177,11 +177,11 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                   className="w-full transform overflow-hidden text-left flex flex-col gap-y-0 bg-white rounded-t-3xl shadow-2xl"
                   data-testid="mobile-actions-modal"
                 >
-                  <div className="w-full flex justify-between items-center px-8 py-6 border-b border-gray-100">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-brown/40">Opciones Disponibles</span>
+                  <div className="w-full flex justify-between items-center px-8 py-6 border-b border-brand-gray-light">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black/40">Opciones Disponibles</span>
                     <button
                       onClick={close}
-                      className="bg-gray-50 w-10 h-10 rounded-full text-brand-brown flex justify-center items-center hover:bg-gray-100 transition-colors"
+                      className="bg-brand-gray-light/20 w-10 h-10 rounded-full text-brand-black flex justify-center items-center hover:bg-gray-100 transition-colors"
                       data-testid="close-modal-button"
                     >
                       <X className="w-4 h-4" />
@@ -206,10 +206,10 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                       </div>
                     )}
                   </div>
-                  <div className="p-8 bg-gray-50/50">
+                  <div className="p-8 bg-brand-gray-light/20/50">
                     <button 
                       onClick={close}
-                      className="w-full h-14 bg-brand-brown text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all"
+                      className="w-full h-14 bg-brand-black text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all"
                     >
                       Confirmar Selección
                     </button>

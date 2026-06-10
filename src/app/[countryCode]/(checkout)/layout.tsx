@@ -8,11 +8,11 @@ export default function CheckoutLayout({
 }) {
   return (
     <div className="w-full bg-white relative small:min-h-screen">
-      <div className="h-16 bg-white border-b border-gray-100">
+      <div className="h-16 bg-white border-b border-brand-gray-light">
         <nav className="flex h-full items-center content-container justify-between">
           <LocalizedClientLink
             href="/cart"
-            className="text-[10px] uppercase tracking-[0.3em] text-brand-gray flex items-center gap-x-2 flex-1 basis-0 hover:text-brand-brown transition-colors duration-300"
+            className="text-[10px] uppercase tracking-[0.3em] text-brand-gray flex items-center gap-x-2 flex-1 basis-0 hover:text-brand-black transition-colors duration-300"
             data-testid="back-to-cart-link"
           >
             <ChevronDown className="rotate-90" size={14} />
@@ -25,7 +25,7 @@ export default function CheckoutLayout({
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/"
-            className="font-serif text-lg italic text-brand-brown hover:text-brand-olive transition-colors duration-300"
+            className="font-serif text-lg italic text-brand-black hover:text-brand-black transition-colors duration-300"
             data-testid="store-link"
           >
             Le Bon Marché
@@ -35,7 +35,7 @@ export default function CheckoutLayout({
       </div>
       <div className="relative" data-testid="checkout-container">{children}</div>
       <div className="py-6 w-full flex items-center justify-center">
-        <p className="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-medium">
+        <p className="text-[9px] uppercase tracking-[0.3em] text-brand-gray font-medium">
           &copy; {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.
         </p>
       </div>

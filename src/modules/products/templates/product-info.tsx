@@ -22,7 +22,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       {/* Precios */}
       <div className="flex items-baseline gap-4">
         {hasDiscount && cheapestPrice?.original_price && (
-          <span className="text-sm text-gray-500 line-through font-medium">
+          <span className="text-sm text-brand-gray line-through font-medium">
             {cheapestPrice.original_price}
           </span>
         )}
@@ -38,19 +38,19 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
       {/* Especificaciones rápidas */}
       {product.type && (
-        <div className="text-sm text-gray-600 font-light">
+        <div className="text-sm text-brand-gray font-light">
           <span className="font-bold text-gray-700">Categoría:</span> {product.type.value}
         </div>
       )}
 
       {product.collection && (
-        <div className="text-sm text-gray-600 font-light">
+        <div className="text-sm text-brand-gray font-light">
           <span className="font-bold text-gray-700">Colección:</span> {product.collection.title}
         </div>
       )}
 
       {product.options && product.options.length > 0 && (
-        <div className="text-sm text-gray-600 font-light">
+        <div className="text-sm text-brand-gray font-light">
           <span className="font-bold text-gray-700">Variantes:</span> {product.options.length} disponibles
         </div>
       )}

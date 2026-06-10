@@ -51,11 +51,11 @@ const SearchBar = () => {
             setSearchValue(e.target.value)
             setIsSearching(true)
           }}
-          className="w-full px-0 py-4 border-b border-gray-100 bg-transparent text-brand-black placeholder-gray-300 outline-none focus:border-brand-gold transition-all font-light text-sm tracking-wide"
+          className="w-full px-0 py-4 border-b border-brand-gray-light bg-transparent text-brand-black placeholder-gray-300 outline-none focus:border-brand-black transition-all font-light text-sm tracking-wide"
         />
 
         {/* Icono de búsqueda - Minimalista */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-300 group-focus-within:text-brand-gold transition-colors">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-300 group-focus-within:text-brand-black transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -99,8 +99,8 @@ const SearchBar = () => {
 
       {/* Indicador de búsqueda */}
       {isSearching && (
-        <div className="h-1 w-full bg-gray-50 mt-1 overflow-hidden">
-          <div className="h-full bg-brand-gold animate-marquee w-1/2" />
+        <div className="h-1 w-full bg-brand-gray-light/20 mt-1 overflow-hidden">
+          <div className="h-full bg-brand-black animate-marquee w-1/2" />
         </div>
       )}
     </div>
