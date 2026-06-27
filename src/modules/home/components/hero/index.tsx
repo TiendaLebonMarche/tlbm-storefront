@@ -10,7 +10,7 @@ const TRANSITION_MS = 1000
 
 const SLIDES = [
   {
-    bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=60&w=1200",
+    bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=40&w=640",
     bgPos: "center",
     bgPosMobile: "center",
     eyebrow: "Tu tienda online",
@@ -22,7 +22,7 @@ const SLIDES = [
     tag: "h1",
   },
   {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_1200/v1778526049/ChatGPT_Image_11_may_2026_13_33_38_jiqtmt.png",
+    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_640/v1778526049/ChatGPT_Image_11_may_2026_13_33_38_jiqtmt.png",
     bgPos: "center 42%",
     bgPosMobile: "center",
     eyebrow: "Compra inteligente",
@@ -34,7 +34,7 @@ const SLIDES = [
     tag: "h2",
   },
   {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_1200/v1778521762/ChatGPT_Image_11_may_2026_12_48_02_1_s1pzmt.png",
+    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_640/v1778521762/ChatGPT_Image_11_may_2026_12_48_02_1_s1pzmt.png",
     bgPos: "center 38%",
     bgPosMobile: "center",
     eyebrow: "Ofertas detectadas",
