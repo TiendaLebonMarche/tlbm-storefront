@@ -90,7 +90,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           {/* LEFT: Gallery — 58% */}
           <div className="w-full lg:w-[58%]">
             <div className="lg:sticky lg:top-32 relative">
-              <ImageGallery images={images} productTitle={product.title} />
+              <ImageGallery images={images} productTitle={product.title} layoutId={`product-image-${product.handle}`} />
             </div>
           </div>
 

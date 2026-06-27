@@ -1,18 +1,19 @@
 import { Container, clx } from "@medusajs/ui"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import React from "react"
 
 import PlaceholderImage from "@modules/common/icons/placeholder-image"
 
 type ThumbnailProps = {
   thumbnail?: string | null
-  // TODO: Fix image typings
   images?: any[] | null
   size?: "small" | "medium" | "large" | "full" | "square"
   isFeatured?: boolean
   className?: string
   "data-testid"?: string
   alt?: string
+  layoutId?: string
 }
 
 const Thumbnail: React.FC<ThumbnailProps> = ({
@@ -23,6 +24,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   className,
   "data-testid": dataTestid,
   alt = "Producto Le Bon Marché",
+  layoutId,
 }) => {
   const initialImage = thumbnail || images?.[0]?.url
   const hoverImage = images?.[1]?.url || initialImage // fallback to initial if no 2nd image
@@ -43,7 +45,9 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       data-testid={dataTestid}
     >
       <div className="group/thumb relative w-full h-full">
-        <ImageOrPlaceholder image={initialImage} alt={alt} />
+        <motion.div layoutId={layoutId} className="absolute inset-0">
+          <ImageOrPlaceholder image={initialImage} alt={alt} />
+        </motion.div>
         {/* Hover image */}
         {hoverImage && hoverImage !== initialImage && (
           <div className="absolute inset-0 opacity-0 lg:group-hover/thumb:opacity-100 transition-opacity duration-700 z-10 w-full h-full bg-transparent">

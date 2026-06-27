@@ -64,6 +64,7 @@ export default function ProductPreview({
           size="full"
           isFeatured={isFeatured}
           alt={product.title || "Producto Le Bon Marché"}
+          layoutId={`product-image-${product.handle}`}
         />
 
         {/* Elegant white hover overlay */}

@@ -8,9 +8,10 @@ import { motion, AnimatePresence } from "framer-motion"
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
   productTitle?: string
+  layoutId?: string
 }
 
-const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
+const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
@@ -93,6 +94,7 @@ const ImageGallery = ({ images, productTitle }: ImageGalleryProps) => {
           {selectedImage?.url && (
             <motion.div
               key={selectedImage.id}
+              layoutId={layoutId}
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
