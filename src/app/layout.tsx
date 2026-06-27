@@ -144,6 +144,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
+        {/* Preload hero image for faster LCP */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=40&w=640"
+          fetchpriority="high"
+        />
+
         {/* RSS Feed for AI and content discovery */}
         <link
           rel="alternate"
