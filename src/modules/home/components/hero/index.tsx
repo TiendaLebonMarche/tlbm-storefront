@@ -22,7 +22,7 @@ const SLIDES = [
     tag: "h1",
   },
   {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_2200/v1778526049/ChatGPT_Image_11_may_2026_13_33_38_jiqtmt.png",
+    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_1200/v1778526049/ChatGPT_Image_11_may_2026_13_33_38_jiqtmt.png",
     bgPos: "center 42%",
     bgPosMobile: "center",
     eyebrow: "Compra inteligente",
@@ -34,7 +34,7 @@ const SLIDES = [
     tag: "h2",
   },
   {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_2200/v1778521762/ChatGPT_Image_11_may_2026_12_48_02_1_s1pzmt.png",
+    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_1200/v1778521762/ChatGPT_Image_11_may_2026_12_48_02_1_s1pzmt.png",
     bgPos: "center 38%",
     bgPosMobile: "center",
     eyebrow: "Ofertas detectadas",
