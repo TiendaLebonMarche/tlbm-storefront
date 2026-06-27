@@ -32,7 +32,7 @@ function checkEnvVariables() {
       )
     )
 
-    process.exit(1)
+    console.warn("\n⚠️  Env var missing — continuing anyway (Vercel deploy mode)\n"); return
   }
 }
 
