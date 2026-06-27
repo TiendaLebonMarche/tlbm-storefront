@@ -421,6 +421,9 @@ export default function Hero() {
                   <img
                     src={`https://cdn.simpleicons.org/${slug}/11151f`}
                     alt={label}
+                    width="24"
+                    height="24"
+                    loading="lazy"
                     onError={(e) => {
                       const img = e.currentTarget
                       img.style.display = "none"

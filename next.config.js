@@ -13,7 +13,8 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  */
 const nextConfig = {
   reactStrictMode: true,
-  // Disable legacy browser polyfills (modern browsers don't need them)
+  swcMinify: true,
+  // Modern browser target — no ES5 polyfills needed
   transpilePackages: [],
   // Optimize bundle size for known large packages
   experimental: {
