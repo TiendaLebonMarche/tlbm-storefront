@@ -3989,10 +3989,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stripe/stripe-js@npm:^8.2.0":
-  version: 8.8.0
-  resolution: "@stripe/stripe-js@npm:8.8.0"
-  checksum: 10/a059771590c6eb57efdcfb789da4783eb6e5a10d716bfe094ce5bcf7b28ba439867af53d055f7998cbd15a255e9dae020f9f4e6276defb4416d0457fc674fcfe
+"@stripe/stripe-js@npm:^9.8.0":
+  version: 9.8.0
+  resolution: "@stripe/stripe-js@npm:9.8.0"
+  checksum: 10/ac9f73095a586b38b7253b83ed251f6234a93d686fc2cbdd3e8084f2aa9fd3520da108762a907dd39d1a05f33b225ff44de53e0747923fb70c2cae6df5d0c9f2
   languageName: node
   linkType: hard
 
@@ -8145,7 +8145,7 @@ __metadata:
     "@radix-ui/react-separator": "npm:^1.1.8"
     "@radix-ui/react-slot": "npm:^1.2.4"
     "@stripe/react-stripe-js": "npm:^5.3.0"
-    "@stripe/stripe-js": "npm:^8.2.0"
+    "@stripe/stripe-js": "npm:^9.8.0"
     "@types/node": "npm:^18.0.0"
     "@types/react": "npm:19.0.0"
     "@types/react-dom": "npm:19.0.0"
