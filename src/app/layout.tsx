@@ -149,7 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           rel="preload"
           as="image"
           href="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=40&w=640"
-          fetchpriority="high"
+          fetchPriority="high"
         />
 
         {/* RSS Feed for AI and content discovery */}

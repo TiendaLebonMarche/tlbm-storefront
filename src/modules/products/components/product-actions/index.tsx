@@ -1,11 +1,12 @@
 "use client"
 
+function isEqual(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+
 import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
-// Vanilla JS deep equality
 import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 import ProductPrice from "../product-price"

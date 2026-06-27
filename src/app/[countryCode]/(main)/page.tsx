@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 
-import HeroSection2 from "@modules/home/components/hero-section-2"
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
