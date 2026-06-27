@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     siteName: "Tienda Le Bon Marché",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: new URL("/opengraph-image.jpg", getBaseURL()).toString(),
         width: 1200,
         height: 630,
         alt: "Tienda Le Bon Marché — Boutique Online Colombia",

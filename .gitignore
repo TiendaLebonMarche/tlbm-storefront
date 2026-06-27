@@ -67,3 +67,4 @@ tsc-errors.log
 ts-errors.txt
 .env.local
 data/
+.env*

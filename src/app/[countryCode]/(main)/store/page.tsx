@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import SortOptions from "@modules/store/components/refinement-list/sort-products"
 import StoreTemplate from "@modules/store/templates"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
@@ -41,7 +42,12 @@ export default async function StorePage(props: Params) {
   const { sortBy, page, q, collection, minPrice, maxPrice } = searchParams
 
   return (
-    <StoreTemplate
+    <div className="content-container px-4 py-4">
+      <Breadcrumbs items={[
+        { label: "Inicio", href: `/co` },
+        { label: "Catálogo" },
+      ]} />
+      <StoreTemplate
       sortBy={sortBy}
       page={page}
       countryCode={params.countryCode}
@@ -50,5 +56,6 @@ export default async function StorePage(props: Params) {
       minPrice={minPrice}
       maxPrice={maxPrice}
     />
+    </div>
   )
 }
