@@ -13,6 +13,12 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  */
 const nextConfig = {
   reactStrictMode: true,
+  // Disable legacy browser polyfills (modern browsers don't need them)
+  transpilePackages: [],
+  // Optimize bundle size for known large packages
+  experimental: {
+    optimizePackageImports: ["@medusajs/ui", "@radix-ui/react-icons", "lucide-react"],
+  },
   async headers() {
     return [
       {

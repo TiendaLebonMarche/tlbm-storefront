@@ -10,7 +10,7 @@ const TRANSITION_MS = 1000
 
 const SLIDES = [
   {
-    bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2200",
+    bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=60&w=1200",
     bgPos: "center",
     bgPosMobile: "center",
     eyebrow: "Tu tienda online",
@@ -203,7 +203,7 @@ export default function Hero() {
           background-size: cover;
           opacity: 0;
           transform: scale(1.1);
-          transition: opacity 500ms ease, transform 1500ms ease;
+          transition: opacity 300ms ease, transform 800ms ease;
           will-change: opacity, transform, clip-path;
         }
         .tlbm-bg.is-active { opacity: 1; transform: scale(1); }
@@ -359,22 +359,22 @@ export default function Hero() {
           <AnimatePresence>
             <motion.article
               key={textIdx}
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 1, scale: 1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.02 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className={`tlbm-slide align-${SLIDES[textIdx].align}`}
             >
-              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05, duration: 0.3 }} className="tlbm-eyebrow">
+              <motion.p initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-eyebrow">
                 {SLIDES[textIdx].eyebrow}
               </motion.p>
-              <motion.h1 initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }} className="tlbm-title">
+              <motion.h1 initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-title">
                 {SLIDES[textIdx].title}
               </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.4 }} className="tlbm-copy">
+              <motion.p initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-copy">
                 {SLIDES[textIdx].copy}
               </motion.p>
-              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="tlbm-actions">
+              <motion.div initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-actions">
                 <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
                   {SLIDES[textIdx].btn}
                 </LocalizedClientLink>
