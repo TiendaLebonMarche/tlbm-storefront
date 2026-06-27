@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch products for 'co' region
   const { response: { products } } = await listProducts({
     countryCode: "co",
-    queryParams: { limit: 200 },
+    queryParams: { limit: 10000 },
   }).catch(() => ({ response: { products: [] } }))
 
   // Fetch all categories

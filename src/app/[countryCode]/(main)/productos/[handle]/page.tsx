@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import { HttpTypes } from "@medusajs/types"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
@@ -264,6 +265,12 @@ export default async function ProductPage(props: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <div className="content-container px-4 py-4">
+        <Breadcrumbs items={[
+          { label: "Tienda", href: `/co/store` },
+          { label: product.title },
+        ]} />
+      </div>
       <ProductTemplate
         product={pricedProduct}
         region={region}

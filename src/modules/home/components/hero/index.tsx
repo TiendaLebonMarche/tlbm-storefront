@@ -384,17 +384,23 @@ export default function Hero() {
         </div>
 
         <div className="tlbm-controls">
-          <button className="tlbm-ctrl" onClick={() => handleNav(-1)}>
+          <button className="tlbm-ctrl" onClick={() => handleNav(-1)} aria-label="Anterior">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M15 18l-6-6 6-6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
           <div className="tlbm-dots">
             {SLIDES.map((_, i) => (
-              <button key={i} className={`tlbm-dot${i === textIdx ? " is-active" : ""}`} onClick={() => handleDot(i)} />
+              <button
+                key={i}
+                className={`tlbm-dot${i === textIdx ? " is-active" : ""}`}
+                onClick={() => handleDot(i)}
+                aria-current={i === textIdx ? "true" : undefined}
+                aria-label={`Ir a slide ${i + 1}`}
+              />
             ))}
           </div>
-          <button className="tlbm-ctrl" onClick={() => handleNav(1)}>
+          <button className="tlbm-ctrl" onClick={() => handleNav(1)} aria-label="Siguiente">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M9 6l6 6-6 6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

@@ -3,6 +3,7 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { blogPosts } from "@lib/data/blog"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { sanitizeHtml } from "@lib/util/sanitize"
 
 export async function generateMetadata({
   params,
@@ -101,7 +102,7 @@ export default async function BlogPostPage({
               prose-strong:text-brand-black prose-strong:font-bold
               prose-blockquote:border-l-brand-gold prose-blockquote:italic
               prose-img:rounded-sm shadow-sm"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
           />
 
           {/* Share & Back Link */}

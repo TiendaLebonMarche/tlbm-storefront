@@ -23,7 +23,21 @@ const nextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" }
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://js.stripe.com https://o45000000000.ingest.us.sentry.io",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://cdn.simpleicons.org https://*.s3.amazonaws.com https://medusa-public-images.s3.eu-west-1.amazonaws.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "frame-src https://www.googletagmanager.com https://js.stripe.com",
+              "connect-src 'self' https://api.tiendalebonmarche.com http://localhost:9000 https://o45000000000.ingest.us.sentry.io https://vitals.vercel-insights.com wss://*.vercel.app",
+              "manifest-src 'self'",
+            ].join("; "),
+          },
         ],
       },
     ]
@@ -48,10 +62,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
-        hostname: "backend-ixlt-production.up.railway.app",
       },
       {
         protocol: "https",

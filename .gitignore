@@ -56,3 +56,13 @@ dump.rdb
 /blob-report/
 /playwright/.cache/
 /playwright/.auth
+
+# Logs and temp files
+*.bak
+*.log
+next-build-output.txt
+ts-errs.txt
+ts-out.txt
+tsc-errors.log
+ts-errors.txt
+.env.local
