@@ -5,14 +5,42 @@ import { FormEvent, useState } from "react"
 const NewsletterSection = () => {
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [message, setMessage] = useState("")
+  const [isError, setIsError] = useState(false)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    // Aquí se integraría con tu servicio de email
-    console.log("Suscripción:", email)
-    setIsSubmitted(true)
-    setEmail("")
-    setTimeout(() => setIsSubmitted(false), 5000)
+    setIsSubmitted(false)
+    setIsError(false)
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+
+      if (res.ok) {
+        setMessage(data.message || "¡Gracias por suscribirte!")
+        setIsSubmitted(true)
+        setEmail("")
+      } else {
+        setMessage(data.error || "Error al suscribir")
+        setIsError(true)
+        setIsSubmitted(true)
+      }
+    } catch {
+      setMessage("Error de conexión. Intenta de nuevo.")
+      setIsError(true)
+      setIsSubmitted(true)
+    }
+
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setMessage("")
+      setIsError(false)
+    }, 5000)
   }
 
   return (
@@ -58,8 +86,14 @@ const NewsletterSection = () => {
 
           {/* Success Message */}
           {isSubmitted && (
-            <p className="text-brand-black text-sm font-bold mb-6 transition-all">
-              ✓ ¡Gracias! Revisa tu email para el beneficio exclusivo.
+            <p
+              className={`text-sm font-bold mb-6 transition-all ${
+                isError ? "text-red-600" : "text-brand-black"
+              }`}
+              role="alert"
+              aria-live="polite"
+            >
+              {isError ? `✗ ${message}` : `✓ ${message}`}
             </p>
           )}
 
