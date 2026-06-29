@@ -8,6 +8,8 @@ import { HttpTypes } from "@medusajs/types"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
+export const dynamic = "force-dynamic"
+
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
   searchParams: Promise<{ v_id?: string }>
@@ -75,18 +77,9 @@ async function findProduct(
   countryCode: string,
   handleOrSku: string
 ): Promise<HttpTypes.StoreProduct | null> {
-  // Try by handle first
-  let product = await listProducts({
+  const product = await listProducts({
     countryCode,
     queryParams: { handle: handleOrSku },
-  }).then(({ response }) => response.products[0]).catch(() => null)
-
-  if (product) return product
-
-  // Fallback: try by SKU (for short URLs like lbm000110626)
-  product = await listProducts({
-    countryCode,
-    queryParams: { sku: handleOrSku },
   }).then(({ response }) => response.products[0]).catch(() => null)
 
   return product
