@@ -71,6 +71,27 @@ function getImagesForVariant(
   return (product.images || []).filter((i) => imageIdsMap.has(i.id))
 }
 
+async function findProduct(
+  countryCode: string,
+  handleOrSku: string
+): Promise<HttpTypes.StoreProduct | null> {
+  // Try by handle first
+  let product = await listProducts({
+    countryCode,
+    queryParams: { handle: handleOrSku },
+  }).then(({ response }) => response.products[0]).catch(() => null)
+
+  if (product) return product
+
+  // Fallback: try by SKU (for short URLs like lbm000110626)
+  product = await listProducts({
+    countryCode,
+    queryParams: { sku: handleOrSku },
+  }).then(({ response }) => response.products[0]).catch(() => null)
+
+  return product
+}
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   const { handle } = params
@@ -80,10 +101,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
-  const product = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle },
-  }).then(({ response }) => response.products[0]).catch(() => null)
+  const product = await findProduct(params.countryCode, handle)
 
   if (!product) {
     notFound()
@@ -131,10 +149,7 @@ export default async function ProductPage(props: Props) {
     notFound()
   }
 
-  const pricedProduct = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle: params.handle },
-  }).then(({ response }) => response.products[0]).catch(() => null)
+  const pricedProduct = await findProduct(params.countryCode, params.handle)
 
   if (!pricedProduct) {
     notFound()
