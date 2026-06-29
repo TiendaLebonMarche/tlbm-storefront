@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { listProducts } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
 import ProductActions from "@modules/products/components/product-actions"
@@ -21,5 +22,9 @@ export default async function ProductActionsWrapper({
     return null
   }
 
-  return <ProductActions product={product} region={region} />
+  return (
+    <Suspense>
+      <ProductActions product={product} region={region} />
+    </Suspense>
+  )
 }
