@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 // ── Constants ────────────────────────────────────────────────────────────────
@@ -125,6 +124,9 @@ export default function Hero() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    // 🔴 OFFLOAD: Canvas wave animation is HEAVY on mobile CPUs
+    // Causes TBT spikes (228ms) on mobile — skip entirely on small screens
+    if (typeof window !== 'undefined' && window.innerWidth <= 760) return
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext("2d")
@@ -326,14 +328,15 @@ export default function Hero() {
           .tlbm-dot.is-active { width: 28px; }
         }
 
-        .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; }
-        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 60s linear infinite; }
+        .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; will-change: transform; }
+        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 80s linear infinite; will-change: transform; }
         .tlbm-mq-track { display: flex; align-items: center; gap: 40px; padding-right: 40px; }
         .tlbm-brand { 
           display: flex; align-items: center; justify-content: center; 
           width: 160px; height: 74px; padding: 12px; 
           border: 1px solid rgba(0,0,0,.04); border-radius: 12px; 
           background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); 
+          will-change: transform;
         }
         .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
         .tlbm-brand span { color: #111; font-weight: 900; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; }
@@ -356,31 +359,25 @@ export default function Hero() {
         <canvas ref={canvasRef} className="tlbm-wave" />
 
         <div className="tlbm-inner">
-          <AnimatePresence>
-            <motion.article
+          <article
               key={textIdx}
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.02 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
               className={`tlbm-slide align-${SLIDES[textIdx].align}`}
             >
-              <motion.p initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-eyebrow">
+              <p className="tlbm-eyebrow">
                 {SLIDES[textIdx].eyebrow}
-              </motion.p>
-              <motion.h1 initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-title">
+              </p>
+              <h1 className="tlbm-title">
                 {SLIDES[textIdx].title}
-              </motion.h1>
-              <motion.p initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-copy">
+              </h1>
+              <p className="tlbm-copy">
                 {SLIDES[textIdx].copy}
-              </motion.p>
-              <motion.div initial={{ opacity: 1, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.15 }} className="tlbm-actions">
+              </p>
+              <div className="tlbm-actions">
                 <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
                   {SLIDES[textIdx].btn}
                 </LocalizedClientLink>
-              </motion.div>
-            </motion.article>
-          </AnimatePresence>
+              </div>
+            </article>
         </div>
 
         <div className="tlbm-controls">

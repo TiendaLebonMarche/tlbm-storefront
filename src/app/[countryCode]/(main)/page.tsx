@@ -1,16 +1,19 @@
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import HotDeals from "@modules/home/components/hot-deals"
-import AnimatedTestimonialsSection from "@modules/home/components/animated-testimonials"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
-import { Blog7 } from "@/components/ui/blog7"
 import MostSoldSection from "@modules/home/components/most-sold"
-import BrandStatement from "@modules/home/components/brand-statement"
 import Reveal from "@modules/common/components/reveal"
+
+// 🔴 DEFER: Components below the fold — loaded lazily to reduce initial JS bundle
+const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"), { ssr: false })
+const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"), { ssr: false })
+const Blog7 = dynamic(() => import("@/components/ui/blog7").then(m => ({ default: m.Blog7 })), { ssr: false })
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
