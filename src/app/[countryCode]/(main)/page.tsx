@@ -11,9 +11,9 @@ import MostSoldSection from "@modules/home/components/most-sold"
 import Reveal from "@modules/common/components/reveal"
 
 // 🔴 DEFER: Components below the fold — loaded lazily to reduce initial JS bundle
-const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"), { ssr: false })
-const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"), { ssr: false })
-const Blog7 = dynamic(() => import("@/components/ui/blog7").then(m => ({ default: m.Blog7 })), { ssr: false })
+const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
+const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"))
+const Blog7 = dynamic(() => import("@/components/ui/blog7").then(m => ({ default: m.Blog7 })))
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
