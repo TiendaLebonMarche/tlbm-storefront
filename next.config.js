@@ -13,8 +13,7 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  // Modern browser target — no ES5 polyfills needed
+  poweredByHeader: false,
   transpilePackages: [],
   // Optimize bundle size for known large packages
   experimental: {
