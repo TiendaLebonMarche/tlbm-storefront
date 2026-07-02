@@ -9,38 +9,38 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/cart', '/checkout', '/account', '/api/'],
+                disallow: ['/cart', '/checkout', '/account', '/api', '/api/'],
             },
             // AI crawlers — allow full indexing for AI discoverability
             {
                 userAgent: 'GPTBot',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
             {
                 userAgent: 'Claude-Web',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
             {
                 userAgent: 'anthropic-ai',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
             {
                 userAgent: 'Google-Extended',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
             {
                 userAgent: 'PerplexityBot',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
             {
                 userAgent: 'cohere-ai',
                 allow: '/',
-                disallow: ['/checkout', '/account', '/api/'],
+                disallow: ['/checkout', '/account', '/api', '/api/'],
             },
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
