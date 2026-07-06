@@ -90,7 +90,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <span className="text-sm font-bold text-[#D4AF37]">{item.price}</span>
                   <LocalizedClientLink
                     href={`/productos/${item.handle}`}
-                    className="px-4 py-2 text-white text-[10px] font-bold uppercase tracking-[.22em] rounded-full bg-[#0A0A0F] hover:bg-gray-900 hover:scale-[1.05] transition-all duration-300"
+                    className="px-4 py-3 text-white text-[10px] font-bold uppercase tracking-[.22em] rounded-full bg-[#0A0A0F] hover:bg-gray-900 hover:scale-[1.05] transition-all duration-300 min-h-[44px] flex items-center justify-center"
                   >
                     Comprar
                   </LocalizedClientLink>
