@@ -125,7 +125,7 @@ function OrbitVisual() {
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[95vh] md:min-h-screen overflow-hidden flex items-center"
+      className="relative min-h-[95vh] md:min-h-screen overflow-x-hidden flex items-center"
       style={{ backgroundColor: "#0A0A0F" }}
     >
       <BgGrid />
