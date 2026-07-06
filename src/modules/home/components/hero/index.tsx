@@ -149,7 +149,7 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="font-serif text-[2.8rem] sm:text-[3.6rem] md:text-[4.2rem] lg:text-[5rem] leading-[1.05] font-bold tracking-tight text-white">
+            <h1 className="font-serif text-[2.4rem] sm:text-[3.6rem] md:text-[4.2rem] lg:text-[5rem] leading-[1.05] font-bold tracking-tight text-white">
               Tecnología<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F5D980] to-[#C8912E]">
                 Exclusiva

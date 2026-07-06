@@ -90,7 +90,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <span className="text-sm font-bold text-[#D4AF37]">{item.price}</span>
                   <LocalizedClientLink
                     href={`/productos/${item.handle}`}
-                    className="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine"
+                    className="px-4 py-2 text-[#0A0A0F] text-[10px] font-bold uppercase tracking-[.22em] rounded-full btn-shine"
                     style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}
                   >
                     Comprar

@@ -57,10 +57,9 @@ export default function OfertasParallax() {
           >
             {/* Background image */}
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
               style={{
                 backgroundImage: `url('${offer.bg}')`,
-                backgroundAttachment: "fixed",
               }}
             />
 
