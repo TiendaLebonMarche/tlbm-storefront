@@ -87,6 +87,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "api.tiendalebonmarche.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.tiendalebonmarche.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.cloudinary.com",
+      },
       ...(S3_HOSTNAME && S3_PATHNAME
         ? [
           {
