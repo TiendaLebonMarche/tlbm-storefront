@@ -176,19 +176,6 @@ export default function Hero() {
               >
                 Explorar Colección
               </LocalizedClientLink>
-
-              <LocalizedClientLink
-                href="/store?q=ofertas"
-                className="inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300"
-                style={{
-                  border: "1px solid rgba(212,175,55,0.2)",
-                  backdropFilter: "blur(12px)",
-                  background: "rgba(10,10,15,0.3)",
-                  color: "rgba(255,255,255,0.8)",
-                }}
-              >
-                Ver Ofertas
-              </LocalizedClientLink>
             </div>
 
             <div className="flex items-center gap-6 md:gap-10 mt-4 pt-6 md:pt-7" style={{ borderTop: "1px solid rgba(212,175,55,0.1)" }}>

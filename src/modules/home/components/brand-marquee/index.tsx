@@ -7,7 +7,7 @@ const BRANDS = [
 
 export default function BrandMarquee() {
   return (
-    <section className="py-8 overflow-hidden border-y border-gray-100 dark:border-white/5 bg-white dark:bg-[#0A0A0F]">
+    <section className="py-8 overflow-hidden bg-white dark:bg-[#0A0A0F]">
       <div className="flex whitespace-nowrap animate-brand-scroll">
         {[0, 1].map((set) => (
           <div key={set} className="flex items-center gap-12 mx-8">

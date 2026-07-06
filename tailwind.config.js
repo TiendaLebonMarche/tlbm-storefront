@@ -204,8 +204,8 @@ module.exports = {
           "100%": { transform: "translateX(-50%)" },
         },
         "pm-scroll": {
-          "0%": { transform: "translateX(-50%)" },
-          "100%": { transform: "translateX(0)" },
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
       animation: {

@@ -75,8 +75,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Badge */}
-                  <span className="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" 
-                    style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)", boxShadow: "0 2px 12px rgba(212,175,55,.2)" }}>
+                  <span className="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full bg-[#0A0A0F]">
                     Nuevo
                   </span>
                 </div>
