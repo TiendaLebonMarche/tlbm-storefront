@@ -1,8 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { Card, CardHeader } from "./card"
-import { Button } from "./button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -22,115 +20,99 @@ export interface ProductMostSoldProps {
   items: ProductItem[]
 }
 
-export const ProductMostSold = ({
-  title,
-  subtitle,
-  items,
-}: ProductMostSoldProps) => {
-  const [isPaused, setIsPaused] = React.useState(false)
-  
-  // Quadruple items to ensure a very long seamless marquee loop
+export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps) => {
   const duplicatedItems = [...items, ...items, ...items, ...items]
 
   return (
-    <section className="w-full bg-[#f8f8f8] py-16 md:py-24 overflow-hidden border-b border-brand-gray-light">
-      <div className="content-container px-6 mb-12 flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black mb-4 block underline underline-offset-8 decoration-brand-gray/30">Selección VIP</span>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-bold text-brand-black tracking-tighter italic leading-none uppercase">
-            {title}
-          </h2>
-          <p className="text-brand-gray/60 text-sm md:text-base font-medium italic mt-4 max-w-xl">
-            {subtitle}
-          </p>
-        </motion.div>
+    <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 md:py-20 overflow-hidden">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10 reveal">
+        <div className="flex items-end justify-between">
+          <div>
+            <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+              <span className="w-8 h-px bg-[#D4AF37]/30" />
+              Selección VIP
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
+              Lo más{" "}
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">
+                vendidos
+              </span>
+            </h2>
+          </div>
+          <LocalizedClientLink
+            href="/store"
+            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-[#D4AF37] transition-colors group"
+          >
+            Ver Todo
+            <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </LocalizedClientLink>
+        </div>
       </div>
 
-      <div className="relative w-full overflow-hidden select-none touch-pan-y">
-        <motion.div
-          className="flex gap-4 md:gap-6 px-4"
-          initial={{ x: "0%" }}
-          animate={{ x: isPaused ? undefined : "-50%" }}
-          transition={{
-            duration: 90, // Slower than categories for better visibility of products
-            repeat: Infinity,
-            ease: "linear",
-            repeatType: "loop"
-          }}
-          onHoverStart={() => setIsPaused(true)}
-          onHoverEnd={() => setIsPaused(false)}
-          drag="x"
-          dragConstraints={{ left: -3000, right: 0 }}
-          style={{ width: "fit-content" }}
-        >
+      {/* Horizontal scrolling row */}
+      <div className="pm-wrap reveal r-d2">
+        <div className="pm-track">
           {duplicatedItems.map((item, index) => (
-            <div
-              key={`${item.id}-${index}`}
-              className="w-[280px] md:w-[350px] flex-shrink-0"
-            >
-              <Card className="border-0 bg-white shadow-sm hover:shadow-2xl transition-all duration-700 overflow-hidden h-full flex flex-col group rounded-none">
-                <LocalizedClientLink href={`/productos/${item.handle}`} className="block relative aspect-[4/5] overflow-hidden bg-brand-gray-light/20">
+            <div key={`${item.id}-${index}`} className="pm-card card-lift group">
+              <LocalizedClientLink href={`/productos/${item.handle}`} className="block">
+                <div className="relative aspect-square overflow-hidden" style={{ background: "#F5F5F0" }}>
                   {item.imageSrc ? (
                     <Image
                       src={item.imageSrc}
                       alt={item.name}
                       fill
-                      sizes="(max-width: 768px) 280px, 350px"
-                      className="h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                      sizes="(max-width: 640px) 220px, 280px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-100 text-brand-gray text-[10px] uppercase font-bold tracking-widest">
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-[9px] font-bold uppercase tracking-widest">
                       Sin imagen
                     </div>
                   )}
-                  {/* Overlay elegant */}
-                  <div className="absolute inset-0 bg-brand-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute top-4 right-4 translate-x-12 group-hover:translate-x-0 transition-transform duration-500">
-                    <div className="bg-brand-black text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
-                       Nuevo
-                    </div>
-                  </div>
+                  {/* Gold overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Badge */}
+                  <span className="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" 
+                    style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)", boxShadow: "0 2px 12px rgba(212,175,55,.2)" }}>
+                    Nuevo
+                  </span>
+                </div>
+              </LocalizedClientLink>
+              <div className="p-4">
+                <LocalizedClientLink href={`/productos/${item.handle}`}>
+                  <h3 className="text-sm font-semibold mb-1 text-gray-900 dark:text-white/90 line-clamp-1">{item.name}</h3>
                 </LocalizedClientLink>
-                <CardHeader className="p-6 pb-2 bg-white">
-                  <div className="flex justify-between items-start gap-2 mb-3">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-black bg-brand-gray-light px-2 py-0.5">
-                      {item.category}
-                    </span>
-                    <span className="text-sm font-black text-brand-black tracking-tighter">
-                      {item.price}
-                    </span>
-                  </div>
-                  <LocalizedClientLink href={`/productos/${item.handle}`}>
-                    <h3 className="text-lg md:text-xl font-serif font-bold text-brand-black leading-tight h-14 line-clamp-2 hover:text-brand-black transition-colors">
-                      {item.name}
-                    </h3>
-                  </LocalizedClientLink>
-                </CardHeader>
-                <div className="p-6 pt-2 mt-auto bg-white">
-                  <LocalizedClientLink href={`/productos/${item.handle}`}>
-                    <Button className="w-full bg-brand-black text-white hover:bg-brand-black border-0 rounded-none h-11 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg shadow-black/5 group-hover:shadow-black/20">
-                      Ver Producto
-                    </Button>
+                <p className="text-xs font-medium text-gray-400 dark:text-white/25 mb-3">{item.category}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold text-[#D4AF37]">{item.price}</span>
+                  <LocalizedClientLink
+                    href={`/productos/${item.handle}`}
+                    className="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine"
+                    style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}
+                  >
+                    Comprar
                   </LocalizedClientLink>
                 </div>
-              </Card>
+              </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
-      
-      <div className="mt-16 text-center">
-          <LocalizedClientLink
-            href="/store"
-            className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-brand-black border-b-2 border-brand-black/10 pb-2 hover:text-brand-black hover:border-brand-black transition-all"
-          >
-            Ver catálogo completo
-          </LocalizedClientLink>
+
+      <div className="mt-12 text-center reveal">
+        <LocalizedClientLink
+          href="/store"
+          className="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine"
+          style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)", boxShadow: "0 4px 24px rgba(212,175,55,.2)" }}
+        >
+          Ver Catálogo Completo
+          <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </LocalizedClientLink>
       </div>
     </section>
   )

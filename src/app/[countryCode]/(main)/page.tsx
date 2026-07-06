@@ -3,7 +3,6 @@ import dynamic from "next/dynamic"
 
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
-import CategoriesGrid from "@modules/home/components/categories-grid"
 import BrandMarquee from "@modules/home/components/brand-marquee"
 import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
@@ -59,11 +58,6 @@ export default async function Home(props: {
       {/* HOT DEALS — data-driven products from Medusa */}
       <Reveal>
         <HotDeals countryCode={countryCode} />
-      </Reveal>
-
-      {/* CATEGORIES */}
-      <Reveal>
-        <CategoriesGrid />
       </Reveal>
 
       {/* BRAND MARQUEE */}
