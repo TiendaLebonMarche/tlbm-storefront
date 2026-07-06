@@ -103,7 +103,7 @@ export default async function Footer() {
           <p className="text-white/12 text-[10px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
             <div className="flex gap-4 text-white/12 text-[9px]">
-              <span>Hecho en 🇨🇴 Colombia</span>
+              <span>Emprendimiento de Bucaramanga, Col</span>
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>

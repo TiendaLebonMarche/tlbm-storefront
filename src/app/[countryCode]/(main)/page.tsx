@@ -6,12 +6,12 @@ import TrustBadges from "@modules/home/components/trust-badges"
 import BrandMarquee from "@modules/home/components/brand-marquee"
 import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
+import OfertasParallax from "@modules/home/components/ofertas-parallax"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import Reveal from "@modules/common/components/reveal"
 
 // Lazy load below-fold components
-const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"))
 const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
@@ -65,9 +65,9 @@ export default async function Home(props: {
         <BrandMarquee />
       </Reveal>
 
-      {/* PROMO */}
+      {/* OFERTAS PARALLAX */}
       <Reveal>
-        <BrandStatement />
+        <OfertasParallax />
       </Reveal>
 
       {/* MOST SOLD — data-driven products from Medusa */}
