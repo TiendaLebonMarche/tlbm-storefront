@@ -47,28 +47,46 @@ const SLIDES = [
 ] as const
 
 const BRANDS = [
-  { slug: "xiaomi", label: "Xiaomi" },
-  { slug: "samsung", label: "Samsung" },
-  { slug: "redmi", label: "Redmi" }, // Fallback to text
-  { slug: "acer", label: "Acer" },
-  { slug: "passau", label: "Passau" }, // Fallback to text
-  { slug: "sony", label: "Sony" },
-  { slug: "jbl", label: "JBL" },
-  { slug: "puma", label: "PUMA" },
-  { slug: "adidas", label: "ADIDAS" },
-  { slug: "nike", label: "NIKE" },
-  { slug: "champion", label: "Champion" },
-  { slug: "underarmour", label: "Under Armour" },
-  { slug: "and1", label: "AND1" }, // Fallback to text
-  { slug: "insta360", label: "Insta360" },
-  { slug: "starlink", label: "Starlink" },
-  { slug: "dji", label: "DJI" },
-  { slug: "dell", label: "Dell" },
-  { slug: "logitech", label: "Mouse" },
-  { slug: "opencode", label: "OpenCode" },
-  { slug: "kyzona", label: "Kyzona" },
-  { slug: "monsterenergy", label: "Monster" },
+  { slug: "xiaomi", label: "Xiaomi", icon: true },
+  { slug: "samsung", label: "Samsung", icon: true },
+  { slug: "redmi", label: "Redmi", icon: false },
+  { slug: "acer", label: "Acer", icon: true },
+  { slug: "passau", label: "Passau", icon: false },
+  { slug: "sony", label: "Sony", icon: true },
+  { slug: "jbl", label: "JBL", icon: true },
+  { slug: "puma", label: "PUMA", icon: true },
+  { slug: "adidas", label: "ADIDAS", icon: true },
+  { slug: "nike", label: "NIKE", icon: true },
+  { slug: "champion", label: "Champion", icon: false },
+  { slug: "underarmour", label: "Under Armour", icon: true },
+  { slug: "and1", label: "AND1", icon: false },
+  { slug: "insta360", label: "Insta360", icon: true },
+  { slug: "starlink", label: "Starlink", icon: false },
+  { slug: "dji", label: "DJI", icon: true },
+  { slug: "dell", label: "Dell", icon: true },
+  { slug: "logitech", label: "Logitech", icon: false },
+  { slug: "opencode", label: "OpenCode", icon: true },
+  { slug: "kyzona", label: "Kyzona", icon: false },
+  { slug: "monsterenergy", label: "Monster", icon: false },
 ]
+
+function BrandLogo({ slug, label, icon }: { slug: string; label: string; icon: boolean }) {
+  return icon ? (
+    <img
+      src={`https://cdn.simpleicons.org/${slug}/11151f`}
+      alt={label}
+      width="24"
+      height="24"
+      loading="lazy"
+      onError={(e) => {
+        const img = e.currentTarget
+        img.style.display = "none"
+        const fb = img.nextElementSibling as HTMLElement
+        if (fb) fb.style.display = "block"
+      }}
+    />
+  ) : null
+}
 
 export default function Hero() {
   const [current, setCurrent] = useState(0)
@@ -339,7 +357,7 @@ export default function Hero() {
           will-change: transform;
         }
         .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
-        .tlbm-brand span { color: #111; font-weight: 900; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; }
+        .tlbm-brand-text { color: #111; font-weight: 900; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; }
         @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       `}</style>
 
@@ -413,22 +431,10 @@ export default function Hero() {
         <div className="tlbm-mq-inner">
           {[0, 1].map((copy) => (
             <div key={copy} className="tlbm-mq-track">
-              {BRANDS.map(({ slug, label }) => (
+              {BRANDS.map(({ slug, label, icon }) => (
                 <div key={slug} className="tlbm-brand">
-                  <img
-                    src={`https://cdn.simpleicons.org/${slug}/11151f`}
-                    alt={label}
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                    onError={(e) => {
-                      const img = e.currentTarget
-                      img.style.display = "none"
-                      const fb = img.nextElementSibling as HTMLElement
-                      if (fb) fb.style.display = "block"
-                    }}
-                  />
-                  <span style={{ display: "none" }}>{label}</span>
+                  <BrandLogo slug={slug} label={label} icon={icon} />
+                  <span className="tlbm-brand-text">{label}</span>
                 </div>
               ))}
             </div>

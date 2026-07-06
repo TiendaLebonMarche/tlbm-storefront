@@ -14,8 +14,8 @@ import { Locale } from "@lib/data/locales"
 const mainMenu = [
   { name: "Inicio", href: "/" },
   { name: "Tienda", href: "/store" },
-  { name: "Parlantes", href: "/store" },
-  { name: "Tecnología", href: "/store" },
+  { name: "Parlantes", href: "/store?q=parlante" },
+  { name: "Tecnología", href: "/store?q=tecnologia" },
   { name: "Ofertas", href: "/store" },
   { name: "Blog", href: "/blog" },
   { name: "Quiénes Somos", href: "/quienes-somos" },
