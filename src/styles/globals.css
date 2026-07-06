@@ -459,7 +459,7 @@
 
 /* ── THEME TOGGLE ── */
 #theme-btn {
-  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  position: fixed; bottom: 80px; right: 24px; z-index: 500;
   width: 44px; height: 44px; border-radius: 50%; border: none;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   background: #D4AF37; box-shadow: 0 4px 20px rgba(212,175,55,.25);
