@@ -9,6 +9,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
+import ThemeToggle from "@modules/layout/components/theme-toggle"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 
 import ClientLogo from "@modules/layout/components/client-logo"
@@ -118,6 +119,7 @@ export default async function Nav() {
             </svg>
             Explorar
           </LocalizedClientLink>
+          <ThemeToggle />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
           </Suspense>
