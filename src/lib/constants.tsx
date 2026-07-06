@@ -34,6 +34,14 @@ export const paymentInfoMap: Record<
     title: "Efectivo - Transferencia: Nequi/Daviplata/BreB",
     icon: <CreditCard />,
   },
+  manual_efectivo: {
+    title: "1. Efectivo",
+    icon: <CreditCard />,
+  },
+  manual_transferencia: {
+    title: "2. Transferencia (Nequi/Daviplata/BreB)",
+    icon: <CreditCard />,
+  },
   "pp_efectivo-payment_efectivo": {
     title: "Efectivo - Transferencia: Nequi/Daviplata/BreB",
     icon: <CreditCard />,
@@ -52,7 +60,7 @@ export const isPaypal = (providerId?: string) => {
   return providerId?.startsWith("pp_paypal")
 }
 export const isManual = (providerId?: string) => {
-  return providerId?.startsWith("pp_efectivo-payment_efectivo") || providerId?.startsWith("pp_system_default")
+  return providerId?.startsWith("manual_") || providerId?.startsWith("pp_system_default") || providerId?.startsWith("pp_efectivo-payment_efectivo")
 }
 
 // Add currencies that don't need to be divided by 100

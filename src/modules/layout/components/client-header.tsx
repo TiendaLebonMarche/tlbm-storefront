@@ -27,7 +27,7 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
     <div
       className={`
         fixed top-0 left-0 w-full z-[100] group/header
-        transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
+        transition-[transform,opacity] duration-300 ease-out
         ${isScrolled
           ? "bg-white/80 backdrop-blur-xl shadow-[0_1px_20px_0_rgba(0,0,0,0.05)] text-black"
           : isHome
@@ -42,17 +42,17 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
       <div
         id="top-bar"
         className={`
-          bg-[#1a1a1a] text-[#f4f4f4] text-[9px] md:text-[10px]
-          tracking-[0.25em] font-sans uppercase font-medium
-          overflow-hidden border-b border-white/10
-          transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
-          ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[36px] py-2.5 opacity-100"}
+          bg-[#1a1a1a] text-[#f4f4f4]/80 text-[8px] md:text-[9px]
+          tracking-[0.2em] font-sans uppercase font-medium
+          overflow-hidden border-b border-white/5
+          transition-all duration-500 ease-out
+          ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[24px] py-1 opacity-100"}
         `}
       >
         <div className="flex whitespace-nowrap animate-marquee-fixed w-full items-center h-full">
           {[...Array(6)].map((_, i) => (
-            <span key={i} className="mx-8 flex items-center">
-              Envíos a todo Bucaramanga <span className="mx-4 text-white/30">•</span> Productos originales y exclusivos
+            <span key={i} className="mx-6 flex items-center">
+              Envíos a todo Bucaramanga <span className="mx-3 text-white/20">•</span> Productos originales y exclusivos
             </span>
           ))}
         </div>
@@ -61,12 +61,12 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
       {/* ── MAIN NAV ────────────────────────────────────────────────────── */}
       <header
         id="main-header"
-        className="mx-auto w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]"
+        className="mx-auto w-full transition-[transform,opacity] duration-300 ease-out"
       >
         <div className={`
           max-w-[95rem] mx-auto
           flex justify-between items-center
-          transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]
+          transition-[transform,opacity] duration-300 ease-out
           ${isScrolled ? "min-h-[56px] md:min-h-[60px] py-2 lg:py-3" : "min-h-[64px] md:min-h-[76px] py-3 lg:py-4"}
         `}>
           {children}

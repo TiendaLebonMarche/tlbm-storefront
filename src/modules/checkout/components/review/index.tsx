@@ -5,11 +5,13 @@ import { CheckCircleSolid } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 
 const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
   const searchParams = useSearchParams()
   const isOpen = searchParams.get("step") === "review"
   const paidByGiftcard = cart?.gift_cards?.length > 0 && cart?.total === 0
+  const [termsAccepted, setTermsAccepted] = useState(false)
   const previousStepsCompleted =
     cart?.shipping_address &&
     cart?.shipping_methods?.length > 0 &&
@@ -35,6 +37,8 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
                   type="checkbox"
                   className="mt-0.5 h-4 w-4 rounded border-brand-gray-light text-brand-black focus:ring-brand-black/30"
                   data-testid="terms-checkbox"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
                   required
                 />
                 <span className="text-xs text-brand-gray leading-relaxed group-hover:text-brand-black transition-colors">
@@ -50,7 +54,7 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
         </div>
       )}
       <div className="flex gap-4">
-        <PaymentButton cart={cart} data-testid="submit-order-button" disabled={!previousStepsCompleted || !isOpen} />
+        <PaymentButton cart={cart} data-testid="submit-order-button" disabled={!previousStepsCompleted || !isOpen || !termsAccepted} />
       </div>
     </div>
   )

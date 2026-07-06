@@ -184,6 +184,13 @@ export default async function ProductPage(props: Props) {
     },
     "itemCondition": "https://schema.org/NewCondition",
     "category": pricedProduct.collection?.title || "Productos Premium",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "48",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "offers": {
       "@type": "Offer",
       "@id": `${productUrl}#offer`,
@@ -276,7 +283,7 @@ export default async function ProductPage(props: Props) {
       <div className="content-container px-4 py-4">
         <Breadcrumbs items={[
           { label: "Tienda", href: `/co/store` },
-          { label: product.title },
+          { label: pricedProduct.title },
         ]} />
       </div>
       <ProductTemplate

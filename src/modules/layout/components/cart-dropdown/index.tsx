@@ -140,7 +140,7 @@ const CartDropdown = ({
     <div className="h-full z-50 flex items-center relative">
       <Popover className="relative h-full flex items-center">
         <PopoverButton
-          className="nav-icon text-inherit hover:text-brand-black relative flex items-center gap-1.5 outline-none transition-colors"
+          className="nav-icon text-inherit hover:text-brand-black relative inline-flex items-center justify-center outline-none transition-colors w-12 h-12"
           onClick={open}
           data-testid="nav-cart-link"
         >

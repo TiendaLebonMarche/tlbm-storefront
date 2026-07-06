@@ -25,7 +25,7 @@ export default function SearchModal() {
         <>
             <button
                 onClick={openSearch}
-                className="nav-icon hover:text-brand-black relative flex items-center outline-none transition-colors"
+                className="nav-icon hover:text-brand-black relative inline-flex items-center justify-center outline-none transition-colors w-12 h-12"
                 aria-label="Buscar"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

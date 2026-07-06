@@ -67,7 +67,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="group flex items-center justify-center outline-none text-inherit transition-opacity duration-300 hover:opacity-70 w-10 h-10"
+                  className="group flex items-center justify-center outline-none text-inherit transition-opacity duration-300 hover:opacity-70 w-12 h-12"
                   onClick={openSideMenu}
                 >
                   <div className="relative flex flex-col justify-center items-center w-6 h-6 overflow-hidden">

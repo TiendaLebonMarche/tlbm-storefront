@@ -105,7 +105,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               {!isSimple && (
                 <button
                   onClick={open}
-                  className="w-full h-14 border border-brand-gray-light bg-brand-gray-light/20/50 flex items-center justify-between px-5 text-[10px] font-bold uppercase tracking-widest text-brand-black hover:bg-brand-gray-light/30 transition-colors"
+                  className="w-full h-12 border border-brand-gray-light bg-brand-gray-light/20/50 flex items-center justify-between px-5 text-[10px] font-bold uppercase tracking-widest text-brand-black hover:bg-brand-gray-light/30 transition-colors"
                   data-testid="mobile-actions-button"
                 >
                   <span className="truncate max-w-[120px]">
@@ -120,7 +120,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 onClick={handleAddToCart}
                 disabled={!inStock || !variant || isAdding}
                 className={clx(
-                  "w-full h-14 text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand-brown/10 relative overflow-hidden",
+                  "w-full h-12 text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand-brown/10 relative overflow-hidden",
                   {
                     "bg-brand-black text-white active:scale-95": inStock && variant && !isAdding,
                     "bg-gray-100 text-gray-300 cursor-not-allowed border border-gray-50": !inStock || !variant,

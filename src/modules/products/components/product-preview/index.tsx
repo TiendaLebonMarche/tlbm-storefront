@@ -109,7 +109,7 @@ export default function ProductPreview({
         )}
 
         {/* Title */}
-        <LocalizedClientLink href={`/productos/${product.handle}`} className="mb-1.5">
+        <LocalizedClientLink href={`/productos/${product.handle}`} className="mb-1.5 min-h-[48px] flex items-center justify-center">
           <h3
             className="text-xs md:text-sm font-semibold text-brand-black leading-snug line-clamp-2 hover:text-brand-black transition-colors duration-300 font-sans"
             data-testid="product-title"

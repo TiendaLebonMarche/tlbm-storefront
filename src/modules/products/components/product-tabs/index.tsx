@@ -66,7 +66,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
             key={i}
             onClick={() => setActiveTab(i)}
             className={clx(
-              "pb-4 text-[11px] font-bold uppercase tracking-[0.25em] transition-all duration-300 relative whitespace-nowrap",
+              "pb-4 text-[11px] font-bold uppercase tracking-[0.25em] transition-all duration-300 relative whitespace-nowrap min-h-[48px]",
               {
                 "text-brand-black": activeTab === i,
                 "text-gray-300 hover:text-brand-gray": activeTab !== i,

@@ -56,9 +56,13 @@ const Shipping: React.FC<{
   const handleSetShippingMethod = async (id: string) => {
     setError(null)
     setIsLoading(true)
+    const previousId = shippingMethodId
     setShippingMethodId(id)
     await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
-      .catch((err) => { setError(err.message) })
+      .catch((err) => { 
+        setError(err.message)
+        setShippingMethodId(previousId)
+      })
       .finally(() => setIsLoading(false))
   }
 
@@ -86,6 +90,7 @@ const Shipping: React.FC<{
               Elige tu método de entrega preferido
             </span>
             <div data-testid="delivery-options-container" className="pb-8">
+              {availableShippingMethods && availableShippingMethods.length > 0 ? (
               <RadioGroup value={shippingMethodId} onChange={(v) => v && handleSetShippingMethod(v)}>
                 {availableShippingMethods?.map((option: any) => {
                   const isDisabled = option.price_type === "calculated" && !isLoadingPrices && typeof calculatedPricesMap[option.id] !== "number"
@@ -128,11 +133,17 @@ const Shipping: React.FC<{
                   )
                 })}
               </RadioGroup>
+              ) : (
+                <div className="py-8 text-center text-brand-gray text-sm">
+                  <p>No hay métodos de envío disponibles para tu ubicación.</p>
+                  <p className="text-xs mt-2">Por favor contacta a soporte para más información.</p>
+                </div>
+              )}
             </div>
           </div>
           <div>
             <ErrorMessage error={error} data-testid="delivery-option-error-message" />
-            <Button size="large" className="mt-6 pill-button bg-brand-black hover:bg-brand-navy text-white w-full sm:w-auto" onClick={handleSubmit} isLoading={isLoading} disabled={!shippingMethodId} data-testid="submit-delivery-option-button">
+            <Button size="large" className="mt-6 pill-button bg-brand-black hover:bg-brand-navy text-white w-full sm:w-auto" onClick={handleSubmit} isLoading={isLoading} disabled={!shippingMethodId || isLoading} data-testid="submit-delivery-option-button">
               Continuar al Pago
             </Button>
           </div>

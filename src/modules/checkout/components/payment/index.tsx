@@ -1,7 +1,7 @@
 "use client"
 
 import { RadioGroup } from "@headlessui/react"
-import { isStripeLike, paymentInfoMap } from "@lib/constants"
+import { isManual, isStripeLike, paymentInfoMap } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { Button, clx } from "@medusajs/ui"
@@ -36,9 +36,9 @@ const Payment = ({
   const setPaymentMethod = async (method: string) => {
     setError(null)
     setSelectedPaymentMethod(method)
-    const actualProviderId = method.startsWith("manual_") ? "pp_efectivo-payment_efectivo" : method
-    if (isStripeLike(actualProviderId)) {
-      await initiatePaymentSession(cart, { provider_id: actualProviderId })
+    const provider = method.startsWith("manual_") ? "pp_system_default" : method
+    if (isStripeLike(provider)) {
+      await initiatePaymentSession(cart, { provider_id: provider })
     }
   }
 
@@ -59,14 +59,21 @@ const Payment = ({
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const actualProviderId = selectedPaymentMethod.startsWith("manual_") ? "pp_efectivo-payment_efectivo" : selectedPaymentMethod
-      const checkActiveSession = activeSession?.provider_id === actualProviderId
+      const provider = selectedPaymentMethod.startsWith("manual_") ? "pp_system_default" : selectedPaymentMethod
+      const checkActiveSession = activeSession?.provider_id === provider
       if (!checkActiveSession) {
-        await initiatePaymentSession(cart, { provider_id: actualProviderId })
+        await initiatePaymentSession(cart, { provider_id: provider })
       }
-      if (!isStripeLike(actualProviderId) || activeSession) {
+      // For manual/efectivo methods, go to review immediately
+      if (isManual(selectedPaymentMethod)) {
         return router.push(pathname + "?" + createQueryString("step", "review"), { scroll: false })
       }
+      // For Stripe, wait for card element to be complete
+      if (isStripeLike(selectedPaymentMethod) && !cardComplete) {
+        setError("Por favor completa los datos de la tarjeta antes de continuar.")
+        return
+      }
+      return router.push(pathname + "?" + createQueryString("step", "review"), { scroll: false })
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -96,15 +103,10 @@ const Payment = ({
           {!paidByGiftcard && availablePaymentMethods?.length && (
             <>
               <RadioGroup value={selectedPaymentMethod} onChange={(value: string) => setPaymentMethod(value)}>
-                {availablePaymentMethods.flatMap((paymentMethod) => {
-                  if (paymentMethod.id === "pp_system_default" || paymentMethod.id?.includes("efectivo")) {
-                    return [
-                      { ...paymentMethod, id: "manual_efectivo", title: "1. Efectivo" },
-                      { ...paymentMethod, id: "manual_transferencia", title: "2. Transferencia (Nequi/Daviplata/BreB)" }
-                    ]
-                  }
-                  return [paymentMethod]
-                }).map((paymentMethod) => (
+                {[
+                  { id: "manual_efectivo", title: "1. Efectivo" },
+                  { id: "manual_transferencia", title: "2. Transferencia (Nequi/Daviplata/BreB)" }
+                ].map((paymentMethod) => (
                   <div key={paymentMethod.id} className={clx(
                     "flex items-center justify-between py-5 border-2 rounded-3xl px-8 mb-4 hover:border-brand-black transition-all cursor-pointer",
                     { "border-brand-black bg-brand-gray-light/20": selectedPaymentMethod === paymentMethod.id,
@@ -120,17 +122,35 @@ const Payment = ({
               </RadioGroup>
 
               {selectedPaymentMethod === "manual_transferencia" && (
-                <div className="bg-brand-gray-light/10 border border-brand-gray-light/30 rounded-3xl p-6 mb-6">
-                  <p className="text-sm font-bold text-brand-black uppercase tracking-widest mb-3">
-                    📋 Datos para Transferencia
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50/30 border border-green-200/50 rounded-3xl p-6 mb-6 shadow-sm">
+                  <p className="text-sm font-bold text-emerald-800 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <span className="text-lg">💚</span> Datos para Transferencia
                   </p>
-                  <div className="space-y-2 text-brand-black text-sm">
-                    <p className="flex justify-between"><span className="font-semibold">💚 Daviplata:</span><span className="font-mono">3104489218</span></p>
-                    <p className="flex justify-between"><span className="font-semibold">🔗 Llave Bre-B:</span><span className="font-mono">@3104489218</span></p>
-                    <p className="flex justify-between"><span className="font-semibold">🏦 Llave Bre-B 2:</span><span className="font-mono">@Plenti31059</span></p>
+                  <div className="space-y-3">
+                    <div className="bg-white rounded-xl p-4 border border-green-100 flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-xl flex-shrink-0">
+                        💚
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-green-600 uppercase tracking-wider">Daviplata</p>
+                        <p className="text-lg font-bold text-gray-900 font-mono tracking-wider">310 448 9218</p>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 border border-green-100 flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+                        🔵
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Llave Bre-B</p>
+                        <p className="text-lg font-bold text-gray-900 font-mono tracking-wider">310 448 9218</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-brand-gray-light/30">
-                    <p className="text-xs text-brand-gray">Una vez realizado el pago, comparte el comprobante con nosotros y confirmaremos tu pedido. El pedido se procesará una vez recibamos la confirmación del pago.</p>
+                  <div className="mt-4 pt-4 border-t border-green-200/50">
+                    <p className="text-xs text-emerald-700/70 leading-relaxed">
+                      Una vez realizado el pago, comparte el comprobante con nosotros y confirmaremos tu pedido. 
+                      El pedido se procesará una vez recibamos la confirmación del pago.
+                    </p>
                   </div>
                 </div>
               )}
@@ -148,7 +168,7 @@ const Payment = ({
 
           <Button size="large" className="mt-6 pill-button bg-brand-black hover:bg-brand-navy text-white w-full sm:w-auto"
             onClick={handleSubmit} isLoading={isLoading}
-            disabled={(isStripeLike(selectedPaymentMethod) && !cardComplete) || (!selectedPaymentMethod && !paidByGiftcard)}
+            disabled={(!selectedPaymentMethod && !paidByGiftcard)}
             data-testid="submit-payment-button">
             {selectedPaymentMethod === "manual_efectivo" || selectedPaymentMethod === "manual_transferencia" ? "Revisar Compra" : "Continuar"}
           </Button>

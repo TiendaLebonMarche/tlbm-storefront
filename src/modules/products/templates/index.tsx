@@ -10,6 +10,7 @@ import ProductActionsWrapper from "./product-actions-wrapper"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Reveal from "@modules/common/components/reveal"
+import CollapsibleDescription from "@modules/products/components/collapsible-description"
 
 const ProductTabs = dynamic(() => import("@modules/products/components/product-tabs"), {
   ssr: true,
@@ -68,11 +69,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
       {/* ── BREADCRUMB ── */}
       <div className="border-b border-gray-50">
-        <div className="content-container py-4 md:py-5">
+        <div className="content-container py-3 md:py-4">
           <nav className="flex items-center gap-2 text-[9px] text-brand-gray tracking-[0.2em] uppercase font-sans">
-            <LocalizedClientLink href="/" className="hover:text-brand-black transition-colors duration-300">Inicio</LocalizedClientLink>
-            <span className="text-gray-200">/</span>
-            <LocalizedClientLink href="/store" className="hover:text-brand-black transition-colors duration-300">Tienda</LocalizedClientLink>
+            <LocalizedClientLink href="/" className="inline-flex items-center min-h-[48px] hover:text-brand-black transition-colors duration-200">Inicio</LocalizedClientLink>
+            <span className="text-gray-200 flex items-center">/</span>
+            <LocalizedClientLink href="/store" className="inline-flex items-center min-h-[48px] hover:text-brand-black transition-colors duration-200">Tienda</LocalizedClientLink>
             {product.collection && (
               <>
                 <span className="text-gray-200">/</span>
@@ -84,8 +85,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* ── HERO: Gallery + Product Info ── */}
-      <div className="content-container py-8 lg:py-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 xl:gap-28 items-start">
+      <div className="content-container py-[clamp(1.5rem,5vw,4rem)] lg:py-[clamp(2rem,6vw,4rem)]">
+        <div className="flex flex-col lg:flex-row gap-[clamp(1.5rem,5vw,3rem)] lg:gap-[clamp(3rem,6vw,7rem)] xl:gap-[clamp(4rem,7vw,7rem)] items-start">
 
           {/* LEFT: Gallery — 58% */}
           <div className="w-full lg:w-[58%]">
@@ -119,7 +120,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </div>
                 
                 <h1
-                  className="text-4xl md:text-5xl lg:text-5xl xl:text-7xl font-serif font-normal text-brand-black leading-[1.1] tracking-tight"
+                  className="text-[clamp(1.75rem,5vw,3.5rem)] md:text-[clamp(2.25rem,4vw,3rem)] lg:text-[clamp(2.5rem,4vw,3rem)] xl:text-[clamp(3.5rem,4.5vw,4.5rem)] font-serif font-normal text-brand-black leading-[1.1] tracking-tight"
                   data-testid="product-title"
                 >
                   {product.title}
@@ -140,18 +141,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </span>
               </div>
 
-              {/* Short description / Intro */}
+              {/* Short description / Intro — collapsible en mobile */}
               {product.description && (
-                <div className="text-[16px] text-brand-gray font-light leading-relaxed font-sans max-w-xl">
-                  {product.description.includes('\n') 
-                    ? product.description.split('\n').map((line, i) => (
-                        <span key={i}>
-                          {line}
-                          {i < product.description.split('\n').length - 1 && <br />}
-                        </span>
-                      ))
-                    : product.description}
-                </div>
+                <CollapsibleDescription description={product.description} />
               )}
             </div>
 
@@ -247,7 +239,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 group/trust">
-                  <div className="flex-shrink-0 text-brand-black/30 group-hover/trust:text-brand-black transition-colors duration-500 mt-0.5">
+                  <div className="flex-shrink-0 text-brand-black/30 group-hover/trust:text-brand-black transition-colors duration-200 mt-0.5">
                     {item.icon}
                   </div>
                   <div className="space-y-0.5">
@@ -288,7 +280,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 )}
                 
                 {/* MedusaJS Custom Metadata Mapping */}
-                {Object.entries(metadata).slice(0, 4).map(([key, value]) => (
+                {Object.entries(metadata || {}).slice(0, 4).map(([key, value]) => (
                   <div key={key} className="flex flex-col gap-y-1">
                     <span className="text-[9px] font-bold text-brand-black uppercase tracking-widest opacity-40 capitalize">
                       {key.replace(/_/g, ' ')}
@@ -328,7 +320,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </div>
                 
                 <Accordion type="single" collapsible className="w-full space-y-2">
-                  <AccordionItem value="item-1" className="border border-brand-gray-light bg-white px-6 transition-all duration-300 hover:border-brand-gray-light">
+                  <AccordionItem value="item-1" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
                       ¿Cuál es el origen de este producto?
                     </AccordionTrigger>
@@ -337,7 +329,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="border border-brand-gray-light bg-white px-6 transition-all duration-300 hover:border-brand-gray-light">
+                  <AccordionItem value="item-2" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
                       Tiempos y logística de entrega
                     </AccordionTrigger>
@@ -346,7 +338,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="border border-brand-gray-light bg-white px-6 transition-all duration-300 hover:border-brand-gray-light">
+                  <AccordionItem value="item-3" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
                       Política de garantía TLBM
                     </AccordionTrigger>
@@ -358,7 +350,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
                 {/* WhatsApp Premium Support */}
                 <div className="bg-brand-black p-10 mt-8 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-150" />
                   <div className="relative z-10 space-y-6">
                     <div>
                       <p className="text-[10px] font-bold text-brand-black uppercase tracking-[0.3em] mb-3">Asistencia Personalizada</p>
@@ -371,7 +363,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                       href="https://wa.me/573027567783" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white border-b border-brand-black/50 pb-1 hover:border-brand-black transition-all duration-300"
+                      className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white border-b border-brand-black/50 pb-1 hover:border-brand-black transition-all duration-300 min-h-[48px]"
                     >
                       Conversar por WhatsApp
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-brand-black">
