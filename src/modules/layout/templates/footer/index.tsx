@@ -103,7 +103,7 @@ export default async function Footer() {
 
       {/* Watermark full-width */}
       <div className="w-screen max-w-[100vw] overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
-        <p className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em] text-white/10" style={{ fontSize: "clamp(4rem,20vw,16rem)", fontWeight: 700 }}>
+        <p className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em] text-white/8" style={{ fontSize: "clamp(2.5rem,12vw,10rem)", fontWeight: 700 }}>
           LE BON MARCHÉ
         </p>
       </div>
