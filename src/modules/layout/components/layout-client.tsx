@@ -47,8 +47,23 @@ export default function LayoutClient() {
     }
     window.addEventListener("scroll", onScroll, { passive: true })
 
+    // ── Reveal Observer for .reveal elements ──
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible")
+            revealObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12 }
+    )
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el))
+
     return () => {
       window.removeEventListener("scroll", onScroll)
+      revealObserver.disconnect()
       progress.remove()
       noise.remove()
       btn.remove()

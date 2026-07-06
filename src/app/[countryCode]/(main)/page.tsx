@@ -9,13 +9,11 @@ import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
-import { blogPosts } from "@lib/data/blog"
 import Reveal from "@modules/common/components/reveal"
 
 // Lazy load below-fold components
 const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"))
 const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
-const Blog7 = dynamic(() => import("@/components/ui/blog7").then(m => ({ default: m.Blog7 })))
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
@@ -86,29 +84,6 @@ export default async function Home(props: {
       {/* TESTIMONIALS */}
       <Reveal>
         <AnimatedTestimonialsSection />
-      </Reveal>
-
-      {/* BLOG */}
-      <Reveal>
-        <Blog7
-          tagline="Lifestyle & Tendencias"
-          heading="Blog Le Bon Marché - El blog de tu tienda en bucaramanga."
-          description="Descubre las piezas que definen el lujo moderno y las historias detrás de nuestra selección exclusiva. Inspiración editorial para los más exigentes."
-          buttonText="Ver todos los artículos"
-          buttonUrl="/blog"
-          posts={blogPosts.slice(0, 3).map((post, idx) => ({
-            id: `post-${idx}`,
-            title: post.title,
-            summary: post.img
-              ? "Una selección exclusiva de piezas y tendencias del mundo luxury, traída directamente a tu pantalla."
-              : "",
-            label: post.tag,
-            author: "Le Bon Marché",
-            published: "2024",
-            url: `/blog/${post.handle}`,
-            image: post.img,
-          }))}
-        />
       </Reveal>
     </div>
   )
