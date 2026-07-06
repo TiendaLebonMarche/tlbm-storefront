@@ -1,135 +1,77 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Star, Quote } from "lucide-react"
-import { cn } from "@lib/utils"
-
-const TESTIMONIALS = [
+const testimonials = [
   {
-    id: 1,
-    name: "Claudia Mendoza",
-    location: "Bogotá, Colombia",
-    text: "La calidad de los productos es incomparable. El diseño es tan sofisticado que parece una pieza de joyería. La atención fue impecable.",
-    size: "large"
-  },
-  {
-    id: 2,
-    name: "Andrés V.",
+    initials: "CA",
+    name: "Carlos A.",
     location: "Bucaramanga",
-    text: "Buscaba algo único para mi oficina y encontré gadgets exóticos increíbles. El envío fue rápido y muy premium.",
-    size: "small"
+    stars: 5,
+    text: "Increíble calidad y atención. El parlante que compré superó todas mis expectativas. 100% recomendados.",
   },
   {
-    id: 3,
-    name: "Isabella S.",
+    initials: "MP",
+    name: "María P.",
+    location: "Bogotá",
+    stars: 5,
+    text: "Mi smartwatch llegó en 3 días. Producto original, bien empacado. Volveré a comprar sin duda.",
+  },
+  {
+    initials: "DG",
+    name: "David G.",
     location: "Medellín",
-    text: "Le Bon Marché se ha convertido en mi tienda favorita para regalos. Todo tiene un toque de exclusividad único.",
-    size: "medium"
+    stars: 4,
+    text: "Los audífonos ANC que compré son una locura. La cancelación de ruido es bestial. Envío rapidísimo.",
   },
-  {
-    id: 4,
-    name: "Ricardo Ortiz",
-    location: "Cali",
-    text: "Una experiencia de lujo desde la web hasta la entrega. Recomendado 100% para amantes de la tecnología original.",
-    size: "small"
-  },
-  {
-    id: 5,
-    name: "Elena G.",
-    location: "Bucaramanga",
-    text: "Diseño impecable y funcionalidad superior en cada pieza. Una joya nacional.",
-    size: "medium"
-  }
 ]
 
-export default function TestimonialsSection() {
+function StarIcon({ filled }: { filled: boolean }) {
   return (
-    <section className="bg-white py-16 md:py-28 overflow-hidden relative">
-      <div className="content-container px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Header Info */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="size-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-bold text-brand-black">
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-black">+2000 Clientes</span>
-              </div>
-              
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-bold text-brand-black leading-[0.9] tracking-tighter italic mb-8">
-                Opiniones reales de nuestros clientes
-              </h2>
-              <p className="max-w-md text-brand-gray/60 leading-relaxed font-medium">
-                La satisfacción de quienes confían en nosotros es el pilar de Le Bon Marché. Descubre por qué somos la referencia en lujo y exclusividad.
-              </p>
-              
-              <div className="mt-12 flex items-center gap-6">
-                <div>
-                  <div className="text-3xl font-bold text-brand-black">4.9/5</div>
-                  <div className="flex gap-0.5 mt-1">
-                    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="size-3 fill-brand-olive text-brand-black" />)}
-                  </div>
-                </div>
-                <div className="h-10 w-[1px] bg-gray-100" />
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray/40">CALIFICACIÓN PROMEDIO</div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Testimonials Bento/Mosaic */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {TESTIMONIALS.map((t, idx) => (
-              <motion.div
-                key={t.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className={cn(
-                  "p-8 rounded-none border border-gray-50 bg-[#fafafa] flex flex-col justify-between hover:bg-white hover:border-brand-black/10 hover:shadow-2xl transition-all duration-700",
-                  t.size === "large" ? "md:col-span-2 md:min-h-[280px]" : "md:col-span-1"
-                )}
-              >
-                <Quote className="size-6 text-brand-black/20 mb-6" />
-                
-                <p className={cn(
-                  "text-brand-black leading-relaxed mb-8",
-                  t.size === "large" ? "text-xl md:text-2xl font-medium tracking-tight" : "text-sm font-medium"
-                )}>
-                  &quot;{t.text}&quot;
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="text-[11px] font-bold uppercase tracking-widest text-brand-black">{t.name}</h4>
-                    <p className="text-[9px] text-brand-gray/40 uppercase font-bold tracking-tighter">{t.location}</p>
-                  </div>
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="size-2.5 fill-brand-olive/40 text-brand-black/40" />)}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </div>
-      
-      {/* Decorative pattern */}
-       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-100 to-transparent" />
-    </section>
+    <svg className={`w-4 h-4 ${filled ? "text-[#D4AF37]" : "text-gray-300 dark:text-white/20"}`} fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
   )
 }
 
+export default function AnimatedTestimonialsSection() {
+  return (
+    <section className="relative py-16 lg:py-24 bg-white dark:bg-[#0A0A0F]">
+      <div className="glow-line absolute top-0 left-0 right-0" />
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
+        <div className="text-center max-w-2xl mx-auto mb-14 reveal">
+          <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+            <span className="w-8 h-px bg-[#D4AF37]/30" />
+            Clientes
+          </div>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] mb-6 text-gray-900 dark:text-white">
+            Lo que dicen{" "}
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">
+              nuestros clientes
+            </span>
+          </h2>
+        </div>
 
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <div key={i} className={`testi-card reveal r-d${i + 1}`}>
+              <div className="flex gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <StarIcon key={s} filled={s <= t.stars} />
+                ))}
+              </div>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-white/60 mb-6">"{t.text}"</p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 dark:text-white/30">
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-900 dark:text-white/80">{t.name}</p>
+                  <p className="text-[9px] text-gray-400 dark:text-white/25">{t.location}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

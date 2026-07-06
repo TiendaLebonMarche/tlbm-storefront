@@ -21,6 +21,15 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        tlbm: {
+          gold: '#D4AF37',
+          'gold-light': '#E8C84A',
+          'gold-dark': '#B8860B',
+          amber: '#C8912E',
+          dark: '#0A0A0F',
+          surface: '#121218',
+          card: '#181820',
+        },
         brand: {
           black: '#000000',
           navy: '#00154A',
@@ -84,6 +93,15 @@ module.exports = {
         ]
       },
       keyframes: {
+        float: {
+          "0%,100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-18px)" },
+        },
+        "float-slow": {
+          "0%,100%": { transform: "translateY(0) rotate(0deg)" },
+          "33%": { transform: "translateY(-10px) rotate(.8deg)" },
+          "66%": { transform: "translateY(-5px) rotate(-.5deg)" },
+        },
         ring: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -161,8 +179,38 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "pulse-glow": {
+          "0%,100%": { "box-shadow": "0 0 30px rgba(212,175,55,.06)" },
+          "50%": { "box-shadow": "0 0 60px rgba(212,175,55,.15)" },
+        },
+        "badge-pulse": {
+          "0%,100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        shimmer: {
+          "0%": { "background-position": "200% 0" },
+          "100%": { "background-position": "-200% 0" },
+        },
+        orbit: {
+          "0%": { transform: "rotate(0) translateX(40px) rotate(0)" },
+          "100%": { transform: "rotate(360deg) translateX(40px) rotate(-360deg)" },
+        },
+        "orbit-reverse": {
+          "0%": { transform: "rotate(0) translateX(55px) rotate(0)" },
+          "100%": { transform: "rotate(-360deg) translateX(55px) rotate(360deg)" },
+        },
+        "brand-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "pm-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float-slow 8s ease-in-out infinite",
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
         "fade-in-right":
           "fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards",
@@ -178,6 +226,13 @@ module.exports = {
         leave: "leave 150ms ease-in forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
+        "badge-pulse": "badge-pulse 3s ease-in-out infinite",
+        shimmer: "shimmer 3s linear infinite",
+        orbit: "orbit 8s linear infinite",
+        "orbit-reverse": "orbit-reverse 10s linear infinite",
+        "brand-scroll": "brand-scroll 50s linear infinite",
+        "pm-scroll": "pm-scroll 60s linear infinite",
       },
     },
   },

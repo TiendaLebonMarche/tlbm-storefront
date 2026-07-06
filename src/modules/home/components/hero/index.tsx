@@ -1,446 +1,394 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useMemo } from "react"
+import { motion } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-// ── Constants ────────────────────────────────────────────────────────────────
-const SLIDE_TIME = 8000
-const TRANSITION_MS = 1000
+// ── Constants ──────────────────────────────────────────────────────────────
 
-const SLIDES = [
-  {
-    bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=40&w=640",
-    bgPos: "center",
-    bgPosMobile: "center",
-    eyebrow: "Tu tienda online",
-    title: "LE BON MARCHÉ",
-    copy: "Tienda virtual retail en Bucaramanga. ❤️",
-    btn: "Comprar ahora",
-    href: "/store",
-    align: "left",
-    tag: "h1",
-  },
-  {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_640/v1778526049/ChatGPT_Image_11_may_2026_13_33_38_jiqtmt.png",
-    bgPos: "center 42%",
-    bgPosMobile: "center",
-    eyebrow: "Compra inteligente",
-    title: "PRODUCTOS ORIGINALES",
-    copy: "Tenemos los mejores productos a los mejores precios.",
-    btn: "Explorar más",
-    href: "/store",
-    align: "center",
-    tag: "h2",
-  },
-  {
-    bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_640/v1778521762/ChatGPT_Image_11_may_2026_12_48_02_1_s1pzmt.png",
-    bgPos: "center 38%",
-    bgPosMobile: "center",
-    eyebrow: "Ofertas detectadas",
-    title: "PRECIOS DE LOCURA",
-    copy: "Manejamos un ejército de bots buscando ofertas para ti.",
-    btn: "Ver ofertas",
-    href: "/store",
-    align: "right",
-    tag: "h2",
-  },
-] as const
+const PARTICLES = 22
+const ORBIT_RINGS = 3
+const ORBIT_DOTS = 8
 
-const BRANDS = [
-  { slug: "xiaomi", label: "Xiaomi", icon: true },
-  { slug: "samsung", label: "Samsung", icon: true },
-  { slug: "redmi", label: "Redmi", icon: false },
-  { slug: "acer", label: "Acer", icon: true },
-  { slug: "passau", label: "Passau", icon: false },
-  { slug: "sony", label: "Sony", icon: true },
-  { slug: "jbl", label: "JBL", icon: true },
-  { slug: "puma", label: "PUMA", icon: true },
-  { slug: "adidas", label: "ADIDAS", icon: true },
-  { slug: "nike", label: "NIKE", icon: true },
-  { slug: "champion", label: "Champion", icon: false },
-  { slug: "underarmour", label: "Under Armour", icon: true },
-  { slug: "and1", label: "AND1", icon: false },
-  { slug: "insta360", label: "Insta360", icon: true },
-  { slug: "starlink", label: "Starlink", icon: false },
-  { slug: "dji", label: "DJI", icon: true },
-  { slug: "dell", label: "Dell", icon: true },
-  { slug: "logitech", label: "Logitech", icon: false },
-  { slug: "opencode", label: "OpenCode", icon: true },
-  { slug: "kyzona", label: "Kyzona", icon: false },
-  { slug: "monsterenergy", label: "Monster", icon: false },
-]
+// ── Sub-components ─────────────────────────────────────────────────────────
 
-function BrandLogo({ slug, label, icon }: { slug: string; label: string; icon: boolean }) {
-  return icon ? (
-    <img
-      src={`https://cdn.simpleicons.org/${slug}/11151f`}
-      alt={label}
-      width="24"
-      height="24"
-      loading="lazy"
-      onError={(e) => {
-        const img = e.currentTarget
-        img.style.display = "none"
-        const fb = img.nextElementSibling as HTMLElement
-        if (fb) fb.style.display = "block"
-      }}
-    />
-  ) : null
-}
-
-export default function Hero() {
-  const [current, setCurrent] = useState(0)
-  const [textIdx, setTextIdx] = useState(0)
-  const [incoming, setIncoming] = useState<number | null>(null)
-  const [progKey, setProgKey] = useState(0)
-
-  const busyRef = useRef(false)
-  const slideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const transTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const currentRef = useRef(0)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const rafRef = useRef<number>(0)
-
-  function clearAllTimers() {
-    if (slideTimerRef.current) clearTimeout(slideTimerRef.current)
-    if (transTimerRef.current) clearTimeout(transTimerRef.current)
-  }
-
-  function scheduleNext(fromIndex: number) {
-    clearAllTimers()
-    slideTimerRef.current = setTimeout(() => {
-      goTo((fromIndex + 1) % SLIDES.length)
-    }, SLIDE_TIME)
-  }
-
-  function goTo(next: number) {
-    if (busyRef.current || next === currentRef.current) {
-      scheduleNext(currentRef.current)
-      return
-    }
-    clearAllTimers()
-    busyRef.current = true
-    setTextIdx(next)
-    setIncoming(next)
-    transTimerRef.current = setTimeout(() => {
-      currentRef.current = next
-      setCurrent(next)
-      setIncoming(null)
-      setProgKey(k => k + 1)
-      busyRef.current = false
-      scheduleNext(next)
-    }, TRANSITION_MS)
-  }
-
-  useEffect(() => {
-    setProgKey(k => k + 1)
-    scheduleNext(0)
-    return () => {
-      clearAllTimers()
-      cancelAnimationFrame(rafRef.current)
-    }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    // 🔴 OFFLOAD: Canvas wave animation is HEAVY on mobile CPUs
-    // Causes TBT spikes (228ms) on mobile — skip entirely on small screens
-    if (typeof window !== 'undefined' && window.innerWidth <= 760) return
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-    const mobile = () => window.innerWidth <= 760
-    let cW = 0, cH = 0
-    function resize() {
-      const pr = Math.min(window.devicePixelRatio || 1, mobile() ? 1.4 : 2)
-      cW = window.innerWidth; cH = window.innerHeight
-      canvas!.width = Math.floor(cW * pr)
-      canvas!.height = Math.floor(cH * pr)
-      canvas!.style.width = `${cW}px`
-      canvas!.style.height = `${cH}px`
-      ctx!.setTransform(pr, 0, 0, pr, 0, 0)
-    }
-    function draw(t: number = 0) {
-      ctx!.clearRect(0, 0, cW, cH)
-      ctx!.lineWidth = 1
-      const lines = mobile() ? 16 : 28
-      const pts = mobile() ? 58 : 90
-      for (let l = 0; l < lines; l++) {
-        ctx!.beginPath()
-        ctx!.strokeStyle = `rgba(255,255,255,${0.025 + l * 0.0025})`
-        for (let p = 0; p <= pts; p++) {
-          const x = (p / pts) * cW
-          const base = cH * 0.22 + l * 22
-          const y = base + Math.sin(p * 0.18 + t * 0.00045 + l * 0.32) * 32 + Math.cos(p * 0.09 + t * 0.00028 + l) * 18
-          p === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)
-        }
-        ctx!.stroke()
-      }
-      rafRef.current = requestAnimationFrame(draw)
-    }
-    resize()
-    draw()
-    window.addEventListener("resize", resize)
-    return () => window.removeEventListener("resize", resize)
+/** Floating particles scattered behind content */
+function BgParticles() {
+  const particles = useMemo(() => {
+    return Array.from({ length: PARTICLES }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1.5,
+      delay: Math.random() * 6,
+      duration: Math.random() * 4 + 5,
+      opacity: Math.random() * 0.35 + 0.08,
+    }))
   }, [])
 
-  function handleNav(dir: number) {
-    clearAllTimers()
-    busyRef.current = false
-    goTo((currentRef.current + dir + SLIDES.length) % SLIDES.length)
-  }
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.size > 2.5 ? "#D4AF37" : "rgba(255,255,255,0.5)",
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [p.opacity, p.opacity * 2, p.opacity],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  )
+}
 
-  function handleDot(idx: number) {
-    clearAllTimers()
-    busyRef.current = false
-    goTo(idx)
-  }
+/** Radial glow gradient spots in the background */
+function BgGlows() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden" aria-hidden>
+      {/* Central warm glow */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: "50%",
+          height: "60%",
+          top: "20%",
+          right: "-5%",
+          background:
+            "radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)",
+        }}
+      />
+      {/* Top-right cool glow */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: "40%",
+          height: "40%",
+          top: "-5%",
+          right: "10%",
+          background:
+            "radial-gradient(ellipse at center, rgba(212,175,55,0.05) 0%, transparent 70%)",
+        }}
+      />
+      {/* Bottom ambient */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: "60%",
+          height: "30%",
+          bottom: "0%",
+          left: "0%",
+          background:
+            "radial-gradient(ellipse at center, rgba(200,145,46,0.06) 0%, transparent 70%)",
+        }}
+      />
+    </div>
+  )
+}
+
+/** Grid overlay with subtle gold lines */
+function BgGrid() {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none z-[1] opacity-[0.04]"
+      aria-hidden
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(212,175,55,1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(212,175,55,1) 1px, transparent 1px)
+        `,
+        backgroundSize: "80px 80px",
+      }}
+    />
+  )
+}
+
+/** Animated orbit visual for the right column */
+function OrbitVisual() {
+  const rings = useMemo(() => {
+    return Array.from({ length: ORBIT_RINGS }, (_, i) => ({
+      radius: 60 + i * 48,
+      borderDash: i % 2 === 0 ? "8 12" : "2 18",
+      rotationDuration: 18 + i * 6,
+      direction: i % 2 === 0 ? 1 : -1,
+    }))
+  }, [])
+
+  const dots = useMemo(() => {
+    return Array.from({ length: ORBIT_DOTS }, (_, i) => {
+      const angle = (i / ORBIT_DOTS) * Math.PI * 2
+      return {
+        id: i,
+        angle,
+        delay: i * 0.25,
+        size: i % 2 === 0 ? 6 : 4,
+        orbitIndex: i % ORBIT_RINGS,
+      }
+    })
+  }, [])
 
   return (
-    <>
-      <style>{`
-        .tlbm-hero {
-          --accent: #1f7aff;
-          --accent-dk: #075ad6;
-          --muted: rgba(255,255,255,0.78);
-          --line: rgba(255,255,255,0.24);
-          --max-w: 1120px;
-          --slide-ms: ${SLIDE_TIME}ms;
-          --trans-ms: ${TRANSITION_MS}ms;
-          position: relative;
-          isolation: isolate;
-          min-height: 100vh;
-          min-height: 100dvh;
-          overflow: hidden;
-          background: #090b10;
-        }
+    <div className="relative flex items-center justify-center w-full h-full min-h-[380px] md:min-h-[440px]">
+      {/* Center product showcase card */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div
+          className="glass w-[140px] h-[140px] md:w-[170px] md:h-[170px] rounded-2xl flex flex-col items-center justify-center gap-3"
+          style={{
+            border: "1px solid rgba(212,175,55,0.15)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            background: "rgba(10,10,15,0.5)",
+            boxShadow: "0 0 60px rgba(212,175,55,0.06)",
+          }}
+        >
+          {/* Box icon SVG */}
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="opacity-60"
+          >
+            <path
+              d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+              stroke="#D4AF37"
+              strokeWidth="1.2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="#D4AF37"
+              strokeWidth="1.2"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 12V22"
+              stroke="#D4AF37"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M7 4.5L17 9.5"
+              stroke="#D4AF37"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+            />
+          </svg>
+          <span
+            className="text-[0.6rem] font-semibold tracking-[0.2em] uppercase"
+            style={{ color: "rgba(212,175,55,0.7)" }}
+          >
+            Producto<br />Destacado
+          </span>
+        </div>
+      </motion.div>
 
-        .tlbm-bg {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          background-position: var(--pos, center);
-          background-size: cover;
-          opacity: 0;
-          transform: scale(1.1);
-          transition: opacity 300ms ease, transform 800ms ease;
-          will-change: opacity, transform, clip-path;
-        }
-        .tlbm-bg.is-active { opacity: 1; transform: scale(1); }
-        .tlbm-bg.is-incoming {
-          z-index: 1;
-          opacity: 1;
-          transform: scale(1.03);
-          clip-path: inset(0 100% 0 0);
-          animation: tlbm-reveal var(--trans-ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .tlbm-overlay {
-          position: absolute; inset: 0; z-index: 2; pointer-events: none;
-          background:
-            linear-gradient(90deg,rgba(4,7,13,.54) 0%,rgba(4,7,13,.28) 48%,rgba(4,7,13,.08) 100%),
-            linear-gradient(0deg,rgba(4,7,13,.38) 0%,rgba(4,7,13,.04) 48%,rgba(4,7,13,.28) 100%);
-        }
-        .tlbm-wave { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; opacity: .28; pointer-events: none; }
-
-        .tlbm-inner {
-          position: relative; z-index: 4;
-          width: min(var(--max-w), calc(100% - 40px));
-          min-height: 100vh; min-height: 100dvh;
-          margin: 0 auto; display: grid; align-items: center;
-          padding: clamp(88px,12vh,150px) 0 clamp(98px,14vh,150px);
-        }
-
-        .tlbm-slide {
-          grid-area: 1/1;
-          max-width: 720px;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .tlbm-slide.align-left { align-items: flex-start; text-align: left; justify-self: start; }
-        .tlbm-slide.align-center { align-items: center; text-align: center; justify-self: center; }
-        .tlbm-slide.align-right { align-items: flex-end; text-align: right; justify-self: end; }
-
-        .tlbm-eyebrow {
-          display: inline-flex; align-items: center; gap: 12px;
-          margin: 0 0 18px; color: var(--muted);
-          font-size: .78rem; font-weight: 800;
-          letter-spacing: .16em; text-transform: uppercase;
-        }
-        .tlbm-eyebrow::before { content: ""; width: 42px; height: 1px; background: var(--accent); }
-        .tlbm-slide.align-center .tlbm-eyebrow::before { display: none; }
-
-        .tlbm-title {
-          margin: 0; max-width: 12ch;
-          font-family: var(--font-inter, Inter, ui-sans-serif, system-ui, sans-serif);
-          font-size: clamp(2.8rem, 8vw, 6.5rem);
-          font-weight: 900; line-height: .92;
-          color: transparent;
-          background: linear-gradient(104deg,#fff 0%,#fff 38%,#d9fbff 50%,#fff 62%,#fff 100%);
-          background-size: 220% 100%;
-          background-clip: text; -webkit-background-clip: text;
-          filter: drop-shadow(0 16px 34px rgba(0,0,0,.38));
-          animation: tlbm-sheen 6.8s cubic-bezier(.42,0,.2,1) infinite;
-        }
-
-        .tlbm-copy {
-          max-width: 560px; margin: 24px 0 0;
-          font-family: var(--font-fraunces, Georgia, serif);
-          color: var(--muted);
-          font-size: clamp(1rem, 1.8vw, 1.25rem);
-          font-weight: 500; line-height: 1.5;
-        }
-
-        .tlbm-actions { display: flex; align-items: center; gap: 14px; margin-top: 34px; }
-        .tlbm-btn {
-          display: inline-flex; align-items: center; justify-content: center;
-          min-height: 52px; padding: 0 32px;
-          border-radius: 6px; color: #fff; background: var(--accent);
-          box-shadow: 0 14px 34px rgba(31,122,255,.28);
-          font-family: var(--font-public-sans, Inter, ui-sans-serif, system-ui, sans-serif);
-          font-size: .86rem; font-weight: 800;
-          letter-spacing: .08em; text-decoration: none; text-transform: uppercase;
-          transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .tlbm-btn:hover { background: var(--accent-dk); transform: translateY(-3px) scale(1.02); }
-
-        .tlbm-controls {
-          position: absolute; right: max(20px, calc((100vw - var(--max-w)) / 2));
-          bottom: 36px; z-index: 5; display: flex; align-items: center; gap: 12px;
-        }
-        .tlbm-ctrl {
-          display: inline-grid; place-items: center; width: 44px; height: 44px;
-          border: 1px solid var(--line); border-radius: 999px;
-          color: #fff; background: rgba(8,10,16,.44);
-          cursor: pointer; backdrop-filter: blur(12px);
-          transition: all 200ms ease;
-        }
-        .tlbm-ctrl:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.1); transform: scale(1.1); }
-        .tlbm-ctrl svg { width: 20px; height: 20px; }
-
-        .tlbm-dots { display: flex; align-items: center; gap: 10px; }
-        .tlbm-dot {
-          width: 12px; height: 12px; padding: 0; border: 1px solid var(--line); border-radius: 999px;
-          background: rgba(255,255,255,.3); cursor: pointer; transition: all 300ms ease;
-        }
-        .tlbm-dot.is-active { width: 36px; border-color: transparent; background: #fff; }
-
-        .tlbm-progress { position: absolute; left: 0; bottom: 0; z-index: 5; width: 100%; height: 4px; overflow: hidden; background: rgba(255,255,255,.1); }
-        .tlbm-progress-bar { display: block; width: 100%; height: 100%; background: #00e5ff; box-shadow: 0 0 16px rgba(0,229,255,.6); transform-origin: left; transform: scaleX(0); animation: tlbm-progress var(--slide-ms) linear forwards; }
-
-        @keyframes tlbm-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        @keyframes tlbm-reveal { from { clip-path: inset(0 100% 0 0); transform: scale(1.05); } to { clip-path: inset(0 0 0 0); transform: scale(1); } }
-        @keyframes tlbm-sheen { 0%,22% { background-position: 115% 50%; } 56%,100% { background-position: -95% 50%; } }
-
-        @media (max-width: 760px) {
-          .tlbm-inner { width: 100%; padding: 80px 24px 140px; align-items: center; }
-          .tlbm-slide { justify-self: center !important; align-items: center !important; text-align: center !important; max-width: 100%; }
-          .tlbm-eyebrow::before { display: block !important; }
-          .tlbm-title { font-size: clamp(2.4rem, 12vw, 3.8rem); max-width: 10ch; }
-          .tlbm-copy { font-size: 1.05rem; margin-top: 20px; max-width: 90%; }
-          .tlbm-actions { flex-direction: column; width: 100%; }
-          .tlbm-btn { width: 100%; }
-          .tlbm-controls { left: 0; right: 0; bottom: 30px; justify-content: center; }
-          .tlbm-ctrl { width: 40px; height: 40px; }
-          .tlbm-dot.is-active { width: 28px; }
-        }
-
-        .tlbm-marquee { overflow: hidden; background: #fff; border-top: 1px solid rgba(0,0,0,.05); padding: 24px 0; will-change: transform; }
-        .tlbm-mq-inner { display: flex; width: max-content; animation: tlbm-marquee 80s linear infinite; will-change: transform; }
-        .tlbm-mq-track { display: flex; align-items: center; gap: 40px; padding-right: 40px; }
-        .tlbm-brand { 
-          display: flex; align-items: center; justify-content: center; 
-          width: 160px; height: 74px; padding: 12px; 
-          border: 1px solid rgba(0,0,0,.04); border-radius: 12px; 
-          background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,.02); 
-          will-change: transform;
-        }
-        .tlbm-brand img { max-width: 100%; max-height: 36px; object-fit: contain; }
-        .tlbm-brand-text { color: #111; font-weight: 900; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; }
-        @keyframes tlbm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      `}</style>
-
-      <section className="tlbm-hero">
-        {SLIDES.map((s, i) => (
-          <div
+      {/* Orbit rings */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        {rings.map((ring, i) => (
+          <motion.div
             key={i}
-            className={`tlbm-bg${i === current ? " is-active" : ""}${i === incoming ? " is-incoming" : ""}`}
+            className="absolute rounded-full"
             style={{
-              backgroundImage: `url('${s.bg}')`,
-              ["--pos" as string]: s.bgPos,
+              width: ring.radius * 2,
+              height: ring.radius * 2,
+              border: "1px dashed rgba(212,175,55,0.12)",
+              borderRadius: "50%",
+            }}
+            animate={{ rotate: 360 * ring.direction }}
+            transition={{
+              duration: ring.rotationDuration,
+              repeat: Infinity,
+              ease: "linear",
             }}
           />
         ))}
+      </div>
 
-        <div className="tlbm-overlay" />
-        <canvas ref={canvasRef} className="tlbm-wave" />
+      {/* Orbiting dots */}
+      {rings.map((ring, ringIdx) => {
+        const dotsOnRing = Array.from(
+          { length: 4 + ringIdx * 2 },
+          (_, i) => ({
+            id: `${ringIdx}-${i}`,
+            angle: (i / (4 + ringIdx * 2)) * Math.PI * 2,
+            size: ringIdx === 0 ? 5 : ringIdx === 1 ? 4 : 3,
+          })
+        )
+        return dotsOnRing.map((dot) => (
+          <motion.div
+            key={dot.id}
+            className="absolute rounded-full"
+            style={{
+              width: dot.size,
+              height: dot.size,
+              backgroundColor: "#D4AF37",
+              boxShadow: "0 0 8px rgba(212,175,55,0.4)",
+              left: `calc(50% + ${ring.radius * Math.cos(dot.angle)}px - ${dot.size / 2}px)`,
+              top: `calc(50% + ${ring.radius * Math.sin(dot.angle)}px - ${dot.size / 2}px)`,
+            }}
+            animate={{ opacity: [0.3, 0.9, 0.3] }}
+            transition={{
+              duration: 2.5 + ringIdx * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: dot.id.split("-").reduce((a, b) => a + parseInt(b), 0) * 0.15,
+            }}
+          />
+        ))
+      })}
+    </div>
+  )
+}
 
-        <div className="tlbm-inner">
-          <article
-              key={textIdx}
-              className={`tlbm-slide align-${SLIDES[textIdx].align}`}
-            >
-              <p className="tlbm-eyebrow">
-                {SLIDES[textIdx].eyebrow}
-              </p>
-              <h1 className="tlbm-title">
-                {SLIDES[textIdx].title}
-              </h1>
-              <p className="tlbm-copy">
-                {SLIDES[textIdx].copy}
-              </p>
-              <div className="tlbm-actions">
-                <LocalizedClientLink href={SLIDES[textIdx].href} className="tlbm-btn">
-                  {SLIDES[textIdx].btn}
-                </LocalizedClientLink>
-              </div>
-            </article>
-        </div>
+// ── Main Hero Component ────────────────────────────────────────────────────
 
-        <div className="tlbm-controls">
-          <button className="tlbm-ctrl" onClick={() => handleNav(-1)} aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M15 18l-6-6 6-6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <div className="tlbm-dots">
-            {SLIDES.map((_, i) => (
-              <button
-                key={i}
-                className={`tlbm-dot${i === textIdx ? " is-active" : ""}`}
-                onClick={() => handleDot(i)}
-                aria-current={i === textIdx ? "true" : undefined}
-                aria-label={`Ir a slide ${i + 1}`}
+export default function Hero() {
+  return (
+    <section
+      className="relative min-h-[95vh] md:min-h-screen overflow-hidden flex items-center"
+      style={{ backgroundColor: "#0A0A0F" }}
+    >
+      {/* ── Background layers ── */}
+      <BgGrid />
+      <BgGlows />
+      <BgParticles />
+
+      {/* ── Content ── */}
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-8 py-24 md:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+          {/* ══════ LEFT COLUMN ══════ */}
+          <motion.div
+            className="flex flex-col gap-6 md:gap-7"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3">
+              <span
+                className="block w-10 h-[1px]"
+                style={{ backgroundColor: "#D4AF37" }}
               />
-            ))}
-          </div>
-          <button className="tlbm-ctrl" onClick={() => handleNav(1)} aria-label="Siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M9 6l6 6-6 6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
+              <span
+                className="text-[0.7rem] md:text-[0.75rem] font-semibold tracking-[0.2em] uppercase"
+                style={{ color: "#D4AF37" }}
+              >
+                Colección Verano 2026
+              </span>
+            </div>
 
-        <div className="tlbm-progress">
-          <span key={progKey} className="tlbm-progress-bar" />
-        </div>
-      </section>
+            {/* Title */}
+            <h1
+              className="font-serif text-[2.8rem] sm:text-[3.6rem] md:text-[4.2rem] lg:text-[5rem] leading-[1.05] font-bold tracking-tight"
+              style={{ color: "#fff" }}
+            >
+              Tecnología<br />
+              <span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F5D980] to-[#C8912E]"
+              >
+                Exclusiva
+              </span>
+              <br />
+              para Ti
+            </h1>
 
-      <section className="tlbm-marquee">
-        <div className="tlbm-mq-inner">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="tlbm-mq-track">
-              {BRANDS.map(({ slug, label, icon }) => (
-                <div key={slug} className="tlbm-brand">
-                  <BrandLogo slug={slug} label={label} icon={icon} />
-                  <span className="tlbm-brand-text">{label}</span>
+            {/* Description */}
+            <p
+              className="text-sm md:text-base leading-relaxed max-w-[480px]"
+              style={{ color: "rgba(255,255,255,0.4)", fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif" }}
+            >
+              Descubre la tecnología premium que define tu estilo. 
+              Productos originales, selección curada y el mejor servicio 
+              desde Bucaramanga para todo Colombia.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-2">
+              <LocalizedClientLink
+                href="/store"
+                className="btn-shine inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, #D4AF37 0%, #C8912E 50%, #B8862B 100%)",
+                  color: "#0A0A0F",
+                  boxShadow: "0 12px 32px rgba(212,175,55,0.25)",
+                }}
+              >
+                Explorar Colección
+              </LocalizedClientLink>
+
+              <LocalizedClientLink
+                href="/store?q=ofertas"
+                className="inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.2)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  background: "rgba(10,10,15,0.3)",
+                  color: "rgba(255,255,255,0.8)",
+                }}
+              >
+                Ver Ofertas
+              </LocalizedClientLink>
+            </div>
+
+            {/* Stats Row */}
+            <div className="flex items-center gap-6 md:gap-10 mt-4 pt-6 md:pt-7" style={{ borderTop: "1px solid rgba(212,175,55,0.1)" }}>
+              {[
+                { value: "30+", label: "Productos" },
+                { value: "100%", label: "Originales" },
+                { value: "CO", label: "Bucaramanga" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col">
+                  <span
+                    className="text-lg md:text-xl font-bold font-serif tracking-tight"
+                    style={{ color: "#D4AF37" }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span
+                    className="text-[0.65rem] md:text-[0.7rem] font-medium tracking-[0.12em] uppercase"
+                    style={{ color: "rgba(255,255,255,0.3)" }}
+                  >
+                    {stat.label}
+                  </span>
                 </div>
               ))}
             </div>
-          ))}
+          </motion.div>
+
+          {/* ══════ RIGHT COLUMN ══════ */}
+          <motion.div
+            className="hidden md:flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          >
+            <OrbitVisual />
+          </motion.div>
         </div>
-      </section>
-    </>
+
+        {/* Bottom decorative line */}
+        <div className="mt-16 md:mt-20 w-full h-[1px]" style={{ background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent)" }} />
+      </div>
+    </section>
   )
 }

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LE BON MARCHÉ · Rediseño v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{tlbm:{gold:'#D4AF37',goldLight:'#E8C84A',goldDark:'#B8860B',amber:'#C8912E',dark:'#0A0A0F',surface:'#121218',card:'#181820',border:'rgba(255,255,255,0.06)',muted:'rgba(255,255,255,0.35)'}}}},fontFamily:{sans:['Inter','system-ui','sans-serif'],serif:['Playfair Display','Georgia','serif']}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;background:#FAFAF9;color:#1A1A1A;transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1)}
+body.dark{background:#0A0A0F;color:#F8F6F1}
+::selection{background:rgba(212,175,55,.3)}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#D4AF37;border-radius:2px}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-progress{position:fixed;top:0;left:0;z-index:9999;height:1.5px;background:linear-gradient(90deg,#B8860B,#D4AF37,#E8C84A,#D4AF37,#B8860B);background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .1s linear}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── NOISE TEXTURE ── */
+#noise-overlay{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.015;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px}
+
+/* ── THEME TOGGLE ── */
+#theme-btn{position:fixed;bottom:24px;right:24px;z-index:9998;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#D4AF37;box-shadow:0 4px 20px rgba(212,175,55,.25);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;backdrop-filter:blur(12px)}
+#theme-btn:hover{transform:scale(1.12);box-shadow:0 6px 30px rgba(212,175,55,.35)}
+#theme-btn svg{width:20px;height:20px;color:#0A0A0F;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+#theme-btn:active svg{transform:rotate(180deg)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.r-d1{transition-delay:.12s}.r-d2{transition-delay:.24s}.r-d3{transition-delay:.36s}.r-d4{transition-delay:.48s}
+
+/* ── CARD LIFT ── */
+.card-lift{transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1);will-change:transform}
+.card-lift:hover{transform:translateY(-8px)}
+.img-zoom{overflow:hidden}
+.img-zoom img,.img-zoom>div{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.img-zoom:hover img,.img-zoom:hover>div{transform:scale(1.07)}
+
+/* ── BUTTON SHINE ── */
+.btn-shine{position:relative;overflow:hidden}
+.btn-shine::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .6s cubic-bezier(.16,1,.3,1)}
+.btn-shine:hover::after{left:100%}
+
+/* ── NAV LINKS ── */
+.nav-link{position:relative;transition:color .3s;color:#4B5563}
+.nav-link:hover{color:#D4AF37}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:#D4AF37;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+body.dark .nav-link{color:rgba(255,255,255,.4)}
+body.dark .nav-link:hover{color:#D4AF37}
+
+/* ── ANIMATIONS ── */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes float-slow{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-10px) rotate(.8deg)}66%{transform:translateY(-5px) rotate(-.5deg)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 30px rgba(212,175,55,.06)}50%{box-shadow:0 0 60px rgba(212,175,55,.15)}}
+@keyframes badge-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes orbit{0%{transform:rotate(0) translateX(40px) rotate(0)}100%{transform:rotate(360deg) translateX(40px) rotate(-360deg)}}
+@keyframes orbit-reverse{0%{transform:rotate(0) translateX(55px) rotate(0)}100%{transform:rotate(-360deg) translateX(55px) rotate(360deg)}}
+.float{animation:float 6s ease-in-out infinite}
+.float-slow{animation:float-slow 8s ease-in-out infinite}
+.pulse-glow{animation:pulse-glow 4s ease-in-out infinite}
+.badge-pulse{animation:badge-pulse 3s ease-in-out infinite}
+
+/* ── GLASS (DEFAULT: LIGHT) ── */
+.glass{border:1px solid rgba(0,0,0,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+body.dark .glass{border:1px solid rgba(255,255,255,.06)}
+
+/* ── PRODUCT MARQUEE ── */
+.pm-wrap{overflow:hidden;mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%)}
+.pm-track{display:flex;gap:1.25rem;width:max-content;animation:pm-scroll 60s linear infinite}
+.pm-track:hover{animation-play-state:paused}
+@keyframes pm-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.pm-card{flex-shrink:0;width:clamp(240px,28vw,340px);border-radius:1.25rem;overflow:hidden;cursor:pointer;background:#FFFFFF;border:1px solid #E5E7EB;transition:border-color .4s,box-shadow .4s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.pm-card:hover{border-color:rgba(212,175,55,.4);box-shadow:0 8px 24px rgba(212,175,55,.08)}
+body.dark .pm-card{background:#181820;border:1px solid rgba(255,255,255,.06);box-shadow:none}
+body.dark .pm-card:hover{border-color:rgba(212,175,55,.25)}
+
+/* ── HEADER ── */
+header.sticky{background:rgba(250,250,249,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,0,0,.06)}
+body.dark header.sticky{background:rgba(10,10,15,.85);border-bottom:1px solid rgba(255,255,255,.05)}
+
+/* ── GRID BG ── */
+.grid-bg{background-image:linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);background-size:70px 70px}
+
+/* ── GLOW LINE ── */
+.glow-line{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.3),transparent)}
+
+/* ── CATEGORY ITEMS ── */
+.cat-item{position:relative;border-radius:1.25rem;overflow:hidden;cursor:pointer;min-height:280px;border:1px solid #E5E7EB;background:#FFFFFF;transition:border-color .4s,transform .5s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.cat-item:hover{border-color:rgba(212,175,55,.4);transform:scale(1.02);box-shadow:0 8px 30px rgba(212,175,55,.08)}
+body.dark .cat-item{background:transparent;border-color:rgba(255,255,255,.06)}
+body.dark .cat-item:hover{border-color:rgba(212,175,55,.3)}
+
+/* ── TRUST ITEMS ── */
+.trust-item{display:flex;align-items:center;gap:.75rem;padding:1rem 1.5rem;border-radius:1rem;border:1px solid #E5E7EB;transition:border-color .3s,background .3s}
+.trust-item:hover{border-color:rgba(212,175,55,.3);background:rgba(212,175,55,.04)}
+body.dark .trust-item{border:1px solid rgba(255,255,255,.05)}
+body.dark .trust-item:hover{border-color:rgba(212,175,55,.2);background:rgba(212,175,55,.03)}
+body.dark .trust-item svg{color:#D4AF37}
+body.dark .trust-item p:first-of-type{color:rgba(255,255,255,.8)}
+body.dark .trust-item p:last-of-type{color:rgba(255,255,255,.3)}
+
+/* ── SECTIONS LIGHT/DARK ── */
+.section-dark{background:#0A0A0F;color:#F8F6F1}
+.section-light{background:#FAFAF9;color:#1A1A1A}
+
+/* ── TESIMONIAL CARDS ── */
+.testi-card{padding:1.5rem 2rem;border-radius:1.25rem;border:1px solid #E5E7EB;background:#FFFFFF;transition:border-color .3s,box-shadow .3s}
+.testi-card:hover{border-color:rgba(212,175,55,.3);box-shadow:0 8px 24px rgba(212,175,55,.06)}
+body.dark .testi-card{background:transparent;border:1px solid rgba(255,255,255,.06)}
+body.dark .testi-card:hover{border-color:rgba(212,175,55,.2)}
+
+/* ── TEXT COLORS LIGHT/DARK ── */
+.text-muted{color:#6B7280}
+body.dark .text-muted{color:rgba(255,255,255,.35)}
+.text-heading{color:#111827}
+body.dark .text-heading{color:rgba(255,255,255,.9)}
+.text-body{color:#4B5563}
+body.dark .text-body{color:rgba(255,255,255,.6)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero-title{font-size:3rem!important}
+  .hero-sub{font-size:2rem!important}
+  .nav-desktop{display:none!important}
+  .mb-menu{display:flex!important}
+  .f-grid{grid-template-columns:1fr!important}
+  .pm-card{width:220px!important}
+  .pm-track{gap:.75rem;animation-duration:40s}
+  .cat-item{min-height:200px}
+}
+@media(min-width:641px){.mb-menu{display:none!important}.nav-desktop{display:flex!important}}
+@media(max-width:1024px){.hero-title{font-size:4.5rem!important}}
+</style>
+</head>
+<body>
+
+<!-- NOISE OVERLAY -->
+<div id="noise-overlay"></div>
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- THEME TOGGLE -->
+<button id="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+  <svg id="t-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+  </svg>
+</button>
+
+<!-- ═══ TOP BAR ═══ -->
+<div style="background:#0A0A0F;border-bottom:1px solid rgba(255,255,255,.04);">
+  <div class="max-w-[90rem] mx-auto flex items-center justify-between h-9 px-6 lg:px-10">
+    <div class="flex items-center gap-4">
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">IG</a>
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">FB</a>
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">TT</a>
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">WA</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-zinc-600 text-[9px] font-medium tracking-wide">🌎 Envíos a toda Colombia</span>
+      <span class="w-px h-3 bg-white/5"></span>
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">Registrarse</a>
+      <span class="text-white/8">/</span>
+      <a href="#" class="text-zinc-600 hover:text-[#D4AF37] transition-colors text-[9px] font-bold uppercase tracking-[.22em]">Ingresar</a>
+      <span class="w-px h-3 bg-white/5"></span>
+      <button class="relative text-zinc-500 hover:text-[#D4AF37] transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007z"/></svg>
+        <span class="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 rounded-full bg-[#D4AF37] text-[7px] font-bold flex items-center justify-center text-black">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="sticky top-0 z-40" id="hdr">
+  <div class="max-w-[90rem] mx-auto flex items-center justify-between h-16 lg:h-[72px] px-6 lg:px-10">
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 0 24px rgba(212,175,55,.2);">
+        <span class="text-[#0A0A0F] text-[8px] font-black tracking-widest">LBM</span>
+      </div>
+      <span class="hidden sm:block text-xs font-bold tracking-tight text-gray-900">LE BON MARCHÉ</span>
+    </a>
+    <nav class="nav-desktop items-center gap-10">
+      <a href="#" class="nav-link text-[10px] font-bold uppercase tracking-[.28em] active">Inicio</a>
+      <a href="#" class="nav-link text-[10px] font-bold uppercase tracking-[.28em]">Tienda</a>
+      <a href="#" class="nav-link text-[10px] font-bold uppercase tracking-[.28em]">Colecciones</a>
+      <a href="#" class="nav-link text-[10px] font-bold uppercase tracking-[.28em]">Ofertas</a>
+      <a href="#" class="nav-link text-[10px] font-bold uppercase tracking-[.28em]">Blog</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#" class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[#0A0A0F] text-[9px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 4px 18px rgba(212,175,55,.25);">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        Explorar
+      </a>
+      <button class="mb-menu flex flex-col gap-1 p-2 group" aria-label="Menú">
+        <span class="block w-5 h-[1.5px] bg-gray-600 rounded-full transition-all duration-300 group-hover:w-6"></span>
+        <span class="block w-5 h-[1.5px] bg-gray-600 rounded-full"></span>
+        <span class="block w-5 h-[1.5px] bg-gray-600 rounded-full transition-all duration-300 group-hover:w-4"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO (LIGHT DEFAULT) ═══ -->
+<section class="min-h-[95vh] flex items-center overflow-hidden relative section-light" id="hero-section">
+  <div class="absolute inset-0 grid-bg opacity-50"></div>
+  <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full" style="background:radial-gradient(circle,rgba(212,175,55,.06) 0%,transparent 60%);"></div>
+  <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full" style="background:radial-gradient(circle,rgba(200,145,46,.04) 0%,transparent 60%);"></div>
+  <div class="absolute top-1/3 left-1/2 w-2 h-2 rounded-full bg-[#D4AF37]/20 float" style="animation-delay:-1s;"></div>
+  <div class="absolute top-2/3 right-1/4 w-1.5 h-1.5 rounded-full bg-[#D4AF37]/15 float" style="animation-delay:-3s;"></div>
+  
+  <div class="relative z-10 max-w-[90rem] mx-auto w-full px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center py-24 lg:py-0 min-h-[95vh]">
+      
+      <!-- LEFT -->
+      <div class="max-w-xl reveal visible">
+        <div class="inline-flex items-center gap-3 text-[#D4AF37]/80 text-[9px] font-bold uppercase tracking-[.35em] mb-8">
+          <span class="w-8 h-px bg-[#D4AF37]/40"></span>
+          Colección Verano 2026
+        </div>
+        
+        <h1 class="hero-title font-serif text-6xl md:text-7xl lg:text-[5.5rem] font-bold leading-[.88] tracking-tight mb-8 text-gray-900">
+          Tecnología<br>
+          <span style="background:linear-gradient(135deg,#D4AF37 0%,#E8C84A 40%,#D4AF37 70%,#C8912E 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Exclusiva</span><br>
+          para Ti
+        </h1>
+        
+        <p class="text-base md:text-lg leading-relaxed max-w-md mb-10 font-light text-gray-500">
+          Los gadgets más exclusivos, tecnología premium y accesorios de lujo. 
+          Curados con pasión desde Bucaramanga para toda Colombia.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="#" class="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 4px 24px rgba(212,175,55,.25);">
+            Explorar Colección
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#" class="inline-flex items-center px-8 py-4 text-[10px] font-bold uppercase tracking-[.25em] rounded-full border border-gray-200 text-gray-500 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300">
+            Ver Ofertas
+          </a>
+        </div>
+        
+        <!-- Stats -->
+        <div class="flex items-center gap-8 mt-14 pt-10 border-t border-gray-200">
+          <div>
+            <span class="text-2xl font-bold text-gray-900">30+</span>
+            <p class="text-[9px] uppercase tracking-[.25em] font-medium mt-1.5 text-gray-400">Productos</p>
+          </div>
+          <div class="w-px h-10 bg-gray-200"></div>
+          <div>
+            <span class="text-2xl font-bold text-[#D4AF37]">100%</span>
+            <p class="text-[9px] uppercase tracking-[.25em] font-medium mt-1.5 text-gray-400">Originales</p>
+          </div>
+          <div class="w-px h-10 bg-gray-200"></div>
+          <div>
+            <span class="text-2xl font-bold text-gray-900">CO</span>
+            <p class="text-[9px] uppercase tracking-[.25em] font-medium mt-1.5 text-gray-400">Bucaramanga</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- RIGHT -->
+      <div class="relative flex items-center justify-center lg:justify-end reveal visible r-d2">
+        <div class="relative w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
+          <div class="absolute inset-0 rounded-full border border-[#D4AF37]/8 pulse-glow"></div>
+          <div class="absolute inset-8 rounded-full border border-dashed border-[#D4AF37]/6 float-slow"></div>
+          <div class="absolute inset-16 rounded-full border border-[#D4AF37]/5"></div>
+          
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#D4AF37]/30" style="animation:orbit 8s linear infinite;"></div>
+          <div class="absolute top-1/2 right-0 translate-y-[-50%] w-2.5 h-2.5 rounded-full bg-[#D4AF37]/20" style="animation:orbit-reverse 10s linear infinite;"></div>
+          
+          <div class="absolute inset-12 rounded-full pulse-glow flex items-center justify-center" style="background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(200,145,46,.04));border:1px solid rgba(212,175,55,.1);">
+            <div class="text-center">
+              <div class="w-28 h-28 md:w-36 md:h-36 mx-auto mb-3 rounded-2xl flex items-center justify-center float border border-[#D4AF37]/15" style="background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(200,145,46,.08));box-shadow:0 8px 40px rgba(212,175,55,.08);animation-delay:-2s;">
+                <svg class="w-12 h-12 md:w-16 md:h-16 text-[#D4AF37]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+              </div>
+              <span class="text-[9px] font-bold uppercase tracking-[.35em] text-gray-400">Producto Destacado</span>
+              <p class="text-sm font-medium text-[#D4AF37] mt-1">Audio Exclusivo</p>
+            </div>
+          </div>
+          
+          <div class="absolute -top-3 right-12 w-2 h-2 rounded-full bg-[#D4AF37]/25 float" style="animation-duration:5s;"></div>
+          <div class="absolute bottom-6 -left-2 w-3 h-3 rounded-full bg-[#D4AF37]/15 float" style="animation-duration:7s;animation-delay:-2s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUST BAR ═══ -->
+<section style="padding:1.5rem 0;border-bottom:1px solid #E5E7EB;background:#FAFAF9;">
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 reveal">
+      <div class="trust-item">
+        <svg class="w-5 h-5 text-[#D4AF37]/80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div><p class="text-[11px] font-semibold text-gray-900">100% Original</p><p class="text-[9px] text-gray-400">Garantizado</p></div>
+      </div>
+      <div class="trust-item">
+        <svg class="w-5 h-5 text-[#D4AF37]/80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+        <div><p class="text-[11px] font-semibold text-gray-900">Envío Exprés</p><p class="text-[9px] text-gray-400">2-5 días hábiles</p></div>
+      </div>
+      <div class="trust-item">
+        <svg class="w-5 h-5 text-[#D4AF37]/80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+        <div><p class="text-[11px] font-semibold text-gray-900">Pago Seguro</p><p class="text-[9px] text-gray-400">Nequi · Daviplata · TC</p></div>
+      </div>
+      <div class="trust-item">
+        <svg class="w-5 h-5 text-[#D4AF37]/80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div><p class="text-[11px] font-semibold text-gray-900">Soporte 24/7</p><p class="text-[9px] text-gray-400">WhatsApp directo</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section style="padding:6rem 0;background:#FAFAF9;">
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-10">
+    <div class="flex items-end justify-between mb-12 reveal">
+      <div>
+        <div class="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+          <span class="w-8 h-px bg-[#D4AF37]/30"></span> Categorías
+        </div>
+        <h2 class="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900">
+          Explora por <span style="background:linear-gradient(135deg,#D4AF37,#C8912E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Secciones</span>
+        </h2>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="cat-item p-8 flex flex-col justify-end reveal r-d1" style="background:linear-gradient(180deg,rgba(212,175,55,.04) 0%,#ffffff 100%);">
+        <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(200,145,46,.08));border:1px solid rgba(212,175,55,.12);">
+          <svg class="w-6 h-6 text-[#D4AF37]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-1 text-gray-900">Audio Premium</h3>
+        <p class="text-xs text-gray-400 font-light">Parlantes, auriculares y más</p>
+      </div>
+      <div class="cat-item p-8 flex flex-col justify-end reveal r-d2" style="background:linear-gradient(180deg,rgba(59,130,246,.04) 0%,#ffffff 100%);">
+        <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.06));border:1px solid rgba(59,130,246,.12);">
+          <svg class="w-6 h-6 text-blue-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-1 text-gray-900">Smart Tech</h3>
+        <p class="text-xs text-gray-400 font-light">Smartwatches y wearables</p>
+      </div>
+      <div class="cat-item p-8 flex flex-col justify-end reveal r-d3" style="background:linear-gradient(180deg,rgba(34,197,94,.04) 0%,#ffffff 100%);">
+        <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.06));border:1px solid rgba(34,197,94,.12);">
+          <svg class="w-6 h-6 text-green-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.099 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-1 text-gray-900">Accesorios</h3>
+        <p class="text-xs text-gray-400 font-light">Cargadores, fundas y más</p>
+      </div>
+      <div class="cat-item p-8 flex flex-col justify-end reveal r-d4" style="background:linear-gradient(180deg,rgba(168,85,247,.04) 0%,#ffffff 100%);">
+        <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(168,85,247,.06));border:1px solid rgba(168,85,247,.12);">
+          <svg class="w-6 h-6 text-purple-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-1 text-gray-900">Gaming</h3>
+        <p class="text-xs text-gray-400 font-light">Audífonos y periféricos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCT MARQUEE ═══ -->
+<section style="padding:2rem 0 6rem;background:#FAFAF9;">
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10 reveal">
+    <div class="flex items-end justify-between">
+      <div>
+        <div class="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+          <span class="w-8 h-px bg-[#D4AF37]/30"></span> Lo Más Exclusivo
+        </div>
+        <h2 class="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900">
+          Productos <span style="background:linear-gradient(135deg,#D4AF37,#C8912E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Destacados</span>
+        </h2>
+      </div>
+      <a href="#" class="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 hover:text-[#D4AF37] transition-colors group">
+        Ver Todo
+        <svg class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+  
+  <div class="pm-wrap reveal r-d2">
+    <div class="pm-track" id="pm-track">
+      <!-- 1 -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(200,145,46,.06));border:1px solid rgba(212,175,55,.1);">
+            <svg class="w-8 h-8 text-[#D4AF37]/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">Nuevo</span>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Parlante Magnético</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">JBL / Sony</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$89.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(59,130,246,.05));border:1px solid rgba(59,130,246,.1);">
+            <svg class="w-8 h-8 text-blue-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#EF4444,#DC2626);box-shadow:0 2px 12px rgba(239,68,68,.2);">-30%</span>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Smartwatch Pro</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">Amazfit / Xiaomi</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2"><span class="text-sm font-bold text-[#D4AF37]">$159.99</span><span class="text-xs text-gray-300 line-through">$229.99</span></div>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.1);">
+            <svg class="w-8 h-8 text-green-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Auriculares ANC</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">Sony / Bose</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$249.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(168,85,247,.05));border:1px solid rgba(168,85,247,.1);">
+            <svg class="w-8 h-8 text-purple-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">Oferta</span>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Cargador Inalámbrico</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">UGREEN / Baseus</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$39.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <!-- 5-8 more cards... -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(249,115,22,.05));border:1px solid rgba(249,115,22,.1);">
+            <svg class="w-8 h-8 text-orange-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Reloj Inteligente</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">Garmin / Amazfit</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$189.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(6,182,212,.1),rgba(6,182,212,.05));border:1px solid rgba(6,182,212,.1);">
+            <svg class="w-8 h-8 text-cyan-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">Nuevo</span>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Monitor Portátil 15.6"</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">ASUS / Lenovo</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$219.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(244,63,94,.1),rgba(244,63,94,.05));border:1px solid rgba(244,63,94,.1);">
+            <svg class="w-8 h-8 text-rose-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.099 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+          </div>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Audífonos Gaming</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">HyperX / Logitech</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$79.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(234,179,8,.1),rgba(234,179,8,.05));border:1px solid rgba(234,179,8,.1);">
+            <svg class="w-8 h-8 text-yellow-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">2x1</span>
+        </div>
+        <div class="p-4 md:p-5">
+          <h3 class="text-sm font-semibold mb-1 text-gray-900">Lámpara LED Smart</h3>
+          <p class="text-xs font-medium text-gray-400 mb-3">Xiaomi / Philips</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#D4AF37]">$45.99</span>
+            <button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button>
+          </div>
+        </div>
+      </div>
+      <!-- DUPLICATE -->
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(200,145,46,.06));border:1px solid rgba(212,175,55,.1);">
+            <svg class="w-8 h-8 text-[#D4AF37]/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">Nuevo</span>
+        </div>
+        <div class="p-4 md:p-5"><h3 class="text-sm font-semibold mb-1 text-gray-900">Parlante Magnético</h3><p class="text-xs font-medium text-gray-400 mb-3">JBL / Sony</p><div class="flex items-center justify-between"><span class="text-sm font-bold text-[#D4AF37]">$89.99</span><button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button></div></div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(59,130,246,.05));border:1px solid rgba(59,130,246,.1);">
+            <svg class="w-8 h-8 text-blue-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#EF4444,#DC2626);box-shadow:0 2px 12px rgba(239,68,68,.2);">-30%</span>
+        </div>
+        <div class="p-4 md:p-5"><h3 class="text-sm font-semibold mb-1 text-gray-900">Smartwatch Pro</h3><p class="text-xs font-medium text-gray-400 mb-3">Amazfit / Xiaomi</p><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-sm font-bold text-[#D4AF37]">$159.99</span><span class="text-xs text-gray-300 line-through">$229.99</span></div><button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button></div></div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.1);">
+            <svg class="w-8 h-8 text-green-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+        <div class="p-4 md:p-5"><h3 class="text-sm font-semibold mb-1 text-gray-900">Auriculares ANC</h3><p class="text-xs font-medium text-gray-400 mb-3">Sony / Bose</p><div class="flex items-center justify-between"><span class="text-sm font-bold text-[#D4AF37]">$249.99</span><button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button></div></div>
+      </div>
+      <div class="pm-card card-lift group">
+        <div class="relative aspect-square flex items-center justify-center img-zoom" style="background:#F5F5F0;">
+          <div class="w-16 h-16 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(168,85,247,.05));border:1px solid rgba(168,85,247,.1);">
+            <svg class="w-8 h-8 text-purple-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5"/></svg>
+          </div>
+          <span class="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full badge-pulse" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 2px 12px rgba(212,175,55,.2);">Oferta</span>
+        </div>
+        <div class="p-4 md:p-5"><h3 class="text-sm font-semibold mb-1 text-gray-900">Cargador Inalámbrico</h3><p class="text-xs font-medium text-gray-400 mb-3">UGREEN / Baseus</p><div class="flex items-center justify-between"><span class="text-sm font-bold text-[#D4AF37]">$39.99</span><button class="px-4 py-2 text-[#0A0A0F] text-[8px] font-bold uppercase tracking-[.22em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">Comprar</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMO ═══ -->
+<section style="padding:6rem 0;position:relative;overflow:hidden;background:#FAFAF9;">
+  <div class="glow-line absolute top-0 left-0 right-0"></div>
+  <div class="absolute inset-0" style="background:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,.03) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(200,145,46,.02) 0%,transparent 50%);"></div>
+  
+  <div class="relative z-10 max-w-[90rem] mx-auto px-6 lg:px-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <div class="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.35em] mb-6">
+          <span class="w-8 h-px bg-[#D4AF37]/30"></span> Oferta Especial
+        </div>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[.9] mb-6 text-gray-900">
+          Tecnología que<br>
+          <span style="background:linear-gradient(135deg,#D4AF37,#E8C84A,#C8912E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Inspira</span>
+        </h2>
+        <p class="text-base md:text-lg max-w-md mb-8 font-light text-gray-500">
+          Los gadgets más exclusivos del mercado. Para los que no se conforman con lo ordinario.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#" class="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine" style="background:linear-gradient(135deg,#D4AF37,#C8912E);box-shadow:0 4px 24px rgba(212,175,55,.2);">
+            Aprovechar Oferta
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#" class="inline-flex items-center px-6 py-4 text-[10px] font-bold uppercase tracking-[.25em] rounded-full border border-gray-200 text-gray-500 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300">Ver Colección</a>
+        </div>
+      </div>
+      
+      <div class="relative flex justify-center md:justify-end reveal r-d2">
+        <div class="relative">
+          <div class="w-52 h-52 md:w-64 md:h-64 rounded-full flex flex-col items-center justify-center float-slow" style="background:linear-gradient(135deg,rgba(212,175,55,.1),rgba(200,145,46,.05));border:2px solid rgba(212,175,55,.15);box-shadow:0 0 60px rgba(212,175,55,.08);">
+            <span class="text-[#D4AF37]/60 text-[9px] font-bold uppercase tracking-[.4em] mb-1">Hasta</span>
+            <span class="text-6xl md:text-7xl font-bold" style="background:linear-gradient(135deg,#D4AF37,#E8C84A,#C8912E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">40%</span>
+            <span class="text-gray-400 text-[9px] font-bold uppercase tracking-[.3em] mt-1">OFF</span>
+          </div>
+          <div class="absolute -top-3 right-6 w-2.5 h-2.5 rounded-full bg-[#D4AF37]/25 float" style="animation-duration:4s;"></div>
+          <div class="absolute bottom-8 -left-4 w-2 h-2 rounded-full bg-[#D4AF37]/15 float" style="animation-duration:5s;animation-delay:-2s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section style="padding:6rem 0;position:relative;background:#FAFAF9;">
+  <div class="glow-line absolute top-0 left-0 right-0"></div>
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <div class="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+        <span class="w-8 h-px bg-[#D4AF37]/30"></span> Clientes
+      </div>
+      <h2 class="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] mb-6 text-gray-900">
+        Lo que dicen <span style="background:linear-gradient(135deg,#D4AF37,#C8912E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">nuestros clientes</span>
+      </h2>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="testi-card reveal r-d1">
+        <div class="flex gap-1 mb-4">
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+        </div>
+        <p class="text-sm leading-relaxed text-gray-600 mb-6">"Increíble calidad y atención. El parlante que compré superó todas mis expectativas. 100% recomendados."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">CA</div>
+          <div>
+            <p class="text-xs font-semibold text-gray-900">Carlos A.</p>
+            <p class="text-[9px] text-gray-400">Bucaramanga</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal r-d2">
+        <div class="flex gap-1 mb-4">
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+        </div>
+        <p class="text-sm leading-relaxed text-gray-600 mb-6">"Mi smartwatch llegó en 3 días. Producto original, bien empacado. Volveré a comprar sin duda."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">MP</div>
+          <div>
+            <p class="text-xs font-semibold text-gray-900">María P.</p>
+            <p class="text-[9px] text-gray-400">Bogotá</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal r-d3">
+        <div class="flex gap-1 mb-4">
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"></svg>
+          <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-sm leading-relaxed text-gray-600 mb-6">"Los audífonos ANC que compré son una locura. La cancelación de ruido es bestial. Envío rapidísimo."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">DG</div>
+          <div>
+            <p class="text-xs font-semibold text-gray-900">David G.</p>
+            <p class="text-[9px] text-gray-400">Medellín</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRAND MARQUEE ═══ -->
+<section style="padding:2.5rem 0;border-top:1px solid #E5E7EB;border-bottom:1px solid #E5E7EB;overflow:hidden;background:#FAFAF9;">
+  <div class="flex whitespace-nowrap" style="animation:brand-scroll 50s linear infinite;">
+    <div class="flex items-center gap-12 mx-8">
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Xiaomi</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Samsung</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Sony</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">JBL</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Bose</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">DJI</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Apple</span>
+    </div>
+    <div class="flex items-center gap-12 mx-8">
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Xiaomi</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Samsung</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Sony</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">JBL</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Bose</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">DJI</span>
+      <span class="w-1 h-1 rounded-full bg-[#D4AF37]/25"></span>
+      <span class="text-gray-300 text-lg font-bold uppercase tracking-[.3em]">Apple</span>
+    </div>
+  </div>
+  <style>@keyframes brand-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style>
+</section>
+
+<!-- ═══ FOOTER (siempre negro) ═══ -->
+<footer style="background:#08080C;padding-top:5rem;padding-bottom:2rem;border-top:1px solid rgba(255,255,255,.03);">
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-10">
+    <div class="f-grid grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">
+            <span class="text-[#0A0A0F] text-xs font-black tracking-wider">LBM</span>
+          </div>
+          <span class="text-sm font-bold tracking-tight text-white/80">LE BON MARCHÉ</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-xs font-light text-white/20 mb-6">
+          Selección exclusiva de tecnología, gadgets y accesorios de lujo. 
+          Curados con pasión desde Bucaramanga para toda Colombia.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">IG</a>
+          <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">FB</a>
+          <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">TT</a>
+          <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">WA</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Colección</h4>
+        <ul class="space-y-3.5">
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Tecnología</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Gadgets</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Audio</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Smartwatch</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Ofertas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Ayuda</h4>
+        <ul class="space-y-3.5">
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Contacto</h4>
+        <ul class="space-y-3.5">
+          <li class="text-sm text-white/30">Bucaramanga, Santander</li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-colors duration-300">hola@tiendalebonmarche.com</a></li>
+          <li><a href="#" class="text-sm text-white/30 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
+          <li class="mt-8">
+            <div class="text-[9px] font-bold uppercase tracking-[.25em] text-white/15 mb-3">Newsletter</div>
+            <div class="flex">
+              <input type="email" placeholder="tu@email.com" class="bg-white/[0.03] border border-white/10 rounded-l-full px-4 py-2.5 text-xs text-white/60 placeholder-white/20 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300" style="caret-color:#D4AF37;">
+              <button class="btn-shine text-[#0A0A0F] px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer" style="background:linear-gradient(135deg,#D4AF37,#C8912E);">OK</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div style="border-top:1px solid rgba(255,255,255,.04);padding-top:1.5rem;" class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-white/12 text-[10px]">© 2026 Le Bon Marché. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-4">
+        <div class="flex gap-4 text-white/12 text-[9px]">
+          <span>Hecho en 🇨🇴 Colombia</span>
+          <span>·</span>
+          <span>100% Original Garantizado</span>
+        </div>
+        <div class="flex gap-2.5">
+          <span class="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Nequi</span>
+          <span class="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Davi</span>
+          <span class="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Visa</span>
+          <span class="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Mst</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div style="width:100%;overflow:hidden;margin-top:3.5rem;pointer-events:none;user-select:none;">
+    <p style="font-family:'Playfair Display',serif;font-size:clamp(4rem,16vw,14rem);font-weight:700;color:rgba(255,255,255,.03);line-height:1;letter-spacing:-.02em;text-align:center;white-space:nowrap;">LE BON MARCHÉ</p>
+  </div>
+</footer>
+
+<script>
+function toggleTheme(){
+  document.body.classList.toggle('dark');
+  var icon=document.getElementById('t-icon');
+  if(document.body.classList.contains('dark')){
+    icon.innerHTML='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+  } else {
+    icon.innerHTML='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+  }
+}
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  var p=Math.min(window.scrollY/h*100,100);
+  document.getElementById('scroll-progress').style.width=p+'%';
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

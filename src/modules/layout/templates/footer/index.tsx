@@ -1,106 +1,133 @@
 import { listCategories } from "@lib/data/categories"
 import { listCollections } from "@lib/data/collections"
-import { Text, clx } from "@medusajs/ui"
 import Image from "next/image"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
 
 export default async function Footer() {
-  const { collections } = await listCollections({
-    fields: "*products",
-  })
+  const { collections } = await listCollections({ fields: "*products" })
   const productCategories = await listCategories()
 
   return (
-    <footer className="bg-white text-brand-black pt-12 pb-12 md:pt-20 md:pb-16 px-6 mt-auto border-t border-brand-gray-light">
-      
-      <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-24 mb-6">
-        <div className="flex flex-col gap-y-8">
-          <LocalizedClientLink 
-            href="/" 
-            className="flex items-center justify-start hover:opacity-70 transition-all duration-300"
-          >
-            <Image 
-              src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1780690110/logo-junio-negro_cyhwth.png"
-              alt="Tienda Le Bon Marché" 
-              width={1822} 
-              height={548} 
-              className="w-[200px] md:w-[260px] lg:w-[300px] h-auto object-contain"
-            />
-          </LocalizedClientLink>
-          <p className="text-brand-gray text-sm leading-relaxed max-w-xs font-normal">
-            Una selección exclusiva de productos exóticos, tecnología y piezas de lujo pensada para los más exigentes. Hecho con pasión en Bucaramanga para toda Colombia.
-          </p>
-          <div className="flex gap-x-8 text-[11px] font-bold tracking-[0.2em] text-brand-black opacity-60">
-            <a href="https://instagram.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">INSTAGRAM</a>
-            <a href="https://facebook.com/tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">FACEBOOK</a>
-            <a href="https://tiktok.com/@tiendalebonmarche" className="hover:opacity-100 transition-opacity" target="_blank" rel="noreferrer">TIKTOK</a>
+    <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
+          {/* Brand */}
+          <div>
+            <LocalizedClientLink href="/" className="flex items-center gap-3 mb-6 group">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}
+              >
+                <span className="text-[#0A0A0F] text-xs font-black tracking-wider">LBM</span>
+              </div>
+              <span className="text-sm font-bold tracking-tight text-white/80">LE BON MARCHÉ</span>
+            </LocalizedClientLink>
+            <p className="text-sm leading-relaxed max-w-xs font-light text-white/20 mb-6">
+              Selección exclusiva de tecnología, gadgets y accesorios de lujo. Curados con pasión desde Bucaramanga para toda Colombia.
+            </p>
+            <div className="flex gap-3">
+              <a href="https://instagram.com/tiendalebonmarche" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">IG</a>
+              <a href="https://facebook.com/tiendalebonmarche" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">FB</a>
+              <a href="https://tiktok.com/@tiendalebonmarche" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">TT</a>
+              <a href="https://wa.me/573027567783" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold border border-white/10 text-white/20 hover:text-[#D4AF37] hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110">WA</a>
+            </div>
+          </div>
+
+          {/* Colección */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Colección</h4>
+            <ul className="space-y-3.5">
+              {collections && collections.length > 0 ? (
+                collections.slice(0, 5).map((c) => (
+                  <li key={c.id}>
+                    <LocalizedClientLink
+                      href={`/collections/${c.handle}`}
+                      className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block"
+                    >
+                      {c.title}
+                    </LocalizedClientLink>
+                  </li>
+                ))
+              ) : (
+                <>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
+                </>
+              )}
+            </ul>
+          </div>
+
+          {/* Ayuda */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Ayuda</h4>
+            <ul className="space-y-3.5">
+              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store" className="text-sm text-white/30 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
+            </ul>
+          </div>
+
+          {/* Contacto */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/15">Contacto</h4>
+            <ul className="space-y-3.5">
+              <li className="text-sm text-white/30">Bucaramanga, Santander</li>
+              <li><a href="mailto:hola@tiendalebonmarche.com" className="text-sm text-white/30 hover:text-[#D4AF37] transition-colors duration-300">hola@tiendalebonmarche.com</a></li>
+              <li><a href="https://wa.me/573027567783" className="text-sm text-white/30 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
+              <li className="mt-8">
+                <div className="text-[9px] font-bold uppercase tracking-[.25em] text-white/15 mb-3">Newsletter</div>
+                <div className="flex">
+                  <input
+                    type="email"
+                    placeholder="tu@email.com"
+                    className="bg-white/[0.03] border border-white/10 rounded-l-full px-4 py-2.5 text-xs text-white/60 placeholder-white/20 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300"
+                    style={{ caretColor: "#D4AF37" }}
+                  />
+                  <button
+                    className="btn-shine text-[#0A0A0F] px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer"
+                    style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}
+                  >
+                    OK
+                  </button>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-brand-black opacity-40">
-            Colección
-          </h4>
-          <ul className="space-y-4 text-sm font-medium text-brand-black">
-            {collections && collections.length > 0 ? (
-              collections.slice(0, 4).map((c) => (
-                <li key={c.id}>
-                  <LocalizedClientLink className="hover:text-brand-black transition-colors duration-300" href={`/collections/${c.handle}`}>
-                    {c.title}
-                  </LocalizedClientLink>
-                </li>
-              ))
-            ) : (
-              <>
-                <li><LocalizedClientLink href="/store" className="hover:text-brand-black transition-colors">Catálogo Completo</LocalizedClientLink></li>
-                <li><LocalizedClientLink href="/store" className="hover:text-brand-black transition-colors">Novedades</LocalizedClientLink></li>
-              </>
-            )}
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-brand-black opacity-40">
-            Legal & Soporte
-          </h4>
-          <ul className="space-y-4 text-sm font-medium text-brand-black">
-            <li><LocalizedClientLink href="/legal/terminos" className="hover:text-brand-black transition-colors">Términos y Condiciones</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/legal/privacidad" className="hover:text-brand-black transition-colors">Privacidad y Habeas Data</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/legal/devoluciones" className="hover:text-brand-black transition-colors">Garantías y Devoluciones</LocalizedClientLink></li>
-            <li><LocalizedClientLink href="/legal/envios" className="hover:text-brand-black transition-colors">Envíos & Entregas</LocalizedClientLink></li>
-          </ul>
-        </div>
-
-        <div className="flex flex-col gap-y-4">
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2 text-brand-black opacity-40">
-            Contacto & Empresa
-          </h4>
-          <div className="text-brand-gray text-xs leading-relaxed max-w-[250px] space-y-1">
-            <p className="font-bold text-brand-black">Tienda Le Bon Marché</p>
-            <p>NIT: 901.000.000-X</p>
-            <p>Bucaramanga, Santander, Colombia</p>
-            <p className="mt-2"><a href="mailto:soporte@tiendalebonmarche.com" className="hover:text-brand-black underline underline-offset-2">soporte@tiendalebonmarche.com</a></p>
+        {/* Bottom */}
+        <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/12 text-[10px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-4 text-white/12 text-[9px]">
+              <span>Hecho en 🇨🇴 Colombia</span>
+              <span>·</span>
+              <span>100% Original Garantizado</span>
+            </div>
+            <div className="flex gap-2.5">
+              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Nequi</span>
+              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Davi</span>
+              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Visa</span>
+              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/5 text-white/20 text-[7px] font-bold">Mst</span>
+            </div>
           </div>
-          <a href="https://wa.me/573027567783" className="text-xl mt-2 font-sans font-bold text-brand-black hover:text-brand-black transition-colors" target="_blank" rel="noreferrer">
-            +57 302 756 7783
-          </a>
         </div>
       </div>
 
-      <div className="max-w-[90rem] mx-auto border-t border-brand-gray-light pt-8 flex flex-col md:flex-row justify-between items-center gap-y-6">
-        <div className="text-[10px] text-brand-gray font-medium tracking-[0.1em] opacity-60">
-          &copy; {new Date().getFullYear()} TIENDA LE BON MARCHÉ. TODOS LOS DERECHOS RESERVADOS.
-        </div>
-        <div className="flex gap-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-brand-black opacity-60">
-          <LocalizedClientLink href="/legal/privacidad" className="hover:opacity-100 transition-opacity">POLÍTICA DE PRIVACIDAD</LocalizedClientLink>
-          <LocalizedClientLink href="/store" className="hover:opacity-100 transition-opacity">FAQ</LocalizedClientLink>
-        </div>
-      </div>
-      <div id="footer-brand-text" className="w-full bg-white pt-6 pb-12 border-t border-brand-gray-light overflow-hidden reveal-up">
-        <p className="text-[12.5vw] leading-[0.8] font-sans font-black tracking-[-0.07em] text-center w-full text-black uppercase whitespace-nowrap select-none" role="presentation">
-          LEBONMARCHÉ
+      {/* Watermark */}
+      <div className="w-full overflow-hidden mt-14 pointer-events-none select-none">
+        <p
+          className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em]"
+          style={{
+            fontSize: "clamp(4rem,16vw,14rem)",
+            fontWeight: 700,
+            color: "rgba(255,255,255,.03)",
+          }}
+        >
+          LE BON MARCHÉ
         </p>
       </div>
     </footer>

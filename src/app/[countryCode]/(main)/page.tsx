@@ -3,16 +3,16 @@ import dynamic from "next/dynamic"
 
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
-import HotDeals from "@modules/home/components/hot-deals"
+import CategoriesGrid from "@modules/home/components/categories-grid"
+import BrandMarquee from "@modules/home/components/brand-marquee"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
-import MostSoldSection from "@modules/home/components/most-sold"
 import Reveal from "@modules/common/components/reveal"
 
-// 🔴 DEFER: Components below the fold — loaded lazily to reduce initial JS bundle
-const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
+// Lazy load below-fold components
 const BrandStatement = dynamic(() => import("@modules/home/components/brand-statement"))
+const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
 const Blog7 = dynamic(() => import("@/components/ui/blog7").then(m => ({ default: m.Blog7 })))
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
@@ -38,43 +38,45 @@ export default async function Home(props: {
   params: Promise<{ countryCode: string }>
 }) {
   const params = await props.params
-
   const { countryCode } = params
 
   const region = await getRegion(countryCode)
 
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
-
-  if (!collections || !region) {
+  if (!region) {
     return null
   }
 
   return (
     <div className="flex flex-col gap-0">
+      {/* HERO */}
       <Hero />
 
+      {/* TRUST BADGES */}
       <Reveal>
         <TrustBadges />
       </Reveal>
 
+      {/* CATEGORIES */}
       <Reveal>
-        <HotDeals countryCode={countryCode} />
+        <CategoriesGrid />
       </Reveal>
 
+      {/* BRAND MARQUEE */}
+      <Reveal>
+        <BrandMarquee />
+      </Reveal>
+
+      {/* PROMO */}
       <Reveal>
         <BrandStatement />
       </Reveal>
 
+      {/* TESTIMONIALS */}
       <Reveal>
         <AnimatedTestimonialsSection />
       </Reveal>
 
-      <Reveal>
-        <MostSoldSection countryCode={countryCode} />
-      </Reveal>
-
+      {/* BLOG */}
       <Reveal>
         <Blog7
           tagline="Lifestyle & Tendencias"
@@ -85,7 +87,9 @@ export default async function Home(props: {
           posts={blogPosts.slice(0, 3).map((post, idx) => ({
             id: `post-${idx}`,
             title: post.title,
-            summary: post.img ? "Una selección exclusiva de piezas y tendencias del mundo luxury, traída directamente a tu pantalla." : "",
+            summary: post.img
+              ? "Una selección exclusiva de piezas y tendencias del mundo luxury, traída directamente a tu pantalla."
+              : "",
             label: post.tag,
             author: "Le Bon Marché",
             published: "2024",
@@ -94,7 +98,6 @@ export default async function Home(props: {
           }))}
         />
       </Reveal>
-
     </div>
   )
 }
