@@ -22,7 +22,10 @@ export default async function HotDeals({
 
     const products = response?.products || []
 
-    if (products.length === 0) return null
+    // Orden aleatorio para mostrar productos diferentes cada visita
+    const shuffled = [...products].sort(() => 0.5 - Math.random())
+
+    if (shuffled.length === 0) return null
 
     return (
       <section className="w-full bg-white py-16 md:py-24 border-b border-brand-gray-light">
@@ -50,7 +53,7 @@ export default async function HotDeals({
           <div className="w-full">
             {/* Responsive grid: 2 cols mobile, 3 cols small/medium/large desktop */}
             <InfiniteProducts 
-              initialProducts={products} 
+              initialProducts={shuffled} 
               region={region} 
               gridClass="grid grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-12 mb-8"
               limit={9}

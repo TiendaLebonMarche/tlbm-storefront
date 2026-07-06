@@ -63,7 +63,6 @@ export default function InfiniteProducts({
 }: InfiniteProductsProps) {
   const [displayedCount, setDisplayedCount] = useState(limit)
   const [isLoading, setIsLoading] = useState(false)
-  const observerTarget = useRef<HTMLDivElement>(null)
 
   const productsToShow = initialProducts.slice(0, displayedCount)
   const hasMore = displayedCount < initialProducts.length
@@ -76,19 +75,6 @@ export default function InfiniteProducts({
       setIsLoading(false)
     }, 800)
   }, [isLoading, hasMore, limit])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) loadMore()
-      },
-      { threshold: 0.1, rootMargin: "200px" }
-    )
-
-    const target = observerTarget.current
-    if (target) observer.observe(target)
-    return () => { if (target) observer.unobserve(target) }
-  }, [loadMore])
 
   return (
     <>
@@ -120,7 +106,8 @@ export default function InfiniteProducts({
           <button
             onClick={loadMore}
             disabled={isLoading}
-            className="px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-500 disabled:opacity-30"
+            className="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine disabled:opacity-30"
+            style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)", boxShadow: "0 4px 24px rgba(212,175,55,.2)" }}
           >
             {isLoading ? "Cargando…" : `Cargar más (${initialProducts.length - displayedCount})`}
           </button>
