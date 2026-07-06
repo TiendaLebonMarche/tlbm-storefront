@@ -167,11 +167,11 @@ export default function Hero() {
             <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-2">
               <LocalizedClientLink
                 href="/store"
-                className="btn-shine inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300"
+                className="btn-shine inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300 hover:scale-[1.03]"
                 style={{
-                  background: "linear-gradient(135deg, #D4AF37 0%, #C8912E 50%, #B8862B 100%)",
-                  color: "#0A0A0F",
-                  boxShadow: "0 12px 32px rgba(212,175,55,0.25)",
+                  background: "#0A0A0F",
+                  color: "#FFFFFF",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
                 }}
               >
                 Explorar Colección

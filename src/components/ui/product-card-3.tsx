@@ -90,8 +90,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <span className="text-sm font-bold text-[#D4AF37]">{item.price}</span>
                   <LocalizedClientLink
                     href={`/productos/${item.handle}`}
-                    className="px-4 py-2 text-[#0A0A0F] text-[10px] font-bold uppercase tracking-[.22em] rounded-full btn-shine"
-                    style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}
+                    className="px-4 py-2 text-white text-[10px] font-bold uppercase tracking-[.22em] rounded-full bg-[#0A0A0F] hover:bg-gray-900 hover:scale-[1.05] transition-all duration-300"
                   >
                     Comprar
                   </LocalizedClientLink>
@@ -105,8 +104,8 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="mt-12 text-center reveal">
         <LocalizedClientLink
           href="/store"
-          className="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine"
-          style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)", boxShadow: "0 4px 24px rgba(212,175,55,.2)" }}
+          className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03]"
+          style={{ background: "#0A0A0F", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
         >
           Ver Catálogo Completo
           <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

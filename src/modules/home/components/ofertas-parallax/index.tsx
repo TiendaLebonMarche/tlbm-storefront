@@ -97,10 +97,10 @@ export default function OfertasParallax() {
                 </p>
                 <LocalizedClientLink
                   href={offer.href}
-                  className="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine"
+                  className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03] hover:shadow-lg hover:shadow-black/20"
                   style={{
-                    background: "linear-gradient(135deg,#D4AF37,#C8912E)",
-                    boxShadow: "0 4px 24px rgba(212,175,55,.25)",
+                    background: "#0A0A0F",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
                   }}
                 >
                   Comprar Ahora

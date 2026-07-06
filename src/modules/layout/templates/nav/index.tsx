@@ -105,7 +105,7 @@ export default async function Nav() {
           <SearchModal />
           <LocalizedClientLink
             href="/store"
-            className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-[10px] font-bold tracking-[0.18em] uppercase text-white rounded-full bg-gradient-to-r from-[#D4AF37] to-[#C8912E] hover:from-[#C8912E] hover:to-[#B8860B] transition-all duration-300 shadow-lg shadow-[#D4AF37]/20 hover:shadow-[#D4AF37]/40 hover:scale-105"
+            className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-[10px] font-bold tracking-[0.18em] uppercase text-white rounded-full bg-[#0A0A0F] hover:bg-gray-900 transition-all duration-300 shadow-lg shadow-black/10 hover:shadow-black/20 hover:scale-105"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

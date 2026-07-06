@@ -69,13 +69,13 @@ export default async function Footer() {
             <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/50">Contacto</h4>
             <ul className="space-y-3.5">
               <li className="text-sm text-white/70">Bucaramanga, Santander</li>
-              <li><a href="mailto:hola@tiendalebonmarche.com" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">hola@tiendalebonmarche.com</a></li>
+              <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
               <li><a href="https://wa.me/573027567783" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
               <li className="mt-8">
                 <div className="text-[9px] font-bold uppercase tracking-[.25em] text-white/50 mb-3">Newsletter</div>
                 <div className="flex">
                   <input type="email" placeholder="tu@email.com" className="bg-white/5 border border-white/20 rounded-l-full px-4 py-2.5 text-xs text-white placeholder-white/50 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300" style={{ caretColor: "#D4AF37" }} />
-                  <button className="btn-shine text-[#0A0A0F] px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer" style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}>OK</button>
+                  <button className="px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#0A0A0F] hover:bg-gray-900 transition-all duration-300">OK</button>
                 </div>
               </li>
             </ul>
