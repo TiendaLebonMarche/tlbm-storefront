@@ -282,6 +282,7 @@ export default async function ProductPage(props: Props) {
       />
       <div className="content-container px-4 py-4">
         <Breadcrumbs items={[
+          { label: "Inicio", href: `/co` },
           { label: "Tienda", href: `/co/store` },
           { label: pricedProduct.title },
         ]} />

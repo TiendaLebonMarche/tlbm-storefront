@@ -121,10 +121,15 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                 <input
                   type="number"
                   placeholder="Mín"
-                  value={minPrice || ""}
-                  onChange={(e) =>
+                  defaultValue={minPrice || ""}
+                  onBlur={(e) =>
                     handleFilterChange("minPrice", e.target.value || null)
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleFilterChange("minPrice", e.currentTarget.value || null)
+                    }
+                  }}
                   className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
                 />
               </div>
@@ -133,10 +138,15 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                 <input
                   type="number"
                   placeholder="Máx"
-                  value={maxPrice || ""}
-                  onChange={(e) =>
+                  defaultValue={maxPrice || ""}
+                  onBlur={(e) =>
                     handleFilterChange("maxPrice", e.target.value || null)
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleFilterChange("maxPrice", e.currentTarget.value || null)
+                    }
+                  }}
                   className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
                 />
               </div>

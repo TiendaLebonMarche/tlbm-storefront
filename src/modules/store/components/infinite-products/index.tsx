@@ -114,6 +114,19 @@ export default function InfiniteProducts({
         ))}
       </ul>
 
+      {/* Load more button (fallback for when observer doesn't trigger) */}
+      {hasMore && (
+        <div className="flex justify-center py-8">
+          <button
+            onClick={loadMore}
+            disabled={isLoading}
+            className="px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-black border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-500 disabled:opacity-30"
+          >
+            {isLoading ? "Cargando…" : `Cargar más (${initialProducts.length - displayedCount})`}
+          </button>
+        </div>
+      )}
+
       {/* Intersection observer sentinel */}
       <div ref={observerTarget} className="flex flex-col justify-center items-center py-10 min-h-[80px]">
         {isLoading && (
