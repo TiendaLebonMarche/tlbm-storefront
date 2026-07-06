@@ -5,6 +5,8 @@ import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
 import CategoriesGrid from "@modules/home/components/categories-grid"
 import BrandMarquee from "@modules/home/components/brand-marquee"
+import HotDeals from "@modules/home/components/hot-deals"
+import MostSoldSection from "@modules/home/components/most-sold"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { blogPosts } from "@lib/data/blog"
@@ -56,6 +58,11 @@ export default async function Home(props: {
         <TrustBadges />
       </Reveal>
 
+      {/* HOT DEALS — data-driven products from Medusa */}
+      <Reveal>
+        <HotDeals countryCode={countryCode} />
+      </Reveal>
+
       {/* CATEGORIES */}
       <Reveal>
         <CategoriesGrid />
@@ -69,6 +76,11 @@ export default async function Home(props: {
       {/* PROMO */}
       <Reveal>
         <BrandStatement />
+      </Reveal>
+
+      {/* MOST SOLD — data-driven products from Medusa */}
+      <Reveal>
+        <MostSoldSection countryCode={countryCode} />
       </Reveal>
 
       {/* TESTIMONIALS */}
