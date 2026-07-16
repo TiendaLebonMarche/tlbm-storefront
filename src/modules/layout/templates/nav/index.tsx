@@ -31,14 +31,9 @@ export default async function Nav() {
 
         <LocalizedClientLink
           href="/"
-          className="flex items-center gap-2 pointer-events-auto"
+          className="flex items-center h-9 pointer-events-auto"
         >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#C8912E] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#D4AF37]/20">
-            <span className="text-[9px] font-black text-white tracking-tight">LBM</span>
-          </div>
-          <span className="text-[10px] font-bold tracking-[0.18em] uppercase leading-tight">
-            LE BON<br />MARCHÉ
-          </span>
+          <ClientLogo isMobile />
         </LocalizedClientLink>
 
         <div className="flex-none flex items-center gap-1">
@@ -54,15 +49,9 @@ export default async function Nav() {
         <div className="flex items-center justify-start flex-1">
           <LocalizedClientLink
             href="/"
-            className="flex items-center gap-3 pointer-events-auto group"
+            className="flex items-center h-10 pointer-events-auto group"
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#C8912E] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#D4AF37]/20 transition-transform duration-300 group-hover:scale-105">
-              <span className="text-xs font-black text-white tracking-tight">LBM</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[11px] font-bold tracking-[0.22em] uppercase">Le Bon</span>
-              <span className="text-[11px] font-bold tracking-[0.22em] uppercase">Marché</span>
-            </div>
+            <ClientLogo />
           </LocalizedClientLink>
         </div>
 

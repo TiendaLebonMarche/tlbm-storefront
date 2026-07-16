@@ -14,11 +14,16 @@ export default async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
           {/* Brand */}
           <div>
-            <LocalizedClientLink href="/" className="flex items-center gap-3 mb-6 group">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,#D4AF37,#C8912E)" }}>
-                <span className="text-[#0A0A0F] text-xs font-black tracking-wider">LBM</span>
+            <LocalizedClientLink href="/" className="inline-block mb-6">
+              <div className="relative w-[220px] h-[60px]">
+                <Image
+                  src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784234322/logo-tlbmjul_yidrku.png"
+                  alt="Tienda Le Bon Marché"
+                  fill
+                  className="object-contain brightness-0 invert"
+                  priority
+                />
               </div>
-              <span className="text-sm font-bold tracking-tight text-white">LE BON MARCHÉ</span>
             </LocalizedClientLink>
             <p className="text-sm leading-relaxed max-w-xs font-light text-white/60 mb-6">
               Selección exclusiva de tecnología, gadgets y accesorios de lujo. Curados con pasión desde Bucaramanga para toda Colombia.
