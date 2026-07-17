@@ -428,7 +428,7 @@
   mask-image: linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
   -webkit-mask-image: linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
 }
-.pm-track { display: flex; gap: 1.25rem; width: max-content; animation: pm-scroll 45s linear infinite; }
+.pm-track { display: flex; gap: 1.25rem; width: max-content; animation: pm-scroll 65s linear infinite; }
 .pm-track:hover { animation-play-state: paused; }
 @keyframes pm-scroll {
   0% { transform: translateX(-25%); }

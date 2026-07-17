@@ -99,29 +99,29 @@ export default function ProductPreview({
         )}
       </div>
 
-      {/* Info block — estilo Nest & Field */}
-      <div className="pt-4 pb-2 flex flex-col gap-[3px]">
+      {/* Info block — centrado, estilo e-commerce premium */}
+      <div className="pt-5 pb-2 flex flex-col items-center text-center gap-[2px]">
         {/* Category/Collection — color único por categoría */}
         {category && (
           <span
-            className="text-[13px] font-semibold tracking-[-0.42px] leading-snug uppercase"
+            className="text-[11px] font-semibold tracking-[0.08em] leading-snug uppercase mb-1"
             style={{ color: categoryColor }}
           >
             {category}
           </span>
         )}
 
-        {/* Title */}
+        {/* Title — centrado */}
         <h3
-          className="text-[17px] md:text-[18px] font-semibold tracking-[-0.9px] leading-tight text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2"
+          className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]"
         >
           {product.title}
         </h3>
 
-        {/* Price */}
-        <div className="mt-0.5">
+        {/* Price — destacado en dorado, más grande */}
+        <div className="mt-1.5">
           {cheapestPrice && (
-            <span className="text-[14px] font-semibold tracking-[-0.42px] text-[#101010]">
+            <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm">
               {cheapestPrice.calculated_price}
             </span>
           )}
