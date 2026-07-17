@@ -530,28 +530,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@medusajs/icons@npm:2.17.1, @medusajs/icons@npm:latest":
-  version: 2.17.1
-  resolution: "@medusajs/icons@npm:2.17.1"
+"@medusajs/icons@npm:2.17.2, @medusajs/icons@npm:^2.17.1":
+  version: 2.17.2
+  resolution: "@medusajs/icons@npm:2.17.2"
   peerDependencies:
     react: ^18.3.1 || ^19.0.0
-  checksum: 10/b19e3b4e9cdf76c77df1be7d2210b927548b36cde0df268f43f1da3e911bff0998bc0efa73858cdec1ed9bcef110cdacf135bd90a732346aed9ac0bb0ef60935
+  checksum: 10/4b3015c6d7564c72fed070d9330903894b1d778615ad0b58b8ad3f5682a3b864b351c0dba554c3e4d2f2fc44f247f4ef2796e9b816e2815045ddbf57bfe3ac8c
   languageName: node
   linkType: hard
 
-"@medusajs/js-sdk@npm:latest":
-  version: 2.17.1
-  resolution: "@medusajs/js-sdk@npm:2.17.1"
+"@medusajs/js-sdk@npm:^2.17.1":
+  version: 2.17.2
+  resolution: "@medusajs/js-sdk@npm:2.17.2"
   dependencies:
     fetch-event-stream: "npm:^0.1.5"
     qs: "npm:^6.12.1"
-  checksum: 10/c58bced7a23a4a47b03f44efce47c84ff09118a16bdc3ab9078fe9af22d05305f91365ee57e929ef573e2b10e88dd10f013266dc0bc61a79a631401560bccfec
+  checksum: 10/71ab0682866bf265daeac82f22f066ca09e237b724439f7c2842e3d5e7306501d83201c47a8d9a7701f61768ac5c290b029a684c97959f082d4e0719e67bbb63
   languageName: node
   linkType: hard
 
-"@medusajs/types@npm:latest":
-  version: 2.17.1
-  resolution: "@medusajs/types@npm:2.17.1"
+"@medusajs/types@npm:^2.17.1":
+  version: 2.17.2
+  resolution: "@medusajs/types@npm:2.17.2"
   dependencies:
     bignumber.js: "npm:^9.1.2"
   peerDependencies:
@@ -562,30 +562,30 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 10/a5cde53769116d3d329504ff399e5420b72727c874e7e94a2d4449765d25595bed464646f780d561539a702fc6cb6bba418d99af922d1637f424cfc4d4a75dc0
+  checksum: 10/7fc48aca5b8e762f98110ef555ef9942f470cd37b9b826fb155cc8c1cd2a56f449ba64af31ec515722f68b20f051fabe4313a9ee994485f56519196c449b9d3a
   languageName: node
   linkType: hard
 
-"@medusajs/ui-preset@npm:latest":
-  version: 2.17.1
-  resolution: "@medusajs/ui-preset@npm:2.17.1"
+"@medusajs/ui-preset@npm:^2.17.1":
+  version: 2.17.2
+  resolution: "@medusajs/ui-preset@npm:2.17.2"
   dependencies:
     "@tailwindcss/forms": "npm:^0.5.3"
     tailwindcss-animate: "npm:^1.0.6"
   peerDependencies:
     tailwindcss: ^3.4.3
-  checksum: 10/a9ce1d9cc637b298084a74226645911436c7a16c7b699525c072c408223c30cdbd3a7b22378219c7a0944f564e2a3fcba6164c46763d5f47bb398eed2c9e2526
+  checksum: 10/ec8e2ea876729eabf6ab03a0f75f4ba23353257e4e72d2be85aa1391f04c069ccea09e098088e1c2ddbfd981be80007043ebac5e6f39b9080c1c0a9cd480b0ad
   languageName: node
   linkType: hard
 
-"@medusajs/ui@npm:latest":
-  version: 4.1.18
-  resolution: "@medusajs/ui@npm:4.1.18"
+"@medusajs/ui@npm:^4.1.18":
+  version: 4.1.19
+  resolution: "@medusajs/ui@npm:4.1.19"
   dependencies:
     "@dnd-kit/core": "npm:^6.1.0"
     "@dnd-kit/sortable": "npm:^8.0.0"
     "@dnd-kit/utilities": "npm:^3.2.2"
-    "@medusajs/icons": "npm:2.17.1"
+    "@medusajs/icons": "npm:2.17.2"
     "@radix-ui/react-dialog": "npm:1.1.4"
     "@radix-ui/react-dismissable-layer": "npm:1.1.4"
     "@tanstack/react-table": "npm:8.20.5"
@@ -604,7 +604,7 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
     react-dom: ^18.3.1
-  checksum: 10/a3d6a86b039982fcdfc03e609f2870ad98d9777f92c9de4bbfd54a243b116953fa0e0a825b282aabae8bf29103dc2b85b7b9327e45ea908953d700d52f71cca7
+  checksum: 10/008ebefb70b58ba74f9fb37add939bf9eef61aa299cc39c015892eb165d9cd1e2e6c35754e10964cbd4d4131d0fa701c22dd1990e3f3e74ec98d0f0747fc4cf0
   languageName: node
   linkType: hard
 
@@ -4113,21 +4113,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:19.0.0":
-  version: 19.0.0
-  resolution: "@types/react-dom@npm:19.0.0"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10/86945c4d4c4cd82e993acdd380c3d9d8e8ca297228aa72c0fa6af4620abb145e7b12235c9165d569f1b25b5f72d1dbe4b4e3f2419432248de9838b22e94295a2
+"@types/prop-types@npm:*":
+  version: 15.7.15
+  resolution: "@types/prop-types@npm:15.7.15"
+  checksum: 10/31aa2f59b28f24da6fb4f1d70807dae2aedfce090ec63eaf9ea01727a9533ef6eaf017de5bff99fbccad7d1c9e644f52c6c2ba30869465dd22b1a7221c29f356
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:19.0.0":
+"@types/react-dom@npm:18.3.1":
+  version: 18.3.1
+  resolution: "@types/react-dom@npm:18.3.1"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10/33f9ba79b26641ddf00a8699c30066b7e3573ab254e97475bf08f82fab83a6d3ce8d4ebad86afeb49bb8df3374390a9ba93125cece33badc4b3e8f7eac3c84d8
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*":
   version: 19.0.0
   resolution: "@types/react@npm:19.0.0"
   dependencies:
     csstype: "npm:^3.0.2"
   checksum: 10/5596d9a2c9c982d5e86add54f5d9b115153c4d47073dd3f8f8369a5e5b7f3088d614a935f85a2cf26eb6631d7ebebc7b913c5d22bf880847370070f2e60e63e6
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:18.3.12":
+  version: 18.3.12
+  resolution: "@types/react@npm:18.3.12"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10/c9bbdfeacd5347d2240e0d2cb5336bc57dbc1b9ff557b6c4024b49df83419e4955553518169d3736039f1b62608e15b35762a6c03d49bd86e33add4b43b19033
   languageName: node
   linkType: hard
 
@@ -4636,12 +4653,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.2":
-  version: 10.4.27
-  resolution: "autoprefixer@npm:10.4.27"
+"autoprefixer@npm:^10.5.2":
+  version: 10.5.2
+  resolution: "autoprefixer@npm:10.5.2"
   dependencies:
-    browserslist: "npm:^4.28.1"
-    caniuse-lite: "npm:^1.0.30001774"
+    browserslist: "npm:^4.28.4"
+    caniuse-lite: "npm:^1.0.30001799"
     fraction.js: "npm:^5.3.4"
     picocolors: "npm:^1.1.1"
     postcss-value-parser: "npm:^4.2.0"
@@ -4649,7 +4666,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: 10/5dd9ec57cc1c2af556e10d6c76d082f66d23275671b8b125f6c1d33ba7d9a984d80d3fb4fab7b5e092ac1a34f3aa5a131a392f131f5924029c3cb82faea15b0c
+  checksum: 10/c184de7b125d694b02e1c7f7de7e0aefc63307a7cf8b68a0efc507e23c54c480972ef93d6d3b82ba819dd541cbb139d199ef3fa323691d6471965f4b4129c74a
   languageName: node
   linkType: hard
 
@@ -4690,12 +4707,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"baseline-browser-mapping@npm:^2.9.0":
-  version: 2.10.0
-  resolution: "baseline-browser-mapping@npm:2.10.0"
+"baseline-browser-mapping@npm:^2.10.42":
+  version: 2.10.42
+  resolution: "baseline-browser-mapping@npm:2.10.42"
   bin:
     baseline-browser-mapping: dist/cli.cjs
-  checksum: 10/8145e076e4299f04c7a412e6ea63803e330153cd89c47b5303f9b56b58078f4c3d5a5b5332c1069da889e76facacca4d43f8940375f7e73ce0a4d96214332953
+  checksum: 10/7ea956db54694e4386fd14de665d9582aaa53901c09f21925abfe0ee0d5751947947775b890daad73d21673ed51de5bbefd888076edb8f9aaf76e53da47b061f
   languageName: node
   linkType: hard
 
@@ -4741,18 +4758,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.28.1":
-  version: 4.28.1
-  resolution: "browserslist@npm:4.28.1"
+"browserslist@npm:^4.28.4":
+  version: 4.28.5
+  resolution: "browserslist@npm:4.28.5"
   dependencies:
-    baseline-browser-mapping: "npm:^2.9.0"
-    caniuse-lite: "npm:^1.0.30001759"
-    electron-to-chromium: "npm:^1.5.263"
-    node-releases: "npm:^2.0.27"
-    update-browserslist-db: "npm:^1.2.0"
+    baseline-browser-mapping: "npm:^2.10.42"
+    caniuse-lite: "npm:^1.0.30001800"
+    electron-to-chromium: "npm:^1.5.387"
+    node-releases: "npm:^2.0.50"
+    update-browserslist-db: "npm:^1.2.3"
   bin:
     browserslist: cli.js
-  checksum: 10/64f2a97de4bce8473c0e5ae0af8d76d1ead07a5b05fc6bc87b848678bb9c3a91ae787b27aa98cdd33fc00779607e6c156000bed58fefb9cf8e4c5a183b994cdb
+  checksum: 10/40f5f3b160e003b86cf16d906029a274990dc3b6b824f913c141a11ace1f9664204f2d1e8388e5ddf0233b4759c5a171a5bb3f55256f72c9f0ca6ebba58fcc9a
   languageName: node
   linkType: hard
 
@@ -4811,10 +4828,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001579, caniuse-lite@npm:^1.0.30001759, caniuse-lite@npm:^1.0.30001774":
+"caniuse-lite@npm:^1.0.30001579":
   version: 1.0.30001774
   resolution: "caniuse-lite@npm:1.0.30001774"
   checksum: 10/63c87aeac08548847ecd12746144029761707d9eae57750f673543a2b2a6126bca98584dd551818e8dc2a480d11489bebe0027af26de4ee46466e7b216109862
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001799, caniuse-lite@npm:^1.0.30001800":
+  version: 1.0.30001802
+  resolution: "caniuse-lite@npm:1.0.30001802"
+  checksum: 10/496fd430cf348fb175a794a641a525a7ecf332f7118133ba2faacc820f556f8e8a314aec7f422e0636ffc346525e33e3bf1ba520c3898ed70c380e41d00e534f
   languageName: node
   linkType: hard
 
@@ -5145,10 +5169,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.5.263":
-  version: 1.5.302
-  resolution: "electron-to-chromium@npm:1.5.302"
-  checksum: 10/0d31470d04a0d1ea046dd363370081b67e6fe822949b10cfece0a64fd2f8180afb5ccaf14f4294251e444a0af627eb0dc0156242b714c0f10561adf2a21aa5f7
+"electron-to-chromium@npm:^1.5.387":
+  version: 1.5.387
+  resolution: "electron-to-chromium@npm:1.5.387"
+  checksum: 10/987c002c3a8e08b33977ae4130c7a67a7047c69120b1240cbaedd0a2b72e9a67d32c52d2644b521092dbb2ce058129690f77fd376e58d895cdba12a9eddea689
   languageName: node
   linkType: hard
 
@@ -6542,7 +6566,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -6788,10 +6812,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-releases@npm:^2.0.27":
-  version: 2.0.27
-  resolution: "node-releases@npm:2.0.27"
-  checksum: 10/f6c78ddb392ae500719644afcbe68a9ea533242c02312eb6a34e8478506eb7482a3fb709c70235b01c32fe65625b68dfa9665113f816d87f163bc3819b62b106
+"node-releases@npm:^2.0.50":
+  version: 2.0.50
+  resolution: "node-releases@npm:2.0.50"
+  checksum: 10/c40306176fc9d43d27b919034fab57ab0753448dfcabeb1ae669128d28f595fba4c329a269b2d7fa9bb7d5a6d2bda8b2bd8fe5e8446226bb809f448fec2e80fb
   languageName: node
   linkType: hard
 
@@ -7367,14 +7391,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.0.0":
-  version: 19.0.0
-  resolution: "react-dom@npm:19.0.0"
+"react-dom@npm:18.3.1":
+  version: 18.3.1
+  resolution: "react-dom@npm:18.3.1"
   dependencies:
-    scheduler: "npm:^0.25.0"
+    loose-envify: "npm:^1.1.0"
+    scheduler: "npm:^0.23.2"
   peerDependencies:
-    react: ^19.0.0
-  checksum: 10/aa64a2f1991042f516260e8b0eca0ae777b6c8f1aa2b5ae096e80bbb6ac9b005aef2bca697969841d34f7e1819556263476bdfea36c35092e8d9aefde3de2d9a
+    react: ^18.3.1
+  checksum: 10/3f4b73a3aa083091173b29812b10394dd06f4ac06aff410b74702cfb3aa29d7b0ced208aab92d5272919b612e5cda21aeb1d54191848cf6e46e9e354f3541f81
   languageName: node
   linkType: hard
 
@@ -7472,10 +7497,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0":
-  version: 19.0.0
-  resolution: "react@npm:19.0.0"
-  checksum: 10/2490969c503f644703c88990d20e4011fa6119ddeca451e9de48f6d7ab058d670d2852a5fcd3aa3cd90a923ab2815d532637bd4a814add402ae5c0d4f129ee71
+"react@npm:18.3.1":
+  version: 18.3.1
+  resolution: "react@npm:18.3.1"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10/261137d3f3993eaa2368a83110466fc0e558bc2c7f7ae7ca52d94f03aac945f45146bd85e5f481044db1758a1dbb57879e2fcdd33924e2dde1bdc550ce73f7bf
   languageName: node
   linkType: hard
 
@@ -7660,10 +7687,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.25.0":
-  version: 0.25.0
-  resolution: "scheduler@npm:0.25.0"
-  checksum: 10/e661e38503ab29a153429a99203fefa764f28b35c079719eb5efdd2c1c1086522f6653d8ffce388209682c23891a6d1d32fa6badf53c35fb5b9cd0c55ace42de
+"scheduler@npm:^0.23.2":
+  version: 0.23.2
+  resolution: "scheduler@npm:0.23.2"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10/e8d68b89d18d5b028223edf090092846868a765a591944760942b77ea1f69b17235f7e956696efbb62c8130ab90af7e0949bfb8eba7896335507317236966bc9
   languageName: node
   linkType: hard
 
@@ -8187,11 +8216,11 @@ __metadata:
   resolution: "tienda-le-bon-marche@workspace:."
   dependencies:
     "@headlessui/react": "npm:^2.2.0"
-    "@medusajs/icons": "npm:latest"
-    "@medusajs/js-sdk": "npm:latest"
-    "@medusajs/types": "npm:latest"
-    "@medusajs/ui": "npm:latest"
-    "@medusajs/ui-preset": "npm:latest"
+    "@medusajs/icons": "npm:^2.17.1"
+    "@medusajs/js-sdk": "npm:^2.17.1"
+    "@medusajs/types": "npm:^2.17.1"
+    "@medusajs/ui": "npm:^4.1.18"
+    "@medusajs/ui-preset": "npm:^2.17.1"
     "@playwright/test": "npm:^1.61.1"
     "@radix-ui/react-accordion": "npm:^1.2.12"
     "@radix-ui/react-avatar": "npm:^1.1.11"
@@ -8202,10 +8231,10 @@ __metadata:
     "@stripe/react-stripe-js": "npm:^5.3.0"
     "@stripe/stripe-js": "npm:^8.2.0"
     "@types/node": "npm:^18.0.0"
-    "@types/react": "npm:19.0.0"
-    "@types/react-dom": "npm:19.0.0"
+    "@types/react": "npm:18.3.12"
+    "@types/react-dom": "npm:18.3.1"
     ansi-colors: "npm:^4.1.3"
-    autoprefixer: "npm:^10.4.2"
+    autoprefixer: "npm:^10.5.2"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     eslint: "npm:8.57.0"
@@ -8214,9 +8243,9 @@ __metadata:
     lucide-react: "npm:^1.7.0"
     next: "npm:15.0.7"
     postcss: "npm:^8.4.8"
-    react: "npm:19.0.0"
+    react: "npm:18.3.1"
     react-country-flag: "npm:^3.1.0"
-    react-dom: "npm:19.0.0"
+    react-dom: "npm:18.3.1"
     server-only: "npm:^0.0.1"
     tailwind-merge: "npm:^3.5.0"
     tailwindcss: "npm:^3.0.23"
@@ -8478,7 +8507,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"update-browserslist-db@npm:^1.2.0":
+"update-browserslist-db@npm:^1.2.3":
   version: 1.2.3
   resolution: "update-browserslist-db@npm:1.2.3"
   dependencies:
