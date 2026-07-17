@@ -70,9 +70,10 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   className="group flex items-center justify-center outline-none text-inherit transition-opacity duration-300 hover:opacity-70 w-12 h-12"
                   onClick={openSideMenu}
                 >
-                  <div className="relative flex flex-col justify-center items-center w-6 h-6 overflow-hidden">
-                    <span className="absolute h-[1.5px] w-full bg-current transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] -translate-y-[3px] group-hover:-translate-y-[4px]"></span>
-                    <span className="absolute h-[1.5px] w-full bg-current transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-[3px] group-hover:translate-y-[4px]"></span>
+                  <div className="flex flex-col gap-[6px] items-start">
+                    <span className="block h-[1.5px] bg-current rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
+                    <span className="block h-[1.5px] bg-current rounded-[2px] transition-all duration-300 w-[14px] group-hover:w-5" />
+                    <span className="block h-[1.5px] bg-current rounded-[2px] transition-all duration-300 w-[18px] group-hover:w-4" />
                   </div>
                 </Popover.Button>
               </div>

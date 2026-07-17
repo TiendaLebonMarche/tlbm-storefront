@@ -1,10 +1,7 @@
-import { Text } from "@medusajs/ui"
-import { listProducts } from "@lib/data/products"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import Thumbnail from "../thumbnail"
-import PreviewPrice from "./price"
+import Image from "next/image"
 
 export default function ProductPreview({
   product,
@@ -17,26 +14,10 @@ export default function ProductPreview({
 }) {
   const { cheapestPrice } = getProductPrice({ product })
 
-  const totalInventory =
-    product.variants?.reduce(
-      (sum, v) => {
-        // In Medusa v2, inventory_quantity may be null (managed via inventory items)
-        if (v.inventory_quantity === null || v.inventory_quantity === undefined) {
-          return sum + 999 // Available (stock managed separately)
-        }
-        return sum + (v.inventory_quantity || 0)
-      },
-      0
-    ) || 999
-
   const isNew = product.created_at
     ? new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
     : false
 
-  const isLowStock = totalInventory < 5 && totalInventory > 0
-
-  // Custom badge from product tags (set via admin panel)
-  // Busca tags que empiecen con "Producto" o "producto" para mostrar como badge
   const productTags = (product as any).tags as Array<{id: string; value: string}> | null
   const customBadge = productTags?.find(
     (t: any) => t.value?.toLowerCase().startsWith("producto")
@@ -48,81 +29,74 @@ export default function ProductPreview({
     null
 
   return (
-    <article className="group flex flex-col h-full">
-      {/* Image block — seamless background */}
-      <LocalizedClientLink
-        href={`/productos/${product.handle}`}
-        data-testid="product-wrapper"
-        className="block relative overflow-hidden aspect-square bg-transparent"
-      >
-        {/* Subtle border instead of bg color mismatch */}
-        <div className="absolute inset-0 border border-brand-gray-light/60 z-10 pointer-events-none" />
-        
-        <Thumbnail
-          thumbnail={product.thumbnail}
-          images={product.images}
-          size="full"
-          isFeatured={isFeatured}
-          alt={product.title || "Producto Le Bon Marché"}
-          layoutId={`product-image-${product.handle}`}
-        />
+    <LocalizedClientLink
+      href={`/productos/${product.handle}`}
+      data-testid="product-wrapper"
+      className="group flex flex-col h-full no-underline text-inherit cursor-pointer"
+    >
+      {/* Image block — rectangular proporción Nest & Field */}
+      <div className="relative w-full overflow-hidden rounded-none" style={{ aspectRatio: "0.873/1", background: "#F2F2F2" }}>
+        {product.thumbnail || (product.images && product.images[0]?.url) ? (
+          <Image
+            src={product.thumbnail || (product.images && product.images[0]?.url) || ""}
+            alt={product.title || "Producto Le Bon Marché"}
+            fill
+            sizes="(max-width: 640px) 50vw, 33vw"
+            className="object-contain p-2 md:p-3 transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-400 text-[9px] font-bold uppercase tracking-widest">
+            Sin imagen
+          </div>
+        )}
 
-        {/* Elegant white hover overlay */}
-        <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-
-        {/* CTA pill on hover — visible desde md: (768px) */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500 ease-out z-20 pointer-events-none">
-          <span className="bg-brand-black text-white text-[8px] font-semibold uppercase tracking-[0.3em] px-4 md:px-6 py-2 md:py-2.5 whitespace-nowrap">
-            Ver Producto
-          </span>
+        {/* Hover scale + gold overlay sutil */}
+        <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </div>
-      </LocalizedClientLink>
 
-      {/* Info block */}
-      <div className="flex flex-col items-center text-center pt-3 md:pt-4 pb-1 px-1 md:px-0 flex-1">
-        {/* Badges / Labels centered */}
-        {(isNew || isLowStock || customBadge) && (
-          <div className="flex flex-wrap justify-center gap-1.5 mb-2">
+        {/* Badges */}
+        {(isNew || customBadge) && (
+          <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
             {customBadge && (
-              <span className="bg-pink-600 text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+              <span className="bg-pink-600 text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
                 {customBadge}
               </span>
             )}
             {isNew && (
-              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
+              <span className="bg-[#0A0A0F] text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
                 Nuevo
-              </span>
-            )}
-            {isLowStock && (
-              <span className="bg-brand-black text-white text-[6px] md:text-[7px] font-bold uppercase tracking-[0.25em] px-2 py-1">
-                Últimas uds.
               </span>
             )}
           </div>
         )}
+      </div>
 
-        {/* Category */}
+      {/* Info block — estilo Nest & Field */}
+      <div className="pt-4 pb-2 flex flex-col gap-[3px]">
+        {/* Category/Collection */}
         {category && (
-          <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.25em] text-brand-black truncate mb-1">
+          <span className="text-[13px] font-medium tracking-[-0.42px] leading-snug" style={{ color: "#666" }}>
             {category}
           </span>
         )}
 
         {/* Title */}
-        <LocalizedClientLink href={`/productos/${product.handle}`} className="mb-1.5 min-h-[48px] flex items-center justify-center">
-          <h3
-            className="text-xs md:text-sm font-semibold text-brand-black leading-snug line-clamp-2 hover:text-brand-black transition-colors duration-300 font-sans"
-            data-testid="product-title"
-          >
-            {product.title}
-          </h3>
-        </LocalizedClientLink>
+        <h3
+          className="text-[17px] md:text-[18px] font-semibold tracking-[-0.9px] leading-tight text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2"
+        >
+          {product.title}
+        </h3>
 
         {/* Price */}
-        <div className="mt-auto flex justify-center">
-          {cheapestPrice && <PreviewPrice price={cheapestPrice as any} />}
+        <div className="mt-0.5">
+          {cheapestPrice && (
+            <span className="text-[14px] font-semibold tracking-[-0.42px] text-[#101010]">
+              {cheapestPrice.calculated_price}
+            </span>
+          )}
         </div>
       </div>
-    </article>
+    </LocalizedClientLink>
   )
 }

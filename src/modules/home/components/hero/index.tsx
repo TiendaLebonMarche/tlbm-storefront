@@ -212,15 +212,15 @@ function ScrollHeader({ visible }: { visible: boolean }) {
       >
         <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
           <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
-            {/* Hamburger */}
+            {/* Hamburger — 3 líneas asimétricas */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[5px] p-2 group"
+              className="flex flex-col gap-[7px] p-2 group cursor-pointer bg-none border-none outline-none"
               aria-label="Menú"
             >
-              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300 group-hover:w-6" />
-              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300" />
-              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300 group-hover:w-3" />
+              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
+              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-[14px] group-hover:w-5" />
+              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-[18px] group-hover:w-4" />
             </button>
 
             {/* Logo centrado */}
@@ -309,12 +309,12 @@ function HeroOverlay({ visible }: { visible: boolean }) {
           <div className="flex items-center justify-between h-[60px] md:h-[72px]">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[5px] p-2 group"
+              className="flex flex-col gap-[7px] p-2 group cursor-pointer bg-none border-none outline-none"
               aria-label="Menú"
             >
-              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300 group-hover:w-6" />
-              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300" />
-              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300 group-hover:w-3" />
+              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
+              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-[14px] group-hover:w-5" />
+              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-[18px] group-hover:w-4" />
             </button>
 
             <div className="absolute left-1/2 -translate-x-1/2">

@@ -55,16 +55,17 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="pm-wrap reveal r-d2">
         <div className="pm-track">
           {duplicatedItems.map((item, index) => (
-            <div key={`${item.id}-${index}`} className="pm-card card-lift group">
-              <LocalizedClientLink href={`/productos/${item.handle}`} className="block">
-                <div className="relative aspect-square overflow-hidden" style={{ background: "#F5F5F0" }}>
+            <div key={`${item.id}-${index}`} className="flex-shrink-0 group" style={{ width: "clamp(240px, 28vw, 340px)" }}>
+              <LocalizedClientLink href={`/productos/${item.handle}`} className="block no-underline text-inherit">
+                {/* Image — rectangular proporción Nest & Field */}
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "0.873/1", background: "#F2F2F2" }}>
                   {item.imageSrc ? (
                     <Image
                       src={item.imageSrc}
                       alt={item.name}
                       fill
-                      sizes="(max-width: 640px) 220px, 280px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="340px"
+                      className="object-contain p-2 md:p-3 transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 text-[9px] font-bold uppercase tracking-widest">
@@ -75,26 +76,24 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Badge */}
-                  <span className="absolute top-3 left-3 text-white text-[8px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 rounded-full bg-[#0A0A0F]">
+                  <span className="absolute top-3 left-3 text-white text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-[#0A0A0F]">
                     Nuevo
                   </span>
                 </div>
-              </LocalizedClientLink>
-              <div className="p-4">
-                <LocalizedClientLink href={`/productos/${item.handle}`}>
-                  <h3 className="text-sm font-semibold mb-1 text-gray-900 dark:text-white/90 line-clamp-1">{item.name}</h3>
-                </LocalizedClientLink>
-                <p className="text-xs font-medium text-gray-400 dark:text-white/25 mb-3">{item.category}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-[#D4AF37]">{item.price}</span>
-                  <LocalizedClientLink
-                    href={`/productos/${item.handle}`}
-                    className="px-4 py-3 text-white text-[10px] font-bold uppercase tracking-[.22em] rounded-full bg-[#0A0A0F] hover:bg-gray-900 hover:scale-[1.05] transition-all duration-300 min-h-[44px] flex items-center justify-center"
-                  >
-                    Comprar
-                  </LocalizedClientLink>
+
+                {/* Info */}
+                <div className="pt-4 pb-2 flex flex-col gap-[3px]">
+                  <span className="text-[13px] font-medium tracking-[-0.42px] leading-snug text-[#666]">
+                    {item.category}
+                  </span>
+                  <h3 className="text-[17px] md:text-[18px] font-semibold tracking-[-0.9px] leading-tight text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">
+                    {item.name}
+                  </h3>
+                  <span className="text-[14px] font-semibold tracking-[-0.42px] text-[#101010] mt-0.5">
+                    {item.price}
+                  </span>
                 </div>
-              </div>
+              </LocalizedClientLink>
             </div>
           ))}
         </div>
