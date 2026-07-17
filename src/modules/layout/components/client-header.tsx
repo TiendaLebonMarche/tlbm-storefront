@@ -5,30 +5,25 @@ import { usePathname } from "next/navigation"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 /*
-  Header height budget (must match hero pt values):
+  This header is intentionally hidden on the home page (/) because the Hero
+  slider component handles its own overlay header + scroll-to-white-bar.
 
-  Top bar:
-    h-[28px] md:h-[32px] → ~32px
-
-  Nav bar:
-    Mobile  (<md): min-h-[60px] + py-3 not scrolled, min-h-[56px] + py-2 scrolled
-    Desktop (≥md): min-h-[72px] + py-3 not scrolled, min-h-[60px] + py-2 scrolled
-
-  Total:
-    Mobile  = 32 + 60 = 92px → hero pt uses ~112px
-    Desktop = 32 + 72 = 104px → hero pt uses ~128px
+  On every other page it behaves as a normal sticky header with glass effect.
 */
+
 export default function ClientHeader({ children }: { children: React.ReactNode }) {
   const isScrolled = useScrollThreshold(50)
   const pathname = usePathname()
 
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
 
+  // On the home page, this header renders nothing — the Hero slider
+  // component owns the header (floating logo + hamburger, white bar on scroll).
+  if (isHome) return null
+
   const textColor = isScrolled
     ? "text-white"
-    : isHome
-      ? "text-white"
-      : "text-black"
+    : "text-black"
 
   return (
     <div
@@ -36,10 +31,8 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
         fixed top-0 left-0 w-full z-[100] group/header
         transition-all duration-500 ease-out
         ${isScrolled
-          ? "bg-[#0A0A0F]/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
-          : isHome
-            ? "bg-transparent backdrop-blur-none"
-            : "bg-white/90 backdrop-blur-xl shadow-[0_1px_20px_0_rgba(0,0,0,0.05)]"
+          ? "bg-white/95 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.06)] border-b border-gray-100/50"
+          : "bg-transparent backdrop-blur-none"
         }
       `}
       data-scrolled={isScrolled}
@@ -55,7 +48,6 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
         `}
       >
         <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14 h-full flex items-center justify-between">
-          {/* Left: Social links */}
           <div className="flex items-center gap-3 md:gap-5 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
             <a
               href="https://instagram.com"
@@ -91,7 +83,6 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
             </a>
           </div>
 
-          {/* Right: Info + Auth links */}
           <div className="flex items-center gap-2 md:gap-5 text-[9px] md:text-[10px] font-medium tracking-[0.15em] uppercase">
             <span className="hidden sm:inline text-white/50">Envíos a toda Colombia</span>
             <span className="hidden sm:inline text-white/20">|</span>

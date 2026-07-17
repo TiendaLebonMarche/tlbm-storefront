@@ -1,215 +1,605 @@
 "use client"
 
-import { useMemo } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useCallback, useRef } from "react"
+import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-// ── Constants ──────────────────────────────────────────────────────────────
+// ── Logo URL ────────────────────────────────────────────────────────────────
+const LOGO_URL =
+  "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784234322/logo-tlbmjul_yidrku.png"
 
-const PARTICLES = 22
-const ORBIT_RINGS = 3
+// ── Slide Data ──────────────────────────────────────────────────────────────
 
-// ── Sub-components ─────────────────────────────────────────────────────────
+interface Slide {
+  id: number
+  label: string
+  title: string
+  subtitle: string
+  cta: string
+  href: string
+  /** Primary media: image URL */
+  image: string
+  /** Optional video URL (if present, plays instead of static image) */
+  video?: string
+  overlayFrom: string
+  overlayTo: string
+  textSide: "left" | "right"
+}
 
-/** Floating particles — uses deterministic positions (no Math.random) */
-function BgParticles() {
-  const particles = useMemo(() => {
-    // seed-based deterministic positions to avoid hydration mismatch
-    const seeds = [
-      {x:15,y:20,s:2.5,d:5.5,dr:8,o:0.25},{x:78,y:10,s:3,d:2.0,dr:7,o:0.35},
-      {x:45,y:85,s:1.8,d:3.5,dr:9,o:0.15},{x:88,y:60,s:2.2,d:1.0,dr:6,o:0.30},
-      {x:5,y:50,s:3.5,d:4.0,dr:10,o:0.20},{x:60,y:30,s:1.5,d:0.5,dr:7.5,o:0.28},
-      {x:30,y:70,s:2.8,d:5.5,dr:8.5,o:0.18},{x:92,y:35,s:2.0,d:3.0,dr:6.5,o:0.32},
-      {x:55,y:5,s:1.6,d:1.5,dr:9.5,o:0.22},{x:20,y:45,s:3.2,d:4.5,dr:7,o:0.12},
-      {x:70,y:75,s:1.4,d:2.5,dr:8,o:0.35},{x:40,y:15,s:2.6,d:0.0,dr:6,o:0.20},
-      {x:82,y:80,s:1.9,d:5.0,dr:9,o:0.15},{x:10,y:90,s:2.3,d:3.0,dr:7.5,o:0.28},
-      {x:65,y:55,s:3.1,d:1.0,dr:8.5,o:0.10},{x:35,y:40,s:1.7,d:4.0,dr:6.5,o:0.30},
-      {x:75,y:25,s:2.4,d:2.0,dr:9,o:0.22},{x:50,y:65,s:2.9,d:5.5,dr:7,o:0.18},
-      {x:25,y:10,s:1.3,d:3.5,dr:8,o:0.32},{x:85,y:45,s:2.1,d:0.5,dr:6,o:0.25},
-      {x:95,y:70,s:2.7,d:4.5,dr:9.5,o:0.15},{x:12,y:30,s:1.8,d:2.5,dr:7,o:0.28},
-    ]
-    return seeds.map((s, i) => ({
-      id: i, x: s.x, y: s.y, size: s.s,
-      delay: s.d, duration: s.dr, opacity: s.o,
-    }))
-  }, [])
+const SLIDES: Slide[] = [
+  {
+    id: 1,
+    label: "Tecnología Premium",
+    title: "Dispositivos que\nmarcan la diferencia",
+    subtitle:
+      "Los mejores gadgets originales del mercado, seleccionados para quienes exigen calidad y diseño.",
+    cta: "Explorar Colección",
+    href: "/store",
+    image:
+      "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75",
+    video:
+      "https://cdn.coverr.co/videos/coverr-close-up-of-modern-laptop-on-desk-5651/1080p.mp4",
+    overlayFrom: "from-black/65",
+    overlayTo: "to-black/30",
+    textSide: "left",
+  },
+  {
+    id: 2,
+    label: "Productos Exclusivos",
+    title: "Originalidad que\nte distingue",
+    subtitle:
+      "Piezas únicas y difíciles de encontrar. Tu estilo merece algo más que lo convencional.",
+    cta: "Ver Productos",
+    href: "/store?collection=exclusivos",
+    image:
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1920&q=75",
+    video:
+      "https://cdn.coverr.co/videos/coverr-woman-shopping-in-a-store-6098/1080p.mp4",
+    overlayFrom: "from-black/60",
+    overlayTo: "to-black/25",
+    textSide: "right",
+  },
+  {
+    id: 3,
+    label: "Ofertas Especiales",
+    title: "Precios que\nno podrás creer",
+    subtitle:
+      "Descuentos exclusivos en productos seleccionados. Calidad premium a tu alcance.",
+    cta: "Ver Ofertas",
+    href: "/store",
+    image:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=75",
+    overlayFrom: "from-black/55",
+    overlayTo: "to-black/20",
+    textSide: "left",
+  },
+  {
+    id: 4,
+    label: "Bucaramanga",
+    title: "Hecho para ti,\ndesde Santander",
+    subtitle:
+      "Tienda virtual con corazón bumangués. Envíos a toda Colombia con el mejor servicio.",
+    cta: "Conócenos",
+    href: "/store",
+    image:
+      "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1920&q=75",
+    overlayFrom: "from-black/60",
+    overlayTo: "to-black/25",
+    textSide: "right",
+  },
+]
+
+// ── Variants (framer-motion) ────────────────────────────────────────────────
+
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? "-100%" : "100%",
+    opacity: 0,
+  }),
+}
+
+const textVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  }),
+}
+
+// ── Slide Media (image or video) ────────────────────────────────────────────
+
+function SlideMedia({
+  slide,
+  isActive,
+}: {
+  slide: Slide
+  isActive: boolean
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (!videoRef.current || !slide.video) return
+    if (isActive) {
+      videoRef.current.play().catch(() => {})
+    } else {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }, [isActive, slide.video])
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            backgroundColor: p.size > 2.5 ? "#D4AF37" : "rgba(255,255,255,0.5)",
-          }}
-          animate={{ y: [0, -20, 0], opacity: [p.opacity, p.opacity * 2, p.opacity] }}
-          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+    <>
+      {/* Image (always renders as fallback / poster) */}
+      <Image
+        src={slide.image}
+        alt={slide.label}
+        fill
+        sizes="100vw"
+        className={`object-cover transition-opacity duration-500 ${
+          slide.video && isActive ? "opacity-0" : "opacity-100"
+        }`}
+        priority={slide.id <= 2}
+        fetchPriority={slide.id === 1 ? "high" : "auto"}
+      />
+
+      {/* Video (plays only when active) */}
+      {slide.video && (
+        <video
+          ref={videoRef}
+          src={slide.video}
+          muted
+          loop
+          playsInline
+          preload={isActive ? "auto" : "none"}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+            isActive ? "opacity-100" : "opacity-0"
+          }`}
         />
-      ))}
+      )}
+    </>
+  )
+}
+
+// ── Marquee ─────────────────────────────────────────────────────────────────
+
+function MarqueeBar() {
+  return (
+    <div className="relative z-50 bg-[#FFD700] text-black overflow-hidden">
+      <div className="flex whitespace-nowrap animate-marquee-fixed py-2 md:py-2.5">
+        <span className="inline-flex items-center gap-8 mx-4 text-[11px] md:text-[13px] font-bold tracking-[0.15em] uppercase">
+          <span>✦</span>
+          <span>Tienda Le Bon Marché</span>
+          <span>•</span>
+          <span>Tienda virtual en Bucaramanga</span>
+          <span>•</span>
+          <span>Productos exóticos y 100% originales</span>
+          <span>✦</span>
+        </span>
+        <span className="inline-flex items-center gap-8 mx-4 text-[11px] md:text-[13px] font-bold tracking-[0.15em] uppercase">
+          <span>✦</span>
+          <span>Tienda Le Bon Marché</span>
+          <span>•</span>
+          <span>Tienda virtual en Bucaramanga</span>
+          <span>•</span>
+          <span>Productos exóticos y 100% originales</span>
+          <span>✦</span>
+        </span>
+      </div>
     </div>
   )
 }
 
-function BgGlows() {
-  return (
-    <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden" aria-hidden>
-      <div className="absolute rounded-full" style={{ width: "50%", height: "60%", top: "20%", right: "-5%", background: "radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)" }} />
-      <div className="absolute rounded-full" style={{ width: "40%", height: "40%", top: "-5%", right: "10%", background: "radial-gradient(ellipse at center, rgba(212,175,55,0.05) 0%, transparent 70%)" }} />
-      <div className="absolute rounded-full" style={{ width: "60%", height: "30%", bottom: "0%", left: "0%", background: "radial-gradient(ellipse at center, rgba(200,145,46,0.06) 0%, transparent 70%)" }} />
-    </div>
-  )
-}
+// ── Sticky White Header (appears on scroll) ────────────────────────────────
 
-function BgGrid() {
-  return (
-    <div className="absolute inset-0 pointer-events-none z-[1] opacity-[0.04]" aria-hidden
-      style={{ backgroundImage: "linear-gradient(rgba(212,175,55,1) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,1) 1px, transparent 1px)", backgroundSize: "80px 80px" }}
-    />
-  )
-}
+function ScrollHeader({ visible }: { visible: boolean }) {
+  const [menuOpen, setMenuOpen] = useState(false)
 
-/** Orbit visual for the right column */
-function OrbitVisual() {
   return (
-    <div className="relative flex items-center justify-center w-full h-full min-h-[380px] md:min-h-[440px]">
-      {/* Center card */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center justify-center"
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+    <>
+      <div
+        className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
+          ${
+            visible
+              ? "translate-y-0 opacity-100 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.06)]"
+              : "-translate-y-full opacity-0 pointer-events-none"
+          }`}
       >
-        <div
-          className="glass w-[140px] h-[140px] md:w-[170px] md:h-[170px] rounded-2xl flex flex-col items-center justify-center gap-3"
-          style={{
-            border: "1px solid rgba(212,175,55,0.15)",
-            background: "rgba(10,10,15,0.5)",
-            boxShadow: "0 0 60px rgba(212,175,55,0.06)",
-          }}
-        >
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" className="opacity-60">
-            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="#D4AF37" strokeWidth="1.2" strokeLinejoin="round" />
-            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#D4AF37" strokeWidth="1.2" strokeLinejoin="round" />
-            <path d="M12 12V22" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
-            <path d="M7 4.5L17 9.5" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
-          </svg>
-          <span className="text-[0.6rem] font-semibold tracking-[0.2em] uppercase" style={{ color: "rgba(212,175,55,0.7)" }}>
-            Producto<br />Destacado
-          </span>
-        </div>
-      </motion.div>
+        <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
+          <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col gap-[5px] p-2 group"
+              aria-label="Menú"
+            >
+              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300 group-hover:w-6" />
+              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300" />
+              <span className="block w-5 h-[1.5px] bg-black transition-all duration-300 group-hover:w-3" />
+            </button>
 
-      {/* Orbit rings */}
-      {[0, 1, 2].map((i) => {
-        const radius = 60 + i * 48
-        return (
+            {/* Logo centrado */}
+            <LocalizedClientLink href="/" className="flex items-center h-8 md:h-9">
+              <div className="relative w-[130px] md:w-[170px] h-full">
+                <Image
+                  src={LOGO_URL}
+                  alt="Tienda Le Bon Marché"
+                  fill
+                  sizes="170px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </LocalizedClientLink>
+
+            <div className="w-9" />
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {menuOpen && (
           <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{ width: radius * 2, height: radius * 2, border: i % 2 === 0 ? "1px dashed rgba(212,175,55,0.12)" : "1px dashed rgba(212,175,55,0.08)", borderRadius: "50%" }}
-            animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-            transition={{ duration: 18 + i * 6, repeat: Infinity, ease: "linear" }}
-          />
-        )
-      })}
-    </div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[95] bg-white flex flex-col"
+          >
+            <div className="flex items-center justify-between px-4 h-[60px] border-b border-gray-100">
+              <LocalizedClientLink href="/" className="flex items-center h-7">
+                <div className="relative w-[120px] h-full">
+                  <Image src={LOGO_URL} alt="Tienda Le Bon Marché" fill sizes="120px" className="object-contain" />
+                </div>
+              </LocalizedClientLink>
+              <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl font-light text-gray-400 hover:text-black transition-colors" aria-label="Cerrar menú">
+                ✕
+              </button>
+            </div>
+            <nav className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
+              {[
+                { label: "Inicio", href: "/" },
+                { label: "Tienda", href: "/store" },
+                { label: "Colecciones", href: "/collections" },
+                { label: "Ofertas", href: "/store" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contacto", href: "/contact" },
+              ].map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 * i, duration: 0.5 }}
+                >
+                  <LocalizedClientLink
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                  >
+                    {link.label}
+                  </LocalizedClientLink>
+                </motion.div>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
-// ── Main Hero ──────────────────────────────────────────────────────────────
+// ── Hero Overlay (floating logo + hamburger on hero) ───────────────────────
 
-export default function Hero() {
+function HeroOverlay({ visible }: { visible: boolean }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <section
-      className="relative min-h-[95vh] md:min-h-screen overflow-x-hidden flex items-center"
-      style={{ backgroundColor: "#0A0A0F" }}
-    >
-      <BgGrid />
-      <BgGlows />
-      <BgParticles />
+    <>
+      <div
+        className={`absolute top-0 left-0 w-full z-30 transition-all duration-500 ${
+          visible ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
+          <div className="flex items-center justify-between h-[60px] md:h-[72px]">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col gap-[5px] p-2 group"
+              aria-label="Menú"
+            >
+              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300 group-hover:w-6" />
+              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300" />
+              <span className="block w-5 h-[1.5px] bg-white transition-all duration-300 group-hover:w-3" />
+            </button>
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-8 py-24 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-          {/* LEFT COLUMN — visible from server render, animated on viewport entry */}
-          <motion.div
-            className="flex flex-col gap-6 md:gap-7"
-            initial={false}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="block w-10 h-[1px]" style={{ backgroundColor: "#D4AF37" }} />
-              <span className="text-[0.7rem] md:text-[0.75rem] font-semibold tracking-[0.2em] uppercase" style={{ color: "#D4AF37" }}>
-                Colección Verano 2026
-              </span>
-            </div>
-
-            <h1 className="font-serif text-[2.4rem] sm:text-[3.6rem] md:text-[4.2rem] lg:text-[5rem] leading-[1.05] font-bold tracking-tight text-white">
-              Tecnología<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F5D980] to-[#C8912E]">
-                Exclusiva
-              </span>
-              <br />
-              para Ti
-            </h1>
-
-            <p className="text-sm md:text-base leading-relaxed max-w-[480px]" style={{ color: "rgba(255,255,255,0.4)" }}>
-              Descubre la tecnología premium que define tu estilo.
-              Productos originales, selección curada y el mejor servicio
-              desde Bucaramanga para todo Colombia.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-2">
-              <LocalizedClientLink
-                href="/store"
-                className="btn-shine inline-flex items-center justify-center min-h-[50px] px-7 md:px-9 rounded-lg text-sm font-bold tracking-[0.06em] uppercase transition-all duration-300 hover:scale-[1.03]"
-                style={{
-                  background: "#0A0A0F",
-                  color: "#FFFFFF",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
-                }}
-              >
-                Explorar Colección
+            <div className="absolute left-1/2 -translate-x-1/2">
+              <LocalizedClientLink href="/" className="flex items-center justify-center">
+                <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[48px] md:h-[56px] lg:h-[64px]">
+                  <Image
+                    src={LOGO_URL}
+                    alt="Tienda Le Bon Marché"
+                    fill
+                    sizes="260px"
+                    className="object-contain brightness-0 invert"
+                    priority
+                  />
+                </div>
               </LocalizedClientLink>
             </div>
 
-            <div className="flex items-center gap-6 md:gap-10 mt-4 pt-6 md:pt-7" style={{ borderTop: "1px solid rgba(212,175,55,0.1)" }}>
-              {[
-                { value: "30+", label: "Productos" },
-                { value: "100%", label: "Originales" },
-                { value: "CO", label: "Bucaramanga" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col">
-                  <span className="text-lg md:text-xl font-bold font-serif tracking-tight" style={{ color: "#D4AF37" }}>
-                    {stat.value}
-                  </span>
-                  <span className="text-[0.65rem] md:text-[0.7rem] font-medium tracking-[0.12em] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+            <div className="w-9" />
+          </div>
+        </div>
+      </div>
 
-          {/* RIGHT COLUMN */}
+      <AnimatePresence>
+        {menuOpen && (
           <motion.div
-            className="hidden md:flex items-center justify-center"
-            initial={false}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[95] bg-white flex flex-col"
           >
-            <OrbitVisual />
+            <div className="flex items-center justify-between px-4 h-[60px] border-b border-gray-100">
+              <LocalizedClientLink href="/" className="flex items-center h-7">
+                <div className="relative w-[120px] h-full">
+                  <Image src={LOGO_URL} alt="Tienda Le Bon Marché" fill sizes="120px" className="object-contain" />
+                </div>
+              </LocalizedClientLink>
+              <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl font-light text-gray-400 hover:text-black transition-colors" aria-label="Cerrar menú">
+                ✕
+              </button>
+            </div>
+            <nav className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
+              {[
+                { label: "Inicio", href: "/" },
+                { label: "Tienda", href: "/store" },
+                { label: "Colecciones", href: "/collections" },
+                { label: "Ofertas", href: "/store" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contacto", href: "/contact" },
+              ].map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 * i, duration: 0.5 }}
+                >
+                  <LocalizedClientLink
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                  >
+                    {link.label}
+                  </LocalizedClientLink>
+                </motion.div>
+              ))}
+            </nav>
           </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
+// ── Main Hero ───────────────────────────────────────────────────────────────
+
+export default function Hero() {
+  const [[slideIndex, direction], setSlideState] = useState([0, 0])
+  const [isScrolled, setIsScrolled] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const [paused, setPaused] = useState(false)
+
+  const totalSlides = SLIDES.length
+
+  // ── Scroll detection ──
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 80)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  // ── Auto-play (12s) ──
+  useEffect(() => {
+    if (paused) {
+      if (timerRef.current) clearInterval(timerRef.current)
+      return
+    }
+    timerRef.current = setInterval(() => {
+      setSlideState(([current]) => [(current + 1) % totalSlides, 1])
+    }, 12000)
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+  }, [paused, totalSlides])
+
+  const goTo = useCallback((index: number) => {
+    setSlideState(([current]) => {
+      const dir = index > current ? 1 : -1
+      return [index, dir]
+    })
+  }, [])
+
+  const next = useCallback(() => {
+    setSlideState(([current]) => [(current + 1) % totalSlides, 1])
+  }, [totalSlides])
+
+  const prev = useCallback(() => {
+    setSlideState(([current]) => [(current - 1 + totalSlides) % totalSlides, -1])
+  }, [totalSlides])
+
+  const currentSlide = SLIDES[slideIndex]
+
+  return (
+    <>
+      {/* ── MARQUEE ── */}
+      <MarqueeBar />
+
+      {/* ── SCROLL HEADER (white bar) ── */}
+      <ScrollHeader visible={isScrolled} />
+
+      {/* ── HERO SLIDER ── */}
+      <section
+        className="relative w-full h-screen overflow-hidden bg-black"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Slides */}
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+          <motion.div
+            key={slideIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0"
+          >
+            <SlideMedia slide={currentSlide} isActive={true} />
+
+            {/* Gradient overlays */}
+            <div
+              className={`absolute inset-0 bg-gradient-to-r ${currentSlide.overlayFrom} ${currentSlide.overlayTo}`}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* ── Floating header (logo + hamburger) ── */}
+        <HeroOverlay visible={isScrolled} />
+
+        {/* ── TEXT CONTENT ── */}
+        <div className="absolute inset-0 z-20 flex items-center">
+          <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 lg:px-12">
+            <motion.div
+              key={`text-${slideIndex}`}
+              className={`max-w-[580px] ${
+                currentSlide.textSide === "right"
+                  ? "ml-auto text-right md:items-end"
+                  : "text-left md:items-start"
+              } flex flex-col`}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.span
+                custom={0}
+                variants={textVariants}
+                className="inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase text-[#D4AF37] mb-3 md:mb-4"
+              >
+                <span className="block w-8 h-[1px] bg-[#D4AF37]" />
+                {currentSlide.label}
+              </motion.span>
+
+              <motion.h1
+                custom={1}
+                variants={textVariants}
+                className="font-serif text-[2.2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] leading-[1.05] font-bold text-white whitespace-pre-line"
+              >
+                {currentSlide.title}
+              </motion.h1>
+
+              <motion.p
+                custom={2}
+                variants={textVariants}
+                className="text-sm md:text-base leading-relaxed mt-3 md:mt-5 max-w-[440px] text-white/60"
+              >
+                {currentSlide.subtitle}
+              </motion.p>
+
+              <motion.div custom={3} variants={textVariants} className="mt-6 md:mt-9">
+                <LocalizedClientLink
+                  href={currentSlide.href}
+                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-lg text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98]"
+                  style={{
+                    background: "linear-gradient(135deg, #D4AF37, #C8912E, #B8860B)",
+                    color: "#0A0A0F",
+                    boxShadow: "0 4px 24px rgba(212,175,55,0.3)",
+                  }}
+                >
+                  <span className="relative z-10">{currentSlide.cta}</span>
+                  <svg
+                    className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[800ms] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                </LocalizedClientLink>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="mt-16 md:mt-20 w-full h-[1px]" style={{ background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent)" }} />
-      </div>
-    </section>
+        {/* ── ARROWS ── */}
+        <button
+          onClick={prev}
+          className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
+          aria-label="Anterior"
+        >
+          <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
+          aria-label="Siguiente"
+        >
+          <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* ── SLIDE INDICATORS (numbered) ── */}
+        <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 md:gap-3">
+          {SLIDES.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goTo(index)}
+              className={`group flex items-center gap-2 transition-all duration-500 ${
+                index === slideIndex ? "" : "opacity-40 hover:opacity-70"
+              }`}
+              aria-label={`Ir a slide ${index + 1}`}
+            >
+              <span
+                className={`block rounded-full transition-all duration-500 ${
+                  index === slideIndex
+                    ? "w-8 md:w-10 h-[2px] bg-[#D4AF37]"
+                    : "w-2 h-2 bg-white/60 group-hover:bg-white"
+                }`}
+              />
+              <span
+                className={`text-[9px] font-bold tracking-[0.15em] transition-all duration-500 ${
+                  index === slideIndex ? "text-[#D4AF37]" : "text-white/50"
+                }`}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* ── Pause indicator ── */}
+        <div className="absolute bottom-6 md:bottom-10 right-6 md:right-10 z-20">
+          <span className="text-[9px] font-medium tracking-[0.15em] text-white/30">
+            {paused ? "❚❚" : "▶"} AUTO
+          </span>
+        </div>
+      </section>
+    </>
   )
 }
