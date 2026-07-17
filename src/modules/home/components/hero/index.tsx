@@ -6,8 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 // ── Logo URL ────────────────────────────────────────────────────────────────
-const LOGO_URL =
-  "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784234322/logo-tlbmjul_yidrku.png"
+const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784320140/logo-julio_nezqqe.png"
 
 // ── Slide Data ──────────────────────────────────────────────────────────────
 

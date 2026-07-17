@@ -17,7 +17,7 @@ export default async function Footer() {
             <LocalizedClientLink href="/" className="inline-block mb-6">
               <div className="relative w-[220px] h-[60px]">
                 <Image
-                  src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784234322/logo-tlbmjul_yidrku.png"
+                  src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784320140/logo-julio_nezqqe.png"
                   alt="Tienda Le Bon Marché"
                   fill
                   className="object-contain brightness-0 invert"
