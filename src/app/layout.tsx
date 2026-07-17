@@ -26,9 +26,9 @@ const BASE_URL = "https://www.tiendalebonmarche.com"
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
   title: {
-    default: "Tienda Le Bon Marché | Productos Originales & Exóticos | Boutique Virtual Bucaramanga",
+    default: "Le Bon Marché - Tienda virtual en Bucaramanga - Productos Exóticos y 100% Originales",
   },
-  description: "Tienda Le Bon Marché — Boutique online con la selección más original en tecnología premium, gadgets exclusivos, decoración exótica y libros de colección. Envíos VIP a toda Colombia desde Bucaramanga. Consigue gadgets exóticos, tecnología de lujo, parlantes originales y smartwatch original con los mejores precios.",
+  description: "Le Bon Marché es tu tienda virtual en Bucaramanga con productos exóticos, originales y difíciles de encontrar. Tecnología premium, gadgets exclusivos, parlantes originales, smartwatches y accesorios. Envíos a toda Colombia. 100% original, garantizado.",
   keywords: [
     "tienda virtual en Bucaramanga",
     "Tienda Le Bon Marché productos",
@@ -84,14 +84,14 @@ export const metadata: Metadata = {
         url: "/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Tienda Le Bon Marché — Boutique Online Colombia",
+        alt: "Le Bon Marché — Tienda virtual en Bucaramanga — Productos Exóticos y 100% Originales",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tienda Le Bon Marché | Boutique Online Colombia",
-    description: "Originales & Exóticos — Tecnología premium, gadgets y decoración exclusiva. Envíos a toda Colombia.",
+    title: "Le Bon Marché - Tienda virtual en Bucaramanga - Productos Exóticos y 100% Originales",
+    description: "Le Bon Marché es tu tienda virtual en Bucaramanga con productos exóticos, originales y difíciles de encontrar. Tecnología premium, gadgets exclusivos, parlantes y smartwatch originales. Envíos VIP a toda Colombia. 100% original, garantizado.",
     images: ["/twitter-image.jpg"],
     creator: "@tiendalebonmarche",
     site: "@tiendalebonmarche",

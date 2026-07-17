@@ -17,19 +17,19 @@ const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/componen
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 export const metadata: Metadata = {
-  title: "Tienda Le Bon Marché Bucaramanga | Productos Originales & Exóticos",
+  title: "Le Bon Marché - Tienda virtual en Bucaramanga - Productos Exóticos y 100% Originales",
   description:
-    "Tienda Le Bon Marché en Bucaramanga: tecnología de lujo, gadgets exóticos, parlantes originales, smartwatch original y oficina premium. ¡Los mejores precios y descuentos en Bucaramanga con envíos VIP a toda Colombia!",
+    "Le Bon Marché es tu tienda virtual en Bucaramanga con productos exóticos, originales y difíciles de encontrar. Tecnología premium, gadgets exclusivos, parlantes originales, smartwatches y accesorios. Envíos a toda Colombia. 100% original, garantizado.",
   alternates: {
     canonical: `${BASE_URL}/co`,
   },
   openGraph: {
-    title: "Tienda Le Bon Marché Bucaramanga | Productos Originales & Exóticos",
-    description: "Tecnología de lujo, gadgets exóticos, parlantes y smartwatch original en Bucaramanga. Tu tienda virtual premium con los mejores precios.",
+    title: "Le Bon Marché - Tienda virtual en Bucaramanga - Productos Exóticos y 100% Originales",
+    description: "Le Bon Marché es tu tienda virtual en Bucaramanga con productos exóticos, originales y difíciles de encontrar. Tecnología premium, gadgets exclusivos, parlantes y smartwatch originales. Envíos VIP a toda Colombia. 100% original, garantizado.",
     url: `${BASE_URL}/co`,
     type: "website",
     locale: "es_CO",
-    siteName: "Tienda Le Bon Marché",
+    siteName: "Le Bon Marché",
   },
 }
 
