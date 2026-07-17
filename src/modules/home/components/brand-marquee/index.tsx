@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/image"
-
 const BRANDS = [
   { name: "Xiaomi", slug: "xiaomi", color: "#FF6900" },
   { name: "Samsung", slug: "samsung", color: "#1428A0" },
@@ -14,26 +12,28 @@ const BRANDS = [
 
 export default function BrandMarquee() {
   return (
-    <section className="py-10 md:py-12 overflow-hidden bg-white dark:bg-[#0A0A0F] border-y border-gray-100 dark:border-white/5">
+    <section className="py-10 md:py-14 overflow-hidden bg-white dark:bg-[#0A0A0F] border-y border-gray-100 dark:border-white/5">
       <div className="flex whitespace-nowrap animate-brand-scroll">
         {[0, 1, 2].map((set) => (
-          <div key={set} className="flex items-center gap-14 md:gap-20 mx-8 md:mx-12">
+          <div key={set} className="flex items-center gap-16 md:gap-24 mx-10 md:mx-14">
             {BRANDS.map((brand, i) => (
-              <div
+              <img
                 key={`${set}-${i}`}
-                className="flex items-center justify-center opacity-40 hover:opacity-70 transition-opacity duration-300"
-                style={{ width: "clamp(60px, 8vw, 100px)", height: "clamp(24px, 3vw, 36px)" }}
+                src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace("#", "")}`}
+                alt={brand.name}
                 title={brand.name}
-              >
-                <Image
-                  src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace("#", "")}`}
-                  alt={brand.name}
-                  width={100}
-                  height={36}
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
-              </div>
+                width={100}
+                height={36}
+                style={{
+                  width: "clamp(80px, 10vw, 120px)",
+                  height: "clamp(28px, 3.5vw, 40px)",
+                  objectFit: "contain",
+                  opacity: 0.5,
+                  filter: brand.color === "#000000" ? "brightness(0.3)" : "none",
+                }}
+                loading="lazy"
+                className="hover:opacity-80 transition-opacity duration-300"
+              />
             ))}
           </div>
         ))}
