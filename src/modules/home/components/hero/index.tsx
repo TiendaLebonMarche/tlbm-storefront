@@ -37,6 +37,8 @@ const SLIDES: Slide[] = [
     href: "/store",
     image:
       "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75",
+    video:
+      "https://res.cloudinary.com/dgo9tm9e2/video/upload/v1784322670/12655226_3834_2160_30fps_gias92.mp4",
     overlayFrom: "from-black/65",
     overlayTo: "to-black/30",
     textSide: "left",
