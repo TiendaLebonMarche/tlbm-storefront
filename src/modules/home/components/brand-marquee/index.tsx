@@ -1,13 +1,13 @@
 "use client"
 
 const BRANDS = [
-  { name: "Xiaomi", slug: "xiaomi", color: "#FF6900" },
-  { name: "Samsung", slug: "samsung", color: "#1428A0" },
-  { name: "Sony", slug: "sony", color: "#000000" },
-  { name: "JBL", slug: "jbl", color: "#FF6600" },
-  { name: "Bose", slug: "bose", color: "#000000" },
-  { name: "DJI", slug: "dji", color: "#000000" },
-  { name: "Apple", slug: "apple", color: "#555555" },
+  { name: "Xiaomi", slug: "xiaomi" },
+  { name: "Samsung", slug: "samsung" },
+  { name: "Sony", slug: "sony" },
+  { name: "JBL", slug: "jbl" },
+  { name: "Bose", slug: "bose" },
+  { name: "DJI", slug: "dji" },
+  { name: "Apple", slug: "apple" },
 ]
 
 export default function BrandMarquee() {
@@ -19,7 +19,7 @@ export default function BrandMarquee() {
             {BRANDS.map((brand, i) => (
               <img
                 key={`${set}-${i}`}
-                src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color.replace("#", "")}`}
+                src={`https://cdn.simpleicons.org/${brand.slug}/5c5c5c`}
                 alt={brand.name}
                 title={brand.name}
                 width={100}
@@ -28,11 +28,10 @@ export default function BrandMarquee() {
                   width: "clamp(80px, 10vw, 120px)",
                   height: "clamp(28px, 3.5vw, 40px)",
                   objectFit: "contain",
-                  opacity: 0.5,
-                  filter: brand.color === "#000000" ? "brightness(0.3)" : "none",
+                  opacity: 0.35,
                 }}
                 loading="lazy"
-                className="hover:opacity-80 transition-opacity duration-300"
+                className="hover:opacity-60 transition-opacity duration-300"
               />
             ))}
           </div>
