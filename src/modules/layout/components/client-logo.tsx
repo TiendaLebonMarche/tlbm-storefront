@@ -20,8 +20,8 @@ export default function ClientLogo({ isMobile = false }: { isMobile?: boolean })
         relative flex items-center justify-center
         transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
         ${isMobile
-          ? (isScrolled ? "w-[130px]" : "w-[170px]")
-          : (isScrolled ? "w-[160px] md:w-[180px] lg:w-[200px] 2xl:w-[240px]" : "w-[200px] md:w-[240px] lg:w-[280px] 2xl:w-[340px]")
+          ? (isScrolled ? "w-[150px]" : "w-[170px]")
+          : (isScrolled ? "w-[180px] md:w-[200px] lg:w-[220px] 2xl:w-[260px]" : "w-[200px] md:w-[240px] lg:w-[280px] 2xl:w-[340px]")
         }
         h-full
       `}

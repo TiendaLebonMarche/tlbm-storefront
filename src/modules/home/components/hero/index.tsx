@@ -169,25 +169,25 @@ function SlideMedia({
 
 function MarqueeBar() {
   return (
-    <div className="relative z-50 bg-[#FFD700] text-black overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-fixed py-2 md:py-2.5">
-        <span className="inline-flex items-center gap-8 mx-4 text-[11px] md:text-[13px] font-bold tracking-[0.15em] uppercase">
-          <span>✦</span>
+    <div className="relative z-50 bg-[#D4AF37] text-black overflow-hidden">
+      <div className="flex whitespace-nowrap animate-marquee-fixed py-1.5 md:py-1.5">
+        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
+          <span className="opacity-50">✦</span>
           <span>Tienda Le Bon Marché</span>
-          <span>•</span>
+          <span className="opacity-30">•</span>
           <span>Tienda virtual en Bucaramanga</span>
-          <span>•</span>
+          <span className="opacity-30">•</span>
           <span>Productos exóticos y 100% originales</span>
-          <span>✦</span>
+          <span className="opacity-50">✦</span>
         </span>
-        <span className="inline-flex items-center gap-8 mx-4 text-[11px] md:text-[13px] font-bold tracking-[0.15em] uppercase">
-          <span>✦</span>
+        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
+          <span className="opacity-50">✦</span>
           <span>Tienda Le Bon Marché</span>
-          <span>•</span>
+          <span className="opacity-30">•</span>
           <span>Tienda virtual en Bucaramanga</span>
-          <span>•</span>
+          <span className="opacity-30">•</span>
           <span>Productos exóticos y 100% originales</span>
-          <span>✦</span>
+          <span className="opacity-50">✦</span>
         </span>
       </div>
     </div>
@@ -223,13 +223,13 @@ function ScrollHeader({ visible }: { visible: boolean }) {
             </button>
 
             {/* Logo centrado */}
-            <LocalizedClientLink href="/" className="flex items-center h-8 md:h-9">
-              <div className="relative w-[130px] md:w-[170px] h-full">
+            <LocalizedClientLink href="/" className="flex items-center h-10 md:h-12">
+              <div className="relative w-[170px] md:w-[220px] h-full">
                 <Image
                   src={LOGO_URL}
                   alt="Tienda Le Bon Marché"
                   fill
-                  sizes="170px"
+                  sizes="220px"
                   className="object-contain"
                   priority
                 />
