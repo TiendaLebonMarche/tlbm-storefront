@@ -29,11 +29,11 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: 1,
-    label: "Tecnología Premium",
-    title: "Dispositivos que\nmarcan la diferencia",
+    label: "Presencia Global",
+    title: "Tenemos presencia\nen más de 58 aeropuertos\ndel mundo",
     subtitle:
-      "Los mejores gadgets originales del mercado, seleccionados para quienes exigen calidad y diseño.",
-    cta: "Explorar Colección",
+      "Tecnología premium que viaja contigo. Los mismos gadgets que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
+    cta: "Descubrir Colección",
     href: "/store",
     image:
       "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75",
