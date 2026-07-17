@@ -57,8 +57,8 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
           {duplicatedItems.map((item, index) => (
             <div key={`${item.id}-${index}`} className="flex-shrink-0 group" style={{ width: "clamp(240px, 28vw, 340px)" }}>
               <LocalizedClientLink href={`/productos/${item.handle}`} className="block no-underline text-inherit">
-                {/* Image — rectangular proporción Nest & Field */}
-                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "0.873/1", background: "#F2F2F2" }}>
+                {/* Image — rectangular, fondo blanco */}
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "0.873/1", background: "#FFFFFF" }}>
                   {item.imageSrc ? (
                     <Image
                       src={item.imageSrc}
@@ -83,7 +83,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
 
                 {/* Info */}
                 <div className="pt-4 pb-2 flex flex-col gap-[3px]">
-                  <span className="text-[13px] font-medium tracking-[-0.42px] leading-snug text-[#666]">
+                  <span className="text-[13px] font-semibold tracking-[-0.42px] leading-snug uppercase" style={{ color: "#6366F1" }}>
                     {item.category}
                   </span>
                   <h3 className="text-[17px] md:text-[18px] font-semibold tracking-[-0.9px] leading-tight text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">

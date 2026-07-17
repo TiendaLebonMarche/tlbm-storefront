@@ -3,6 +3,31 @@ import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
 
+// ── Category color mapping ──────────────────────────────────────────────
+const CATEGORY_COLORS: Record<string, string> = {
+  "tecnología": "#2563EB",
+  "tecnologia": "#2563EB",
+  "audio": "#7C3AED",
+  "audio premium": "#7C3AED",
+  "accesorios": "#D97706",
+  "accesorios originales": "#D97706",
+  "oficina": "#059669",
+  "oficina premium": "#059669",
+  "gaming": "#DC2626",
+  "hogar": "#C026D3",
+  "deportes": "#EA580C",
+  "viaje": "#0891B2",
+  "moda": "#DB2777",
+  "electrónica": "#1D4ED8",
+  "electronica": "#1D4ED8",
+  "original": "#6366F1",
+}
+
+function getCategoryColor(category: string): string {
+  const key = category.toLowerCase().trim()
+  return CATEGORY_COLORS[key] || "#6366F1"
+}
+
 export default function ProductPreview({
   product,
   isFeatured,
@@ -28,14 +53,16 @@ export default function ProductPreview({
     (product as any).categories?.[0]?.name ||
     null
 
+  const categoryColor = category ? getCategoryColor(category) : undefined
+
   return (
     <LocalizedClientLink
       href={`/productos/${product.handle}`}
       data-testid="product-wrapper"
       className="group flex flex-col h-full no-underline text-inherit cursor-pointer"
     >
-      {/* Image block — rectangular proporción Nest & Field */}
-      <div className="relative w-full overflow-hidden rounded-none" style={{ aspectRatio: "0.873/1", background: "#F2F2F2" }}>
+      {/* Image block — rectangular, fondo blanco */}
+      <div className="relative w-full overflow-hidden rounded-none" style={{ aspectRatio: "0.873/1", background: "#FFFFFF" }}>
         {product.thumbnail || (product.images && product.images[0]?.url) ? (
           <Image
             src={product.thumbnail || (product.images && product.images[0]?.url) || ""}
@@ -74,9 +101,12 @@ export default function ProductPreview({
 
       {/* Info block — estilo Nest & Field */}
       <div className="pt-4 pb-2 flex flex-col gap-[3px]">
-        {/* Category/Collection */}
+        {/* Category/Collection — color único por categoría */}
         {category && (
-          <span className="text-[13px] font-medium tracking-[-0.42px] leading-snug" style={{ color: "#666" }}>
+          <span
+            className="text-[13px] font-semibold tracking-[-0.42px] leading-snug uppercase"
+            style={{ color: categoryColor }}
+          >
             {category}
           </span>
         )}
