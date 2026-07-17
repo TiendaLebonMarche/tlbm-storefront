@@ -38,8 +38,6 @@ const SLIDES: Slide[] = [
     href: "/store",
     image:
       "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75",
-    video:
-      "https://cdn.coverr.co/videos/coverr-close-up-of-modern-laptop-on-desk-5651/1080p.mp4",
     overlayFrom: "from-black/65",
     overlayTo: "to-black/30",
     textSide: "left",
@@ -54,8 +52,6 @@ const SLIDES: Slide[] = [
     href: "/store?collection=exclusivos",
     image:
       "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1920&q=75",
-    video:
-      "https://cdn.coverr.co/videos/coverr-woman-shopping-in-a-store-6098/1080p.mp4",
     overlayFrom: "from-black/60",
     overlayTo: "to-black/25",
     textSide: "right",

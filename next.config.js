@@ -42,6 +42,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://cdn.simpleicons.org https://*.s3.amazonaws.com https://medusa-public-images.s3.eu-west-1.amazonaws.com",
               "font-src 'self' https://fonts.gstatic.com",
               "frame-src https://www.googletagmanager.com https://js.stripe.com",
+              "media-src 'self' https://cdn.coverr.co https://res.cloudinary.com",
               "connect-src 'self' https://api.tiendalebonmarche.com http://localhost:9000 https://o45000000000.ingest.us.sentry.io https://vitals.vercel-insights.com wss://*.vercel.app",
               "manifest-src 'self'",
             ].join("; "),
