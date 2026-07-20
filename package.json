@@ -32,7 +32,7 @@
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
     "next": "15.0.7",
-    "react": "18.3.1",
+    "react": "19.2.7",
     "react-country-flag": "^3.1.0",
     "react-dom": "18.3.1",
     "server-only": "^0.0.1",
@@ -44,7 +44,7 @@
     "@medusajs/ui-preset": "^2.17.1",
     "@playwright/test": "^1.61.1",
     "@types/node": "^18.0.0",
-    "@types/react": "18.3.12",
+    "@types/react": "19.2.17",
     "@types/react-dom": "18.3.1",
     "autoprefixer": "^10.4.2",
     "eslint": "8.57.0",
@@ -55,12 +55,12 @@
   },
   "resolutions": {
     "next": "15.0.7",
-    "react": "18.3.1",
+    "react": "19.2.7",
     "react-dom": "18.3.1"
   },
   "overrides": {
     "next": "15.0.7",
-    "react": "18.3.1",
+    "react": "19.2.7",
     "react-dom": "18.3.1"
   },
   "packageManager": "yarn@1.22.22"
