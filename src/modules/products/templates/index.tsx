@@ -309,7 +309,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
       <Reveal>
-        <div className="border-t border-brand-gray-light bg-brand-gray-light/20/30">
+        <div className="border-t border-brand-gray-light bg-brand-gray-light/20">
           <div className="content-container py-12 lg:py-16">
             <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
               
