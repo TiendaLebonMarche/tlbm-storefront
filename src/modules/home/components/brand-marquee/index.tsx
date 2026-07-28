@@ -27,7 +27,7 @@ const BRANDS = [
 export default function BrandMarquee() {
   return (
     <section className="py-10 md:py-14 overflow-hidden bg-white dark:bg-[#0A0A0F] border-y border-gray-100 dark:border-white/5">
-      <div className="flex whitespace-nowrap animate-brand-scroll">
+      <div className="flex whitespace-nowrap animate-brand-scroll brand-marquee-track">
         {[0, 1, 2].map((set) => (
           <div key={set} className="flex items-center gap-16 md:gap-24 mx-10 md:mx-14">
             {BRANDS.map((brand, i) => (
@@ -37,8 +37,8 @@ export default function BrandMarquee() {
                 alt={brand.name}
                 title={brand.name}
                 style={{
-                  width: "clamp(80px, 10vw, 120px)",
-                  height: "clamp(28px, 3.5vw, 40px)",
+                  width: "clamp(100px, 12vw, 150px)",
+                  height: "clamp(36px, 4.5vw, 52px)",
                   objectFit: "contain",
                   opacity: 0.4,
                   flexShrink: 0,
