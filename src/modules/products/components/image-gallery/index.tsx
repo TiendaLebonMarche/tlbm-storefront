@@ -87,7 +87,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
 
       {/* ── MAIN IMAGE ── */}
       <div 
-        className="relative flex-1 aspect-[4/5] bg-white overflow-hidden cursor-crosshair group/image"
+        className="relative w-full lg:flex-1 aspect-[4/5] bg-white overflow-hidden cursor-crosshair group/image"
         onClick={() => setIsZoomed(!isZoomed)}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setIsZoomed(false)}
