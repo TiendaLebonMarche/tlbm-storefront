@@ -7,7 +7,6 @@ import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
 import WhatsAppFloat from "@modules/layout/components/whatsapp-float"
 import LayoutClient from "@modules/layout/components/layout-client"
-import SmoothScrollProvider from "@modules/layout/components/smooth-scroll-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -188,9 +187,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <StructuredData />
         <UIProvider>
           <LayoutClient />
-          <SmoothScrollProvider>
-            <PagePaddingWrapper>{props.children}</PagePaddingWrapper>
-          </SmoothScrollProvider>
+          <PagePaddingWrapper>{props.children}</PagePaddingWrapper>
           <WhatsAppFloat />
         </UIProvider>
       </body>

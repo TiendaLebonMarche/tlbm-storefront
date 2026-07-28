@@ -21,7 +21,7 @@ export interface ProductMostSoldProps {
 }
 
 export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps) => {
-  const duplicatedItems = [...items, ...items, ...items, ...items]
+  const duplicatedItems = [...items, ...items]
 
   return (
     <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 md:py-20 overflow-hidden">

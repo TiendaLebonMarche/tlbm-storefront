@@ -431,7 +431,7 @@
 .pm-track { display: flex; gap: 1.25rem; width: max-content; animation: pm-scroll 65s linear infinite; }
 .pm-track:hover { animation-play-state: paused; }
 @keyframes pm-scroll {
-  0% { transform: translateX(-25%); }
+  0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
 .pm-card {
