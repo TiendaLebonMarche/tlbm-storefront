@@ -23,7 +23,7 @@ export default async function Footer() {
   }
 
   return (
-    <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5 overflow-hidden">
+    <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
           {/* Brand */}
