@@ -52,7 +52,7 @@ export default async function Home(props: {
   }
 
   return (
-    <>
+    <div className="relative">
       {/* ═══ HERO FIJO (se queda estático) ═══ */}
       <div className="fixed inset-0 z-0">
         <Hero />
@@ -100,6 +100,6 @@ export default async function Home(props: {
           <AnimatedTestimonialsSection />
         </Reveal>
       </div>
-    </>
+    </div>
   )
 }
