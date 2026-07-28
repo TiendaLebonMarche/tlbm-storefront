@@ -52,7 +52,7 @@ export default async function Home(props: {
   }
 
   return (
-    <div className="relative">
+    <div className="relative bg-white dark:bg-[#0A0A0F]">
       {/* ═══ HERO FIJO (se queda estático) ═══ */}
       <div className="fixed inset-0 z-0">
         <Hero />
