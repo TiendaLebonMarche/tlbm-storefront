@@ -25,7 +25,7 @@ export default async function Footer() {
                 />
               </div>
             </LocalizedClientLink>
-            <p className="text-sm leading-relaxed max-w-xs font-light text-white/60 mb-6">
+            <p className="text-sm leading-relaxed max-w-xs font-light text-white/80 mb-6">
               Selección exclusiva de tecnología, gadgets y accesorios de lujo. Curados con pasión desde Bucaramanga para toda Colombia.
             </p>
             <div className="flex gap-3">
@@ -43,15 +43,15 @@ export default async function Footer() {
               {collections && collections.length > 0 ? (
                 collections.slice(0, 5).map((c) => (
                   <li key={c.id}>
-                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
+                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
                       {c.title}
                     </LocalizedClientLink>
                   </li>
                 ))
               ) : (
                 <>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
                 </>
               )}
             </ul>
@@ -61,11 +61,11 @@ export default async function Footer() {
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Ayuda</h4>
             <ul className="space-y-3.5">
-              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/store" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
             </ul>
           </div>
 
@@ -73,9 +73,9 @@ export default async function Footer() {
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Contacto</h4>
             <ul className="space-y-3.5">
-              <li className="text-sm text-white/70">Bucaramanga, Santander</li>
-              <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
-              <li><a href="https://wa.me/573027567783" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
+              <li className="text-sm text-white/85">Bucaramanga, Santander</li>
+              <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white/85 hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
+              <li><a href="https://wa.me/573027567783" className="text-sm text-white/85 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
               <li className="mt-8">
                 <div className="text-[9px] font-bold uppercase tracking-[.25em] text-white/50 mb-3">Newsletter</div>
                 <div className="flex">
