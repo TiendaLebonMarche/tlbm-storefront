@@ -45,9 +45,9 @@ export default function ProductPrice({
         )}
         <span
           className={clx(
-            "text-3xl md:text-4xl font-semibold tracking-tight text-brand-black font-sans",
+            "text-4xl md:text-5xl font-bold tracking-tight text-[#D4AF37] font-serif",
             {
-              "text-brand-black": selectedPrice.price_type !== "sale",
+              "text-[#D4AF37]": selectedPrice.price_type !== "sale",
             }
           )}
           data-testid="product-price"

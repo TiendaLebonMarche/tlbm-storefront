@@ -316,8 +316,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* Left: Technical Details */}
               <div className="w-full lg:w-[45%]">
                 <div className="mb-12">
-                  <p className="text-[9px] uppercase tracking-[0.5em] text-brand-black/40 font-sans mb-4">Información técnica</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan la diferencia</h3>
+                  <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Información técnica</p>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">la diferencia</span></h3>
                 </div>
                 <ProductTabs product={product} />
               </div>
@@ -325,13 +325,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* Right: FAQ + WhatsApp Help */}
               <div className="w-full lg:w-[55%] space-y-12">
                 <div className="mb-12 lg:mb-16">
-                  <p className="text-[9px] uppercase tracking-[0.5em] text-brand-black/40 font-sans mb-4">Preguntas y dudas</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Servicio al cliente</h3>
+                  <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Preguntas y dudas</p>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Servicio al <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">cliente</span></h3>
                 </div>
                 
-                <Accordion type="single" collapsible className="w-full space-y-2">
-                  <AccordionItem value="item-1" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
+                <Accordion type="single" collapsible className="w-full space-y-3">
+                  <AccordionItem value="item-1" className="border border-gray-100 bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/30 data-[state=open]:border-[#D4AF37]/40">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       ¿Cuál es el origen de este producto?
                     </AccordionTrigger>
                     <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
@@ -339,8 +339,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
+                  <AccordionItem value="item-2" className="border border-gray-100 bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/30 data-[state=open]:border-[#D4AF37]/40">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       Tiempos y logística de entrega
                     </AccordionTrigger>
                     <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
@@ -348,8 +348,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="border border-brand-gray-light bg-white px-6 transition-all duration-200 hover:border-brand-gray-light">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 uppercase tracking-wider">
+                  <AccordionItem value="item-3" className="border border-gray-100 bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/30 data-[state=open]:border-[#D4AF37]/40">
+                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       Política de garantía TLBM
                     </AccordionTrigger>
                     <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-gray-50 pt-4">
