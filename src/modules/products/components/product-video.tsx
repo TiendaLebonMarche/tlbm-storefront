@@ -18,11 +18,14 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  // Cargar el video después del mount (lazy)
+  // Cargar el video después del mount (lazy) usando proxy
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    
+
+    // Usar proxy para evitar bloqueos de CORS/códec
+    const proxyUrl = `/api/video-proxy?url=${encodeURIComponent(videoUrl)}`
+    video.src = proxyUrl
     video.load()
     setIsLoading(true)
     setHasError(false)
@@ -115,9 +118,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
               muted={isMuted}
               onEnded={() => setIsPlaying(false)}
               onError={() => { setHasError(true); setIsLoading(false); }}
-            >
-              <source src={videoUrl} type="video/mp4" />
-            </video>
+            />
 
             {/* Loading spinner */}
             {isLoading && !hasError && (
