@@ -1,0 +1,127 @@
+"use client"
+
+import { useState, useRef } from "react"
+import { Play, Pause, Maximize2, Volume2, VolumeX } from "lucide-react"
+
+type ProductVideoProps = {
+  videoUrl: string
+  title?: string
+}
+
+export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const togglePlay = () => {
+    if (!videoRef.current) return
+    if (isPlaying) {
+      videoRef.current.pause()
+    } else {
+      videoRef.current.play()
+    }
+    setIsPlaying(!isPlaying)
+  }
+
+  const toggleMute = () => {
+    if (!videoRef.current) return
+    videoRef.current.muted = !isMuted
+    setIsMuted(!isMuted)
+  }
+
+  const toggleFullscreen = async () => {
+    if (!containerRef.current) return
+    if (!document.fullscreenElement) {
+      await containerRef.current.requestFullscreen()
+      setIsFullscreen(true)
+    } else {
+      await document.exitFullscreen()
+      setIsFullscreen(false)
+    }
+  }
+
+  return (
+    <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 lg:py-20">
+      <div className="content-container">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <p className="text-[9px] uppercase tracking-[0.5em] text-brand-black/40 dark:text-white/40 font-sans mb-4">
+              Video del producto
+            </p>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-brand-black dark:text-white leading-tight">
+              Mira el producto en acción
+            </h3>
+          </div>
+
+          {/* Video Player */}
+          <div
+            ref={containerRef}
+            className="relative group bg-black rounded-sm overflow-hidden aspect-video cursor-pointer"
+            onClick={togglePlay}
+          >
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              className="w-full h-full object-contain"
+              playsInline
+              preload="metadata"
+              onEnded={() => setIsPlaying(false)}
+              onError={(e) => console.warn("[Video] Error loading:", videoUrl)}
+            />
+
+            {/* Overlay play button when paused */}
+            {!isPlaying && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-300">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" />
+                </div>
+              </div>
+            )}
+
+            {/* Bottom controls */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); togglePlay(); }}
+                    className="text-white hover:text-[#D4AF37] transition-colors"
+                    aria-label={isPlaying ? "Pausar" : "Reproducir"}
+                  >
+                    {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" fill="white" />}
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); toggleMute(); }}
+                    className="text-white/70 hover:text-white transition-colors"
+                    aria-label={isMuted ? "Activar sonido" : "Silenciar"}
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </button>
+                  {title && (
+                    <span className="text-white/60 text-xs font-medium truncate max-w-[200px] hidden sm:block">
+                      {title}
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
+                  className="text-white/70 hover:text-white transition-colors"
+                  aria-label="Pantalla completa"
+                >
+                  <Maximize2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Caption */}
+          <p className="text-center text-[11px] text-brand-gray/60 dark:text-white/30 mt-4 font-light tracking-wide">
+            Video demostrativo del producto — La experiencia visual puede variar ligeramente del producto final
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}

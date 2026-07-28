@@ -11,6 +11,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Reveal from "@modules/common/components/reveal"
 import CollapsibleDescription from "@modules/products/components/collapsible-description"
+import ProductVideo from "@modules/products/components/product-video"
 
 const ProductTabs = dynamic(() => import("@modules/products/components/product-tabs"), {
   ssr: true,
@@ -279,8 +280,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                   </div>
                 )}
                 
-                {/* MedusaJS Custom Metadata Mapping */}
-                {Object.entries(metadata || {}).slice(0, 4).map(([key, value]) => (
+                {/* MedusaJS Custom Metadata Mapping — excluir video_url */}
+                {Object.entries(metadata || {})
+                  .filter(([key]) => !['video_url', 'video'].includes(key))
+                  .slice(0, 4).map(([key, value]) => (
                   <div key={key} className="flex flex-col gap-y-1">
                     <span className="text-[9px] font-bold text-brand-black uppercase tracking-widest opacity-40 capitalize">
                       {key.replace(/_/g, ' ')}
@@ -296,6 +299,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </div>
         </div>
       </div>
+
+      {/* ── VIDEO DEL PRODUCTO (si tiene video_url en metadata) ── */}
+      {metadata?.video_url && (
+        <Reveal>
+          <ProductVideo videoUrl={metadata.video_url as string} title={product.title} />
+        </Reveal>
+      )}
 
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
       <Reveal>
