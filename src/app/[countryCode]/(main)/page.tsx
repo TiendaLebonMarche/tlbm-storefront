@@ -14,6 +14,12 @@ import Reveal from "@modules/common/components/reveal"
 // Lazy load below-fold components
 const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
 
+// ISR: revalidate every hour — Vercel serves cached HTML, rebuilds in background
+export const revalidate = 3600
+
+// Dynamic params to avoid full static generation at build time
+export const dynamicParams = true
+
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 export const metadata: Metadata = {

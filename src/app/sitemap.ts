@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next'
 import { listProducts } from '@lib/data/products'
 import { listCategories } from '@lib/data/categories'
-import { blogPosts } from '@lib/data/blog'
+
+// Revalidate sitemap every 6 hours
+export const revalidate = 21600
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
@@ -41,7 +43,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/co`, lastModified: formatDate(new Date()), changeFrequency: 'daily', priority: 1.0 },
     { url: `${BASE_URL}/co/store`, lastModified: formatDate(new Date()), changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE_URL}/co/quienes-somos`, lastModified: formatDate(new Date()), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/co/blog`, lastModified: formatDate(new Date()), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/co/legal/terminos`, lastModified: formatDate(new Date()), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/co/legal/privacidad`, lastModified: formatDate(new Date()), changeFrequency: 'yearly', priority: 0.3 },
   ]
@@ -66,18 +67,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }))
 
-  // 4. Blog Posts
-  const blogEntries: MetadataRoute.Sitemap = blogPosts
-    .filter(b => !!b.handle)
-    .map(b => ({
-      url: `${BASE_URL}/co/blog/${sanitize(b.handle)}`,
-      lastModified: formatDate(new Date()),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    }))
-
   // Combined unique entries to prevent duplicates and ensure clean XML structure
-  const allEntries = [...staticEntries, ...productEntries, ...categoryEntries, ...blogEntries]
+  const allEntries = [...staticEntries, ...productEntries, ...categoryEntries]
   
   // Deduplicate by URL using Map
   const uniqueEntries = Array.from(new Map(allEntries.map(e => [e.url, e])).values())

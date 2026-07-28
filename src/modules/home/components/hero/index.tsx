@@ -268,7 +268,6 @@ function ScrollHeader({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
-                { label: "Blog", href: "/blog" },
                 { label: "Contacto", href: "/contact" },
               ].map((link, i) => (
                 <motion.div
@@ -362,7 +361,6 @@ function HeroOverlay({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
-                { label: "Blog", href: "/blog" },
                 { label: "Contacto", href: "/contact" },
               ].map((link, i) => (
                 <motion.div

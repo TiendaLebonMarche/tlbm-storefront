@@ -17,7 +17,7 @@ const mainMenu = [
   { name: "Parlantes", href: "/store?q=parlante" },
   { name: "Tecnología", href: "/store?q=tecnologia" },
   { name: "Ofertas", href: "/store" },
-  { name: "Blog", href: "/blog" },
+  { name: "Tienda", href: "/store" },
   { name: "Quiénes Somos", href: "/quienes-somos" },
 ]
 

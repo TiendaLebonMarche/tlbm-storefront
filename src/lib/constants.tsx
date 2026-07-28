@@ -92,7 +92,7 @@ export const NAV_LINKS = [
   { href: "/sonido", label: "Sonido" },
   { href: "/hogar", label: "Hogar" },
   { href: "/quienes-somos", label: "Quiénes Somos" },
-  { href: "/blog", label: "Blog" },
+  { href: "/store", label: "Tienda" },
 ]
 
 export const MORE_LINKS = [
