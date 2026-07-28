@@ -5,8 +5,22 @@ import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export default async function Footer() {
-  const { collections } = await listCollections({ fields: "*products" })
-  const productCategories = await listCategories()
+  // Datos con fallback — si la API falla no se cae el footer
+  let collections: any[] = []
+  let productCategories: any[] = []
+  
+  try {
+    const result = await listCollections({ fields: "*products" })
+    collections = result?.collections || []
+  } catch (e) {
+    console.warn("[Footer] Error loading collections:", e)
+  }
+  
+  try {
+    productCategories = (await listCategories()) || []
+  } catch (e) {
+    console.warn("[Footer] Error loading categories:", e)
+  }
 
   return (
     <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5">
@@ -25,7 +39,7 @@ export default async function Footer() {
                 />
               </div>
             </LocalizedClientLink>
-            <p className="text-sm leading-relaxed max-w-xs font-light text-white/80 mb-6">
+            <p className="text-sm leading-relaxed max-w-xs text-white/90 mb-6">
               Selección exclusiva de tecnología, gadgets y accesorios de lujo. Curados con pasión desde Bucaramanga para toda Colombia.
             </p>
             <div className="flex gap-3">
@@ -38,20 +52,20 @@ export default async function Footer() {
 
           {/* Colección */}
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Colección</h4>
-            <ul className="space-y-3.5">
-              {collections && collections.length > 0 ? (
-                collections.slice(0, 5).map((c) => (
+            <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Colección</h4>
+            <ul className="space-y-3">
+              {collections.length > 0 ? (
+                collections.slice(0, 5).map((c: any) => (
                   <li key={c.id}>
-                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
+                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
                       {c.title}
                     </LocalizedClientLink>
                   </li>
                 ))
               ) : (
                 <>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
                 </>
               )}
             </ul>
@@ -59,28 +73,28 @@ export default async function Footer() {
 
           {/* Ayuda */}
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Ayuda</h4>
-            <ul className="space-y-3.5">
-              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/store" className="text-sm text-white/85 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
+            <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Ayuda</h4>
+            <ul className="space-y-3">
+              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
             </ul>
           </div>
 
           {/* Contacto */}
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Contacto</h4>
-            <ul className="space-y-3.5">
-              <li className="text-sm text-white/85">Bucaramanga, Santander</li>
-              <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white/85 hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
-              <li><a href="https://wa.me/573027567783" className="text-sm text-white/85 hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
+            <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Contacto</h4>
+            <ul className="space-y-3">
+              <li className="text-sm text-white">Bucaramanga, Santander</li>
+              <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
+              <li><a href="https://wa.me/573027567783" className="text-sm text-white hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
               <li className="mt-8">
-                <div className="text-[9px] font-bold uppercase tracking-[.25em] text-white/50 mb-3">Newsletter</div>
+                <div className="text-[10px] font-bold uppercase tracking-[.25em] text-white/70 mb-3">Newsletter</div>
                 <div className="flex">
-                  <input type="email" placeholder="tu@email.com" className="bg-white/5 border border-white/20 rounded-l-full px-4 py-2.5 text-xs text-white placeholder-white/50 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300" style={{ caretColor: "#D4AF37" }} />
-                  <button className="px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#0A0A0F] hover:bg-gray-900 transition-all duration-300">OK</button>
+                  <input type="email" placeholder="tu@email.com" className="bg-white/10 border border-white/30 rounded-l-full px-4 py-2.5 text-xs text-white placeholder-white/60 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300" style={{ caretColor: "#D4AF37" }} />
+                  <button className="px-5 py-2.5 rounded-r-full text-[9px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#D4AF37] hover:bg-[#C8912E] transition-all duration-300">OK</button>
                 </div>
               </li>
             </ul>
@@ -89,24 +103,24 @@ export default async function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/60 text-[10px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
+          <p className="text-white/70 text-[11px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
           <div className="flex items-center gap-4">
-            <div className="flex gap-4 text-white/60 text-[9px]">
+            <div className="flex gap-4 text-white/70 text-[10px]">
               <span>Emprendimiento de Bucaramanga, Col</span>
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>
             <div className="flex gap-2.5">
-              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/10 text-white/80 text-[7px] font-bold">Nequi</span>
-              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/10 text-white/80 text-[7px] font-bold">Davi</span>
-              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/10 text-white/80 text-[7px] font-bold">Visa</span>
-              <span className="w-7 h-5 rounded flex items-center justify-center bg-white/10 text-white/80 text-[7px] font-bold">Mst</span>
+              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold">Nequi</span>
+              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold">Davi</span>
+              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold">Visa</span>
+              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold">Mst</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Watermark full-width */}
+      {/* Watermark */}
       <div className="w-screen max-w-[100vw] overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
         <p className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em] text-white/8" style={{ fontSize: "clamp(2.5rem,12vw,10rem)", fontWeight: 700 }}>
           LE BON MARCHÉ
