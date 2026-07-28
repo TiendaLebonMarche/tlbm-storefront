@@ -76,7 +76,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Badge */}
-                  <span className="absolute top-3 left-3 text-white text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-[#0A0A0F]">
+                  <span className="absolute top-3 left-3 text-white text-[8px] sm:text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-[#0A0A0F]">
                     Nuevo
                   </span>
                 </div>

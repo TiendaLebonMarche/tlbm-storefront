@@ -359,7 +359,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </Accordion>
 
                 {/* WhatsApp Premium Support */}
-                <div className="bg-brand-black p-10 mt-8 relative overflow-hidden group">
+                <div className="bg-brand-black p-6 md:p-10 mt-8 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-150" />
                   <div className="relative z-10 space-y-6">
                     <div>

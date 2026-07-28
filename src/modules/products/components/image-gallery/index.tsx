@@ -100,7 +100,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
           <>
             <button
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[-4px] group-hover/image:translate-x-0"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[-4px] group-hover/image:translate-x-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -108,7 +108,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[4px] group-hover/image:translate-x-0"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[4px] group-hover/image:translate-x-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

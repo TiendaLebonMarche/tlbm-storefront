@@ -29,7 +29,7 @@ export default async function Footer() {
           {/* Brand */}
           <div>
             <LocalizedClientLink href="/" className="inline-block mb-6">
-              <div className="relative w-[220px] h-[60px]">
+              <div className="relative w-[160px] md:w-[220px] h-[44px] md:h-[60px]">
                 <Image
                   src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784320861/logo-julio_nezqqe.png"
                   alt="Tienda Le Bon Marché"
@@ -121,7 +121,7 @@ export default async function Footer() {
       </div>
 
       {/* Watermark */}
-      <div className="w-screen max-w-[100vw] overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
+      <div className="w-full max-w-[100vw] overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
         <p className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em] text-white/8" style={{ fontSize: "clamp(2.5rem,12vw,10rem)", fontWeight: 700 }}>
           LE BON MARCHÉ
         </p>

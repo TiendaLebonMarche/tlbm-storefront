@@ -445,7 +445,7 @@ export default function Hero() {
 
       {/* ── HERO SLIDER ── */}
       <section
-        className="relative w-full h-screen overflow-hidden bg-black"
+        className="relative w-full min-h-[100dvh] overflow-hidden bg-black"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
