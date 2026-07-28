@@ -30,9 +30,9 @@ const SLIDES: Slide[] = [
   {
     id: 1,
     label: "Presencia Global",
-    title: "Tenemos presencia\nen más de 58 aeropuertos\ndel mundo",
+    title: "Con presencia\nen más de 58 paises\ndel mundo",
     subtitle:
-      "Tecnología premium que viaja contigo. Los mismos gadgets que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
+      "Los mismos productos que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
     cta: "Descubrir Colección",
     href: "/store",
     image:
