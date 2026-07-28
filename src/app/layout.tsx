@@ -146,13 +146,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           fetchPriority="high"
         />
 
-        {/* RSS Feed for AI and content discovery */}
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Blog Tienda Le Bon Marché"
-          href={`${BASE_URL}/rss.xml`}
-        />
         {/* AI Discovery endpoints */}
         <link
           rel="alternate"
