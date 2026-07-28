@@ -52,39 +52,54 @@ export default async function Home(props: {
   }
 
   return (
-    <div className="flex flex-col gap-0">
-      {/* HERO */}
-      <Hero />
+    <>
+      {/* ═══ HERO FIJO (se queda estático) ═══ */}
+      <div className="fixed inset-0 z-0">
+        <Hero />
+      </div>
 
-      {/* TRUST BADGES */}
-      <Reveal>
-        <TrustBadges />
-      </Reveal>
+      {/* ═══ SPACER: empuja el contenido debajo del hero ═══ */}
+      <div className="h-screen w-full relative z-[1]" />
 
-      {/* HOT DEALS — data-driven products from Medusa */}
-      <Reveal>
-        <HotDeals countryCode={countryCode} />
-      </Reveal>
+      {/* ═══ CONTENIDO CON REVEAL (sube tapando el hero) ═══ */}
+      <div className="relative z-[2] bg-white dark:bg-[#0A0A0F] shadow-[0_-8px_60px_rgba(0,0,0,0.12)]">
+        {/* Curva SVG decorativa superior */}
+        <div className="absolute top-[-60px] left-0 w-full h-[60px] leading-none overflow-hidden pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path d="M0,60 C360,0 1080,0 1440,60 L1440,60 L0,60 Z" fill="white" />
+          </svg>
+        </div>
 
-      {/* BRAND MARQUEE */}
-      <Reveal>
-        <BrandMarquee />
-      </Reveal>
+        {/* TRUST BADGES */}
+        <Reveal>
+          <TrustBadges />
+        </Reveal>
 
-      {/* OFERTAS PARALLAX */}
-      <Reveal>
-        <OfertasParallax />
-      </Reveal>
+        {/* HOT DEALS — data-driven products from Medusa */}
+        <Reveal>
+          <HotDeals countryCode={countryCode} />
+        </Reveal>
 
-      {/* MOST SOLD — data-driven products from Medusa */}
-      <Reveal>
-        <MostSoldSection countryCode={countryCode} />
-      </Reveal>
+        {/* BRAND MARQUEE */}
+        <Reveal>
+          <BrandMarquee />
+        </Reveal>
 
-      {/* TESTIMONIALS */}
-      <Reveal>
-        <AnimatedTestimonialsSection />
-      </Reveal>
-    </div>
+        {/* OFERTAS PARALLAX */}
+        <Reveal>
+          <OfertasParallax />
+        </Reveal>
+
+        {/* MOST SOLD — data-driven products from Medusa */}
+        <Reveal>
+          <MostSoldSection countryCode={countryCode} />
+        </Reveal>
+
+        {/* TESTIMONIALS */}
+        <Reveal>
+          <AnimatedTestimonialsSection />
+        </Reveal>
+      </div>
+    </>
   )
 }
