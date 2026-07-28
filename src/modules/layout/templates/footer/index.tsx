@@ -23,7 +23,7 @@ export default async function Footer() {
   }
 
   return (
-    <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5">
+    <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5 overflow-hidden">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
           {/* Brand */}
@@ -121,7 +121,7 @@ export default async function Footer() {
       </div>
 
       {/* Watermark */}
-      <div className="w-full max-w-[100vw] overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
+      <div className="w-full overflow-hidden mt-14 pointer-events-none select-none -mx-6 lg:-mx-10">
         <p className="font-serif text-center whitespace-nowrap leading-none tracking-[-.02em] text-white/8" style={{ fontSize: "clamp(2.5rem,12vw,10rem)", fontWeight: 700 }}>
           LE BON MARCHÉ
         </p>
