@@ -16,7 +16,6 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
   const [isZoomed, setIsZoomed] = useState(false)
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
 
-  // Navegación con teclado
   const goNext = useCallback(() => {
     setSelectedImageIndex((prev) => (prev + 1) % images.length)
   }, [images.length])
@@ -54,28 +53,28 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
   const baseAlt = productTitle || "Producto Le Bon Marché"
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-3 w-full">
-      {/* Thumbnails */}
+    <div className="flex flex-col-reverse lg:flex-row gap-4 w-full">
+
+      {/* ── THUMBNAILS ── */}
       {images.length > 1 && (
-        <div className="flex lg:flex-col gap-3 w-full lg:w-[80px] flex-shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[700px] no-scrollbar">
+        <div className="flex lg:flex-col gap-2 w-full lg:w-[88px] flex-shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[700px] no-scrollbar">
           {images.map((image, idx) => (
             <button
               key={image.id}
               onClick={() => setSelectedImageIndex(idx)}
-              className={`relative aspect-[3/4] flex-shrink-0 w-20 lg:w-full overflow-hidden transition-all duration-700 ease-in-out ${
+              className={`relative aspect-[4/5] flex-shrink-0 w-[72px] lg:w-full overflow-hidden transition-all duration-500 ${
                 selectedImageIndex === idx
-                  ? "border border-brand-black opacity-100"
-                  : "border border-transparent opacity-40 hover:opacity-100"
+                  ? "ring-1 ring-[#D4AF37] opacity-100 scale-100"
+                  : "ring-0 opacity-50 hover:opacity-80 hover:scale-[1.02]"
               }`}
-              title={`Ver ${baseAlt} - imagen ${idx + 1}`}
             >
               {image.url && (
                 <Image
                   src={image.url}
                   alt={`${baseAlt} - miniatura ${idx + 1}`}
                   fill
-                  className="object-cover bg-white"
-                  sizes="80px"
+                  className="object-contain bg-white p-1"
+                  sizes="88px"
                 />
               )}
             </button>
@@ -83,103 +82,102 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
         </div>
       )}
 
-      {/* Main Image */}
+      {/* ── MAIN IMAGE ── */}
       <div 
         className="relative flex-1 aspect-[4/5] bg-white overflow-hidden cursor-crosshair group/image"
         onClick={() => setIsZoomed(!isZoomed)}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setIsZoomed(false)}
       >
-        {/* Prev/Next arrows */}
+        {/* Gold corner accent */}
+        <div className="absolute top-0 left-0 z-30 pointer-events-none">
+          <div className="w-[60px] h-[1px] bg-gradient-to-r from-[#D4AF37] to-transparent" />
+          <div className="w-[1px] h-[40px] bg-gradient-to-b from-[#D4AF37] to-transparent ml-0" />
+        </div>
+
+        {/* Arrows */}
         {images.length > 1 && (
           <>
             <button
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-opacity duration-200 hover:bg-white shadow-md"
-              aria-label="Imagen anterior"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[-4px] group-hover/image:translate-x-0"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-brand-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-opacity duration-200 hover:bg-white shadow-md"
-              aria-label="Siguiente imagen"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[4px] group-hover/image:translate-x-0"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-brand-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
             </button>
           </>
         )}
+
         <AnimatePresence mode="wait">
           {selectedImage?.url && (
             <motion.div
               key={selectedImage.id}
               layoutId={layoutId}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="absolute inset-0 flex items-center justify-center p-4 md:p-6"
             >
               <Image
                 src={selectedImage.url}
                 alt={`${baseAlt} - imagen principal`}
                 fill
-                className={`object-cover transition-all duration-1000 ease-in-out ${
+                className={`object-contain transition-all duration-700 ease-out ${
                   isZoomed ? 'scale-[2]' : 'scale-100'
                 }`}
-                style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
+                style={isZoomed ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`, objectFit: 'cover' } : { objectFit: 'contain' }}
                 priority
                 sizes="(max-width: 768px) 100vw, 60vw"
-                onError={(e) => {
-                  const target = e.currentTarget as HTMLImageElement
-                  target.style.display = 'none'
-                  const fallback = target.parentElement?.querySelector('.image-fallback')
-                  if (fallback) (fallback as HTMLElement).style.display = 'flex'
-                }}
               />
-              <div className="image-fallback hidden absolute inset-0 bg-brand-gray-light/20 items-center justify-center">
-                <p className="text-gray-300 text-xs tracking-[0.3em] uppercase font-sans">Sin imagen</p>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Subtle border overlay */}
-        <div className="absolute inset-0 border border-brand-gray-light/40 pointer-events-none z-10" />
+        {/* Subtle border */}
+        <div className="absolute inset-0 border border-brand-gray-light/30 pointer-events-none z-10" />
 
         {/* Zoom hint */}
         {!isZoomed && (
-          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-            <div className="bg-white/80 backdrop-blur-sm p-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-4 h-4 text-brand-gray">
+          <div className="absolute bottom-4 right-4 opacity-0 group-hover/image:opacity-100 transition-all duration-300 z-20 translate-y-1 group-hover/image:translate-y-0">
+            <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-2 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-3.5 h-3.5 text-[#101010]/50">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0010.606 10.606zM10.5 7.5v6m3-3h-6" />
               </svg>
+              <span className="text-[9px] font-medium text-[#101010]/50 uppercase tracking-[0.15em]">Ampliar</span>
             </div>
           </div>
         )}
 
         {/* Counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-4 text-[10px] text-brand-gray tracking-[0.2em] font-sans z-20">
-            {String(selectedImageIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+          <div className="absolute bottom-4 left-4 z-20">
+            <span className="text-[10px] font-medium text-[#101010]/30 tracking-[0.15em] font-sans">
+              {String(selectedImageIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            </span>
           </div>
         )}
 
-        {/* Dots navigation */}
+        {/* Dots */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
             {images.map((_, idx) => (
               <button
                 key={idx}
                 onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(idx); }}
-                className={`transition-all duration-200 rounded-full ${
+                className={`transition-all duration-300 rounded-full ${
                   selectedImageIndex === idx
-                    ? 'w-5 h-1.5 bg-brand-black'
-                    : 'w-1.5 h-1.5 bg-brand-black/20 hover:bg-brand-black/40'
+                    ? 'w-6 h-[2px] bg-[#D4AF37]'
+                    : 'w-[6px] h-[6px] bg-[#101010]/15 hover:bg-[#101010]/30'
                 }`}
                 aria-label={`Ir a imagen ${idx + 1}`}
               />

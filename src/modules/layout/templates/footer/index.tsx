@@ -38,7 +38,7 @@ export default async function Footer() {
 
           {/* Colección */}
           <div>
-            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/50">Colección</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Colección</h4>
             <ul className="space-y-3.5">
               {collections && collections.length > 0 ? (
                 collections.slice(0, 5).map((c) => (
@@ -59,7 +59,7 @@ export default async function Footer() {
 
           {/* Ayuda */}
           <div>
-            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/50">Ayuda</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Ayuda</h4>
             <ul className="space-y-3.5">
               <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/70 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
@@ -71,7 +71,7 @@ export default async function Footer() {
 
           {/* Contacto */}
           <div>
-            <h4 className="text-[9px] font-bold uppercase tracking-[.35em] mb-8 text-white/50">Contacto</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[.35em] mb-8 text-white/70">Contacto</h4>
             <ul className="space-y-3.5">
               <li className="text-sm text-white/70">Bucaramanga, Santander</li>
               <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
