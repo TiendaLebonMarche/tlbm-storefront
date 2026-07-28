@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 
 const BRANDS = [
   { name: "Xiaomi", slug: "xiaomi" },
@@ -32,18 +31,17 @@ export default function BrandMarquee() {
         {[0, 1, 2].map((set) => (
           <div key={set} className="flex items-center gap-16 md:gap-24 mx-10 md:mx-14">
             {BRANDS.map((brand, i) => (
-              <Image
+              <img
                 key={`${set}-${i}`}
                 src={`/brands/${brand.slug}.svg`}
                 alt={brand.name}
                 title={brand.name}
-                width={120}
-                height={40}
                 style={{
                   width: "clamp(80px, 10vw, 120px)",
                   height: "clamp(28px, 3.5vw, 40px)",
                   objectFit: "contain",
                   opacity: 0.4,
+                  flexShrink: 0,
                 }}
                 className="hover:opacity-70 transition-opacity duration-300"
               />
