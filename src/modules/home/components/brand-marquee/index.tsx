@@ -3,12 +3,26 @@ import Image from "next/image"
 
 const BRANDS = [
   { name: "Xiaomi", slug: "xiaomi" },
+  { name: "Redmi", slug: "redmi" },
   { name: "Samsung", slug: "samsung" },
   { name: "Sony", slug: "sony" },
   { name: "JBL", slug: "jbl" },
   { name: "Bose", slug: "bose" },
+  { name: "Passau", slug: "passau" },
+  { name: "Monster", slug: "monster" },
   { name: "DJI", slug: "dji" },
   { name: "Apple", slug: "apple" },
+  { name: "Acer", slug: "acer" },
+  { name: "Dell", slug: "dell" },
+  { name: "Puma", slug: "puma" },
+  { name: "Nike", slug: "nike" },
+  { name: "Adidas", slug: "adidas" },
+  { name: "Under Armour", slug: "underarmour" },
+  { name: "Fila", slug: "fila" },
+  { name: "Champion", slug: "champion" },
+  { name: "Starlink", slug: "starlink" },
+  { name: "Voyager", slug: "voyager" },
+  { name: "Soho", slug: "soho" },
 ]
 
 export default function BrandMarquee() {
