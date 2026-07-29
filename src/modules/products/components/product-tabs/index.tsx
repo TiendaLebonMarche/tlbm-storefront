@@ -142,12 +142,12 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
         </div>
       )}
 
-      {/* Metadata key-values */}
+      {/* Metadata key-values — filtrar campos internos */}
       {Object.keys(metadata).length > 0 && (
         <div className="pt-2">
           <p className="text-[10px] text-brand-gray uppercase tracking-[0.2em] mb-3 font-sans">Información adicional</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
-            {Object.entries(metadata).map(([key, value]) => (
+            {Object.entries(metadata).filter(([key]) => !['video_url', 'video', 'internal'].includes(key)).map(([key, value]) => (
               <div key={key} className="flex justify-between py-3 border-b border-gray-50">
                 <span className="text-xs text-brand-gray uppercase tracking-wider font-sans capitalize">
                   {key.replace(/_/g, ' ')}
