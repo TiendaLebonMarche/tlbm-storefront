@@ -117,25 +117,25 @@ export default async function Footer() {
               <span>100% Original Garantizado</span>
             </div>
             <div className="flex gap-2.5 items-center flex-wrap justify-center">
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Nequi">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Nequi">
                 <Image src="/payments/nequi.svg" alt="Nequi" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="DaviPlata">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="DaviPlata">
                 <Image src="/payments/daviplata.svg" alt="DaviPlata" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Mercado Pago">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Mercado Pago">
                 <Image src="/payments/mercadopago.svg" alt="Mercado Pago" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="PSE Colombia">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="PSE Colombia">
                 <Image src="/payments/pse-colombia.svg" alt="PSE Colombia" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Binance">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Binance">
                 <Image src="/payments/binance.svg" alt="Binance" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Bre-B">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Bre-B">
                 <Image src="/payments/breb.svg" alt="Bre-B" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Mastercard">
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Mastercard">
                 <Image src="/payments/mastercard.svg" alt="Mastercard" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
             </div>
