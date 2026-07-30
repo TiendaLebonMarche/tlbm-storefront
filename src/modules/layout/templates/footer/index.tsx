@@ -116,18 +116,27 @@ export default async function Footer() {
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>
-            <div className="flex gap-2.5 items-center">
-              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold" title="Nequi">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-white/80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+            <div className="flex gap-2.5 items-center flex-wrap justify-center">
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Nequi">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M35.5 8c-8.2 0-15.5 3.2-21.2 8.9C8.6 22.6 5.5 30 5.5 38.2s3.1 15.6 8.8 21.3c5.7 5.7 13 8.9 21.2 8.9 8.3 0 15.6-3.2 21.3-8.9 5.7-5.7 8.8-13.1 8.8-21.3 0-8.2-3.1-15.6-8.8-21.3C51.1 11.2 43.8 8 35.5 8zm0 44.6c-3.9 0-7.4-1.5-10.1-4.2-2.7-2.7-4.2-6.2-4.2-10.2s1.5-7.5 4.2-10.2c2.7-2.7 6.2-4.2 10.1-4.2 3.9 0 7.5 1.5 10.2 4.2 2.7 2.7 4.2 6.2 4.2 10.2s-1.5 7.5-4.2 10.2c-2.7 2.7-6.3 4.2-10.2 4.2z"/><text x="58" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="28" fill="currentColor">Nequi</text></svg>
               </span>
-              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold" title="Daviplata">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-white/80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Daviplata">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M8 10h32v8H16v10h22v8H16v14H8V10z"/><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">DaviPlata</text></svg>
               </span>
-              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold" title="Visa">
-                <svg viewBox="0 0 24 24" className="w-5 h-4 fill-current text-white/80"><path d="M9.5 8.5L8 15h2l1.5-6.5H9.5zm4.5 0l-1.5 6.5h2L16 8.5h-2zm5 0c-.8 0-1.5.4-1.8 1l-1.5 5.5h2l.3-1h1.8l.2 1H22l-1.3-6c-.2-.8-.8-1.5-1.7-1.5zm-7.5 0L9.5 15h-2l-.5-2.5c-.2-.6-.5-1.2-1-1.6l.6 4.1h-2l1.2-6h2.5l.4 1.5c.3-1 .9-1.5 1.8-1.5h.5z"/></svg>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Mercado Pago">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M28 12c-8 0-15 3.5-19.5 9C4 26.5 4 34 4 34s0 7.5 4.5 13C13 52.5 20 56 28 56c8 0 15-3.5 19.5-9 4.5-5.5 4.5-13 4.5-13s0-7.5-4.5-13C43 15.5 36 12 28 12z"/><circle cx="22" cy="34" r="4" fill="#fff"/><circle cx="34" cy="34" r="4" fill="#fff"/><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="currentColor">MP</text></svg>
               </span>
-              <span className="w-8 h-6 rounded flex items-center justify-center bg-white/15 text-white text-[8px] font-bold" title="Mastercard">
-                <svg viewBox="0 0 24 24" className="w-5 h-4" fill="none"><circle cx="9" cy="12" r="6" fill="#EA4335" opacity="0.7"/><circle cx="15" cy="12" r="6" fill="#FBBC05" opacity="0.7"/><rect x="9" y="6" width="6" height="12" fill="#34A853" opacity="0.3"/></svg>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="PSE Colombia">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><rect x="8" y="14" width="24" height="32" rx="4" stroke="currentColor" strokeWidth="2.5" fill="none"/><rect x="16" y="20" width="8" height="6" rx="1" fill="currentColor"/><line x1="10" y1="32" x2="30" y2="32" stroke="currentColor" strokeWidth="2"/><circle cx="20" cy="40" r="2.5" fill="currentColor"/><text x="40" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">PSE</text></svg>
+              </span>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Binance">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><rect x="12" y="12" width="36" height="36" rx="6" stroke="#F0B90B" strokeWidth="2.5" fill="none"/><text x="30" y="37" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#F0B90B" text-anchor="middle">B</text><text x="52" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">Binance</text></svg>
+              </span>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Bre-B">
+                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><circle cx="22" cy="30" r="16" stroke="#D4AF37" strokeWidth="2.5" fill="none"/><text x="22" y="35" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#D4AF37" text-anchor="middle">B</text><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="currentColor">Bre-B</text></svg>
+              </span>
+              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Mastercard">
+                <svg viewBox="0 0 200 60" className="w-14 h-5" fill="none"><circle cx="26" cy="30" r="14" fill="#EA4335" opacity="0.8"/><circle cx="36" cy="30" r="14" fill="#FBBC05" opacity="0.8"/><rect x="23" y="16" width="16" height="28" fill="#34A853" opacity="0.25"/></svg>
               </span>
             </div>
           </div>
