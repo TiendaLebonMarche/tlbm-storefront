@@ -1,4 +1,4 @@
 {
-  "installCommand": "npx yarn install --no-immutable",
+  "installCommand": "yarn install --no-immutable",
   "buildCommand": "next build"
 }
