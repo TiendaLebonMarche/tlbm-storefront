@@ -7,35 +7,34 @@ interface Brand {
 }
 
 const BRANDS: Brand[] = [
-  // Icon brands (have SVG in /public/brands/)
+  // Intercalado: icono, texto, icono, texto... para ritmo visual
   { name: "Xiaomi", slug: "xiaomi", type: "icon" },
-  { name: "Samsung", slug: "samsung", type: "icon" },
-  { name: "Sony", slug: "sony", type: "icon" },
-  { name: "JBL", slug: "jbl", type: "icon" },
-  { name: "Bose", slug: "bose", type: "icon" },
-  { name: "DJI", slug: "dji", type: "icon" },
-  { name: "Apple", slug: "apple", type: "icon" },
-  { name: "Acer", slug: "acer", type: "icon" },
-  { name: "Dell", slug: "dell", type: "icon" },
-  { name: "Puma", slug: "puma", type: "icon" },
-  { name: "Nike", slug: "nike", type: "icon" },
-  { name: "Adidas", slug: "adidas", type: "icon" },
-  { name: "Under Armour", slug: "underarmour", type: "icon" },
-  { name: "Fila", slug: "fila", type: "icon" },
-  { name: "Insta360", slug: "insta360", type: "icon" },
-  // Text brands (no simpleicons icon available)
   { name: "Redmi", type: "text" },
+  { name: "Samsung", slug: "samsung", type: "icon" },
   { name: "Passau", type: "text" },
+  { name: "Sony", slug: "sony", type: "icon" },
   { name: "Monster", type: "text" },
+  { name: "JBL", slug: "jbl", type: "icon" },
   { name: "Champion", type: "text" },
+  { name: "Bose", slug: "bose", type: "icon" },
   { name: "Starlink", type: "text" },
+  { name: "DJI", slug: "dji", type: "icon" },
   { name: "Voyager", type: "text" },
+  { name: "Apple", slug: "apple", type: "icon" },
   { name: "Soho", type: "text" },
+  { name: "Acer", slug: "acer", type: "icon" },
   { name: "Unigear", type: "text" },
+  { name: "Dell", slug: "dell", type: "icon" },
   { name: "Meidosa", type: "text" },
+  { name: "Puma", slug: "puma", type: "icon" },
   { name: "KYSONA", type: "text" },
+  { name: "Nike", slug: "nike", type: "icon" },
   { name: "Vortex", type: "text" },
+  { name: "Adidas", slug: "adidas", type: "icon" },
   { name: "CITLLA", type: "text" },
+  { name: "Under Armour", slug: "underarmour", type: "icon" },
+  { name: "Insta360", slug: "insta360", type: "icon" },
+  { name: "Fila", slug: "fila", type: "icon" },
 ]
 
 const LOGO_STYLE = {
