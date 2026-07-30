@@ -441,7 +441,7 @@
 /* Mobile: animation más rápida para evitar corte visible en pantallas pequeñas */
 @media (max-width: 640px) {
   .animate-brand-scroll {
-    animation-duration: 20s !important;
+    animation-duration: 40s !important;
   }
   .brand-marquee-wrap {
     mask-image: linear-gradient(to right, transparent 3%, #000 10%, #000 90%, transparent 97%);
