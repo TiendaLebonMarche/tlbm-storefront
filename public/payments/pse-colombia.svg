@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 36" width="100" height="36">
+  <!-- PSE Colombia payment badge -->
+  <rect width="100" height="36" rx="6" fill="#003580"/>
+  <circle cx="18" cy="18" r="11" fill="#FFFFFF" opacity="0.15"/>
+  <text x="50" y="23" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="17" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">PSE</text>
+</svg>

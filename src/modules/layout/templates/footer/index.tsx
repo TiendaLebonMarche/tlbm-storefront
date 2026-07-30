@@ -117,26 +117,26 @@ export default async function Footer() {
               <span>100% Original Garantizado</span>
             </div>
             <div className="flex gap-2.5 items-center flex-wrap justify-center">
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Nequi">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M35.5 8c-8.2 0-15.5 3.2-21.2 8.9C8.6 22.6 5.5 30 5.5 38.2s3.1 15.6 8.8 21.3c5.7 5.7 13 8.9 21.2 8.9 8.3 0 15.6-3.2 21.3-8.9 5.7-5.7 8.8-13.1 8.8-21.3 0-8.2-3.1-15.6-8.8-21.3C51.1 11.2 43.8 8 35.5 8zm0 44.6c-3.9 0-7.4-1.5-10.1-4.2-2.7-2.7-4.2-6.2-4.2-10.2s1.5-7.5 4.2-10.2c2.7-2.7 6.2-4.2 10.1-4.2 3.9 0 7.5 1.5 10.2 4.2 2.7 2.7 4.2 6.2 4.2 10.2s-1.5 7.5-4.2 10.2c-2.7 2.7-6.3 4.2-10.2 4.2z"/><text x="58" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="28" fill="currentColor">Nequi</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Nequi">
+                <Image src="/payments/nequi.svg" alt="Nequi" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Daviplata">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M8 10h32v8H16v10h22v8H16v14H8V10z"/><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">DaviPlata</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="DaviPlata">
+                <Image src="/payments/daviplata.svg" alt="DaviPlata" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Mercado Pago">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><path d="M28 12c-8 0-15 3.5-19.5 9C4 26.5 4 34 4 34s0 7.5 4.5 13C13 52.5 20 56 28 56c8 0 15-3.5 19.5-9 4.5-5.5 4.5-13 4.5-13s0-7.5-4.5-13C43 15.5 36 12 28 12z"/><circle cx="22" cy="34" r="4" fill="#fff"/><circle cx="34" cy="34" r="4" fill="#fff"/><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="currentColor">MP</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Mercado Pago">
+                <Image src="/payments/mercadopago.svg" alt="Mercado Pago" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="PSE Colombia">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><rect x="8" y="14" width="24" height="32" rx="4" stroke="currentColor" strokeWidth="2.5" fill="none"/><rect x="16" y="20" width="8" height="6" rx="1" fill="currentColor"/><line x1="10" y1="32" x2="30" y2="32" stroke="currentColor" strokeWidth="2"/><circle cx="20" cy="40" r="2.5" fill="currentColor"/><text x="40" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">PSE</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="PSE Colombia">
+                <Image src="/payments/pse-colombia.svg" alt="PSE Colombia" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Binance">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><rect x="12" y="12" width="36" height="36" rx="6" stroke="#F0B90B" strokeWidth="2.5" fill="none"/><text x="30" y="37" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#F0B90B" text-anchor="middle">B</text><text x="52" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="24" fill="currentColor">Binance</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Binance">
+                <Image src="/payments/binance.svg" alt="Binance" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Bre-B">
-                <svg viewBox="0 0 200 60" className="w-14 h-5 fill-current text-white/90"><circle cx="22" cy="30" r="16" stroke="#D4AF37" strokeWidth="2.5" fill="none"/><text x="22" y="35" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#D4AF37" text-anchor="middle">B</text><text x="44" y="42" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="currentColor">Bre-B</text></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Bre-B">
+                <Image src="/payments/breb.svg" alt="Bre-B" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
-              <span className="w-9 h-7 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors" title="Mastercard">
-                <svg viewBox="0 0 200 60" className="w-14 h-5" fill="none"><circle cx="26" cy="30" r="14" fill="#EA4335" opacity="0.8"/><circle cx="36" cy="30" r="14" fill="#FBBC05" opacity="0.8"/><rect x="23" y="16" width="16" height="28" fill="#34A853" opacity="0.25"/></svg>
+              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors p-1" title="Mastercard">
+                <Image src="/payments/mastercard.svg" alt="Mastercard" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
               </span>
             </div>
           </div>
