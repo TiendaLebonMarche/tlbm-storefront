@@ -204,7 +204,7 @@ function ScrollHeader({ visible }: { visible: boolean }) {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
+        className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
           ${
             visible
               ? "translate-y-0 opacity-100 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.06)]"
@@ -533,7 +533,7 @@ export default function Hero() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[800ms] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 </LocalizedClientLink>
               </motion.div>
             </motion.div>

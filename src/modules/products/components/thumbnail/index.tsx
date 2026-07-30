@@ -67,11 +67,12 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt={alt || "Producto Le Bon Marché"}
-      className="absolute inset-0 object-contain object-center p-0 md:p-2 transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:group-hover/thumb:scale-[1.03] mix-blend-multiply"
+      className="absolute inset-0 object-contain object-center p-0 md:p-2 transition-transform duration-1000 lg:group-hover/thumb:scale-[1.03] mix-blend-multiply"
       draggable={false}
       quality={85}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
+      style={{ transitionTimingFunction: "cubic-bezier(0.25,0.46,0.45,0.94)" }}
     />
   ) : (
     <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-transparent">

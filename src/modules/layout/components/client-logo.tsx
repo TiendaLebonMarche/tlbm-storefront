@@ -18,13 +18,14 @@ export default function ClientLogo({ isMobile = false }: { isMobile?: boolean })
     <div
       className={`
         relative flex items-center justify-center
-        transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+        transition-all duration-500
         ${isMobile
           ? (isScrolled ? "w-[150px]" : "w-[170px]")
           : (isScrolled ? "w-[180px] md:w-[200px] lg:w-[220px] 2xl:w-[260px]" : "w-[200px] md:w-[240px] lg:w-[280px] 2xl:w-[340px]")
         }
         h-full
       `}
+      style={{ transitionTimingFunction: "cubic-bezier(0.25,1,0.5,1)" }}
     >
       <Image
         src={LOGO_URL}
@@ -33,9 +34,10 @@ export default function ClientLogo({ isMobile = false }: { isMobile?: boolean })
         sizes="(max-width: 768px) 170px, 340px"
         className={`
           object-contain
-          transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+          transition-all duration-500
           ${onTransparentBg ? "brightness-0 invert" : ""}
         `}
+        style={{ transitionTimingFunction: "cubic-bezier(0.25,1,0.5,1)" }}
         priority
       />
     </div>

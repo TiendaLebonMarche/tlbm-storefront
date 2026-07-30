@@ -50,7 +50,7 @@
   }
   
   .img-savoy-zoom {
-    @apply transition-transform duration-[1200ms] w-full h-full object-cover;
+    @apply transition-transform duration-1000 w-full h-full object-cover;
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .group:hover .img-savoy-zoom,
