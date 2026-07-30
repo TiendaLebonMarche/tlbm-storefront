@@ -56,7 +56,7 @@ export default async function Nav() {
         </div>
 
         {/* Center: Nav links */}
-        <div className="flex-none flex items-center gap-8 lg:gap-10">
+        <nav className="flex-none flex items-center gap-8 lg:gap-10">
           <LocalizedClientLink
             href="/"
             className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
@@ -81,7 +81,7 @@ export default async function Nav() {
           >
             Ofertas
           </LocalizedClientLink>
-        </div>
+        </nav>
 
         {/* Right: Search, Explore, Cart */}
         <div className="flex items-center justify-end gap-3 lg:gap-5 flex-1">
