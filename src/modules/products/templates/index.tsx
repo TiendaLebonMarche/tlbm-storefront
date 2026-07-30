@@ -2,6 +2,7 @@ import { HttpTypes } from "@medusajs/types"
 import { notFound } from "next/navigation"
 import React, { Suspense } from "react"
 import dynamic from "next/dynamic"
+import { WhatsAppHelpButton, WhatsAppCTABuy } from "@modules/products/components/whatsapp-product-buttons"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
@@ -251,6 +252,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               ))}
             </div>
 
+            {/* WhatsApp CTA Botón 1: ¿Dudas? Pregúntanos */}
+            <div className="flex justify-start">
+              <WhatsAppHelpButton />
+            </div>
+
             {/* Divider */}
             <div className="w-full h-px bg-brand-gray-light/20" />
 
@@ -320,6 +326,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                   <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">la diferencia</span></h3>
                 </div>
                 <ProductTabs product={product} />
+
+                {/* WhatsApp CTA Botón 2: Compra por WhatsApp */}
+                <div className="mt-8">
+                  <WhatsAppCTABuy />
+                </div>
               </div>
 
               {/* Right: FAQ + WhatsApp Help */}
