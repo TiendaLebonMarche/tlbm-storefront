@@ -466,7 +466,7 @@
 #scroll-progress {
   position: fixed; top: 0; left: 0; z-index: 9999;
   height: 1.5px;
-  background: linear-gradient(90deg,#B8860B,#D4AF37,#E8C84A,#D4AF37,#B8860B);
+  background: linear-gradient(90deg,#D4AF37,#D4AF37,#D4AF37,#D4AF37,#D4AF37);
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
   transition: width .1s linear;

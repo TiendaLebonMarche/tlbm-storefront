@@ -19,7 +19,7 @@ export default function BrandStatement() {
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[.9] mb-6 text-gray-900 dark:text-white">
               Tecnología que<br />
-              <span className="bg-gradient-to-r from-[#D4AF37] via-[#E8C84A] to-[#C8912E] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 Inspira
               </span>
             </h2>
@@ -31,7 +31,7 @@ export default function BrandStatement() {
                 href="/store"
                 className="group inline-flex items-center gap-2.5 px-8 py-4 text-[#0A0A0F] font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine"
                 style={{
-                  background: "linear-gradient(135deg,#D4AF37,#C8912E)",
+                  background: "linear-gradient(135deg,#D4AF37,#D4AF37/80)",
                   boxShadow: "0 4px 24px rgba(212,175,55,.2)",
                 }}
               >
@@ -60,7 +60,7 @@ export default function BrandStatement() {
                 }}
               >
                 <span className="text-[#D4AF37]/60 text-[9px] font-bold uppercase tracking-[.4em] mb-1">Hasta</span>
-                <span className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#E8C84A] to-[#C8912E] bg-clip-text text-transparent">
+                <span className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                   40%
                 </span>
                 <span className="text-gray-400 dark:text-white/30 text-[9px] font-bold uppercase tracking-[.3em] mt-1">OFF</span>

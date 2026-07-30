@@ -65,7 +65,7 @@ export default function CategoriesGrid() {
             </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
               Explora por{" "}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 Secciones
               </span>
             </h2>

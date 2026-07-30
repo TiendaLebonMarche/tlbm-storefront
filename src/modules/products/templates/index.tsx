@@ -317,7 +317,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <div className="w-full lg:w-[45%]">
                 <div className="mb-12">
                   <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Información técnica</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">la diferencia</span></h3>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">la diferencia</span></h3>
                 </div>
                 <ProductTabs product={product} />
               </div>
@@ -326,7 +326,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <div className="w-full lg:w-[55%] space-y-12">
                 <div className="mb-12 lg:mb-16">
                   <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Preguntas y dudas</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Servicio al <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">cliente</span></h3>
+                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Servicio al <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">cliente</span></h3>
                 </div>
                 
                 <Accordion type="single" collapsible className="w-full space-y-3">

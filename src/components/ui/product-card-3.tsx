@@ -34,7 +34,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
             </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
               Lo más{" "}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#C8912E] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 vendidos
               </span>
             </h2>
@@ -92,7 +92,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <h3 className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]">
                     {item.name}
                   </h3>
-                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm mt-1.5">
+                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-brand-black drop-shadow-sm mt-1.5">
                     {item.price}
                   </span>
                 </div>
