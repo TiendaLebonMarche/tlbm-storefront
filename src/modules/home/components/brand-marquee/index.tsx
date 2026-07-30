@@ -32,11 +32,11 @@ const BRANDS: Brand[] = [
 
 export default function BrandMarquee() {
   return (
-    <section className="py-12 md:py-16 overflow-hidden bg-white dark:bg-[#0A0A0F] border-y border-gray-100 dark:border-white/5">
+    <section className="overflow-hidden bg-white dark:bg-[#0A0A0F]">
       <div className="brand-marquee-wrap">
         <div className="flex whitespace-nowrap animate-brand-scroll brand-marquee-track">
           {[0, 1].map((set) => (
-            <div key={set} className="flex items-center gap-9 mx-0">
+            <div key={set} className="flex items-center gap-10 mx-0">
               {BRANDS.map((brand, i) =>
                 brand.type === "icon" ? (
                   <img
@@ -45,8 +45,8 @@ export default function BrandMarquee() {
                     alt={brand.name}
                     title={brand.name}
                     style={{
-                      width: "clamp(90px, 14vw, 180px)",
-                      height: "clamp(44px, 5.5vw, 68px)",
+                      width: "clamp(120px, 18vw, 240px)",
+                      height: "clamp(56px, 7vw, 88px)",
                       objectFit: "contain",
                       opacity: 0.6,
                       flexShrink: 0,
@@ -58,12 +58,12 @@ export default function BrandMarquee() {
                     key={`${set}-${i}`}
                     title={brand.name}
                     style={{
-                      width: "clamp(90px, 14vw, 180px)",
-                      height: "clamp(44px, 5.5vw, 68px)",
+                      width: "clamp(120px, 18vw, 240px)",
+                      height: "clamp(56px, 7vw, 88px)",
                       opacity: 0.5,
                       flexShrink: 0,
                     }}
-                    className="flex items-center justify-center font-sans font-bold uppercase tracking-[2px] text-[#5c5c5c] dark:text-gray-400 text-[clamp(14px,1.8vw,22px)] hover:opacity-100 transition-opacity duration-300"
+                    className="flex items-center justify-center font-sans font-bold uppercase tracking-[3px] text-[#5c5c5c] dark:text-gray-400 text-[clamp(16px,2.2vw,28px)] hover:opacity-100 transition-opacity duration-300"
                   >
                     {brand.name}
                   </span>

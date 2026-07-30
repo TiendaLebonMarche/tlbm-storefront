@@ -200,8 +200,8 @@ module.exports = {
           "100%": { transform: "rotate(-360deg) translateX(55px) rotate(360deg)" },
         },
         "brand-scroll": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
         },
         "pm-scroll": {
           "0%": { transform: "translateX(0)" },
@@ -231,7 +231,7 @@ module.exports = {
         shimmer: "shimmer 3s linear infinite",
         orbit: "orbit 8s linear infinite",
         "orbit-reverse": "orbit-reverse 10s linear infinite",
-        "brand-scroll": "brand-scroll 14s linear infinite",
+        "brand-scroll": "brand-scroll 7s linear infinite",
         "pm-scroll": "pm-scroll 50s linear infinite",
       },
     },
