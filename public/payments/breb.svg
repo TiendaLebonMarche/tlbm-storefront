@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
-  <!-- Bre-B - Banco de la República Colombia -->
-  <rect width="120" height="40" rx="4" fill="#FFFFFF"/>
-  <circle cx="22" cy="20" r="14" fill="#1A237E"/>
-  <text x="22" y="25" font-family="Georgia,'Times New Roman',serif" font-weight="bold" font-size="18" fill="#FFFFFF" text-anchor="middle">B</text>
-  <text x="42" y="25" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="16" fill="#1A237E">Bre-B</text>
+  <rect width="120" height="40" rx="6" fill="#FFFFFF"/>
+  <rect x="2" y="2" width="36" height="36" rx="18" fill="#1A237E"/>
+  <text x="20" y="26" font-family="Georgia,serif" font-weight="bold" font-size="20" fill="#FFFFFF" text-anchor="middle">B</text>
+  <text x="46" y="26" font-family="Arial,sans-serif" font-weight="900" font-size="18" fill="#1A237E" letter-spacing="-0.5">Bre-B</text>
 </svg>

@@ -117,26 +117,26 @@ export default async function Footer() {
               <span>100% Original Garantizado</span>
             </div>
             <div className="flex gap-2.5 items-center flex-wrap justify-center">
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Nequi">
-                <Image src="/payments/nequi.svg" alt="Nequi" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Nequi">
+                <img src="/payments/nequi.svg" alt="Nequi" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="DaviPlata">
-                <Image src="/payments/daviplata.svg" alt="DaviPlata" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mercado Pago">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mercadopago_xx7b9e.svg" alt="Mercado Pago" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Mercado Pago">
-                <Image src="/payments/mercadopago.svg" alt="Mercado Pago" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mastercard">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mastercard_gfpcyy.svg" alt="Mastercard" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="PSE Colombia">
-                <Image src="/payments/pse-colombia.svg" alt="PSE Colombia" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Daviplata">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/daviplata_oiquqy.svg" alt="Daviplata" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Binance">
-                <Image src="/payments/binance.svg" alt="Binance" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="PSE Colombia">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/pse-logo_wxdnoy.png" alt="PSE Colombia" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Bre-B">
-                <Image src="/payments/breb.svg" alt="Bre-B" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Bre-B">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Bre-B_dhmaex.svg" alt="Bre-B" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
-              <span className="w-[52px] h-8 rounded flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-white/20 hover:border-[#D4AF37]/30 p-1" title="Mastercard">
-                <Image src="/payments/mastercard.svg" alt="Mastercard" width={52} height={20} className="h-5 w-auto object-contain" unoptimized />
+              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Binance">
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Binance_logo_zbndn0.svg" alt="Binance" className="h-5 w-auto object-contain" loading="lazy" />
               </span>
             </div>
           </div>
