@@ -430,6 +430,11 @@
 }
 .pm-track { display: flex; gap: 1.25rem; width: max-content; animation: pm-scroll 50s linear infinite; }
 .pm-track:hover { animation-play-state: paused; }
+.brand-marquee-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 4%, #000 96%, transparent 100%);
+}
 .brand-marquee-track:hover { animation-play-state: paused; }
 @keyframes pm-scroll {
   0% { transform: translateX(0); }
