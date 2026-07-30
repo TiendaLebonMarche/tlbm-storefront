@@ -81,12 +81,6 @@ export default async function Nav() {
           >
             Ofertas
           </LocalizedClientLink>
-          <LocalizedClientLink
-            href="/store"
-            className="nav-link text-[11px] font-semibold tracking-[0.18em] uppercase"
-          >
-            Tienda
-          </LocalizedClientLink>
         </div>
 
         {/* Right: Search, Explore, Cart */}

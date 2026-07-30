@@ -79,7 +79,7 @@ export default async function Footer() {
               <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
             </ul>
           </div>
 
