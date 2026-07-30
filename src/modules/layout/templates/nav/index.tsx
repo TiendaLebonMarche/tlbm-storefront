@@ -59,25 +59,25 @@ export default async function Nav() {
         <div className="flex-none flex items-center gap-8 lg:gap-10">
           <LocalizedClientLink
             href="/"
-            className="nav-link text-[11px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Inicio
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/store"
-            className="nav-link text-[11px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Tienda
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/collections"
-            className="nav-link text-[11px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Colecciones
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/store"
-            className="nav-link text-[11px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Ofertas
           </LocalizedClientLink>

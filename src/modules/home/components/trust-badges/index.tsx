@@ -50,8 +50,8 @@ export default function TrustBadges() {
             <div key={i} className="trust-item">
               {b.icon}
               <div>
-                <p className="text-[11px] font-semibold text-gray-900 dark:text-white/80">{b.title}</p>
-                <p className="text-[9px] text-gray-400 dark:text-white/30">{b.desc}</p>
+                <p className="text-[13px] font-semibold text-gray-900 dark:text-white/80">{b.title}</p>
+                <p className="text-[11px] text-gray-500 dark:text-white/30">{b.desc}</p>
               </div>
             </div>
           ))}

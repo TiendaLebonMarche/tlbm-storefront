@@ -41,7 +41,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
           </div>
           <LocalizedClientLink
             href="/store"
-            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-[#D4AF37] transition-colors group"
+            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-[#D4AF37] transition-colors group active:scale-95"
           >
             Ver Todo
             <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="mt-12 text-center reveal">
         <LocalizedClientLink
           href="/store"
-          className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03]"
+          className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
           style={{ background: "#0A0A0F", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
         >
           Ver Catálogo Completo

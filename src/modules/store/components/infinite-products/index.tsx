@@ -86,7 +86,7 @@ export default function InfiniteProducts({
           <button
             onClick={loadMore}
             disabled={isLoading}
-            className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine disabled:opacity-30 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/20"
+            className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine disabled:opacity-30 hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg hover:shadow-black/20 transition-all duration-200"
             style={{ background: "#0A0A0F", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
           >
             {isLoading ? "Cargando…" : `Cargar más (${initialProducts.length - displayedCount})`}

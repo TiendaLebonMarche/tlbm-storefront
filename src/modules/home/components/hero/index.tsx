@@ -172,8 +172,8 @@ function SlideMedia({
 function MarqueeBar() {
   return (
     <div className="relative z-50 bg-[#D4AF37] text-black overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-fixed py-1.5 md:py-1.5">
-        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
+      <div className="flex whitespace-nowrap animate-marquee-fixed py-2 md:py-2">
+        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A1A1A]">
           <span className="opacity-50">✦</span>
           <span>Tienda Le Bon Marché</span>
           <span className="opacity-30">•</span>
@@ -182,7 +182,7 @@ function MarqueeBar() {
           <span>Productos exóticos y 100% originales</span>
           <span className="opacity-50">✦</span>
         </span>
-        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
+        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A1A1A]">
           <span className="opacity-50">✦</span>
           <span>Tienda Le Bon Marché</span>
           <span className="opacity-30">•</span>
@@ -319,7 +319,7 @@ function HeroOverlay({ visible }: { visible: boolean }) {
 
             <div className="absolute left-1/2 -translate-x-1/2">
               <LocalizedClientLink href="/" className="flex items-center justify-center">
-                <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[48px] md:h-[56px] lg:h-[64px]">
+                <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[51px] md:h-[65px] lg:h-[77px]">
                   <Image
                     src={LOGO_URL}
                     alt="Tienda Le Bon Marché"
@@ -445,7 +445,7 @@ export default function Hero() {
 
       {/* ── HERO SLIDER ── */}
       <section
-        className="relative w-full min-h-[100dvh] overflow-hidden bg-black"
+        className="relative w-full min-h-[100dvh] max-h-[700px] overflow-hidden bg-black"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >

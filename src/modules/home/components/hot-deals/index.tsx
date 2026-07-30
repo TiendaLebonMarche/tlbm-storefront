@@ -32,7 +32,7 @@ export default async function HotDeals({
         <div className="content-container px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
-              <span className="text-brand-black font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+              <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
                 ⚡ Selección Curada
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-sans font-black tracking-tighter text-brand-black leading-[0.9]">

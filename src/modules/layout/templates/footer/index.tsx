@@ -94,7 +94,7 @@ export default async function Footer() {
                 <div className="text-[10px] font-bold uppercase tracking-[.25em] text-white/70 mb-3">Newsletter</div>
                 <div className="flex">
                   <input type="email" placeholder="tu@email.com" className="bg-white/10 border border-white/30 rounded-l-full px-5 py-3 text-sm text-white placeholder-white/60 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300 min-h-[48px]" style={{ caretColor: "#D4AF37" }} />
-                  <button className="px-6 py-3 rounded-r-full text-[10px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#D4AF37] hover:bg-[#D4AF37]/80 transition-all duration-300 min-h-[48px]">OK</button>
+                  <button className="px-6 py-3 rounded-r-full text-[10px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#D4AF37] hover:bg-[#D4AF37]/80 transition-all duration-300 min-h-[48px]">→</button>
                 </div>
               </li>
             </ul>
