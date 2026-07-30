@@ -43,7 +43,7 @@ const badges = [
 
 export default function TrustBadges() {
   return (
-    <section className="w-full bg-white dark:bg-[#0A0A0F] py-6 border-b border-gray-100 dark:border-white/5">
+    <section className="w-full bg-white dark:bg-[#0A0A0F] py-6">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 reveal">
           {badges.map((b, i) => (

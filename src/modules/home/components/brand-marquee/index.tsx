@@ -39,18 +39,18 @@ const BRANDS: Brand[] = [
 ]
 
 const LOGO_STYLE = {
-  width: "clamp(130px, 18vw, 240px)",
-  height: "clamp(60px, 7vw, 88px)",
+  width: "clamp(80px, 18vw, 230px)",
+  height: "clamp(40px, 7vw, 80px)",
   flexShrink: 0,
 } as const
 
 export default function BrandMarquee() {
   return (
-    <section className="overflow-hidden bg-white dark:bg-[#0A0A0F] border-0 py-8 md:py-10">
+    <section className="overflow-hidden bg-white dark:bg-[#0A0A0F] border-0 py-6 md:py-10">
       <div className="brand-marquee-wrap">
-        <div className="flex whitespace-nowrap animate-brand-scroll brand-marquee-track">
+        <div className="flex items-center w-[max-content] animate-brand-scroll brand-marquee-track">
           {[0, 1].map((set) => (
-            <div key={set} className="flex items-center gap-10 mx-0">
+            <div key={set} className="flex items-center gap-4 md:gap-10 mx-0">
               {BRANDS.map((brand, i) => (
                 <div
                   key={`${set}-${i}`}
@@ -65,7 +65,7 @@ export default function BrandMarquee() {
                       className="max-w-full max-h-full w-full h-full object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
                     />
                   ) : (
-                    <span className="font-sans font-bold uppercase tracking-[3px] text-[#5c5c5c] dark:text-gray-400 text-[clamp(14px,2vw,24px)] leading-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-center px-2">
+                    <span className="font-sans font-bold uppercase tracking-[2px] text-[#5c5c5c] dark:text-gray-400 text-[clamp(11px,2vw,22px)] leading-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-center px-1">
                       {brand.name}
                     </span>
                   )}

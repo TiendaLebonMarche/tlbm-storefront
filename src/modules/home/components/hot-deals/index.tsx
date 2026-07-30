@@ -28,7 +28,7 @@ export default async function HotDeals({
     if (shuffled.length === 0) return null
 
     return (
-      <section className="w-full bg-white py-16 md:py-24 border-b border-brand-gray-light">
+      <section className="w-full bg-white py-16 md:py-24">
         <div className="content-container px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
