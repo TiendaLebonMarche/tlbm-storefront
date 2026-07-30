@@ -518,6 +518,7 @@ export default function Hero() {
                   className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-lg text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98]"
                   style={{
                     background: "linear-gradient(135deg, #D4AF37, #D4AF37/80)",
+                    backgroundColor: "#D4AF37",
                     color: "#0A0A0F",
                     boxShadow: "0 4px 24px rgba(212,175,55,0.3)",
                   }}

@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useRef, useState, useEffect } from "react"
-import { useIntersection } from "@lib/hooks/use-in-view"
+import React, { useRef } from "react"
+import { motion } from "framer-motion"
 
 type RevealProps = {
   children: React.ReactNode
@@ -11,23 +11,18 @@ type RevealProps = {
 
 const Reveal: React.FC<RevealProps> = ({ children, className = "", delay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null)
-  const isVisible = useIntersection(ref, "0px")
-  const [hasRevealed, setHasRevealed] = useState(false)
-
-  useEffect(() => {
-    if (isVisible) {
-      setHasRevealed(true)
-    }
-  }, [isVisible])
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`${hasRevealed ? "reveal-up" : "opacity-0"} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: delay / 1000, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
 
