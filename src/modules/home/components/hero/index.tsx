@@ -216,7 +216,7 @@ function ScrollHeader({ visible }: { visible: boolean }) {
             {/* Hamburger — 3 líneas asimétricas */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[7px] p-2 group cursor-pointer bg-none border-none outline-none"
+              className="flex flex-col gap-[7px] p-3 min-w-[44px] min-h-[44px] items-center justify-center group cursor-pointer bg-none border-none outline-none"
               aria-label="Menú"
             >
               <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
@@ -309,7 +309,7 @@ function HeroOverlay({ visible }: { visible: boolean }) {
           <div className="flex items-center justify-between h-[60px] md:h-[72px]">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[7px] p-2 group cursor-pointer bg-none border-none outline-none"
+              className="flex flex-col gap-[7px] p-3 min-w-[44px] min-h-[44px] items-center justify-center group cursor-pointer bg-none border-none outline-none"
               aria-label="Menú"
             >
               <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
