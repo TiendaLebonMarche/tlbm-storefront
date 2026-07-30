@@ -12,26 +12,32 @@ export async function GET(req: NextRequest) {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         "Accept": "video/mp4,video/*;q=0.9,*/*;q=0.8",
-        "Referer": "https://www.amazon.com/",
       },
     })
 
     if (!videoResp.ok) {
+      console.error("[Video Proxy] Fetch failed:", videoResp.status, url.slice(0, 60))
       return new NextResponse("Failed to fetch video", { status: 502 })
     }
 
-    // Get the video data as a blob/array buffer
-    const videoBuffer = await videoResp.arrayBuffer()
-    
-    // Return with proper headers for browser playback
-    return new NextResponse(videoBuffer, {
-      headers: {
-        "Content-Type": "video/mp4",
-        "Content-Length": videoBuffer.byteLength.toString(),
-        "Accept-Ranges": "bytes",
-        "Cache-Control": "public, max-age=86400",
-        "Access-Control-Allow-Origin": "*",
-      },
+    const contentType = videoResp.headers.get("content-type") || "video/mp4"
+    const contentLength = videoResp.headers.get("content-length")
+
+    // Stream the video instead of loading it all into memory
+    const headers: Record<string, string> = {
+      "Content-Type": contentType,
+      "Accept-Ranges": "bytes",
+      "Cache-Control": "public, max-age=86400",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Expose-Headers": "Content-Length, Accept-Ranges",
+    }
+
+    if (contentLength) {
+      headers["Content-Length"] = contentLength
+    }
+
+    return new NextResponse(videoResp.body, {
+      headers,
     })
   } catch (error) {
     console.error("[Video Proxy] Error:", error)
