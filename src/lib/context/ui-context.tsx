@@ -9,6 +9,11 @@ interface UIContextType {
   closeSideMenu: () => void
   openCart: () => void
   closeCart: () => void
+  /** Conteo optimista de items (seteado al instante al añadir a la bolsa).
+   * El badge del carrito lo usa como override del conteo del servidor,
+   * que llega ~1-6s después vía router.refresh(). */
+  cartCount: number | null
+  setCartCount: (count: number | null) => void
 }
 
 const UIContext = createContext<UIContextType | undefined>(undefined)
@@ -16,6 +21,7 @@ const UIContext = createContext<UIContextType | undefined>(undefined)
 export const UIProvider = ({ children }: { children: ReactNode }) => {
   const [isSideMenuOpen, setSideMenuOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
+  const [cartCount, setCartCount] = useState<number | null>(null)
 
   const openSideMenu = () => {
     setSideMenuOpen(true)
@@ -37,6 +43,8 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
         closeSideMenu,
         openCart,
         closeCart,
+        cartCount,
+        setCartCount,
       }}
     >
       {children}

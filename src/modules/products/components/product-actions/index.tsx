@@ -37,7 +37,7 @@ export default function ProductActions({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { openCart } = useUI()
+  const { openCart, setCartCount } = useUI()
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
@@ -141,6 +141,13 @@ export default function ProductActions({
 
       if (result && 'cart' in result) {
         setAddedSuccess(true)
+        // Badge instantáneo: contar items del carrito devuelto por addToCart
+        // (el router.refresh() re-sincroniza el server component después)
+        const itemCount = result.cart.items?.reduce(
+          (acc, item) => acc + (item.quantity || 0),
+          0
+        )
+        setCartCount(itemCount ?? null)
         // Track add_to_cart for GTM
         trackAddToCart({
           id: selectedVariant.id || product.id,
@@ -154,6 +161,9 @@ export default function ProductActions({
         })
         // Abrir el sidebar SOLO después de tener el carrito actualizado
         openCart()
+        // Refrescar server components (CartButton re-fetchea retrieveCart)
+        // → el conteo del servidor se sincroniza con el optimista
+        router.refresh()
         setTimeout(() => setAddedSuccess(false), 2500)
       } else if (result) {
         throw new Error(result as string)

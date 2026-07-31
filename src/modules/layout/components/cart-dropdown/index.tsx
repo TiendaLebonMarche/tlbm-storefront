@@ -30,7 +30,7 @@ const CartDropdown = ({
   const [activeTimer, setActiveTimer] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
-  const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu } = useUI()
+  const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu, cartCount } = useUI()
 
   // Cierra el menú lateral si se abre el carrito
   useEffect(() => {
@@ -46,6 +46,10 @@ const CartDropdown = ({
     cartState?.items?.reduce((acc, item) => {
       return acc + item.quantity
     }, 0) || 0
+
+  // Badge optimista: cartCount (seteado al añadir, instantáneo) tiene prioridad
+  // sobre el conteo del servidor (que llega ~1-6s después vía router.refresh).
+  const badgeCount = cartCount ?? totalItems
 
   const subtotal = cartState?.subtotal ?? 0
   const itemRef = useRef<number>(totalItems || 0)
@@ -144,7 +148,7 @@ const CartDropdown = ({
           onClick={open}
           data-testid="nav-cart-link"
         >
-          {totalItems === 0 ? (
+          {badgeCount === 0 ? (
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
@@ -153,9 +157,9 @@ const CartDropdown = ({
               <path d="M15.75 10.5V6a3.75 3.75 0 00-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.461 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
           )}
-          {totalItems > 0 && (
-            <div className="absolute -top-2 -right-2 bg-brand-black text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold cart-badge-pop" key={totalItems}>
-              {totalItems}
+          {badgeCount > 0 && (
+            <div className="absolute -top-2 -right-2 bg-brand-black text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold cart-badge-pop" key={badgeCount}>
+              {badgeCount}
             </div>
           )}
         </PopoverButton>

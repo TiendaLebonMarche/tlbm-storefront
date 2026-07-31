@@ -432,6 +432,21 @@
 }
 .nav-link-dark:hover::after,
 .nav-link-dark.active::after { width: 100%; }
+/* Variante LUXE para el nav del header de producto: separadores ◆ dorados,
+   subrayado dorado que crece DESDE EL CENTRO (más elegante que left→right) */
+.nav-link-lux { position: relative; color: rgba(10,10,15,.6); transition: color .3s; white-space: nowrap; }
+.nav-link-lux::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 1px;
+  background: #D4AF37;
+  transition: width .4s cubic-bezier(.16,1,.3,1);
+}
+.nav-link-lux:hover { color: #D4AF37; }
+.nav-link-lux:hover::after,
+.nav-link-lux.active::after { width: 100%; }
 .nav-link::after {
   content: '';
   position: absolute;

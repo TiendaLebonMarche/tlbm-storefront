@@ -37,7 +37,7 @@ export default function TopMarquee({ variant = "gold" }: TopMarqueeProps) {
 
   return (
     <div
-      className={`relative z-50 overflow-hidden brand-marquee-wrap ${
+      className={`relative z-50 overflow-hidden ${
         isDark ? "bg-[#0A0A0F]" : "bg-[#D4AF37]"
       }`}
     >
