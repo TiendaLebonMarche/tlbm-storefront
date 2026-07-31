@@ -3,27 +3,42 @@
 import { useScrollThreshold } from "@lib/hooks/use-scroll-threshold"
 import { usePathname } from "next/navigation"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import TopMarquee from "@modules/common/components/top-marquee"
+import ProductHeader from "@modules/layout/components/product-header"
 
 /*
   This header is intentionally hidden on the home page (/) because the Hero
   slider component handles its own overlay header + scroll-to-white-bar.
 
   On every other page it behaves as a normal sticky header with glass effect.
+
+  On product pages (/productos/...) the thin top bar is replaced by the
+  dark TopMarquee (fondo negro + texto dorado) — misma marquesina del index
+  en variante oscura. Colapsa al hacer scroll igual que la barra anterior.
 */
 
-export default function ClientHeader({ children }: { children: React.ReactNode }) {
+export default function ClientHeader({
+  children,
+  cartSlot,
+}: {
+  children: React.ReactNode
+  cartSlot?: React.ReactNode
+}) {
   const isScrolled = useScrollThreshold(50)
   const pathname = usePathname()
 
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
 
+  // Páginas de detalle de producto → marquesina oscura en vez de la barra fina
+  const isProductPage = pathname?.includes("/productos/") ?? false
+
   // On the home page, this header renders nothing — the Hero slider
   // component owns the header (floating logo + hamburger, white bar on scroll).
   if (isHome) return null
 
-  const textColor = isScrolled
-    ? "text-white"
-    : "text-black"
+  // En páginas no-home el header siempre está sobre fondo claro (blanco o glass),
+  // por lo que el texto/iconos son siempre oscuros (nunca text-white).
+  const textColor = "text-black"
 
   return (
     <div
@@ -38,15 +53,24 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
       data-scrolled={isScrolled}
       data-home={isHome}
     >
-      {/* ── TOP BAR ── Always dark #0A0A0F ────────────────────────────── */}
-      <div
-        className={`
-          bg-[#0A0A0F] text-white/70
-          border-b border-white/5
-          transition-all duration-500 ease-out overflow-hidden
-          ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[28px] md:h-[32px] py-0.5 opacity-100"}
-        `}
-      >
+      {/* ── TOP BAR ── Productos: marquesina oscura · Resto: barra fina #0A0A0F ── */}
+      {isProductPage ? (
+        <div
+          className={`transition-all duration-500 ease-out overflow-hidden
+            ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
+          `}
+        >
+          <TopMarquee variant="dark" />
+        </div>
+      ) : (
+        <div
+          className={`
+            bg-[#0A0A0F] text-white/70
+            border-b border-white/5
+            transition-all duration-500 ease-out overflow-hidden
+            ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[28px] md:h-[32px] py-0.5 opacity-100"}
+          `}
+        >
         <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14 h-full flex items-center justify-between">
           <div className="flex items-center gap-3 md:gap-5 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
             <a
@@ -101,26 +125,52 @@ export default function ClientHeader({ children }: { children: React.ReactNode }
             </LocalizedClientLink>
           </div>
         </div>
-      </div>
+        </div>
+      )}
 
       {/* ── MAIN HEADER ────────────────────────────────────────────── */}
       <header
         id="main-header"
         className={`mx-auto w-full transition-all duration-300 ease-out ${textColor}`}
       >
-        <div
-          className={`
-            max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14
-            flex justify-between items-center
-            transition-all duration-300 ease-out
-            ${isScrolled
-              ? "min-h-[56px] md:min-h-[60px] py-2"
-              : "min-h-[60px] md:min-h-[72px] py-3"
-            }
-          `}
-        >
-          {children}
-        </div>
+        {isProductPage ? (
+          <>
+            {/* Mobile (<md): bloque de Nav (hamburguesa | logo | carrito) */}
+            <div className="md:hidden">
+              <div
+                className={`
+                  max-w-[95rem] mx-auto px-4
+                  flex justify-between items-center
+                  transition-all duration-300 ease-out
+                  ${isScrolled ? "min-h-[56px] py-2" : "min-h-[60px] py-3"}
+                `}
+              >
+                {children}
+              </div>
+            </div>
+
+            {/* Desktop (≥md): logo centrado + nav centrado + lupa/carrito */}
+            <div className="hidden md:block">
+              <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
+                <ProductHeader isScrolled={isScrolled} cartSlot={cartSlot} />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div
+            className={`
+              max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14
+              flex justify-between items-center
+              transition-all duration-300 ease-out
+              ${isScrolled
+                ? "min-h-[56px] md:min-h-[60px] py-2"
+                : "min-h-[60px] md:min-h-[72px] py-3"
+              }
+            `}
+          >
+            {children}
+          </div>
+        )}
       </header>
     </div>
   )

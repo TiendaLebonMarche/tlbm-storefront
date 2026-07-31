@@ -353,8 +353,16 @@
   100% { transform: translateX(-50%); }
 }
 .animate-marquee-fixed { 
-  display: inline-flex;
-  animation: marquee-fixed 30s linear infinite; 
+  display: inline-flex !important;
+  width: max-content !important;
+  animation: marquee-fixed 45s linear infinite; 
+}
+
+/* Mobile: animación más lenta para el texto largo */
+@media (max-width: 640px) {
+  .animate-marquee-fixed {
+    animation-duration: 50s !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -411,6 +419,19 @@
 
 /* ── NAV LINK ── */
 .nav-link { position: relative; transition: color .3s; color: rgba(255,255,255,.4); }
+/* Variante para fondos claros (header de producto): texto oscuro + hover dorado */
+.nav-link-dark { position: relative; transition: color .3s; color: rgba(10,10,15,.65); }
+.nav-link-dark:hover { color: #D4AF37; }
+.nav-link-dark::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: #D4AF37;
+  transition: width .4s cubic-bezier(.16,1,.3,1);
+}
+.nav-link-dark:hover::after,
+.nav-link-dark.active::after { width: 100%; }
 .nav-link::after {
   content: '';
   position: absolute;

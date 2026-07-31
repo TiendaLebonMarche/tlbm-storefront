@@ -20,14 +20,14 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-      style={{ background: dark ? "#D4AF37" : "rgba(255,255,255,0.1)" }}
+      className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+      style={{ background: dark ? "#D4AF37" : "rgba(10,10,15,0.06)" }}
       aria-label="Cambiar tema"
     >
       <svg
-        className="w-4 h-4"
+        className="w-5 h-5"
         fill="none"
-        stroke={dark ? "#0A0A0F" : "white"}
+        stroke={dark ? "#0A0A0F" : "#0A0A0F"}
         viewBox="0 0 24 24"
       >
         {dark ? (

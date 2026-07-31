@@ -8,7 +8,6 @@ import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import ProductActionsWrapper from "./product-actions-wrapper"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Reveal from "@modules/common/components/reveal"
 import CollapsibleDescription from "@modules/products/components/collapsible-description"
@@ -69,25 +68,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <div className="bg-white min-h-screen selection:bg-brand-black/10">
 
-      {/* ── BREADCRUMB ── */}
-      <div className="border-b border-[#FAFAF9]">
-        <div className="content-container py-3 md:py-4">
-          <nav className="flex items-center gap-2 text-[9px] text-brand-gray tracking-[0.2em] uppercase font-sans">
-            <LocalizedClientLink href="/" className="inline-flex items-center min-h-[48px] hover:text-brand-black transition-colors duration-200">Inicio</LocalizedClientLink>
-            <span className="text-gray-200 flex items-center">/</span>
-            <LocalizedClientLink href="/store" className="inline-flex items-center min-h-[48px] hover:text-brand-black transition-colors duration-200">Tienda</LocalizedClientLink>
-            {product.collection && (
-              <>
-                <span className="text-gray-200">/</span>
-                <span className="text-brand-black/60 font-medium">{product.collection.title}</span>
-              </>
-            )}
-          </nav>
-        </div>
-      </div>
-
       {/* ── HERO: Gallery + Product Info ── */}
-      <div className="content-container py-[clamp(1.5rem,5vw,4rem)] lg:py-[clamp(2rem,6vw,4rem)]">
+      <div className="content-container py-6 md:py-8 lg:pt-8 lg:pb-12">
         <div className="flex flex-col lg:flex-row gap-[clamp(1.5rem,5vw,3rem)] lg:gap-[clamp(3rem,6vw,7rem)] xl:gap-[clamp(4rem,7vw,7rem)] items-start">
 
           {/* LEFT: Gallery — 58% */}

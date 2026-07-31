@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import TopMarquee from "@modules/common/components/top-marquee"
 
 // ── Logo URL ────────────────────────────────────────────────────────────────
 const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784320861/logo-julio_nezqqe.png"
@@ -168,33 +169,9 @@ function SlideMedia({
 }
 
 // ── Marquee ─────────────────────────────────────────────────────────────────
-
-function MarqueeBar() {
-  return (
-    <div className="relative z-50 bg-[#D4AF37] text-black overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-fixed py-2 md:py-2">
-        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A1A1A]">
-          <span className="opacity-50">✦</span>
-          <span>Tienda Le Bon Marché</span>
-          <span className="opacity-30">•</span>
-          <span>Tienda virtual en Bucaramanga</span>
-          <span className="opacity-30">•</span>
-          <span>Productos exóticos y 100% originales</span>
-          <span className="opacity-50">✦</span>
-        </span>
-        <span className="inline-flex items-center gap-6 mx-3 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A1A1A]">
-          <span className="opacity-50">✦</span>
-          <span>Tienda Le Bon Marché</span>
-          <span className="opacity-30">•</span>
-          <span>Tienda virtual en Bucaramanga</span>
-          <span className="opacity-30">•</span>
-          <span>Productos exóticos y 100% originales</span>
-          <span className="opacity-50">✦</span>
-        </span>
-      </div>
-    </div>
-  )
-}
+// La marquesina superior ahora vive en @modules/common/components/top-marquee
+// para reutilizarse en el index (variante dorada) y en páginas de producto
+// (variante oscura). Ver TopMarquee.
 
 // ── Sticky White Header (appears on scroll) ────────────────────────────────
 
@@ -438,7 +415,7 @@ export default function Hero() {
   return (
     <>
       {/* ── MARQUEE ── */}
-      <MarqueeBar />
+      <TopMarquee variant="gold" />
 
       {/* ── SCROLL HEADER (white bar) ── */}
       <ScrollHeader visible={isScrolled} />

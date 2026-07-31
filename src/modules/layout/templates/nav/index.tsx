@@ -22,8 +22,14 @@ export default async function Nav() {
   ])
 
   return (
-    <ClientHeaderWrapper>
-      {/* MOBILE (<md): hamburger left · LBM logo+text center · cart right */}
+    <ClientHeaderWrapper
+      cartSlot={
+        <Suspense fallback={<div className="w-5 h-5" />}>
+          <CartButton />
+        </Suspense>
+      }
+    >
+      {/* MOBILE (<md): hamburger left · LBM logo+text center · lupa + cart right */}
       <div className="flex md:hidden w-full items-center justify-between">
         <div className="flex-none">
           <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
@@ -31,12 +37,13 @@ export default async function Nav() {
 
         <LocalizedClientLink
           href="/"
-          className="flex items-center h-9 pointer-events-auto"
+          className="flex items-center h-11 pointer-events-auto"
         >
           <ClientLogo isMobile />
         </LocalizedClientLink>
 
         <div className="flex-none flex items-center gap-1">
+          <SearchModal />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
           </Suspense>
@@ -56,52 +63,36 @@ export default async function Nav() {
         </div>
 
         {/* Center: Nav links */}
-        <nav className="flex-none flex items-center gap-8 lg:gap-10">
+        <nav className="flex-none flex items-center gap-6 lg:gap-8">
           <LocalizedClientLink
             href="/"
-            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Inicio
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/store"
-            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Tienda
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/collections"
-            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Colecciones
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/store"
-            className="nav-link text-[12px] font-semibold tracking-[0.18em] uppercase"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
           >
             Ofertas
           </LocalizedClientLink>
         </nav>
 
-        {/* Right: Search, Explore, Cart */}
+        {/* Right: Search (lupa), Theme, Cart — sin botón EXPLORAR (regla: solo la lupa) */}
         <div className="flex items-center justify-end gap-3 lg:gap-5 flex-1">
           <SearchModal />
-          <LocalizedClientLink
-            href="/store"
-            className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-[10px] font-bold tracking-[0.18em] uppercase text-white rounded-full bg-[#0A0A0F] hover:bg-gray-900 transition-all duration-300 shadow-lg shadow-black/10 hover:shadow-black/20 hover:scale-105"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-3 h-3"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-            Explorar
-          </LocalizedClientLink>
           <ThemeToggle />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
