@@ -4,6 +4,7 @@ import Image from "next/image"
 import { listRegions } from "@lib/data/regions"
 import { listLocales } from "@lib/data/locales"
 import { getLocale } from "@lib/data/locale-actions"
+import { listCollections } from "@lib/data/collections"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
@@ -11,18 +12,21 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ThemeToggle from "@modules/layout/components/theme-toggle"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
+import { HttpTypes } from "@medusajs/types"
 
 import ClientLogo from "@modules/layout/components/client-logo"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale] = await Promise.all([
+  const [regions, locales, currentLocale, { collections }] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     getLocale(),
+    listCollections({ fields: "id,title,handle" }),
   ])
 
   return (
     <ClientHeaderWrapper
+      collections={collections as HttpTypes.StoreCollection[]}
       cartSlot={
         <Suspense fallback={<div className="w-5 h-5" />}>
           <CartButton />
@@ -32,7 +36,12 @@ export default async function Nav() {
       {/* MOBILE (<md): hamburger left · LBM logo+text center · lupa + cart right */}
       <div className="flex md:hidden w-full items-center justify-between">
         <div className="flex-none">
-          <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+          <SideMenu
+            regions={regions}
+            locales={locales}
+            currentLocale={currentLocale}
+            collections={collections as HttpTypes.StoreCollection[]}
+          />
         </div>
 
         <LocalizedClientLink

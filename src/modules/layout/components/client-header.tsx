@@ -20,9 +20,11 @@ import ProductHeader from "@modules/layout/components/product-header"
 export default function ClientHeader({
   children,
   cartSlot,
+  collections = [],
 }: {
   children: React.ReactNode
   cartSlot?: React.ReactNode
+  collections?: Array<{ id: string; title: string; handle: string }>
 }) {
   const isScrolled = useScrollThreshold(50)
   const pathname = usePathname()
@@ -152,7 +154,11 @@ export default function ClientHeader({
             {/* Desktop (≥md): logo centrado + nav centrado + lupa/carrito */}
             <div className="hidden md:block">
               <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-                <ProductHeader isScrolled={isScrolled} cartSlot={cartSlot} />
+                <ProductHeader
+                  isScrolled={isScrolled}
+                  cartSlot={cartSlot}
+                  collections={collections}
+                />
               </div>
             </div>
           </>

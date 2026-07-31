@@ -25,9 +25,10 @@ type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
+  collections?: Array<{ id: string; title: string; handle: string }>
 }
 
-const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
+const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMenuProps) => {
   const { isSideMenuOpen, openSideMenu, closeSideMenu, isCartOpen, closeCart } = useUI()
 
   // Cierra el carrito si se abre el menú lateral
@@ -120,6 +121,18 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                             onClick={() => { close(); closeSideMenu(); }}
                           >
                             {name}
+                          </LocalizedClientLink>
+                        </li>
+                      ))}
+                      {/* Colecciones dinámicas de Medusa */}
+                      {collections.map((collection, index) => (
+                        <li key={collection.id} className="w-full group overflow-hidden">
+                          <LocalizedClientLink
+                            href={`/collections/${collection.handle}`}
+                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 delay-[${(mainMenu.length + index) * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
+                            onClick={() => { close(); closeSideMenu(); }}
+                          >
+                            {collection.title}
                           </LocalizedClientLink>
                         </li>
                       ))}
