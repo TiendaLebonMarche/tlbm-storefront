@@ -4,6 +4,7 @@ import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-g
 import RefinementList from "@modules/store/components/refinement-list"
 import SearchBar from "@modules/store/components/search-bar"
 import FilterPanel from "@modules/store/components/filter-panel"
+import CollectionFilter from "@modules/store/components/collection-filter"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { listCollections } from "@lib/data/collections"
 
@@ -34,6 +35,10 @@ const StoreTemplate = async ({
     fields: "id, handle, title",
   })
 
+  // El searchParam ?collection= trae el ID de la colección (como lo setea
+  // FilterPanel y CollectionFilter). PaginatedProducts espera collectionId.
+  const resolvedCollectionId = collection || undefined
+
   return (
     <div className="bg-white min-h-screen" data-testid="category-container">
       
@@ -63,6 +68,9 @@ const StoreTemplate = async ({
       </div>
 
       <div className="content-container px-6 py-10">
+        {/* ── Filtro de colecciones (pills elegantes, todo el ancho) ── */}
+        <CollectionFilter collections={collections || []} />
+
         <div className="flex flex-col medium:flex-row gap-x-10 gap-y-8">
 
           {/* ── Sidebar ── */}
@@ -95,6 +103,7 @@ const StoreTemplate = async ({
                 page={pageNumber}
                 countryCode={countryCode}
                 query={query}
+                collectionId={resolvedCollectionId}
                 collection={collection}
                 minPrice={minPrice}
                 maxPrice={maxPrice}

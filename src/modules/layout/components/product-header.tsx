@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import SearchModal from "@modules/layout/components/search-modal"
 import ClientLogo from "@modules/layout/components/client-logo"
+import CollectionsDropdown from "@modules/layout/components/collections-dropdown"
 
 /**
  * Header de páginas de detalle de producto (desktop ≥md).
@@ -40,8 +40,6 @@ export default function ProductHeader({
   cartSlot?: React.ReactNode
   collections?: Collection[]
 }) {
-  const [isCollectionsOpen, setCollectionsOpen] = useState(false)
-
   return (
     <div className="flex flex-col w-full">
       {/* ── Fila 1: logo centrado → index ── */}
@@ -90,88 +88,14 @@ export default function ProductHeader({
             Tienda
           </LocalizedClientLink>
 
-          {/* ── Colecciones: dropdown mega-menú ── */}
+          {/* ── Colecciones: dropdown mega-menú (componente compartido) ── */}
           <span
             aria-hidden="true"
             className="mx-4 lg:mx-6 text-[8px] leading-none text-[#D4AF37]/70 select-none"
           >
             ◆
           </span>
-          <div
-            className="relative"
-            onMouseEnter={() => setCollectionsOpen(true)}
-            onMouseLeave={() => setCollectionsOpen(false)}
-          >
-            <LocalizedClientLink
-              href="/collections"
-              className="nav-link-lux text-[11px] font-semibold tracking-[0.22em] uppercase inline-flex items-center gap-1.5"
-            >
-              Colecciones
-              <svg
-                width="9"
-                height="9"
-                viewBox="0 0 12 12"
-                fill="none"
-                className={`transition-transform duration-300 ${isCollectionsOpen ? "rotate-180" : ""} text-[#D4AF37]`}
-              >
-                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </LocalizedClientLink>
-
-            {/* Panel dropdown */}
-            <div
-              className={`
-                absolute left-1/2 -translate-x-1/2 top-full pt-3
-                transition-all duration-300 ease-out
-                ${isCollectionsOpen
-                  ? "opacity-100 translate-y-0 pointer-events-auto"
-                  : "opacity-0 -translate-y-1 pointer-events-none"}
-              `}
-            >
-              <div className="w-[420px] md:w-[460px] bg-white/95 backdrop-blur-xl border border-[#D4AF37]/15 rounded-2xl shadow-[0_24px_60px_rgba(10,10,15,0.14)] p-5">
-                {/* Header del panel */}
-                <div className="flex items-center justify-between mb-4 pb-4 border-b border-[#FAFAF9]">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
-                    Explorar por categoría
-                  </span>
-                  <span aria-hidden="true" className="text-[#D4AF37] text-[10px]">
-                    ◆
-                  </span>
-                </div>
-
-                {/* Grid de colecciones */}
-                <div className="grid grid-cols-2 gap-1">
-                  {collections.length === 0 ? (
-                    <p className="col-span-2 text-sm text-black/40 py-3">
-                      Cargando colecciones…
-                    </p>
-                  ) : (
-                    collections.map((collection) => (
-                      <LocalizedClientLink
-                        key={collection.id}
-                        href={`/collections/${collection.handle}`}
-                        className="group flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg text-[12px] font-semibold uppercase tracking-[0.14em] text-black/60 hover:text-[#B8962E] hover:bg-[#D4AF37]/6 transition-all duration-200"
-                      >
-                        {collection.title}
-                        <span className="text-[#D4AF37]/50 text-[10px] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
-                          →
-                        </span>
-                      </LocalizedClientLink>
-                    ))
-                  )}
-                </div>
-
-                {/* Footer del panel */}
-                <LocalizedClientLink
-                  href="/collections"
-                  className="mt-4 pt-4 border-t border-[#FAFAF9] flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.28em] text-black/50 hover:text-[#B8962E] transition-colors duration-200"
-                >
-                  Ver todas las colecciones
-                  <span className="text-[#D4AF37]">→</span>
-                </LocalizedClientLink>
-              </div>
-            </div>
-          </div>
+          <CollectionsDropdown collections={collections} />
 
           <span
             aria-hidden="true"

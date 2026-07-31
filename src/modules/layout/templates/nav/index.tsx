@@ -12,6 +12,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/layout/components/search-modal"
 import ThemeToggle from "@modules/layout/components/theme-toggle"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
+import CollectionsDropdown from "@modules/layout/components/collections-dropdown"
 import { HttpTypes } from "@medusajs/types"
 
 import ClientLogo from "@modules/layout/components/client-logo"
@@ -85,12 +86,10 @@ export default async function Nav() {
           >
             Tienda
           </LocalizedClientLink>
-          <LocalizedClientLink
-            href="/collections"
-            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
-          >
-            Colecciones
-          </LocalizedClientLink>
+          <CollectionsDropdown
+            collections={collections as HttpTypes.StoreCollection[]}
+            linkClassName="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase inline-flex items-center gap-1.5"
+          />
           <LocalizedClientLink
             href="/store"
             className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
