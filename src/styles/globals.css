@@ -447,6 +447,21 @@
 .nav-link-lux:hover { color: #D4AF37; }
 .nav-link-lux:hover::after,
 .nav-link-lux.active::after { width: 100%; }
+/* Tab de filtro de colecciones (/store): línea dorada que crece desde el centro,
+   activa = línea visible + texto negro; inactiva = solo línea al hover */
+.filter-tab { padding-bottom: 6px; }
+.filter-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 1.5px;
+  background: #D4AF37;
+  transition: width .4s cubic-bezier(.16,1,.3,1);
+}
+.filter-tab:hover::after { width: 60%; }
+.filter-tab[data-active='true']::after,
+.filter-tab[data-active='true']:hover::after { width: 100%; }
 .nav-link::after {
   content: '';
   position: absolute;
