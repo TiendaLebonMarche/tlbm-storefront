@@ -97,6 +97,14 @@ export default async function Nav() {
           >
             Ofertas
           </LocalizedClientLink>
+          <a
+            href="https://wa.me/573027567783"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
+          >
+            Contacto
+          </a>
         </nav>
 
         {/* Right: Search (lupa), Theme, Cart — sin botón EXPLORAR (regla: solo la lupa) */}
