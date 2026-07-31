@@ -31,9 +31,15 @@ const StoreTemplate = async ({
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
 
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
+  // noStore: el filtro de colecciones debe reflejar SIEMPRE las colecciones
+  // actuales (las crea el departamento de Catálogo vía admin API, sin invalidar
+  // el tag de Next → force-cache serviría 0 colecciones en producción).
+  const { collections } = await listCollections(
+    {
+      fields: "id, handle, title",
+    },
+    { noStore: true }
+  )
 
   // El searchParam ?collection= trae el ID de la colección (como lo setea
   // FilterPanel y CollectionFilter). PaginatedProducts espera collectionId.
