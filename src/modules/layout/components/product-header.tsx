@@ -51,7 +51,7 @@ export default function ProductHeader({
         <LocalizedClientLink
           href="/"
           aria-label="Ir al inicio"
-          className="pointer-events-auto"
+          className="pointer-events-auto h-full flex items-center justify-center"
         >
           <ClientLogo />
         </LocalizedClientLink>

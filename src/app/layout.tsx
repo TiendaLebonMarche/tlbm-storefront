@@ -101,8 +101,9 @@ export const metadata: Metadata = {
   },
   category: "shopping",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 }
 

@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useScrollThreshold } from "@lib/hooks/use-scroll-threshold"
 import { usePathname } from "next/navigation"
 
-const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1784320861/logo-julio_nezqqe.png"
+const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785517677/logo-TLBM-trpar_qtqudf.png"
 
 export default function ClientLogo({ isMobile = false }: { isMobile?: boolean }) {
   const isScrolled = useScrollThreshold(50)
