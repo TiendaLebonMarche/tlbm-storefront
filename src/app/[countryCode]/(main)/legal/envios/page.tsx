@@ -49,6 +49,11 @@ export default function EnviosPage() {
                 Cuando invierte en tecnología exótica o artículos premium, la puntualidad no es opcional. Hemos estructurado nuestra red logística desde nuestro centro en Bucaramanga.
               </p>
 
+              <h2 className="text-3xl mt-16 mb-6">Información de Entrega (Ley 1480, art. 23)</h2>
+              <p>
+                Conforme al artículo 23 de la Ley 1480 de 2011, antes de finalizar su compra usted conoce el valor total del pedido, los costos de envío, los plazos de entrega y la identidad del comerciante. Esta información también llega por correo electrónico en la confirmación del pedido. Si el producto no puede ser entregado en el plazo informado, le avisaremos de inmediato y usted podrá optar por la entrega posterior o el reintegro del dinero.
+              </p>
+
               <h2 className="text-3xl mt-16 mb-6">El Modelo Fast-Track (Local)</h2>
               <p>
                 Para el Área Metropolitana de Bucaramanga y periferia directa, aplicamos el protocolo <strong>Fast-Track</strong>. Todo pedido abonado antes de las 13:00 hrs de un día hábil es procesado y despachado con la estricta garantía de llegar a su residencia u oficina <strong>en menos de 24 horas</strong>. Nuestras rutas VIP operan blindando la caja con protocolos de privacidad.

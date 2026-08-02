@@ -51,12 +51,30 @@ export default function PrivacidadPage() {
 
               <h2 className="text-3xl mt-16 mb-6">Finalidad y Uso de Datos</h2>
               <p>
-                Bajo la Ley 1581 de 2012, informamos que requerimos su información primaria y civil únicamente para:
+                Bajo la Ley 1581 de 2012 y el Decreto 1377 de 2013, informamos que requerimos su información primaria y civil únicamente para:
               </p>
               <ul className="mb-10 mt-4 space-y-3">
                 <li>Ejecutar nuestra logística de despachos y el modelo Fast-Track.</li>
                 <li>Tramitar correctamente la facturación electrónica requerida por la DIAN.</li>
                 <li>Brindar atención VIP por medio de nuestros asesores directos.</li>
+              </ul>
+
+              <h2 className="text-3xl mt-16 mb-6">Consentimiento y Aviso de Privacidad</h2>
+              <p>
+                Conforme al Decreto 1377 de 2013, el tratamiento de sus datos personales requiere su <strong>autorización previa, expresa e informada</strong>. Por eso, al momento de finalizar su compra usted debe aceptar de manera voluntaria (casilla de verificación <strong>no premarcada</strong>) nuestra Política de Tratamiento de Datos. El silencio no constituye consentimiento. Usted puede revocar su autorización en cualquier momento.
+              </p>
+
+              <h2 className="text-3xl mt-16 mb-6">Derechos del Titular</h2>
+              <p>
+                De acuerdo con el artículo 8 de la Ley 1581 de 2012, usted tiene derecho a:
+              </p>
+              <ul className="mb-10 mt-4 space-y-3">
+                <li><strong>Conocer, actualizar y rectificar</strong> sus datos personales.</li>
+                <li><strong>Solicitar prueba</strong> de la autorización otorgada.</li>
+                <li><strong>Ser informado</strong> del uso que se les ha dado.</li>
+                <li><strong>Presentar quejas</strong> ante la Superintendencia de Industria y Comercio (SIC) por infracciones a la Ley 1581.</li>
+                <li><strong>Revocar la autorización</strong> y solicitar la supresión de los datos cuando no se requieran para la finalidad.</li>
+                <li><strong>Acceder</strong> en cualquier momento a sus datos.</li>
               </ul>
 
               <h2 className="text-3xl mt-16 mb-6">Inteligencia Artificial y Transparencia</h2>
