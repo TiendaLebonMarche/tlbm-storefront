@@ -26,9 +26,9 @@ export default async function Footer() {
   return (
     <footer className="bg-[#08080C] text-white pt-16 pb-8 border-t border-white/5">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-14 reveal justify-items-center">
           {/* Brand */}
-          <div>
+          <div className="flex flex-col items-center text-center">
             <LocalizedClientLink href="/" className="inline-block mb-6">
               <div className="relative w-[160px] md:w-[220px] h-[44px] md:h-[60px]">
                 <Image
@@ -60,7 +60,7 @@ export default async function Footer() {
           </div>
 
           {/* Colección */}
-          <div>
+          <div className="flex flex-col items-center text-center">
             <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Colección</h4>
             <ul className="space-y-3">
               {collections.length > 0 ? (
@@ -81,7 +81,7 @@ export default async function Footer() {
           </div>
 
           {/* Ayuda */}
-          <div>
+          <div className="flex flex-col items-center text-center">
             <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Ayuda</h4>
             <ul className="space-y-3">
               <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
@@ -93,13 +93,13 @@ export default async function Footer() {
           </div>
 
           {/* Contacto */}
-          <div>
+          <div className="flex flex-col items-center text-center">
             <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Contacto</h4>
             <ul className="space-y-3">
               <li className="text-sm text-white">Bucaramanga, Santander</li>
               <li><a href="mailto:info@tiendalebonmarche.com" className="text-sm text-white hover:text-[#D4AF37] transition-colors duration-300">info@tiendalebonmarche.com</a></li>
               <li><a href="https://wa.me/573027567783" className="text-sm text-white hover:text-[#D4AF37] transition-colors duration-300">+57 302 756 7783</a></li>
-              <li className="mt-8">
+              <li className="mt-8 flex flex-col items-center">
                 <div className="text-[10px] font-bold uppercase tracking-[.25em] text-white/70 mb-3">Newsletter</div>
                 <NewsletterForm />
               </li>
@@ -108,15 +108,15 @@ export default async function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-center gap-4">
           <p className="text-white/70 text-[11px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto justify-center">
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-white/70 text-[11px]">
               <span>Emprendimiento de Bucaramanga, Col</span>
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>
-            <div className="grid grid-cols-4 sm:flex sm:flex-wrap sm:justify-center gap-2.5">
+            <div className="grid grid-cols-4 sm:flex sm:flex-wrap sm:justify-center gap-2.5 justify-items-center">
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Nequi">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444937/nequi_wzhnhr.svg" alt="Nequi" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
