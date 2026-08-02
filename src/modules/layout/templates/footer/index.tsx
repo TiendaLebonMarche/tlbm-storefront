@@ -110,33 +110,33 @@ export default async function Footer() {
         {/* Bottom */}
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/70 text-[11px]">© {new Date().getFullYear()} Le Bon Marché. Todos los derechos reservados.</p>
-          <div className="flex items-center gap-4">
-            <div className="flex gap-4 text-white/70 text-[10px]">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-white/70 text-[11px]">
               <span>Emprendimiento de Bucaramanga, Col</span>
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>
-            <div className="flex gap-2.5 items-center flex-wrap justify-center">
+            <div className="grid grid-cols-4 sm:flex sm:flex-wrap sm:justify-center gap-2.5">
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Nequi">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444937/nequi_wzhnhr.svg" alt="Nequi" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444937/nequi_wzhnhr.svg" alt="Nequi" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mercado Pago">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mercadopago_xx7b9e.svg" alt="Mercado Pago" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mercadopago_xx7b9e.svg" alt="Mercado Pago" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mastercard">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mastercard_gfpcyy.svg" alt="Mastercard" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mastercard_gfpcyy.svg" alt="Mastercard" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Daviplata">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/daviplata_oiquqy.svg" alt="Daviplata" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/daviplata_oiquqy.svg" alt="Daviplata" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="PSE Colombia">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/pse-logo_wxdnoy.png" alt="PSE Colombia" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/pse-logo_wxdnoy.png" alt="PSE Colombia" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Bre-B">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Bre-B_dhmaex.svg" alt="Bre-B" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Bre-B_dhmaex.svg" alt="Bre-B" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
               <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Binance">
-                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Binance_logo_zbndn0.svg" alt="Binance" className="h-5 w-auto object-contain" loading="lazy" />
+                <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Binance_logo_zbndn0.svg" alt="Binance" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
             </div>
           </div>

@@ -492,13 +492,7 @@ export default function Hero() {
               <motion.div custom={3} variants={textVariants} className="mt-6 md:mt-9">
                 <LocalizedClientLink
                   href={currentSlide.href}
-                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-lg text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98]"
-                  style={{
-                    background: "linear-gradient(135deg, #D4AF37, #D4AF37/80)",
-                    backgroundColor: "#D4AF37",
-                    color: "#0A0A0F",
-                    boxShadow: "0 4px 24px rgba(212,175,55,0.3)",
-                  }}
+                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98] bg-[#0A0A0F] text-white border border-white/10 hover:border-[#D4AF37]/40"
                 >
                   <span className="relative z-10">{currentSlide.cta}</span>
                   <svg
@@ -510,7 +504,7 @@ export default function Hero() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 </LocalizedClientLink>
               </motion.div>
             </motion.div>

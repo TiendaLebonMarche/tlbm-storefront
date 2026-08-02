@@ -43,7 +43,7 @@ export default function TerminosPage() {
               Términos y Condiciones
             </h1>
             
-            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-p:leading-loose text-brand-gray max-w-none">
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-p:leading-loose text-brand-gray max-w-none [&_h2]:font-serif [&_h2]:font-bold [&_h2]:text-[#000000] [&_h2]:tracking-tight [&_p]:text-brand-gray [&_p]:font-light [&_p]:leading-loose">
               
               <p className="text-xl md:text-2xl font-serif text-[#000000] leading-relaxed mb-16">
                 Bienvenido a Tienda Le Bon Marché. Este documento establece el contrato de adhesión bajo el cual usted accede a nuestros servicios y plataforma, rigiéndonos bajo la Ley 1480 de 2011 (Estatuto del Consumidor), la Ley 527 de 1999 (Comercio Electrónico) y demás normativa colombiana aplicable al comercio virtual.

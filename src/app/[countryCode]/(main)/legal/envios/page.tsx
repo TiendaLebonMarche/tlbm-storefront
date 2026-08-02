@@ -43,7 +43,7 @@ export default function EnviosPage() {
               Envíos y Entregas
             </h1>
             
-            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-li:text-brand-gray prose-li:font-light prose-p:leading-loose text-brand-gray max-w-none">
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-li:text-brand-gray prose-li:font-light prose-p:leading-loose text-brand-gray max-w-none [&_h2]:font-serif [&_h2]:font-bold [&_h2]:text-[#000000] [&_h2]:tracking-tight [&_p]:text-brand-gray [&_p]:font-light [&_p]:leading-loose">
               
               <p className="text-xl md:text-2xl font-serif text-[#000000] leading-relaxed mb-16">
                 Cuando invierte en tecnología exótica o artículos premium, la puntualidad no es opcional. Hemos estructurado nuestra red logística desde nuestro centro en Bucaramanga.

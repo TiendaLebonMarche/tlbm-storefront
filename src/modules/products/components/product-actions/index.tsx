@@ -204,6 +204,27 @@ export default function ProductActions({
           <ProductPrice product={product} variant={selectedVariant} />
         </div>
 
+        {/* Availability & Urgency — UNA sola fuente de verdad: inStock de la variante seleccionada */}
+        <div className="flex items-center gap-3">
+          {inStock ? (
+            <>
+              <div className="relative flex items-center justify-center">
+                <div className="w-3 h-3 rounded-full bg-green-500/30 animate-ping absolute" />
+                <div className="w-2 h-2 rounded-full bg-green-500 relative" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-green-700 font-sans">Disponible</p>
+                <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestra dirección principal</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-2 h-2 rounded-full bg-red-400" />
+              <p className="text-sm font-medium text-red-500 font-sans">Agotado temporalmente</p>
+            </>
+          )}
+        </div>
+
         {/* CTAs */}
         <div className="flex flex-col gap-3">
           {/* Botón principal: Añadir al carrito */}

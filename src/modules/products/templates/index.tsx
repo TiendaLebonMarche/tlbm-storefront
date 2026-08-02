@@ -39,22 +39,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     return notFound()
   }
 
-  const totalStock = product.variants?.reduce(
-    (sum, v) => {
-      // In Medusa v2, inventory_quantity may be null (managed via inventory items)
-      if (v.inventory_quantity === null || v.inventory_quantity === undefined) {
-        return sum + 999
-      }
-      return sum + (v.inventory_quantity || 0)
-    },
-    0
-  ) || 999
-
   const isNew = product.created_at
     ? new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
     : false
-
-  const isLowStock = totalStock < 5 && totalStock > 0
 
   // Extract MedusaJS metadata
   const tags = (product as any).tags || []
@@ -144,39 +131,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               >
                 <ProductActionsWrapper id={product.id} region={region} />
               </Suspense>
-            </div>
-
-            {/* Availability & Urgency */}
-            <div className="pb-8 space-y-4">
-              <div className="flex items-center gap-3">
-                {totalStock > 0 ? (
-                  <>
-                    <div className="relative flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-green-500/30 animate-ping absolute" />
-                      <div className="w-2 h-2 rounded-full bg-green-500 relative" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-green-700 font-sans">Disponible</p>
-                      <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestra dirección principal</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-2 h-2 rounded-full bg-red-400" />
-                    <p className="text-sm font-medium text-red-500 font-sans">Agotado temporalmente</p>
-                  </>
-                )}
-              </div>
-              {isLowStock && (
-                <div className="bg-orange-50/40 border border-orange-100/50 p-3 rounded-sm">
-                  <p className="text-[11px] text-orange-600/90 font-medium font-sans flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                    </svg>
-                    Edición Limitada: Solo quedan {totalStock} unidades disponibles
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Divider */}
