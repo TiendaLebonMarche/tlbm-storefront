@@ -1,5 +1,5 @@
 version: STSv1
-mode: testing
+mode: enforce
 mx: route1.mx.cloudflare.net
 mx: route2.mx.cloudflare.net
 mx: route3.mx.cloudflare.net
