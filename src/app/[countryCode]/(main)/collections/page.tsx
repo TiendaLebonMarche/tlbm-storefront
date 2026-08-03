@@ -19,10 +19,7 @@ export default async function CollectionsPage({ params }: Props) {
   const { countryCode } = await params
 
   const [{ collections }, regions] = await Promise.all([
-    listCollections(
-      { fields: "id,title,handle,products.id" },
-      { noStore: true }
-    ),
+    listCollections({ fields: "id,title,handle,products.id" }),
     listRegions(),
   ])
 

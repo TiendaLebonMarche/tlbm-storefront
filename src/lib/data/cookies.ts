@@ -19,18 +19,18 @@ export const getAuthHeaders = async (): Promise<
 }
 
 export const getCacheTag = async (tag: string): Promise<string> => {
+  // TLBM: storefront sin datos por-usuario en páginas cacheadas → tags PLANOS
+  // compartidos por entidad ("products", "collections", "categories", ...).
+  // El subscriber de Medusa (backend) invalida con revalidateTag(tag) on-demand.
+  // La cookie _medusa_cache_id del starter (per-visitante) fragmenta la caché
+  // y hace IMPOSIBLE la invalidación remota (revalidateTag es exacto, no por prefijo).
   try {
-    const cookies = await nextCookies()
-    const cacheId = cookies.get("_medusa_cache_id")?.value
-
-    if (!cacheId) {
-      return ""
-    }
-
-    return `${tag}-${cacheId}`
+    await nextCookies()
   } catch (error) {
-    return ""
+    // cookies() no disponible (edge/build) — el tag plano igual aplica
   }
+
+  return tag
 }
 
 export const getCacheOptions = async (
@@ -40,13 +40,7 @@ export const getCacheOptions = async (
     return {}
   }
 
-  const cacheTag = await getCacheTag(tag)
-
-  if (!cacheTag) {
-    return {}
-  }
-
-  return { tags: [`${cacheTag}`] }
+  return { tags: [tag] }
 }
 
 export const setAuthToken = async (token: string) => {
