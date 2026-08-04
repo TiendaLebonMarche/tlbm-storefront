@@ -27,7 +27,7 @@ export default async function RelatedMostSold({
     queryParams: {
       limit: 50,
       fields:
-        "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+thumbnail,*images,+metadata,+tags,+categories,",
+        "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+thumbnail,*images,+metadata,+tags,*categories,",
     },
   }).catch(() => null)
 
