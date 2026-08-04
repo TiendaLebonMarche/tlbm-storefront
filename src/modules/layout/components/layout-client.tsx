@@ -24,6 +24,8 @@ export default function LayoutClient() {
     window.addEventListener("scroll", onScroll, { passive: true })
 
     // ── Reveal Observer for .reveal elements ──
+    // Robusto: si el elemento ya está en viewport al registrarse, mostrarlo de inmediato.
+    // Timeout de seguridad: nada puede quedar invisible para siempre (bug intermitente del observer).
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -33,13 +35,31 @@ export default function LayoutClient() {
           }
         })
       },
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     )
-    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el))
+
+    const revealEls = document.querySelectorAll<HTMLElement>(".reveal")
+    revealEls.forEach((el) => {
+      // Ya visible en pantalla → activar sin esperar al observer
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add("visible")
+      } else {
+        revealObserver.observe(el)
+      }
+    })
+
+    // Fallback: forzar visibilidad de TODO lo que no se activó (evita secciones invisibles)
+    const safetyTimer = window.setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".reveal:not(.visible)").forEach((el) => {
+        el.classList.add("visible")
+      })
+    }, 2500)
 
     return () => {
       window.removeEventListener("scroll", onScroll)
       revealObserver.disconnect()
+      window.clearTimeout(safetyTimer)
       progress.remove()
       noise.remove()
     }

@@ -25,7 +25,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
 
   return (
     <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 md:py-20 overflow-hidden">
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10 reveal">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10">
         <div className="flex items-end justify-between">
           <div>
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
@@ -51,8 +51,9 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
         </div>
       </div>
 
-      {/* Horizontal scrolling row */}
-      <div className="pm-wrap reveal r-d2">
+      {/* Horizontal scrolling row — SIN reveal: la marquesina debe ser SIEMPRE visible
+          (el IntersectionObserver falla intermitentemente → sección invisible) */}
+      <div className="pm-wrap">
         <div className="pm-track">
           {duplicatedItems.map((item, index) => (
             <div key={`${item.id}-${index}`} className="flex-shrink-0 group" style={{ width: "clamp(240px, 28vw, 340px)" }}>
@@ -102,7 +103,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
         </div>
       </div>
 
-      <div className="mt-12 text-center reveal">
+      <div className="mt-12 text-center">
         <LocalizedClientLink
           href="/store"
           className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
