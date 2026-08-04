@@ -184,13 +184,6 @@ export default async function ProductPage(props: Props) {
     },
     "itemCondition": "https://schema.org/NewCondition",
     "category": pricedProduct.collection?.title || "Productos Premium",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "48",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
     "offers": {
       "@type": "Offer",
       "@id": `${productUrl}#offer`,

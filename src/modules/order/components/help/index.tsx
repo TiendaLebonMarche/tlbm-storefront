@@ -9,12 +9,14 @@ const Help = () => {
       <div className="text-base-regular my-2">
         <ul className="gap-y-2 flex flex-col">
           <li>
-            <LocalizedClientLink href="/contact">Contáctanos</LocalizedClientLink>
+            <a href="https://wa.me/573027567783" target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
+              Contáctanos por WhatsApp
+            </a>
           </li>
           <li>
-            <LocalizedClientLink href="/contact">
+            <a href="https://wa.me/573027567783" target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
               Cambios y Devoluciones
-            </LocalizedClientLink>
+            </a>
           </li>
         </ul>
       </div>

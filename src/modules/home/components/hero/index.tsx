@@ -245,7 +245,7 @@ function ScrollHeader({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
-                { label: "Contacto", href: "/contact" },
+                { label: "Contacto", href: "https://wa.me/573027567783" },
               ].map((link, i) => (
                 <motion.div
                   key={link.label}
@@ -253,13 +253,25 @@ function ScrollHeader({ visible }: { visible: boolean }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 * i, duration: 0.5 }}
                 >
-                  <LocalizedClientLink
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                  >
-                    {link.label}
-                  </LocalizedClientLink>
+                  {link.href.startsWith("http") ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMenuOpen(false)}
+                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <LocalizedClientLink
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                    >
+                      {link.label}
+                    </LocalizedClientLink>
+                  )}
                 </motion.div>
               ))}
             </nav>
@@ -338,7 +350,7 @@ function HeroOverlay({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
-                { label: "Contacto", href: "/contact" },
+                { label: "Contacto", href: "https://wa.me/573027567783" },
               ].map((link, i) => (
                 <motion.div
                   key={link.label}
@@ -346,13 +358,25 @@ function HeroOverlay({ visible }: { visible: boolean }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 * i, duration: 0.5 }}
                 >
-                  <LocalizedClientLink
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                  >
-                    {link.label}
-                  </LocalizedClientLink>
+                  {link.href.startsWith("http") ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMenuOpen(false)}
+                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <LocalizedClientLink
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
+                    >
+                      {link.label}
+                    </LocalizedClientLink>
+                  )}
                 </motion.div>
               ))}
             </nav>
