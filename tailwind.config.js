@@ -24,8 +24,6 @@ module.exports = {
         tlbm: {
           gold: '#D4AF37',
           'gold-light': '#E8C84A',
-          'gold-dark': '#B8860B',
-          amber: '#C8912E',
           dark: '#0A0A0F',
           surface: '#121218',
           card: '#181820',

@@ -120,10 +120,6 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <head>
-        <meta property="og:image" content="https://www.tiendalebonmarche.com/opengraph-image.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Tienda Le Bon Marché — Boutique Online Colombia" />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{

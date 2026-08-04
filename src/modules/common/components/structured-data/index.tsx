@@ -46,7 +46,7 @@ export default function StructuredData() {
       },
       {
         "@type": "ContactPoint",
-        "email": "hola@tiendalebonmarche.com",
+        "email": "info@tiendalebonmarche.com",
         "contactType": "customer support",
         "areaServed": "CO"
       }
@@ -142,7 +142,7 @@ export default function StructuredData() {
         "name": "¿Puedo hacer devoluciones?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, dentro de los primeros 15 días desde la recepción del producto, en condiciones originales. Contáctanos a hola@tiendalebonmarche.com para gestionar tu devolución."
+          "text": "Sí, dentro de los primeros 15 días desde la recepción del producto, en condiciones originales. Contáctanos a info@tiendalebonmarche.com para gestionar tu devolución."
         }
       }
     ]
