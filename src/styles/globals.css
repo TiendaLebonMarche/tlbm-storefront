@@ -474,10 +474,9 @@
 .nav-link.active::after { width: 100%; }
 
 /* ── PRODUCT MARQUEE ── */
+/* SIN fade lateral (regla TLBM: marquesina de productos sin difuminado en los lados) */
 .pm-wrap {
   overflow: hidden;
-  mask-image: linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
-  -webkit-mask-image: linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
 }
 .pm-track { display: flex; gap: 1.25rem; width: max-content; animation: pm-scroll 50s linear infinite; }
 .pm-track:hover { animation-play-state: paused; }
