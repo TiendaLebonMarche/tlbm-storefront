@@ -37,7 +37,7 @@ const SLIDES: Slide[] = [
     cta: "Descubrir Colección",
     href: "/store",
     image:
-      "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842108/hero/hero-1.jpg",
     video:
       "https://res.cloudinary.com/dgo9tm9e2/video/upload/v1784322670/12655226_3834_2160_30fps_gias92.mp4",
     overlayFrom: "from-black/65",
@@ -53,7 +53,7 @@ const SLIDES: Slide[] = [
     cta: "Ver Productos",
     href: "/store?collection=exclusivos",
     image:
-      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1920&q=75",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842110/hero/hero-2.jpg",
     overlayFrom: "from-black/60",
     overlayTo: "to-black/25",
     textSide: "right",
@@ -67,7 +67,7 @@ const SLIDES: Slide[] = [
     cta: "Ver Ofertas",
     href: "/store",
     image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=75",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842112/hero/hero-3.jpg",
     overlayFrom: "from-black/55",
     overlayTo: "to-black/20",
     textSide: "left",
@@ -81,7 +81,7 @@ const SLIDES: Slide[] = [
     cta: "Conócenos",
     href: "/store",
     image:
-      "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1920&q=75",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842113/hero/hero-4.jpg",
     overlayFrom: "from-black/60",
     overlayTo: "to-black/25",
     textSide: "right",

@@ -139,11 +139,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload hero image for faster LCP — alineado con el slide 1 real (foto 1468495244123) */}
+        {/* Preload hero image for faster LCP — alineado con el slide 1 real (Cloudinary f_auto) */}
         <link
           rel="preload"
           as="image"
-          href="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75"
+          href="https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842108/hero/hero-1.jpg"
           fetchPriority="high"
         />
 
