@@ -15,6 +15,8 @@ interface Slide {
   id: number
   label: string
   title: string
+  /** Frase a resaltar en dorado sólido (1 sola — regla oro solo acento) */
+  highlight?: string
   subtitle: string
   cta: string
   href: string
@@ -31,7 +33,8 @@ const SLIDES: Slide[] = [
   {
     id: 1,
     label: "Tienda Virtual Bucaramanga",
-    title: "Tienda virtual en\nBucaramanga con productos\n100% originales",
+    title: "Tienda virtual en\nBucaramanga con\nproductos 100% originales",
+    highlight: "100% originales",
     subtitle:
       "Los mismos productos que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
     cta: "Descubrir Colección",
@@ -500,9 +503,20 @@ export default function Hero() {
               <motion.h1
                 custom={1}
                 variants={textVariants}
-                className="font-serif text-[2.2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] leading-[1.05] font-bold text-white whitespace-pre-line"
+                className="font-serif font-semibold text-white whitespace-pre-line text-[2.05rem] min-[375px]:text-[2.2rem] sm:text-[2.7rem] md:text-[3.1rem] lg:text-[3.9rem] min-[1440px]:text-[4.5rem] min-[1920px]:text-[5rem] leading-[1.08] md:leading-[1.06] lg:leading-[1.03] min-[1440px]:leading-[1.01] min-[1920px]:leading-[1] tracking-[-0.008em] sm:tracking-[-0.01em] lg:tracking-[-0.012em] min-[1440px]:tracking-[-0.015em] text-balance max-w-[18ch] lg:max-w-[20ch]"
               >
-                {currentSlide.title}
+                {currentSlide.highlight && currentSlide.title.includes(currentSlide.highlight)
+                  ? (() => {
+                      const parts = currentSlide.title.split(currentSlide.highlight)
+                      return (
+                        <>
+                          {parts[0]}
+                          <span className="text-[#D4AF37]">{currentSlide.highlight}</span>
+                          {parts[1]}
+                        </>
+                      )
+                    })()
+                  : currentSlide.title}
               </motion.h1>
 
               <motion.p
@@ -516,7 +530,7 @@ export default function Hero() {
               <motion.div custom={3} variants={textVariants} className="mt-6 md:mt-9">
                 <LocalizedClientLink
                   href={currentSlide.href}
-                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98] bg-[#0A0A0F] text-white border border-white/10 hover:border-[#D4AF37]/40"
+                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase bg-[#0A0A0F] text-white border border-white/10 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 active:scale-[0.98]"
                 >
                   <span className="relative z-10">{currentSlide.cta}</span>
                   <svg

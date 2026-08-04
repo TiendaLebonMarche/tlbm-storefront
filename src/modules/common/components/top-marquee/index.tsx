@@ -25,11 +25,10 @@ interface TopMarqueeProps {
  *  - Sin márgenes laterales (mx) que alteren el ritmo del loop.
  */
 const PHRASES = [
-  "Bienvenidos Tienda Le Bon Marché",
-  "Tienda virtual en la ciudad de Bucaramanga",
-  "Productos exclusivos, originales y exóticos",
-  "Pagos por Nequi, Daviplata, Bre-B, Baloto, MasterCard, Visa, Mercado Pago",
-  "Envíos en Bucaramanga y su área metropolitana",
+  "Bienvenidos a Le Bon Marché",
+  "Tienda virtual en Bucaramanga",
+  "Productos 100% originales",
+  "Envíos a toda Colombia",
 ]
 
 export default function TopMarquee({ variant = "gold" }: TopMarqueeProps) {
@@ -42,21 +41,21 @@ export default function TopMarquee({ variant = "gold" }: TopMarqueeProps) {
       }`}
     >
       {/* Track animado: SIN gap entre copias (el pr-* de cada copia da el ritmo) */}
+      {/* R2 auditoría: texto 11px más legible, separador único ·, mensaje corto y calmado */}
       <div className="flex whitespace-nowrap animate-marquee-fixed py-2">
         {[0, 1].map((set) => (
           <span
             key={set}
-            className={`inline-flex items-center gap-6 pr-6 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase ${
-              isDark ? "text-[#D4AF37]" : "text-[#1A1A1A]"
+            className={`inline-flex items-center gap-5 pr-5 text-[10px] md:text-[11px] font-medium tracking-[0.1em] uppercase ${
+              isDark ? "text-[#D4AF37]" : "text-black/85"
             }`}
           >
-            {/* Empieza con ✦, termina con la última frase → unión limpia */}
-            <span className={isDark ? "opacity-70" : "opacity-50"}>✦</span>
+            <span className={isDark ? "opacity-60" : "opacity-40"}>·</span>
             {PHRASES.map((phrase, i) => (
               <Fragment key={i}>
                 <span>{phrase}</span>
                 {i < PHRASES.length - 1 && (
-                  <span className={isDark ? "opacity-70" : "opacity-50"}>✦</span>
+                  <span className={isDark ? "opacity-60" : "opacity-40"}>·</span>
                 )}
               </Fragment>
             ))}

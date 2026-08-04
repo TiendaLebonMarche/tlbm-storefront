@@ -66,15 +66,15 @@ export default async function Footer() {
               {collections.length > 0 ? (
                 collections.slice(0, 5).map((c: any) => (
                   <li key={c.id}>
-                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
+                    <LocalizedClientLink href={`/collections/${c.handle}`} className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">
                       {c.title}
                     </LocalizedClientLink>
                   </li>
                 ))
               ) : (
                 <>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
-                  <li><LocalizedClientLink href="/store" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Catálogo</LocalizedClientLink></li>
+                  <li><LocalizedClientLink href="/store" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Novedades</LocalizedClientLink></li>
                 </>
               )}
             </ul>
@@ -84,12 +84,12 @@ export default async function Footer() {
           <div className="flex flex-col items-center text-center">
             <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Ayuda</h4>
             <ul className="space-y-3">
-              <li><LocalizedClientLink href="/guias" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Guías de Compra</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/guias" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Guías de Compra</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/privacidad" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Privacidad</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white/75 hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">FAQ</LocalizedClientLink></li>
             </ul>
           </div>
 
@@ -117,26 +117,26 @@ export default async function Footer() {
               <span>·</span>
               <span>100% Original Garantizado</span>
             </div>
-            <div className="grid grid-cols-4 sm:flex sm:flex-wrap sm:justify-center gap-2.5 justify-items-center">
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Nequi">
+            <div className="grid grid-cols-3 min-[380px]:grid-cols-4 sm:flex sm:flex-wrap sm:justify-center gap-2.5 justify-items-center">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Nequi">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444937/nequi_wzhnhr.svg" alt="Nequi" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mercado Pago">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mercado Pago">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mercadopago_xx7b9e.svg" alt="Mercado Pago" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mastercard">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Mastercard">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/mastercard_gfpcyy.svg" alt="Mastercard" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Daviplata">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Daviplata">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/daviplata_oiquqy.svg" alt="Daviplata" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="PSE Colombia">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="PSE Colombia">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/pse-logo_wxdnoy.png" alt="PSE Colombia" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Bre-B">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Bre-B">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Bre-B_dhmaex.svg" alt="Bre-B" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
-              <span className="w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Binance">
+              <span className="w-[56px] min-[380px]:w-[60px] h-[34px] rounded-md flex items-center justify-center bg-white hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#D4AF37]/20 border border-gray-200/50 hover:border-[#D4AF37]/20 p-1.5" title="Binance">
                 <img src="https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785444639/Binance_logo_zbndn0.svg" alt="Binance" className="max-w-full max-h-full w-full h-full object-contain" loading="lazy" />
               </span>
             </div>

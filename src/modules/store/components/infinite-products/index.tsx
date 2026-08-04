@@ -38,7 +38,7 @@ function RevealItem({ children, staggerIndex }: { children: React.ReactNode; sta
 export default function InfiniteProducts({
   initialProducts,
   region,
-  gridClass = "grid grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-12 mb-8",
+  gridClass = "grid grid-cols-1 min-[380px]:grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-12 mb-8",
   limit = 12,
 }: InfiniteProductsProps) {
   const [displayedCount, setDisplayedCount] = useState(limit)

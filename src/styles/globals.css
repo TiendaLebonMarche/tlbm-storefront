@@ -483,6 +483,7 @@
 .pm-wrap:hover .pm-track { animation-play-state: paused; }
 .brand-marquee-wrap {
   overflow: hidden;
+  /* Regla TLBM: logos con fade sutil 2-8% (mantener — decisión de Julián) */
   mask-image: linear-gradient(to right, transparent 2%, #000 8%, #000 92%, transparent 98%);
   -webkit-mask-image: linear-gradient(to right, transparent 2%, #000 8%, #000 92%, transparent 98%);
 }

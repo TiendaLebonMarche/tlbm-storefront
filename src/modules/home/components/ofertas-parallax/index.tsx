@@ -45,7 +45,7 @@ export default function OfertasParallax() {
   return (
     <section className="relative bg-black overflow-hidden">
       {/* Slides container */}
-      <div className="relative h-[70vh] md:h-[85vh]">
+      <div className="relative h-[56vh] min-h-[420px] md:h-[85vh]">
         {offers.map((offer, i) => (
           <div
             key={i}

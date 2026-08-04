@@ -32,7 +32,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
               <span className="w-8 h-px bg-[#D4AF37]/30" />
               Selección VIP
             </div>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
+            <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-gray-900 dark:text-white">
               Lo más{" "}
               <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 vendidos
@@ -66,7 +66,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                       alt={item.name}
                       fill
                       sizes="340px"
-                      className="object-contain p-2 md:p-3 transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="object-contain p-1 md:p-1.5 transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-gray-50">
@@ -106,11 +106,10 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="mt-12 text-center">
         <LocalizedClientLink
           href="/store"
-          className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
-          style={{ background: "#0A0A0F", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
+          className="group inline-flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase font-semibold text-[#0A0A0F] dark:text-white hover:text-[#D4AF37] transition-colors duration-300"
         >
           Ver Catálogo Completo
-          <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </LocalizedClientLink>

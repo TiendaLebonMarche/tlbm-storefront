@@ -28,14 +28,14 @@ export default async function HotDeals({
     if (shuffled.length === 0) return null
 
     return (
-      <section className="w-full bg-white py-16 md:py-24">
+      <section className="w-full bg-white py-20 md:py-24">
         <div className="content-container px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
               <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
                 ⚡ Selección Curada
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black tracking-tighter text-brand-black leading-[0.9]">
+              <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-brand-black">
                 Precios de Selección Global
               </h2>
               <p className="text-brand-gray text-sm md:text-base mt-6 font-normal leading-relaxed">
