@@ -8,7 +8,7 @@ Somos una tienda especializada en productos originales, únicos y difíciles de 
 
 - Sitio web: [https://www.tiendalebonmarche.com/co](https://www.tiendalebonmarche.com/co)
 - Sobre nosotros: [https://www.tiendalebonmarche.com/co/quienes-somos](https://www.tiendalebonmarche.com/co/quienes-somos)
-- Contacto: [hola@tiendalebonmarche.com](mailto:hola@tiendalebonmarche.com)
+- Contacto: [info@tiendalebonmarche.com](mailto:info@tiendalebonmarche.com)
 - Teléfono: +57 302 756 7783
 
 ## Catálogo de Productos
@@ -60,7 +60,6 @@ Somos una tienda 100% virtual con sede en Bucaramanga, Santander. No contamos co
 - [Inicio](https://www.tiendalebonmarche.com/co)
 - [Tienda completa](https://www.tiendalebonmarche.com/co/store)
 - [¿Quiénes somos?](https://www.tiendalebonmarche.com/co/quienes-somos)
-- [Blog de tendencias](https://www.tiendalebonmarche.com/co/blog)
 - [Términos y condiciones](https://www.tiendalebonmarche.com/co/legal/terminos)
 - [Política de privacidad](https://www.tiendalebonmarche.com/co/legal/privacidad)
 - [Mi cuenta](https://www.tiendalebonmarche.com/co/account)

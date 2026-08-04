@@ -6,7 +6,7 @@ import Reveal from "@modules/common/components/reveal"
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 export const metadata: Metadata = {
-  title: "Quiénes Somos | Tienda Le Bon Marché — Bucaramanga",
+  title: "Quiénes Somos — Boutique virtual en Bucaramanga",
   description: "Conoce a Tienda Le Bon Marché. Desde Bucaramanga, somos cazadores de calidades, trayendo los productos más exclusivos, exóticos y originales con envíos a toda Colombia.",
   alternates: {
     canonical: `${BASE_URL}/co/quienes-somos`,
@@ -47,7 +47,7 @@ const aboutSchema = {
     "slogan": "Originales & Exóticos",
     "areaServed": "Colombia",
     "telephone": "+573027567783",
-    "email": "hola@tiendalebonmarche.com",
+    "email": "info@tiendalebonmarche.com",
     "sameAs": [
       "https://www.instagram.com/tiendalebonmarche",
       "https://www.facebook.com/tiendalebonmarche"

@@ -113,7 +113,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const currencyCode = region.currency_code.toUpperCase()
 
   return {
-    title: `${product.title} | Le Bon Marché`,
+    title: `${product.title} - Original en Colombia`,
     description,
     alternates: {
       canonical: canonicalUrl,
@@ -132,9 +132,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     other: {
       "product:price:amount": String(price),
       "product:price:currency": currencyCode,
-      "product:availability": product.variants?.[0]?.manage_inventory === false
-        ? "in stock"
-        : "in stock",
+      "product:availability": product.variants?.some((v) => {
+        if (v.manage_inventory === false) return true
+        if (v.inventory_quantity === null || v.inventory_quantity === undefined) return true
+        return (v.inventory_quantity ?? 0) > 0
+      }) ? "in stock" : "out of stock",
     },
     twitter: {
       card: "summary_large_image",
@@ -166,7 +168,16 @@ export default async function ProductPage(props: Props) {
   const productUrl = `${BASE_URL}/${params.countryCode}/productos/${pricedProduct.handle}`
   const currencyCode = region.currency_code.toUpperCase()
   const firstVariant = pricedProduct.variants?.[0] as any
-  const price = firstVariant?.calculated_price || firstVariant?.original_price || 0
+  // Extraer SOLO el valor numérico para el JSON-LD (Google rechaza objetos)
+  const rawPrice = firstVariant?.calculated_price
+  const price = typeof rawPrice === "string"
+    ? rawPrice
+    : String(
+        (rawPrice as { calculated_amount?: number | null } | undefined)
+          ?.calculated_amount ??
+        firstVariant?.original_amount ??
+        0
+      )
   const isInStock = pricedProduct.variants?.some((v) => {
     // In Medusa v2, inventory_quantity may be null (managed via inventory items)
     if (v.inventory_quantity === null || v.inventory_quantity === undefined) return true

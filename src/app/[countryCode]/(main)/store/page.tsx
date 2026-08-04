@@ -7,7 +7,7 @@ import Breadcrumbs from "@modules/common/components/breadcrumbs"
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
 export const metadata: Metadata = {
-  title: "Catálogo de Productos | Tienda Le Bon Marché",
+  title: "Catálogo de Productos",
   description: "Descubre nuestra selección curada de tecnología premium, gadgets exclusivos, decoración exótica y libros de colección. Boutique virtual en Bucaramanga con envíos a toda Colombia.",
   alternates: {
     canonical: `${BASE_URL}/co/store`,

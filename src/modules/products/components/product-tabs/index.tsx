@@ -103,6 +103,11 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 
   // Extract metadata/tags if available
   const tags = (product as any).tags || []
+  // Filtrar tags internos de taxonomía (marca:/tipo:/uso:) — son metadatos SEO,
+  // no etiquetas visibles al cliente. Solo mostrar etiquetas descriptivas limpias.
+  const publicTags = tags.filter(
+    (t: any) => t?.value && !t.value.includes(":") && !["nuevo", "new"].includes(t.value.toLowerCase())
+  )
   const metadata = (product as any).metadata || {}
 
   return (
@@ -126,11 +131,11 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
       )}
 
       {/* Tags from MedusaJS metadata */}
-      {tags.length > 0 && (
+      {publicTags.length > 0 && (
         <div className="pt-2">
           <p className="text-[10px] text-brand-gray uppercase tracking-[0.2em] mb-3 font-sans">Etiquetas</p>
           <div className="flex flex-wrap gap-2">
-            {tags.map((tag: any) => (
+            {publicTags.map((tag: any) => (
               <span
                 key={tag.id}
                 className="text-[10px] text-brand-gray border border-brand-gray-light px-3 py-1.5 uppercase tracking-wider font-sans"

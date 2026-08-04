@@ -56,8 +56,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   try {
     const productCategory = await getCategoryByHandle(params.category)
 
-    const title = `${productCategory.name} | Categorías Le Bon Marché`
-    const description = productCategory.description ?? `Explora nuestra selección exclusiva de ${productCategory.name} en Tienda Le Bon Marché. Gadgets, tecnología y decoración premium con envíos a toda Colombia.`
+    // Descripción SEO: prioridad a metadata.description (configurada por categoría),
+    // luego al campo description nativo, y como último recurso el fallback genérico.
+    const seoDescription = (productCategory as any)?.metadata?.description
+      ?? productCategory.description
+      ?? `Explora nuestra selección exclusiva de ${productCategory.name} en Tienda Le Bon Marché. Gadgets, tecnología y decoración premium con envíos a toda Colombia.`
+
+    const title = `${productCategory.name} - Comprar Original`
+    const description = seoDescription
     
     const BASE_URL = "https://www.tiendalebonmarche.com"
     const canonicalUrl = `${BASE_URL}/${params.countryCode}/categories/${params.category.join("/")}`
@@ -97,12 +103,55 @@ export default async function CategoryPage(props: Props) {
     notFound()
   }
 
+  // CollectionPage + ItemList schema — ayuda a Google a indexar la categoría
+  // como una colección curada con sus productos (rich results y contexto semántico)
+  const BASE_URL = "https://www.tiendalebonmarche.com"
+  const categoryUrl = `${BASE_URL}/${params.countryCode}/categories/${params.category.join("/")}`
+  const categoryProducts = (productCategory as any).products || []
+  const seoDescription = (productCategory as any)?.metadata?.description
+    ?? productCategory.description
+    ?? `Explora nuestra selección exclusiva de ${productCategory.name} en Tienda Le Bon Marché. Gadgets, tecnología y decoración premium con envíos a toda Colombia.`
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${categoryUrl}#collection`,
+    "name": `${productCategory.name} — Tienda Le Bon Marché`,
+    "description": seoDescription,
+    "url": categoryUrl,
+    "isPartOf": {
+      "@type": "OnlineStore",
+      "name": "Tienda Le Bon Marché",
+      "url": BASE_URL,
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": `${productCategory.name} — productos originales`,
+      "numberOfItems": categoryProducts.length,
+      "itemListElement": categoryProducts
+        .filter((p: any) => !!p?.handle)
+        .slice(0, 30)
+        .map((p: any, i: number) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "name": p.title || "",
+          "url": `${BASE_URL}/${params.countryCode}/productos/${p.handle}`,
+        })),
+    },
+  }
+
   return (
-    <CategoryTemplate
-      category={productCategory}
-      sortBy={sortBy}
-      page={page}
-      countryCode={params.countryCode}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <CategoryTemplate
+        category={productCategory}
+        sortBy={sortBy}
+        page={page}
+        countryCode={params.countryCode}
+      />
+    </>
   )
 }

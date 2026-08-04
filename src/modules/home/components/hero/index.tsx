@@ -30,8 +30,8 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: 1,
-    label: "Presencia Global",
-    title: "Con presencia\nen más de 58 paises\ndel mundo",
+    label: "Tienda Virtual Bucaramanga",
+    title: "Tienda virtual en\nBucaramanga con productos\n100% originales",
     subtitle:
       "Los mismos productos que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
     cta: "Descubrir Colección",

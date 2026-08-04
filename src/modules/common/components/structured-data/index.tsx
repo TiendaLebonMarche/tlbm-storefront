@@ -158,7 +158,7 @@ export default function StructuredData() {
     "image": `${BASE_URL}/logo.png`,
     "url": BASE_URL,
     "telephone": "+573027567783",
-    "email": "hola@tiendalebonmarche.com",
+    "email": "info@tiendalebonmarche.com",
     "priceRange": "$$",
     "currenciesAccepted": "COP",
     "paymentAccepted": "Credit Card, Debit Card, PSE, Nequi, Daviplata",
