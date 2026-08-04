@@ -7,6 +7,7 @@ import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
 import WhatsAppFloat from "@modules/layout/components/whatsapp-float"
 import LayoutClient from "@modules/layout/components/layout-client"
+import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -115,8 +116,6 @@ export const viewport = {
   userScalable: true,
 }
 
-import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
-
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
@@ -140,11 +139,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload hero image for faster LCP */}
+        {/* Preload hero image for faster LCP — alineado con el slide 1 real (foto 1468495244123) */}
         <link
           rel="preload"
           as="image"
-          href="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=40&w=640"
+          href="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1920&q=75"
           fetchPriority="high"
         />
 

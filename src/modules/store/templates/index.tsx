@@ -45,10 +45,10 @@ const StoreTemplate = async ({
   const resolvedCollectionId = collection || undefined
 
   return (
-    <div className="bg-white min-h-screen" data-testid="category-container">
+    <div className="bg-[#FAFAF9] min-h-screen" data-testid="category-container">
       
       {/* ── Editorial Store Header ── */}
-      <div className="border-b border-brand-gray-light pt-8 pb-10 px-6">
+      <div className="pt-8 pb-10 px-6">
         <div className="content-container">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>

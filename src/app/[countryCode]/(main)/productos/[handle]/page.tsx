@@ -105,6 +105,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const canonicalUrl = `${BASE_URL}/${params.countryCode}/productos/${product.handle}`
 
+  const firstVariant = product.variants?.[0]
+  const rawPrice = firstVariant?.calculated_price
+  const price = typeof rawPrice === "string"
+    ? rawPrice
+    : String((rawPrice as { calculated_amount?: number | null } | undefined)?.calculated_amount ?? 0)
+  const currencyCode = region.currency_code.toUpperCase()
+
   return {
     title: `${product.title} | Le Bon Marché`,
     description,
@@ -121,6 +128,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       siteName: "Tienda Le Bon Marché",
       locale: "es_CO",
       url: canonicalUrl,
+    },
+    other: {
+      "product:price:amount": String(price),
+      "product:price:currency": currencyCode,
+      "product:availability": product.variants?.[0]?.manage_inventory === false
+        ? "in stock"
+        : "in stock",
     },
     twitter: {
       card: "summary_large_image",
