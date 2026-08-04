@@ -21,7 +21,7 @@ export default async function OrderCompletedTemplate({
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   // Determinar si el pago es en efectivo
-  const paymentSession = order.payment_collection?.payment_sessions?.[0]
+  const paymentSession = order.payment_collections?.[0]?.payment_sessions?.[0]
   const isCash = paymentSession?.provider_id?.includes("efectivo") ?? false
 
   return (

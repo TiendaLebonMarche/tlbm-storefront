@@ -10,12 +10,13 @@ import { useState } from "react"
 const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
   const searchParams = useSearchParams()
   const isOpen = searchParams.get("step") === "review"
-  const paidByGiftcard = cart?.gift_cards?.length > 0 && cart?.total === 0
+  const giftCards = (cart as HttpTypes.StoreCart & { gift_cards?: unknown[] }).gift_cards
+  const paidByGiftcard = (giftCards?.length ?? 0) > 0 && cart?.total === 0
   const [termsAccepted, setTermsAccepted] = useState(false)
   const previousStepsCompleted =
     cart?.shipping_address &&
-    cart?.shipping_methods?.length > 0 &&
-    (cart?.payment_collection?.payment_sessions?.length > 0 || paidByGiftcard)
+    (cart?.shipping_methods?.length ?? 0) > 0 &&
+    ((cart?.payment_collection?.payment_sessions?.length ?? 0) > 0 || paidByGiftcard)
 
   return (
     <div className="bg-white checkout-step">

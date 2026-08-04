@@ -1,7 +1,7 @@
 import { subscribeToNewsletter } from "@lib/actions/newsletter"
 
 type Props = {
-  searchParams?: Promise<{ success?: string; error?: string }>
+  searchParams?: Promise<{ success?: string; error?: string; message?: string }>
 }
 
 const NewsletterSection = async ({ searchParams }: Props) => {

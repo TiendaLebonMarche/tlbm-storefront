@@ -1,6 +1,6 @@
 "use client"
 
-function isEqual(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+function isEqual(a: unknown, b: unknown) { return JSON.stringify(a) === JSON.stringify(b); }
 
 import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
@@ -139,7 +139,7 @@ export default function ProductActions({
         countryCode,
       })
 
-      if (result && 'cart' in result) {
+      if (result && typeof result === "object" && "cart" in result) {
         setAddedSuccess(true)
         // Badge instantáneo: contar items del carrito devuelto por addToCart
         // (el router.refresh() re-sincroniza el server component después)
@@ -152,9 +152,12 @@ export default function ProductActions({
         trackAddToCart({
           id: selectedVariant.id || product.id,
           name: product.title || "Producto",
-          price: selectedVariant?.calculated_price
-            ? parseFloat(selectedVariant.calculated_price)
-            : 0,
+          price: (() => {
+            const cp = selectedVariant?.calculated_price
+            return typeof cp === "string"
+              ? parseFloat(cp) || 0
+              : Number(cp?.calculated_amount ?? 0)
+          })(),
           quantity: 1,
           category: product.collection?.title || undefined,
           variant: selectedVariant?.title || undefined,

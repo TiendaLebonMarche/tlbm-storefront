@@ -3,6 +3,13 @@
  * Centralized event tracking for tiendalebonmarche.com
  */
 
+// Declaración global de dataLayer (GTM) para tipos
+declare global {
+  interface Window {
+    dataLayer: unknown[]
+  }
+}
+
 // Ensure dataLayer exists
 const ensureDataLayer = () => {
   if (typeof window === "undefined") return false

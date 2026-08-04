@@ -104,7 +104,7 @@ const ShippingAddress = ({
               Object.keys(formData).reduce((acc, key) => {
                 acc[key.replace("shipping_address.", "")] = formData[key]
                 return acc
-              }, {} as HttpTypes.StoreCartAddress)
+              }, {} as Record<string, unknown>) as unknown as HttpTypes.StoreCartAddress
             }
             onSelect={setFormAddress}
           />
