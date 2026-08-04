@@ -4,6 +4,7 @@ import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-g
 import RefinementList from "@modules/store/components/refinement-list"
 import SearchBar from "@modules/store/components/search-bar"
 import FilterPanel from "@modules/store/components/filter-panel"
+import FilterDrawer from "@modules/store/components/filter-drawer"
 import CollectionFilter from "@modules/store/components/collection-filter"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { listCollections } from "@lib/data/collections"
@@ -77,8 +78,11 @@ const StoreTemplate = async ({
 
         <div className="flex flex-col medium:flex-row gap-x-10 gap-y-8">
 
-          {/* ── Sidebar ── */}
-          <aside className="medium:sticky medium:top-28 w-full medium:w-[200px] flex-shrink-0 self-start">
+          {/* ── Filtros móviles: botón sticky + drawer ── */}
+          <FilterDrawer sortBy={sort} collections={collections || []} />
+
+          {/* ── Sidebar (desktop) ── */}
+          <aside className="hidden medium:block medium:sticky medium:top-28 w-full medium:w-[200px] flex-shrink-0 self-start">
             <div className="space-y-8">
               <SearchBar />
               <RefinementList sortBy={sort} />

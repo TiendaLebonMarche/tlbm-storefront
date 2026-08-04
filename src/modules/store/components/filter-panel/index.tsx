@@ -10,7 +10,7 @@ interface FilterProps {
 const FilterPanel = ({ collections = [] }: FilterProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   const selectedCollection = searchParams.get("collection")
   const minPrice = searchParams.get("minPrice")
@@ -47,7 +47,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
   return (
     <div className="bg-transparent">
       <div className="flex items-center justify-between mb-8 cursor-pointer group" onClick={() => setIsOpen(!isOpen)}>
-        <h3 className="font-bold text-[11px] uppercase tracking-[0.25em] text-brand-black group-hover:text-brand-black transition-colors">
+        <h3 className="font-bold text-xs uppercase tracking-[0.25em] text-brand-black group-hover:text-brand-black transition-colors">
           Refinar Búsqueda
         </h3>
         <svg
@@ -71,7 +71,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
           {/* Colecciones */}
           {collections.length > 0 && (
             <div className="mb-10">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
                 Colecciones
               </h4>
               <div className="space-y-4">
@@ -93,7 +93,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                       />
                       <div className="absolute w-1.5 h-1.5 rounded-full bg-brand-black scale-0 peer-checked:scale-100 transition-transform duration-300" />
                     </div>
-                    <span className="text-xs text-brand-gray group-hover:text-brand-black transition-colors font-light">
+                    <span className="text-sm text-brand-gray group-hover:text-brand-black transition-colors font-light">
                       {col.title}
                     </span>
                   </label>
@@ -112,7 +112,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
 
           {/* Rango de Precio */}
           <div className="mb-10">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gray mb-5">
               Inversión
             </h4>
             <div className="grid grid-cols-2 gap-3">
