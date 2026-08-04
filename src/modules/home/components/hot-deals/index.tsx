@@ -33,7 +33,7 @@ export default async function HotDeals({
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
             <div className="max-w-2xl">
               <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
-                ⚡ Selección Curada
+                Nuestros mejores productos
               </span>
               <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-brand-black">
                 Precios de Selección Global

@@ -56,15 +56,15 @@ export default async function Home(props: {
       {/* ═══ HERO ═══ */}
       <Hero />
 
-      {/* ═══ BRAND MARQUEE — exactamente debajo del hero (regla Julián) ═══ */}
-      <BrandMarquee />
-
       {/* ═══ CONTENIDO ═══ */}
       <div className="bg-white dark:bg-[#0A0A0F]">
         {/* TRUST BADGES */}
         <Reveal>
           <TrustBadges />
         </Reveal>
+
+        {/* BRAND MARQUEE — justo antes de "Nuestros mejores productos" (regla Julián) */}
+        <BrandMarquee />
 
         {/* HOT DEALS — data-driven products from Medusa */}
         <Reveal>
