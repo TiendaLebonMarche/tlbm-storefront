@@ -5,6 +5,10 @@ import { getAllGuides } from '@lib/guides'
 
 // Revalidate sitemap every 6 hours
 export const revalidate = 21600
+// Force static generation at build time — critical so getAllGuides() sees the
+// .md files (process.cwd() in Vercel serverless runtime doesn't include them,
+// which caused the guide URLs to be missing from the live sitemap)
+export const dynamic = "force-static"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
