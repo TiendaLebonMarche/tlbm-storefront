@@ -56,6 +56,9 @@ export default async function Home(props: {
       {/* ═══ HERO ═══ */}
       <Hero />
 
+      {/* ═══ BRAND MARQUEE — exactamente debajo del hero (regla Julián) ═══ */}
+      <BrandMarquee />
+
       {/* ═══ CONTENIDO ═══ */}
       <div className="bg-white dark:bg-[#0A0A0F]">
         {/* TRUST BADGES */}
@@ -66,11 +69,6 @@ export default async function Home(props: {
         {/* HOT DEALS — data-driven products from Medusa */}
         <Reveal>
           <HotDeals countryCode={countryCode} />
-        </Reveal>
-
-        {/* BRAND MARQUEE */}
-        <Reveal>
-          <BrandMarquee />
         </Reveal>
 
         {/* OFERTAS PARALLAX */}

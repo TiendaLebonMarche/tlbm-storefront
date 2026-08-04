@@ -229,7 +229,7 @@ module.exports = {
         shimmer: "shimmer 3s linear infinite",
         orbit: "orbit 8s linear infinite",
         "orbit-reverse": "orbit-reverse 10s linear infinite",
-        "brand-scroll": "brand-scroll 36s linear infinite",
+        "brand-scroll": "brand-scroll 72s linear infinite",
         "pm-scroll": "pm-scroll 50s linear infinite",
       },
     },
