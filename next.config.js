@@ -9,6 +9,21 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: [],
+  // Blog migrado a /co/guias (Ago-2026): redirigir el /blog indexado por Google
+  async redirects() {
+    return [
+      {
+        source: "/blog",
+        destination: "/co/guias",
+        permanent: true,
+      },
+      {
+        source: "/co/blog",
+        destination: "/co/guias",
+        permanent: true,
+      },
+    ]
+  },
   // Optimize bundle size for known large packages
   experimental: {
     optimizePackageImports: ["@medusajs/ui", "@radix-ui/react-icons", "lucide-react"],
