@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { listProducts } from '@lib/data/products'
 import { listCategories } from '@lib/data/categories'
+import { getAllGuides } from '@lib/guides'
 
 // Revalidate sitemap every 6 hours
 export const revalidate = 21600
@@ -67,8 +68,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }))
 
+  // 3b. Blog / Guides Pages
+  const guidesEntries: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/co/guias`, lastModified: formatDate(new Date()), changeFrequency: 'weekly', priority: 0.8 },
+    ...getAllGuides().map<MetadataRoute.Sitemap[number]>(g => ({
+      url: `${BASE_URL}/co/guias/${sanitize(g.slug)}`,
+      lastModified: formatDate(g.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+  ]
+
   // Combined unique entries to prevent duplicates and ensure clean XML structure
-  const allEntries = [...staticEntries, ...productEntries, ...categoryEntries]
+  const allEntries = [...staticEntries, ...productEntries, ...categoryEntries, ...guidesEntries]
   
   // Deduplicate by URL using Map
   const uniqueEntries = Array.from(new Map(allEntries.map(e => [e.url, e])).values())

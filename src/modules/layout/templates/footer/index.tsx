@@ -84,6 +84,7 @@ export default async function Footer() {
           <div className="flex flex-col items-center text-center">
             <h4 className="text-[11px] font-bold uppercase tracking-[.35em] mb-8 text-white">Ayuda</h4>
             <ul className="space-y-3">
+              <li><LocalizedClientLink href="/guias" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Guías de Compra</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/envios" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Envíos</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/devoluciones" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Devoluciones</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/legal/terminos" className="text-sm text-white hover:text-[#D4AF37] transition-all duration-300 hover:translate-x-1 inline-block">Términos</LocalizedClientLink></li>

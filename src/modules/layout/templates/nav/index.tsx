@@ -96,6 +96,12 @@ export default async function Nav() {
           >
             Ofertas
           </LocalizedClientLink>
+          <LocalizedClientLink
+            href="/guias"
+            className="nav-link-dark text-[12px] font-semibold tracking-[0.18em] uppercase"
+          >
+            Guías
+          </LocalizedClientLink>
           <a
             href="https://wa.me/573027567783"
             target="_blank"

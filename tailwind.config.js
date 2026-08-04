@@ -235,6 +235,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     require("tailwindcss-radix")(),
     function ({ addUtilities }) {
       addUtilities({
