@@ -6,15 +6,18 @@ export default function ThemeToggle() {
   const [dark, setDark] = useState(false)
 
   useEffect(() => {
-    // Check initial state
+    // Check initial state — persistido por el script inline del layout
     const isDark = document.documentElement.classList.contains("dark")
     setDark(isDark)
   }, [])
 
   const toggle = () => {
-    document.documentElement.classList.toggle("dark")
-    document.body.classList.toggle("dark")
-    setDark((prev) => !prev)
+    const next = !document.documentElement.classList.contains("dark")
+    document.documentElement.classList.toggle("dark", next)
+    document.body.classList.toggle("dark", next)
+    document.documentElement.setAttribute("data-mode", next ? "dark" : "light")
+    try { localStorage.setItem("tlbm_theme", next ? "dark" : "light") } catch {}
+    setDark(next)
   }
 
   return (
