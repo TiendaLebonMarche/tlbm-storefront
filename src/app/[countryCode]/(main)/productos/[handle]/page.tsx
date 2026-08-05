@@ -100,8 +100,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
-  const description = product.description
+  const rawDescription = product.description
     || `Descubre ${product.title} en Tienda Le Bon Marché — boutique virtual en Bucaramanga. Producto premium seleccionado por su calidad y diseño único. Envíos a toda Colombia.`
+  // Meta description SEO: máx ~158 chars (Google trunca a ~155-160 en SERP)
+  const description = rawDescription.length > 158
+    ? `${rawDescription.slice(0, 155).trimEnd()}…`
+    : rawDescription
 
   const canonicalUrl = `${BASE_URL}/${params.countryCode}/productos/${product.handle}`
 
