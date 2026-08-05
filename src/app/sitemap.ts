@@ -3,11 +3,12 @@ import { listProducts } from '@lib/data/products'
 import { listCategories } from '@lib/data/categories'
 import { getAllGuides } from '@lib/guides'
 
-// Revalidate sitemap every 6 hours
-export const revalidate = 21600
-// Force static generation at build time — critical so getAllGuides() sees the
-// .md files (process.cwd() in Vercel serverless runtime doesn't include them,
-// which caused the guide URLs to be missing from the live sitemap)
+// Force static generation at BUILD time ONLY — critical so getAllGuides()
+// sees the .md files. NO revalidate: with `revalidate`, Vercel regenerates the
+// sitemap in the serverless runtime when it expires, and there process.cwd()
+// does NOT include src/content/guias (files read with fs are not bundled), so
+// the guide URLs vanish from the live sitemap (bug 04-ago-2026, fix 05-ago).
+// Trade-off: new guides/products appear on next deploy (deploys are frequent).
 export const dynamic = "force-static"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
