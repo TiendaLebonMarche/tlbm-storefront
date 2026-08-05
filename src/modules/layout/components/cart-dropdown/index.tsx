@@ -11,7 +11,6 @@ import { HttpTypes } from "@medusajs/types"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import Thumbnail from "@modules/products/components/thumbnail"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState, useCallback } from "react"
 import { useUI } from "@lib/context/ui-context"
@@ -238,14 +237,24 @@ const CartDropdown = ({
                         <div className="flex gap-3 sm:gap-4 items-center flex-1 min-w-0">
                           <LocalizedClientLink
                             href={`/productos/${item.product_handle}`}
-                            className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-md overflow-hidden"
+                            className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-md overflow-hidden bg-brand-gray-light/30"
                           >
-                            <Thumbnail
-                              thumbnail={item.thumbnail}
-                              images={item.variant?.product?.images}
-                              size="square"
-                              className="w-full h-full object-cover"
-                            />
+                            {item.thumbnail ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={item.thumbnail}
+                                alt={item.title || "Producto"}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                                draggable={false}
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-brand-gray-light/30">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-6 h-6 text-gray-300">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                              </div>
+                            )}
                           </LocalizedClientLink>
                           <div className="text-sm min-w-0 flex-1">
                             <p className="font-bold text-brand-black truncate">
