@@ -9,7 +9,7 @@ export type BreadcrumbItem = {
 export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
-      <ol className="flex flex-wrap items-center gap-1 text-sm text-brand-gray">
+      <ol className="flex flex-wrap items-center gap-1 text-sm">
         {items.map((item, i) => (
           <Fragment key={i}>
             {i > 0 && (
@@ -21,12 +21,12 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
               {item.href ? (
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-brand-navy"
+                  className="text-brand-gray transition-colors hover:text-[#D4AF37]"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-brand-navy font-medium" aria-current="page">
+                <span className="text-brand-black font-medium" aria-current="page">
                   {item.label}
                 </span>
               )}
