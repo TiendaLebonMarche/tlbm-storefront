@@ -45,7 +45,7 @@ const StoreTemplate = async ({
   const resolvedCollectionId = collection || undefined
 
   return (
-    <div className="bg-[#FAFAF9] min-h-screen" data-testid="category-container">
+    <div className="bg-white min-h-screen" data-testid="category-container">
       
       {/* ── Editorial Store Header ── */}
       <div className="pt-8 pb-10 px-6">

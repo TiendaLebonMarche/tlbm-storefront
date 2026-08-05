@@ -6,14 +6,14 @@ import ThemeToggle from "@modules/layout/components/theme-toggle"
 
 /**
  * Controles del header (lupa + cambio de tema).
- * En la página de carrito (/cart) se ocultan: el carrito ya es el foco,
- * y el usuario pidió explícitamente que no haya lupa ni ThemeToggle ahí.
+ * En carrito (/cart) y tienda (/store) se ocultan: el usuario pidió
+ * explícitamente que esas páginas no tengan lupa ni ThemeToggle.
  */
 const HeaderSearchControls = () => {
   const pathname = usePathname()
-  const isCartPage = pathname?.includes("/cart") ?? false
+  const hideOn = ["/cart", "/store"].some((p) => pathname?.includes(p)) ?? false
 
-  if (isCartPage) return null
+  if (hideOn) return null
 
   return (
     <>
