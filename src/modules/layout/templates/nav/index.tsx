@@ -9,8 +9,7 @@ import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
-import SearchModal from "@modules/layout/components/search-modal"
-import ThemeToggle from "@modules/layout/components/theme-toggle"
+import HeaderSearchControls from "@modules/layout/components/header-search-controls"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
 import CollectionsDropdown from "@modules/layout/components/collections-dropdown"
 import { HttpTypes } from "@medusajs/types"
@@ -53,7 +52,7 @@ export default async function Nav() {
         </LocalizedClientLink>
 
         <div className="flex-none flex items-center gap-1">
-          <SearchModal />
+          <HeaderSearchControls />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
           </Suspense>
@@ -114,8 +113,7 @@ export default async function Nav() {
 
         {/* Right: Search (lupa), Theme, Cart — sin botón EXPLORAR (regla: solo la lupa) */}
         <div className="flex items-center justify-end gap-3 lg:gap-5 flex-1">
-          <SearchModal />
-          <ThemeToggle />
+          <HeaderSearchControls />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
           </Suspense>

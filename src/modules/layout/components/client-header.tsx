@@ -34,6 +34,9 @@ export default function ClientHeader({
   // Páginas de detalle de producto → marquesina oscura en vez de la barra fina
   const isProductPage = pathname?.includes("/productos/") ?? false
 
+  // Página de carrito → marquesina DORADA (la del index) en vez de la barra fina
+  const isCartPage = pathname?.includes("/cart") ?? false
+
   // On the home page, this header renders nothing — the Hero slider
   // component owns the header (floating logo + hamburger, white bar on scroll).
   if (isHome) return null
@@ -55,14 +58,14 @@ export default function ClientHeader({
       data-scrolled={isScrolled}
       data-home={isHome}
     >
-      {/* ── TOP BAR ── Productos: marquesina oscura · Resto: barra fina #0A0A0F ── */}
-      {isProductPage ? (
+      {/* ── TOP BAR ── Productos: marquesina oscura · Carrito: marquesina dorada · Resto: barra fina #0A0A0F ── */}
+      {isProductPage || isCartPage ? (
         <div
           className={`transition-all duration-500 ease-out overflow-hidden
             ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
           `}
         >
-          <TopMarquee variant="dark" />
+          <TopMarquee variant={isCartPage ? "gold" : "dark"} />
         </div>
       ) : (
         <div
