@@ -61,14 +61,14 @@ export default function ClientHeader({
       data-scrolled={isScrolled}
       data-home={isHome}
     >
-      {/* ── TOP BAR ── Productos: marquesina oscura · Carrito/Tienda: marquesina dorada · Resto: barra fina #0A0A0F ── */}
+      {/* ── TOP BAR ── Productos/Tienda: marquesina oscura (negro + dorado) · Carrito: dorada · Resto: barra fina #0A0A0F ── */}
       {isProductPage || isCartPage || isStorePage ? (
         <div
           className={`transition-all duration-500 ease-out overflow-hidden
             ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
           `}
         >
-          <TopMarquee variant={isCartPage || isStorePage ? "gold" : "dark"} />
+          <TopMarquee variant={isCartPage ? "gold" : "dark"} />
         </div>
       ) : (
         <div

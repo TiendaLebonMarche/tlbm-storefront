@@ -71,7 +71,7 @@ export default function CollectionsDropdown({
       >
         <div className={`${panelWidth} bg-white/95 backdrop-blur-xl border border-[#D4AF37]/15 rounded-2xl shadow-[0_24px_60px_rgba(10,10,15,0.14)] p-5`}>
           {/* Header del panel */}
-          <div className="flex items-center justify-between mb-4 pb-4 border-b border-[#FAFAF9]">
+          <div className="flex items-center justify-between mb-4 pb-4 border-b border-white">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
               Explorar por categoría
             </span>
@@ -105,7 +105,7 @@ export default function CollectionsDropdown({
           {/* Footer del panel */}
           <LocalizedClientLink
             href="/collections"
-            className="mt-4 pt-4 border-t border-[#FAFAF9] flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.28em] text-black/50 hover:text-[#B8962E] transition-colors duration-200"
+            className="mt-4 pt-4 border-t border-white flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.28em] text-black/50 hover:text-[#B8962E] transition-colors duration-200"
           >
             Ver todas las colecciones
             <span className="text-[#D4AF37]">→</span>

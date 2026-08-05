@@ -65,7 +65,7 @@ export default async function CollectionsPage({ params }: Props) {
               <LocalizedClientLink
                 key={collection.id}
                 href={`/collections/${collection.handle}`}
-                className="group bg-white border border-[#FAFAF9] hover:border-[#D4AF37]/40 rounded-xl p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(10,10,15,0.06)]"
+                className="group bg-white border border-gray-100 hover:border-[#D4AF37]/40 rounded-xl p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(10,10,15,0.06)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -83,7 +83,7 @@ export default async function CollectionsPage({ params }: Props) {
                     ◆
                   </span>
                 </div>
-                <div className="mt-4 pt-4 border-t border-[#FAFAF9] flex items-center justify-between">
+                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
                   <span className="text-xs uppercase tracking-[0.2em] text-black/50 group-hover:text-[#B8962E] transition-colors">
                     Ver colección
                   </span>

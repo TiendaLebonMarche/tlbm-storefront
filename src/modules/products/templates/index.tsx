@@ -70,7 +70,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <div className="w-full lg:w-[42%] lg:mt-4">
             
             {/* Header: Collection + Title + Rating */}
-            <div className="space-y-6 pb-8 border-b border-[#FAFAF9]">
+            <div className="space-y-6 pb-8 border-b border-white">
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   {product.collection?.title && (
@@ -134,7 +134,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             </div>
 
             {/* Divider */}
-            <div className="w-full h-px bg-[#FAFAF9]" />
+            <div className="w-full h-px bg-white" />
 
             {/* Trust Signals Grid */}
             <div className="py-8 grid grid-cols-2 gap-x-8 gap-y-6">
@@ -194,7 +194,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             </div>
 
             {/* Divider */}
-            <div className="w-full h-px bg-[#FAFAF9]" />
+            <div className="w-full h-px bg-white" />
 
             {/* Seller info & Dynamic Metadata */}
             <div className="py-8 space-y-6">
@@ -251,7 +251,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
       <Reveal>
-        <div className="bg-[#FAFAF9]">
+        <div className="bg-white">
           <div className="content-container py-12 lg:py-16">
             <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
               
@@ -277,29 +277,29 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </div>
                 
                 <Accordion type="single" collapsible className="w-full space-y-3">
-                  <AccordionItem value="item-1" className="border border-[#FAFAF9] bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
+                  <AccordionItem value="item-1" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       ¿Cuál es el origen de este producto?
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-[#FAFAF9] pt-4">
+                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
                       Contamos con <strong className="font-medium text-brand-black">bots inteligentes siempre activos</strong> buscando las mejores piezas globales para traerlas a nuestra selección. Garantizamos productos <strong className="font-medium text-brand-black">100% originales</strong> con trazabilidad completa desde su origen.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="border border-[#FAFAF9] bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
+                  <AccordionItem value="item-2" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       Tiempos y logística de entrega
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-[#FAFAF9] pt-4">
+                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
                       <strong className="font-medium text-brand-black">24 horas</strong> para entregas locales en Bucaramanga. De <strong className="font-medium text-brand-black">2 a 5 días</strong> para envíos nacionales via Coordinadora o Servientrega.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="border border-[#FAFAF9] bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
+                  <AccordionItem value="item-3" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
                       Política de garantía TLBM
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-[#FAFAF9] pt-4">
+                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
                       Cuentas con garantía total contra defectos de fabricación. Además, aplicamos el derecho de retracto de 5 días hábiles para que compres con absoluta tranquilidad.
                     </AccordionContent>
                   </AccordionItem>
