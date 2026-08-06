@@ -27,10 +27,10 @@ const BASE_URL = "https://www.tiendalebonmarche.com"
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
   title: {
-    default: "Le Bon Marché - Tienda virtual en Bucaramanga - Productos Exóticos y 100% Originales",
+    default: "Tienda Virtual en Bucaramanga | Le Bon Marché",
     template: "%s | Le Bon Marché",
   },
-  description: "Le Bon Marché es tu tienda virtual en Bucaramanga con productos exóticos, originales y difíciles de encontrar. Tecnología premium, gadgets exclusivos, parlantes originales, smartwatches y accesorios. Envíos a toda Colombia. 100% original, garantizado.",
+  description: "Tienda virtual en Bucaramanga con productos exóticos y 100% originales: tecnología premium, gadgets, parlantes, smartwatches y más. Envíos a toda Colombia.",
   keywords: [
     "tienda virtual en Bucaramanga",
     "Tienda Le Bon Marché productos",

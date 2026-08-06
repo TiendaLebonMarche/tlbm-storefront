@@ -8,6 +8,22 @@ import { HttpTypes } from "@medusajs/types"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
+// Title SEO: Google trunca ~60-70 chars en SERP; cortar en límite de palabra (no a mitad)
+function truncateTitle(title: string, max = 50): string {
+  if (title.length <= max) return title
+  const cut = title.slice(0, max)
+  const lastSpace = cut.lastIndexOf(" ")
+  return `${(lastSpace > 25 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`
+}
+
+// Marca real = tag `marca:*` de Medusa (40/40 productos lo tienen) — fallback la tienda
+function getBrandName(product: HttpTypes.StoreProduct): string {
+  const tag = product.tags?.find((t) => t.value?.startsWith("marca:"))
+  const raw = tag?.value?.replace(/^marca:/, "").trim()
+  if (!raw) return "Le Bon Marché"
+  return raw.charAt(0).toUpperCase() + raw.slice(1)
+}
+
 export const dynamic = "force-dynamic"
 
 type Props = {
@@ -117,7 +133,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const currencyCode = region.currency_code.toUpperCase()
 
   return {
-    title: `${product.title} - Original en Colombia`,
+    // Title SEO: ~60 chars finales con el template "%s | Le Bon Marché" del layout
+    title: truncateTitle(product.title, 45),
     description,
     alternates: {
       canonical: canonicalUrl,
@@ -202,7 +219,7 @@ export default async function ProductPage(props: Props) {
     "identifier": pricedProduct.id,
     "brand": {
       "@type": "Brand",
-      "name": "Le Bon Marché",
+      "name": getBrandName(pricedProduct),
       "url": BASE_URL
     },
     "seller": {
