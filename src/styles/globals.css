@@ -8,7 +8,85 @@
   --brand-blue: #1A3B8F;
   --brand-gray: #6B6F7A;
   --brand-gray-light: #BEC1C8;
+
+  /* === TOKENS CANÓNICOS ESCENOGRAFÍA (07-ago-2026) — TODO tema usa var() === */
+  --gold: #D4AF37;
+  --ink: #0A0A0F;
+  --ink-deep: #08080C;
+  --bg: #FFFFFF;
+  --text: #101010;
+  --muted: #5C5C5C;
+  --accent: #6366F1;
+  --whatsapp: #25D366;
 }
+
+/* === SISTEMA DE ESCENOGRAFÍA POR TEMPORADA (07-ago-2026) ===
+   Activación MANUAL: cambiar SEASON en src/lib/season.ts → deploy.
+   [data-theme] sobreescribe SOLO variables + clases de escenografía.
+   El default hereda :root (diseño actual IDÉNTICO). */
+[data-theme="default"] {
+  --season: "default";
+}
+
+/* 🎃 Halloween — plantilla (variables de ejemplo, refinar al montar la escena) */
+[data-theme="halloween"] {
+  --gold: #FF8C42;
+  --ink: #1A0B0B;
+  --ink-deep: #120707;
+  --muted: #C77B5A;
+  --accent: #7B2D8B;
+  --season: "halloween";
+}
+
+/* 🎄 Navidad — plantilla */
+[data-theme="navidad"] {
+  --gold: #E8C84A;
+  --ink: #07140F;
+  --ink-deep: #030A07;
+  --muted: #7A8C7F;
+  --accent: #B3261E;
+  --season: "navidad";
+}
+
+/* 💘 San Valentín — plantilla */
+[data-theme="san-valentin"] {
+  --gold: #E8A0B4;
+  --ink: #1C0509;
+  --ink-deep: #120304;
+  --muted: #C08A96;
+  --accent: #D9265A;
+  --season: "san-valentin";
+}
+
+/* Decoración flotante animada (SeasonalDecor) — se monta/desmonta según data-theme */
+@keyframes season-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(6deg); }
+}
+@keyframes season-drift {
+  0% { transform: translateX(-4%) translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(104vw) translateY(-30px); opacity: 0; }
+}
+.seasonal-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+.seasonal-decor .decor-item {
+  position: absolute;
+  animation: season-float 7s ease-in-out infinite;
+  user-select: none;
+}
+.seasonal-decor .decor-drift {
+  position: absolute;
+  top: -40px;
+  animation: season-drift linear infinite;
+}
+[data-theme="default"] .seasonal-decor { display: none; }
 
 
 @layer utilities {

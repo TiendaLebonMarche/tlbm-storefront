@@ -2,6 +2,8 @@ import { Inter, Playfair_Display } from "next/font/google"
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "styles/globals.css"
+import { SEASON } from "@lib/season"
+import SeasonalDecor from "@modules/common/components/seasonal-decor"
 import GoogleAnalytics from "@modules/common/components/google-analytics"
 import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
@@ -118,7 +120,7 @@ export const viewport = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="es" data-mode="light" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="es" data-mode="light" data-theme={SEASON} className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <head>
         {/* Anti-flash de tema: aplica dark ANTES del paint si el usuario lo eligió */}
         <script
@@ -176,6 +178,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <meta name="distribution" content="global" />
       </head>
       <body className="antialiased">
+        {/* Escenografía por temporada — capa decorativa (vacía en default) */}
+        <SeasonalDecor />
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
