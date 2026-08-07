@@ -665,7 +665,7 @@
 .cats-viewport { overflow: hidden; position: relative; max-width: 940px; margin: 0 auto; }
 .cats-track {
   display: flex; gap: 5px; padding: 12px 32px 10px;
-  scrollbar-width: none; will-change: transform; touch-action: pan-y;
+  width: max-content; scrollbar-width: none; will-change: transform; touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 }
 .cats-track::-webkit-scrollbar { display: none; }

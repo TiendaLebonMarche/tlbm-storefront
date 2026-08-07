@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CategoryCard } from "."
 
-// Carousel de MOVIMIENTO CONTINUO (marquee rAF) de IZQUIERDA→DERECHA: el track empieza
-// mostrando el final de la copia B y avanza hacia el inicio (las tarjetas se desplazan hacia
-// la derecha); al llegar al inicio reinicia al final de la copia B (seamless, invisible).
+// Carousel de MOVIMIENTO CONTINUO (marquee rAF): las tarjetas fluyen en orden de
+// IZQUIERDA→DERECHA (la siguiente entra por la derecha; el contenido avanza hacia la
+// izquierda). Loop seamless: 2 copias; al completar la copia A reinicia invisible.
 // Zoom central por POSICIÓN real + SWIPE táctil + pausa hover/touch.
 const SPEED_PX_S = 30
 const CARD_STEP_MS = 400
@@ -74,12 +74,12 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
         if (lastTsRef.current) {
           // Clamp del dt (máx 100ms): evita la explosión del offset si la pestaña estuvo
           // en background (el rAF se congela y al volver el delta sería enorme → el track
-          // saltaba a una zona vacía sin tarjetas visibles)
+          // saltaba a una zona sin tarjetas visibles)
           const dt = Math.min((ts - lastTsRef.current) / 1000, 0.1)
-          // IZQUIERDA→DERECHA: el offset crece desde -halfWidth (final de la copia B) hacia 0;
-          // al llegar a 0 reinicia a -halfWidth (posición idéntica → invisible)
+          // Flujo izq→der: el offset crece 0 → halfWidth (final de la copia A = inicio de B);
+          // al llegar reinicia a 0 (posición idéntica → invisible)
           offsetRef.current += SPEED_PX_S * dt
-          if (offsetRef.current >= 0) {
+          if (offsetRef.current >= halfWidth()) {
             offsetRef.current -= halfWidth()
           }
         }
@@ -92,8 +92,6 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       lastTsRef.current = ts
       rafRef.current = requestAnimationFrame(frame)
     }
-    // Posición inicial: final del track (copia B) → el primer avance muestra contenido anterior
-    offsetRef.current = -halfWidth()
     rafRef.current = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(rafRef.current)
   }, [reducedMotion])
