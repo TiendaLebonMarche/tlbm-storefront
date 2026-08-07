@@ -36,7 +36,10 @@ export default async function CategoriesCarousel() {
     fields: "id,name,handle,parent_category_id",
   }).catch(() => [])
 
-  const roots = categories.filter((c: any) => !c.parent_category_id)
+  // Raíces = sin parent O con parent inactivo/no listado (ej. Bolsas Secas cuyo padre
+  // "Deportes y Aire Libre" está inactivo — la Store API solo lista categorías activas)
+  const activeIds = new Set(categories.map((c: any) => c.id))
+  const roots = categories.filter((c: any) => !c.parent_category_id || !activeIds.has(c.parent_category_id))
 
   const cards: CategoryCard[] = []
   for (const cat of roots) {
