@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
-  title: "Página no encontrada | Tienda Le Bon Marché",
+  title: "Página no encontrada",
   description: "La página que buscas no existe.",
 }
 
