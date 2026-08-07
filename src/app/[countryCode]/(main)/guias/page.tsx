@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
     siteName: "Tienda Le Bon Marché",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Guías de Compra | Le Bon Marché",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",

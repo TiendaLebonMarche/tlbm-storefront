@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getGuideBySlug, getAllGuides } from "@lib/guides"
+import { truncateTitle } from "@lib/seo"
 import GuideMarkdown from "@modules/guides/components/guide-markdown"
 import RelatedMostSold from "@modules/guides/components/related-most-sold"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
@@ -32,7 +33,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const keywords = guide.keywords.length > 0 ? guide.keywords.join(", ") : guide.description
 
   return {
-    title: `${guide.title}`,
+    // Title SEO ≤60c finales (el template del layout añade " | Le Bon Marché")
+    title: truncateTitle(guide.title, 45),
     description: guide.description,
     keywords,
     alternates: {
@@ -48,6 +50,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       publishedTime: guide.date,
       authors: [guide.author],
       tags: guide.keywords.slice(0, 5),
+      images: [
+        {
+          url: "/opengraph-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: guide.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

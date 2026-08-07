@@ -36,6 +36,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CO",
     siteName: "Le Bon Marché",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Tienda Virtual en Bucaramanga | Le Bon Marché",
+      },
+    ],
   },
 }
 
