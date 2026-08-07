@@ -646,11 +646,11 @@
 /* === SECCIÓN CATEGORÍAS (carousel — 07-ago-2026) ===
    Usa tokens var(--gold)/var(--ink)/var(--text) del sistema de escenografía:
    [data-theme="halloween"|"navidad"|"san-valentin"] la recoloriza automáticamente. */
-.cats-section { padding: 40px 0 56px; overflow: hidden; background: var(--bg); }
-.cats-head { text-align: center; margin-bottom: 24px; padding: 0 20px; }
+.cats-section { padding: 32px 0 44px; overflow: hidden; background: var(--bg); }
+.cats-head { text-align: center; margin-bottom: 18px; padding: 0 20px; }
 .cats-eyebrow {
   font-size: 10px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 12px;
+  color: var(--gold); margin-bottom: 8px;
 }
 .cats-title {
   font-family: Georgia, "Times New Roman", serif; font-style: italic;
@@ -658,13 +658,13 @@
   letter-spacing: -0.01em;
 }
 .cats-diamond { color: var(--gold); font-style: normal; font-size: 0.5em; vertical-align: middle; margin: 0 10px; }
-.cats-sub { color: var(--muted); font-size: 14px; margin-top: 10px; }
+.cats-sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
 
-/* Viewport visible (root del IntersectionObserver) + track scrolleable dentro */
+/* Viewport visible (root del cálculo central) + track con movimiento continuo */
 .cats-viewport { overflow: hidden; position: relative; }
 .cats-track {
-  display: flex; gap: 10px; overflow-x: auto; padding: 16px 8vw 8px;
-  scroll-snap-type: x mandatory; scrollbar-width: none;
+  display: flex; gap: 5px; padding: 14px 8vw 8px;
+  scrollbar-width: none; will-change: transform;
   -webkit-overflow-scrolling: touch;
 }
 .cats-track::-webkit-scrollbar { display: none; }
@@ -711,10 +711,10 @@
 .cats-nav:active { transform: scale(0.95); }
 
 @media (max-width: 640px) {
-  .cats-section { padding: 32px 0 48px; }
-  .cats-track { padding: 14px 6vw 8px; }
+  .cats-section { padding: 24px 0 40px; }
+  .cats-track { padding: 12px 6vw 8px; }
   .cat-card { width: 78vw; }
-  .cats-nav { top: -44px; width: 38px; height: 38px; font-size: 14px; }
-  .cats-nav.prev { right: calc(6vw + 46px); }
+  .cats-nav { top: -40px; width: 36px; height: 36px; font-size: 14px; }
+  .cats-nav.prev { right: calc(6vw + 44px); }
   .cats-nav.next { right: 6vw; }
 }

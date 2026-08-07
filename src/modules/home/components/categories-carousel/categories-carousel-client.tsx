@@ -1,87 +1,107 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CategoryCard } from "."
 
-// Carousel por pasos suaves + LOOP SEAMLESS: el track lleva 2 copias idénticas; al llegar
-// al final de la copia A, el scroll se reinicia sin animación a la posición equivalente de
-// la copia B → el ciclo última→primera es INVISIBLE (movimiento continuo).
-// Zoom suave en la tarjeta central (IntersectionObserver). Pausa al hover/touch. Flechas laterales.
-const AUTOPLAY_MS = 3500
-const PAUSE_AFTER_MANUAL_MS = 6000
+// Carousel de MOVIMIENTO CONTINUO Y CONSTANTE (marquee rAF): el track avanza a velocidad
+// fija; al completar la copia A, reinicia a la posición equivalente de la copia B (seamless,
+// invisible). Zoom suave en la tarjeta que CRUZA el centro del viewport (calculado por posición
+// en cada frame — más preciso que IntersectionObserver para marquee). Flechas: pausa + salto
+// de una tarjeta con transición suave. Pausa al hover/touch.
+const SPEED_PX_S = 30
+const CARD_STEP_MS = 400
+const RESUME_AFTER_MANUAL_MS = 3500
 
 export default function CategoriesCarouselClient({ cards }: { cards: CategoryCard[] }) {
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
-  const [paused, setPaused] = useState(false)
-  const manualTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const offsetRef = useRef(0)
+  const pausedRef = useRef(false)
+  const rafRef = useRef(0)
+  const lastTsRef = useRef(0)
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Avance por pasos con reinicio invisible (loop seamless)
-  useEffect(() => {
-    if (paused) return
-    const id = setInterval(() => {
-      const el = trackRef.current
-      if (!el) return
-      const card = el.querySelector<HTMLElement>("[data-cat-card]")
-      const step = card ? card.offsetWidth + 10 : 260
-      const halfWidth = el.scrollWidth / 2
-      if (el.scrollLeft >= halfWidth - 2) {
-        // Fin de la copia A → saltar a la posición equivalente de la copia B (invisible)
-        el.scrollTo({ left: el.scrollLeft - halfWidth, behavior: "instant" })
-      } else {
-        el.scrollBy({ left: step, behavior: "smooth" })
-      }
-    }, AUTOPLAY_MS)
-    return () => clearInterval(id)
-  }, [paused])
-
-  // Zoom suave en la tarjeta central — root = el VIEWPORT visible (el track completo es
-  // mucho más ancho que lo visible; usarlo de root hace que los ratios nunca alcancen umbral)
+  // Bucle continuo: movimiento + detección de la tarjeta central
   useEffect(() => {
     const viewport = viewportRef.current
-    const el = trackRef.current
-    if (!viewport || !el) return
-    const cardEls = Array.from(el.querySelectorAll<HTMLElement>("[data-cat-card]"))
-    const io = new IntersectionObserver(
-      (entries) => {
-        let best: IntersectionObserverEntry | null = null
-        for (const e of entries) {
-          if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
-            best = e
+    const track = trackRef.current
+    if (!viewport || !track) return
+
+    const cardEls = Array.from(track.querySelectorAll<HTMLElement>("[data-cat-card]"))
+    const halfWidth = () => track.scrollWidth / 2
+
+    const applyCenter = () => {
+      const vRect = viewport.getBoundingClientRect()
+      const centerX = vRect.left + vRect.width / 2
+      let active: HTMLElement | null = null
+      for (const c of cardEls) {
+        const r = c.getBoundingClientRect()
+        if (r.left <= centerX && r.right >= centerX) {
+          active = c
+          break
+        }
+      }
+      cardEls.forEach((c) => {
+        const is = c === active
+        c.classList.toggle("cat-center", is)
+        c.classList.toggle("cat-side", !is)
+      })
+    }
+
+    let frameCount = 0
+    const frame = (ts: number) => {
+      if (!pausedRef.current) {
+        if (lastTsRef.current) {
+          const dt = (ts - lastTsRef.current) / 1000
+          offsetRef.current += SPEED_PX_S * dt
+          if (offsetRef.current >= halfWidth()) {
+            offsetRef.current -= halfWidth()
           }
         }
-        cardEls.forEach((c) => {
-          const active = best && c === best.target
-          c.classList.toggle("cat-center", !!active)
-          c.classList.toggle("cat-side", !active)
-        })
-      },
-      { root: viewport, threshold: [0.4, 0.6, 0.8] }
-    )
-    cardEls.forEach((c) => io.observe(c))
-    return () => io.disconnect()
+        track.style.transform = `translateX(${-offsetRef.current}px)`
+        // Calcular la central cada ~6 frames (evita trabajo innecesario por frame)
+        frameCount++
+        if (frameCount % 6 === 0) applyCenter()
+      }
+      lastTsRef.current = ts
+      rafRef.current = requestAnimationFrame(frame)
+    }
+    rafRef.current = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(rafRef.current)
   }, [])
 
-  const pause = useCallback(() => setPaused(true), [])
-  const resume = useCallback(() => {
-    setPaused(false)
-    if (manualTimer.current) clearTimeout(manualTimer.current)
-    manualTimer.current = setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS)
+  const pause = useCallback(() => {
+    pausedRef.current = true
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
   }, [])
+
+  const resume = useCallback(() => {
+    pausedRef.current = false
+  }, [])
+
+  const pauseTemporarily = useCallback(() => {
+    pause()
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    resumeTimerRef.current = setTimeout(resume, RESUME_AFTER_MANUAL_MS)
+  }, [pause, resume])
 
   const step = useCallback(
     (dir: 1 | -1) => {
-      const el = trackRef.current
-      if (!el) return
-      const card = el.querySelector<HTMLElement>("[data-cat-card]")
-      const stepPx = card ? card.offsetWidth + 10 : 260
-      el.scrollBy({ left: dir * stepPx, behavior: "smooth" })
-      pause()
-      if (manualTimer.current) clearTimeout(manualTimer.current)
-      manualTimer.current = setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS)
+      const track = trackRef.current
+      if (!track) return
+      const card = track.querySelector<HTMLElement>("[data-cat-card]")
+      const stepPx = card ? card.offsetWidth + 5 : 260
+      const half = track.scrollWidth / 2
+      offsetRef.current = (offsetRef.current + dir * stepPx + half) % half
+      track.style.transition = `transform ${CARD_STEP_MS}ms cubic-bezier(0.16,1,0.3,1)`
+      track.style.transform = `translateX(${-offsetRef.current}px)`
+      setTimeout(() => {
+        track.style.transition = "none"
+      }, CARD_STEP_MS)
+      pauseTemporarily()
     },
-    [pause]
+    [pauseTemporarily]
   )
 
   return (
@@ -115,7 +135,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
                 <span className="cat-label">Explora</span>
                 <span className="cat-name">{c.name}</span>
                 <span className="cat-btn">
-                  Shop <span aria-hidden="true">→</span>
+                  Ingresar <span aria-hidden="true">→</span>
                 </span>
               </span>
             </LocalizedClientLink>
