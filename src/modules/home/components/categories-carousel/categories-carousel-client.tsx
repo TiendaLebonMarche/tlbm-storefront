@@ -1,17 +1,16 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CategoryCard } from "."
 
-// Carousel de MOVIMIENTO CONTINUO Y CONSTANTE (marquee rAF): el track avanza a velocidad
-// fija; al completar la copia A, reinicia a la posición equivalente de la copia B (seamless,
-// invisible). Zoom suave en la tarjeta que CRUZA el centro del viewport (calculado por posición
-// en cada frame — más preciso que IntersectionObserver para marquee). Flechas: pausa + salto
-// de una tarjeta con transición suave. Pausa al hover/touch.
+// Carousel de MOVIMIENTO CONTINUO (marquee rAF) + zoom central por POSICIÓN real
+// (la tarjeta que cruza el centro del viewport) + SWIPE táctil + pausa hover/touch.
+// Loop seamless: 2 copias del track; al completar la copia A reinicia invisible.
 const SPEED_PX_S = 30
 const CARD_STEP_MS = 400
 const RESUME_AFTER_MANUAL_MS = 3500
+const SWIPE_THRESHOLD_PX = 20
 
 export default function CategoriesCarouselClient({ cards }: { cards: CategoryCard[] }) {
   const viewportRef = useRef<HTMLDivElement>(null)
@@ -21,9 +20,21 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
   const rafRef = useRef(0)
   const lastTsRef = useRef(0)
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pointerRef = useRef<{ x: number; y: number; moved: boolean } | null>(null)
+  const [reducedMotion, setReducedMotion] = useState(false)
 
-  // Bucle continuo: movimiento + detección de la tarjeta central
+  // Respetar prefers-reduced-motion (WCAG): sin animación automática
   useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
+  // Bucle continuo: movimiento + tarjeta central (solo si no hay reduced-motion)
+  useEffect(() => {
+    if (reducedMotion) return
     const viewport = viewportRef.current
     const track = trackRef.current
     if (!viewport || !track) return
@@ -35,11 +46,14 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       const vRect = viewport.getBoundingClientRect()
       const centerX = vRect.left + vRect.width / 2
       let active: HTMLElement | null = null
+      let bestDist = Infinity
       for (const c of cardEls) {
         const r = c.getBoundingClientRect()
-        if (r.left <= centerX && r.right >= centerX) {
+        const cCenter = (r.left + r.right) / 2
+        const dist = Math.abs(cCenter - centerX)
+        if (dist < bestDist) {
+          bestDist = dist
           active = c
-          break
         }
       }
       cardEls.forEach((c) => {
@@ -60,7 +74,6 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
           }
         }
         track.style.transform = `translateX(${-offsetRef.current}px)`
-        // Calcular la central cada ~6 frames (evita trabajo innecesario por frame)
         frameCount++
         if (frameCount % 6 === 0) applyCenter()
       }
@@ -69,7 +82,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     }
     rafRef.current = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [])
+  }, [reducedMotion])
 
   const pause = useCallback(() => {
     pausedRef.current = true
@@ -80,11 +93,27 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     pausedRef.current = false
   }, [])
 
-  const pauseTemporarily = useCallback(() => {
-    pause()
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    resumeTimerRef.current = setTimeout(resume, RESUME_AFTER_MANUAL_MS)
-  }, [pause, resume])
+  const pauseTemporarily = useCallback(
+    (ms = RESUME_AFTER_MANUAL_MS) => {
+      pause()
+      resumeTimerRef.current = setTimeout(resume, ms)
+    },
+    [pause, resume]
+  )
+
+  const setOffset = useCallback((next: number, animate = true) => {
+    const track = trackRef.current
+    if (!track) return
+    const half = track.scrollWidth / 2
+    offsetRef.current = ((next % half) + half) % half
+    if (animate) track.style.transition = `transform ${CARD_STEP_MS}ms cubic-bezier(0.16,1,0.3,1)`
+    track.style.transform = `translateX(${-offsetRef.current}px)`
+    if (animate) {
+      setTimeout(() => {
+        track.style.transition = "none"
+      }, CARD_STEP_MS)
+    }
+  }, [])
 
   const step = useCallback(
     (dir: 1 | -1) => {
@@ -92,17 +121,61 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       if (!track) return
       const card = track.querySelector<HTMLElement>("[data-cat-card]")
       const stepPx = card ? card.offsetWidth + 5 : 260
-      const half = track.scrollWidth / 2
-      offsetRef.current = (offsetRef.current + dir * stepPx + half) % half
-      track.style.transition = `transform ${CARD_STEP_MS}ms cubic-bezier(0.16,1,0.3,1)`
-      track.style.transform = `translateX(${-offsetRef.current}px)`
-      setTimeout(() => {
-        track.style.transition = "none"
-      }, CARD_STEP_MS)
+      setOffset(offsetRef.current + dir * stepPx)
       pauseTemporarily()
     },
-    [pauseTemporarily]
+    [setOffset, pauseTemporarily]
   )
+
+  // SWIPE táctil: pointer events en el viewport; swipe > umbral ajusta el offset y
+  // cancela el click del link (evita navegar accidentalmente al deslizar)
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    pointerRef.current = { x: e.clientX, y: e.clientY, moved: false }
+    pause()
+  }, [pause])
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    const p = pointerRef.current
+    if (!p) return
+    const dx = e.clientX - p.x
+    if (Math.abs(dx) > SWIPE_THRESHOLD_PX) {
+      p.moved = true
+      // Arrastre en vivo (sin transición): seguir el dedo
+      const track = trackRef.current
+      if (track) {
+        track.style.transition = "none"
+        track.style.transform = `translateX(${-(offsetRef.current - dx)}px)`
+      }
+    }
+  }, [])
+
+  const onPointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      const p = pointerRef.current
+      pointerRef.current = null
+      if (!p) return
+      const dx = e.clientX - p.x
+      if (p.moved) {
+        // Liberar: fijar el offset al salto de tarjeta más cercano
+        const track = trackRef.current
+        if (track) {
+          const card = track.querySelector<HTMLElement>("[data-cat-card]")
+          const stepPx = card ? card.offsetWidth + 5 : 260
+          const dir = dx < 0 ? 1 : -1
+          setOffset(offsetRef.current - dx + dir * stepPx * 0.5)
+        }
+        pauseTemporarily(1500)
+      } else {
+        resume()
+      }
+    },
+    [setOffset, pauseTemporarily, resume]
+  )
+
+  const onPointerCancel = useCallback(() => {
+    pointerRef.current = null
+    resume()
+  }, [resume])
 
   return (
     <section className="cats-section" aria-labelledby="cats-title">
@@ -119,31 +192,36 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
         className="cats-viewport"
         onMouseEnter={pause}
         onMouseLeave={resume}
-        onTouchStart={pause}
-        onTouchEnd={resume}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
       >
         <div ref={trackRef} className="cats-track">
-          {[...cards, ...cards].map((c, i) => (
-            <LocalizedClientLink
-              key={`${c.handle}-${i}`}
-              href={`/categories/${c.handle}`}
-              className="cat-card cat-side"
-              data-cat-card="true"
-            >
-              <img src={c.image} alt={c.name} loading="lazy" className="cat-img" />
-              <span className="cat-overlay">
-                <span className="cat-label">Explora</span>
-                <span className="cat-name">{c.name}</span>
-                <span className="cat-btn">
-                  Ingresar <span aria-hidden="true">→</span>
+          {[...cards, ...cards].map((c, i) => {
+            const isClone = i >= cards.length
+            return (
+              <LocalizedClientLink
+                key={`${c.handle}-${i}`}
+                href={`/categories/${c.handle}`}
+                className="cat-card cat-side"
+                data-cat-card="true"
+                aria-hidden={isClone}
+                tabIndex={isClone ? -1 : 0}
+              >
+                <img src={c.image} alt={c.name} loading="lazy" decoding="async" className="cat-img" />
+                <span className="cat-overlay">
+                  <span className="cat-label">Explora</span>
+                  <span className="cat-name">{c.name}</span>
+                  <span className="cat-btn">
+                    Ingresar <span aria-hidden="true">→</span>
+                  </span>
                 </span>
-              </span>
-            </LocalizedClientLink>
-          ))}
+              </LocalizedClientLink>
+            )
+          })}
         </div>
-      </div>
 
-      <div className="cats-controls">
         <button className="cats-nav prev" onClick={() => step(-1)} aria-label="Categoría anterior">
           ←
         </button>

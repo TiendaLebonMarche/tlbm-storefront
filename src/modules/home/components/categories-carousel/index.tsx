@@ -41,14 +41,15 @@ export default async function CategoriesCarousel() {
   const activeIds = new Set(categories.map((c: any) => c.id))
   const roots = categories.filter((c: any) => !c.parent_category_id || !activeIds.has(c.parent_category_id))
 
-  const cards: CategoryCard[] = []
-  for (const cat of roots) {
-    const handle = cat.handle as string
-    const image = CATEGORY_IMAGES[handle] ?? (await findFallbackImage(cat.id as string))
-    if (image) {
-      cards.push({ name: cat.name as string, handle, image })
-    }
-  }
+  // Fallbacks de imagen en PARALELO (evita waterfall N+1)
+  const cards: CategoryCard[] = await Promise.all(
+    roots.map(async (cat: any) => {
+      const handle = cat.handle as string
+      const image = CATEGORY_IMAGES[handle] ?? (await findFallbackImage(cat.id as string))
+      if (!image) return null
+      return { name: cat.name as string, handle, image }
+    })
+  ).then((results) => results.filter((c): c is CategoryCard => c !== null))
 
   if (cards.length === 0) return null
 
