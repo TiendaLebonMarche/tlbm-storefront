@@ -106,7 +106,7 @@ async function getCountryCode(
 export async function middleware(request: NextRequest) {
   let redirectUrl = request.nextUrl.href
 
-  let response = NextResponse.redirect(redirectUrl, 307)
+  let response = NextResponse.redirect(redirectUrl, 301)
 
   let cacheIdCookie = request.cookies.get("_medusa_cache_id")
 
@@ -143,10 +143,25 @@ export async function middleware(request: NextRequest) {
 
   const queryString = request.nextUrl.search ? request.nextUrl.search : ""
 
+  // Normalize the first path segment to lowercase when it's a valid country
+  // code written in uppercase (e.g. /CO → /co, /CO/store → /co/store).
+  // Google recommends a single case for URLs to avoid duplicate pages:
+  // https://developers.google.com/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites
+  const pathSegments = request.nextUrl.pathname.split("/").filter(Boolean)
+  const firstSegmentIsCountryCode =
+    pathSegments.length > 0 &&
+    regionMap.has(pathSegments[0].toLowerCase()) &&
+    pathSegments[0] !== pathSegments[0].toLowerCase()
+
   // If no country code is set, we redirect to the relevant region.
   if (!urlHasCountryCode && countryCode) {
-    redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
-    response = NextResponse.redirect(`${redirectUrl}`, 307)
+    let destinationPath = redirectPath
+    if (firstSegmentIsCountryCode) {
+      const rest = pathSegments.slice(1).join("/")
+      destinationPath = rest ? `/${rest}` : ""
+    }
+    redirectUrl = `${request.nextUrl.origin}/${countryCode}${destinationPath}${queryString}`
+    response = NextResponse.redirect(redirectUrl, 301)
   } else if (!urlHasCountryCode && !countryCode) {
     // Handle case where no valid country code exists (empty regions)
     return new NextResponse(
