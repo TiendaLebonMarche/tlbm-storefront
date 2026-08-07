@@ -85,19 +85,19 @@ export default async function Home(props: {
           <OfertasParallax />
         </Reveal>
 
-        {/* CATEGORÍAS — carousel (exactamente antes de Lo más vendidos, regla Julián 07-ago) */}
+        {/* CATEGORÍAS — carousel (exactamente antes de Lo que dicen nuestros clientes, regla Julián 07-ago) */}
         <Reveal>
           <CategoriesCarousel />
+        </Reveal>
+
+        {/* TESTIMONIALS — lo que dicen nuestros clientes (después de Categorías, regla Julián 07-ago) */}
+        <Reveal>
+          <AnimatedTestimonialsSection />
         </Reveal>
 
         {/* MOST SOLD — data-driven products from Medusa */}
         <Reveal>
           <MostSoldSection countryCode={countryCode} />
-        </Reveal>
-
-        {/* TESTIMONIALS */}
-        <Reveal>
-          <AnimatedTestimonialsSection />
         </Reveal>
       </div>
     </main>

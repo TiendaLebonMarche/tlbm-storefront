@@ -4,9 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CategoryCard } from "."
 
-// Carousel de MOVIMIENTO CONTINUO (marquee rAF) + zoom central por POSICIÓN real
-// (la tarjeta que cruza el centro del viewport) + SWIPE táctil + pausa hover/touch.
-// Loop seamless: 2 copias del track; al completar la copia A reinicia invisible.
+// Carousel de MOVIMIENTO CONTINUO (marquee rAF) de IZQUIERDA→DERECHA: el track empieza
+// mostrando el final de la copia B y avanza hacia el inicio (las tarjetas se desplazan hacia
+// la derecha); al llegar al inicio reinicia al final de la copia B (seamless, invisible).
+// Zoom central por POSICIÓN real + SWIPE táctil + pausa hover/touch.
 const SPEED_PX_S = 30
 const CARD_STEP_MS = 400
 const RESUME_AFTER_MANUAL_MS = 3500
@@ -68,8 +69,10 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       if (!pausedRef.current) {
         if (lastTsRef.current) {
           const dt = (ts - lastTsRef.current) / 1000
+          // IZQUIERDA→DERECHA: el offset crece desde -halfWidth (final de la copia B) hacia 0;
+          // al llegar a 0 reinicia a -halfWidth (posición idéntica → invisible)
           offsetRef.current += SPEED_PX_S * dt
-          if (offsetRef.current >= halfWidth()) {
+          if (offsetRef.current >= 0) {
             offsetRef.current -= halfWidth()
           }
         }
@@ -80,6 +83,8 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       lastTsRef.current = ts
       rafRef.current = requestAnimationFrame(frame)
     }
+    // Posición inicial: final del track (copia B) → el primer avance muestra contenido anterior
+    offsetRef.current = -halfWidth()
     rafRef.current = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(rafRef.current)
   }, [reducedMotion])
