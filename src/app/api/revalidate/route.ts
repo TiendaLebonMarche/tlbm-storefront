@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No valid tags" }, { status: 400 })
   }
 
-  validTags.forEach((tag) => revalidateTag(tag))
+  validTags.forEach((tag) => revalidateTag(tag, "page"))
 
   return NextResponse.json({
     revalidated: validTags,
