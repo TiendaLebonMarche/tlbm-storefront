@@ -2,19 +2,12 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
+import { truncateTitle } from "@lib/seo"
 import ProductTemplate from "@modules/products/templates"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import { HttpTypes } from "@medusajs/types"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
-
-// Title SEO: Google trunca ~60-70 chars en SERP; cortar en límite de palabra (no a mitad)
-function truncateTitle(title: string, max = 50): string {
-  if (title.length <= max) return title
-  const cut = title.slice(0, max)
-  const lastSpace = cut.lastIndexOf(" ")
-  return `${(lastSpace > 25 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`
-}
 
 // Marca real = tag `marca:*` de Medusa (40/40 productos lo tienen) — fallback la tienda
 function getBrandName(product: HttpTypes.StoreProduct): string {
@@ -118,19 +111,29 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const rawDescription = product.description
     || `Descubre ${product.title} en Tienda Le Bon Marché — boutique virtual en Bucaramanga. Producto premium seleccionado por su calidad y diseño único. Envíos a toda Colombia.`
-  // Meta description SEO: máx ~158 chars (Google trunca a ~155-160 en SERP)
-  const description = rawDescription.length > 158
-    ? `${rawDescription.slice(0, 155).trimEnd()}…`
-    : rawDescription
 
-  const canonicalUrl = `${BASE_URL}/${params.countryCode}/productos/${product.handle}`
-
+  // Meta description SEO de CONVERSIÓN (guía oficial Google 07-ago):
+  // producto + marca + precio COP + envío, máx ~158 chars (Google trunca ~155-160).
+  // El precio se calcula ANTES de la descripción para poder incluirlo.
   const firstVariant = product.variants?.[0]
   const rawPrice = firstVariant?.calculated_price
   const price = typeof rawPrice === "string"
     ? rawPrice
     : String((rawPrice as { calculated_amount?: number | null } | undefined)?.calculated_amount ?? 0)
   const currencyCode = region.currency_code.toUpperCase()
+
+  const brand = getBrandName(product)
+  const priceNumber = Number(price)
+  const hasPrice = priceNumber > 0
+  const priceFormatted = hasPrice ? `$${priceNumber.toLocaleString("es-CO")} ${currencyCode}` : ""
+  const metaBase = priceFormatted
+    ? `${product.title} — ${brand}. ${priceFormatted}. Envíos a toda Colombia.`
+    : rawDescription
+  const description = metaBase.length > 158
+    ? `${metaBase.slice(0, 155).trimEnd()}…`
+    : metaBase
+
+  const canonicalUrl = `${BASE_URL}/${params.countryCode}/productos/${product.handle}`
 
   return {
     // Title SEO: ~60 chars finales con el template "%s | Le Bon Marché" del layout
