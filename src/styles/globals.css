@@ -658,6 +658,7 @@
   letter-spacing: -0.01em;
 }
 .cats-diamond { color: var(--gold); font-style: normal; font-size: 0.5em; vertical-align: middle; margin: 0 10px; }
+.cats-gold { color: var(--gold); font-style: italic; }
 .cats-sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
 
 /* Viewport centrado (máx 940px = ~3 tarjetas visibles: el zoom central se percibe) */

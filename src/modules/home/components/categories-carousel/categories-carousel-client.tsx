@@ -41,7 +41,11 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     if (!viewport || !track) return
 
     const cardEls = Array.from(track.querySelectorAll<HTMLElement>("[data-cat-card]"))
-    const halfWidth = () => track.scrollWidth / 2
+    // Defensivo: si el track aún no tiene ancho (layout pendiente), usa un fallback
+    const halfWidth = () => {
+      const w = track.scrollWidth
+      return w > 0 ? w / 2 : 2200
+    }
 
     const applyCenter = () => {
       const vRect = viewport.getBoundingClientRect()
@@ -68,7 +72,10 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     const frame = (ts: number) => {
       if (!pausedRef.current) {
         if (lastTsRef.current) {
-          const dt = (ts - lastTsRef.current) / 1000
+          // Clamp del dt (máx 100ms): evita la explosión del offset si la pestaña estuvo
+          // en background (el rAF se congela y al volver el delta sería enorme → el track
+          // saltaba a una zona vacía sin tarjetas visibles)
+          const dt = Math.min((ts - lastTsRef.current) / 1000, 0.1)
           // IZQUIERDA→DERECHA: el offset crece desde -halfWidth (final de la copia B) hacia 0;
           // al llegar a 0 reinicia a -halfWidth (posición idéntica → invisible)
           offsetRef.current += SPEED_PX_S * dt
@@ -76,7 +83,9 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
             offsetRef.current -= halfWidth()
           }
         }
-        track.style.transform = `translateX(${-offsetRef.current}px)`
+        if (halfWidth() > 0) {
+          track.style.transform = `translateX(${-offsetRef.current}px)`
+        }
         frameCount++
         if (frameCount % 6 === 0) applyCenter()
       }
@@ -187,7 +196,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       <div className="cats-head">
         <div className="cats-eyebrow">Explora</div>
         <h2 id="cats-title" className="cats-title">
-          Nuestras <span className="cats-diamond" aria-hidden="true">◆</span> Categorías
+          Descubre tu próxima <span className="cats-gold">obsesión</span>
         </h2>
         <p className="cats-sub">Productos 100% originales, seleccionados para ti</p>
       </div>
