@@ -4,24 +4,30 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CategoryCard } from "."
 
+// Carousel por pasos suaves + LOOP SEAMLESS: el track lleva 2 copias idénticas; al llegar
+// al final de la copia A, el scroll se reinicia sin animación a la posición equivalente de
+// la copia B → el ciclo última→primera es INVISIBLE (movimiento continuo).
+// Zoom suave en la tarjeta central (IntersectionObserver). Pausa al hover/touch. Flechas laterales.
 const AUTOPLAY_MS = 3500
 const PAUSE_AFTER_MANUAL_MS = 6000
 
 export default function CategoriesCarouselClient({ cards }: { cards: CategoryCard[] }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const [paused, setPaused] = useState(false)
-  const [manualTimer, setManualTimer] = useState<ReturnType<typeof setTimeout> | null>(null)
+  const manualTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Avance automático suave (izquierda→derecha: el contenido fluye hacia la izquierda)
+  // Avance por pasos con reinicio invisible (loop seamless)
   useEffect(() => {
     if (paused) return
     const id = setInterval(() => {
       const el = trackRef.current
       if (!el) return
       const card = el.querySelector<HTMLElement>("[data-cat-card]")
-      const step = card ? card.offsetWidth + 20 : 300
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-        el.scrollTo({ left: 0, behavior: "smooth" })
+      const step = card ? card.offsetWidth + 10 : 260
+      const halfWidth = el.scrollWidth / 2
+      if (el.scrollLeft >= halfWidth - 2) {
+        // Fin de la copia A → saltar a la posición equivalente de la copia B (invisible)
+        el.scrollTo({ left: el.scrollLeft - halfWidth, behavior: "instant" })
       } else {
         el.scrollBy({ left: step, behavior: "smooth" })
       }
@@ -29,11 +35,11 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     return () => clearInterval(id)
   }, [paused])
 
-  // Zoom suave en la tarjeta central (IntersectionObserver sobre el contenedor)
+  // Zoom suave en la tarjeta central
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
-    const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-cat-card]"))
+    const cardEls = Array.from(el.querySelectorAll<HTMLElement>("[data-cat-card]"))
     const io = new IntersectionObserver(
       (entries) => {
         let best: IntersectionObserverEntry | null = null
@@ -42,7 +48,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
             best = e
           }
         }
-        cards.forEach((c) => {
+        cardEls.forEach((c) => {
           const active = best && c === best.target
           c.classList.toggle("cat-center", !!active)
           c.classList.toggle("cat-side", !active)
@@ -50,29 +56,29 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       },
       { root: el, threshold: [0.4, 0.6, 0.8] }
     )
-    cards.forEach((c) => io.observe(c))
+    cardEls.forEach((c) => io.observe(c))
     return () => io.disconnect()
   }, [])
 
   const pause = useCallback(() => setPaused(true), [])
   const resume = useCallback(() => {
     setPaused(false)
-    if (manualTimer) clearTimeout(manualTimer)
-    setManualTimer(setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS))
-  }, [manualTimer])
+    if (manualTimer.current) clearTimeout(manualTimer.current)
+    manualTimer.current = setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS)
+  }, [])
 
   const step = useCallback(
     (dir: 1 | -1) => {
       const el = trackRef.current
       if (!el) return
       const card = el.querySelector<HTMLElement>("[data-cat-card]")
-      const stepPx = card ? card.offsetWidth + 20 : 300
+      const stepPx = card ? card.offsetWidth + 10 : 260
       el.scrollBy({ left: dir * stepPx, behavior: "smooth" })
       pause()
-      if (manualTimer) clearTimeout(manualTimer)
-      setManualTimer(setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS))
+      if (manualTimer.current) clearTimeout(manualTimer.current)
+      manualTimer.current = setTimeout(() => setPaused(false), PAUSE_AFTER_MANUAL_MS)
     },
-    [manualTimer, pause]
+    [pause]
   )
 
   return (
@@ -91,10 +97,11 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
         onMouseEnter={pause}
         onMouseLeave={resume}
         onTouchStart={pause}
+        onTouchEnd={resume}
       >
-        {cards.map((c) => (
+        {[...cards, ...cards].map((c, i) => (
           <LocalizedClientLink
-            key={c.handle}
+            key={`${c.handle}-${i}`}
             href={`/categories/${c.handle}`}
             className="cat-card cat-side"
             data-cat-card="true"
