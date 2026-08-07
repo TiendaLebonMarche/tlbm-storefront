@@ -65,9 +65,6 @@ const nextConfig = {
       fullUrl: false,
     },
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: false,
   },
