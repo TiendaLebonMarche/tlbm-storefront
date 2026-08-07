@@ -642,3 +642,78 @@
 .testi-card:hover { border-color: rgba(212,175,55,.3); box-shadow: 0 8px 24px rgba(212,175,55,.06); }
 .dark .testi-card { background: transparent; border: 1px solid rgba(255,255,255,.06); }
 .dark .testi-card:hover { border-color: rgba(212,175,55,.2); }
+
+/* === SECCIÓN CATEGORÍAS (carousel — 07-ago-2026) ===
+   Usa tokens var(--gold)/var(--ink)/var(--text) del sistema de escenografía:
+   [data-theme="halloween"|"navidad"|"san-valentin"] la recoloriza automáticamente. */
+.cats-section { padding: 56px 0 72px; overflow: hidden; background: var(--bg); }
+.cats-head { text-align: center; margin-bottom: 36px; padding: 0 20px; }
+.cats-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.cats-title {
+  font-family: Georgia, "Times New Roman", serif; font-style: italic;
+  font-size: clamp(28px, 4vw, 42px); font-weight: 400; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.cats-diamond { color: var(--gold); font-style: normal; font-size: 0.5em; vertical-align: middle; margin: 0 10px; }
+.cats-sub { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+/* Track scrolleable con scroll-snap (avance suave) */
+.cats-track {
+  display: flex; gap: 20px; overflow-x: auto; padding: 24px 12vw 12px;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.cats-track::-webkit-scrollbar { display: none; }
+
+/* Tarjeta 2:3 (más alta que ancha) */
+.cat-card {
+  position: relative; width: clamp(230px, 19vw, 270px); flex-shrink: 0;
+  aspect-ratio: 2 / 3; border-radius: 14px; overflow: hidden;
+  display: block; background: var(--ink); scroll-snap-align: center;
+  transition: transform 500ms cubic-bezier(0.16,1,0.3,1), opacity 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms;
+}
+.cat-side { transform: scale(0.92); opacity: 0.85; z-index: 1; }
+.cat-center { transform: scale(1.06); opacity: 1; z-index: 2; box-shadow: 0 18px 44px rgba(10,10,15,0.18); }
+.cat-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.25,0.46,0.45,0.94); }
+.cat-card:hover .cat-img { transform: scale(1.05); }
+.cat-overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 22px 18px;
+  background: linear-gradient(to top, rgba(8,8,12,0.82) 0%, rgba(8,8,12,0.25) 45%, transparent 70%);
+}
+.cat-label { color: var(--gold); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 4px; }
+.cat-name { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px; }
+.cat-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: #000; font-weight: 600; font-size: 12px;
+  padding: 10px 18px; border-radius: 999px; width: max-content;
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.cat-card:hover .cat-btn { background: var(--ink); color: #fff; gap: 12px; }
+
+/* Controles laterales glass (2026) */
+.cats-controls { position: relative; max-width: 100%; }
+.cats-nav {
+  position: absolute; top: -52px; width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(255,255,255,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(10,10,15,0.08); box-shadow: 0 8px 24px rgba(10,10,15,0.08);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--ink); font-size: 16px; transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+  z-index: 5;
+}
+.cats-nav.prev { right: calc(12vw + 52px); }
+.cats-nav.next { right: 12vw; }
+.cats-nav:hover { border-color: var(--gold); color: var(--gold); transform: scale(1.06); }
+.cats-nav:active { transform: scale(0.95); }
+
+@media (max-width: 640px) {
+  .cats-section { padding: 40px 0 56px; }
+  .cats-track { padding: 20px 6vw 10px; }
+  .cat-card { width: 72vw; }
+  .cats-nav { top: -44px; width: 38px; height: 38px; font-size: 14px; }
+  .cats-nav.prev { right: calc(6vw + 46px); }
+  .cats-nav.next { right: 6vw; }
+}

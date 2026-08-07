@@ -6,6 +6,7 @@ import BrandMarquee from "@modules/home/components/brand-marquee"
 import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
 import OfertasParallax from "@modules/home/components/ofertas-parallax"
+import CategoriesCarousel from "@modules/home/components/categories-carousel"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import Reveal from "@modules/common/components/reveal"
@@ -82,6 +83,11 @@ export default async function Home(props: {
         {/* OFERTAS PARALLAX */}
         <Reveal>
           <OfertasParallax />
+        </Reveal>
+
+        {/* CATEGORÍAS — carousel (exactamente antes de Lo más vendidos, regla Julián 07-ago) */}
+        <Reveal>
+          <CategoriesCarousel />
         </Reveal>
 
         {/* MOST SOLD — data-driven products from Medusa */}
