@@ -11,11 +11,11 @@ import { useScrollThreshold } from "@lib/hooks/use-scroll-threshold"
  * header se encoge, así que el padding se reduce para no dejar un hueco
  * blanco exagerado entre header y contenido.
  *
- * Medidas reales (verificadas con Playwright, Jul 2026):
- * - Producto top: marquesina 31 + logo 80 + fila2 60 = 171px → pt-44 (176px)
+ * Medidas reales (verificadas con Playwright, Jul 2026; marquesina rediseñada 07-ago):
+ * - Producto top: marquesina 46 + logo 80 + fila2 60 = 186px → pt-52 (208px)
  * - Producto scrolled: logo 52 + fila2 54 = 106px → pt-28 (112px)
- * - Producto mobile: marquesina 30 + nav 72 = 102px → pt-28 (112px)
- * - Resto top: topbar 32 + header 72 = 104px → pt-36 (144px) lg
+ * - Producto mobile: marquesina 36 + nav 68 = 104px → pt-28 (112px)
+ * - Resto top: marquesina 46 + header 72 = 118px → pt-36 (144px) md/lg
  * - Resto scrolled: header 60px → pt-24 (96px)
  */
 export default function PagePaddingWrapper({ children }: { children: React.ReactNode }) {
@@ -26,17 +26,17 @@ export default function PagePaddingWrapper({ children }: { children: React.React
   // Nota: countryCode es dinámico, revisamos si la ruta es solo /{countryCode} o /
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
 
-  // Páginas de producto: header más alto (marquesina oscura + logo centrado + nav)
+  // Páginas de producto: header más alto (marquesina + logo centrado + nav)
   const isProductPage = pathname?.includes("/productos/") ?? false
 
   const topPadding = !isHome
     ? isProductPage
       ? isScrolled
         ? "pt-28" // 112px ≥ 106px header scrolled
-        : "pt-28 md:pt-44 lg:pt-44" // 176px ≥ 171px header top (md y lg)
+        : "pt-28 md:pt-52 lg:pt-52" // mobile 112 ≥ 104 · md/lg 208 ≥ 186 header top
       : isScrolled
         ? "pt-24 md:pt-24" // 96px ≥ 60px header scrolled
-        : "pt-28 md:pt-32 lg:pt-36" // 112/128/144px ≥ 104px header top
+        : "pt-28 md:pt-36 lg:pt-36" // mobile 112 ≥ 104 · md/lg 144 ≥ 118 header top
     : ""
 
   return (

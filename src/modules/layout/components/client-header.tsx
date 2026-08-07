@@ -13,8 +13,8 @@ import ProductHeader from "@modules/layout/components/product-header"
   On every other page it behaves as a normal sticky header with glass effect.
 
   On product pages (/productos/...) the thin top bar is replaced by the
-  dark TopMarquee (fondo negro + texto dorado) — misma marquesina del index
-  en variante oscura. Colapsa al hacer scroll igual que la barra anterior.
+  TopMarquee (etiqueta dorada TLBM + banda negra) — el mismo diseño en todas
+  las páginas. Colapsa al hacer scroll igual que la barra anterior.
 */
 
 export default function ClientHeader({
@@ -34,10 +34,10 @@ export default function ClientHeader({
   // Páginas de detalle de producto → marquesina oscura en vez de la barra fina
   const isProductPage = pathname?.includes("/productos/") ?? false
 
-  // Página de carrito → marquesina DORADA (la del index) en vez de la barra fina
+  // Página de carrito → TopMarquee en vez de la barra fina
   const isCartPage = pathname?.includes("/cart") ?? false
 
-  // Página de tienda (/store) → marquesina DORADA igual que el carrito
+  // Página de tienda (/store) → TopMarquee en vez de la barra fina
   const isStorePage = pathname?.includes("/store") ?? false
 
   // On the home page, this header renders nothing — the Hero slider
@@ -61,14 +61,14 @@ export default function ClientHeader({
       data-scrolled={isScrolled}
       data-home={isHome}
     >
-      {/* ── TOP BAR ── Productos/Tienda: marquesina oscura (negro + dorado) · Carrito: dorada · Resto: barra fina #0A0A0F ── */}
+      {/* ── TOP BAR ── Productos/Tienda/Carrito: TopMarquee (etiqueta dorada + banda negra) · Resto: barra fina #0A0A0F ── */}
       {isProductPage || isCartPage || isStorePage ? (
         <div
           className={`transition-all duration-500 ease-out overflow-hidden
             ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
           `}
         >
-          <TopMarquee variant={isCartPage ? "gold" : "dark"} />
+          <TopMarquee />
         </div>
       ) : (
         <div

@@ -442,7 +442,7 @@ export default function Hero() {
   return (
     <>
       {/* ── MARQUEE ── */}
-      <TopMarquee variant="gold" />
+      <TopMarquee />
 
       {/* ── SCROLL HEADER (white bar) ── */}
       <ScrollHeader visible={isScrolled} />

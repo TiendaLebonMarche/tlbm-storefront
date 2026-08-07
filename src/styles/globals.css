@@ -435,6 +435,11 @@
   width: max-content !important;
   animation: marquee-fixed 45s linear infinite; 
 }
+/* Pausa al hover + accesibilidad (prefers-reduced-motion) */
+.animate-marquee-fixed:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-fixed { animation: none !important; }
+}
 
 /* Mobile: animación más lenta para el texto largo */
 @media (max-width: 640px) {
