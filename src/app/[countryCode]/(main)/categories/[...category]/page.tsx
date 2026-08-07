@@ -80,6 +80,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         url: canonicalUrl,
         siteName: "Tienda Le Bon Marché",
         type: "website",
+        images: [
+          {
+            url: "/opengraph-image.jpg",
+            width: 1200,
+            height: 630,
+            alt: `${productCategory.name} | Tienda Le Bon Marché`,
+          },
+        ],
       },
       twitter: {
         card: "summary_large_image",
@@ -140,11 +148,38 @@ export default async function CategoryPage(props: Props) {
     },
   }
 
+  // BreadcrumbList (guía oficial Google 07-ago): Inicio → Tienda → niveles de categoría
+  const slugToName = (slug: string) =>
+    slug
+      .split("-")
+      .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ")
+  const breadcrumbItems = [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/${params.countryCode}` },
+    { "@type": "ListItem", position: 2, name: "Tienda", item: `${BASE_URL}/${params.countryCode}/store` },
+    ...params.category.map((slug: string, idx: number) => ({
+      "@type": "ListItem",
+      position: idx + 3,
+      name: idx === params.category.length - 1 ? productCategory.name : slugToName(slug),
+      item: `${BASE_URL}/${params.countryCode}/categories/${params.category.slice(0, idx + 1).join("/")}`,
+    })),
+  ]
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${categoryUrl}#breadcrumb`,
+    "itemListElement": breadcrumbItems,
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <CategoryTemplate
         category={productCategory}
