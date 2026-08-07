@@ -12,6 +12,7 @@ const AUTOPLAY_MS = 3500
 const PAUSE_AFTER_MANUAL_MS = 6000
 
 export default function CategoriesCarouselClient({ cards }: { cards: CategoryCard[] }) {
+  const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [paused, setPaused] = useState(false)
   const manualTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -35,10 +36,12 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     return () => clearInterval(id)
   }, [paused])
 
-  // Zoom suave en la tarjeta central
+  // Zoom suave en la tarjeta central — root = el VIEWPORT visible (el track completo es
+  // mucho más ancho que lo visible; usarlo de root hace que los ratios nunca alcancen umbral)
   useEffect(() => {
+    const viewport = viewportRef.current
     const el = trackRef.current
-    if (!el) return
+    if (!viewport || !el) return
     const cardEls = Array.from(el.querySelectorAll<HTMLElement>("[data-cat-card]"))
     const io = new IntersectionObserver(
       (entries) => {
@@ -54,7 +57,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
           c.classList.toggle("cat-side", !active)
         })
       },
-      { root: el, threshold: [0.4, 0.6, 0.8] }
+      { root: viewport, threshold: [0.4, 0.6, 0.8] }
     )
     cardEls.forEach((c) => io.observe(c))
     return () => io.disconnect()
@@ -92,30 +95,32 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
       </div>
 
       <div
-        ref={trackRef}
-        className="cats-track"
+        ref={viewportRef}
+        className="cats-viewport"
         onMouseEnter={pause}
         onMouseLeave={resume}
         onTouchStart={pause}
         onTouchEnd={resume}
       >
-        {[...cards, ...cards].map((c, i) => (
-          <LocalizedClientLink
-            key={`${c.handle}-${i}`}
-            href={`/categories/${c.handle}`}
-            className="cat-card cat-side"
-            data-cat-card="true"
-          >
-            <img src={c.image} alt={c.name} loading="lazy" className="cat-img" />
-            <span className="cat-overlay">
-              <span className="cat-label">Explora</span>
-              <span className="cat-name">{c.name}</span>
-              <span className="cat-btn">
-                Shop <span aria-hidden="true">→</span>
+        <div ref={trackRef} className="cats-track">
+          {[...cards, ...cards].map((c, i) => (
+            <LocalizedClientLink
+              key={`${c.handle}-${i}`}
+              href={`/categories/${c.handle}`}
+              className="cat-card cat-side"
+              data-cat-card="true"
+            >
+              <img src={c.image} alt={c.name} loading="lazy" className="cat-img" />
+              <span className="cat-overlay">
+                <span className="cat-label">Explora</span>
+                <span className="cat-name">{c.name}</span>
+                <span className="cat-btn">
+                  Shop <span aria-hidden="true">→</span>
+                </span>
               </span>
-            </span>
-          </LocalizedClientLink>
-        ))}
+            </LocalizedClientLink>
+          ))}
+        </div>
       </div>
 
       <div className="cats-controls">

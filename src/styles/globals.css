@@ -660,7 +660,8 @@
 .cats-diamond { color: var(--gold); font-style: normal; font-size: 0.5em; vertical-align: middle; margin: 0 10px; }
 .cats-sub { color: var(--muted); font-size: 14px; margin-top: 10px; }
 
-/* Track scrolleable con scroll-snap (avance suave por pasos + loop seamless) */
+/* Viewport visible (root del IntersectionObserver) + track scrolleable dentro */
+.cats-viewport { overflow: hidden; position: relative; }
 .cats-track {
   display: flex; gap: 10px; overflow-x: auto; padding: 16px 8vw 8px;
   scroll-snap-type: x mandatory; scrollbar-width: none;
