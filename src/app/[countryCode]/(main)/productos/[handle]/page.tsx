@@ -239,6 +239,11 @@ export default async function ProductPage(props: Props) {
       "url": productUrl,
       "priceCurrency": currencyCode,
       "price": price,
+      // validFrom = inicio de la oferta (requisito Fichas de comerciantes, correo GSC 07-ago):
+      // fecha real de publicación del producto (created_at de Medusa) con ISO 8601 + timezone
+      "validFrom": (pricedProduct.created_at
+        ? new Date(pricedProduct.created_at).toISOString()
+        : new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString()),
       "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       "availability": isInStock
         ? "https://schema.org/InStock"
