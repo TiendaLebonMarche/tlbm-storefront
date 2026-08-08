@@ -251,13 +251,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       <Reveal>
         <div className="bg-white">
           <div className="content-container py-12 lg:py-16">
-            <div className="flex flex-col lg:flex-row gap-16 xl:gap-32">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 xl:gap-x-16">
               
               {/* Left: Technical Details */}
-              <div className="w-full lg:w-[45%]">
+              <div className="lg:col-span-7">
                 <div className="mb-12">
-                  <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Información técnica</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">la diferencia</span></h3>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-sans mb-4">Información técnica</p>
+                  <h2 className="text-3xl md:text-4xl font-serif font-semibold text-brand-black leading-[1.15] tracking-[-0.015em] text-balance">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">la diferencia</span></h2>
                 </div>
                 <ProductSections product={product} />
 
@@ -265,51 +265,78 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 <div className="mt-8">
                   <WhatsAppCTABuy />
                 </div>
+
+                {/* Trust badges — señal de confianza bajo el CTA (enjambre diseño 08-ago) */}
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {["Reembolso protegido", "Garantía y soporte", "Envío rápido"].map((t) => (
+                    <div
+                      key={t}
+                      className="flex items-center gap-2 rounded-full border border-black/10 px-3 py-2.5"
+                    >
+                      <svg
+                        className="w-3.5 h-3.5 flex-shrink-0 text-[#D4AF37]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span className="text-[10px] font-semibold text-brand-gray uppercase tracking-wider">
+                        {t}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Right: FAQ + WhatsApp Help */}
-              <div className="w-full lg:w-[55%] space-y-12">
+              <div className="lg:col-span-5 flex flex-col space-y-12">
                 <div className="mb-12 lg:mb-16">
-                  <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Preguntas y dudas</p>
-                  <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Servicio al <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">cliente</span></h3>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-sans mb-4">Preguntas y dudas</p>
+                  <h3 className="text-2xl md:text-3xl font-serif font-semibold text-brand-black leading-[1.15] tracking-[-0.015em] text-balance">Servicio al <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">cliente</span></h3>
                 </div>
                 
-                <Accordion type="single" collapsible className="w-full space-y-3">
-                  <AccordionItem value="item-1" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
+                <Accordion type="single" collapsible className="w-full space-y-0 divide-y divide-black/10 border-y border-black/10">
+                  <AccordionItem value="item-1" className="py-1">
+                    <AccordionTrigger className="text-[15px] font-semibold text-brand-black hover:no-underline font-sans py-5 tracking-wide [&>svg]:text-[#D4AF37] [&>svg]:w-4 [&>svg]:h-4">
                       ¿Cuál es el origen de este producto?
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
+                    <AccordionContent className="text-brand-gray font-normal leading-relaxed font-sans text-[15px] pb-5 pt-1">
                       Contamos con <strong className="font-medium text-brand-black">bots inteligentes siempre activos</strong> buscando las mejores piezas globales para traerlas a nuestra selección. Garantizamos productos <strong className="font-medium text-brand-black">100% originales</strong> con trazabilidad completa desde su origen.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
+                  <AccordionItem value="item-2" className="py-1">
+                    <AccordionTrigger className="text-[15px] font-semibold text-brand-black hover:no-underline font-sans py-5 tracking-wide [&>svg]:text-[#D4AF37] [&>svg]:w-4 [&>svg]:h-4">
                       ¿Cuánto tarda la entrega?
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
+                    <AccordionContent className="text-brand-gray font-normal leading-relaxed font-sans text-[15px] pb-5 pt-1">
                       <strong className="font-medium text-brand-black">24 horas</strong> para entregas locales en Bucaramanga. De <strong className="font-medium text-brand-black">2 a 5 días</strong> para envíos nacionales via Coordinadora o Servientrega.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
-                    <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
+                  <AccordionItem value="item-3" className="py-1">
+                    <AccordionTrigger className="text-[15px] font-semibold text-brand-black hover:no-underline font-sans py-5 tracking-wide [&>svg]:text-[#D4AF37] [&>svg]:w-4 [&>svg]:h-4">
                       ¿Tiene garantía?
                     </AccordionTrigger>
-                    <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
+                    <AccordionContent className="text-brand-gray font-normal leading-relaxed font-sans text-[15px] pb-5 pt-1">
                       Cuentas con garantía total contra defectos de fabricación. Además, aplicamos el derecho de retracto de 5 días hábiles para que compres con absoluta tranquilidad.
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
 
                 {/* WhatsApp Premium Support */}
-                <div className="bg-brand-black p-6 md:p-10 mt-8 relative overflow-hidden group">
+                <div className="bg-brand-black p-8 xl:p-10 mt-auto relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
-                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/5 rounded-full -ml-24 -mb-24 transition-transform duration-700 group-hover:scale-150" />
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#D4AF37]/5 rounded-full -ml-24 -mb-24 transition-transform duration-700 group-hover:scale-150" />
                   <div className="relative z-10 space-y-6">
                     <div>
-                      <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-[0.3em] mb-3">Asistencia Personalizada</p>
+                      <p className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-[0.3em] mb-3">Asistencia Personalizada</p>
                       <h4 className="text-2xl font-serif text-white leading-snug">¿Deseas atención directa de un asesor?</h4>
                     </div>
                     <p className="text-sm text-white/50 font-light leading-relaxed max-w-sm">
@@ -319,8 +346,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                       href="https://wa.me/573027567783?text=Holaa%2C%20vi%20un%20producto%20en%20Tienda%20Le%20Bon%20March%C3%A9%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20detalles%20antes%20de%20comprar." 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="relative overflow-hidden inline-flex items-center gap-3 px-7 py-3.5 rounded-full text-white font-medium text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-emerald-500/30"
-                      style={{ backgroundColor: "#25D366" }}
+                      className="relative overflow-hidden inline-flex items-center gap-3 px-7 py-3.5 rounded-full border border-[#D4AF37] text-[#D4AF37] font-semibold text-sm transition-all duration-300 hover:bg-[#D4AF37] hover:text-brand-black active:scale-95"
                     >
                       <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 relative z-10">
