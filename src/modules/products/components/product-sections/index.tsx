@@ -140,7 +140,10 @@ const ProductInfoTab = ({ product }: ProductSectionsProps) => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
             {Object.entries(metadata)
-              .filter(([key]) => !["video_url", "video", "internal"].includes(key))
+              .filter(
+                ([key]) =>
+                  !["video_url", "video", "internal", "origen", "origin", "asin"].includes(key)
+              )
               .map(([key, value]) => (
                 <div key={key} className="flex justify-between py-3 border-b border-gray-50">
                   <span className="text-xs text-brand-gray uppercase tracking-wider font-sans capitalize">
