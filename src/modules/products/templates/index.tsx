@@ -13,9 +13,7 @@ import Reveal from "@modules/common/components/reveal"
 import CollapsibleDescription from "@modules/products/components/collapsible-description"
 import ProductVideo from "@modules/products/components/product-video"
 
-const ProductTabs = dynamic(() => import("@modules/products/components/product-tabs"), {
-  ssr: true,
-})
+import ProductSections from "@modules/products/components/product-sections"
 
 const RelatedProducts = dynamic(() => import("@modules/products/components/related-products"), {
   ssr: true,
@@ -261,7 +259,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                   <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37]/60 font-sans mb-4">Información técnica</p>
                   <h3 className="text-3xl md:text-4xl font-serif text-brand-black leading-tight">Detalles que marcan <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">la diferencia</span></h3>
                 </div>
-                <ProductTabs product={product} />
+                <ProductSections product={product} />
 
                 {/* WhatsApp CTA Botón 2: Compra por WhatsApp */}
                 <div className="mt-8">
@@ -288,7 +286,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
                   <AccordionItem value="item-2" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
-                      Tiempos y logística de entrega
+                      ¿Cuánto tarda la entrega?
                     </AccordionTrigger>
                     <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
                       <strong className="font-medium text-brand-black">24 horas</strong> para entregas locales en Bucaramanga. De <strong className="font-medium text-brand-black">2 a 5 días</strong> para envíos nacionales via Coordinadora o Servientrega.
@@ -297,7 +295,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
                   <AccordionItem value="item-3" className="border border-white bg-white px-6 transition-all duration-200 hover:border-[#D4AF37]/20 data-[state=open]:border-[#D4AF37]/30">
                     <AccordionTrigger className="text-[13px] font-medium text-brand-black hover:no-underline font-sans py-6 tracking-wide">
-                      Política de garantía TLBM
+                      ¿Tiene garantía?
                     </AccordionTrigger>
                     <AccordionContent className="text-brand-gray font-light leading-relaxed font-sans text-[14px] pb-6 border-t border-white pt-4">
                       Cuentas con garantía total contra defectos de fabricación. Además, aplicamos el derecho de retracto de 5 días hábiles para que compres con absoluta tranquilidad.
