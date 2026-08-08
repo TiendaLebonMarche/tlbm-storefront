@@ -152,7 +152,9 @@ const ProductInfoTab = ({ product }: ProductSectionsProps) => {
             {Object.entries(metadata)
               .filter(
                 ([key]) =>
-                  !["video_url", "video", "internal", "origen", "origin", "asin"].includes(key)
+                  !["video_url", "video", "internal", "origen", "origin", "asin", "proveedor", "supplier"].includes(
+                    key.toLowerCase()
+                  )
               )
               .map(([key, value]) => (
                 <div key={key} className="flex items-baseline justify-between gap-6 py-3">
