@@ -6,7 +6,7 @@ category: "Audio"
 keywords: ["mejor parlante bluetooth colombia 2026", "parlante bluetooth original", "parlante sony original colombia", "parlante ip67 resistencia agua", "parlante portátil con graves", "parlante para fiesta luces led", "dónde comprar parlante original bucaramanga"]
 relatedCategories: ["electronicos-parlantes-bluetooth", "electronicos-audifonos"]
 readingTime: "6 min"
-author: "Departamento Editorial — Tienda Le Bon Marché"
+author: "Lebonmarche"
 slug: "mejor-parlante-bluetooth-original-colombia-2026"
 ---
 

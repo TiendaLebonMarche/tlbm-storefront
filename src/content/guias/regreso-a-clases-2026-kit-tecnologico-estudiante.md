@@ -6,7 +6,7 @@ category: "Tecnología"
 keywords: ["regreso a clases 2026", "kit tecnológico estudiantes", "morral universitario original", "audífonos inalámbricos económicos", "setup de estudio en casa", "mouse ergonómico vertical", "smartwatch con llamadas barato"]
 relatedCategories: ["computacion", "electronicos-audifonos", "moda-accesorios-morrales", "electronicos-smartwatches"]
 readingTime: "5 min"
-author: "Departamento Editorial — Tienda Le Bon Marché"
+author: "Lebonmarche"
 slug: "regreso-a-clases-2026-kit-tecnologico-estudiante"
 ---
 

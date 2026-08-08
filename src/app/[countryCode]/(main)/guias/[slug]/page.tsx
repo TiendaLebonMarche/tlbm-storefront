@@ -176,17 +176,33 @@ export default async function GuidePage(props: Props) {
             {guide.description}
           </p>
 
-          <div className="mt-6 flex items-center gap-3 text-sm text-gray-400">
-            <span>{guide.author}</span>
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-400">
+            <a
+              href={`/${params.countryCode}/quienes-somos`}
+              className="font-semibold text-gray-600 dark:text-gray-300 hover:text-[#D4AF37] transition-colors"
+            >
+              Por {guide.author}
+            </a>
             <span className="w-1 h-1 rounded-full bg-gray-300" />
-            <time dateTime={guide.date}>
-              {new Date(guide.date).toLocaleDateString("es-CO", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
+            <span className="inline-flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3a9 9 0 109 9" />
+              </svg>
+              Actualizado:
+              <time dateTime={guide.date}>
+                {new Date(guide.date).toLocaleDateString("es-CO", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </span>
           </div>
+          <p className="mt-3 text-xs text-gray-400 dark:text-gray-500 max-w-xl">
+            Equipo de selección de Le Bon Marché — cada producto de esta guía pasa por
+            verificación de originalidad antes de recomendarse.
+          </p>
         </header>
 
         {/* Content */}
