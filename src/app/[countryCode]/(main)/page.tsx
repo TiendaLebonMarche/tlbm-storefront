@@ -5,6 +5,7 @@ import TrustBadges from "@modules/home/components/trust-badges"
 import BrandMarquee from "@modules/home/components/brand-marquee"
 import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
+import FaqSection from "@modules/home/components/faq-section"
 import OfertasParallax from "@modules/home/components/ofertas-parallax"
 import CategoriesCarousel from "@modules/home/components/categories-carousel"
 import { listCollections } from "@lib/data/collections"
@@ -99,6 +100,9 @@ export default async function Home(props: {
         <Reveal>
           <MostSoldSection countryCode={countryCode} />
         </Reveal>
+
+        {/* FAQ + PROOF — preguntas visibles + cifras reales (framework AI SEO puntos 8 y 11) */}
+        <FaqSection />
       </div>
     </main>
   )

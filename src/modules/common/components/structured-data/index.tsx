@@ -1,4 +1,5 @@
 import { getBaseURL } from "@lib/util/env"
+import { FAQ_ITEMS } from "@lib/faq"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 const COUNTRY_URL = `${BASE_URL}/co`
@@ -98,54 +99,20 @@ export default function StructuredData() {
     }
   }
 
-  // 3. FAQPage Schema — Preguntas frecuentes para rich results
+  // 3. FAQPage Schema — mismas preguntas del FAQ visible de la home (fuente única @lib/faq)
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "name": "Preguntas Frecuentes — Tienda Le Bon Marché",
     "url": `${COUNTRY_URL}/#faq`,
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Hacen envíos a todo Colombia?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. Realizamos envíos a todos los municipios de Colombia. Los tiempos de entrega varían entre 2 y 7 días hábiles dependiendo del destino. Trabajamos con las principales transportadoras del país."
-        }
+    "mainEntity": FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
       },
-      {
-        "@type": "Question",
-        "name": "¿Cuáles son los métodos de pago aceptados?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Aceptamos tarjetas de crédito y débito (Visa, Mastercard), PSE, Nequi, Daviplata y transferencia bancaria. Todas las transacciones están protegidas con cifrado SSL."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Los productos tienen garantía?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. Todos nuestros productos cumplen con la garantía establecida por la normativa colombiana (Ley 1480 del Estatuto del Consumidor). El período varía según el tipo de producto."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Tienen tienda física en Bucaramanga?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Somos una tienda 100% virtual con sede en Bucaramanga, Santander. No contamos con punto de venta físico pero puedes contactarnos por WhatsApp al +57 302 756 7783."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Puedo hacer devoluciones?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, dentro de los primeros 15 días desde la recepción del producto, en condiciones originales. Contáctanos a info@tiendalebonmarche.com para gestionar tu devolución."
-        }
-      }
-    ]
+    })),
   }
 
   // 4. LocalBusiness Schema — señal de negocio local Bucaramanga
