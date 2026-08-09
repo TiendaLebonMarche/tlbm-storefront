@@ -1,7 +1,11 @@
-import { deleteLineItem } from "@lib/data/cart"
+"use client"
+
+import { deleteLineItem, retrieveCart } from "@lib/data/cart"
 import { Spinner, Trash } from "@medusajs/icons"
 import { clx } from "@medusajs/ui"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useUI } from "@lib/context/ui-context"
 
 const DeleteButton = ({
   id,
@@ -13,12 +17,39 @@ const DeleteButton = ({
   className?: string
 }) => {
   const [isDeleting, setIsDeleting] = useState(false)
+  const { setCart, setCartCount } = useUI()
+  const router = useRouter()
+
+  const syncCart = async (cart?: any) => {
+    const fresh = cart ?? (await retrieveCart().catch(() => null))
+    setCart(fresh ?? null)
+    setCartCount(
+      fresh?.items?.length
+        ? fresh.items.reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
+        : null
+    )
+    try {
+      router.refresh()
+    } catch {}
+  }
 
   const handleDelete = async (id: string) => {
     setIsDeleting(true)
-    await deleteLineItem(id).catch((err) => {
+    try {
+      const cart = await deleteLineItem(id)
+      await syncCart(cart)
+    } catch (err: any) {
+      const msg = err?.message || ""
+      // RSC #441: el delete pudo ejecutarse aunque el re-render del árbol
+      // Server Components falló → re-verificar el carrito real.
+      if (/Minified React error|Server Components render/i.test(msg)) {
+        await syncCart()
+      } else {
+        console.error("Error al eliminar item:", err)
+      }
+    } finally {
       setIsDeleting(false)
-    })
+    }
   }
 
   return (

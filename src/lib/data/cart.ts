@@ -21,10 +21,17 @@ import { getLocale } from "@lib/data/locale-actions"
  * @param cartId - optional - The ID of the cart to retrieve.
  * @returns The cart object if found, or null if not found.
  */
+/**
+ * Campos completos del carrito para el storefront.
+ * ⚠️ items.total es CALCULADO — el retrieve default de Medusa NO lo incluye;
+ * sin él el LineItemPrice renderiza $0,00 en la bolsa.
+ */
+const CART_FIELDS =
+  "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
+
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
-  fields ??=
-    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
+  fields ??= CART_FIELDS
 
   if (!id) {
     return null
@@ -164,8 +171,13 @@ export async function addToCart({
         if (fulfillmentCacheTag) revalidateTag(fulfillmentCacheTag, "page")
       })
 
-    // Obtener carrito actualizado después de agregar el item
-    const updatedCart = await sdk.store.cart.retrieve(cart.id, {}, headers)
+    // Obtener carrito actualizado después de agregar el item (con campos
+    // completos: items.total es calculado y NO viene en el retrieve default)
+    const updatedCart = await sdk.store.cart.retrieve(
+      cart.id,
+      { fields: CART_FIELDS },
+      headers
+    )
     return { cart: updatedCart.cart } // Éxito con carrito actualizado
   } catch (error: any) {
     console.error("DEBUG - Fallo crítico en addToCart:", error)
@@ -203,6 +215,14 @@ export async function updateLineItem({
 
       const fulfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fulfillmentCacheTag, "page")
+
+      // Devolver el carrito fresco (con items.total) para actualizar la bolsa al instante
+      const fresh = await sdk.store.cart.retrieve(
+        cartId,
+        { fields: CART_FIELDS },
+        headers
+      )
+      return fresh.cart
     })
     .catch(medusaError)
 }
@@ -230,6 +250,14 @@ export async function deleteLineItem(lineId: string) {
 
       const fulfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fulfillmentCacheTag, "page")
+
+      // Devolver el carrito fresco para actualizar la bolsa al instante
+      const fresh = await sdk.store.cart.retrieve(
+        cartId,
+        { fields: CART_FIELDS },
+        headers
+      )
+      return fresh.cart
     })
     .catch(medusaError)
 }

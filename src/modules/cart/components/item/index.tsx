@@ -1,7 +1,7 @@
 "use client"
 
 import { Table, Text, clx } from "@medusajs/ui"
-import { updateLineItem } from "@lib/data/cart"
+import { updateLineItem, retrieveCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import CartItemSelect from "@modules/cart/components/cart-item-select"
 import ErrorMessage from "@modules/checkout/components/error-message"
@@ -11,7 +11,9 @@ import LineItemPrice from "@modules/common/components/line-item-price"
 import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Spinner from "@modules/common/icons/spinner"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useUI } from "@lib/context/ui-context"
 
 type ItemProps = {
   item: HttpTypes.StoreCartLineItem
@@ -22,21 +24,44 @@ type ItemProps = {
 const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { setCart, setCartCount } = useUI()
+  const router = useRouter()
+
+  const syncCart = async (cart?: any) => {
+    const fresh = cart ?? (await retrieveCart().catch(() => null))
+    setCart(fresh ?? null)
+    setCartCount(
+      fresh?.items?.length
+        ? fresh.items.reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
+        : null
+    )
+    try {
+      router.refresh()
+    } catch {}
+  }
 
   const changeQuantity = async (quantity: number) => {
     setError(null)
     setUpdating(true)
 
-    await updateLineItem({
-      lineId: item.id,
-      quantity,
-    })
-      .catch((err) => {
-        setError(err.message)
+    try {
+      const cart = await updateLineItem({
+        lineId: item.id,
+        quantity,
       })
-      .finally(() => {
-        setUpdating(false)
-      })
+      await syncCart(cart)
+    } catch (err: any) {
+      const msg = err?.message || ""
+      // RSC #441 transitorio: la mutación pudo ejecutarse aunque el re-render
+      // del árbol Server Components falló → re-verificar el carrito real.
+      if (/Minified React error|Server Components render/i.test(msg)) {
+        await syncCart()
+      } else {
+        setError(msg)
+      }
+    } finally {
+      setUpdating(false)
+    }
   }
 
   // TODO: Update this to grab the actual max inventory
