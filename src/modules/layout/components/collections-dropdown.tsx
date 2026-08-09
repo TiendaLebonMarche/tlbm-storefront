@@ -69,7 +69,7 @@ export default function CollectionsDropdown({
             : "opacity-0 -translate-y-1 pointer-events-none"}
         `}
       >
-        <div className={`${panelWidth} bg-white/95 backdrop-blur-xl border border-[#D4AF37]/15 rounded-2xl shadow-[0_24px_60px_rgba(10,10,15,0.14)] p-5`}>
+        <div className={`${panelWidth} bg-white border border-[#D4AF37]/15 rounded-2xl shadow-[0_24px_60px_rgba(10,10,15,0.14)] p-5`}>
           {/* Header del panel */}
           <div className="flex items-center justify-between mb-4 pb-4 border-b border-white">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">

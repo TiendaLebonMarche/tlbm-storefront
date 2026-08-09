@@ -227,7 +227,7 @@ const CartDropdown = ({
           leaveTo="opacity-0"
         >
           <div
-            className="fixed inset-0 bg-black/50 z-[900] cursor-pointer backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 z-[900] cursor-pointer"
             aria-label="Cerrar bolsa"
             tabIndex={0}
             onClick={close}

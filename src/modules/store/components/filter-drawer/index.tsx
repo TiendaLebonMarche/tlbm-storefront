@@ -33,7 +33,7 @@ const FilterDrawer = ({ sortBy, collections = [] }: FilterDrawerProps) => {
   return (
     <>
       {/* Botón sticky móvil */}
-      <div className="medium:hidden sticky top-[68px] z-30 -mx-6 px-6 py-3 bg-white/90 backdrop-blur border-b border-brand-gray-light">
+      <div className="medium:hidden sticky top-[68px] z-30 -mx-6 px-6 py-3 bg-white/95 border-b border-brand-gray-light">
         <button
           onClick={() => setIsOpen(true)}
           className="w-full flex items-center justify-center gap-3 py-3.5 border border-brand-black text-brand-black text-[11px] font-bold uppercase tracking-[0.25em] hover:bg-brand-black hover:text-white transition-all"

@@ -70,7 +70,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveTo="translate-y-full opacity-0"
         >
           <div
-            className="bg-white/80 backdrop-blur-xl flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-brand-gray-light shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
+            className="bg-white/95 flex flex-col gap-y-4 justify-center items-center p-5 pb-8 w-full border-t border-brand-gray-light shadow-[0_-15px_50px_rgba(0,0,0,0.06)]"
             data-testid="mobile-actions"
           >
             <div className="flex items-baseline justify-between w-full">
@@ -159,7 +159,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-brand-black/40 backdrop-blur-md" />
+            <div className="fixed inset-0 bg-brand-black/40" />
           </Transition.Child>
 
           <div className="fixed bottom-0 inset-x-0">

@@ -746,3 +746,10 @@ body:not([data-cart-open="true"]) .group\/header {
 body[data-cart-open="true"] [aria-label="Contactar por WhatsApp"] {
   display: none;
 }
+
+/* Rendimiento: mientras la bolsa está abierta se PAUSAN las animaciones
+   infinitas del header oculto (marquesina marquee-fixed, shimmer, ping)
+   → el main thread queda libre y el mouse no se "pega". */
+body[data-cart-open="true"] .group\/header * {
+  animation-play-state: paused !important;
+}
