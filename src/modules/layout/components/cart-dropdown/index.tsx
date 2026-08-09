@@ -106,6 +106,34 @@ const CartDropdown = ({
 
   const pathname = usePathname()
 
+  // ── Mientras la bolsa está abierta ─────────────────────────────
+  // 1) Ocultar el header fijo (marquesina oscura) → evita la "franja
+  //    negra" que se veía en la parte superior al abrir el drawer.
+  // 2) Bloquear el scroll del fondo (el drawer scrollea internamente).
+  useEffect(() => {
+    document.body.dataset.cartOpen = isCartOpen ? "true" : "false"
+    const prevOverflow = document.body.style.overflow
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = prevOverflow
+    }
+    return () => {
+      document.body.dataset.cartOpen = "false"
+      document.body.style.overflow = prevOverflow
+    }
+  }, [isCartOpen])
+
+  // Cerrar la bolsa con la tecla Escape
+  useEffect(() => {
+    if (!isCartOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close()
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [isCartOpen, close])
+
   // Abre automáticamente cuando cambia el número de items
   // Solo en páginas que NO son de producto (desde producto lo abre handleAddToCart)
   useEffect(() => {
