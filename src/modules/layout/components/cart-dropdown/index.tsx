@@ -18,6 +18,10 @@ import { useUI } from "@lib/context/ui-context"
 // Tiempo en ms antes de cerrar la bolsa automáticamente
 const AUTO_CLOSE_MS = 8000
 
+// Compartido entre las 3 instancias del drawer: overflow original del body
+// (ver useEffect abajo — evita que una instancia guarde "hidden" como valor previo).
+let cartBodyOverflow: string | null = null
+
 // Color exacto de WhatsApp
 const WHATSAPP_COLOR = "#25D366"
 
@@ -110,18 +114,24 @@ const CartDropdown = ({
   // 1) Ocultar el header fijo (marquesina oscura) → evita la "franja
   //    negra" que se veía en la parte superior al abrir el drawer.
   // 2) Bloquear el scroll del fondo (el drawer scrollea internamente).
-  const prevOverflowRef = useRef("")
+  // ⚠️ Hay 3 instancias del drawer (desktop/mobile/tablet): el overflow
+  // original se guarda a nivel de módulo para que solo la primera que se
+  // abre capture el valor real y todas restablezcan el mismo.
   useEffect(() => {
     document.body.dataset.cartOpen = isCartOpen ? "true" : "false"
     if (isCartOpen) {
-      prevOverflowRef.current = document.body.style.overflow
+      if (cartBodyOverflow === null) {
+        cartBodyOverflow = document.body.style.overflow
+      }
       document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = prevOverflowRef.current
+      document.body.style.overflow = cartBodyOverflow ?? ""
+      cartBodyOverflow = null
     }
     return () => {
       document.body.dataset.cartOpen = "false"
-      document.body.style.overflow = prevOverflowRef.current
+      document.body.style.overflow = cartBodyOverflow ?? ""
+      cartBodyOverflow = null
     }
   }, [isCartOpen])
 
