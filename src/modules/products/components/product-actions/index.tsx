@@ -2,7 +2,7 @@
 
 function isEqual(a: unknown, b: unknown) { return JSON.stringify(a) === JSON.stringify(b); }
 
-import { addToCart } from "@lib/data/cart"
+import { addToCart, retrieveCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
@@ -166,7 +166,13 @@ export default function ProductActions({
         openCart()
         // Refrescar server components (CartButton re-fetchea retrieveCart)
         // → el conteo del servidor se sincroniza con el optimista
-        router.refresh()
+        // ⚠️ si el re-render RSC falla (React #441 transitorio), NO debe
+        // tumbar el flujo — el badge optimista ya muestra el conteo correcto.
+        try {
+          router.refresh()
+        } catch (e) {
+          console.error("router.refresh falló tras añadir:", e)
+        }
         setTimeout(() => setAddedSuccess(false), 2500)
       } else if (result) {
         throw new Error(result as string)
@@ -174,7 +180,40 @@ export default function ProductActions({
     } catch (error: any) {
       const message = error?.message || "Error desconocido de conexión"
       console.error("Error al añadir a la bolsa:", error)
-      alert(`Error: ${message}\n\nPor favor, verifica que la región esté configurada correctamente o intenta de nuevo.`)
+      if (error?.digest) console.error("RSC digest:", error.digest)
+
+      // Next 16: tras un server action, el framework re-renderiza el árbol RSC.
+      // Si ese render falla (transitorio, React #441 "Server Components render"),
+      // la promesa de la acción rechaza AUNQUE el item SÍ se agregó. Antes de
+      // alarmar al cliente, verificamos el carrito real contra Medusa.
+      const isRscError = /Minified React error|Server Components render/i.test(message)
+      if (isRscError) {
+        try {
+          const cart = await retrieveCart()
+          const hasItem = cart?.items?.some(
+            (i: any) => i.variant_id === selectedVariant?.id
+          )
+          if (hasItem) {
+            setAddedSuccess(true)
+            setCartCount(
+              ((cart?.items || []) as any[]).reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
+            )
+            openCart()
+            setTimeout(() => setAddedSuccess(false), 2500)
+            return
+          }
+        } catch (e) {
+          console.error("Fallo al verificar carrito tras error RSC:", e)
+        }
+      }
+
+      const friendly =
+        isRscError
+          ? "Hubo un problema al actualizar la bolsa. Intenta de nuevo o escríbenos por WhatsApp."
+          : message
+      alert(
+        `${friendly}\n\nSi el problema continúa, escríbenos a WhatsApp y te ayudamos al instante.`
+      )
     } finally {
       setIsAdding(false)
     }
