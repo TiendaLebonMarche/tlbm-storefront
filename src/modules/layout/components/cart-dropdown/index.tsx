@@ -31,15 +31,10 @@ const CartDropdown = ({
   )
   const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu, cartCount, cart: contextCart } = useUI()
 
-  // Carrito efectivo: preferimos el prop del servidor cuando trae items;
-  // si quedó vacío/stale (re-render RSC falló tras añadir), usamos el
-  // carrito fresco del cliente (seteado por addToCart en el contexto UI).
-  const cartState =
-    cartProp?.items?.length
-      ? cartProp
-      : contextCart?.items?.length
-        ? contextCart
-        : cartProp ?? null
+  // Carrito efectivo: el del CONTEXTO UI es siempre el más fresco (viene del
+  // response de addToCart/delete/update). El prop del servidor solo se usa
+  // como fallback en el primer render (antes de cualquier mutación).
+  const cartState = contextCart ?? cartProp ?? null
 
   // Cierra el menú lateral si se abre el carrito
   useEffect(() => {
