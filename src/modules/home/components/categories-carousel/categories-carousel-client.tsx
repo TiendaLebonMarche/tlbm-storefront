@@ -8,7 +8,7 @@ import type { CategoryCard } from "."
 // IZQUIERDA→DERECHA (la siguiente entra por la derecha; el contenido avanza hacia la
 // izquierda). Loop seamless: 2 copias; al completar la copia A reinicia invisible.
 // Zoom central por POSICIÓN real + SWIPE táctil + pausa hover/touch.
-const SPEED_PX_S = 30
+const SPEED_PX_S = 45
 const CARD_STEP_MS = 400
 const RESUME_AFTER_MANUAL_MS = 3500
 const SWIPE_THRESHOLD_PX = 20
@@ -41,28 +41,35 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
     if (!viewport || !track) return
 
     const cardEls = Array.from(track.querySelectorAll<HTMLElement>("[data-cat-card]"))
-    // Defensivo: si el track aún no tiene ancho (layout pendiente), usa un fallback
-    const halfWidth = () => {
+    // Métricas cacheadas (se leen UNA vez): leer scrollWidth/getBoundingClientRect
+    // por frame era la causa del movimiento "trancado" (layout thrash).
+    let halfW = 0
+    let cardW = 270
+    let vCenter = 0
+    const GAP = 5
+    const PAD_L = 32
+
+    const ensureMetrics = () => {
+      if (halfW > 0) return
       const w = track.scrollWidth
-      return w > 0 ? w / 2 : 2200
+      if (w <= 0) return
+      halfW = w / 2
+      const c = cardEls[0]
+      if (c) cardW = c.offsetWidth
+      vCenter = viewport.getBoundingClientRect().width / 2
     }
 
+    // Centro por ARITMÉTICA (sin leer layout por tarjeta):
+    // centro de la tarjeta n en coords del track = PAD_L + n*(cardW+GAP) + cardW/2
+    // → n = (offset + vCenter - PAD_L - cardW/2) / (cardW+GAP), con módulo por copias.
     const applyCenter = () => {
-      const vRect = viewport.getBoundingClientRect()
-      const centerX = vRect.left + vRect.width / 2
-      let active: HTMLElement | null = null
-      let bestDist = Infinity
-      for (const c of cardEls) {
-        const r = c.getBoundingClientRect()
-        const cCenter = (r.left + r.right) / 2
-        const dist = Math.abs(cCenter - centerX)
-        if (dist < bestDist) {
-          bestDist = dist
-          active = c
-        }
-      }
-      cardEls.forEach((c) => {
-        const is = c === active
+      if (halfW <= 0) return
+      const target = offsetRef.current + vCenter
+      const n = Math.round((target - PAD_L - cardW / 2) / (cardW + GAP))
+      const count = cardEls.length
+      const idx = ((n % count) + count) % count
+      cardEls.forEach((c, i) => {
+        const is = i === idx
         c.classList.toggle("cat-center", is)
         c.classList.toggle("cat-side", !is)
       })
@@ -79,15 +86,16 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
           // Flujo izq→der: el offset crece 0 → halfWidth (final de la copia A = inicio de B);
           // al llegar reinicia a 0 (posición idéntica → invisible)
           offsetRef.current += SPEED_PX_S * dt
-          if (offsetRef.current >= halfWidth()) {
-            offsetRef.current -= halfWidth()
+          ensureMetrics()
+          if (halfW > 0 && offsetRef.current >= halfW) {
+            offsetRef.current -= halfW
           }
+          if (halfW > 0) {
+            track.style.transform = `translateX(${-offsetRef.current}px)`
+          }
+          frameCount++
+          if (frameCount % 8 === 0) applyCenter()
         }
-        if (halfWidth() > 0) {
-          track.style.transform = `translateX(${-offsetRef.current}px)`
-        }
-        frameCount++
-        if (frameCount % 6 === 0) applyCenter()
       }
       lastTsRef.current = ts
       rafRef.current = requestAnimationFrame(frame)
