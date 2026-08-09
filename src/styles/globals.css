@@ -740,3 +740,9 @@ body:not([data-cart-open="true"]) .group\/header {
   transform: translateY(0);
   transition: transform 0.3s ease;
 }
+
+/* Ocultar el botón flotante de WhatsApp mientras la bolsa está abierta
+   (el drawer va POR ENCIMA de todo, incluido el float z-[400]). */
+body[data-cart-open="true"] [aria-label="Contactar por WhatsApp"] {
+  display: none;
+}

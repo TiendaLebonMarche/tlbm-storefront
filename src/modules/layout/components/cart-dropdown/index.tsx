@@ -13,6 +13,7 @@ import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { useUI } from "@lib/context/ui-context"
 
 // Tiempo en ms antes de cerrar la bolsa automáticamente
@@ -207,6 +208,13 @@ const CartDropdown = ({
           )}
         </PopoverButton>
 
+        {/* Overlay + panel se renderizan en un PORTAL a nivel de body:
+            ningún transform/stacking del header puede romper el alto completo
+            (h-screen) ni tapar la X; quedan por encima de TODO (incl. botón
+            flotante de WhatsApp que usa z-[400]). */}
+        {typeof document !== "undefined" ? (
+          createPortal(
+            <>
         {/* Overlay oscuro */}
         <Transition
           show={isCartOpen}
@@ -219,7 +227,7 @@ const CartDropdown = ({
           leaveTo="opacity-0"
         >
           <div
-            className="fixed inset-0 bg-black/50 z-[200] cursor-pointer backdrop-blur-sm"
+            className="fixed inset-0 bg-black/50 z-[900] cursor-pointer backdrop-blur-sm"
             aria-label="Cerrar bolsa"
             tabIndex={0}
             onClick={close}
@@ -247,7 +255,7 @@ const CartDropdown = ({
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            className="fixed top-0 right-0 h-screen w-full sm:w-[420px] max-w-[100vw] bg-white shadow-2xl flex flex-col z-[300] overflow-hidden"
+            className="fixed top-0 right-0 h-screen w-full sm:w-[420px] max-w-[100vw] bg-white shadow-2xl flex flex-col z-[950] overflow-hidden"
             data-testid="nav-cart-dropdown"
             aria-modal="true"
             role="dialog"
@@ -388,6 +396,10 @@ const CartDropdown = ({
             )}
           </PopoverPanel>
         </Transition>
+            </>,
+            document.body
+          )
+        ) : null}
       </Popover>
     </div>
   )
