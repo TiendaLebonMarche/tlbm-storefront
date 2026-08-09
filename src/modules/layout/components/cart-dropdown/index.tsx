@@ -110,17 +110,18 @@ const CartDropdown = ({
   // 1) Ocultar el header fijo (marquesina oscura) → evita la "franja
   //    negra" que se veía en la parte superior al abrir el drawer.
   // 2) Bloquear el scroll del fondo (el drawer scrollea internamente).
+  const prevOverflowRef = useRef("")
   useEffect(() => {
     document.body.dataset.cartOpen = isCartOpen ? "true" : "false"
-    const prevOverflow = document.body.style.overflow
     if (isCartOpen) {
+      prevOverflowRef.current = document.body.style.overflow
       document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = prevOverflow
+      document.body.style.overflow = prevOverflowRef.current
     }
     return () => {
       document.body.dataset.cartOpen = "false"
-      document.body.style.overflow = prevOverflow
+      document.body.style.overflow = prevOverflowRef.current
     }
   }, [isCartOpen])
 
