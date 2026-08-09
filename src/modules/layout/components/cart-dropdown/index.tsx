@@ -22,14 +22,24 @@ const AUTO_CLOSE_MS = 8000
 const WHATSAPP_COLOR = "#25D366"
 
 const CartDropdown = ({
-  cart: cartState,
+  cart: cartProp,
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
   const [activeTimer, setActiveTimer] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
-  const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu, cartCount } = useUI()
+  const { isCartOpen, openCart, closeCart, isSideMenuOpen, closeSideMenu, cartCount, cart: contextCart } = useUI()
+
+  // Carrito efectivo: preferimos el prop del servidor cuando trae items;
+  // si quedó vacío/stale (re-render RSC falló tras añadir), usamos el
+  // carrito fresco del cliente (seteado por addToCart en el contexto UI).
+  const cartState =
+    cartProp?.items?.length
+      ? cartProp
+      : contextCart?.items?.length
+        ? contextCart
+        : cartProp ?? null
 
   // Cierra el menú lateral si se abre el carrito
   useEffect(() => {

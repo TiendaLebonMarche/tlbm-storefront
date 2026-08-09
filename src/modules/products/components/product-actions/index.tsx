@@ -37,7 +37,7 @@ export default function ProductActions({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { openCart, setCartCount } = useUI()
+  const { openCart, setCartCount, setCart } = useUI()
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
@@ -148,6 +148,9 @@ export default function ProductActions({
           0
         )
         setCartCount(itemCount ?? null)
+        // Carrito fresco en el contexto UI → el drawer lo muestra aunque el
+        // re-render RSC falle (React #441) y el prop del servidor quede stale.
+        setCart(result.cart)
         // Track add_to_cart for GTM
         trackAddToCart({
           id: selectedVariant.id || product.id,
@@ -198,6 +201,7 @@ export default function ProductActions({
             setCartCount(
               ((cart?.items || []) as any[]).reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
             )
+            setCart(cart)
             openCart()
             setTimeout(() => setAddedSuccess(false), 2500)
             return
