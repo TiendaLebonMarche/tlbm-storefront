@@ -666,8 +666,10 @@
 .cats-gold { color: var(--gold); font-style: italic; }
 .cats-sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
 
-/* Viewport centrado (máx 940px = ~3 tarjetas visibles: el zoom central se percibe) */
-.cats-viewport { overflow: hidden; position: relative; max-width: 940px; margin: 0 auto; }
+/* Viewport a TODO EL ANCHO de la página (antes max-width:940px dejaba
+   márgenes vacíos a los lados en desktop). El carrusel fluye edge-to-edge;
+   el zoom central + flechas + overlays se mantienen iguales. */
+.cats-viewport { overflow: hidden; position: relative; width: 100%; max-width: none; margin: 0 auto; }
 .cats-track {
   display: flex; gap: 5px; padding: 12px 32px 10px;
   width: max-content; scrollbar-width: none; will-change: transform; touch-action: pan-y;
