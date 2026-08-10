@@ -54,7 +54,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     <div className="bg-white min-h-screen selection:bg-brand-black/10">
 
       {/* ── HERO: Gallery + Product Info ── */}
-      <div className="content-container py-6 md:py-8 lg:pt-8 lg:pb-12">
+      <div className="content-container pt-6 pb-44 md:py-8 lg:pt-8 lg:pb-12">
         <div className="flex flex-col lg:flex-row gap-[clamp(1.5rem,5vw,3rem)] lg:gap-[clamp(3rem,6vw,7rem)] xl:gap-[clamp(4rem,7vw,7rem)] items-start">
 
           {/* LEFT: Gallery — 58% */}

@@ -107,6 +107,7 @@
   /* === CORRECCIONES GLOBALES === */
   html, body {
       overflow-x: hidden;
+      overflow-x: clip; /* corta el desborde sin scroll container (evita arrastre lateral en móvil) */
       width: 100%;
       position: relative;
       background-color: #FFFFFF !important;

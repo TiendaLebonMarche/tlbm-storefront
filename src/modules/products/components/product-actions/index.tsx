@@ -329,7 +329,7 @@ export default function ProductActions({
         inStock={inStock}
         handleAddToCart={handleAddToCart}
         isAdding={isAdding}
-        show={!inView}
+        show={true}
         optionsDisabled={!!disabled || isAdding}
       />
     </>
