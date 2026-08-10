@@ -11,6 +11,12 @@ updates:
     labels:
       - "dependencies"
       - "automated"
+    # REGLA JULIÁN (10-ago): majors = decisión manual con investigación previa.
+    # No abrir PRs de semver-major (tailwindcss 4, framer-motion 13, @types/node 26...)
+    # — rompen el build (peers) o requieren migración planificada.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       medusa:
         patterns:
