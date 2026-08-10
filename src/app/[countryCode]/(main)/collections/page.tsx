@@ -4,6 +4,7 @@ import { listCollections } from "@lib/data/collections"
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import PageHeader from "@modules/common/components/page-header"
 
 export const metadata: Metadata = {
   title: "Colecciones | Tienda Le Bon Marché",
@@ -44,16 +45,16 @@ export default async function CollectionsPage({ params }: Props) {
 
   return (
     <div className="content-container py-6 md:py-8 lg:pt-8 lg:pb-12">
-      <div className="mb-6 md:mb-8">
-        <h1 className="text-2xl md:text-3xl font-playfair font-semibold text-black">
-          Colecciones
-        </h1>
-        <p className="mt-2 text-sm text-black/50 max-w-xl">
-          Explora nuestro catálogo organizado por categorías: audio, gaming,
-          tecnología, deportes y más. Todos los productos son originales y
-          con envío en Bucaramanga.
-        </p>
-      </div>
+      {/* Header — diseño por defecto de subpáginas (PageHeader, patrón /co/store) */}
+      <PageHeader
+        eyebrow="Catálogo"
+        title={
+          <>
+            Nuestras <em className="italic font-light">colecciones</em>
+          </>
+        }
+        description="Explora nuestro catálogo organizado por categorías: audio, gaming, tecnología, deportes y más. Todos los productos son originales y con envío en Bucaramanga."
+      />
 
       {sorted.length === 0 ? (
         <p className="text-black/50">Aún no hay colecciones publicadas.</p>

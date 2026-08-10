@@ -32,7 +32,6 @@ export default async function Nav() {
             regions={regions}
             locales={locales}
             currentLocale={currentLocale}
-            collections={collections as HttpTypes.StoreCollection[]}
           />
         </div>
 
@@ -59,7 +58,6 @@ export default async function Nav() {
             regions={regions}
             locales={locales}
             currentLocale={currentLocale}
-            collections={collections as HttpTypes.StoreCollection[]}
           />
         </div>
 
@@ -92,7 +90,6 @@ export default async function Nav() {
             regions={regions}
             locales={locales}
             currentLocale={currentLocale}
-            collections={collections as HttpTypes.StoreCollection[]}
           />
           <LocalizedClientLink
             href="/"

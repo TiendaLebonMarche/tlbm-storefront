@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { getAllGuides } from "@lib/guides"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import PageHeader from "@modules/common/components/page-header"
 
 const BASE_URL = "https://www.tiendalebonmarche.com"
 
@@ -70,24 +71,16 @@ export default async function GuidesPage(props: {
       </div>
 
       <div className="content-container max-w-[1000px] mx-auto px-4 pb-20">
-        {/* Header */}
-        <header className="pt-6 pb-10 text-center">
-          <div className="inline-flex items-center gap-3 text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.35em] mb-5">
-            <span className="w-8 h-px bg-[#D4AF37]/40" />
-            Blog & Guías
-            <span className="w-8 h-px bg-[#D4AF37]/40" />
-          </div>
-          <h1 className="font-serif text-4xl md:text-6xl font-bold tracking-tight leading-[1.02] text-gray-900 dark:text-white">
-            Guías de{" "}
-            <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
-              compra inteligente
-            </span>
-          </h1>
-          <p className="mt-5 text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-base md:text-lg">
-            Comparativas con precios reales, kits recomendados y consejos para comprar productos
-            originales en Colombia. Sin letra pequeña.
-          </p>
-        </header>
+        {/* Header — diseño por defecto de subpáginas (PageHeader, patrón /co/store) */}
+        <PageHeader
+          eyebrow="Blog & Guías"
+          title={
+            <>
+              Guías de <em className="italic font-light">compra inteligente</em>
+            </>
+          }
+          description="Comparativas con precios reales, kits recomendados y consejos para comprar productos originales en Colombia. Sin letra pequeña."
+        />
 
         {/* Grid de guías */}
         {guides.length === 0 ? (

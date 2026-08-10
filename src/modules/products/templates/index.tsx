@@ -148,7 +148,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </svg>
                   ),
                   label: "Recoge en Tienda",
-                  sub: "Bodega Bucaramanga · Cra 27 #45-06"
+                  sub: "Bodega Bucaramanga"
                 },
                 {
                   icon: (
