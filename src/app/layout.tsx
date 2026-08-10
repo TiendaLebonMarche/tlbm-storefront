@@ -85,10 +85,11 @@ export const metadata: Metadata = {
     siteName: "Tienda Le Bon Marché",
     images: [
       {
-        // URL absoluta + ?v=2 = cache-buster: WhatsApp/Facebook cachean la preview
-        // por URL (~14 días). Al cambiar la imagen, subir la versión para forzar
-        // refetch inmediato. (Query en URL relativa la strip-aba Next.js metadata.)
-        url: `${BASE_URL}/opengraph-image.jpg?v=2`,
+        // opengraph-v2.jpg = URL NUEVA (cache-buster natural): WhatsApp/Facebook/
+        // Telegram cachean la preview POR URL. Al cambiar la imagen, renombrar el
+        // archivo (v3, v4...) para forzar refetch inmediato en todos los clientes.
+        // (Next.js metadata strip-aba el query string incluso en URL absoluta.)
+        url: "/opengraph-v2.jpg",
         width: 1200,
         height: 630,
         alt: "Tienda Virtual en Bucaramanga | Le Bon Marché",
@@ -99,7 +100,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tienda Virtual en Bucaramanga | Le Bon Marché",
     description: "Tienda virtual en Bucaramanga con productos exóticos y 100% originales: tecnología premium, gadgets, parlantes, smartwatches y más. Envíos a toda Colombia.",
-    images: [`${BASE_URL}/twitter-image.jpg?v=2`],
+    images: ["/twitter-v2.jpg"],
     creator: "@tiendalebonmarche",
     site: "@tiendalebonmarche",
   },
