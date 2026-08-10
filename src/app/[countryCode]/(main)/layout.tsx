@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { Suspense } from "react"
 
 import { listCartOptions, retrieveCart } from "@lib/data/cart"
 import { retrieveCustomer } from "@lib/data/customer"
@@ -9,6 +10,7 @@ import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
 import CookieBanner from "@modules/layout/components/cookie-banner"
+import CartDrawerData from "@modules/layout/components/cart-drawer-data"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -57,6 +59,10 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
       </main>
       <CookieBanner />
       <Footer />
+      {/* Drawer de la bolsa — instancia ÚNICA global (fix drawer duplicado 10-ago) */}
+      <Suspense fallback={null}>
+        <CartDrawerData />
+      </Suspense>
     </>
   )
 }

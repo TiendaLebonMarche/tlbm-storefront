@@ -167,15 +167,10 @@ export default function ProductActions({
         })
         // Abrir el sidebar SOLO después de tener el carrito actualizado
         openCart()
-        // Refrescar server components (CartButton re-fetchea retrieveCart)
-        // → el conteo del servidor se sincroniza con el optimista
-        // ⚠️ si el re-render RSC falla (React #441 transitorio), NO debe
-        // tumbar el flujo — el badge optimista ya muestra el conteo correcto.
-        try {
-          router.refresh()
-        } catch (e) {
-          console.error("router.refresh falló tras añadir:", e)
-        }
+        // ⚠️ SIN router.refresh() aquí: disparaba React #441 server-side
+        // (bug conocido de Next.js ≥15.4.7 con Popover/useId — ver skill).
+        // El badge/drawer ya se actualizan vía contexto UI (setCart/setCartCount);
+        // el server se re-sincroniza en la siguiente navegación/revalidate.
         setTimeout(() => setAddedSuccess(false), 2500)
       } else if (result) {
         throw new Error(result as string)

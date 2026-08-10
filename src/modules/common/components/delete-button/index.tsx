@@ -3,7 +3,6 @@
 import { deleteLineItem, retrieveCart } from "@lib/data/cart"
 import { Spinner, Trash } from "@medusajs/icons"
 import { clx } from "@medusajs/ui"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useUI } from "@lib/context/ui-context"
 
@@ -18,7 +17,6 @@ const DeleteButton = ({
 }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const { setCart, setCartCount } = useUI()
-  const router = useRouter()
 
   const syncCart = async (cart?: any) => {
     const fresh = cart ?? (await retrieveCart().catch(() => null))
@@ -28,9 +26,7 @@ const DeleteButton = ({
         ? fresh.items.reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
         : null
     )
-    try {
-      router.refresh()
-    } catch {}
+    // Sin router.refresh(): el contexto UI ya actualiza badge/drawer (fix React #441)
   }
 
   const handleDelete = async (id: string) => {
