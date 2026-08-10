@@ -36,7 +36,7 @@ const SLIDES: Slide[] = [
     title: "Tienda virtual en\nBucaramanga con\nproductos 100% originales",
     highlight: "100% originales",
     subtitle:
-      "Los mismos productos que encuentras en las mejores tiendas duty-free del planeta, ahora en Bucaramanga.",
+      "Tecnología y gadgets originales que no encuentras en cualquier tienda, ahora en Bucaramanga.",
     cta: "Descubrir Colección",
     href: "/store",
     image:
@@ -64,9 +64,9 @@ const SLIDES: Slide[] = [
   {
     id: 3,
     label: "Ofertas Especiales",
-    title: "Precios que\nno podrás creer",
+    title: "Ofertas reales en\nproductos originales",
     subtitle:
-      "Descuentos exclusivos en productos seleccionados. Calidad premium a tu alcance.",
+      "Descuentos en productos seleccionados. La calidad que buscas, al mejor precio.",
     cta: "Ver Ofertas",
     href: "/store",
     image:
@@ -248,6 +248,7 @@ function ScrollHeader({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
+                { label: "Guías", href: "/guias" },
                 { label: "Contacto", href: "https://wa.me/573027567783" },
               ].map((link, i) => (
                 <motion.div
@@ -353,6 +354,7 @@ function HeroOverlay({ visible }: { visible: boolean }) {
                 { label: "Tienda", href: "/store" },
                 { label: "Colecciones", href: "/collections" },
                 { label: "Ofertas", href: "/store" },
+                { label: "Guías", href: "/guias" },
                 { label: "Contacto", href: "https://wa.me/573027567783" },
               ].map((link, i) => (
                 <motion.div

@@ -8,6 +8,29 @@ type ProductSectionsProps = {
   product: HttpTypes.StoreProduct
 }
 
+// Whitelist de metadata visible al cliente (10-ago-2026): los campos internos de
+// compra y campañas NO se muestran crudos (ej. "tipo pack-regalo campania ... true").
+// Solo claves curadas con etiqueta elegante.
+const METADATA_LABELS: Record<string, string> = {
+  sku: "SKU",
+  tipo: "Presentación",
+  campania: "Edición",
+  incluye_regalo: "Incluye regalo",
+}
+
+function formatMetadataValue(key: string, value: unknown): string {
+  const v = String(value)
+  if (v === "true") return "Sí"
+  if (v === "false") return "No"
+  if (key === "tipo" && v === "pack-regalo") return "Pack de regalo"
+  if (key === "campania") return v.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  return v
+}
+
+function getDisplayMetadata(metadata: Record<string, unknown>): [string, unknown][] {
+  return Object.entries(metadata).filter(([key]) => key in METADATA_LABELS)
+}
+
 /**
  * Secciones del PDP con jerarquía H3-pregunta (framework AI SEO punto 4) y
  * estilo premium TLBM (rediseño 08-ago-2026 — enjambre de diseño):
@@ -142,30 +165,23 @@ const ProductInfoTab = ({ product }: ProductSectionsProps) => {
         </dl>
       )}
 
-      {/* Metadata key-values — formateados y sin campos internos */}
-      {Object.keys(metadata).length > 0 && (
+      {/* Metadata key-values — whitelist curada (10-ago): solo campos con etiqueta elegante */}
+      {getDisplayMetadata(metadata).length > 0 && (
         <div className="pt-1">
           <p className="text-[10px] text-brand-gray uppercase tracking-[0.2em] mb-3 font-sans">
             Información adicional
           </p>
           <dl className="divide-y divide-black/10 border-b border-black/10">
-            {Object.entries(metadata)
-              .filter(
-                ([key]) =>
-                  !["video_url", "video", "internal", "origen", "origin", "asin", "proveedor", "supplier"].includes(
-                    key.toLowerCase()
-                  )
-              )
-              .map(([key, value]) => (
-                <div key={key} className="flex items-baseline justify-between gap-6 py-3">
-                  <dt className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gray capitalize">
-                    {key === "sku" ? "SKU" : key.replace(/_/g, " ")}
-                  </dt>
-                  <dd className="text-sm font-semibold text-brand-black text-right">
-                    {formatValue(String(value))}
-                  </dd>
-                </div>
-              ))}
+            {getDisplayMetadata(metadata).map(([key, value]) => (
+              <div key={key} className="flex items-baseline justify-between gap-6 py-3">
+                <dt className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gray">
+                  {METADATA_LABELS[key]}
+                </dt>
+                <dd className="text-sm font-semibold text-brand-black text-right">
+                  {formatMetadataValue(key, value)}
+                </dd>
+              </div>
+            ))}
           </dl>
         </div>
       )}

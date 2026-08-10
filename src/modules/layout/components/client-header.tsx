@@ -4,27 +4,23 @@ import { useScrollThreshold } from "@lib/hooks/use-scroll-threshold"
 import { usePathname } from "next/navigation"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import TopMarquee from "@modules/common/components/top-marquee"
-import ProductHeader from "@modules/layout/components/product-header"
 
 /*
-  This header is intentionally hidden on the home page (/) because the Hero
-  slider component handles its own overlay header + scroll-to-white-bar.
+  Header unificado (10-ago-2026): en TODAS las páginas no-home el patrón es el
+  mismo — hamburguesa (SideMenu) a la izquierda, logo centrado, acciones a la
+  derecha (lupa + carrito). El nav horizontal desktop se eliminó: el drawer
+  trae las colecciones dinámicas de Medusa. El home sigue manejando su propio
+  header (HeroOverlay + ScrollHeader) con el mismo patrón.
 
-  On every other page it behaves as a normal sticky header with glass effect.
-
-  On product pages (/productos/...) the thin top bar is replaced by the
-  TopMarquee (etiqueta dorada TLBM + banda negra) — el mismo diseño en todas
-  las páginas. Colapsa al hacer scroll igual que la barra anterior.
+  En páginas de producto (/productos/...), carrito (/cart) y tienda (/store)
+  la barra superior fina se reemplaza por la TopMarquee (etiqueta dorada TLBM
+  + banda negra). Colapsa al hacer scroll igual que la barra anterior.
 */
 
 export default function ClientHeader({
   children,
-  cartSlot,
-  collections = [],
 }: {
   children: React.ReactNode
-  cartSlot?: React.ReactNode
-  collections?: Array<{ id: string; title: string; handle: string }>
 }) {
   const isScrolled = useScrollThreshold(50)
   const pathname = usePathname()
@@ -141,48 +137,19 @@ export default function ClientHeader({
         id="main-header"
         className={`mx-auto w-full transition-all duration-300 ease-out ${textColor}`}
       >
-        {isProductPage ? (
-          <>
-            {/* Mobile (<md): bloque de Nav (hamburguesa | logo | carrito) */}
-            <div className="md:hidden">
-              <div
-                className={`
-                  max-w-[95rem] mx-auto px-4
-                  flex justify-between items-center
-                  transition-all duration-300 ease-out
-                  ${isScrolled ? "min-h-[56px] py-2" : "min-h-[60px] py-3"}
-                `}
-              >
-                {children}
-              </div>
-            </div>
-
-            {/* Desktop (≥md): logo centrado + nav centrado + lupa/carrito */}
-            <div className="hidden md:block">
-              <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-                <ProductHeader
-                  isScrolled={isScrolled}
-                  cartSlot={cartSlot}
-                  collections={collections}
-                />
-              </div>
-            </div>
-          </>
-        ) : (
-          <div
-            className={`
-              max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14
-              flex justify-between items-center
-              transition-all duration-300 ease-out
-              ${isScrolled
-                ? "min-h-[56px] md:min-h-[60px] py-2"
-                : "min-h-[60px] md:min-h-[72px] py-3"
-              }
-            `}
-          >
-            {children}
-          </div>
-        )}
+        <div
+          className={`
+            max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14
+            flex justify-between items-center
+            transition-all duration-300 ease-out
+            ${isScrolled
+              ? "min-h-[56px] md:min-h-[60px] py-2"
+              : "min-h-[60px] md:min-h-[72px] py-3"
+            }
+          `}
+        >
+          {children}
+        </div>
       </header>
     </div>
   )

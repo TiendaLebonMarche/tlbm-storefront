@@ -41,7 +41,7 @@ export default async function Footer() {
               </div>
             </LocalizedClientLink>
             <p className="text-sm leading-relaxed max-w-xs text-white/90 mb-6">
-              Selección exclusiva de tecnología, gadgets y accesorios de lujo. Curados con pasión desde Bucaramanga para toda Colombia.
+              Tecnología, gadgets y accesorios 100% originales, seleccionados para ti. Envíos a toda Colombia desde Bucaramanga.
             </p>
             <div className="flex gap-3">
               <a href="https://instagram.com/tiendalebonmarche" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-[#D4AF37] border border-white/20 hover:border-[#D4AF37]/40 transition-all duration-300 hover:scale-110" title="Instagram">

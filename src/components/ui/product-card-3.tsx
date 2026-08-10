@@ -30,7 +30,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
           <div>
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
               <span className="w-8 h-px bg-[#D4AF37]/30" />
-              Selección VIP
+              Los favoritos
             </div>
             <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-gray-900 dark:text-white">
               Lo más{" "}

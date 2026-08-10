@@ -96,20 +96,6 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 </h1>
               </div>
 
-              {/* Social Proof: Rating + Reviews */}
-              <div className="flex items-center gap-4 py-1">
-                <div className="flex items-center gap-1 text-brand-black">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg key={star} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-                      <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                    </svg>
-                  ))}
-                </div>
-                <span className="text-[11px] text-brand-gray font-sans uppercase tracking-[0.15em] pl-4">
-                  48 Reseñas Certificadas
-                </span>
-              </div>
-
               {/* Short description / Intro — collapsible en mobile */}
               {product.description && (
                 <CollapsibleDescription description={product.description} />
@@ -161,8 +147,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                     </svg>
                   ),
-                  label: "Pasa a Recoger",
-                  sub: "Pasa cuando quieras"
+                  label: "Recoge en Tienda",
+                  sub: "Bodega Bucaramanga · Cra 27 #45-06"
                 },
                 {
                   icon: (
@@ -171,7 +157,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </svg>
                   ),
                   label: "Pago Protegido",
-                  sub: "Encriptación de grado militar"
+                  sub: "Datos cifrados con SSL"
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 group/trust">

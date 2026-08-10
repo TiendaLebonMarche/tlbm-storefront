@@ -12,6 +12,29 @@ type ProductTabsProps = {
   product: HttpTypes.StoreProduct
 }
 
+// Whitelist de metadata visible al cliente (10-ago-2026): los campos internos de
+// compra y campañas NO se muestran crudos (ej. "tipo pack-regalo campania ... true").
+// Solo claves curadas con etiqueta elegante.
+const METADATA_LABELS: Record<string, string> = {
+  sku: "SKU",
+  tipo: "Presentación",
+  campania: "Edición",
+  incluye_regalo: "Incluye regalo",
+}
+
+function formatMetadataValue(key: string, value: unknown): string {
+  const v = String(value)
+  if (v === "true") return "Sí"
+  if (v === "false") return "No"
+  if (key === "tipo" && v === "pack-regalo") return "Pack de regalo"
+  if (key === "campania") return v.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  return v
+}
+
+function getDisplayMetadata(metadata: Record<string, unknown>): [string, unknown][] {
+  return Object.entries(metadata).filter(([key]) => key in METADATA_LABELS)
+}
+
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const [activeTab, setActiveTab] = useState(0)
 
@@ -147,18 +170,18 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
         </div>
       )}
 
-      {/* Metadata key-values — filtrar campos internos */}
-      {Object.keys(metadata).length > 0 && (
+      {/* Metadata key-values — whitelist curada (10-ago): solo campos con etiqueta elegante */}
+      {getDisplayMetadata(metadata).length > 0 && (
         <div className="pt-2">
           <p className="text-[10px] text-brand-gray uppercase tracking-[0.2em] mb-3 font-sans">Información adicional</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
-            {Object.entries(metadata).filter(([key]) => !['video_url', 'video', 'internal'].includes(key)).map(([key, value]) => (
+            {getDisplayMetadata(metadata).map(([key, value]) => (
               <div key={key} className="flex justify-between py-3 border-b border-gray-50">
-                <span className="text-xs text-brand-gray uppercase tracking-wider font-sans capitalize">
-                  {key.replace(/_/g, ' ')}
+                <span className="text-xs text-brand-gray uppercase tracking-wider font-sans">
+                  {METADATA_LABELS[key]}
                 </span>
                 <span className="text-sm text-brand-black font-medium text-right">
-                  {String(value)}
+                  {formatMetadataValue(key, value)}
                 </span>
               </div>
             ))}

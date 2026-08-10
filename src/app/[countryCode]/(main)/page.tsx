@@ -7,7 +7,7 @@ import HotDeals from "@modules/home/components/hot-deals"
 import MostSoldSection from "@modules/home/components/most-sold"
 import FaqSection from "@modules/home/components/faq-section"
 import OfertasParallax from "@modules/home/components/ofertas-parallax"
-import CategoriesCarousel from "@modules/home/components/categories-carousel"
+import CollectionsCarousel from "@modules/home/components/collections-carousel"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import Reveal from "@modules/common/components/reveal"
@@ -86,9 +86,9 @@ export default async function Home(props: {
           <OfertasParallax />
         </Reveal>
 
-        {/* CATEGORÍAS — carousel (exactamente antes de Lo que dicen nuestros clientes, regla Julián 07-ago) */}
+        {/* COLECCIONES — carousel (exactamente antes de Lo que dicen nuestros clientes, regla Julián 07-ago) */}
         <Reveal>
-          <CategoriesCarousel />
+          <CollectionsCarousel />
         </Reveal>
 
         {/* TESTIMONIALS — lo que dicen nuestros clientes (después de Categorías, regla Julián 07-ago) */}

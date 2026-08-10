@@ -14,11 +14,11 @@ import { Locale } from "@lib/data/locales"
 const mainMenu = [
   { name: "Inicio", href: "/" },
   { name: "Tienda", href: "/store" },
-  { name: "Parlantes", href: "/store?q=parlante" },
-  { name: "Tecnología", href: "/store?q=tecnologia" },
+  { name: "Colecciones", href: "/collections" },
   { name: "Ofertas", href: "/store" },
-  { name: "Tienda", href: "/store" },
+  { name: "Guías", href: "/guias" },
   { name: "Quiénes Somos", href: "/quienes-somos" },
+  { name: "Contacto", href: "https://wa.me/573027567783", external: true },
 ]
 
 type SideMenuProps = {
@@ -113,15 +113,29 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
                     </div>
 
                     <ul className="flex flex-col gap-2 items-start justify-start flex-1 w-full translate-y-4">
-                      {mainMenu.map(({ name, href }, index) => (
-                        <li key={name} className="w-full group overflow-hidden">
-                          <LocalizedClientLink
-                            href={href}
-                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 delay-[${index * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
-                            onClick={() => { close(); closeSideMenu(); }}
-                          >
-                            {name}
-                          </LocalizedClientLink>
+                      {mainMenu.map((item, index) => (
+                        <li key={item.name} className="w-full group overflow-hidden">
+                          {item.href.startsWith("http") ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 group-hover:translate-x-2 tracking-tighter uppercase"
+                              style={{ transitionDelay: `${index * 50}ms` }}
+                              onClick={() => { close(); closeSideMenu(); }}
+                            >
+                              {item.name}
+                            </a>
+                          ) : (
+                            <LocalizedClientLink
+                              href={item.href}
+                              className="block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 group-hover:translate-x-2 tracking-tighter uppercase"
+                              style={{ transitionDelay: `${index * 50}ms` }}
+                              onClick={() => { close(); closeSideMenu(); }}
+                            >
+                              {item.name}
+                            </LocalizedClientLink>
+                          )}
                         </li>
                       ))}
                       {/* Colecciones dinámicas de Medusa */}
@@ -129,7 +143,8 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
                         <li key={collection.id} className="w-full group overflow-hidden">
                           <LocalizedClientLink
                             href={`/collections/${collection.handle}`}
-                            className={`block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 delay-[${(mainMenu.length + index) * 50}ms] group-hover:translate-x-2 tracking-tighter uppercase`}
+                            className="block w-full text-2xl md:text-3xl font-black py-4 border-b border-gray-50 text-brand-black transform transition-all duration-700 group-hover:translate-x-2 tracking-tighter uppercase"
+                            style={{ transitionDelay: `${(mainMenu.length + index) * 50}ms` }}
                             onClick={() => { close(); closeSideMenu(); }}
                           >
                             {collection.title}

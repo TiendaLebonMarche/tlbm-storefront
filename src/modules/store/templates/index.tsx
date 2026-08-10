@@ -63,8 +63,8 @@ const StoreTemplate = async ({
               </h1>
             </div>
             <p className="text-brand-gray text-xs font-light leading-relaxed max-w-xs md:text-right">
-              Artículos originales y codiciados del mercado global,{" "}
-              traídos con el mejor servicio a Bucaramanga.
+              Productos originales y difíciles de encontrar,{" "}
+              traídos directo a Bucaramanga con envío a toda Colombia.
             </p>
           </div>
           {/* Thin divider line */}

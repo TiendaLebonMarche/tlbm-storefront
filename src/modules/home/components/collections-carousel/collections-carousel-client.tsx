@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import type { CategoryCard } from "."
+import type { CollectionCard } from "."
 
 // Carousel de MOVIMIENTO CONTINUO (marquee rAF): las tarjetas fluyen en orden de
 // IZQUIERDA→DERECHA (la siguiente entra por la derecha; el contenido avanza hacia la
@@ -13,7 +13,7 @@ const CARD_STEP_MS = 400
 const RESUME_AFTER_MANUAL_MS = 3500
 const SWIPE_THRESHOLD_PX = 20
 
-export default function CategoriesCarouselClient({ cards }: { cards: CategoryCard[] }) {
+export default function CollectionsCarouselClient({ cards }: { cards: CollectionCard[] }) {
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(0)
@@ -223,7 +223,7 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
             return (
               <LocalizedClientLink
                 key={`${c.handle}-${i}`}
-                href={`/categories/${c.handle}`}
+                href={`/collections/${c.handle}`}
                 className="cat-card cat-side"
                 data-cat-card="true"
                 aria-hidden={isClone}
@@ -242,10 +242,10 @@ export default function CategoriesCarouselClient({ cards }: { cards: CategoryCar
           })}
         </div>
 
-        <button className="cats-nav prev" onClick={() => step(-1)} aria-label="Categoría anterior">
+        <button className="cats-nav prev" onClick={() => step(-1)} aria-label="Colección anterior">
           ←
         </button>
-        <button className="cats-nav next" onClick={() => step(1)} aria-label="Siguiente categoría">
+        <button className="cats-nav next" onClick={() => step(1)} aria-label="Siguiente colección">
           →
         </button>
       </div>
