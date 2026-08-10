@@ -59,7 +59,9 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
             offsetRef.current -= halfW
           }
           if (halfW > 0) {
-            track.style.transform = `translateX(${-offsetRef.current}px)`
+            // translateX POSITIVO → el track fluye hacia la DERECHA
+            // (las tarjetas entran por la izquierda y salen por la derecha)
+            track.style.transform = `translateX(${offsetRef.current}px)`
           }
         }
       }
@@ -131,7 +133,8 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
       const track = trackRef.current
       if (track) {
         track.style.transition = "none"
-        track.style.transform = `translateX(${-(offsetRef.current - dx)}px)`
+        // Acompañar al dedo: arrastrar a la derecha mueve el track a la derecha
+        track.style.transform = `translateX(${offsetRef.current + dx}px)`
       }
     }
   }, [])
@@ -147,8 +150,9 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
         if (track) {
           const card = track.querySelector<HTMLElement>("[data-cat-card]")
           const stepPx = card ? card.offsetWidth + 16 : 356
-          const dir = dx < 0 ? 1 : -1
-          setOffset(offsetRef.current - dx + dir * stepPx * 0.5)
+          // Flujo derecha: arrastrar a la derecha (dx>0) = siguiente tarjeta
+          const dir = dx < 0 ? -1 : 1
+          setOffset(offsetRef.current + dx + dir * stepPx * 0.5)
         }
         pauseTemporarily(1500)
       } else {
