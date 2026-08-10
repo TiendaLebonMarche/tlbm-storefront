@@ -27,15 +27,6 @@ export default function ClientHeader({
 
   const isHome = pathname === "/" || /^\/[a-zA-Z-]{2,5}\/?$/.test(pathname || "")
 
-  // Páginas de detalle de producto → marquesina oscura en vez de la barra fina
-  const isProductPage = pathname?.includes("/productos/") ?? false
-
-  // Página de carrito → TopMarquee en vez de la barra fina
-  const isCartPage = pathname?.includes("/cart") ?? false
-
-  // Página de tienda (/store) → TopMarquee en vez de la barra fina
-  const isStorePage = pathname?.includes("/store") ?? false
-
   // On the home page, this header renders nothing — the Hero slider
   // component owns the header (floating logo + hamburger, white bar on scroll).
   if (isHome) return null
@@ -57,80 +48,16 @@ export default function ClientHeader({
       data-scrolled={isScrolled}
       data-home={isHome}
     >
-      {/* ── TOP BAR ── Productos/Tienda/Carrito: TopMarquee (etiqueta dorada + banda negra) · Resto: barra fina #0A0A0F ── */}
-      {isProductPage || isCartPage || isStorePage ? (
-        <div
-          className={`transition-all duration-500 ease-out overflow-hidden
-            ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
-          `}
-        >
-          <TopMarquee />
-        </div>
-      ) : (
-        <div
-          className={`
-            bg-[#0A0A0F] text-white/70
-            border-b border-white/5
-            transition-all duration-500 ease-out overflow-hidden
-            ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "h-[28px] md:h-[32px] py-0.5 opacity-100"}
-          `}
-        >
-        <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14 h-full flex items-center justify-between">
-          <div className="flex items-center gap-3 md:gap-5 text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              IG
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              FB
-            </a>
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              TT
-            </a>
-            <a
-              href="https://wa.me/573027567783"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              WA
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2 md:gap-5 text-[9px] md:text-[10px] font-medium tracking-[0.15em] uppercase">
-            <span className="hidden sm:inline text-white/50">Envíos a toda Colombia</span>
-            <span className="hidden sm:inline text-white/20">|</span>
-            <LocalizedClientLink
-              href="/account"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              Registrarse
-            </LocalizedClientLink>
-            <span className="text-white/20">/</span>
-            <LocalizedClientLink
-              href="/account"
-              className="hover:text-[#D4AF37] transition-colors duration-300"
-            >
-              Iniciar Sesión
-            </LocalizedClientLink>
-          </div>
-        </div>
-        </div>
-      )}
+      {/* ── TOP BAR ── TODAS las subpáginas: TopMarquee (etiqueta dorada + banda negra).
+          Regla Julián 10-ago: el diseño de /store es el diseño por defecto de TODAS
+          las subpáginas (existentes y futuras). */}
+      <div
+        className={`transition-all duration-500 ease-out overflow-hidden
+          ${isScrolled ? "h-0 opacity-0 py-0 border-transparent" : "opacity-100"}
+        `}
+      >
+        <TopMarquee />
+      </div>
 
       {/* ── MAIN HEADER ────────────────────────────────────────────── */}
       <header

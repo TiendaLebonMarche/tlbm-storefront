@@ -91,6 +91,20 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
     if (isSideMenuOpen) setCollectionsOpen(false)
   }, [isSideMenuOpen])
 
+  // Cierre con clic en cualquier parte fuera del drawer (como la bolsa/cart).
+  // Listener global = garantiza el cierre aunque el backdrop falle.
+  useEffect(() => {
+    if (!isSideMenuOpen) return
+    const handleClickOutside = (event: MouseEvent) => {
+      const panel = document.querySelector('[data-testid="nav-menu-popup"]')
+      if (panel && !panel.contains(event.target as Node)) {
+        closeSideMenu()
+      }
+    }
+    document.addEventListener("click", handleClickOutside)
+    return () => document.removeEventListener("click", handleClickOutside)
+  }, [isSideMenuOpen, closeSideMenu])
+
   return (
     <div className="h-full z-50">
       <div className="flex items-center h-full">
@@ -158,6 +172,18 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
                           onClick={() => { close(); closeSideMenu(); }}
                         >
                           Inicio
+                        </LocalizedClientLink>
+                      </li>
+
+                      {/* ── Tienda (mismo menú en todas las páginas — regla Julián) ── */}
+                      <li className="w-full group overflow-hidden border-b border-gray-50">
+                        <LocalizedClientLink
+                          href="/store"
+                          className="block w-full text-3xl md:text-[34px] font-serif font-medium py-4 text-brand-black transform transition-all duration-700 group-hover:translate-x-2 group-hover:text-[#D4AF37] tracking-tight"
+                          style={{ transitionDelay: "25ms" }}
+                          onClick={() => { close(); closeSideMenu(); }}
+                        >
+                          Tienda
                         </LocalizedClientLink>
                       </li>
 
