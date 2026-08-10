@@ -73,7 +73,7 @@ export default function ProductPrice({
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-              className="text-[10px] font-semibold text-red-600 tracking-wide font-sans bg-red-50 px-2 py-0.5 rounded-sm"
+              className="text-[10px] font-semibold text-red-600 tracking-wide font-sans bg-red-50 px-2 py-0.5 rounded-xs"
             >
               Ahorras {formattedSavings}
             </motion.span>

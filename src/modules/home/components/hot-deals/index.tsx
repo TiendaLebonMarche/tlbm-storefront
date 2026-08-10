@@ -35,7 +35,7 @@ export default async function HotDeals({
               <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
                 Nuestros mejores productos
               </span>
-              <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-brand-black">
+              <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-tighter font-serif font-bold text-brand-black">
                 Precios de Selección Global
               </h2>
               <p className="text-brand-gray text-sm md:text-base mt-6 font-normal leading-relaxed">

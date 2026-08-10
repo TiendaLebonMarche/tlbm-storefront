@@ -58,7 +58,7 @@ export default function ProductSections({ product }: ProductSectionsProps) {
               .map((line, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <svg
-                    className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#D4AF37]"
+                    className="w-4 h-4 mt-0.5 shrink-0 text-[#D4AF37]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -249,7 +249,7 @@ const ShippingInfoTab = () => {
           },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-4">
-            <div className="flex-shrink-0 text-[#D4AF37] mt-0.5">{item.icon}</div>
+            <div className="shrink-0 text-[#D4AF37] mt-0.5">{item.icon}</div>
             <div className="space-y-1">
               <span className="text-xs font-semibold text-brand-black uppercase tracking-wider block font-sans">
                 {item.title}

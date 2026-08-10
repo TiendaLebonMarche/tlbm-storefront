@@ -79,7 +79,7 @@ export default function ProductPreview({
 
         {/* Hover scale + gold overlay sutil */}
         <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </div>
 
         {/* Badges */}
@@ -121,7 +121,7 @@ export default function ProductPreview({
         {/* Price — destacado en dorado, más grande */}
         <div className="mt-1.5">
           {cheapestPrice && (
-            <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm">
+            <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-xs">
               {cheapestPrice.calculated_price}
             </span>
           )}

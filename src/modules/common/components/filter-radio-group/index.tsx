@@ -52,7 +52,7 @@ const FilterRadioGroup = ({
                 {/* Custom indicator */}
                 <span
                   className={clx(
-                    "absolute left-0 w-3 h-[1px] transition-all duration-300",
+                    "absolute left-0 w-3 h-px transition-all duration-300",
                     {
                       "bg-brand-black w-4": i.value === value,
                       "bg-gray-200 w-0 group-hover:w-2": i.value !== value,

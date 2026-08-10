@@ -25,16 +25,16 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
 
   return (
     <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 md:py-20 overflow-hidden">
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10">
+      <div className="max-w-360 mx-auto px-6 lg:px-10 mb-10">
         <div className="flex items-end justify-between">
           <div>
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
               <span className="w-8 h-px bg-[#D4AF37]/30" />
               Los favoritos
             </div>
-            <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-gray-900 dark:text-white">
+            <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-tighter font-serif font-bold text-gray-900 dark:text-white">
               Lo más{" "}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 vendidos
               </span>
             </h2>
@@ -56,7 +56,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="pm-wrap">
         <div className="pm-track">
           {duplicatedItems.map((item, index) => (
-            <div key={`${item.id}-${index}`} className="flex-shrink-0 group" style={{ width: "clamp(240px, 28vw, 340px)" }}>
+            <div key={`${item.id}-${index}`} className="shrink-0 group" style={{ width: "clamp(240px, 28vw, 340px)" }}>
               <LocalizedClientLink href={`/productos/${item.handle}`} className="block no-underline text-inherit">
                 {/* Image — rectangular, fondo blanco */}
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "0.873/1", background: "#FFFFFF" }}>
@@ -77,7 +77,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                     </div>
                   )}
                   {/* Gold overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Badge */}
                   <span className="absolute top-3 left-3 text-white text-[8px] sm:text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-[#0A0A0F]">
@@ -93,7 +93,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <h3 className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]">
                     {item.name}
                   </h3>
-                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm mt-1.5">
+                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-xs mt-1.5">
                     {item.price}
                   </span>
                 </div>

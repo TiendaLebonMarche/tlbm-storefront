@@ -105,7 +105,7 @@ const Shipping: React.FC<{
                       data-testid="delivery-option-radio"
                       disabled={isDisabled}
                       className={clx(
-                        "flex items-center justify-between cursor-pointer py-6 border-2 rounded-3xl px-8 mb-4 hover:border-brand-black transition-all shadow-sm text-xs",
+                        "flex items-center justify-between cursor-pointer py-6 border-2 rounded-3xl px-8 mb-4 hover:border-brand-black transition-all shadow-xs text-xs",
                         {
                           "border-brand-black bg-brand-gray-light/30": option.id === shippingMethodId,
                           "border-brand-gray-light bg-white": option.id !== shippingMethodId,

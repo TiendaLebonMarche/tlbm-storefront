@@ -47,14 +47,14 @@ export default function BrandMarquee() {
   return (
     <section className="overflow-hidden bg-white dark:bg-[#0A0A0F] border-0 py-6 md:py-10">
       <div className="brand-marquee-wrap">
-        <div className="flex items-center w-[max-content] animate-brand-scroll brand-marquee-track">
+        <div className="flex items-center w-max animate-brand-scroll brand-marquee-track">
           {[0, 1].map((set) => (
             <div key={set} className="flex items-center gap-4 md:gap-10 mx-0">
               {BRANDS.map((brand, i) => (
                 <div
                   key={`${set}-${i}`}
                   title={brand.name}
-                  className="flex items-center justify-center flex-shrink-0"
+                  className="flex items-center justify-center shrink-0"
                   style={LOGO_STYLE}
                 >
                   {brand.type === "icon" ? (

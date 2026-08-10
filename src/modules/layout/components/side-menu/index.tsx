@@ -114,7 +114,7 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="group flex items-center justify-center gap-2 outline-none text-inherit transition-opacity duration-300 hover:opacity-70 h-12"
+                  className="group flex items-center justify-center gap-2 outline-hidden text-inherit transition-opacity duration-300 hover:opacity-70 h-12"
                   onClick={openSideMenu}
                 >
                   <div className="flex flex-col gap-[6px] items-start">
@@ -131,7 +131,7 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
 
               {isSideMenuOpen && (
                 <div
-                  className="fixed inset-0 z-[155] bg-brand-black/10 pointer-events-auto transition-all duration-300"
+                  className="fixed inset-0 z-155 bg-brand-black/10 pointer-events-auto transition-all duration-300"
                   onClick={closeSideMenu}
                   data-testid="side-menu-backdrop"
                   style={{ backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
@@ -148,7 +148,7 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
                 leaveFrom="translate-x-0 opacity-100"
                 leaveTo="-translate-x-full opacity-60"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-screen w-[calc(100vw-48px)] max-w-[400px] bg-white z-[160] text-brand-black border-r border-brand-gray-light flex flex-col shadow-xl overflow-y-auto overscroll-contain">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-[calc(100vw-48px)] max-w-[400px] bg-white z-160 text-brand-black border-r border-brand-gray-light flex flex-col shadow-xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-8"

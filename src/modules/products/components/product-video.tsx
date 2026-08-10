@@ -107,7 +107,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
 
           <div
             ref={containerRef}
-            className={`relative group bg-[#0A0A0F] overflow-hidden aspect-video cursor-pointer rounded-sm ${hasError ? '' : ''}`}
+            className={`relative group bg-[#0A0A0F] overflow-hidden aspect-video cursor-pointer rounded-xs ${hasError ? '' : ''}`}
             onClick={togglePlay}
           >
             <video
@@ -147,7 +147,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
             {/* Play overlay */}
             {!isPlaying && !hasError && !isLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-opacity duration-300">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-xs border border-white/20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" />
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
 
             {/* Controls */}
             {!hasError && (
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <button

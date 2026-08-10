@@ -30,7 +30,7 @@ export default function NewsletterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@email.com"
-          className="bg-white/10 border border-white/30 rounded-l-full px-5 py-3 text-sm text-white placeholder-white/60 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300 min-h-[48px]"
+          className="bg-white/10 border border-white/30 rounded-l-full px-5 py-3 text-sm text-white placeholder-white/60 outline-hidden flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300 min-h-[48px]"
           style={{ caretColor: "#D4AF37" }}
           aria-label="Correo electrónico"
         />

@@ -1,109 +1,350 @@
 /* Playfair Display la carga next/font (layout.tsx) — este @import duplica la descarga */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --brand-navy: #00154A;
-  --brand-blue: #1A3B8F;
-  --brand-gray: #6B6F7A;
-  --brand-gray-light: #BEC1C8;
+@config '../../tailwind.config.js';
 
-  /* === TOKENS CANÓNICOS ESCENOGRAFÍA (07-ago-2026) — TODO tema usa var() === */
-  --gold: #D4AF37;
-  --ink: #0A0A0F;
-  --ink-deep: #08080C;
-  --bg: #FFFFFF;
-  --text: #101010;
-  --muted: #5C5C5C;
-  --accent: #6366F1;
-  --whatsapp: #25D366;
-}
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-/* === SISTEMA DE ESCENOGRAFÍA POR TEMPORADA (07-ago-2026) ===
-   Activación MANUAL: cambiar SEASON en src/lib/season.ts → deploy.
-   [data-theme] sobreescribe SOLO variables + clases de escenografía.
-   El default hereda :root (diseño actual IDÉNTICO). */
-[data-theme="default"] {
-  --season: "default";
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-/* 🎃 Halloween — plantilla (variables de ejemplo, refinar al montar la escena) */
-[data-theme="halloween"] {
-  --gold: #FF8C42;
-  --ink: #1A0B0B;
-  --ink-deep: #120707;
-  --muted: #C77B5A;
-  --accent: #7B2D8B;
-  --season: "halloween";
-}
-
-/* 🎄 Navidad — plantilla */
-[data-theme="navidad"] {
-  --gold: #E8C84A;
-  --ink: #07140F;
-  --ink-deep: #030A07;
-  --muted: #7A8C7F;
-  --accent: #B3261E;
-  --season: "navidad";
-}
-
-/* 💘 San Valentín — plantilla */
-[data-theme="san-valentin"] {
-  --gold: #E8A0B4;
-  --ink: #1C0509;
-  --ink-deep: #120304;
-  --muted: #C08A96;
-  --accent: #D9265A;
-  --season: "san-valentin";
-}
-
-/* Decoración flotante animada (SeasonalDecor) — se monta/desmonta según data-theme */
-@keyframes season-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-18px) rotate(6deg); }
-}
-@keyframes season-drift {
-  0% { transform: translateX(-4%) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateX(104vw) translateY(-30px); opacity: 0; }
-}
-.seasonal-decor {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 5;
-}
-.seasonal-decor .decor-item {
-  position: absolute;
-  animation: season-float 7s ease-in-out infinite;
-  user-select: none;
-}
-.seasonal-decor .decor-drift {
-  position: absolute;
-  top: -40px;
-  animation: season-drift linear infinite;
-}
-[data-theme="default"] .seasonal-decor { display: none; }
-
-
-@layer utilities {
+@utility no-scrollbar {
   /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 
-  .no-scrollbar::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+@utility animate-marquee {
+  /* Animación Marquee */
+  animation: marquee-scroll 30s linear infinite;
+}
+
+@utility hover-lift {
+  /* === Savoy Micro-Interactions === */
+  @apply transition-all duration-500 hover:-translate-y-2;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  &:hover {
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@utility img-savoy-zoom {
+  @apply transition-transform duration-1000 w-full h-full object-cover;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  .group:hover & {
+    @apply scale-[1.03];
   }
 
+  .group\/img:hover & {
+    @apply scale-[1.03];
+  }
+}
+
+@utility group {
+  &:hover .img-savoy-zoom {
+    @apply scale-[1.03];
+  }
+}
+
+@utility group/img {
+  &:hover .img-savoy-zoom {
+    @apply scale-[1.03];
+  }
+}
+
+@utility btn-savoy {
+  @apply relative overflow-hidden transition-all duration-500 hover:opacity-80 active:scale-[0.98];
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@utility header-scrolled {
+  /* Header Glass */
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+@utility modal-overlay {
+  /* Modales */
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  .is-open & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@utility is-open {
+  & .modal-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  & .drawer-right {
+    transform: translateX(0);
+  }
+}
+
+@utility drawer-right {
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  .is-open & {
+    transform: translateX(0);
+  }
+}
+
+@utility mobile-menu {
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+@utility mobile-menu-open {
+  transform: translateX(0);
+}
+
+@utility search-modal {
+  /* Buscador */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+@utility search-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@utility carousel-viewport {
+  /* Carrusel Seguro */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+}
+
+@utility carousel-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 280px;
+  @media (min-width: 768px) {
+    width: 320px;
+  }
+}
+
+@utility category-card {
+  /* Ajuste Categorías Soft */
+  min-width: calc(50% - 12px);
+  scroll-snap-align: start;
+  @apply rounded-4xl overflow-hidden;
+  @media (min-width: 768px) {
+    min-width: calc(25% - 18px);
+    @apply rounded-[2.5rem];
+  }
+}
+
+@utility pill-button {
+  @apply rounded-full px-8 py-4 font-bold uppercase tracking-widest text-[10px] transition-all duration-300;
+}
+
+@utility content-container {
+  @apply max-w-[1440px] w-full mx-auto px-[clamp(1rem,4vw,1.5rem)];
+}
+
+@utility contrast-btn {
+  @apply px-4 py-2 border border-brand-black rounded-lg hover:bg-brand-black hover:border-brand-black hover:text-white transition-colors duration-200 ease-in text-brand-black;
+}
+
+@utility text-xsmall-regular {
+  @apply text-[10px] leading-4 font-normal;
+}
+
+@utility text-small-regular {
+  @apply text-xs leading-5 font-normal;
+}
+
+@utility text-small-semi {
+  @apply text-xs leading-5 font-semibold;
+}
+
+@utility text-base-regular {
+  @apply text-sm leading-6 font-normal;
+}
+
+@utility text-base-semi {
+  @apply text-sm leading-6 font-semibold;
+}
+
+@utility text-large-regular {
+  @apply text-base leading-6 font-normal;
+}
+
+@utility text-large-semi {
+  @apply text-base leading-6 font-semibold;
+}
+
+@utility text-xl-regular {
+  @apply text-2xl leading-[36px] font-normal;
+}
+
+@utility text-xl-semi {
+  @apply text-2xl leading-[36px] font-semibold;
+}
+
+@utility text-2xl-regular {
+  @apply text-[30px] leading-[48px] font-normal;
+}
+
+@utility text-2xl-semi {
+  @apply text-[30px] leading-[48px] font-semibold;
+}
+
+@utility text-3xl-regular {
+  @apply text-[32px] leading-[44px] font-normal;
+}
+
+@utility text-3xl-semi {
+  @apply text-[32px] leading-[44px] font-semibold;
+}
+
+@utility soft-card {
+  @apply bg-white rounded-4xl p-6 shadow-xs border border-gray-50;
+}
+
+@utility input-pill {
+  @apply w-full rounded-full border border-brand-gray-light px-6 py-4 focus:ring-2 focus:ring-brand-black focus:border-transparent outline-hidden transition-all;
+}
+
+@layer utilities {
+  :root {
+    --brand-navy: #00154a;
+    --brand-blue: #1a3b8f;
+    --brand-gray: #6b6f7a;
+    --brand-gray-light: #bec1c8;
+
+    /* === TOKENS CANÓNICOS ESCENOGRAFÍA (07-ago-2026) — TODO tema usa var() === */
+    --gold: #d4af37;
+    --ink: #0a0a0f;
+    --ink-deep: #08080c;
+    --bg: #ffffff;
+    --text: #101010;
+    --muted: #5c5c5c;
+    --accent: #6366f1;
+    --whatsapp: #25d366;
+  }
+
+  /* === SISTEMA DE ESCENOGRAFÍA POR TEMPORADA (07-ago-2026) ===
+   Activación MANUAL: cambiar SEASON en src/lib/season.ts → deploy.
+   [data-theme] sobreescribe SOLO variables + clases de escenografía.
+   El default hereda :root (diseño actual IDÉNTICO). */
+  [data-theme='default'] {
+    --season: 'default';
+  }
+
+  /* 🎃 Halloween — plantilla (variables de ejemplo, refinar al montar la escena) */
+  [data-theme='halloween'] {
+    --gold: #ff8c42;
+    --ink: #1a0b0b;
+    --ink-deep: #120707;
+    --muted: #c77b5a;
+    --accent: #7b2d8b;
+    --season: 'halloween';
+  }
+
+  /* 🎄 Navidad — plantilla */
+  [data-theme='navidad'] {
+    --gold: #e8c84a;
+    --ink: #07140f;
+    --ink-deep: #030a07;
+    --muted: #7a8c7f;
+    --accent: #b3261e;
+    --season: 'navidad';
+  }
+
+  /* 💘 San Valentín — plantilla */
+  [data-theme='san-valentin'] {
+    --gold: #e8a0b4;
+    --ink: #1c0509;
+    --ink-deep: #120304;
+    --muted: #c08a96;
+    --accent: #d9265a;
+    --season: 'san-valentin';
+  }
+
+  /* Decoración flotante animada (SeasonalDecor) — se monta/desmonta según data-theme */
+  @keyframes season-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-18px) rotate(6deg);
+    }
+  }
+  @keyframes season-drift {
+    0% {
+      transform: translateX(-4%) translateY(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(104vw) translateY(-30px);
+      opacity: 0;
+    }
+  }
+  .seasonal-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+  }
+  .seasonal-decor .decor-item {
+    position: absolute;
+    animation: season-float 7s ease-in-out infinite;
+    user-select: none;
+  }
+  .seasonal-decor .decor-drift {
+    position: absolute;
+    top: -40px;
+    animation: season-drift linear infinite;
+  }
+  [data-theme='default'] .seasonal-decor {
+    display: none;
+  }
+}
+
+
+@layer utilities {
   /* === CORRECCIONES GLOBALES === */
   html, body {
       overflow-x: hidden;
@@ -113,92 +354,7 @@
       background-color: #FFFFFF !important;
       color: #000000;
   }
-
-  /* Animación Marquee */
   @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  .animate-marquee { animation: marquee-scroll 30s linear infinite; }
-  
-  /* === Savoy Micro-Interactions === */
-  .hover-lift {
-    @apply transition-all duration-500 hover:-translate-y-2;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-  }
-  .hover-lift:hover {
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
-  }
-  
-  .img-savoy-zoom {
-    @apply transition-transform duration-1000 w-full h-full object-cover;
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .group:hover .img-savoy-zoom,
-  .group\/img:hover .img-savoy-zoom {
-    @apply scale-[1.03];
-  }
-
-  .btn-savoy {
-    @apply relative overflow-hidden transition-all duration-500 hover:opacity-80 active:scale-[0.98];
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  
-  /* Header Glass */
-  .header-scrolled {
-      background-color: rgba(255, 255, 255, 0.95) !important;
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      padding-top: 1rem !important;
-      padding-bottom: 1rem !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-  }
-
-  /* Modales */
-  .modal-overlay { transition: opacity 0.3s ease; opacity: 0; pointer-events: none; }
-  .is-open .modal-overlay { opacity: 1; pointer-events: auto; }
-  
-  .drawer-right { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-  .is-open .drawer-right { transform: translateX(0); }
-
-  .mobile-menu { transform: translateX(-100%); transition: transform 0.4s ease; }
-  .mobile-menu-open { transform: translateX(0); }
-
-  /* Buscador */
-  .search-modal { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-  .search-open { opacity: 1; pointer-events: auto; }
-  
-  /* Carrusel Seguro */
-  .carousel-viewport {
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 20px; 
-  }
-  .carousel-card {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-      width: 280px;
-  }
-  @media (min-width: 768px) {
-      .carousel-card { width: 320px; }
-  }
-  
-  /* Ajuste Categorías Soft */
-  .category-card {
-      min-width: calc(50% - 12px);
-      scroll-snap-align: start;
-      @apply rounded-[2rem] overflow-hidden;
-  }
-  @media(min-width: 768px){
-      .category-card {
-          min-width: calc(25% - 18px); 
-          @apply rounded-[2.5rem];
-      }
-  }
-
-  .pill-button {
-    @apply rounded-full px-8 py-4 font-bold uppercase tracking-widest text-[10px] transition-all duration-300;
-  }
 
   input:focus ~ label,
   input:not(:placeholder-shown) ~ label {
@@ -229,76 +385,6 @@
   input[type="search"]::-webkit-search-results-button,
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
-  }
-}
-
-@layer components {
-  .content-container {
-    @apply max-w-[1440px] w-full mx-auto px-[clamp(1rem,4vw,1.5rem)];
-  }
-
-  .contrast-btn {
-    @apply px-4 py-2 border border-brand-black rounded-lg hover:bg-brand-black hover:border-brand-black hover:text-white transition-colors duration-200 ease-in text-brand-black;
-  }
-
-  .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
-  }
-
-  .text-small-regular {
-    @apply text-xs leading-5 font-normal;
-  }
-
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
-  }
-
-  .text-base-regular {
-    @apply text-sm leading-6 font-normal;
-  }
-
-  .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
-  }
-
-  .text-large-regular {
-    @apply text-base leading-6 font-normal;
-  }
-
-  .text-large-semi {
-    @apply text-base leading-6 font-semibold;
-  }
-
-  .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
-  }
-
-  .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
-  }
-
-  .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
-  }
-
-  .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
-  }
-
-  .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
-  }
-
-  .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
-  }
-
-  .soft-card {
-    @apply bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50;
-  }
-  
-  .input-pill {
-    @apply w-full rounded-full border border-brand-gray-light px-6 py-4 focus:ring-2 focus:ring-brand-black focus:border-transparent outline-none transition-all;
   }
 }
 
