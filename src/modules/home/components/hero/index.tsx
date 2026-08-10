@@ -1,12 +1,11 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef, Suspense } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import TopMarquee from "@modules/common/components/top-marquee"
 import HeaderSearchControls from "@modules/layout/components/header-search-controls"
-import CartButton from "@modules/layout/components/cart-button"
 
 // ── Logo URL ────────────────────────────────────────────────────────────────
 const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785517677/logo-TLBM-trpar_qtqudf.png"
@@ -180,7 +179,7 @@ function SlideMedia({
 
 // ── Sticky White Header (appears on scroll) ────────────────────────────────
 
-function ScrollHeader({ visible, menuSlot }: { visible: boolean; menuSlot?: React.ReactNode }) {
+function ScrollHeader({ visible, menuSlot, cartSlot }: { visible: boolean; menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
   return (
     <div
       className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
@@ -212,9 +211,7 @@ function ScrollHeader({ visible, menuSlot }: { visible: boolean; menuSlot?: Reac
           {/* Right: Search (lupa), Theme, Cart — igual que todas las páginas (10-ago) */}
           <div className="flex items-center justify-end gap-3 lg:gap-5">
             <HeaderSearchControls />
-            <Suspense fallback={<div className="w-5 h-5" />}>
-              <CartButton />
-            </Suspense>
+            {cartSlot}
           </div>
         </div>
       </div>
@@ -224,7 +221,7 @@ function ScrollHeader({ visible, menuSlot }: { visible: boolean; menuSlot?: Reac
 
 // ── Hero Overlay (floating logo + hamburger on hero) ───────────────────────
 
-function HeroOverlay({ visible, menuSlot }: { visible: boolean; menuSlot?: React.ReactNode }) {
+function HeroOverlay({ visible, menuSlot, cartSlot }: { visible: boolean; menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
   return (
     <div
       className={`absolute top-0 left-0 w-full z-30 transition-all duration-500 ${
@@ -254,9 +251,7 @@ function HeroOverlay({ visible, menuSlot }: { visible: boolean; menuSlot?: React
           {/* Right: Search (lupa), Theme, Cart — blancos sobre el hero oscuro */}
           <div className="flex items-center justify-end gap-3 lg:gap-5 text-white">
             <HeaderSearchControls />
-            <Suspense fallback={<div className="w-5 h-5" />}>
-              <CartButton />
-            </Suspense>
+            {cartSlot}
           </div>
         </div>
       </div>
@@ -266,7 +261,7 @@ function HeroOverlay({ visible, menuSlot }: { visible: boolean; menuSlot?: React
 
 // ── Main Hero ───────────────────────────────────────────────────────────────
 
-export default function Hero({ menuSlot }: { menuSlot?: React.ReactNode }) {
+export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
   const [[slideIndex, direction], setSlideState] = useState([0, 0])
   const [isScrolled, setIsScrolled] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -319,7 +314,7 @@ export default function Hero({ menuSlot }: { menuSlot?: React.ReactNode }) {
       <TopMarquee />
 
       {/* ── SCROLL HEADER (white bar) — mismo drawer que todas las páginas ── */}
-      <ScrollHeader visible={isScrolled} menuSlot={menuSlot} />
+      <ScrollHeader visible={isScrolled} menuSlot={menuSlot} cartSlot={cartSlot} />
 
       {/* ── HERO SLIDER ── */}
       <section
@@ -350,7 +345,7 @@ export default function Hero({ menuSlot }: { menuSlot?: React.ReactNode }) {
         </AnimatePresence>
 
         {/* ── Floating header (logo + hamburger) ── */}
-        <HeroOverlay visible={isScrolled} menuSlot={menuSlot} />
+        <HeroOverlay visible={isScrolled} menuSlot={menuSlot} cartSlot={cartSlot} />
 
         {/* ── TEXT CONTENT ── */}
         <div className="absolute inset-0 z-20 flex items-center">

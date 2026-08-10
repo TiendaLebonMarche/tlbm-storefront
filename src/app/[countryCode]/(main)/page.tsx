@@ -13,6 +13,7 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import Reveal from "@modules/common/components/reveal"
 import SideMenuData from "@modules/layout/components/side-menu-data"
+import CartButton from "@modules/layout/components/cart-button"
 
 // Lazy load below-fold components
 const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
@@ -71,6 +72,11 @@ export default async function Home(props: {
         menuSlot={
           <Suspense fallback={<div className="w-12 h-12" />}>
             <SideMenuData />
+          </Suspense>
+        }
+        cartSlot={
+          <Suspense fallback={<div className="w-5 h-5" />}>
+            <CartButton />
           </Suspense>
         }
       />
