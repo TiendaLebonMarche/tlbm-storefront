@@ -505,6 +505,7 @@
 /* Variante para fondos claros (header de producto): texto oscuro + hover dorado */
 .nav-link-dark { position: relative; transition: color .3s; color: rgba(10,10,15,.65); }
 .nav-link-dark:hover { color: #D4AF37; }
+.nav-link-dark.active { color: #D4AF37; }
 .nav-link-dark::after {
   content: '';
   position: absolute;

@@ -13,7 +13,8 @@ import { HttpTypes } from "@medusajs/types"
  */
 const BASE_LINK =
   "nav-link-dark text-[11px] xl:text-[12px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap"
-const ACTIVE_LINK = "text-[#D4AF37]"
+// "active" → color dorado + subrayado dorado animado (definido en globals.css)
+const ACTIVE_LINK = "active"
 
 export default function DesktopNav({
   collections,
