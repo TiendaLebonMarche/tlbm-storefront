@@ -2,7 +2,7 @@
 
 function isEqual(a: unknown, b: unknown) { return JSON.stringify(a) === JSON.stringify(b); }
 
-import { addToCart, retrieveCart } from "@lib/data/cart"
+import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
@@ -178,40 +178,8 @@ export default function ProductActions({
     } catch (error: any) {
       const message = error?.message || "Error desconocido de conexión"
       console.error("Error al añadir a la bolsa:", error)
-      if (error?.digest) console.error("RSC digest:", error.digest)
-
-      // Next 16: tras un server action, el framework re-renderiza el árbol RSC.
-      // Si ese render falla (transitorio, React #441 "Server Components render"),
-      // la promesa de la acción rechaza AUNQUE el item SÍ se agregó. Antes de
-      // alarmar al cliente, verificamos el carrito real contra Medusa.
-      const isRscError = /Minified React error|Server Components render/i.test(message)
-      if (isRscError) {
-        try {
-          const cart = await retrieveCart()
-          const hasItem = cart?.items?.some(
-            (i: any) => i.variant_id === selectedVariant?.id
-          )
-          if (hasItem) {
-            setAddedSuccess(true)
-            setCartCount(
-              ((cart?.items || []) as any[]).reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
-            )
-            setCart(cart)
-            openCart()
-            setTimeout(() => setAddedSuccess(false), 2500)
-            return
-          }
-        } catch (e) {
-          console.error("Fallo al verificar carrito tras error RSC:", e)
-        }
-      }
-
-      const friendly =
-        isRscError
-          ? "Hubo un problema al actualizar la bolsa. Intenta de nuevo o escríbenos por WhatsApp."
-          : message
       alert(
-        `${friendly}\n\nSi el problema continúa, escríbenos a WhatsApp y te ayudamos al instante.`
+        `${message}\n\nSi el problema continúa, escríbenos a WhatsApp y te ayudamos al instante.`
       )
     } finally {
       setIsAdding(false)

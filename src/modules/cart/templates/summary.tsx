@@ -6,6 +6,7 @@ import CartTotals from "@modules/common/components/cart-totals"
 import Divider from "@modules/common/components/divider"
 import DiscountCode from "@modules/checkout/components/discount-code"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useUI } from "@lib/context/ui-context"
 import { HttpTypes } from "@medusajs/types"
 
 type SummaryProps = {
@@ -24,7 +25,12 @@ function getCheckoutStep(cart: HttpTypes.StoreCart) {
   }
 }
 
-const Summary = ({ cart }: SummaryProps) => {
+const Summary = ({ cart: propCart }: SummaryProps) => {
+  // Fuente de verdad: contexto UI (setCart lo actualiza tras cada mutación);
+  // la prop del server es el fallback inicial. Sin esto el Resumen de /co/cart
+  // queda stale tras cambiar cantidades (router.refresh falla en Next 16.3).
+  const { cart: contextCart } = useUI()
+  const cart = (contextCart ?? propCart) as SummaryProps["cart"]
   const step = getCheckoutStep(cart)
 
   return (

@@ -88,14 +88,14 @@ export async function getOrSetCart(countryCode: string) {
     await setCartId(cart.id)
 
     const cartCacheTag = await getCacheTag("carts")
-    if (cartCacheTag) revalidateTag(cartCacheTag, "page")
+    if (cartCacheTag) revalidateTag(cartCacheTag, "max")
   }
 
   if (cart && cart?.region_id !== region.id) {
     try {
       await sdk.store.cart.update(cart.id, { region_id: region.id }, {}, headers)
       const cartCacheTag = await getCacheTag("carts")
-      if (cartCacheTag) revalidateTag(cartCacheTag, "page")
+      if (cartCacheTag) revalidateTag(cartCacheTag, "max")
     } catch (e: any) {
       console.error("Error al actualizar la región del carrito:", e)
     }
@@ -119,10 +119,10 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
     .update(cartId, data, {}, headers)
     .then(async ({ cart }: { cart: HttpTypes.StoreCart }) => {
       const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
+      revalidateTag(cartCacheTag, "max")
 
       const fulfillmentCacheTag = await getCacheTag("fulfillment")
-      revalidateTag(fulfillmentCacheTag, "page")
+      revalidateTag(fulfillmentCacheTag, "max")
 
       return cart
     })
@@ -206,10 +206,17 @@ export async function updateLineItem({
     ...(await getAuthHeaders()),
   }
 
-  await sdk.store.cart
+  // ⚠️ return OBLIGATORIO: sin él la función resuelve undefined y el cliente/route
+  // no recibe el carrito fresco (bug detectado 10-ago vía /api/cart — devolvía {}).
+  return await sdk.store.cart
     .updateLineItem(cartId, lineId, { quantity }, {}, headers)
     .then(async () => {
-      // ⚠️ SIN revalidateTag (React #441 — ver addToCart)
+      // revalidateTag("max") RESTAURADO (10-ago): el perfil "page" inválido era lo
+      // que rompía el flight (#441/500). Con perfil válido, la página /co/cart se
+      // re-renderiza con el carrito fresco tras la mutación (sin router.refresh
+      // del cliente, que también disparaba el bug).
+      const cartCacheTag = await getCacheTag("carts")
+      if (cartCacheTag) revalidateTag(cartCacheTag, "max")
       // Devolver el carrito fresco (con items.total) para actualizar la bolsa al instante
       const fresh = await sdk.store.cart.retrieve(
         cartId,
@@ -236,10 +243,13 @@ export async function deleteLineItem(lineId: string) {
     ...(await getAuthHeaders()),
   }
 
-  await sdk.store.cart
+  // ⚠️ return OBLIGATORIO (ver updateLineItem — mismo bug del undefined)
+  return await sdk.store.cart
     .deleteLineItem(cartId, lineId, {}, headers)
     .then(async () => {
-      // ⚠️ SIN revalidateTag (React #441 — ver addToCart)
+      // revalidateTag("max") RESTAURADO (10-ago) — ver updateLineItem
+      const cartCacheTag = await getCacheTag("carts")
+      if (cartCacheTag) revalidateTag(cartCacheTag, "max")
       // Devolver el carrito fresco para actualizar la bolsa al instante
       const fresh = await sdk.store.cart.retrieve(
         cartId,
@@ -266,7 +276,7 @@ export async function setShippingMethod({
     .addShippingMethod(cartId, { option_id: shippingMethodId }, {}, headers)
     .then(async () => {
       const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
+      revalidateTag(cartCacheTag, "max")
     })
     .catch(medusaError)
 }
@@ -283,7 +293,7 @@ export async function initiatePaymentSession(
     .initiatePaymentSession(cart, data, {}, headers)
     .then(async (resp) => {
       const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
+      revalidateTag(cartCacheTag, "max")
       return resp
     })
     .catch(medusaError)
@@ -304,10 +314,10 @@ export async function applyPromotions(codes: string[]) {
     .update(cartId, { promo_codes: codes }, {}, headers)
     .then(async () => {
       const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
+      revalidateTag(cartCacheTag, "max")
 
       const fulfillmentCacheTag = await getCacheTag("fulfillment")
-      revalidateTag(fulfillmentCacheTag, "page")
+      revalidateTag(fulfillmentCacheTag, "max")
     })
     .catch(medusaError)
 }
@@ -499,14 +509,14 @@ export async function placeOrder(cartId?: string) {
   }
 
   const cartCacheTag = await getCacheTag("carts")
-  revalidateTag(cartCacheTag, "page")
+  revalidateTag(cartCacheTag, "max")
 
   if (cartRes?.type === "order") {
     const countryCode =
       cartRes.order.shipping_address?.country_code?.toLowerCase() || "co"
 
     const orderCacheTag = await getCacheTag("orders")
-    revalidateTag(orderCacheTag, "page")
+    revalidateTag(orderCacheTag, "max")
 
     // Guardar email en la orden vía admin API (Medusa v2 bug: no copia cart.email)
     try {
@@ -559,14 +569,14 @@ export async function updateRegion(countryCode: string, currentPath: string) {
   if (cartId) {
     await updateCart({ region_id: region.id })
     const cartCacheTag = await getCacheTag("carts")
-    revalidateTag(cartCacheTag, "page")
+    revalidateTag(cartCacheTag, "max")
   }
 
   const regionCacheTag = await getCacheTag("regions")
-  revalidateTag(regionCacheTag, "page")
+  revalidateTag(regionCacheTag, "max")
 
   const productsCacheTag = await getCacheTag("products")
-  revalidateTag(productsCacheTag, "page")
+  revalidateTag(productsCacheTag, "max")
 
   redirect(`/${countryCode}${currentPath}`)
 }

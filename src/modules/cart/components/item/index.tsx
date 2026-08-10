@@ -1,7 +1,7 @@
 "use client"
 
 import { Table, Text, clx } from "@medusajs/ui"
-import { updateLineItem, retrieveCart } from "@lib/data/cart"
+import { updateLineItem } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import CartItemSelect from "@modules/cart/components/cart-item-select"
 import ErrorMessage from "@modules/checkout/components/error-message"
@@ -21,18 +21,31 @@ type ItemProps = {
   currencyCode: string
 }
 
-const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
+const Item = ({ item: propItem, type = "full", currencyCode }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const { setCart, setCartCount } = useUI()
+  const { cart: contextCart, setCart, setCartCount } = useUI()
   const router = useRouter()
 
-  const syncCart = async (cart?: any) => {
-    const fresh = cart ?? (await retrieveCart().catch(() => null))
-    setCart(fresh ?? null)
+  // Fuente de verdad: el contexto UI (setCart lo actualiza tras cada mutación).
+  // La prop del server solo se usa como carga inicial (contexto vacío): si el
+  // contexto ya tiene carrito y el item NO está, fue eliminado → la fila se quita.
+  // Sin esto, /co/cart no refleja update/delete hasta recargar (router.refresh()
+  // falla silencioso en Next 16.3.0 con este árbol — bug #441; el revalidateTag
+  // "max" ya deja el server cache fresco para la siguiente navegación).
+  const item = contextCart
+    ? contextCart.items?.find((i) => i.id === propItem.id)
+    : propItem
+  if (!item) return null // item eliminado → la fila desaparece al instante
+
+  const syncCart = (cart: any) => {
+    // updateLineItem YA retorna el carrito fresco (fix return 10-ago).
+    // El contexto UI actualiza fila/drawer/badge al instante; router.refresh()
+    // re-sincroniza el resto del server component (Summary) si el flight funciona.
+    setCart(cart ?? null)
     setCartCount(
-      fresh?.items?.length
-        ? fresh.items.reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
+      cart?.items?.length
+        ? cart.items.reduce((acc: number, i: any) => acc + (i.quantity || 0), 0)
         : null
     )
     try {
@@ -51,14 +64,8 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       })
       await syncCart(cart)
     } catch (err: any) {
-      const msg = err?.message || ""
-      // RSC #441 transitorio: la mutación pudo ejecutarse aunque el re-render
-      // del árbol Server Components falló → re-verificar el carrito real.
-      if (/Minified React error|Server Components render/i.test(msg)) {
-        await syncCart()
-      } else {
-        setError(msg)
-      }
+      console.error("Error al actualizar cantidad:", err)
+      setError(err?.message || "No se pudo actualizar la cantidad")
     } finally {
       setUpdating(false)
     }
