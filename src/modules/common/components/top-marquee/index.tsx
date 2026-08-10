@@ -37,13 +37,13 @@ const LABEL_LOGO_URL =
 export default function TopMarquee() {
   return (
     <div
-      className="relative z-50 flex items-stretch overflow-hidden bg-(--ink)"
+      className="relative z-50 flex items-stretch overflow-hidden bg-[var(--ink)]"
       aria-label="Tienda Le Bon Marché — mensajes de la tienda"
     >
       {/* ── Etiqueta FIJA: dorada + logo TLBM, corte diagonal ── */}
       <div
         aria-hidden="true"
-        className="relative z-10 flex shrink-0 items-center bg-(--gold) py-[5px] pl-3.5 pr-5 md:py-[6px] md:pl-5 md:pr-7"
+        className="relative z-10 flex flex-shrink-0 items-center bg-[var(--gold)] py-[5px] pl-3.5 pr-5 md:py-[6px] md:pl-5 md:pr-7"
         style={{
           clipPath: "polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%)",
         }}

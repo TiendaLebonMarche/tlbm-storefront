@@ -43,7 +43,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full bg-brand-gray-light/20 aspect-4/5 flex flex-col items-center justify-center gap-3">
+      <div className="w-full bg-brand-gray-light/20 aspect-[4/5] flex flex-col items-center justify-center gap-3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={0.8} stroke="#9CA3AF" className="w-10 h-10">
           <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.41a2.25 2.25 0 0 1 3.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
         </svg>
@@ -60,12 +60,12 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
 
       {/* ── THUMBNAILS ── */}
       {images.length > 1 && (
-        <div className="flex lg:flex-col gap-2 w-full lg:w-[88px] shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[700px] no-scrollbar">
+        <div className="flex lg:flex-col gap-2 w-full lg:w-[88px] flex-shrink-0 overflow-x-auto lg:overflow-y-auto lg:max-h-[700px] no-scrollbar">
           {images.map((image, idx) => (
             <button
               key={image.id}
               onClick={() => setSelectedImageIndex(idx)}
-              className={`relative aspect-4/5 shrink-0 w-[72px] lg:w-full overflow-hidden transition-all duration-500 ${
+              className={`relative aspect-[4/5] flex-shrink-0 w-[72px] lg:w-full overflow-hidden transition-all duration-500 ${
                 selectedImageIndex === idx
                   ? "ring-1 ring-[#D4AF37] opacity-100 scale-100"
                   : "ring-0 opacity-50 hover:opacity-80 hover:scale-[1.02]"
@@ -87,15 +87,15 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
 
       {/* ── MAIN IMAGE ── */}
       <div 
-        className="relative w-full lg:flex-1 aspect-4/5 bg-white overflow-hidden cursor-crosshair group/image"
+        className="relative w-full lg:flex-1 aspect-[4/5] bg-white overflow-hidden cursor-crosshair group/image"
         onClick={() => setIsZoomed(!isZoomed)}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setIsZoomed(false)}
       >
         {/* Gold corner accent */}
         <div className="absolute top-0 left-0 z-30 pointer-events-none">
-          <div className="w-[60px] h-px bg-linear-to-r from-[#D4AF37] to-transparent" />
-          <div className="w-px h-[40px] bg-linear-to-b from-[#D4AF37] to-transparent ml-0" />
+          <div className="w-[60px] h-[1px] bg-gradient-to-r from-[#D4AF37] to-transparent" />
+          <div className="w-[1px] h-[40px] bg-gradient-to-b from-[#D4AF37] to-transparent ml-0" />
         </div>
 
         {/* Arrows */}
@@ -103,7 +103,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
           <>
             <button
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-xs shadow-xs opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[-4px] group-hover/image:translate-x-0"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[-4px] group-hover/image:translate-x-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -111,7 +111,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-xs shadow-xs opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[4px] group-hover/image:translate-x-0"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm shadow-sm opacity-0 md:opacity-0 group-hover/image:opacity-100 transition-all duration-300 hover:bg-white hover:shadow-md translate-x-[4px] group-hover/image:translate-x-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-[#101010]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -152,7 +152,7 @@ const ImageGallery = ({ images, productTitle, layoutId }: ImageGalleryProps) => 
         {/* Zoom hint */}
         {!isZoomed && (
           <div className="absolute bottom-4 right-4 opacity-0 group-hover/image:opacity-100 transition-all duration-300 z-20 translate-y-1 group-hover/image:translate-y-0">
-            <div className="flex items-center gap-2 bg-white/90 backdrop-blur-xs px-3 py-2 shadow-xs">
+            <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-2 shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-3.5 h-3.5 text-[#101010]/50">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0010.606 10.606zM10.5 7.5v6m3-3h-6" />
               </svg>

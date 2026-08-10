@@ -88,7 +88,7 @@ const Item: React.FC<AccordionItemProps> = ({
         forceMount={forceMountContent}
         className={clx(
           "overflow-hidden text-sm transition-all",
-          "radix-state-closed:animate-accordion-up radix-state-open:animate-accordion-down"
+          "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
         )}
       >
         <div className="text-brand-gray space-y-3 text-sm leading-relaxed pt-4">

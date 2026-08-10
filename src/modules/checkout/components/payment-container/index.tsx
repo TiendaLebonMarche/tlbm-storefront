@@ -81,7 +81,7 @@ export const StripeCardContainer = ({
       },
     },
     classes: {
-      base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 border border-brand-gray-light rounded-xl appearance-none focus:outline-hidden focus:ring-2 focus:ring-brand-black/20 focus:border-brand-black transition-all duration-300",
+      base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 border border-brand-gray-light rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-brand-black/20 focus:border-brand-black transition-all duration-300",
     },
   }), [])
 

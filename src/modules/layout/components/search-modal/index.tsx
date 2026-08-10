@@ -25,7 +25,7 @@ export default function SearchModal() {
         <>
             <button
                 onClick={openSearch}
-                className="nav-icon hover:text-brand-black relative inline-flex items-center justify-center outline-hidden transition-colors w-12 h-12"
+                className="nav-icon hover:text-brand-black relative inline-flex items-center justify-center outline-none transition-colors w-12 h-12"
                 aria-label="Buscar"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -34,7 +34,7 @@ export default function SearchModal() {
             </button>
 
             <Transition show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-100" onClose={closeSearch}>
+                <Dialog as="div" className="relative z-[100]" onClose={closeSearch}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -44,7 +44,7 @@ export default function SearchModal() {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-white/95 backdrop-blur-xs transition-opacity" />
+                        <div className="fixed inset-0 bg-white/95 backdrop-blur-sm transition-opacity" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -59,7 +59,7 @@ export default function SearchModal() {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <DialogPanel className="relative transform overflow-hidden text-center transition-all sm:w-full sm:max-w-4xl p-6">
-                                    <button onClick={closeSearch} className="absolute right-0 top-0 text-4xl text-brand-gray hover:text-black outline-hidden">&times;</button>
+                                    <button onClick={closeSearch} className="absolute right-0 top-0 text-4xl text-brand-gray hover:text-black outline-none">&times;</button>
                                     <p className="text-sm font-bold uppercase tracking-[0.2em] mb-4 text-brand-black">¿Qué estás buscando?</p>
 
                                     <form 
@@ -72,7 +72,7 @@ export default function SearchModal() {
                                             type="search"
                                             aria-label="Buscar productos"
                                             placeholder="Escribe aquí..."
-                                            className="w-full text-3xl md:text-5xl font-serif text-center border-b-2 border-brand-black bg-transparent py-4 focus:outline-hidden placeholder-gray-300"
+                                            className="w-full text-3xl md:text-5xl font-serif text-center border-b-2 border-brand-black bg-transparent py-4 focus:outline-none placeholder-gray-300"
                                             value={query}
                                             onChange={(e) => setQuery(e.target.value)}
                                             autoFocus

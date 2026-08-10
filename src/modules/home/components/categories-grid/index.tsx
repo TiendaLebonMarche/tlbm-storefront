@@ -56,7 +56,7 @@ const categories = [
 export default function CategoriesGrid() {
   return (
     <section className="bg-white dark:bg-[#0A0A0F] py-16 lg:py-24">
-      <div className="max-w-360 mx-auto px-6 lg:px-10">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-12 reveal">
           <div>
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
@@ -65,7 +65,7 @@ export default function CategoriesGrid() {
             </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
               Explora por{" "}
-              <span className="bg-linear-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 Secciones
               </span>
             </h2>
@@ -83,7 +83,7 @@ export default function CategoriesGrid() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((cat, i) => (
-            <LocalizedClientLink key={i} href="/store" className={`cat-item p-8 flex flex-col justify-end reveal r-d${i + 1} bg-linear-to-b ${cat.gradient}`}>
+            <LocalizedClientLink key={i} href="/store" className={`cat-item p-8 flex flex-col justify-end reveal r-d${i + 1} bg-gradient-to-b ${cat.gradient}`}>
               <div
                 className="mb-4 w-12 h-12 rounded-xl flex items-center justify-center"
                 style={{

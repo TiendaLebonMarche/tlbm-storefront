@@ -36,15 +36,15 @@ export default function AnimatedTestimonialsSection() {
   return (
     <section className="relative py-20 md:py-24 bg-white dark:bg-[#0A0A0F]">
       <div className="glow-line absolute top-0 left-0 right-0" />
-      <div className="max-w-360 mx-auto px-6 lg:px-10">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="text-center max-w-2xl mx-auto mb-14 reveal">
           <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
             <span className="w-8 h-px bg-[#D4AF37]/30" />
             Clientes
           </div>
-          <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-tighter font-serif font-bold mb-6 text-gray-900 dark:text-white">
+          <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold mb-6 text-gray-900 dark:text-white">
             Lo que dicen{" "}
-            <span className="bg-linear-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
               nuestros clientes
             </span>
           </h2>

@@ -27,10 +27,10 @@ export default async function ProductRail({
   }
 
   return (
-    <div className="max-w-380 mx-auto px-6 md:px-12 py-12">
+    <div className="max-w-[95rem] mx-auto px-6 md:px-12 py-12">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-serif mb-3 capitalize">{collection.title}</h2>
-        <div className="w-24 h-px bg-brand-black mx-auto"></div>
+        <div className="w-24 h-[1px] bg-brand-black mx-auto"></div>
         <div className="mt-6">
           <InteractiveLink href={`/collections/${collection.handle}`}>
             Ver Colección Exclusiva

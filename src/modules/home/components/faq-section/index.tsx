@@ -15,7 +15,7 @@ export default function FaqSection() {
       aria-label="Preguntas frecuentes"
     >
       <div className="glow-line absolute top-0 left-0 right-0" />
-      <div className="max-w-380 mx-auto px-6 lg:px-10">
+      <div className="max-w-[95rem] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
           {/* ── Columna izquierda: heading editorial + proof + CTA (sticky) ── */}
           <div className="lg:sticky lg:top-28">
@@ -23,9 +23,9 @@ export default function FaqSection() {
               <span className="w-8 h-px bg-[#D4AF37]/30" />
               Ayuda
             </div>
-            <h2 className="text-[42px] md:text-[56px] xl:text-[64px] leading-[0.95] tracking-tighter font-serif font-bold text-gray-900 dark:text-white">
+            <h2 className="text-[42px] md:text-[56px] xl:text-[64px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-gray-900 dark:text-white">
               Preguntas{" "}
-              <span className="bg-linear-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 frecuentes
               </span>
             </h2>
@@ -71,7 +71,7 @@ export default function FaqSection() {
               >
                 <summary className="flex items-center justify-between gap-4 px-6 md:px-8 py-5 md:py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center gap-4">
-                    <span className="hidden md:inline text-[#D4AF37]/60 text-[10px] font-bold tracking-widest w-6 shrink-0">
+                    <span className="hidden md:inline text-[#D4AF37]/60 text-[10px] font-bold tracking-widest w-6 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="font-serif text-base md:text-lg font-semibold text-gray-900 dark:text-white">
@@ -79,7 +79,7 @@ export default function FaqSection() {
                     </span>
                   </span>
                   <svg
-                    className="w-5 h-5 text-[#D4AF37] shrink-0 transition-transform duration-300 group-open:rotate-45"
+                    className="w-5 h-5 text-[#D4AF37] flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

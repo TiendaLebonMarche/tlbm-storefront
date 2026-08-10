@@ -246,7 +246,7 @@ export default function ProductActions({
               isAdding ||
               !isValidVariant
             }
-            className={`w-full h-14 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden group/btn rounded-xs ${
+            className={`w-full h-14 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden group/btn rounded-sm ${
               addedSuccess
                 ? 'bg-black text-white'
                 : !inStock || !selectedVariant || !isValidVariant

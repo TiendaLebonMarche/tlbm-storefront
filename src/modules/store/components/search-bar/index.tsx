@@ -51,7 +51,7 @@ const SearchBar = () => {
             setSearchValue(e.target.value)
             setIsSearching(true)
           }}
-          className="w-full px-0 py-4 border-b border-brand-gray-light bg-transparent text-brand-black placeholder-gray-300 outline-hidden focus:border-brand-black transition-all font-light text-sm tracking-wide"
+          className="w-full px-0 py-4 border-b border-brand-gray-light bg-transparent text-brand-black placeholder-gray-300 outline-none focus:border-brand-black transition-all font-light text-sm tracking-wide"
         />
 
         {/* Icono de búsqueda - Minimalista */}

@@ -10,7 +10,7 @@ export default function BrandStatement() {
         background: "radial-gradient(ellipse at 30% 50%,rgba(212,175,55,.03) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(200,145,46,.02) 0%,transparent 50%)",
       }} />
 
-      <div className="relative z-10 max-w-360 mx-auto px-6 lg:px-10">
+      <div className="relative z-10 max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="reveal">
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.35em] mb-6">
@@ -19,7 +19,7 @@ export default function BrandStatement() {
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[.9] mb-6 text-gray-900 dark:text-white">
               Tecnología que<br />
-              <span className="bg-linear-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                 Inspira
               </span>
             </h2>
@@ -60,7 +60,7 @@ export default function BrandStatement() {
                 }}
               >
                 <span className="text-[#D4AF37]/60 text-[9px] font-bold uppercase tracking-[.4em] mb-1">Hasta</span>
-                <span className="text-6xl md:text-7xl font-bold bg-linear-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+                <span className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
                   40%
                 </span>
                 <span className="text-gray-400 dark:text-white/30 text-[9px] font-bold uppercase tracking-[.3em] mt-1">OFF</span>

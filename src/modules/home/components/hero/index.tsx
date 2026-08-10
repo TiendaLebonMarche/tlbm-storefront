@@ -182,14 +182,14 @@ function SlideMedia({
 function ScrollHeader({ visible, menuSlot, cartSlot }: { visible: boolean; menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-90 transition-all duration-500
+      className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
         ${
           visible
             ? "translate-y-0 opacity-100 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.06)]"
             : "-translate-y-full opacity-0 pointer-events-none"
         }`}
     >
-      <div className="max-w-380 mx-auto px-4 md:px-10 lg:px-14">
+      <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
         <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
           {/* Hamburger — MISMO drawer SideMenu que todas las páginas (regla 10-ago) */}
           <div className="flex-none">{menuSlot}</div>
@@ -228,7 +228,7 @@ function HeroOverlay({ visible, menuSlot, cartSlot }: { visible: boolean; menuSl
         visible ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
-      <div className="max-w-380 mx-auto px-4 md:px-10 lg:px-14">
+      <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
         <div className="flex items-center justify-between h-[60px] md:h-[72px]">
           {/* Hamburger blanca (sobre hero oscuro) — MISMO drawer SideMenu que todas las páginas */}
           <div className="flex-none text-white">{menuSlot}</div>
@@ -318,7 +318,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
 
       {/* ── HERO SLIDER ── */}
       <section
-        className="relative w-full min-h-dvh max-h-[700px] overflow-hidden bg-black"
+        className="relative w-full min-h-[100dvh] max-h-[700px] overflow-hidden bg-black"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -338,9 +338,9 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
 
             {/* Gradient overlays */}
             <div
-              className={`absolute inset-0 bg-linear-to-r ${currentSlide.overlayFrom} ${currentSlide.overlayTo}`}
+              className={`absolute inset-0 bg-gradient-to-r ${currentSlide.overlayFrom} ${currentSlide.overlayTo}`}
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
           </motion.div>
         </AnimatePresence>
 
@@ -365,14 +365,14 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                 variants={textVariants}
                 className="inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase text-[#D4AF37] mb-3 md:mb-4"
               >
-                <span className="block w-8 h-px bg-[#D4AF37]" />
+                <span className="block w-8 h-[1px] bg-[#D4AF37]" />
                 {currentSlide.label}
               </motion.span>
 
               <motion.h1
                 custom={1}
                 variants={textVariants}
-                className="font-serif font-semibold text-white whitespace-pre-line text-[2.05rem] min-[375px]:text-[2.2rem] sm:text-[2.7rem] md:text-[3.1rem] lg:text-[3.9rem] large:text-[4.5rem] 2xlarge:text-[5rem] leading-[1.08] md:leading-[1.06] lg:leading-[1.03] large:leading-[1.01] 2xlarge:leading-none tracking-[-0.008em] sm:tracking-[-0.01em] lg:tracking-[-0.012em] large:tracking-[-0.015em] text-balance max-w-[18ch] lg:max-w-[20ch]"
+                className="font-serif font-semibold text-white whitespace-pre-line text-[2.05rem] min-[375px]:text-[2.2rem] sm:text-[2.7rem] md:text-[3.1rem] lg:text-[3.9rem] min-[1440px]:text-[4.5rem] min-[1920px]:text-[5rem] leading-[1.08] md:leading-[1.06] lg:leading-[1.03] min-[1440px]:leading-[1.01] min-[1920px]:leading-[1] tracking-[-0.008em] sm:tracking-[-0.01em] lg:tracking-[-0.012em] min-[1440px]:tracking-[-0.015em] text-balance max-w-[18ch] lg:max-w-[20ch]"
               >
                 {currentSlide.highlight && currentSlide.title.includes(currentSlide.highlight)
                   ? (() => {
@@ -411,7 +411,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/10 to-transparent" />
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 </LocalizedClientLink>
               </motion.div>
             </motion.div>
@@ -421,7 +421,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         {/* ── ARROWS ── */}
         <button
           onClick={prev}
-          className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-xs border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
+          className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
           aria-label="Anterior"
         >
           <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -430,7 +430,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         </button>
         <button
           onClick={next}
-          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-xs border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
+          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
           aria-label="Siguiente"
         >
           <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

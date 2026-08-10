@@ -22,13 +22,13 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
       <Table>
         <Table.Header className="border-t-0">
           <Table.Row className="text-brand-black uppercase tracking-[0.2em] text-[10px] font-bold">
-            <Table.HeaderCell className="pl-0!">Producto</Table.HeaderCell>
+            <Table.HeaderCell className="!pl-0">Producto</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell>Cantidad</Table.HeaderCell>
             <Table.HeaderCell className="hidden small:table-cell">
               Precio
             </Table.HeaderCell>
-            <Table.HeaderCell className="pr-0! text-right">
+            <Table.HeaderCell className="!pr-0 text-right">
               Total
             </Table.HeaderCell>
           </Table.Row>

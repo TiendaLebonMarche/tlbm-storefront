@@ -100,7 +100,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
             </div>
 
             <div className={clx("grid grid-cols-2 w-full gap-x-3", {
-              "grid-cols-1!": isSimple
+              "!grid-cols-1": isSimple
             })}>
               {!isSimple && (
                 <button
@@ -149,7 +149,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
         </Transition>
       </div>
       <Transition appear show={state} as={Fragment}>
-        <Dialog as="div" className="relative z-150" onClose={close}>
+        <Dialog as="div" className="relative z-[150]" onClose={close}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

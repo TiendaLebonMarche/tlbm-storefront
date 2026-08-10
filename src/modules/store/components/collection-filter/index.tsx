@@ -56,7 +56,7 @@ export default function CollectionFilter({
       </div>
 
       {/* Tabs: texto + línea dorada desde el centro */}
-      <div className="flex items-center justify-start md:justify-center gap-x-7 gap-y-2 w-full overflow-x-auto pb-2 md:flex-wrap md:overflow-visible md:pb-0 scrollbar-none [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden">
+      <div className="flex items-center justify-start md:justify-center gap-x-7 gap-y-2 w-full overflow-x-auto pb-2 md:flex-wrap md:overflow-visible md:pb-0 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* "Todo" — limpia el filtro */}
         <button
           onClick={() => handleClick(null)}

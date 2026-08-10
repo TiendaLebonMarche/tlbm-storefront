@@ -19,7 +19,7 @@ const CartButtonClient = ({ cart }: { cart?: HttpTypes.StoreCart | null }) => {
   return (
     <button
       onClick={openCart}
-      className="nav-icon text-inherit hover:text-brand-black relative inline-flex items-center justify-center outline-hidden transition-colors w-12 h-12"
+      className="nav-icon text-inherit hover:text-brand-black relative inline-flex items-center justify-center outline-none transition-colors w-12 h-12"
       data-testid="nav-cart-link"
       aria-label="Abrir bolsa de compras"
     >

@@ -35,7 +35,7 @@ const NewsletterSection = async ({ searchParams }: Props) => {
               aria-label="Correo electrónico para suscripción"
               placeholder="Tu correo electrónico"
               required
-              className="flex-1 rounded-full px-8 py-4 bg-white border border-brand-gray-light placeholder-gray-400 text-sm outline-hidden focus:ring-2 focus:ring-brand-black transition-all shadow-xs"
+              className="flex-1 rounded-full px-8 py-4 bg-white border border-brand-gray-light placeholder-gray-400 text-sm outline-none focus:ring-2 focus:ring-brand-black transition-all shadow-sm"
             />
             <button
               type="submit"

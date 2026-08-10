@@ -36,7 +36,7 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
               <label className="flex items-start gap-3 cursor-pointer group">
                 <input
                   type="checkbox"
-                  className="mt-0.5 h-4 w-4 rounded-sm border-brand-gray-light text-brand-black focus:ring-brand-black/30"
+                  className="mt-0.5 h-4 w-4 rounded border-brand-gray-light text-brand-black focus:ring-brand-black/30"
                   data-testid="terms-checkbox"
                   checked={termsAccepted}
                   onChange={(e) => setTermsAccepted(e.target.checked)}

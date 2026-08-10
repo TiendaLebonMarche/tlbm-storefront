@@ -168,7 +168,7 @@ const CartDrawer = ({ cart: cartProp }: { cart?: HttpTypes.StoreCart | null }) =
         leaveTo="opacity-0"
       >
         <div
-          className="fixed inset-0 bg-black/60 z-900 cursor-pointer"
+          className="fixed inset-0 bg-black/60 z-[900] cursor-pointer"
           aria-label="Cerrar bolsa"
           tabIndex={0}
           onClick={close}
@@ -195,7 +195,7 @@ const CartDrawer = ({ cart: cartProp }: { cart?: HttpTypes.StoreCart | null }) =
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="fixed top-0 right-0 h-screen w-[calc(100vw-48px)] sm:w-[420px] max-w-[100vw] bg-white shadow-2xl flex flex-col z-950 overflow-hidden"
+          className="fixed top-0 right-0 h-screen w-[calc(100vw-48px)] sm:w-[420px] max-w-[100vw] bg-white shadow-2xl flex flex-col z-[950] overflow-hidden"
           data-testid="nav-cart-dropdown"
           aria-modal="true"
           role="dialog"
@@ -229,7 +229,7 @@ const CartDrawer = ({ cart: cartProp }: { cart?: HttpTypes.StoreCart | null }) =
                       <div className="flex gap-3 sm:gap-4 items-center flex-1 min-w-0">
                         <LocalizedClientLink
                           href={`/productos/${item.product_handle}`}
-                          className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-md overflow-hidden bg-brand-gray-light/30"
+                          className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-md overflow-hidden bg-brand-gray-light/30"
                         >
                           {item.thumbnail ? (
                             // eslint-disable-next-line @next/next/no-img-element
@@ -265,7 +265,7 @@ const CartDrawer = ({ cart: cartProp }: { cart?: HttpTypes.StoreCart | null }) =
                       </div>
                       <DeleteButton
                         id={item.id}
-                        className="text-red-300 hover:text-red-500 bg-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity shrink-0"
+                        className="text-red-300 hover:text-red-500 bg-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity flex-shrink-0"
                       />
                     </div>
                   ))}

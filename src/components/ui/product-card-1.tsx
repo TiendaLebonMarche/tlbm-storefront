@@ -92,7 +92,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-2 right-2 rounded-full hover:bg-white/80 backdrop-blur-sm"
+                className="absolute top-2 right-2 rounded-full hover:bg-white/80 backdrop-blur"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsWishlisted(!isWishlisted);
@@ -122,7 +122,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
             </LocalizedClientLink>
             
             <div className="flex items-center gap-3 text-sm text-brand-gray mt-1">
-              <div className="bg-brand-black text-white px-2 py-0.5 rounded-sm flex items-center gap-1">
+              <div className="bg-brand-black text-white px-2 py-0.5 rounded flex items-center gap-1">
                 <span className="font-medium text-xs">{rating.toFixed(1)}</span>
                 <Star className="h-3 w-3 fill-white" />
               </div>
