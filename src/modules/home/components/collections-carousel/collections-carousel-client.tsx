@@ -4,9 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CollectionCard } from "."
 
-// Marquee CONTINUO (10-ago-2026 v2): movimiento izquierda→derecha suave y pulcro,
+// Marquee CONTINUO (10-ago-2026 v3): movimiento DERECHA→izquierda suave y pulcro,
 // la siguiente tarjeta entra por la derecha. Loop SEAMLESS: 2 copias; al completar
 // la copia A se reinicia a 0 (posición idéntica → el salto última→primera NO se nota).
+// translateX NEGATIVO: el track fluye hacia la izquierda, el viewport SIEMPRE está
+// lleno (el contenido viene de la derecha). Con translateX positivo el borde izquierdo
+// del viewport se vaciaba a 32px/s — el "espacio en blanco al moverse" (bug #449).
 // Tarjetas GRANDES y SIN zoom por frame (el reescalado constante era lo "pesado").
 const SPEED_PX_S = 32
 const RESUME_AFTER_MANUAL_MS = 3500
@@ -32,7 +35,7 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
     return () => mq.removeEventListener("change", onChange)
   }, [])
 
-  // Bucle continuo rAF: offset crece 0 → halfWidth (final copia A = inicio copia B);
+  // Bucle continuo rAF: offset crece 0 → halfW (final copia A = inicio copia B);
   // al llegar reinicia a 0 → salto INVISIBLE. Sin lectura de layout por frame.
   useEffect(() => {
     if (reducedMotion) return
@@ -42,11 +45,25 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
     let halfW = 0
 
     const ensureMetrics = () => {
+      // halfW = pitch REAL de una copia (padding + gap incluidos) = offsetLeft de la
+      // primera tarjeta de la copia B. scrollWidth/2 NO coincide con el pitch (el
+      // padding lateral 32px + gap entre copias desalinean el reinicio ~24px).
       if (halfW > 0) return
+      const firstB = track.children[cards.length] as HTMLElement | undefined
+      if (firstB) {
+        halfW = firstB.offsetLeft - (track.offsetLeft || 0)
+        if (halfW > 0) return
+      }
       const w = track.scrollWidth
       if (w <= 0) return
       halfW = w / 2
     }
+
+    // Re-medir si cambia el viewport (clamp(280px,24vw,340px) varía con el ancho)
+    const onResize = () => {
+      halfW = 0
+    }
+    window.addEventListener("resize", onResize)
 
     const frame = (ts: number) => {
       if (!pausedRef.current) {
@@ -59,9 +76,10 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
             offsetRef.current -= halfW
           }
           if (halfW > 0) {
-            // translateX POSITIVO → el track fluye hacia la DERECHA
-            // (las tarjetas entran por la izquierda y salen por la derecha)
-            track.style.transform = `translateX(${offsetRef.current}px)`
+            // translateX NEGATIVO → el track fluye hacia la IZQUIERDA
+            // (las tarjetas entran por la derecha y salen por la izquierda;
+            // el viewport nunca se vacía — sin huecos blancos)
+            track.style.transform = `translateX(${-offsetRef.current}px)`
           }
         }
       }
@@ -69,8 +87,11 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
       rafRef.current = requestAnimationFrame(frame)
     }
     rafRef.current = requestAnimationFrame(frame)
-    return () => cancelAnimationFrame(rafRef.current)
-  }, [reducedMotion])
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener("resize", onResize)
+    }
+  }, [reducedMotion, cards.length])
 
   const pause = useCallback(() => {
     pausedRef.current = true
@@ -108,7 +129,8 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
       const track = trackRef.current
       if (!track) return
       const card = track.querySelector<HTMLElement>("[data-cat-card]")
-      const stepPx = card ? card.offsetWidth + 16 : 356
+      const gap = parseFloat(getComputedStyle(track).gap) || 16
+      const stepPx = card ? card.offsetWidth + gap : 356
       setOffset(offsetRef.current + dir * stepPx)
       pauseTemporarily()
     },
@@ -133,8 +155,8 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
       const track = trackRef.current
       if (track) {
         track.style.transition = "none"
-        // Acompañar al dedo: arrastrar a la derecha mueve el track a la derecha
-        track.style.transform = `translateX(${offsetRef.current + dx}px)`
+        // Acompañar al dedo: arrastrar a la izquierda (dx<0) adelanta el flujo
+        track.style.transform = `translateX(${-offsetRef.current + dx}px)`
       }
     }
   }, [])
@@ -149,10 +171,11 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
         const track = trackRef.current
         if (track) {
           const card = track.querySelector<HTMLElement>("[data-cat-card]")
-          const stepPx = card ? card.offsetWidth + 16 : 356
-          // Flujo derecha: arrastrar a la derecha (dx>0) = siguiente tarjeta
-          const dir = dx < 0 ? -1 : 1
-          setOffset(offsetRef.current + dx + dir * stepPx * 0.5)
+          const gap = parseFloat(getComputedStyle(track).gap) || 16
+          const stepPx = card ? card.offsetWidth + gap : 356
+          // Flujo izquierda: arrastrar a la izquierda (dx<0) = siguiente tarjeta
+          const dir = dx < 0 ? 1 : -1
+          setOffset(offsetRef.current + dir * stepPx)
         }
         pauseTemporarily(1500)
       } else {
