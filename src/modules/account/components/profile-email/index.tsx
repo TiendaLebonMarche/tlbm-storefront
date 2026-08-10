@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useEffect, useActionState } from "react";
+import React, { useActionState } from "react";
+
+import useSyncedState from "@lib/hooks/use-synced-state"
 
 import Input from "@modules/common/components/input"
 
@@ -13,7 +15,6 @@ type MyInformationProps = {
 }
 
 const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
-  const [successState, setSuccessState] = React.useState(false)
 
   // TODO: It seems we don't support updating emails now?
   const updateCustomerEmail = (
@@ -37,13 +38,13 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
     success: false,
   })
 
+  // successState refleja state.success (useSyncedState: ajuste en render, no en
+  // effect — React 19) y se puede limpiar con clearState al editar de nuevo.
+  const [successState, setSuccessState] = useSyncedState(state.success)
+
   const clearState = () => {
     setSuccessState(false)
   }
-
-  useEffect(() => {
-    setSuccessState(state.success)
-  }, [state])
 
   return (
     <form action={formAction} className="w-full">

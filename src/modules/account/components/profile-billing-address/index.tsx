@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useEffect, useMemo, useActionState } from "react"
+import React, { useMemo, useActionState } from "react"
 
+import useSyncedState from "@lib/hooks/use-synced-state"
 import Input from "@modules/common/components/input"
 import NativeSelect from "@modules/common/components/native-select"
 
@@ -31,8 +32,6 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
     )
   }, [regions])
 
-  const [successState, setSuccessState] = React.useState(false)
-
   const billingAddress = customer.addresses?.find(
     (addr) => addr.is_default_billing
   )
@@ -53,13 +52,13 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
     initialState
   )
 
+  // successState refleja state.success (useSyncedState: ajuste en render, no en
+  // effect — React 19) y se puede limpiar con clearState al editar de nuevo.
+  const [successState, setSuccessState] = useSyncedState(state.success)
+
   const clearState = () => {
     setSuccessState(false)
   }
-
-  useEffect(() => {
-    setSuccessState(state.success)
-  }, [state])
 
   const currentInfo = useMemo(() => {
     if (!billingAddress) {

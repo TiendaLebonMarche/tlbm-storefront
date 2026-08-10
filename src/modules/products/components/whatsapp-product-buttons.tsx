@@ -1,18 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { trackWhatsAppClick } from "@lib/util/analytics"
 import { usePathname } from "next/navigation"
 
 const WHATSAPP_NUMBER = "573027567783"
 
+// Lazy initializer (client-only): URL actual al montar — en vez de setState en
+// effect (React 19 react-hooks/set-state-in-effect). Guard para SSR (window no
+// existe en el primer render del server).
+const useCurrentUrl = () =>
+  useState(() => (typeof window !== "undefined" ? window.location.href : ""))
+
 export const WhatsAppHelpButton = () => {
   const pathname = usePathname()
-  const [url, setUrl] = useState("")
-
-  useEffect(() => {
-    setUrl(window.location.href)
-  }, [])
+  const [url] = useCurrentUrl()
 
   const text = encodeURIComponent(
     `Hola, estaba viendo este producto en Tienda Le Bon Marché y tengo una consulta:\n${url || `https://tiendalebonmarche.com${pathname}`}`
@@ -42,11 +44,7 @@ export const WhatsAppHelpButton = () => {
 
 export const WhatsAppCTABuy = () => {
   const pathname = usePathname()
-  const [url, setUrl] = useState("")
-
-  useEffect(() => {
-    setUrl(window.location.href)
-  }, [])
+  const [url] = useCurrentUrl()
 
   const text = encodeURIComponent(
     `Hola, quiero comprar este producto de Tienda Le Bon Marché pero prefiero pagar por transferencia/efectivo:\n${url || `https://tiendalebonmarche.com${pathname}`}`

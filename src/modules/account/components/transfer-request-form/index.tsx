@@ -5,22 +5,20 @@ import { createTransferRequest } from "@lib/data/orders"
 import { Text, Heading, Input, Button, IconButton, Toaster } from "@medusajs/ui"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { CheckCircleMiniSolid, XCircleSolid } from "@medusajs/icons"
-import { useEffect, useState } from "react"
+import useSyncedState from "@lib/hooks/use-synced-state"
 
 export default function TransferRequestForm() {
-  const [showSuccess, setShowSuccess] = useState(false)
-
   const [state, formAction] = useActionState(createTransferRequest, {
     success: false,
     error: null,
     order: null,
   })
 
-  useEffect(() => {
-    if (state.success && state.order) {
-      setShowSuccess(true)
-    }
-  }, [state.success, state.order])
+  // showSuccess refleja el resultado de la acción (useSyncedState: ajuste en
+  // render, no en effect — React 19) y se puede cerrar con la X (reset local).
+  const [showSuccess, setShowSuccess] = useSyncedState(
+    !!(state.success && state.order)
+  )
 
   return (
     <div className="flex flex-col gap-y-4 w-full">

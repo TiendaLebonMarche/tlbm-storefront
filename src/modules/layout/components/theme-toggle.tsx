@@ -3,13 +3,11 @@
 import { useEffect, useState } from "react"
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false)
-
-  useEffect(() => {
-    // Check initial state — persistido por el script inline del layout
-    const isDark = document.documentElement.classList.contains("dark")
-    setDark(isDark)
-  }, [])
+  const [dark, setDark] = useState(
+    // Lazy initializer: leer el estado inicial del DOM una sola vez (patrón
+    // correcto en vez de setState en effect — React 19 react-hooks/set-state-in-effect)
+    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
+  )
 
   const toggle = () => {
     const next = !document.documentElement.classList.contains("dark")

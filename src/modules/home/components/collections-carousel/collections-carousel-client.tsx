@@ -24,12 +24,17 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
   const lastTsRef = useRef(0)
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pointerRef = useRef<{ x: number; y: number; moved: boolean } | null>(null)
-  const [reducedMotion, setReducedMotion] = useState(false)
+  // Lazy initializer: leer prefers-reduced-motion una sola vez al montar (en
+  // vez de setState en effect — React 19). Guard SSR (window no existe en server).
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
 
-  // Respetar prefers-reduced-motion (WCAG): sin movimiento automático
+  // Escuchar cambios de prefers-reduced-motion (WCAG): sin movimiento automático
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReducedMotion(mq.matches)
     const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
     mq.addEventListener("change", onChange)
     return () => mq.removeEventListener("change", onChange)

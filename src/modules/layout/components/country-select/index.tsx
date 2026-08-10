@@ -50,12 +50,17 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
       .sort((a, b) => (a?.label ?? "").localeCompare(b?.label ?? ""))
   }, [regions])
 
-  useEffect(() => {
+  // Sincronizar current con countryCode/options como AJUSTE en render con guard
+  // (patrón oficial de React — en vez de setState en effect).
+  const syncKey = `${countryCode ?? "none"}|${options?.length ?? 0}`
+  const [prevSyncKey, setPrevSyncKey] = useState(syncKey)
+  if (prevSyncKey !== syncKey) {
+    setPrevSyncKey(syncKey)
     if (countryCode) {
       const option = options?.find((o) => o?.country === countryCode)
       setCurrent(option)
     }
-  }, [options, countryCode])
+  }
 
   const handleChange = (option: CountryOption) => {
     updateRegion(option.country, currentPath)

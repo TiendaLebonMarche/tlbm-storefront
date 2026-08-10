@@ -8,7 +8,7 @@ import { Button, clx } from "@medusajs/ui"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import MedusaRadio from "@modules/common/components/radio"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 
 const Payment = ({
   cart,
@@ -32,6 +32,14 @@ const Payment = ({
   const router = useRouter()
   const pathname = usePathname()
   const isOpen = searchParams.get("step") === "payment"
+
+  // Reset del error al abrir el paso: ajuste en render con guard (patrón oficial
+  // de React — en vez de setState en effect).
+  const [prevOpen, setPrevOpen] = useState(isOpen)
+  if (prevOpen !== isOpen) {
+    setPrevOpen(isOpen)
+    if (isOpen) setError(null)
+  }
 
   const setPaymentMethod = async (method: string) => {
     setError(null)
@@ -80,8 +88,6 @@ const Payment = ({
       setIsLoading(false)
     }
   }
-
-  useEffect(() => setError(null), [isOpen])
 
   return (
     <div className="bg-white checkout-step">

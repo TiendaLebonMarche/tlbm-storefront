@@ -8,7 +8,11 @@ import { useState, useEffect } from "react"
  * @returns boolean - True if scrolled past threshold
  */
 export const useScrollThreshold = (threshold: number = 100) => {
-    const [isScrolled, setIsScrolled] = useState(false)
+    // Lazy initializer: check inicial del scroll una sola vez (en vez de
+    // setState en effect — React 19). Guard SSR (window no existe en server).
+    const [isScrolled, setIsScrolled] = useState(
+        () => typeof window !== "undefined" && window.scrollY > threshold
+    )
 
     useEffect(() => {
         let ticking = false
@@ -22,9 +26,6 @@ export const useScrollThreshold = (threshold: number = 100) => {
                 ticking = true
             }
         }
-
-        // Initial check
-        setIsScrolled(window.scrollY > threshold)
 
         window.addEventListener("scroll", handleScroll, { passive: true })
         return () => window.removeEventListener("scroll", handleScroll)

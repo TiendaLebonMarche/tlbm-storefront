@@ -17,20 +17,35 @@ const Shipping: React.FC<{
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
 }> = ({ cart, availableShippingMethods }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [isLoadingPrices, setIsLoadingPrices] = useState(true)
   const [calculatedPricesMap, setCalculatedPricesMap] = useState<Record<string, number>>({})
   const [error, setError] = useState<string | null>(null)
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart.shipping_methods?.at(-1)?.shipping_option_id || null
   )
 
+  // Loading DERIVADO: hay métodos calculados cuyo precio aún no está en el mapa.
+  // (en vez de setIsLoadingPrices(true) síncrono en el effect — React 19)
+  const isLoadingPrices =
+    availableShippingMethods?.some(
+      (sm) =>
+        sm.price_type === "calculated" &&
+        typeof calculatedPricesMap[sm.id] !== "number"
+    ) ?? false
+
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
   const isOpen = searchParams.get("step") === "delivery"
 
+  // Reset del error al abrir el paso: ajuste en render con guard (patrón oficial
+  // de React — en vez de setState en effect).
+  const [prevOpen, setPrevOpen] = useState(isOpen)
+  if (prevOpen !== isOpen) {
+    setPrevOpen(isOpen)
+    if (isOpen) setError(null)
+  }
+
   useEffect(() => {
-    setIsLoadingPrices(true)
     if (availableShippingMethods?.length) {
       const promises = availableShippingMethods
         .filter((sm) => sm.price_type === "calculated")
@@ -42,10 +57,7 @@ const Shipping: React.FC<{
             .filter((r) => r.status === "fulfilled")
             .forEach((p) => (pricesMap[(p as any).value?.id || ""] = (p as any).value?.amount!))
           setCalculatedPricesMap(pricesMap)
-          setIsLoadingPrices(false)
         })
-      } else {
-        setIsLoadingPrices(false)
       }
     }
   }, [availableShippingMethods, cart.id])
@@ -65,8 +77,6 @@ const Shipping: React.FC<{
       })
       .finally(() => setIsLoading(false))
   }
-
-  useEffect(() => setError(null), [isOpen])
 
   return (
     <div className="bg-white checkout-step">

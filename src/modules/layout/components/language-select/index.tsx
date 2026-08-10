@@ -93,7 +93,12 @@ const LanguageSelect = ({
     return [DEFAULT_OPTION, ...localeOptions]
   }, [locales, currentLocale])
 
-  useEffect(() => {
+  // Sincronizar current con currentLocale/options como AJUSTE en render con guard
+  // (patrón oficial de React — en vez de setState en effect).
+  const syncKey = `${currentLocale ?? "none"}|${options.length}`
+  const [prevSyncKey, setPrevSyncKey] = useState(syncKey)
+  if (prevSyncKey !== syncKey) {
+    setPrevSyncKey(syncKey)
     if (currentLocale) {
       const option = options.find(
         (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
@@ -102,7 +107,7 @@ const LanguageSelect = ({
     } else {
       setCurrent(DEFAULT_OPTION)
     }
-  }, [options, currentLocale])
+  }
 
   const handleChange = (option: LanguageOption) => {
     startTransition(async () => {

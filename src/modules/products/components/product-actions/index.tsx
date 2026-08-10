@@ -45,12 +45,16 @@ export default function ProductActions({
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
-  useEffect(() => {
+  // Preseleccionar la única variante: ajuste en render con guard (patrón oficial
+  // de React — en vez de setState en effect).
+  const [prevVariants, setPrevVariants] = useState(product.variants)
+  if (prevVariants !== product.variants) {
+    setPrevVariants(product.variants)
     if (product.variants?.length === 1) {
       const variantOptions = optionsAsKeymap(product.variants[0].options)
       setOptions(variantOptions ?? {})
     }
-  }, [product.variants])
+  }
 
   const selectedVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) {

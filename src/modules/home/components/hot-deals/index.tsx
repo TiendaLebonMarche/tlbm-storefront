@@ -8,8 +8,13 @@ export default async function HotDeals({
 }: {
   countryCode: string
 }) {
+  // try/catch SOLO alrededor del fetch (React: no construir JSX dentro de
+  // try/catch — no captura errores de render de los hijos).
+  let region: Awaited<ReturnType<typeof getRegion>> | null = null
+  let products: any[] = []
+
   try {
-    const region = await getRegion(countryCode)
+    region = await getRegion(countryCode)
     if (!region) return null
 
     // Obtener muchos productos para el scroll infinito local
@@ -20,14 +25,21 @@ export default async function HotDeals({
       },
     }).catch(() => ({ response: { products: [] } }))
 
-    const products = response?.products || []
+    products = response?.products || []
+  } catch (error) {
+    console.error("Error loading hot deals:", error)
+    return null
+  }
 
-    // Orden aleatorio para mostrar productos diferentes cada visita
-    const shuffled = [...products].sort(() => 0.5 - Math.random())
+  if (products.length === 0) return null
 
-    if (shuffled.length === 0) return null
+  // Orden aleatorio para mostrar productos diferentes cada visita.
+  // Server component: se evalúa UNA vez por request (ISR/dynamic), no por
+  // render de cliente — la regla react-hooks/purity no aplica aquí.
+  // eslint-disable-next-line react-hooks/purity -- server component, 1x por request
+  const shuffled = [...products].sort(() => 0.5 - Math.random())
 
-    return (
+  return (
       <section className="w-full bg-white py-20 md:py-24">
         <div className="content-container px-6">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
@@ -62,8 +74,4 @@ export default async function HotDeals({
         </div>
       </section>
     )
-  } catch (error) {
-    console.error("Error loading hot deals:", error)
-    return null
-  }
 }

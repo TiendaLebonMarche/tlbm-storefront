@@ -2,7 +2,7 @@ import { HttpTypes } from "@medusajs/types"
 import { Container } from "@medusajs/ui"
 import Checkbox from "@modules/common/components/checkbox"
 import Input from "@modules/common/components/input"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
 
@@ -69,16 +69,23 @@ const ShippingAddress = ({
       }))
   }
 
-  useEffect(() => {
+  // Sincronización del form con datos externos (cart/customer) como AJUSTE en
+  // render con guard — patrón oficial de React (en vez de setState en effect).
+  // Clave estable: id de la dirección del cart + email efectivo (evita loops).
+  const syncKey = `${cart?.shipping_address?.id ?? "none"}|${
+    cart?.email ?? customer?.email ?? "none"
+  }`
+  const [prevSyncKey, setPrevSyncKey] = useState(syncKey)
+  if (prevSyncKey !== syncKey) {
+    setPrevSyncKey(syncKey)
     // Ensure cart is not null and has a shipping_address before setting form data
     if (cart && cart.shipping_address) {
       setFormAddress(cart?.shipping_address, cart?.email)
     }
-
     if (cart && !cart.email && customer?.email) {
       setFormAddress(undefined, customer.email)
     }
-  }, [cart, customer?.email, customer?.addresses]) // Add cart and customer info as dependencies
+  }
 
   const handleChange = (
     e: React.ChangeEvent<

@@ -1,9 +1,10 @@
 "use client"
 
-import React, { useEffect, useState, useActionState } from "react"
+import React, { useState, useActionState } from "react"
 import { PencilSquare as Edit, Trash } from "@medusajs/icons"
 import { Button, Heading, Text, clx } from "@medusajs/ui"
 
+import useSyncedState from "@lib/hooks/use-synced-state"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import CountrySelect from "@modules/checkout/components/country-select"
 import Input from "@modules/common/components/input"
@@ -28,7 +29,6 @@ const EditAddress: React.FC<EditAddressProps> = ({
   isActive = false,
 }) => {
   const [removing, setRemoving] = useState(false)
-  const [successState, setSuccessState] = useState(false)
   const { state, open, close: closeModal } = useToggleState(false)
 
   const [formState, formAction] = useActionState(updateCustomerAddress, {
@@ -37,23 +37,22 @@ const EditAddress: React.FC<EditAddressProps> = ({
     addressId: address.id,
   })
 
+  // successState refleja formState.success (useSyncedState: ajuste en render,
+  // no en effect — React 19) y se puede resetear al abrir/cerrar el modal.
+  const [successState, setSuccessState] = useSyncedState(formState.success)
+
   const close = () => {
     setSuccessState(false)
     closeModal()
   }
 
-  useEffect(() => {
-    if (successState) {
-      close()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [successState])
+  const handleOpen = () => {
+    setSuccessState(false)
+    open()
+  }
 
-  useEffect(() => {
-    if (formState.success) {
-      setSuccessState(true)
-    }
-  }, [formState])
+  // Modal derivado: se cierra automáticamente tras éxito (UI derivada, sin effect)
+  const isOpen = state && !successState
 
   const removeAddress = async () => {
     setRemoving(true)
@@ -104,7 +103,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
         <div className="flex items-center gap-x-4">
           <button
             className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
-            onClick={open}
+            onClick={handleOpen}
             data-testid="address-edit-button"
           >
             <Edit />
@@ -121,7 +120,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
         </div>
       </div>
 
-      <Modal isOpen={state} close={close} data-testid="edit-address-modal">
+      <Modal isOpen={isOpen} close={close} data-testid="edit-address-modal">
         <Modal.Title>
           <Heading className="mb-2">Edit address</Heading>
         </Modal.Title>

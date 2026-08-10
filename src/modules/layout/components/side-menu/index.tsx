@@ -87,9 +87,13 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
   }, [isSideMenuOpen])
 
   // Al abrir el menú se resetea el acordeón (siempre empieza colapsado)
-  useEffect(() => {
+  // Reset de collectionsOpen al abrir el menú: ajuste en render con guard
+  // (patrón oficial de React — en vez de setState en effect).
+  const [prevMenuOpen, setPrevMenuOpen] = useState(isSideMenuOpen)
+  if (prevMenuOpen !== isSideMenuOpen) {
+    setPrevMenuOpen(isSideMenuOpen)
     if (isSideMenuOpen) setCollectionsOpen(false)
-  }, [isSideMenuOpen])
+  }
 
   // Cierre con clic en cualquier parte fuera del drawer (como la bolsa/cart).
   // Listener global = garantiza el cierre aunque el backdrop falle.
