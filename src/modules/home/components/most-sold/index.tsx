@@ -21,7 +21,8 @@ export default async function MostSoldSection({ countryCode }: { countryCode: st
 
   if (!products || products.length === 0) return null
 
-  // Shuffle and pick 8
+  // Shuffle and pick 8 — Math.random en server component: 1x/request (ISR/dynamic)
+  // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
   const shuffled = [...products].sort(() => 0.5 - Math.random()).slice(0, 10)
 
   const items = shuffled.map((p) => {

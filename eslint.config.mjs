@@ -8,6 +8,7 @@ export default defineConfig([
     "out/**",
     "build/**",
     "node_modules/**",
+    ".yarn/**",
     "**/*.min.js",
   ]),
 ])

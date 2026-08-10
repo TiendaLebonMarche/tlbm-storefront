@@ -44,6 +44,8 @@ export default async function RelatedMostSold({
 
   // Si no hay suficientes relacionados, complementar con el resto del catálogo
   const pool = related.length >= 4 ? related : [...related, ...products.filter((p) => !related.includes(p))]
+  // Math.random en server component: 1x/request (ISR/dynamic)
+  // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
   const shuffled = [...pool].sort(() => 0.5 - Math.random()).slice(0, 10)
 
   const items = shuffled.map((p) => {

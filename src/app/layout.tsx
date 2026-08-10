@@ -4,7 +4,7 @@ import { Metadata } from "next"
 import "styles/globals.css"
 import { SEASON } from "@lib/season"
 import SeasonalDecor from "@modules/common/components/seasonal-decor"
-import GoogleAnalytics from "@modules/common/components/google-analytics"
+import { GoogleTagManager } from "@next/third-parties/google"
 import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
 import WhatsAppFloat from "@modules/layout/components/whatsapp-float"
@@ -132,16 +132,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             __html: `(function(){try{var t=localStorage.getItem("tlbm_theme");if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.setAttribute("data-mode","dark");}}catch(e){}})();`,
           }}
         />
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P7ZD7RQP');`,
-          }}
-        />
+        {/* Google Tag Manager — vía oficial @next/third-parties (GoogleTagManager abajo en el body) */}
 
         {/* Preconnect to optimize asset connection speed (Core Web Vitals) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -194,7 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID || "GTM-P7ZD7RQP"} />
         <StructuredData />
         <UIProvider>
           <LayoutClient />

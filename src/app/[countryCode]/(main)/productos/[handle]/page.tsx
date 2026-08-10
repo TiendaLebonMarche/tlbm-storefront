@@ -243,7 +243,10 @@ export default async function ProductPage(props: Props) {
       // fecha real de publicación del producto (created_at de Medusa) con ISO 8601 + timezone
       "validFrom": (pricedProduct.created_at
         ? new Date(pricedProduct.created_at).toISOString()
+        // Date.now en server component: se evalúa UNA vez por request (ISR/dynamic)
+        // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
         : new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString()),
+      // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
       "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       "availability": isInStock
         ? "https://schema.org/InStock"

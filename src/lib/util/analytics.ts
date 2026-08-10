@@ -3,12 +3,7 @@
  * Centralized event tracking for tiendalebonmarche.com
  */
 
-// Declaración global de dataLayer (GTM) para tipos
-declare global {
-  interface Window {
-    dataLayer: unknown[]
-  }
-}
+// dataLayer global: ya declarado por @next/third-parties/google (GoogleTagManager)
 
 // Ensure dataLayer exists
 const ensureDataLayer = () => {
@@ -22,7 +17,8 @@ const ensureDataLayer = () => {
  */
 export const pushEvent = (event: string, data?: Record<string, unknown>) => {
   if (!ensureDataLayer()) return
-  window.dataLayer.push({
+  // ensureDataLayer() garantiza la inicialización (non-null assertion)
+  window.dataLayer!.push({
     event,
     ...data,
   })

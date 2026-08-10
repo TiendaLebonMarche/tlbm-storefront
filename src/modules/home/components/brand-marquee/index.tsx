@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 interface Brand {
   name: string
   slug?: string
@@ -58,9 +60,11 @@ export default function BrandMarquee() {
                   style={LOGO_STYLE}
                 >
                   {brand.type === "icon" ? (
-                    <img
+                    <Image
                       src={`/brands/${brand.slug}.svg`}
                       alt={brand.name}
+                      width={230}
+                      height={80}
                       className="max-w-full max-h-full w-full h-full object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
                     />
                   ) : (

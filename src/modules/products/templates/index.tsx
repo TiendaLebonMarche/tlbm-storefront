@@ -38,6 +38,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   }
 
   const isNew = product.created_at
+    // Date.now en server component: 1x/request (ISR/dynamic)
+    // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
     ? new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
     : false
 

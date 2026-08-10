@@ -58,7 +58,7 @@ export default function AnimatedTestimonialsSection() {
                   <StarIcon key={s} filled={s <= t.stars} />
                 ))}
               </div>
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-white/60 mb-6">"{t.text}"</p>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-white/60 mb-6">&quot;{t.text}&quot;</p>
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 dark:text-white/30">
                   {t.initials}

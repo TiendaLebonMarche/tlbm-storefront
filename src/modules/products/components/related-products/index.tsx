@@ -52,6 +52,8 @@ export default async function RelatedProducts({
   // Shuffle and filter out the current product
   const filteredProducts = products
     .filter((p) => p.id !== product.id)
+    // Math.random en server component: 1x/request (ISR/dynamic)
+    // eslint-disable-next-line react-hooks/purity -- server component, 1x/request
     .sort(() => 0.5 - Math.random()) // Randomize for variety
     .slice(0, 20) // Limit to 20 for the infinite scroll
 

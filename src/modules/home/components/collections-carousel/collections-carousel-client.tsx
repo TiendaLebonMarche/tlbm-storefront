@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { CollectionCard } from "."
 
@@ -227,7 +228,7 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
                 aria-hidden={isClone}
                 tabIndex={isClone ? -1 : 0}
               >
-                <img src={c.image} alt={c.name} loading="lazy" decoding="async" className="cat-img" />
+                <Image src={c.image} alt={c.name} width={480} height={600} className="cat-img" loading="lazy" />
                 <span className="cat-overlay">
                   <span className="cat-label">Explora</span>
                   <span className="cat-name">{c.name}</span>
