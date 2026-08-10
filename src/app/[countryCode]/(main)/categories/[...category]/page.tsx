@@ -82,7 +82,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         type: "website",
         images: [
           {
-            url: "/opengraph-image.jpg",
+            url: "/opengraph-v2.jpg",
             width: 1200,
             height: 630,
             alt: `${productCategory.name} | Tienda Le Bon Marché`,

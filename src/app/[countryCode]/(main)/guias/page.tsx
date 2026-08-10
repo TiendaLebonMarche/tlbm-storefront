@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Tienda Le Bon Marché",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: "/opengraph-v2.jpg",
         width: 1200,
         height: 630,
         alt: "Guías de Compra | Le Bon Marché",

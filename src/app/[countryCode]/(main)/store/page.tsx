@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     locale: "es_CO",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: "/opengraph-v2.jpg",
         width: 1200,
         height: 630,
         alt: "Catálogo de Productos | Tienda Le Bon Marché",

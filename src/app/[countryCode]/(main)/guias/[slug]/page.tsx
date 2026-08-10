@@ -52,7 +52,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       tags: guide.keywords.slice(0, 5),
       images: [
         {
-          url: "/opengraph-image.jpg",
+          url: "/opengraph-v2.jpg",
           width: 1200,
           height: 630,
           alt: guide.title,

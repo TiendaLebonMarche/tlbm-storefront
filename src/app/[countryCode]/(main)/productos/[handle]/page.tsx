@@ -215,7 +215,7 @@ export default async function ProductPage(props: Props) {
     "@id": `${productUrl}#product`,
     "name": pricedProduct.title,
     "description": pricedProduct.description || `${pricedProduct.title} — Disponible en Tienda Le Bon Marché, boutique virtual en Bucaramanga con envíos a toda Colombia.`,
-    "image": images.length > 0 ? images.map((i) => i.url) : [`${BASE_URL}/opengraph-image.jpg`],
+    "image": images.length > 0 ? images.map((i) => i.url) : [`${BASE_URL}/opengraph-v2.jpg`],
     "url": productUrl,
     "sku": firstVariant?.sku || pricedProduct.id,
     "mpn": pricedProduct.id,
