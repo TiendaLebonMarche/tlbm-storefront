@@ -669,22 +669,22 @@
 .cats-gold { color: var(--gold); font-style: italic; }
 .cats-sub { color: var(--muted); font-size: 14px; margin-top: 8px; }
 
-/* Viewport scroll-snap: swipe nativo + autoplay con scrollTo smooth */
+/* Viewport marquee: overflow oculto, el track se mueve con transform (rAF) */
 .cats-viewport {
-  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-  position: relative; -webkit-overflow-scrolling: touch;
+  overflow: hidden; position: relative; width: 100%; margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
 }
-.cats-viewport::-webkit-scrollbar { display: none; }
 .cats-track {
   display: flex; gap: 16px; width: max-content;
-  /* Padding lateral = centra la primera/última tarjeta en desktop */
-  padding: 16px max(calc((100vw - 1280px) / 2), 24px);
-  touch-action: pan-x;
+  padding: 16px 32px 10px;
+  will-change: transform; touch-action: pan-y;
+  scrollbar-width: none;
 }
+.cats-track::-webkit-scrollbar { display: none; }
 
-/* Tarjeta GRANDE 3:4 · snap centrado · hover sutil (sin zoom de frame) */
+/* Tarjeta GRANDE 3:4 · hover sutil (SIN zoom de frame — era lo pesado) */
 .cat-card {
-  position: relative; scroll-snap-align: center;
+  position: relative;
   width: clamp(280px, 24vw, 340px); aspect-ratio: 3 / 4; flex-shrink: 0;
   border-radius: 16px; overflow: hidden; display: block; background: var(--ink);
   transition: transform 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1);
@@ -706,6 +706,15 @@
   transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
 }
 .cat-card:hover .cat-btn { background: var(--ink); color: #fff; gap: 12px; }
+
+/* Desvanecido sutil en los bordes (≥641px): las tarjetas se disuelven al entrar/
+   salir en vez de cortarse en seco — look premium con el flujo continuo. */
+@media (min-width: 641px) {
+  .cats-track {
+    mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  }
+}
 
 /* Controles laterales (glass) */
 .cats-nav {
