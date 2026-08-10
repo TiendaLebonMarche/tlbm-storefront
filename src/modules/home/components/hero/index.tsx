@@ -1,10 +1,12 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, Suspense } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import TopMarquee from "@modules/common/components/top-marquee"
+import HeaderSearchControls from "@modules/layout/components/header-search-controls"
+import CartButton from "@modules/layout/components/cart-button"
 
 // ── Logo URL ────────────────────────────────────────────────────────────────
 const LOGO_URL = "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785517677/logo-TLBM-trpar_qtqudf.png"
@@ -207,7 +209,13 @@ function ScrollHeader({ visible, menuSlot }: { visible: boolean; menuSlot?: Reac
             </div>
           </LocalizedClientLink>
 
-          <div className="w-9" />
+          {/* Right: Search (lupa), Theme, Cart — igual que todas las páginas (10-ago) */}
+          <div className="flex items-center justify-end gap-3 lg:gap-5">
+            <HeaderSearchControls />
+            <Suspense fallback={<div className="w-5 h-5" />}>
+              <CartButton />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>
@@ -243,7 +251,13 @@ function HeroOverlay({ visible, menuSlot }: { visible: boolean; menuSlot?: React
             </LocalizedClientLink>
           </div>
 
-          <div className="w-9" />
+          {/* Right: Search (lupa), Theme, Cart — blancos sobre el hero oscuro */}
+          <div className="flex items-center justify-end gap-3 lg:gap-5 text-white">
+            <HeaderSearchControls />
+            <Suspense fallback={<div className="w-5 h-5" />}>
+              <CartButton />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>
