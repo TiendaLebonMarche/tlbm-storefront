@@ -64,18 +64,25 @@ export default function CategoryTemplate({
               <span className="text-brand-black font-bold">{category.name}</span>
             </div>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
-                <h1 className="text-4xl md:text-5xl font-serif text-brand-black" data-testid="category-page-title">
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-black mb-3 block">
+                  Categoría
+                </span>
+                <h1
+                  className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-black leading-none tracking-tighter"
+                  data-testid="category-page-title"
+                >
                   {category.name}
                 </h1>
-                {category.description && (
-                  <p className="mt-4 text-brand-gray text-sm max-w-[600px] leading-relaxed italic font-serif">
-                    &ldquo;{category.description}&rdquo;
-                  </p>
-                )}
               </div>
+              {category.description && (
+                <p className="text-brand-gray text-xs font-light leading-relaxed max-w-xs md:text-right">
+                  {category.description}
+                </p>
+              )}
             </div>
+            <div className="mt-8 h-px w-full bg-gray-100" />
 
             {category.category_children && category.category_children.length > 0 && (
               <div className="mt-6 flex flex-wrap gap-2">

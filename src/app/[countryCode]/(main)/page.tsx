@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { Suspense } from "react"
 
 import Hero from "@modules/home/components/hero"
 import TrustBadges from "@modules/home/components/trust-badges"
@@ -11,6 +12,7 @@ import CollectionsCarousel from "@modules/home/components/collections-carousel"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import Reveal from "@modules/common/components/reveal"
+import SideMenuData from "@modules/layout/components/side-menu-data"
 
 // Lazy load below-fold components
 const AnimatedTestimonialsSection = dynamic(() => import("@modules/home/components/animated-testimonials"))
@@ -64,7 +66,14 @@ export default async function Home(props: {
   return (
     <main>
       {/* ═══ HERO ═══ */}
-      <Hero />
+      {/* Hero — con el MISMO drawer SideMenu de todas las páginas */}
+      <Hero
+        menuSlot={
+          <Suspense fallback={<div className="w-12 h-12" />}>
+            <SideMenuData />
+          </Suspense>
+        }
+      />
 
       {/* ═══ CONTENIDO ═══ */}
       <div className="bg-white dark:bg-[#0A0A0F]">

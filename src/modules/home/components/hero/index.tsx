@@ -178,223 +178,81 @@ function SlideMedia({
 
 // ── Sticky White Header (appears on scroll) ────────────────────────────────
 
-function ScrollHeader({ visible }: { visible: boolean }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
+function ScrollHeader({ visible, menuSlot }: { visible: boolean; menuSlot?: React.ReactNode }) {
   return (
-    <>
-      <div
-        className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
-          ${
-            visible
-              ? "translate-y-0 opacity-100 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.06)]"
-              : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
-      >
-        <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-          <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
-            {/* Hamburger — 3 líneas asimétricas */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[7px] p-3 min-w-[44px] min-h-[44px] items-center justify-center group cursor-pointer bg-none border-none outline-none"
-              aria-label="Menú"
-            >
-              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
-              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-[14px] group-hover:w-5" />
-              <span className="block h-[1.5px] bg-black rounded-[2px] transition-all duration-300 w-[18px] group-hover:w-4" />
-            </button>
+    <div
+      className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
+        ${
+          visible
+            ? "translate-y-0 opacity-100 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.06)]"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+    >
+      <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
+        <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
+          {/* Hamburger — MISMO drawer SideMenu que todas las páginas (regla 10-ago) */}
+          <div className="flex-none">{menuSlot}</div>
 
-            {/* Logo centrado */}
-            <LocalizedClientLink href="/" className="flex items-center h-10 md:h-12">
-              <div className="relative w-[170px] md:w-[220px] h-full">
-                <Image
-                  src={LOGO_URL}
-                  alt="Tienda Le Bon Marché"
-                  fill
-                  sizes="220px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </LocalizedClientLink>
+          {/* Logo centrado */}
+          <LocalizedClientLink href="/" className="flex items-center h-10 md:h-12">
+            <div className="relative w-[170px] md:w-[220px] h-full">
+              <Image
+                src={LOGO_URL}
+                alt="Tienda Le Bon Marché"
+                fill
+                sizes="220px"
+                className="object-contain"
+                priority
+              />
+            </div>
+          </LocalizedClientLink>
 
-            <div className="w-9" />
-          </div>
+          <div className="w-9" />
         </div>
       </div>
-
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[95] bg-white flex flex-col"
-          >
-            <div className="flex items-center justify-between px-4 h-[60px] border-b border-gray-100">
-              <LocalizedClientLink href="/" className="flex items-center h-7">
-                <div className="relative w-[120px] h-full">
-                  <Image src={LOGO_URL} alt="Tienda Le Bon Marché" fill sizes="120px" className="object-contain" />
-                </div>
-              </LocalizedClientLink>
-              <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl font-light text-gray-400 hover:text-black transition-colors" aria-label="Cerrar menú">
-                ✕
-              </button>
-            </div>
-            <nav className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
-              {[
-                { label: "Inicio", href: "/" },
-                { label: "Tienda", href: "/store" },
-                { label: "Colecciones", href: "/collections" },
-                { label: "Ofertas", href: "/store" },
-                { label: "Guías", href: "/guias" },
-                { label: "Contacto", href: "https://wa.me/573027567783" },
-              ].map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 * i, duration: 0.5 }}
-                >
-                  {link.href.startsWith("http") ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMenuOpen(false)}
-                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <LocalizedClientLink
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                    >
-                      {link.label}
-                    </LocalizedClientLink>
-                  )}
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    </div>
   )
 }
 
 // ── Hero Overlay (floating logo + hamburger on hero) ───────────────────────
 
-function HeroOverlay({ visible }: { visible: boolean }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
+function HeroOverlay({ visible, menuSlot }: { visible: boolean; menuSlot?: React.ReactNode }) {
   return (
-    <>
-      <div
-        className={`absolute top-0 left-0 w-full z-30 transition-all duration-500 ${
-          visible ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-          <div className="flex items-center justify-between h-[60px] md:h-[72px]">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[7px] p-3 min-w-[44px] min-h-[44px] items-center justify-center group cursor-pointer bg-none border-none outline-none"
-              aria-label="Menú"
-            >
-              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-5 group-hover:w-6" />
-              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-[14px] group-hover:w-5" />
-              <span className="block h-[1.5px] bg-white rounded-[2px] transition-all duration-300 w-[18px] group-hover:w-4" />
-            </button>
+    <div
+      className={`absolute top-0 left-0 w-full z-30 transition-all duration-500 ${
+        visible ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
+      <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
+        <div className="flex items-center justify-between h-[60px] md:h-[72px]">
+          {/* Hamburger blanca (sobre hero oscuro) — MISMO drawer SideMenu que todas las páginas */}
+          <div className="flex-none text-white">{menuSlot}</div>
 
-            <div className="absolute left-1/2 -translate-x-1/2">
-              <LocalizedClientLink href="/" className="flex items-center justify-center">
-                <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[51px] md:h-[65px] lg:h-[77px]">
-                  <Image
-                    src={LOGO_URL}
-                    alt="Tienda Le Bon Marché"
-                    fill
-                    sizes="260px"
-                    className="object-contain brightness-0 invert"
-                    priority
-                  />
-                </div>
-              </LocalizedClientLink>
-            </div>
-
-            <div className="w-9" />
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <LocalizedClientLink href="/" className="flex items-center justify-center">
+              <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[51px] md:h-[65px] lg:h-[77px]">
+                <Image
+                  src={LOGO_URL}
+                  alt="Tienda Le Bon Marché"
+                  fill
+                  sizes="260px"
+                  className="object-contain brightness-0 invert"
+                  priority
+                />
+              </div>
+            </LocalizedClientLink>
           </div>
+
+          <div className="w-9" />
         </div>
       </div>
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[95] bg-white flex flex-col"
-          >
-            <div className="flex items-center justify-between px-4 h-[60px] border-b border-gray-100">
-              <LocalizedClientLink href="/" className="flex items-center h-7">
-                <div className="relative w-[120px] h-full">
-                  <Image src={LOGO_URL} alt="Tienda Le Bon Marché" fill sizes="120px" className="object-contain" />
-                </div>
-              </LocalizedClientLink>
-              <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl font-light text-gray-400 hover:text-black transition-colors" aria-label="Cerrar menú">
-                ✕
-              </button>
-            </div>
-            <nav className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
-              {[
-                { label: "Inicio", href: "/" },
-                { label: "Tienda", href: "/store" },
-                { label: "Colecciones", href: "/collections" },
-                { label: "Ofertas", href: "/store" },
-                { label: "Guías", href: "/guias" },
-                { label: "Contacto", href: "https://wa.me/573027567783" },
-              ].map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 * i, duration: 0.5 }}
-                >
-                  {link.href.startsWith("http") ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMenuOpen(false)}
-                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <LocalizedClientLink
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-2xl md:text-3xl font-serif font-bold text-black hover:text-[#D4AF37] transition-colors duration-300"
-                    >
-                      {link.label}
-                    </LocalizedClientLink>
-                  )}
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    </div>
   )
 }
 
 // ── Main Hero ───────────────────────────────────────────────────────────────
 
-export default function Hero() {
+export default function Hero({ menuSlot }: { menuSlot?: React.ReactNode }) {
   const [[slideIndex, direction], setSlideState] = useState([0, 0])
   const [isScrolled, setIsScrolled] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -446,8 +304,8 @@ export default function Hero() {
       {/* ── MARQUEE ── */}
       <TopMarquee />
 
-      {/* ── SCROLL HEADER (white bar) ── */}
-      <ScrollHeader visible={isScrolled} />
+      {/* ── SCROLL HEADER (white bar) — mismo drawer que todas las páginas ── */}
+      <ScrollHeader visible={isScrolled} menuSlot={menuSlot} />
 
       {/* ── HERO SLIDER ── */}
       <section
@@ -478,7 +336,7 @@ export default function Hero() {
         </AnimatePresence>
 
         {/* ── Floating header (logo + hamburger) ── */}
-        <HeroOverlay visible={isScrolled} />
+        <HeroOverlay visible={isScrolled} menuSlot={menuSlot} />
 
         {/* ── TEXT CONTENT ── */}
         <div className="absolute inset-0 z-20 flex items-center">

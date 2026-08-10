@@ -156,23 +156,20 @@ export default async function GuidePage(props: Props) {
       </div>
 
       <article className="content-container max-w-[820px] mx-auto px-4 pb-16">
-        {/* Header */}
-        <header className="pt-6 pb-8 border-b border-gray-100 dark:border-white/10">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.25em]">
-              {guide.category}
-            </span>
-            <span className="w-1 h-1 rounded-full bg-[#D4AF37]/50" />
-            <span className="text-gray-400 text-[10px] font-medium uppercase tracking-[0.2em]">
-              {guide.readingTime} de lectura
-            </span>
+        {/* Header — patrón store (PageHeader) */}
+        <header className="pt-8 pb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-black mb-3 block">
+                {guide.category} · {guide.readingTime} de lectura
+              </span>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-black leading-none tracking-tighter">
+                {guide.title}
+              </h1>
+            </div>
           </div>
-
-          <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900 dark:text-white">
-            {guide.title}
-          </h1>
-
-          <p className="mt-5 text-gray-500 dark:text-gray-400 text-base md:text-lg leading-relaxed">
+          <div className="mt-8 h-px w-full bg-gray-100" />
+          <p className="mt-6 text-brand-gray text-xs md:text-sm font-light leading-relaxed max-w-2xl">
             {guide.description}
           </p>
 

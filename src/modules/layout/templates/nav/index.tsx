@@ -10,7 +10,6 @@ import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import HeaderSearchControls from "@modules/layout/components/header-search-controls"
 import ClientHeaderWrapper from "@modules/layout/components/client-header"
-import DesktopNav from "@modules/layout/components/desktop-nav"
 import { HttpTypes } from "@medusajs/types"
 
 import ClientLogo from "@modules/layout/components/client-logo"
@@ -51,9 +50,11 @@ export default async function Nav() {
         </div>
       </div>
 
-      {/* TABLET (md–lg): hamburger left · logo CENTRADO (absoluto) · acciones right */}
-      <div className="hidden md:flex lg:hidden relative items-center w-full h-full">
-        {/* Left: hamburger → SideMenu */}
+      {/* DESKTOP (≥md): hamburger left · logo CENTRADO (absoluto) · acciones right
+          Mismo patrón que el index: el menú vive en el drawer (SideMenu) en TODAS
+          las páginas. Regla Julián 10-ago: logo al centro, sin nav visible. */}
+      <div className="hidden md:flex relative items-center w-full h-full">
+        {/* Left: hamburger → SideMenu (mismo drawer en todas las páginas) */}
         <div className="flex items-center justify-start flex-1">
           <SideMenu
             regions={regions}
@@ -75,38 +76,6 @@ export default async function Nav() {
 
         {/* Right: Search (lupa), Theme, Cart */}
         <div className="flex items-center justify-end gap-3 lg:gap-5 flex-1">
-          <HeaderSearchControls />
-          <Suspense fallback={<div className="w-5 h-5" />}>
-            <CartButton />
-          </Suspense>
-        </div>
-      </div>
-
-      {/* DESKTOP (≥lg): HÍBRIDO best-practice — hamburger + logo · nav visible · acciones
-          Nav visible en pantallas grandes (NN/g) + drawer completo siempre disponible.
-          Ubicación actual resaltada en dorado (DesktopNav). */}
-      <div className="hidden lg:flex items-center justify-between w-full h-full gap-4 xl:gap-6">
-        {/* Left: hamburger + logo */}
-        <div className="flex items-center justify-start gap-2 xl:gap-4 flex-none">
-          <SideMenu
-            regions={regions}
-            locales={locales}
-            currentLocale={currentLocale}
-            collections={collections as HttpTypes.StoreCollection[]}
-          />
-          <LocalizedClientLink
-            href="/"
-            className="flex items-center h-10 xl:h-12 pointer-events-auto group"
-          >
-            <ClientLogo />
-          </LocalizedClientLink>
-        </div>
-
-        {/* Center: nav compacta visible */}
-        <DesktopNav collections={collections as HttpTypes.StoreCollection[]} />
-
-        {/* Right: Search (lupa), Theme, Cart */}
-        <div className="flex items-center justify-end gap-3 xl:gap-5 flex-none">
           <HeaderSearchControls />
           <Suspense fallback={<div className="w-5 h-5" />}>
             <CartButton />
