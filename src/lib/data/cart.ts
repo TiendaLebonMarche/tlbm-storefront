@@ -164,11 +164,10 @@ export async function addToCart({
         headers
       )
       .then(async () => {
-        const cartCacheTag = await getCacheTag("carts")
-        if (cartCacheTag) revalidateTag(cartCacheTag, "page")
-
-        const fulfillmentCacheTag = await getCacheTag("fulfillment")
-        if (fulfillmentCacheTag) revalidateTag(fulfillmentCacheTag, "page")
+        // ⚠️ SIN revalidateTag aquí: forzaba el re-render del árbol RSC
+        // tras la mutación → React #441 (bug Next ≥15.4.8/16 + useId).
+        // El cliente actualiza el drawer/badge vía el retorno de esta acción;
+        // la revalidación ocurre en la siguiente navegación/revalidate natural.
       })
 
     // Obtener carrito actualizado después de agregar el item (con campos
@@ -210,12 +209,7 @@ export async function updateLineItem({
   await sdk.store.cart
     .updateLineItem(cartId, lineId, { quantity }, {}, headers)
     .then(async () => {
-      const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
-
-      const fulfillmentCacheTag = await getCacheTag("fulfillment")
-      revalidateTag(fulfillmentCacheTag, "page")
-
+      // ⚠️ SIN revalidateTag (React #441 — ver addToCart)
       // Devolver el carrito fresco (con items.total) para actualizar la bolsa al instante
       const fresh = await sdk.store.cart.retrieve(
         cartId,
@@ -245,12 +239,7 @@ export async function deleteLineItem(lineId: string) {
   await sdk.store.cart
     .deleteLineItem(cartId, lineId, {}, headers)
     .then(async () => {
-      const cartCacheTag = await getCacheTag("carts")
-      revalidateTag(cartCacheTag, "page")
-
-      const fulfillmentCacheTag = await getCacheTag("fulfillment")
-      revalidateTag(fulfillmentCacheTag, "page")
-
+      // ⚠️ SIN revalidateTag (React #441 — ver addToCart)
       // Devolver el carrito fresco para actualizar la bolsa al instante
       const fresh = await sdk.store.cart.retrieve(
         cartId,
