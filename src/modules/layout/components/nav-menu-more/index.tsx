@@ -25,7 +25,7 @@ export default function NavMenuMore() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="hover:text-brand-black hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-none uppercase font-bold tracking-widest text-sm"
+        className="hover:text-brand-black hover:underline underline-offset-8 transition-colors text-white group-data-[scrolled=true]:text-brand-black focus:outline-hidden uppercase font-bold tracking-widest text-sm"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="true"
         aria-expanded={open}
@@ -35,7 +35,7 @@ export default function NavMenuMore() {
       </button>
       {open && (
         <div
-          className="absolute left-0 top-full mt-3 min-w-[200px] py-3 px-0 bg-white rounded-md z-[200] transition-all"
+          className="absolute left-0 top-full mt-3 min-w-[200px] py-3 px-0 bg-white rounded-md z-200 transition-all"
           style={{ boxShadow: '0 10px 40px 0 rgba(0,0,0,0.15)' }}
         >
           <ul className="flex flex-col">

@@ -68,3 +68,4 @@ ts-errors.txt
 .env.local
 data/
 .env*
+yarn.lock

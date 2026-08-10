@@ -130,7 +130,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                       handleFilterChange("minPrice", e.currentTarget.value || null)
                     }
                   }}
-                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-hidden focus:border-brand-black transition-colors font-light"
                 />
               </div>
               <div className="relative">
@@ -147,7 +147,7 @@ const FilterPanel = ({ collections = [] }: FilterProps) => {
                       handleFilterChange("maxPrice", e.currentTarget.value || null)
                     }
                   }}
-                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-none focus:border-brand-black transition-colors font-light"
+                  className="w-full pl-6 pr-3 py-2.5 border-b border-brand-gray-light bg-transparent text-xs outline-hidden focus:border-brand-black transition-colors font-light"
                 />
               </div>
             </div>

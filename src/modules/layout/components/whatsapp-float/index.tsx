@@ -33,7 +33,7 @@ const WhatsAppFloat = () => {
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className={`fixed bottom-6 right-6 z-[400] items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group ${
+      className={`fixed bottom-6 right-6 z-400 items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group ${
         pathname?.includes("/productos/") ? "hidden lg:flex" : "flex"
       }`}
       style={{ backgroundColor: WHATSAPP_COLOR }}

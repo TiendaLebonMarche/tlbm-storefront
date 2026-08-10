@@ -38,7 +38,7 @@ export default function ClientHeader({
   return (
     <div
       className={`
-        fixed top-0 left-0 w-full z-[100] group/header
+        fixed top-0 left-0 w-full z-100 group/header
         transition-all duration-500 ease-out
         ${isScrolled
           ? "bg-white/95 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.06)] border-b border-gray-100/50"
@@ -66,7 +66,7 @@ export default function ClientHeader({
       >
         <div
           className={`
-            max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14
+            max-w-380 mx-auto px-4 md:px-10 lg:px-14
             flex justify-between items-center
             transition-all duration-300 ease-out
             ${isScrolled

@@ -75,7 +75,7 @@ export default function OfertasParallax() {
             />
 
             {/* Content */}
-            <div className="relative z-10 h-full max-w-[90rem] mx-auto px-6 lg:px-10 flex items-center">
+            <div className="relative z-10 h-full max-w-360 mx-auto px-6 lg:px-10 flex items-center">
               <div
                 className={`max-w-lg transition-all duration-700 delay-200 ${
                   i === current

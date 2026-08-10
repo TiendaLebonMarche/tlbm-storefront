@@ -104,7 +104,7 @@ const Payment = ({
             <>
               <div className="rounded-3xl border-2 border-brand-gray-light/60 bg-brand-gray-light/5 p-5 md:p-6 mb-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <svg className="w-4 h-4 text-brand-black flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-4 h-4 text-brand-black shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
@@ -132,13 +132,13 @@ const Payment = ({
               </RadioGroup>
 
               {selectedPaymentMethod === "manual_transferencia" && (
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50/30 border border-green-200/50 rounded-3xl p-6 mb-6 shadow-sm">
+                <div className="bg-linear-to-br from-green-50 to-emerald-50/30 border border-green-200/50 rounded-3xl p-6 mb-6 shadow-xs">
                   <p className="text-sm font-bold text-emerald-800 uppercase tracking-widest mb-4 flex items-center gap-2">
                     <span className="text-lg">💚</span> Datos para Transferencia
                   </p>
                   <div className="space-y-3">
                     <div className="bg-white rounded-xl p-4 border border-green-100 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-xl flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-xl shrink-0">
                         💚
                       </div>
                       <div>
@@ -147,7 +147,7 @@ const Payment = ({
                       </div>
                     </div>
                     <div className="bg-white rounded-xl p-4 border border-green-100 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl shrink-0">
                         🔵
                       </div>
                       <div>

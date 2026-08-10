@@ -154,7 +154,7 @@ const ShippingAddress = ({
             value={formData["shipping_address.city"]}
             onChange={handleChange}
             required
-            className="w-full h-14 rounded-3xl border-2 border-brand-gray-light px-6 bg-white focus:outline-none focus:ring-4 focus:ring-brand-black/10 focus:border-brand-black text-sm transition-all appearance-none text-brand-black font-medium shadow-sm"
+            className="w-full h-14 rounded-3xl border-2 border-brand-gray-light px-6 bg-white focus:outline-hidden focus:ring-4 focus:ring-brand-black/10 focus:border-brand-black text-sm transition-all appearance-none text-brand-black font-medium shadow-xs"
             data-testid="shipping-city-select"
           >
             <option value="">Selecciona un municipio</option>

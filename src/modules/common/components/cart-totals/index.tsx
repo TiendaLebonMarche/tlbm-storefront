@@ -68,7 +68,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
         </div>
       </div>
 
-      <div className="h-[1px] w-full bg-gray-100 my-4" />
+      <div className="h-px w-full bg-gray-100 my-4" />
 
       <div className="flex items-center justify-between text-brand-black">
         <span className="text-sm font-bold uppercase tracking-[0.3em]">Total</span>

@@ -39,7 +39,7 @@ export default function CategoryTemplate({
   return (
     <div className="py-12 bg-white" data-testid="category-container">
       <div className="content-container flex flex-col small:flex-row small:items-start gap-x-12">
-        <div className="small:sticky small:top-24 w-full small:w-[250px] flex-shrink-0">
+        <div className="small:sticky small:top-24 w-full small:w-[250px] shrink-0">
           <RefinementList sortBy={sort} data-testid="sort-by-container" />
         </div>
         <div className="w-full">

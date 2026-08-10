@@ -82,7 +82,7 @@ const StoreTemplate = async ({
           <FilterDrawer sortBy={sort} collections={collections || []} />
 
           {/* ── Sidebar (desktop) ── */}
-          <aside className="hidden medium:block medium:sticky medium:top-28 w-full medium:w-[200px] flex-shrink-0 self-start">
+          <aside className="hidden medium:block medium:sticky medium:top-28 w-full medium:w-[200px] shrink-0 self-start">
             <div className="space-y-8">
               <SearchBar />
               <RefinementList sortBy={sort} />

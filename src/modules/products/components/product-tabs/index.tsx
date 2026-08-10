@@ -48,7 +48,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                <ul className="space-y-4">
                 {product.description.split("-").filter(line => line.trim().length > 0).map((line, i) => (
                   <li key={i} className="flex items-start gap-4 group">
-                    <span className="w-1.5 h-px bg-brand-black/20 mt-2.5 flex-shrink-0 transition-all duration-500 group-hover:w-3 group-hover:bg-brand-black" />
+                    <span className="w-1.5 h-px bg-brand-black/20 mt-2.5 shrink-0 transition-all duration-500 group-hover:w-3 group-hover:bg-brand-black" />
                     <p className="text-[15px] font-light text-brand-gray font-sans leading-relaxed">
                       {line.trim()}
                     </p>
@@ -231,7 +231,7 @@ const ShippingInfoTab = () => {
           },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-4">
-            <div className="flex-shrink-0 text-brand-black/60 mt-0.5">
+            <div className="shrink-0 text-brand-black/60 mt-0.5">
               {item.icon}
             </div>
             <div className="space-y-1">
