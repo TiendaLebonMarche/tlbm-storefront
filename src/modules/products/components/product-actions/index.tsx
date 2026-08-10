@@ -271,8 +271,8 @@ export default function ProductActions({
           )}
         </div>
 
-        {/* CTAs */}
-        <div className="flex flex-col gap-3">
+        {/* CTAs — en mobile lo reemplaza la franja fixed (MobileActions), no duplicar */}
+        <div className="hidden lg:flex flex-col gap-3">
           {/* Botón principal: Añadir al carrito */}
           <button
             onClick={handleAddToCart}

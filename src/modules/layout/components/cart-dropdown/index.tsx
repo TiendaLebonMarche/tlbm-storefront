@@ -325,7 +325,7 @@ const CartDropdown = ({
                         </div>
                         <DeleteButton
                           id={item.id}
-                          className="text-red-300 hover:text-red-500 bg-transparent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                          className="text-red-300 hover:text-red-500 bg-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity flex-shrink-0"
                           data-testid="cart-item-remove-button"
                         />
                       </div>
