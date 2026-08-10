@@ -148,7 +148,7 @@ const SideMenu = ({ regions, locales, currentLocale, collections = [] }: SideMen
                 leaveFrom="translate-x-0 opacity-100"
                 leaveTo="-translate-x-full opacity-60"
               >
-                <PopoverPanel className="fixed top-0 left-0 h-screen w-screen max-w-[400px] bg-white z-[160] text-brand-black border-r border-brand-gray-light flex flex-col shadow-xl overflow-y-auto overscroll-contain">
+                <PopoverPanel className="fixed top-0 left-0 h-screen w-[calc(100vw-48px)] max-w-[400px] bg-white z-[160] text-brand-black border-r border-brand-gray-light flex flex-col shadow-xl overflow-y-auto overscroll-contain">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between px-6 md:px-10 pt-10 pb-8"
