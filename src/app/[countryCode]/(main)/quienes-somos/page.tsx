@@ -125,10 +125,10 @@ export default function AboutUsPage() {
           description="Boutique virtual en Bucaramanga. Cazadores de calidades desde 2021, con envíos a toda Colombia."
         />
 
-        <div className="max-w-[70rem] mx-auto px-4 md:px-8 pb-32">
+        <div className="max-w-[70rem] mx-auto px-4 md:px-8 pb-24">
 
           {/* Intro / Lore */}
-          <Reveal className="text-center mb-24 md:mb-32 max-w-3xl mx-auto pt-16">
+          <Reveal className="text-center mb-16 md:mb-20 max-w-3xl mx-auto pt-16">
             <h2 className="text-4xl md:text-6xl font-serif text-black mb-8 italic leading-tight">
               No somos una tienda más, somos sus ojos en el mercado global
             </h2>
@@ -138,7 +138,7 @@ export default function AboutUsPage() {
           </Reveal>
 
           {/* Story Block 1 - Image Left, Text Right */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center mb-20">
             <Reveal className="w-full aspect-[3/4] relative bg-brand-gray-light/20 overflow-hidden">
                <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
@@ -161,7 +161,7 @@ export default function AboutUsPage() {
           </div>
 
           {/* Misión y Visión */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-20">
             <Reveal className="border-t border-black/10 pt-10">
               <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37] block mb-6">
                 Nuestra misión
@@ -181,7 +181,7 @@ export default function AboutUsPage() {
           </div>
 
           {/* Valores */}
-          <Reveal className="mb-20">
+          <Reveal className="mb-16">
             <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-black block mb-10 text-center">
               Lo que no negociamos
             </span>
@@ -196,7 +196,7 @@ export default function AboutUsPage() {
           </Reveal>
 
           {/* Story Block 2 - Text Left, Image Right */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-32 flex-col-reverse md:flex-row">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center mb-20 flex-col-reverse md:flex-row">
             <Reveal delay={150} className="space-y-6 text-center md:text-left md:order-1 order-2">
               <h3 className="text-3xl font-serif italic text-black">Cero Gato por Liebre</h3>
               <div className="w-8 h-[1px] bg-black mx-auto md:mx-0 mb-6" />

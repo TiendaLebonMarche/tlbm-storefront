@@ -14,7 +14,7 @@ const SIDEBAR_LINKS = [
 
 export default function EnviosPage() {
   return (
-    <div className="bg-[#FFFFFF] min-h-screen pt-32 pb-32 selection:bg-brand-black/20">
+    <div className="bg-[#FFFFFF] min-h-screen pt-20 pb-24 selection:bg-brand-black/20">
       <div className="max-w-[85rem] mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
           {/* Sidebar - Sticky */}
@@ -39,27 +39,27 @@ export default function EnviosPage() {
 
           {/* Main Content */}
           <main className="lg:w-3/4 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#000000] mb-16 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-6xl font-serif font-black text-[#000000] mb-10 tracking-tight leading-tight">
               Envíos y Entregas
             </h1>
             
             <div className="prose prose-lg prose-headings:font-serif prose-headings:text-[#000000] prose-headings:font-bold prose-headings:tracking-tight prose-p:text-brand-gray prose-p:font-light prose-li:text-brand-gray prose-li:font-light prose-p:leading-loose text-brand-gray max-w-none [&_h2]:font-serif [&_h2]:font-bold [&_h2]:text-[#000000] [&_h2]:tracking-tight [&_p]:text-brand-gray [&_p]:font-light [&_p]:leading-loose">
               
-              <p className="text-xl md:text-2xl font-serif text-[#000000] leading-relaxed mb-16">
+              <p className="text-xl md:text-2xl font-serif text-[#000000] leading-relaxed mb-10">
                 Cuando invierte en tecnología exótica o artículos premium, la puntualidad no es opcional. Hemos estructurado nuestra red logística desde nuestro centro en Bucaramanga.
               </p>
 
-              <h2 className="text-3xl mt-16 mb-6">Información de Entrega (Ley 1480, art. 23)</h2>
+              <h2 className="text-3xl mt-12 mb-6">Información de Entrega (Ley 1480, art. 23)</h2>
               <p>
                 Conforme al artículo 23 de la Ley 1480 de 2011, antes de finalizar su compra usted conoce el valor total del pedido, los costos de envío, los plazos de entrega y la identidad del comerciante. Esta información también llega por correo electrónico en la confirmación del pedido. Si el producto no puede ser entregado en el plazo informado, le avisaremos de inmediato y usted podrá optar por la entrega posterior o el reintegro del dinero.
               </p>
 
-              <h2 className="text-3xl mt-16 mb-6">El Modelo Fast-Track (Local)</h2>
+              <h2 className="text-3xl mt-12 mb-6">El Modelo Fast-Track (Local)</h2>
               <p>
                 Para el Área Metropolitana de Bucaramanga y periferia directa, aplicamos el protocolo <strong>Fast-Track</strong>. Todo pedido abonado antes de las 13:00 hrs de un día hábil es procesado y despachado con la estricta garantía de llegar a su residencia u oficina <strong>en menos de 24 horas</strong>. Nuestras rutas VIP operan blindando la caja con protocolos de privacidad.
               </p>
 
-              <h2 className="text-3xl mt-16 mb-6">Territorio Nacional</h2>
+              <h2 className="text-3xl mt-12 mb-6">Territorio Nacional</h2>
               <p>
                 Si se encuentra fuera del Área Metropolitana, derivamos el transporte de sus equipos y fragancias a redes especializadas como Servientrega, Coordinadora o Deprisa. 
               </p>
@@ -69,7 +69,7 @@ export default function EnviosPage() {
                 <li><strong>Tracking:</strong> Emitimos código de rastreo en SMS/Mail la misma tarde del embalaje.</li>
               </ul>
 
-              <h2 className="text-3xl mt-16 mb-6">Imponderables en Ruta</h2>
+              <h2 className="text-3xl mt-12 mb-6">Imponderables en Ruta</h2>
               <p>
                 Una vez la encomienda asume la custodia del transportista, entra a regir el entramado nacional de vías de Colombia. Contingencias climáticas severas o alteraciones de orden público están exentas de reembolsos indemnizatorios rápidos, pues superan el brazo logístico de Tienda Le Bon Marché. Sin embargo, nuestro equipo de asesores abogará siempre a su favor hasta que la caja arribe exitosamente.
               </p>

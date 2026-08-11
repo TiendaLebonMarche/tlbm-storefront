@@ -56,7 +56,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     <div className="bg-white min-h-screen selection:bg-brand-black/10">
 
       {/* ── HERO: Gallery + Product Info ── */}
-      <div className="content-container pt-6 pb-44 md:py-8 lg:pt-8 lg:pb-12">
+      <div className="content-container pt-6 pb-16 md:py-8 lg:pt-8 lg:pb-12">
         <div className="flex flex-col lg:flex-row gap-[clamp(1.5rem,5vw,3rem)] lg:gap-[clamp(3rem,6vw,7rem)] xl:gap-[clamp(4rem,7vw,7rem)] items-start">
 
           {/* LEFT: Gallery — 58% */}
@@ -238,7 +238,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       {/* ── PRODUCT DETAILS: Technical Specs ── */}
       <Reveal>
         <div className="bg-white">
-          <div className="content-container py-12 lg:py-16">
+          <div className="content-container py-10 lg:py-14">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-8 xl:gap-x-16">
               
               {/* Left: Technical Details */}
