@@ -10,12 +10,12 @@ import { useRouter } from "next/navigation"
  *
  * Editoral premium: overlay blanco puro + blur, título serif con tracking,
  * input gigante con clamp() responsive (nunca desborda en mobile), chips de
- * búsquedas populares REALES del catálogo y colecciones REALES de Medusa.
+ * MARCAS TOP del catálogo y colecciones REALES de Medusa.
  *
  * Las sugerencias son DINÁMICAS: se cargan de /api/search-suggestions (que
- * deriva colecciones y términos de los títulos de productos de Medusa, con
- * cache invalidable). Si el endpoint falla, se muestran los valores de
- * respaldo estáticos para no romper el modal.
+ * detecta marcas top de una allowlist curada en los títulos de productos de
+ * Medusa + colecciones reales, con cache invalidable). Si el endpoint falla,
+ * se muestran los valores de respaldo estáticos para no romper el modal.
  *
  * - Enter/click → /store?q=... (la StorePage filtra con el query param q).
  * - ESC cierra (HeadlessUI Dialog lo maneja).
@@ -23,7 +23,8 @@ import { useRouter } from "next/navigation"
  */
 
 // Respaldo estático (se muestra solo mientras carga o si la API falla)
-const FALLBACK_POPULAR = ["parlante", "smartwatch", "audífonos", "mouse", "reloj", "dron"]
+// SOLO marcas top reconocidas — la política es nunca sugerir marcas genéricas
+const FALLBACK_POPULAR = ["Sony", "JBL", "Xiaomi", "Puma", "DJI", "Starlink"]
 
 const FALLBACK_COLLECTIONS = [
   { title: "Smartwatches", handle: "smartwatches" },
