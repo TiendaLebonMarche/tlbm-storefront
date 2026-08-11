@@ -1,6 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 /**
  * Marquesina superior — REDISEÑO 07-ago-2026 (aprobado por Julián, ref tm_v4.png):
@@ -40,10 +41,11 @@ export default function TopMarquee() {
       className="relative z-50 flex items-stretch overflow-hidden bg-[var(--ink)]"
       aria-label="Tienda Le Bon Marché — mensajes de la tienda"
     >
-      {/* ── Etiqueta FIJA: dorada + logo TLBM, corte diagonal ── */}
-      <div
-        aria-hidden="true"
-        className="relative z-10 flex flex-shrink-0 items-center bg-[var(--gold)] py-[5px] pl-3.5 pr-5 md:py-[6px] md:pl-5 md:pr-7"
+      {/* ── Etiqueta FIJA: dorada + logo TLBM, corte diagonal — clic → index ── */}
+      <LocalizedClientLink
+        href="/"
+        aria-label="Tienda Le Bon Marché — ir al inicio"
+        className="relative z-10 flex flex-shrink-0 items-center bg-[var(--gold)] py-[5px] pl-3.5 pr-5 md:py-[6px] md:pl-5 md:pr-7 transition-opacity hover:opacity-90"
         style={{
           clipPath: "polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%)",
         }}
@@ -55,7 +57,7 @@ export default function TopMarquee() {
           draggable={false}
           className="h-[26px] w-auto md:h-[34px]"
         />
-      </div>
+      </LocalizedClientLink>
 
       {/* ── Banda móvil: 2 copias, loop seamless ── */}
       <div className="flex min-w-0 flex-1 items-center overflow-hidden">

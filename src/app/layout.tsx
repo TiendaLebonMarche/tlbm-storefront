@@ -126,12 +126,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="es" data-mode="light" data-theme={SEASON} className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <head>
-        {/* Anti-flash de tema: aplica dark ANTES del paint si el usuario lo eligió */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("tlbm_theme");if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.setAttribute("data-mode","dark");}}catch(e){}})();`,
-          }}
-        />
+        {/* El cambio de tema claro/oscuro se eliminó 11-ago-2026 (decisión Julián):
+            la tienda es SIEMPRE modo claro. Sin script anti-flash ni lectura de
+            localStorage de tema. */}
+
         {/* Google Tag Manager — vía oficial @next/third-parties (GoogleTagManager abajo en el body) */}
 
         {/* Preconnect to optimize asset connection speed (Core Web Vitals) */}

@@ -2,12 +2,13 @@
 
 import { usePathname } from "next/navigation"
 import SearchModal from "@modules/layout/components/search-modal"
-import ThemeToggle from "@modules/layout/components/theme-toggle"
 
 /**
- * Controles del header (lupa + cambio de tema).
+ * Controles del header (lupa).
  * En carrito (/cart) y tienda (/store) se ocultan: el usuario pidió
- * explícitamente que esas páginas no tengan lupa ni ThemeToggle.
+ * explícitamente que esas páginas no tengan lupa.
+ * El cambio de tema (claro/oscuro) se eliminó 11-ago-2026 (decisión Julián):
+ * la tienda es siempre modo claro.
  */
 const HeaderSearchControls = () => {
   const pathname = usePathname()
@@ -15,12 +16,7 @@ const HeaderSearchControls = () => {
 
   if (hideOn) return null
 
-  return (
-    <>
-      <SearchModal />
-      <ThemeToggle />
-    </>
-  )
+  return <SearchModal />
 }
 
 export default HeaderSearchControls
