@@ -64,7 +64,7 @@ const SLIDES: Slide[] = [
     cta: "Ver Productos",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786468550/hero/hero-slider2-alf2.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786469627/hero/hero-slider2-comp.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "right",
@@ -373,7 +373,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
           <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 lg:px-12">
             <motion.div
               key={`text-${slideIndex}`}
-              className={`max-w-[580px] ${
+              className={`max-w-[520px] ${
                 currentSlide.textSide === "right"
                   ? "ml-auto text-right md:items-end"
                   : "text-left md:items-start"
