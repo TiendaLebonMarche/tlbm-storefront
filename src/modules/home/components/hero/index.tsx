@@ -329,7 +329,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
 
       {/* ── HERO SLIDER ── */}
       <section
-        className="relative w-full min-h-[100dvh] max-h-[700px] overflow-hidden bg-black"
+        className="relative w-full min-h-[100dvh] md:min-h-0 md:aspect-[16/9] overflow-hidden bg-black"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
