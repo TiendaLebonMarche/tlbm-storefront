@@ -97,9 +97,9 @@ const SLIDES: Slide[] = [
     cta: "Ver Deportes y Aire Libre",
     href: "/co/collections/deportes-y-aire-libre",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786470279/hero/hero-slider4-cano.png",
-    overlayFrom: "from-black/40",
-    overlayTo: "to-black/10",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786471506/hero/hero-slider4-v4.jpg",
+    overlayFrom: "from-black/50",
+    overlayTo: "to-black/20",
     textSide: "right",
     textTheme: "light",
   },
