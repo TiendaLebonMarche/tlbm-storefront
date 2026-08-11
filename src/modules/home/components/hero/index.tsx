@@ -89,17 +89,19 @@ const SLIDES: Slide[] = [
   },
   {
     id: 4,
-    label: "Bucaramanga",
-    title: "Hecho para ti,\ndesde Santander",
+    label: "Aventura en San Gil",
+    title: "Tu aventura,\na prueba de agua",
+    highlight: "a prueba de agua",
     subtitle:
-      "Tienda virtual con corazón bumangués. Envíos a toda Colombia con el mejor servicio.",
-    cta: "Conócenos",
-    href: "/store",
+      "Bolsas impermeables y gadgets originales para el río más cercano.",
+    cta: "Ver Deportes y Aire Libre",
+    href: "/co/collections/deportes-y-aire-libre",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842113/hero/hero-4.jpg",
-    overlayFrom: "from-black/60",
-    overlayTo: "to-black/25",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786470279/hero/hero-slider4-cano.png",
+    overlayFrom: "from-black/40",
+    overlayTo: "to-black/10",
     textSide: "right",
+    textTheme: "light",
   },
 ]
 
