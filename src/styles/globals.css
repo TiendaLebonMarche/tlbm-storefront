@@ -434,10 +434,12 @@
 .animate-marquee-fixed { 
   display: inline-flex !important;
   width: max-content !important;
-  animation: marquee-fixed 45s linear infinite; 
+  animation: marquee-fixed 20s linear infinite; 
 }
-/* Pausa al hover + accesibilidad (prefers-reduced-motion) */
-.animate-marquee-fixed:hover { animation-play-state: paused; }
+/* Movimiento CONTINUO (fix 11-ago): sin pausa al hover — el usuario la percibía
+   estática porque al ser el header superior el cursor está encima casi siempre,
+   y antes se congelaba (animation-play-state: paused). Se mantiene la pausa
+   solo para prefers-reduced-motion (accesibilidad). */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee-fixed { animation: none !important; }
 }
@@ -445,7 +447,7 @@
 /* Mobile: animación más lenta para el texto largo */
 @media (max-width: 640px) {
   .animate-marquee-fixed {
-    animation-duration: 50s !important;
+    animation-duration: 24s !important;
   }
 }
 
