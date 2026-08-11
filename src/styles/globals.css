@@ -436,15 +436,13 @@
   width: max-content !important;
   animation: marquee-fixed 20s linear infinite; 
 }
-/* Movimiento CONTINUO (fix 11-ago): sin pausa al hover — el usuario la percibía
-   estática porque al ser el header superior el cursor está encima casi siempre,
-   y antes se congelaba (animation-play-state: paused). Se mantiene la pausa
-   solo para prefers-reduced-motion (accesibilidad). */
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee-fixed { animation: none !important; }
-}
-
-/* Mobile: animación más lenta para el texto largo */
+/* Movimiento CONTINUO SIEMPRE (fix 11-ago, 2ª ronda):
+   1. Sin pausa al hover — el cursor está sobre el header casi siempre y la
+      congelaba (animation-play-state: paused).
+   2. SIN bloqueo por prefers-reduced-motion — Windows/macOS con "reducir
+      movimiento" activo (muy común: animaciones del sistema desactivadas)
+      congelaba la marquesina con animation:none. La marquesina es un elemento
+      de marca que SIEMPRE debe moverse (decisión Julián 11-ago). */
 @media (max-width: 640px) {
   .animate-marquee-fixed {
     animation-duration: 24s !important;
