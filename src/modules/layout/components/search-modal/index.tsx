@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Transition, Dialog, DialogPanel } from "@headlessui/react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useRouter } from "next/navigation"
@@ -10,16 +10,22 @@ import { useRouter } from "next/navigation"
  *
  * Editoral premium: overlay blanco puro + blur, título serif con tracking,
  * input gigante con clamp() responsive (nunca desborda en mobile), chips de
- * búsquedas populares reales del catálogo y accesos directos a colecciones
- * (12 reales de Medusa). El cambio de tema (luna) ya no existe en la tienda.
+ * búsquedas populares REALES del catálogo y colecciones REALES de Medusa.
+ *
+ * Las sugerencias son DINÁMICAS: se cargan de /api/search-suggestions (que
+ * deriva colecciones y términos de los títulos de productos de Medusa, con
+ * cache invalidable). Si el endpoint falla, se muestran los valores de
+ * respaldo estáticos para no romper el modal.
  *
  * - Enter/click → /store?q=... (la StorePage filtra con el query param q).
  * - ESC cierra (HeadlessUI Dialog lo maneja).
  * - Autofocus al abrir.
  */
-const POPULAR = ["parlante", "smartwatch", "audífonos", "mouse", "reloj", "dron"]
 
-const COLLECTIONS = [
+// Respaldo estático (se muestra solo mientras carga o si la API falla)
+const FALLBACK_POPULAR = ["parlante", "smartwatch", "audífonos", "mouse", "reloj", "dron"]
+
+const FALLBACK_COLLECTIONS = [
   { title: "Smartwatches", handle: "smartwatches" },
   { title: "Parlantes y Audio", handle: "parlantes-y-audio" },
   { title: "Gaming y PC", handle: "gaming-y-pc" },
@@ -28,9 +34,15 @@ const COLLECTIONS = [
   { title: "Drones y DJI", handle: "drones-y-dji" },
 ]
 
+type Suggestions = {
+  popular: string[]
+  collections: { title: string; handle: string }[]
+}
+
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState("")
+  const [suggestions, setSuggestions] = useState<Suggestions | null>(null)
   const router = useRouter()
 
   const openSearch = () => {
@@ -38,6 +50,17 @@ export default function SearchModal() {
     setIsOpen(true)
   }
   const closeSearch = () => setIsOpen(false)
+
+  // Cargar sugerencias dinámicas la primera vez que se abre (una sola vez)
+  useEffect(() => {
+    if (!isOpen || suggestions) return
+    fetch("/api/search-suggestions", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: Suggestions | null) => {
+        if (data && data.popular?.length) setSuggestions(data)
+      })
+      .catch(() => {}) // fallback estático si falla
+  }, [isOpen, suggestions])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,6 +74,9 @@ export default function SearchModal() {
     router.push(`/store?q=${encodeURIComponent(term)}`)
     closeSearch()
   }
+
+  const popular = suggestions?.popular?.length ? suggestions.popular : FALLBACK_POPULAR
+  const collections = suggestions?.collections?.length ? suggestions.collections : FALLBACK_COLLECTIONS
 
   return (
     <>
@@ -129,13 +155,13 @@ export default function SearchModal() {
                     </button>
                   </form>
 
-                  {/* Búsquedas populares */}
+                  {/* Búsquedas populares — dinámicas del catálogo */}
                   <div className="mb-8 md:mb-10">
                     <p className="text-[10px] uppercase tracking-[0.25em] text-brand-gray mb-3">
                       Búsquedas populares
                     </p>
                     <div className="flex flex-wrap justify-center gap-2 md:gap-2.5 px-2">
-                      {POPULAR.map((term) => (
+                      {popular.map((term) => (
                         <button
                           key={term}
                           onClick={() => searchQuick(term)}
@@ -147,13 +173,13 @@ export default function SearchModal() {
                     </div>
                   </div>
 
-                  {/* Colecciones reales */}
+                  {/* Colecciones reales — dinámicas de Medusa */}
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.25em] text-brand-gray mb-3">
                       Explorar colecciones
                     </p>
                     <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-2">
-                      {COLLECTIONS.map((c) => (
+                      {collections.map((c) => (
                         <LocalizedClientLink
                           key={c.handle}
                           href={`/collections/${c.handle}`}
