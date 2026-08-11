@@ -43,7 +43,7 @@ const SLIDES: Slide[] = [
     title: "Tecnología original,\ndifícil de encontrar",
     highlight: "difícil de encontrar",
     subtitle:
-      "Parlantes, smartwatches, drones y accesorios de las marcas que amas — 100% originales, con envío a toda Colombia.",
+      "Las marcas que amas, 100% originales, con envío a toda Colombia.",
     cta: "Descubrir Colección",
     href: "/store",
     image:
@@ -361,7 +361,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         <div
           className={`absolute inset-0 z-20 flex ${
             currentSlide.alignY === "top"
-              ? "items-start pt-24 md:pt-28 lg:pt-32"
+              ? "items-start pt-20 md:pt-24 lg:pt-28"
               : "items-center"
           }`}
         >
