@@ -25,26 +25,16 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
   const lastTsRef = useRef(0)
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pointerRef = useRef<{ x: number; y: number; moved: boolean } | null>(null)
-  // Lazy initializer: leer prefers-reduced-motion una sola vez al montar (en
-  // vez de setState en effect — React 19). Guard SSR (window no existe en server).
-  const [reducedMotion, setReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  )
-
-  // Escuchar cambios de prefers-reduced-motion (WCAG): sin movimiento automático
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
-    mq.addEventListener("change", onChange)
-    return () => mq.removeEventListener("change", onChange)
-  }, [])
+  // NOTA (fix 11-ago): el carousel SIEMPRE se mueve — elemento de marca.
+  // El bloqueo por prefers-reduced-motion (Windows/macOS/Android con "reducir
+  // movimiento") detenía el carousel por completo y el usuario lo percibía
+  // estático, igual que la marquesina superior. El carousel de colecciones
+  // debe animarse siempre (decisión Julián 11-ago); la pausa manual/swipe se
+  // conserva (pausedRef) porque es UX intencional del usuario, no del SO.
 
   // Bucle continuo rAF: offset crece 0 → halfW (final copia A = inicio copia B);
   // al llegar reinicia a 0 → salto INVISIBLE. Sin lectura de layout por frame.
   useEffect(() => {
-    if (reducedMotion) return
     const track = trackRef.current
     if (!track) return
 
@@ -97,7 +87,7 @@ export default function CollectionsCarouselClient({ cards }: { cards: Collection
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener("resize", onResize)
     }
-  }, [reducedMotion, cards.length])
+  }, [cards.length])
 
   const pause = useCallback(() => {
     pausedRef.current = true
