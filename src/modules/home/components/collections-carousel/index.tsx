@@ -1,22 +1,22 @@
 import { listCollections } from "@lib/data/collections"
 import CollectionsCarouselClient from "./collections-carousel-client"
 
-// Imágenes abstractas premium por handle de colección (generadas con IA 11-ago-2026,
-// Nano Banana Pro — sin productos, atmósfera/color/textura con paleta estratégica por
-// categoría). Las 12 colecciones tienen imagen — ya no hay fallback a thumbnail.
+// Imágenes LIFESTYLE premium por handle de colección (generadas con IA 11-ago-2026,
+// Nano Banana Pro — escenas de vida con personas jóvenes colombianas, energía y color;
+// el momento es el mensaje, sin producto protagonista). Las 12 colecciones tienen imagen.
 const COLLECTION_IMAGES: Record<string, string> = {
-  "parlantes-y-audio": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786472410/categories/cat-parlantes-y-audio.jpg",
-  "gaming-y-pc": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786472776/categories/cat-gaming-y-pc.jpg",
-  "moda-y-bolsos": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786472861/categories/cat-moda-y-bolsos.jpg",
-  "hogar-y-cocina": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786472915/categories/cat-hogar-y-cocina.jpg",
-  juguetes: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473072/categories/cat-juguetes.jpg",
-  "camaras-insta360": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473095/categories/cat-camaras-insta360.jpg",
-  "drones-y-dji": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473150/categories/cat-drones-y-dji.jpg",
-  "deportes-y-aire-libre": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473192/categories/cat-deportes-y-aire-libre.png",
-  smartwatches: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473246/categories/cat-smartwatches.jpg",
-  "tablets-y-stylus": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473270/categories/cat-tablets-y-stylus.jpg",
-  starlink: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473296/categories/cat-starlink.jpg",
-  "amor-y-amistad": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786473351/categories/cat-amor-y-amistad.jpg",
+  "parlantes-y-audio": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786474556/categories/cat-v3-parlantes-y-audio.jpg",
+  "gaming-y-pc": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786474944/categories/cat-v3-gaming-y-pc.png",
+  "moda-y-bolsos": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786474962/categories/cat-v3-moda-y-bolsos.png",
+  "hogar-y-cocina": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786474975/categories/cat-v3-hogar-y-cocina.png",
+  juguetes: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786474991/categories/cat-v3-juguetes.png",
+  "camaras-insta360": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475046/categories/cat-v3-camaras-insta360.png",
+  "drones-y-dji": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475081/categories/cat-v3-drones-y-dji.png",
+  "deportes-y-aire-libre": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475106/categories/cat-v3-deportes-y-aire-libre.jpg",
+  smartwatches: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475139/categories/cat-v3-smartwatches.png",
+  "tablets-y-stylus": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475183/categories/cat-v3-tablets-y-stylus.png",
+  starlink: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475208/categories/cat-v3-starlink.jpg",
+  "amor-y-amistad": "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786475250/categories/cat-v3-amor-y-amistad.png",
 }
 
 export type CollectionCard = {
