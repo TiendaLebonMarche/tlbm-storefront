@@ -29,6 +29,10 @@ const GENERIC = new Set([
   "portátil", "negro", "blanco", "gris", "azul", "rojo", "verde", "rosa",
   "grande", "pequeno", "pequeño", "con", "para", "2", "3", "4", "5", "6",
   "7", "8", "9", "10", "w", "v2", "v3", "x5", "x4", "s320", "buds",
+  "bolsa", "funda", "cable", "cargador", "estuche", "soporte", "protector",
+  "control", "mochila", "morral", "case", "cover", "tapita", "gorra",
+  "40w", "30w", "15w", "20w", "50w", "100w", "watt", "watts", "mah",
+  "impermeable", "ergonomico", "ergonómico", "silencioso", "gaming",
 ])
 
 const normalize = (s: string) =>
@@ -73,7 +77,19 @@ export async function GET() {
       }
     }
 
+    // Añadir las categorías de los productos (alta señal: reflejan el catálogo)
+    for (const c of collections) {
+      const tokens = normalize(c.title).split(/\s+/)
+      for (const t of tokens) {
+        if (t.length < 3 || t.length > 20) continue
+        if (STOPWORDS.has(t) || GENERIC.has(t)) continue
+        freq.set(t, (freq.get(t) || 0) + 3) // las colecciones pesan más
+      }
+    }
+
+    // Solo términos con frecuencia ≥2 (evita ruido de 1 solo producto)
     const popular = Array.from(freq.entries())
+      .filter(([, count]) => count >= 2)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 6)
       .map(([term]) => term)
