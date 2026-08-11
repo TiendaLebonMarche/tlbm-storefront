@@ -74,15 +74,17 @@ const SLIDES: Slide[] = [
     id: 3,
     label: "Ofertas Especiales",
     title: "Ofertas reales en\nproductos originales",
+    highlight: "Ofertas reales",
     subtitle:
-      "Descuentos en productos seleccionados. La calidad que buscas, al mejor precio.",
+      "Descuentos en lo mejor de la tienda. La calidad que buscas, al mejor precio.",
     cta: "Ver Ofertas",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842112/hero/hero-3.jpg",
-    overlayFrom: "from-black/55",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786467011/hero/hero-slider3v1.jpg",
+    overlayFrom: "from-black/70",
     overlayTo: "to-black/20",
     textSide: "left",
+    textTheme: "light",
   },
   {
     id: 4,
