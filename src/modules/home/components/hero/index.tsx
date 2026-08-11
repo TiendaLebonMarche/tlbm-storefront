@@ -47,7 +47,7 @@ const SLIDES: Slide[] = [
     cta: "Descubrir Colección",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465182/hero/hero-slider1v2.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465781/hero/hero-slider1v4.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "left",
