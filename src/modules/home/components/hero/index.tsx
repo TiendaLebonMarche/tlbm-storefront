@@ -56,19 +56,20 @@ const SLIDES: Slide[] = [
   },
   {
     id: 2,
-    label: "Productos Exclusivos",
-    title: "Originalidad que\nte distingue",
-    highlight: "te distingue",
+    label: "Tu Espacio, Tu Ritmo",
+    title: "La tecnología que\nvive contigo",
+    highlight: "vive contigo",
     subtitle:
-      "Piezas únicas que no encuentras en cualquier tienda, para tu estilo.",
+      "Smartwatches, parlantes y audífonos originales para tu día a día.",
     cta: "Ver Productos",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786466596/hero/hero-slider2v1.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786468550/hero/hero-slider2-alf2.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "right",
     textTheme: "dark",
+    alignY: "top",
   },
   {
     id: 3,
