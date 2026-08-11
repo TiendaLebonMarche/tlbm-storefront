@@ -11,7 +11,7 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative py-20 md:py-28 bg-white dark:bg-[#0A0A0F]"
+      className="relative py-14 md:py-20 bg-white dark:bg-[#0A0A0F]"
       aria-label="Preguntas frecuentes"
     >
       <div className="glow-line absolute top-0 left-0 right-0" />

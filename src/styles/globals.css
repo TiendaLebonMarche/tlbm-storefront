@@ -656,7 +656,7 @@
 /* ── Carousel colecciones (snap suave, 10-ago-2026) ────────────────────────
    Tarjetas GRANDES, movimiento SOLO al avanzar (autoplay/flechas/swipe).
    Sin marquee continuo ni zoom por frame (se sentía pesado). */
-.cats-section { padding: 64px 0 72px; overflow: hidden; background: var(--bg); }
+.cats-section { padding: 48px 0 56px; overflow: hidden; background: var(--bg); }
 .cats-head { text-align: center; margin-bottom: 36px; padding: 0 20px; }
 .cats-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
@@ -733,7 +733,7 @@
 .cats-nav:active { transform: translateY(-50%) scale(0.95); }
 
 @media (max-width: 640px) {
-  .cats-section { padding: 48px 0 56px; }
+  .cats-section { padding: 40px 0 48px; }
   .cats-track { padding: 12px 20px; gap: 12px; }
   .cat-card { width: 78vw; }
   .cats-nav { width: 40px; height: 40px; font-size: 15px; }

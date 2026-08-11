@@ -40,9 +40,9 @@ export default async function HotDeals({
   const shuffled = [...products].sort(() => 0.5 - Math.random())
 
   return (
-      <section className="w-full bg-white py-20 md:py-24">
+      <section className="w-full bg-white py-12 md:py-16">
         <div className="content-container px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 gap-10">
             <div className="max-w-2xl">
               <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
                 Nuestros mejores productos
@@ -67,7 +67,7 @@ export default async function HotDeals({
             <InfiniteProducts 
               initialProducts={shuffled} 
               region={region} 
-              gridClass="grid grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-12 mb-8"
+              gridClass="grid grid-cols-2 small:grid-cols-3 gap-x-4 small:gap-x-10 medium:gap-x-14 gap-y-8 mb-8"
               limit={9}
             />
           </div>

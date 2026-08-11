@@ -34,10 +34,10 @@ function StarIcon({ filled }: { filled: boolean }) {
 
 export default function AnimatedTestimonialsSection() {
   return (
-    <section className="relative py-20 md:py-24 bg-white dark:bg-[#0A0A0F]">
+    <section className="relative py-14 md:py-20 bg-white dark:bg-[#0A0A0F]">
       <div className="glow-line absolute top-0 left-0 right-0" />
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
-        <div className="text-center max-w-2xl mx-auto mb-14 reveal">
+        <div className="text-center max-w-2xl mx-auto mb-10 reveal">
           <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
             <span className="w-8 h-px bg-[#D4AF37]/30" />
             Clientes

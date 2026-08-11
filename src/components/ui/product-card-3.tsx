@@ -24,8 +24,8 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
   const duplicatedItems = [...items, ...items]
 
   return (
-    <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 md:py-20 overflow-hidden">
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-10">
+    <section className="w-full bg-white dark:bg-[#0A0A0F] py-12 md:py-16 overflow-hidden">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-8">
         <div className="flex items-end justify-between">
           <div>
             <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
