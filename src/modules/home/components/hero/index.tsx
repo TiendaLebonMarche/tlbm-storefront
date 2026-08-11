@@ -51,7 +51,7 @@ const SLIDES: Slide[] = [
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465781/hero/hero-slider1v4.jpg",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786465781/hero/hero-slider1v4.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786481301/hero/hero-mobile-slide1.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "left",
@@ -70,7 +70,7 @@ const SLIDES: Slide[] = [
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786469627/hero/hero-slider2-comp.jpg",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786469627/hero/hero-slider2-comp.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786481330/hero/hero-mobile-slide2.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "right",
@@ -89,7 +89,7 @@ const SLIDES: Slide[] = [
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786469043/hero/hero-slider3A.png",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786469043/hero/hero-slider3A.png",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786481367/hero/hero-mobile-slide3.png",
     overlayFrom: "from-black/50",
     overlayTo: "to-black/10",
     textSide: "left",
@@ -107,7 +107,7 @@ const SLIDES: Slide[] = [
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786471506/hero/hero-slider4-v4.jpg",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786471506/hero/hero-slider4-v4.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786481401/hero/hero-mobile-slide4.png",
     overlayFrom: "from-black/50",
     overlayTo: "to-black/20",
     textSide: "right",
@@ -349,7 +349,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
 
       {/* ── HERO SLIDER ── */}
       <section
-        className="relative w-full min-h-[100dvh] md:min-h-0 md:aspect-[16/9] overflow-hidden bg-black"
+        className="relative w-full aspect-[3/4] min-[480px]:aspect-[16/9] md:aspect-[16/9] overflow-hidden bg-black"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -386,7 +386,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         <div
           className={`absolute inset-0 z-20 flex ${
             currentSlide.alignY === "top"
-              ? "items-start pt-20 md:pt-24 lg:pt-28"
+              ? "items-start pt-6 sm:pt-10 md:pt-24 lg:pt-28"
               : "items-center"
           }`}
         >
