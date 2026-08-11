@@ -8,6 +8,7 @@ const offers = [
     title: "Audio Profesional",
     subtitle: "Parlantes y auriculares con la mejor fidelidad de sonido",
     bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786479006/mascotas/mascota-oferta-audio.jpg",
+    bgMobile: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786480089/mascotas/mascota-oferta-audio-mob.jpg",
     label: "Precio de Selección",
     href: "/store?q=audio",
     align: "right",
@@ -16,6 +17,7 @@ const offers = [
     title: "Smartwatches",
     subtitle: "Smartwatches seleccionados con envío a toda Colombia",
     bg: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786479579/mascotas/mascota-oferta-smart-v2.jpg",
+    bgMobile: "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786480127/mascotas/mascota-oferta-smart-mob.png",
     label: "Selección Global",
     href: "/store?q=smartwatch",
     align: "right",
@@ -44,8 +46,8 @@ export default function OfertasParallax() {
 
   return (
     <section className="relative bg-black overflow-hidden">
-      {/* Slides container */}
-      <div className="relative h-[56vh] min-h-[420px] md:h-[85vh]">
+      {/* Slides container — mobile 56vh (imagen vertical 3:4), desktop 85vh (16:9) */}
+      <div className="relative h-[56vh] min-h-[480px] md:h-[85vh]">
         {offers.map((offer, i) => {
           const active = i === current
           return (
@@ -57,17 +59,27 @@ export default function OfertasParallax() {
                   : "opacity-0 scale-[1.03] pointer-events-none"
               }`}
             >
-              {/* Background image — parallax */}
+              {/* Background image — mobile vertical / desktop parallax */}
               <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
                 style={{
                   backgroundImage: `url('${offer.bg}')`,
+                  // Mobile: imagen vertical 3:4 nativa (sin recorte), desktop 16:9
+                  ["--mobile-bg" as string]: `url('${offer.bgMobile}')`,
                 }}
+                data-bg-mobile={offer.bgMobile}
               />
 
-              {/* Overlay gradient — texto SIEMPRE a la derecha */}
+              {/* Overlay — mobile: gradiente inferior (texto abajo); desktop: derecho */}
               <div
                 className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(0deg, rgba(10,10,15,0.9) 0%, rgba(10,10,15,0.45) 35%, transparent 60%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 hidden md:block"
                 style={{
                   background:
                     "linear-gradient(-90deg, rgba(10,10,15,0.88) 0%, rgba(10,10,15,0.5) 45%, transparent 75%)",
@@ -83,12 +95,12 @@ export default function OfertasParallax() {
                 }}
               />
 
-              {/* Content — derecha */}
-              <div className="relative z-10 h-full max-w-[90rem] mx-auto px-6 lg:px-10 flex items-center">
-                <div className="max-w-lg ml-auto text-right">
+              {/* Content — mobile: abajo-centro; desktop: derecha */}
+              <div className="relative z-10 h-full max-w-[90rem] mx-auto px-6 lg:px-10 flex items-end md:items-center pb-16 md:pb-0">
+                <div className="w-full md:max-w-lg md:ml-auto text-center md:text-right">
                   {/* Label — stagger 1 */}
                   <div
-                    className={`inline-flex items-center justify-end gap-3 text-[#D4AF37] text-[10px] font-bold uppercase tracking-[.35em] mb-6 transition-all duration-700 delay-150 ${
+                    className={`inline-flex items-center justify-center md:justify-end gap-3 text-[#D4AF37] text-[10px] font-bold uppercase tracking-[.35em] mb-4 transition-all duration-700 delay-150 ${
                       active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     }`}
                   >
@@ -98,7 +110,7 @@ export default function OfertasParallax() {
 
                   {/* Título — stagger 2 */}
                   <h2
-                    className={`text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[.9] mb-5 text-white transition-all duration-700 delay-300 ${
+                    className={`text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[.95] mb-4 text-white transition-all duration-700 delay-300 ${
                       active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     }`}
                   >
@@ -107,7 +119,7 @@ export default function OfertasParallax() {
 
                   {/* Subtítulo — stagger 3 */}
                   <p
-                    className={`text-base md:text-lg leading-relaxed mb-9 font-light text-white/60 transition-all duration-700 delay-450 ${
+                    className={`text-base md:text-lg leading-relaxed mb-7 font-light text-white/70 transition-all duration-700 delay-450 ${
                       active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     }`}
                   >
@@ -116,7 +128,7 @@ export default function OfertasParallax() {
 
                   {/* Botón — stagger 4 */}
                   <div
-                    className={`transition-all duration-700 delay-600 ${
+                    className={`flex md:block justify-center transition-all duration-700 delay-600 ${
                       active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     }`}
                   >
@@ -179,6 +191,17 @@ export default function OfertasParallax() {
           }}
         />
       </div>
+
+      {/* Switcher móvil: la imagen vertical se aplica por CSS (media query) */}
+      <style jsx>{`
+        @media (max-width: 767px) {
+          [data-bg-mobile] {
+            background-image: var(--mobile-bg) !important;
+            background-size: cover !important;
+            background-position: center !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

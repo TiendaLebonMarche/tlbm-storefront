@@ -21,8 +21,10 @@ interface Slide {
   subtitle: string
   cta: string
   href: string
-  /** Primary media: image URL */
+  /** Primary media: image URL (desktop) */
   image: string
+  /** Mobile-optimized image URL (vertical c_fill,g_auto para evitar recorte 74%) */
+  imageMobile?: string
   /** Optional video URL (if present, plays instead of static image) */
   video?: string
   overlayFrom: string
@@ -48,6 +50,8 @@ const SLIDES: Slide[] = [
     href: "/store",
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465781/hero/hero-slider1v4.jpg",
+    imageMobile:
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786465781/hero/hero-slider1v4.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "left",
@@ -65,6 +69,8 @@ const SLIDES: Slide[] = [
     href: "/store",
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786469627/hero/hero-slider2-comp.jpg",
+    imageMobile:
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786469627/hero/hero-slider2-comp.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "right",
@@ -82,6 +88,8 @@ const SLIDES: Slide[] = [
     href: "/store",
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786469043/hero/hero-slider3A.png",
+    imageMobile:
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786469043/hero/hero-slider3A.png",
     overlayFrom: "from-black/50",
     overlayTo: "to-black/10",
     textSide: "left",
@@ -98,6 +106,8 @@ const SLIDES: Slide[] = [
     href: "/co/collections/deportes-y-aire-libre",
     image:
       "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786471506/hero/hero-slider4-v4.jpg",
+    imageMobile:
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto,w_390,h_844,c_fill,g_auto/v1786471506/hero/hero-slider4-v4.jpg",
     overlayFrom: "from-black/50",
     overlayTo: "to-black/20",
     textSide: "right",
@@ -154,18 +164,26 @@ function SlideMedia({
 
   return (
     <>
-      {/* Image (always renders as fallback / poster) */}
-      <Image
-        src={slide.image}
-        alt={slide.label}
-        fill
-        sizes="100vw"
-        className={`object-cover transition-opacity duration-500 ${
-          slide.video && isActive ? "opacity-0" : "opacity-100"
-        }`}
-        priority={slide.id <= 2}
-        fetchPriority={slide.id === 1 ? "high" : "auto"}
-      />
+      {/* Image (always renders as fallback / poster) — responsive: mobile vertical, desktop 16:9 */}
+      <picture>
+        {slide.imageMobile && (
+          <source
+            media="(max-width: 767px)"
+            srcSet={slide.imageMobile}
+          />
+        )}
+        <Image
+          src={slide.image}
+          alt={slide.label}
+          fill
+          sizes="100vw"
+          className={`object-cover transition-opacity duration-500 ${
+            slide.video && isActive ? "opacity-0" : "opacity-100"
+          }`}
+          priority={slide.id <= 2}
+          fetchPriority={slide.id === 1 ? "high" : "auto"}
+        />
+      </picture>
 
       {/* Video (plays only when active) */}
       {slide.video && (
