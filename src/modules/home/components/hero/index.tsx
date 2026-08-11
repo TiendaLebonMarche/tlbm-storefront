@@ -28,25 +28,31 @@ interface Slide {
   overlayFrom: string
   overlayTo: string
   textSide: "left" | "right"
+  /** Tema del texto según el fondo de la imagen: "light" = texto blanco sobre
+   * imagen oscura; "dark" = texto negro sobre imagen clara (slider 1 luminoso). */
+  textTheme?: "light" | "dark"
+  /** Alineación vertical del bloque texto+botón: "center" (default) o "top"
+   * (para composiciones con espacio libre arriba, como el slider 1). */
+  alignY?: "center" | "top"
 }
 
 const SLIDES: Slide[] = [
   {
     id: 1,
     label: "Tienda Virtual Bucaramanga",
-    title: "Tienda virtual en\nBucaramanga con\nproductos 100% originales",
-    highlight: "100% originales",
+    title: "Tecnología original,\ndifícil de encontrar",
+    highlight: "difícil de encontrar",
     subtitle:
-      "Tecnología y gadgets originales que no encuentras en cualquier tienda, ahora en Bucaramanga.",
+      "Parlantes, smartwatches, drones y accesorios de las marcas que amas — 100% originales, con envío a toda Colombia.",
     cta: "Descubrir Colección",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1785842108/hero/hero-1.jpg",
-    video:
-      "https://res.cloudinary.com/dgo9tm9e2/video/upload/v1784322670/12655226_3834_2160_30fps_gias92.mp4",
-    overlayFrom: "from-black/65",
-    overlayTo: "to-black/30",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465182/hero/hero-slider1v2.jpg",
+    overlayFrom: "from-black/0",
+    overlayTo: "to-black/0",
     textSide: "left",
+    textTheme: "dark",
+    alignY: "top",
   },
   {
     id: 2,
@@ -336,11 +342,15 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
           >
             <SlideMedia slide={currentSlide} isActive={true} />
 
-            {/* Gradient overlays */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-r ${currentSlide.overlayFrom} ${currentSlide.overlayTo}`}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+            {/* Gradient overlays — solo en slides oscuros (light theme no necesita) */}
+            {currentSlide.textTheme !== "dark" && (
+              <>
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${currentSlide.overlayFrom} ${currentSlide.overlayTo}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -348,7 +358,13 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         <HeroOverlay visible={isScrolled} menuSlot={menuSlot} cartSlot={cartSlot} />
 
         {/* ── TEXT CONTENT ── */}
-        <div className="absolute inset-0 z-20 flex items-center">
+        <div
+          className={`absolute inset-0 z-20 flex ${
+            currentSlide.alignY === "top"
+              ? "items-start pt-24 md:pt-28 lg:pt-32"
+              : "items-center"
+          }`}
+        >
           <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 lg:px-12">
             <motion.div
               key={`text-${slideIndex}`}
@@ -363,16 +379,30 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
               <motion.span
                 custom={0}
                 variants={textVariants}
-                className="inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase text-[#D4AF37] mb-3 md:mb-4"
+                className={`inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase mb-3 md:mb-4 ${
+                  currentSlide.textTheme === "dark"
+                    ? "text-[#B8860B]"
+                    : "text-[#D4AF37]"
+                }`}
               >
-                <span className="block w-8 h-[1px] bg-[#D4AF37]" />
+                <span
+                  className={`block w-8 h-[1px] ${
+                    currentSlide.textTheme === "dark"
+                      ? "bg-[#B8860B]"
+                      : "bg-[#D4AF37]"
+                  }`}
+                />
                 {currentSlide.label}
               </motion.span>
 
               <motion.h1
                 custom={1}
                 variants={textVariants}
-                className="font-serif font-semibold text-white whitespace-pre-line text-[2.05rem] min-[375px]:text-[2.2rem] sm:text-[2.7rem] md:text-[3.1rem] lg:text-[3.9rem] min-[1440px]:text-[4.5rem] min-[1920px]:text-[5rem] leading-[1.08] md:leading-[1.06] lg:leading-[1.03] min-[1440px]:leading-[1.01] min-[1920px]:leading-[1] tracking-[-0.008em] sm:tracking-[-0.01em] lg:tracking-[-0.012em] min-[1440px]:tracking-[-0.015em] text-balance max-w-[18ch] lg:max-w-[20ch]"
+                className={`font-serif font-semibold whitespace-pre-line text-[2.05rem] min-[375px]:text-[2.2rem] sm:text-[2.7rem] md:text-[3.1rem] lg:text-[3.9rem] min-[1440px]:text-[4.5rem] min-[1920px]:text-[5rem] leading-[1.08] md:leading-[1.06] lg:leading-[1.03] min-[1440px]:leading-[1.01] min-[1920px]:leading-[1] tracking-[-0.008em] sm:tracking-[-0.01em] lg:tracking-[-0.012em] min-[1440px]:tracking-[-0.015em] text-balance max-w-[18ch] lg:max-w-[20ch] ${
+                  currentSlide.textTheme === "dark"
+                    ? "text-brand-black"
+                    : "text-white"
+                }`}
               >
                 {currentSlide.highlight && currentSlide.title.includes(currentSlide.highlight)
                   ? (() => {
@@ -380,7 +410,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                       return (
                         <>
                           {parts[0]}
-                          <span className="text-[#D4AF37]">{currentSlide.highlight}</span>
+                          <span className="text-[#B8860B]">{currentSlide.highlight}</span>
                           {parts[1]}
                         </>
                       )
@@ -391,7 +421,11 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
               <motion.p
                 custom={2}
                 variants={textVariants}
-                className="text-sm md:text-base leading-relaxed mt-3 md:mt-5 max-w-[440px] text-white/60"
+                className={`text-sm md:text-base leading-relaxed mt-3 md:mt-5 max-w-[440px] ${
+                  currentSlide.textTheme === "dark"
+                    ? "text-brand-gray"
+                    : "text-white/60"
+                }`}
               >
                 {currentSlide.subtitle}
               </motion.p>
@@ -399,7 +433,11 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
               <motion.div custom={3} variants={textVariants} className="mt-6 md:mt-9">
                 <LocalizedClientLink
                   href={currentSlide.href}
-                  className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase bg-[#0A0A0F] text-white border border-white/10 transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 active:scale-[0.98]"
+                  className={`group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 active:scale-[0.98] ${
+                    currentSlide.textTheme === "dark"
+                      ? "bg-[#0A0A0F] text-white border border-brand-black/10 shadow-[0_8px_30px_rgba(10,10,15,0.18)] hover:shadow-[0_12px_40px_rgba(10,10,15,0.28)] hover:-translate-y-0.5"
+                      : "bg-[#0A0A0F] text-white border border-white/10"
+                  }`}
                 >
                   <span className="relative z-10">{currentSlide.cta}</span>
                   <svg
