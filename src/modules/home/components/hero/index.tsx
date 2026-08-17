@@ -395,7 +395,10 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         <div
           className={`absolute inset-0 z-20 flex ${
             currentSlide.alignY === "top"
-              ? "items-start pt-6 sm:pt-10 md:pt-24 lg:pt-28"
+              // ⚠️ pt SIEMPRE > altura del HeroOverlay + respiro (fix 17-ago):
+              //   header flotante = 64px mobile / 76px md / 88px lg → el texto
+              //   nunca debe quedar detrás del logo (bug reportado por Julián).
+              ? "items-start pt-[104px] min-[480px]:pt-[112px] sm:pt-[120px] md:pt-[128px] lg:pt-[144px] min-[1440px]:pt-[152px]"
               : "items-center"
           }`}
         >
