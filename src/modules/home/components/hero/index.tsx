@@ -221,23 +221,25 @@ function ScrollHeader({ visible, menuSlot, cartSlot }: { visible: boolean; menuS
         }`}
     >
       <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-        <div className="flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
+        <div className="relative flex items-center justify-between h-[60px] md:h-[68px] lg:h-[76px]">
           {/* Hamburger — MISMO drawer SideMenu que todas las páginas (regla 10-ago) */}
           <div className="flex-none">{menuSlot}</div>
 
-          {/* Logo centrado */}
-          <LocalizedClientLink href="/" className="flex items-center h-10 md:h-12">
-            <div className="relative w-[170px] md:w-[220px] h-full">
-              <Image
-                src={LOGO_URL}
-                alt="Tienda Le Bon Marché"
-                fill
-                sizes="220px"
-                className="object-contain"
-                priority
-              />
-            </div>
-          </LocalizedClientLink>
+          {/* Logo centrado ABSOLUTO (centro real del viewport, no del flex) */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <LocalizedClientLink href="/" className="flex items-center justify-center">
+              <div className="relative w-[190px] md:w-[240px] lg:w-[280px] h-[46px] md:h-[56px] lg:h-[64px]">
+                <Image
+                  src={LOGO_URL}
+                  alt="Tienda Le Bon Marché"
+                  fill
+                  sizes="280px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </LocalizedClientLink>
+          </div>
 
           {/* Right: Search (lupa), Theme, Cart — igual que todas las páginas (10-ago) */}
           <div className="flex items-center justify-end gap-3 lg:gap-5">
@@ -251,8 +253,14 @@ function ScrollHeader({ visible, menuSlot, cartSlot }: { visible: boolean; menuS
 }
 
 // ── Hero Overlay (floating logo + hamburger on hero) ───────────────────────
+// `theme`: hereda el tema del slide activo — "dark" = slide CLARO (logo/iconos
+// NEGROS), "light" = slide OSCURO (logo/iconos BLANCOS). Corrige el bug donde
+// el logo e iconos blancos desaparecían sobre el slide 1 claro (17-ago-2026).
 
-function HeroOverlay({ visible, menuSlot, cartSlot }: { visible: boolean; menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
+function HeroOverlay({ visible, menuSlot, cartSlot, theme }: { visible: boolean; menuSlot?: React.ReactNode; cartSlot?: React.ReactNode; theme?: string }) {
+  // theme === "dark" → slide claro → elementos oscuros (negro)
+  // theme === "light" → slide oscuro → elementos claros (blanco)
+  const isLightSlide = theme === "light"
   return (
     <div
       className={`absolute top-0 left-0 w-full z-30 transition-all duration-500 ${
@@ -260,27 +268,28 @@ function HeroOverlay({ visible, menuSlot, cartSlot }: { visible: boolean; menuSl
       }`}
     >
       <div className="max-w-[95rem] mx-auto px-4 md:px-10 lg:px-14">
-        <div className="flex items-center justify-between h-[60px] md:h-[72px]">
-          {/* Hamburger blanca (sobre hero oscuro) — MISMO drawer SideMenu que todas las páginas */}
-          <div className="flex-none text-white">{menuSlot}</div>
+        <div className="relative flex items-center justify-between h-[64px] md:h-[76px] lg:h-[88px]">
+          {/* Hamburger — color según slide (MISMO drawer SideMenu que todas las páginas) */}
+          <div className={`flex-none ${isLightSlide ? "text-white" : "text-black"}`}>{menuSlot}</div>
 
+          {/* Logo centrado ABSOLUTO, más grande; sin invert en slides claros */}
           <div className="absolute left-1/2 -translate-x-1/2">
             <LocalizedClientLink href="/" className="flex items-center justify-center">
-              <div className="relative w-[170px] md:w-[220px] lg:w-[260px] h-[51px] md:h-[65px] lg:h-[77px]">
+              <div className="relative w-[190px] md:w-[250px] lg:w-[300px] h-[52px] md:h-[68px] lg:h-[80px]">
                 <Image
                   src={LOGO_URL}
                   alt="Tienda Le Bon Marché"
                   fill
-                  sizes="260px"
-                  className="object-contain brightness-0 invert"
+                  sizes="300px"
+                  className={`object-contain ${isLightSlide ? "brightness-0 invert" : ""}`}
                   priority
                 />
               </div>
             </LocalizedClientLink>
           </div>
 
-          {/* Right: Search (lupa), Theme, Cart — blancos sobre el hero oscuro */}
-          <div className="flex items-center justify-end gap-3 lg:gap-5 text-white">
+          {/* Right: Search (lupa), Cart — negros sobre slide claro, blancos sobre oscuro */}
+          <div className={`flex items-center justify-end gap-3 lg:gap-5 ${isLightSlide ? "text-white" : "text-black"}`}>
             <HeaderSearchControls />
             {cartSlot}
           </div>
@@ -379,8 +388,8 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
           </motion.div>
         </AnimatePresence>
 
-        {/* ── Floating header (logo + hamburger) ── */}
-        <HeroOverlay visible={isScrolled} menuSlot={menuSlot} cartSlot={cartSlot} />
+        {/* ── Floating header (logo + hamburger) — color según slide activo ── */}
+        <HeroOverlay visible={isScrolled} menuSlot={menuSlot} cartSlot={cartSlot} theme={currentSlide.textTheme} />
 
         {/* ── TEXT CONTENT ── */}
         <div

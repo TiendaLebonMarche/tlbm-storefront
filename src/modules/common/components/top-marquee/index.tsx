@@ -45,7 +45,7 @@ export default function TopMarquee() {
       <LocalizedClientLink
         href="/"
         aria-label="Tienda Le Bon Marché — ir al inicio"
-        className="relative z-10 flex flex-shrink-0 items-center bg-[var(--gold)] py-[5px] pl-3.5 pr-5 md:py-[6px] md:pl-5 md:pr-7 transition-opacity hover:opacity-90"
+        className="relative z-10 flex flex-shrink-0 items-center bg-[var(--gold)] py-[7px] pl-4 pr-6 md:py-[9px] md:pl-6 md:pr-8 transition-opacity hover:opacity-90"
         style={{
           clipPath: "polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%)",
         }}
@@ -55,7 +55,7 @@ export default function TopMarquee() {
           src={LABEL_LOGO_URL}
           alt="Le Bon Marché"
           draggable={false}
-          className="h-[26px] w-auto md:h-[34px]"
+          className="h-[28px] w-auto md:h-[38px]"
         />
       </LocalizedClientLink>
 
