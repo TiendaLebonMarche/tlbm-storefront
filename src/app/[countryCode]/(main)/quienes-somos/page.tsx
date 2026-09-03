@@ -163,7 +163,7 @@ export default function AboutUsPage() {
           {/* Misión y Visión */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-20">
             <Reveal className="border-t border-black/10 pt-10">
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37] block mb-6">
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-gold block mb-6">
                 Nuestra misión
               </span>
               <p className="text-2xl md:text-[28px] font-serif text-black leading-snug">
@@ -171,7 +171,7 @@ export default function AboutUsPage() {
               </p>
             </Reveal>
             <Reveal delay={150} className="border-t border-black/10 pt-10">
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37] block mb-6">
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-gold block mb-6">
                 Nuestra visión
               </span>
               <p className="text-2xl md:text-[28px] font-serif text-black leading-snug">
@@ -187,7 +187,7 @@ export default function AboutUsPage() {
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {values.map((v) => (
-                <div key={v.title} className="border border-gray-100 p-7 hover:border-[#D4AF37]/40 transition-colors duration-300">
+                <div key={v.title} className="border border-gray-100 p-7 hover:border-gold/40 transition-colors duration-300">
                   <h4 className="font-serif text-lg text-black mb-3">{v.title}</h4>
                   <p className="text-sm text-black/60 font-light leading-relaxed">{v.text}</p>
                 </div>

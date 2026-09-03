@@ -286,7 +286,7 @@ export default function ProductActions({
                 ? 'bg-black text-white'
                 : !inStock || !selectedVariant || !isValidVariant
                   ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                  : 'bg-[#D4AF37] text-black hover:bg-[#D4AF37]/80 active:scale-[0.98] shadow-lg shadow-[#D4AF37]/20'
+                  : 'bg-gold text-black hover:bg-gold/80 active:scale-[0.98] shadow-lg shadow-gold/20'
             }`}
             data-testid="add-product-button"
           >

@@ -82,7 +82,7 @@ export default async function Home(props: {
       />
 
       {/* ═══ CONTENIDO ═══ */}
-      <div className="bg-white dark:bg-[#0A0A0F]">
+      <div className="bg-white dark:bg-ink">
         {/* TRUST BADGES */}
         <Reveal>
           <TrustBadges />

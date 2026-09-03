@@ -418,15 +418,15 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                 variants={textVariants}
                 className={`inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase mb-3 md:mb-4 ${
                   currentSlide.textTheme === "dark"
-                    ? "text-[#B8860B]"
-                    : "text-[#D4AF37]"
+                    ? "text-gold-dark"
+                    : "text-gold"
                 }`}
               >
                 <span
                   className={`block w-8 h-[1px] ${
                     currentSlide.textTheme === "dark"
-                      ? "bg-[#B8860B]"
-                      : "bg-[#D4AF37]"
+                      ? "bg-gold-dark"
+                      : "bg-gold"
                   }`}
                 />
                 {currentSlide.label}
@@ -447,7 +447,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                       return (
                         <>
                           {parts[0]}
-                          <span className="text-[#B8860B]">{currentSlide.highlight}</span>
+                          <span className="text-gold-dark">{currentSlide.highlight}</span>
                           {parts[1]}
                         </>
                       )
@@ -472,8 +472,8 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
                   href={currentSlide.href}
                   className={`group relative inline-flex items-center gap-2 px-7 md:px-9 py-3 md:py-4 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 active:scale-[0.98] ${
                     currentSlide.textTheme === "dark"
-                      ? "bg-[#0A0A0F] text-white border border-brand-black/10 shadow-[0_8px_30px_rgba(10,10,15,0.18)] hover:shadow-[0_12px_40px_rgba(10,10,15,0.28)] hover:-translate-y-0.5"
-                      : "bg-[#0A0A0F] text-white border border-white/10"
+                      ? "bg-ink text-white border border-brand-black/10 shadow-[0_8px_30px_rgba(10,10,15,0.18)] hover:shadow-[0_12px_40px_rgba(10,10,15,0.28)] hover:-translate-y-0.5"
+                      : "bg-ink text-white border border-white/10"
                   }`}
                 >
                   <span className="relative z-10">{currentSlide.cta}</span>
@@ -527,13 +527,13 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
               <span
                 className={`block rounded-full transition-all duration-500 ${
                   index === slideIndex
-                    ? "w-8 md:w-10 h-[2px] bg-[#D4AF37]"
+                    ? "w-8 md:w-10 h-[2px] bg-gold"
                     : "w-2 h-2 bg-white/60 group-hover:bg-white"
                 }`}
               />
               <span
                 className={`text-[9px] font-bold tracking-[0.15em] transition-all duration-500 ${
-                  index === slideIndex ? "text-[#D4AF37]" : "text-white/50"
+                  index === slideIndex ? "text-gold" : "text-white/50"
                 }`}
               >
                 {String(index + 1).padStart(2, "0")}

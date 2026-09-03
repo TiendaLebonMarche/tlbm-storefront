@@ -93,7 +93,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
   }
 
   return (
-    <section className="w-full bg-white dark:bg-[#0A0A0F] py-16 lg:py-20">
+    <section className="w-full bg-white dark:bg-ink py-16 lg:py-20">
       <div className="content-container">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
@@ -107,7 +107,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
 
           <div
             ref={containerRef}
-            className={`relative group bg-[#0A0A0F] overflow-hidden aspect-video cursor-pointer rounded-sm ${hasError ? '' : ''}`}
+            className={`relative group bg-ink overflow-hidden aspect-video cursor-pointer rounded-sm ${hasError ? '' : ''}`}
             onClick={togglePlay}
           >
             <video
@@ -123,20 +123,20 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
             {/* Loading spinner */}
             {isLoading && !hasError && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <div className="w-12 h-12 border-2 border-white/20 border-t-[#D4AF37] rounded-full animate-spin" />
+                <div className="w-12 h-12 border-2 border-white/20 border-t-gold rounded-full animate-spin" />
               </div>
             )}
 
             {/* Error state */}
             {hasError && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 gap-4">
-                <AlertTriangle className="w-10 h-10 text-[#D4AF37]/60" />
+                <AlertTriangle className="w-10 h-10 text-gold/60" />
                 <p className="text-white/60 text-sm text-center max-w-xs">
                   El video no pudo cargarse. Puede deberse a restricciones de la fuente.
                 </p>
                 <button
                   onClick={handleRetry}
-                  className="flex items-center gap-2 px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] border border-[#D4AF37]/30 hover:bg-[#D4AF37]/10 transition-all duration-300"
+                  className="flex items-center gap-2 px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-gold border border-gold/30 hover:bg-gold/10 transition-all duration-300"
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
                   Reintentar
@@ -160,7 +160,7 @@ export default function ProductVideo({ videoUrl, title }: ProductVideoProps) {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-                      className="text-white hover:text-[#D4AF37] transition-colors"
+                      className="text-white hover:text-gold transition-colors"
                       aria-label={isPlaying ? "Pausar" : "Reproducir"}
                     >
                       {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" fill="white" />}

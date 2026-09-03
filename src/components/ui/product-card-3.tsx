@@ -24,24 +24,24 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
   const duplicatedItems = [...items, ...items]
 
   return (
-    <section className="w-full bg-white dark:bg-[#0A0A0F] py-12 md:py-16 overflow-hidden">
+    <section className="w-full bg-white dark:bg-ink py-12 md:py-16 overflow-hidden">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10 mb-8">
         <div className="flex items-end justify-between">
           <div>
-            <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
-              <span className="w-8 h-px bg-[#D4AF37]/30" />
+            <div className="inline-flex items-center gap-3 text-gold/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+              <span className="w-8 h-px bg-gold/30" />
               Los favoritos
             </div>
             <h2 className="text-[42px] md:text-[56px] xl:text-[72px] leading-[0.95] tracking-[-0.05em] font-serif font-bold text-gray-900 dark:text-white">
               Lo más{" "}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gold to-gold/70 bg-clip-text text-transparent">
                 vendidos
               </span>
             </h2>
           </div>
           <LocalizedClientLink
             href="/store"
-            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-[#D4AF37] transition-colors group active:scale-95"
+            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-gold transition-colors group active:scale-95"
           >
             Ver Todo
             <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,10 +77,10 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                     </div>
                   )}
                   {/* Gold overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Badge */}
-                  <span className="absolute top-3 left-3 text-white text-[8px] sm:text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-[#0A0A0F]">
+                  <span className="absolute top-3 left-3 text-white text-[8px] sm:text-[7px] font-bold uppercase tracking-[.18em] px-2.5 py-1.5 bg-ink">
                     Nuevo
                   </span>
                 </div>
@@ -90,10 +90,10 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
                   <span className="text-[11px] font-semibold tracking-[0.08em] leading-snug uppercase mb-1 text-[#6366F1]">
                     {item.category}
                   </span>
-                  <h3 className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]">
+                  <h3 className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-body group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]">
                     {item.name}
                   </h3>
-                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm mt-1.5">
+                  <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-gold drop-shadow-sm mt-1.5">
                     {item.price}
                   </span>
                 </div>
@@ -106,7 +106,7 @@ export const ProductMostSold = ({ title, subtitle, items }: ProductMostSoldProps
       <div className="mt-12 text-center">
         <LocalizedClientLink
           href="/store"
-          className="group inline-flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase font-semibold text-[#0A0A0F] dark:text-white hover:text-[#D4AF37] transition-colors duration-300"
+          className="group inline-flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase font-semibold text-ink dark:text-white hover:text-gold transition-colors duration-300"
         >
           Ver Catálogo Completo
           <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

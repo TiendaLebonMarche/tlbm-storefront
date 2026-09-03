@@ -100,11 +100,11 @@ export default function OfertasParallax() {
                 <div className="w-full md:max-w-lg md:ml-auto text-center md:text-right">
                   {/* Label — stagger 1 */}
                   <div
-                    className={`inline-flex items-center justify-center md:justify-end gap-3 text-[#D4AF37] text-[10px] font-bold uppercase tracking-[.35em] mb-4 transition-all duration-700 delay-150 ${
+                    className={`inline-flex items-center justify-center md:justify-end gap-3 text-gold text-[10px] font-bold uppercase tracking-[.35em] mb-4 transition-all duration-700 delay-150 ${
                       active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     }`}
                   >
-                    <span className="w-8 h-px bg-[#D4AF37]/40" />
+                    <span className="w-8 h-px bg-gold/40" />
                     {offer.label}
                   </div>
 
@@ -136,7 +136,7 @@ export default function OfertasParallax() {
                       href={offer.href}
                       className="group relative inline-flex items-center gap-3 px-9 py-4 text-[11px] font-bold uppercase tracking-[.25em] rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(212,175,55,0.25)]"
                       style={{
-                        background: "#0A0A0F",
+                        background: 'var(--ink)',
                         border: "1px solid rgba(212,175,55,0.5)",
                         boxShadow: "0 4px 24px rgba(0,0,0,0.25)",
                       }}
@@ -145,7 +145,7 @@ export default function OfertasParallax() {
                       <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
                       Comprar Ahora
                       <svg
-                        className="w-4 h-4 text-[#D4AF37] transition-transform duration-300 group-hover:translate-x-1.5"
+                        className="w-4 h-4 text-gold transition-transform duration-300 group-hover:translate-x-1.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -174,7 +174,7 @@ export default function OfertasParallax() {
             onClick={() => goTo(i)}
             className={`rounded-full transition-all duration-500 ${
               i === current
-                ? "w-10 h-2 bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.5)]"
+                ? "w-10 h-2 bg-gold shadow-[0_0_12px_rgba(212,175,55,0.5)]"
                 : "w-2 h-2 bg-white/30 hover:bg-white/60 hover:scale-125"
             }`}
             aria-label={`Ir a oferta ${i + 1}`}
@@ -185,7 +185,7 @@ export default function OfertasParallax() {
       {/* Progress bar */}
       <div className="absolute bottom-0 left-0 right-0 z-20 h-[2px] bg-white/10">
         <div
-          className="h-full bg-[#D4AF37] transition-[width] duration-200 ease-linear"
+          className="h-full bg-gold transition-[width] duration-200 ease-linear"
           style={{
             width: `${((current + 1) / offers.length) * 100}%`,
           }}

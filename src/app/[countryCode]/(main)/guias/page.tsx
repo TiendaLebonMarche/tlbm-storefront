@@ -93,19 +93,19 @@ export default async function GuidesPage(props: {
               <LocalizedClientLink
                 key={guide.slug}
                 href={`/guias/${guide.slug}`}
-                className="group block bg-white dark:bg-[#14141E] border border-gray-100 dark:border-white/5 rounded-2xl p-7 md:p-8 hover:border-[#D4AF37]/40 hover:shadow-lg hover:shadow-[#D4AF37]/5 transition-all duration-300"
+                className="group block bg-white dark:bg-card border border-gray-100 dark:border-white/5 rounded-2xl p-7 md:p-8 hover:border-gold/40 hover:shadow-lg hover:shadow-gold/5 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.25em]">
+                  <span className="text-gold text-[10px] font-bold uppercase tracking-[0.25em]">
                     {guide.category}
                   </span>
-                  <span className="w-1 h-1 rounded-full bg-[#D4AF37]/40" />
+                  <span className="w-1 h-1 rounded-full bg-gold/40" />
                   <span className="text-gray-400 text-[10px] uppercase tracking-[0.2em]">
                     {guide.readingTime}
                   </span>
                 </div>
 
-                <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight leading-snug text-gray-900 dark:text-white group-hover:text-[#D4AF37] transition-colors duration-300">
+                <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight leading-snug text-gray-900 dark:text-white group-hover:text-gold transition-colors duration-300">
                   {guide.title}
                 </h2>
 
@@ -113,7 +113,7 @@ export default async function GuidesPage(props: {
                   {guide.description}
                 </p>
 
-                <div className="mt-5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400 group-hover:text-[#D4AF37] transition-colors">
+                <div className="mt-5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400 group-hover:text-gold transition-colors">
                   Leer guía
                   <svg
                     className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"
@@ -130,7 +130,7 @@ export default async function GuidesPage(props: {
         )}
 
         {/* CTA inferior */}
-        <div className="mt-16 rounded-2xl bg-[#0A0A0F] dark:bg-[#14141E] p-8 md:p-10 text-center border border-white/5">
+        <div className="mt-16 rounded-2xl bg-ink dark:bg-card p-8 md:p-10 text-center border border-white/5">
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight">
             ¿Tienes dudas sobre un producto?
           </h2>

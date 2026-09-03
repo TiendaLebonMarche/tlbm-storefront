@@ -21,6 +21,18 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        /* Tokens de escenografía (Fase 1, 03-sep-2026) — patrón v3 con alpha:
+           rgb(var(--X-rgb) / <alpha-value>) → text-gold/70, bg-ink, from-gold…
+           Los tripletes viven en globals.css :root y cada [data-theme] los
+           sobreescribe → un skin recoloriza TODO el sitio (clases + CSS). */
+        gold: "rgb(var(--gold-rgb) / <alpha-value>)",
+        "gold-light": "rgb(var(--gold-light-rgb) / <alpha-value>)",
+        "gold-dark": "rgb(var(--gold-dark-rgb) / <alpha-value>)",
+        "gold-deep": "rgb(var(--gold-deep-rgb) / <alpha-value>)",
+        ink: "rgb(var(--ink-rgb) / <alpha-value>)",
+        "ink-deep": "rgb(var(--ink-deep-rgb) / <alpha-value>)",
+        card: "rgb(var(--card-rgb) / <alpha-value>)",
+        body: "rgb(var(--text-rgb) / <alpha-value>)",
         tlbm: {
           gold: '#D4AF37',
           'gold-light': '#E8C84A',

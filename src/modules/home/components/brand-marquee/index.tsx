@@ -47,7 +47,7 @@ const LOGO_STYLE = {
 
 export default function BrandMarquee() {
   return (
-    <section className="overflow-hidden bg-white dark:bg-[#0A0A0F] border-0 py-4 md:py-8">
+    <section className="overflow-hidden bg-white dark:bg-ink border-0 py-4 md:py-8">
       <div className="brand-marquee-wrap">
         <div className="flex items-center w-[max-content] animate-brand-scroll brand-marquee-track">
           {[0, 1].map((set) => (

@@ -66,11 +66,11 @@ export default async function CollectionsPage({ params }: Props) {
               <LocalizedClientLink
                 key={collection.id}
                 href={`/collections/${collection.handle}`}
-                className="group bg-white border border-gray-100 hover:border-[#D4AF37]/40 rounded-xl p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(10,10,15,0.06)]"
+                className="group bg-white border border-gray-100 hover:border-gold/40 rounded-xl p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(10,10,15,0.06)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h2 className="font-playfair text-lg md:text-xl font-semibold text-black group-hover:text-[#B8962E] transition-colors">
+                    <h2 className="font-playfair text-lg md:text-xl font-semibold text-black group-hover:text-gold-deep transition-colors">
                       {collection.title}
                     </h2>
                     <p className="mt-1 text-xs uppercase tracking-[0.18em] text-black/40">
@@ -79,16 +79,16 @@ export default async function CollectionsPage({ params }: Props) {
                   </div>
                   <span
                     aria-hidden="true"
-                    className="text-[#D4AF37]/70 text-xs mt-1"
+                    className="text-gold/70 text-xs mt-1"
                   >
                     ◆
                   </span>
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-[0.2em] text-black/50 group-hover:text-[#B8962E] transition-colors">
+                  <span className="text-xs uppercase tracking-[0.2em] text-black/50 group-hover:text-gold-deep transition-colors">
                     Ver colección
                   </span>
-                  <span className="text-[#D4AF37] text-sm transition-transform duration-300 group-hover:translate-x-1">
+                  <span className="text-gold text-sm transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
                 </div>

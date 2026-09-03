@@ -90,7 +90,7 @@ export default function ProductPreview({
 
         {/* Hover scale + gold overlay sutil */}
         <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </div>
 
         {/* Badges */}
@@ -107,7 +107,7 @@ export default function ProductPreview({
               </span>
             )}
             {isNew && (
-              <span className="bg-[#0A0A0F] text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
+              <span className="bg-ink text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
                 Nuevo
               </span>
             )}
@@ -129,7 +129,7 @@ export default function ProductPreview({
 
         {/* Title — centrado */}
         <h3
-          className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-[#101010] group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]"
+          className="text-[15px] md:text-[16px] font-semibold tracking-[-0.4px] leading-snug text-body group-hover:opacity-80 transition-opacity duration-300 line-clamp-2 max-w-[95%]"
         >
           {product.title}
         </h3>
@@ -137,7 +137,7 @@ export default function ProductPreview({
         {/* Price — destacado en dorado, más grande */}
         <div className="mt-1.5">
           {cheapestPrice && (
-            <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-[#D4AF37] drop-shadow-sm">
+            <span className="text-[17px] md:text-[19px] font-bold tracking-[-0.3px] text-gold drop-shadow-sm">
               {cheapestPrice.calculated_price}
             </span>
           )}

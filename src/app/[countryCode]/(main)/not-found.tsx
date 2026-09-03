@@ -15,7 +15,7 @@ export default function NotFound() {
       <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-brand-black leading-none">
         No encontrado
       </h1>
-      <span className="w-12 h-[2px] bg-[#D4AF37] rounded-full" />
+      <span className="w-12 h-[2px] bg-gold rounded-full" />
       <p className="text-brand-gray text-sm font-light max-w-sm leading-relaxed">
         La página o producto que buscas no existe o fue removido. Explora nuestro catálogo completo.
       </p>

@@ -65,7 +65,7 @@ export default function InfiniteProducts({
           <span className="font-bold text-gray-900 dark:text-white">{initialProducts.length}</span> productos
         </p>
         {!hasMore && initialProducts.length > 0 && (
-          <span className="text-[9px] text-[#D4AF37] uppercase tracking-[0.2em] font-bold">
+          <span className="text-[9px] text-gold uppercase tracking-[0.2em] font-bold">
             Catálogo completo ✓
           </span>
         )}
@@ -87,7 +87,7 @@ export default function InfiniteProducts({
             onClick={loadMore}
             disabled={isLoading}
             className="group inline-flex items-center gap-2.5 px-8 py-4 text-white font-bold text-[10px] uppercase tracking-[.25em] rounded-full btn-shine disabled:opacity-30 hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg hover:shadow-black/20 transition-all duration-200"
-            style={{ background: "#0A0A0F", boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
+            style={{ background: 'var(--ink)', boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
           >
             {isLoading ? "Cargando…" : `Cargar más (${initialProducts.length - displayedCount})`}
           </button>
@@ -99,10 +99,10 @@ export default function InfiniteProducts({
         {isLoading && (
           <div className="flex flex-col items-center gap-3">
             <div className="relative w-8 h-8">
-              <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37]/20" />
-              <div className="absolute inset-0 rounded-full border-2 border-t-[#D4AF37] border-r-transparent border-b-transparent border-l-transparent animate-spin" />
+              <div className="absolute inset-0 rounded-full border-2 border-gold/20" />
+              <div className="absolute inset-0 rounded-full border-2 border-t-gold border-r-transparent border-b-transparent border-l-transparent animate-spin" />
             </div>
-            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#D4AF37]/60">
+            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-gold/60">
               Cargando…
             </p>
           </div>

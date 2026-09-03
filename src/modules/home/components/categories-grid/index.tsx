@@ -7,7 +7,7 @@ const categories = [
     title: "Audio Premium",
     desc: "Parlantes, auriculares y más",
     icon: (
-      <svg className="w-6 h-6 text-[#D4AF37]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-6 h-6 text-gold/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
@@ -55,24 +55,24 @@ const categories = [
 
 export default function CategoriesGrid() {
   return (
-    <section className="bg-white dark:bg-[#0A0A0F] py-16 lg:py-24">
+    <section className="bg-white dark:bg-ink py-16 lg:py-24">
       <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-12 reveal">
           <div>
-            <div className="inline-flex items-center gap-3 text-[#D4AF37]/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
-              <span className="w-8 h-px bg-[#D4AF37]/30" />
+            <div className="inline-flex items-center gap-3 text-gold/70 text-[9px] font-bold uppercase tracking-[.4em] mb-4">
+              <span className="w-8 h-px bg-gold/30" />
               Categorías
             </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight leading-[.95] text-gray-900 dark:text-white">
               Explora por{" "}
-              <span className="bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gold to-gold/70 bg-clip-text text-transparent">
                 Secciones
               </span>
             </h2>
           </div>
           <LocalizedClientLink
             href="/store"
-            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-[#D4AF37] transition-colors group"
+            className="hidden md:inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.28em] text-gray-400 dark:text-white/30 hover:text-gold transition-colors group"
           >
             Ver Todo
             <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

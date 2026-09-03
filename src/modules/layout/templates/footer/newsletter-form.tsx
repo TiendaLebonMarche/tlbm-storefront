@@ -30,13 +30,13 @@ export default function NewsletterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@email.com"
-          className="bg-white/10 border border-white/30 rounded-l-full px-5 py-3 text-sm text-white placeholder-white/60 outline-none flex-1 focus:border-[#D4AF37]/40 transition-colors duration-300 min-h-[48px]"
-          style={{ caretColor: "#D4AF37" }}
+          className="bg-white/10 border border-white/30 rounded-l-full px-5 py-3 text-sm text-white placeholder-white/60 outline-none flex-1 focus:border-gold/40 transition-colors duration-300 min-h-[48px]"
+          style={{ caretColor: 'var(--gold)' }}
           aria-label="Correo electrónico"
         />
         <button
           type="submit"
-          className="px-6 py-3 rounded-r-full text-[10px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-[#D4AF37] hover:bg-[#D4AF37]/80 transition-all duration-300 min-h-[48px]"
+          className="px-6 py-3 rounded-r-full text-[10px] font-bold uppercase tracking-[.18em] border-none cursor-pointer text-white bg-gold hover:bg-gold/80 transition-all duration-300 min-h-[48px]"
         >
           →
         </button>

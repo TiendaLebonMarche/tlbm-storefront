@@ -48,7 +48,7 @@ export default function CollectionFilter({
           <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-black/30">
             Categorías
           </span>
-          <span aria-hidden="true" className="text-[#D4AF37] text-[8px]">
+          <span aria-hidden="true" className="text-gold text-[8px]">
             ◆
           </span>
         </div>

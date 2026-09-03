@@ -150,7 +150,7 @@ export default function SearchModal() {
                       aria-label="Buscar"
                       className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 p-2"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-brand-black hover:text-[#D4AF37] transition duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-brand-black hover:text-gold transition duration-300">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                       </svg>
                     </button>
@@ -166,7 +166,7 @@ export default function SearchModal() {
                         <button
                           key={term}
                           onClick={() => searchQuick(term)}
-                          className="px-4 py-2 rounded-full border border-brand-gray-light text-sm text-brand-black hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300 cursor-pointer"
+                          className="px-4 py-2 rounded-full border border-brand-gray-light text-sm text-brand-black hover:border-gold hover:text-gold transition-all duration-300 cursor-pointer"
                         >
                           {term}
                         </button>
@@ -185,7 +185,7 @@ export default function SearchModal() {
                           key={c.handle}
                           href={`/collections/${c.handle}`}
                           onClick={closeSearch}
-                          className="text-xs md:text-sm font-medium text-brand-gray uppercase tracking-wider border-b border-transparent hover:border-[#D4AF37] hover:text-[#D4AF37] pb-1 transition-colors duration-300"
+                          className="text-xs md:text-sm font-medium text-brand-gray uppercase tracking-wider border-b border-transparent hover:border-gold hover:text-gold pb-1 transition-colors duration-300"
                         >
                           {c.title}
                         </LocalizedClientLink>

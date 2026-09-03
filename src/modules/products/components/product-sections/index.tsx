@@ -44,7 +44,7 @@ export default function ProductSections({ product }: ProductSectionsProps) {
     <div className="w-full space-y-12">
       {/* ── ¿Qué incluye? (descripción) ── */}
       <section>
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-gold">
           Qué incluye
         </p>
         <h3 className="font-serif text-xl md:text-2xl font-semibold text-brand-black tracking-tight mb-5">
@@ -58,7 +58,7 @@ export default function ProductSections({ product }: ProductSectionsProps) {
               .map((line, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <svg
-                    className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#D4AF37]"
+                    className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -85,7 +85,7 @@ export default function ProductSections({ product }: ProductSectionsProps) {
 
       {/* ── ¿Cuáles son las especificaciones? ── */}
       <section>
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-gold">
           Especificaciones
         </p>
         <h3 className="font-serif text-xl md:text-2xl font-semibold text-brand-black tracking-tight mb-2">
@@ -96,7 +96,7 @@ export default function ProductSections({ product }: ProductSectionsProps) {
 
       {/* ── ¿Cómo llega y puedo devolverlo? ── */}
       <section>
-        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-gold">
           Envío y devoluciones
         </p>
         <h3 className="font-serif text-xl md:text-2xl font-semibold text-brand-black tracking-tight mb-2">
@@ -249,7 +249,7 @@ const ShippingInfoTab = () => {
           },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-4">
-            <div className="flex-shrink-0 text-[#D4AF37] mt-0.5">{item.icon}</div>
+            <div className="flex-shrink-0 text-gold mt-0.5">{item.icon}</div>
             <div className="space-y-1">
               <span className="text-xs font-semibold text-brand-black uppercase tracking-wider block font-sans">
                 {item.title}

@@ -176,13 +176,13 @@ export default async function GuidePage(props: Props) {
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-400">
             <a
               href={`/${params.countryCode}/quienes-somos`}
-              className="font-semibold text-gray-600 dark:text-gray-300 hover:text-[#D4AF37] transition-colors"
+              className="font-semibold text-gray-600 dark:text-gray-300 hover:text-gold transition-colors"
             >
               Por {guide.author}
             </a>
             <span className="w-1 h-1 rounded-full bg-gray-300" />
             <span className="inline-flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3a9 9 0 109 9" />
               </svg>
@@ -208,7 +208,7 @@ export default async function GuidePage(props: Props) {
         </div>
 
         {/* CTA — convertir lectores en clientes */}
-        <div className="mt-6 rounded-2xl bg-[#0A0A0F] dark:bg-[#14141E] p-8 md:p-10 text-center border border-white/5">
+        <div className="mt-6 rounded-2xl bg-ink dark:bg-card p-8 md:p-10 text-center border border-white/5">
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight">
             ¿Te gustó esta guía?
           </h2>
@@ -225,7 +225,7 @@ export default async function GuidePage(props: Props) {
             />
             <a
               href={`/${params.countryCode}/store`}
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase bg-[#D4AF37] text-[#0A0A0F] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase bg-gold text-ink hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
             >
               Ver Catálogo Completo
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
