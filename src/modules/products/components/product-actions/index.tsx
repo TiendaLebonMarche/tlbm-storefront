@@ -39,7 +39,15 @@ export default function ProductActions({
   const searchParams = useSearchParams()
   const { openCart, setCartCount, setCart } = useUI()
 
-  const [options, setOptions] = useState<Record<string, string | undefined>>({})
+  // Preselección REAL de la variante única desde el PRIMER render (server+client).
+  // El guard de render de abajo solo aplica al navegar entre productos; sin un
+  // useState inicializado, un producto de variante única cargado directo quedaba
+  // con selectedVariant indefinido → "Agotado por ahora" eterno (bug 03-sep-2026).
+  const [options, setOptions] = useState<Record<string, string | undefined>>(() =>
+    product.variants?.length === 1
+      ? (optionsAsKeymap(product.variants[0]?.options || []) ?? {})
+      : {}
+  )
   const [isAdding, setIsAdding] = useState(false)
   const [addedSuccess, setAddedSuccess] = useState(false)
   const countryCode = useParams().countryCode as string
