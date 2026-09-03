@@ -134,10 +134,10 @@ export default function OfertasParallax() {
                   >
                     <LocalizedClientLink
                       href={offer.href}
-                      className="group relative inline-flex items-center gap-3 px-9 py-4 text-[11px] font-bold uppercase tracking-[.25em] rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(212,175,55,0.25)]"
+                      className="group relative inline-flex items-center gap-3 px-9 py-4 text-[11px] font-bold uppercase tracking-[.25em] rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.04] hover:shadow-[var(--gold-glow)]"
                       style={{
                         background: 'var(--ink)',
-                        border: "1px solid rgba(212,175,55,0.5)",
+                        border: "1px solid color-mix(in srgb, var(--gold) 50%, transparent)",
                         boxShadow: "0 4px 24px rgba(0,0,0,0.25)",
                       }}
                     >
@@ -174,7 +174,7 @@ export default function OfertasParallax() {
             onClick={() => goTo(i)}
             className={`rounded-full transition-all duration-500 ${
               i === current
-                ? "w-10 h-2 bg-gold shadow-[0_0_12px_rgba(212,175,55,0.5)]"
+                ? "w-10 h-2 bg-gold shadow-[var(--gold-glow-sm)]"
                 : "w-2 h-2 bg-white/30 hover:bg-white/60 hover:scale-125"
             }`}
             aria-label={`Ir a oferta ${i + 1}`}

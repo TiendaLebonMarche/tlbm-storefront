@@ -37,6 +37,9 @@
   --ink-deep-rgb: 8 8 12;
   --card-rgb: 20 20 30;
   --text-rgb: 16 16 16;
+  /* Glows dorados (sombras completas) — recolorizan con el skin vía var(--gold) */
+  --gold-glow: 0 8px 30px color-mix(in srgb, var(--gold) 25%, transparent);
+  --gold-glow-sm: 0 0 12px color-mix(in srgb, var(--gold) 50%, transparent);
 }
 
 /* === SISTEMA DE ESCENOGRAFÍA POR TEMPORADA (07-ago-2026) ===
@@ -47,43 +50,73 @@
   --season: "default";
 }
 
-/* 🎃 Halloween — plantilla (variables de ejemplo, refinar al montar la escena) */
+/* 🎃 HALLOWEEN — Opción B Fiesta Loca aprobada (06-ago) calibrada 03-sep:
+   naranja calabaza #FF7518 (rol dorado) + tinta cálida #120000/#1A0A00.
+   Ref: /root/escenografia-ejemplo.html escena 3. */
 [data-theme="halloween"] {
-  --gold: #FF8C42;
-  --ink: #1A0B0B;
-  --ink-deep: #120707;
-  --muted: #C77B5A;
+  --gold: #FF7518;
+  --gold-light: #FF9A3D;
+  --gold-dark: #E08600;
+  --gold-deep: #8A5A2B;
+  --ink: #1A0A00;
+  --ink-deep: #120000;
+  --card: #2A1205;
+  --muted: #A05A2C;
   --accent: #7B2D8B;
   --season: "halloween";
-  --gold-rgb: 255 140 66;
-  --ink-rgb: 26 11 11;
-  --ink-deep-rgb: 18 7 7;
+  --gold-rgb: 255 117 24;
+  --gold-light-rgb: 255 154 61;
+  --gold-dark-rgb: 224 134 0;
+  --gold-deep-rgb: 138 90 43;
+  --ink-rgb: 26 10 0;
+  --ink-deep-rgb: 18 0 0;
+  --card-rgb: 42 18 5;
 }
 
-/* 🎄 Navidad — plantilla */
+/* 🎄 NAVIDAD — Fiesta Loca navideña (aprobada 06-ago) calibrada 03-sep:
+   dorado navideño + verde bosque; rojo navidad como acento.
+   Ref: /root/escenografia-navidad-sv.html escena 1. */
 [data-theme="navidad"] {
   --gold: #E8C84A;
-  --ink: #07140F;
-  --ink-deep: #030A07;
-  --muted: #7A8C7F;
-  --accent: #B3261E;
+  --gold-light: #FFD166;
+  --gold-dark: #D4AF37;
+  --gold-deep: #B8962E;
+  --ink: #0C3318;
+  --ink-deep: #06210E;
+  --card: #1A4A26;
+  --muted: #55705E;
+  --accent: #C41E3A;
   --season: "navidad";
   --gold-rgb: 232 200 74;
-  --ink-rgb: 7 20 15;
-  --ink-deep-rgb: 3 10 7;
+  --gold-light-rgb: 255 209 102;
+  --gold-dark-rgb: 212 175 55;
+  --gold-deep-rgb: 184 150 46;
+  --ink-rgb: 12 51 24;
+  --ink-deep-rgb: 6 33 14;
+  --card-rgb: 26 74 38;
 }
 
-/* 💘 San Valentín — plantilla */
+/* 💘 SAN VALENTÍN — Fiesta Loca romántica (aprobada 06-ago) calibrada 03-sep:
+   rosa/magenta #E91E63 (rol dorado) + vinos profundos.
+   Ref: /root/escenografia-navidad-sv.html escena 2. */
 [data-theme="san-valentin"] {
-  --gold: #E8A0B4;
-  --ink: #1C0509;
-  --ink-deep: #120304;
-  --muted: #C08A96;
+  --gold: #E91E63;
+  --gold-light: #FF7BA9;
+  --gold-dark: #C2185B;
+  --gold-deep: #7A1A42;
+  --ink: #3D0A1E;
+  --ink-deep: #22030B;
+  --card: #5C1030;
+  --muted: #8F5B74;
   --accent: #D9265A;
   --season: "san-valentin";
-  --gold-rgb: 232 160 180;
-  --ink-rgb: 28 5 9;
-  --ink-deep-rgb: 18 3 4;
+  --gold-rgb: 233 30 99;
+  --gold-light-rgb: 255 123 169;
+  --gold-dark-rgb: 194 24 91;
+  --gold-deep-rgb: 122 26 66;
+  --ink-rgb: 61 10 30;
+  --ink-deep-rgb: 34 3 11;
+  --card-rgb: 92 16 48;
 }
 
 /* Decoración flotante animada (SeasonalDecor) — se monta/desmonta según data-theme */
@@ -487,7 +520,7 @@
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
 /* ── SELECTION ── */
-::selection { background: rgba(212,175,55,.3); }
+::selection { background: color-mix(in srgb, var(--gold) 30%, transparent); }
 
 /* ── GLASS CARD (used by hero orbit) ── */
 .glass-card, .glass {
@@ -623,9 +656,9 @@
   border: 1px solid #E5E7EB; transition: border-color .4s, box-shadow .4s;
   box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
-.pm-card:hover { border-color: rgba(212,175,55,.4); box-shadow: 0 8px 24px rgba(212,175,55,.08); }
+.pm-card:hover { border-color: color-mix(in srgb, var(--gold) 40%, transparent); box-shadow: 0 8px 24px color-mix(in srgb, var(--gold) 8%, transparent); }
 .dark .pm-card { background: #181820; border: 1px solid rgba(255,255,255,.06); box-shadow: none; }
-.dark .pm-card:hover { border-color: rgba(212,175,55,.25); }
+.dark .pm-card:hover { border-color: color-mix(in srgb, var(--gold) 25%, transparent); }
 
 /* ── SCROLL PROGRESS ── */
 #scroll-progress {
@@ -645,7 +678,7 @@
 }
 
 /* ── GLOW LINE ── */
-.glow-line { height: 1px; background: linear-gradient(90deg,transparent,rgba(212,175,55,.3),transparent); }
+.glow-line { height: 1px; background: linear-gradient(90deg,transparent,color-mix(in srgb, var(--gold) 30%, transparent),transparent); }
 
 /* ── TRUST ITEM ── */
 .trust-item {
@@ -653,9 +686,9 @@
   padding: 1rem 1.5rem; border-radius: 1rem;
   border: 1px solid #E5E7EB; transition: border-color .3s, background .3s;
 }
-.trust-item:hover { border-color: rgba(212,175,55,.3); background: rgba(212,175,55,.04); }
+.trust-item:hover { border-color: color-mix(in srgb, var(--gold) 30%, transparent); background: color-mix(in srgb, var(--gold) 4%, transparent); }
 .dark .trust-item { border: 1px solid rgba(255,255,255,.05); }
-.dark .trust-item:hover { border-color: rgba(212,175,55,.2); background: rgba(212,175,55,.03); }
+.dark .trust-item:hover { border-color: color-mix(in srgb, var(--gold) 20%, transparent); background: color-mix(in srgb, var(--gold) 3%, transparent); }
 
 /* ── CATEGORY ITEM ── */
 .cat-item {
@@ -664,9 +697,9 @@
   border: 1px solid #E5E7EB; background: #FFFFFF;
   transition: border-color .4s, transform .5s cubic-bezier(.16,1,.3,1), box-shadow .4s;
 }
-.cat-item:hover { border-color: rgba(212,175,55,.4); transform: scale(1.02); box-shadow: 0 8px 30px rgba(212,175,55,.08); }
+.cat-item:hover { border-color: color-mix(in srgb, var(--gold) 40%, transparent); transform: scale(1.02); box-shadow: 0 8px 30px color-mix(in srgb, var(--gold) 8%, transparent); }
 .dark .cat-item { background: transparent; border-color: rgba(255,255,255,.06); }
-.dark .cat-item:hover { border-color: rgba(212,175,55,.3); }
+.dark .cat-item:hover { border-color: color-mix(in srgb, var(--gold) 30%, transparent); }
 
 /* ── TESTIMONIAL CARD ── */
 .testi-card {
@@ -674,9 +707,9 @@
   border: 1px solid #E5E7EB; background: #FFFFFF;
   transition: border-color .3s, box-shadow .3s;
 }
-.testi-card:hover { border-color: rgba(212,175,55,.3); box-shadow: 0 8px 24px rgba(212,175,55,.06); }
+.testi-card:hover { border-color: color-mix(in srgb, var(--gold) 30%, transparent); box-shadow: 0 8px 24px color-mix(in srgb, var(--gold) 6%, transparent); }
 .dark .testi-card { background: transparent; border: 1px solid rgba(255,255,255,.06); }
-.dark .testi-card:hover { border-color: rgba(212,175,55,.2); }
+.dark .testi-card:hover { border-color: color-mix(in srgb, var(--gold) 20%, transparent); }
 
 /* === SECCIÓN CATEGORÍAS (carousel — 07-ago-2026) ===
    Usa tokens var(--gold)/var(--ink)/var(--text) del sistema de escenografía:
