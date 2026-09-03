@@ -50,6 +50,15 @@ export default function ProductPreview({
     (t: any) => t.value?.toLowerCase().startsWith("producto")
   )?.value || null
 
+  // Stock bajo (metadata.stock_unidades, ej. "1") → etiqueta de urgencia REAL
+  const stockUnits = Number((product as any).metadata?.stock_unidades ?? 0)
+  const lowStockText =
+    stockUnits === 1
+      ? "¡Última unidad!"
+      : stockUnits >= 2 && stockUnits <= 5
+        ? `¡Últimas ${stockUnits}!`
+        : null
+
   const category =
     product.collection?.title ||
     (product as any).categories?.[0]?.name ||
@@ -85,8 +94,13 @@ export default function ProductPreview({
         </div>
 
         {/* Badges */}
-        {(isNew || customBadge) && (
+        {(isNew || customBadge || lowStockText) && (
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            {lowStockText && (
+              <span className="bg-red-600 text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
+                {lowStockText}
+              </span>
+            )}
             {customBadge && (
               <span className="bg-pink-600 text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
                 {customBadge}

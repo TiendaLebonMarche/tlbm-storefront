@@ -126,6 +126,10 @@ export default function ProductActions({
     return false
   }, [selectedVariant])
 
+  // Stock bajo (metadata.stock_unidades, ej. "1") → urgencia REAL junto al CTA
+  const stockUnits = Number((product as any).metadata?.stock_unidades ?? 0)
+  const isLowStock = stockUnits >= 1 && stockUnits <= 5
+
   const actionsRef = useRef<HTMLDivElement>(null)
 
   const inView = useIntersection(actionsRef, "0px")
@@ -220,16 +224,35 @@ export default function ProductActions({
         {/* Availability & Urgency — UNA sola fuente de verdad: inStock de la variante seleccionada */}
         <div className="flex items-center gap-3">
           {inStock ? (
-            <>
-              <div className="relative flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full bg-green-500/30 animate-ping absolute" />
-                <div className="w-2 h-2 rounded-full bg-green-500 relative" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-green-700 font-sans">Disponible</p>
-                <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestra dirección principal</p>
-              </div>
-            </>
+            isLowStock ? (
+              <>
+                <div className="relative flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-red-500/30 animate-ping absolute" />
+                  <div className="w-2 h-2 rounded-full bg-red-600 relative" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-red-600 font-sans uppercase tracking-wide">
+                    {stockUnits === 1 ? "¡Última unidad!" : `¡Solo quedan ${stockUnits}!`}
+                  </p>
+                  <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">
+                    {stockUnits === 1
+                      ? "Stock real: 1 disponible — sin reposición"
+                      : `Stock real: ${stockUnits} disponibles — sin reposición`}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="relative flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-green-500/30 animate-ping absolute" />
+                  <div className="w-2 h-2 rounded-full bg-green-500 relative" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-green-700 font-sans">Disponible</p>
+                  <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">Envío prioritario desde nuestra dirección principal</p>
+                </div>
+              </>
+            )
           ) : (
             <>
               <div className="w-2 h-2 rounded-full bg-red-400" />
