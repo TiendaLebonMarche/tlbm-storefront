@@ -9,6 +9,7 @@ import { UIProvider } from "@lib/context/ui-context"
 import WhatsAppFloat from "@modules/layout/components/whatsapp-float"
 import LayoutClient from "@modules/layout/components/layout-client"
 import PagePaddingWrapper from "@modules/layout/components/page-padding-wrapper"
+import SeasonalFrame from "@modules/common/components/seasonal-frame"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -170,8 +171,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <meta name="distribution" content="global" />
       </head>
       <body className="antialiased">
-        {/* Escenografía por temporada: vive DENTRO del hero (home) — Fase 4.
-            En subpáginas solo actúan la paleta [data-theme] y el copy. */}
+        {/* Escenografía por temporada: decor DENTRO del hero (home) + marco
+            ambiental global en TODAS las páginas (SeasonalFrame, escritorio).
+            En "default" ambos no renderizan nada → diseño actual IDÉNTICO. */}
+        <SeasonalFrame />
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

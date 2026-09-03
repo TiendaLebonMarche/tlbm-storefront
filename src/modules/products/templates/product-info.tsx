@@ -5,6 +5,11 @@ interface ProductInfoProps {
   product: HttpTypes.StoreProduct
 }
 
+// ¿El producto está marcado como "Ideal para regalar"? (metadata en Medusa:
+// gift_eligible = "true" → badge + mensaje personalizado visibles en el PDP.)
+const isGiftEligible = (product: HttpTypes.StoreProduct) =>
+  product.metadata?.gift_eligible === "true"
+
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const { cheapestPrice } = getProductPrice({
     product,
@@ -52,6 +57,25 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       {product.options && product.options.length > 0 && (
         <div className="text-sm text-brand-gray font-light">
           <span className="font-bold text-gray-700">Variantes:</span> {product.options.length} disponibles
+        </div>
+      )}
+
+      {/* Modo regalo — paquete de escenografía (03-sep-2026): badge + mensaje
+          personalizado cuando el producto tiene metadata.gift_eligible="true"
+          (los packs Amor y Amistad / Navidad lo activan desde el CMS). */}
+      {isGiftEligible(product) && (
+        <div className="mt-4 flex items-center gap-3 rounded-2xl border-[1.5px] border-dashed border-[var(--gold)]/60 bg-[var(--gold-light)]/10 px-4 py-3">
+          <span className="text-2xl" aria-hidden="true">
+            🎁
+          </span>
+          <div>
+            <p className="text-sm font-bold text-[var(--gold-dark)]">
+              Ideal para regalar · con mensaje personalizado
+            </p>
+            <p className="text-xs text-[var(--muted)]">
+              Lo escribes tú — lo imprimimos en una tarjeta y va dentro de la caja. Sin costo.
+            </p>
+          </div>
         </div>
       )}
     </div>

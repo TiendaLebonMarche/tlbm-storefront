@@ -3,7 +3,7 @@
 // "default" = diseño actual IDÉNTICO (sin escenografía).
 // Al volver a "default", todo se desmonta solo.
 
-export type Season = "default" | "halloween" | "navidad" | "san-valentin"
+export type Season = "default" | "halloween" | "navidad" | "san-valentin" | "amor-amistad"
 
 // ⚙️ ÚNICO valor a cambiar para activar una temporada
 export const SEASON: Season = "default"
@@ -14,6 +14,7 @@ export const SEASONS: Record<Season, { label: string; emoji: string }> = {
   halloween: { label: "Halloween", emoji: "🎃" },
   navidad: { label: "Navidad", emoji: "🎄" },
   "san-valentin": { label: "San Valentín", emoji: "💘" },
+  "amor-amistad": { label: "Amor y Amistad (19 sep)", emoji: "💘" },
 }
 
 // ── Decoración por temporada (Fase 5, 03-sep-2026) ──────────────────────────
@@ -22,9 +23,12 @@ export const SEASONS: Record<Season, { label: string; emoji: string }> = {
 // top/left en % del hero. delay/duration en CSS time. La entrada es escalonada
 // automáticamente (--i = índice del array). Zonas libres del hero: esquinas y
 // bordes; el texto (izquierda centro) y los dots (abajo centro) nunca se tocan.
-export type DecorKind = "float" | "drift" | "fall" | "sway"
+export type DecorKind = "float" | "drift" | "fall" | "sway" | "rise"
+// svg: nombre de dibujo hand-drawn (trazo sketch) — se mezcla con emojis.
+export type SketchName = "heart" | "sparkle"
 export type DecorItem = {
-  emoji: string
+  emoji?: string
+  svg?: SketchName
   kind?: DecorKind
   top?: string
   left?: string
@@ -53,12 +57,21 @@ export const SEASONAL_DECOR: Record<Season, DecorItem[]> = {
     { emoji: "⭐", kind: "float", top: "50%", left: "94%", delay: "2s" },
   ],
   "san-valentin": [
-    { emoji: "💖", kind: "sway", top: "17%", left: "4%" },
+    { svg: "heart", kind: "sway", top: "16%", left: "3.5%" },
     { emoji: "💘", kind: "sway", top: "11%", left: "88%", delay: "0.6s" },
     { emoji: "🌹", kind: "float", top: "64%", left: "5%", delay: "0.4s" },
     { emoji: "💝", kind: "float", top: "74%", left: "91%", delay: "1s" },
     { emoji: "💕", kind: "sway", top: "46%", left: "93%", delay: "1.6s" },
     { emoji: "💗", kind: "sway", top: "86%", left: "16%", delay: "2.1s" },
+  ],
+  "amor-amistad": [
+    { svg: "heart", kind: "sway", top: "10%", left: "3%" },
+    { emoji: "❤️", kind: "float", top: "6%", left: "16%", delay: "0.3s" },
+    { emoji: "🎈", kind: "rise", top: "63%", left: "5%", delay: "0.8s" },
+    { emoji: "🌹", kind: "rise", top: "50%", left: "93%", delay: "1.2s" },
+    { svg: "sparkle", kind: "float", top: "12%", left: "90%", delay: "0.5s" },
+    { emoji: "💕", kind: "sway", top: "86%", left: "20%", delay: "1.8s" },
+    { emoji: "💝", kind: "float", top: "75%", left: "89%", delay: "1.4s" },
   ],
 }
 
@@ -125,6 +138,21 @@ export const SEASON_COPY: Partial<Record<Season, SeasonalCopy>> = {
       cta: "💝 Explorar detalles 💝",
     },
   },
+  "amor-amistad": {
+    topbar: [
+      "💘 Amor y Amistad en Le Bon Marché",
+      "Regala original: tecnología que sí se usa",
+      "Productos 100% originales",
+    ],
+    separator: "·",
+    hero: {
+      label: "💘🌹🎈 Edición Amor y Amistad · 19 sep 🎁💝",
+      title: "El detalle 100% original\nque sí enamora este septiembre",
+      highlight: "100% original",
+      subtitle: "Packs de tecnología original con mensaje personalizado y entrega en 24 h en Bucaramanga.",
+      cta: "🎁 Explorar regalos 🎁",
+    },
+  },
 }
 
 // ── Deadline logístico por temporada (Fase 5) ───────────────────────────────
@@ -135,4 +163,5 @@ export const SEASON_DEADLINE: Partial<Record<Season, SeasonDeadline>> = {
   halloween: { month: 10, day: 31, message: "Pide antes del 28 oct y recibe a tiempo 🎃" },
   navidad: { month: 12, day: 25, message: "Pide antes del 18 dic y recibe antes de Navidad 🎁" },
   "san-valentin": { month: 2, day: 14, message: "Pide antes del 11 feb y llega a tiempo 💘" },
+  "amor-amistad": { month: 9, day: 19, message: "Pide antes del 16 sep y recibe a tiempo 🎁" },
 }

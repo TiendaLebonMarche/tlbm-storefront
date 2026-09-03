@@ -119,6 +119,30 @@
   --card-rgb: 92 16 48;
 }
 
+/* 💘 AMOR Y AMISTAD (19 sep, Colombia) — prototipo aprobado 03-sep:
+   frambuesa (rol dorado) + tinta vino; dorado de marca como acento.
+   Ref: /root/amor-amistad-escenario.html (prototipo). */
+[data-theme="amor-amistad"] {
+  --gold: #D6336C;
+  --gold-light: #FF8FB3;
+  --gold-dark: #B0135A;
+  --gold-deep: #7A1A42;
+  --ink: #3D0A1E;
+  --ink-deep: #26040F;
+  --card: #5C1030;
+  --muted: #9A5B6F;
+  --accent: #D4AF37;
+  --season: "amor-amistad";
+  --gold-rgb: 214 51 108;
+  --gold-light-rgb: 255 143 179;
+  --gold-dark-rgb: 176 19 90;
+  --gold-deep-rgb: 122 26 66;
+  --ink-rgb: 61 10 30;
+  --ink-deep-rgb: 38 4 15;
+  --card-rgb: 92 16 48;
+  --accent-rgb: 212 175 55;
+}
+
 /* ═══ Decoración escenográfica (SeasonalDecor) — montada DENTRO del hero ═══
    Upgrade Fase 5 (03-sep-2026, investigación community 2026):
    - entrada escalonada (stagger ~90ms/ítem) con aparecer+escala,
@@ -197,6 +221,14 @@
   background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%);
   animation-delay: 2s;
 }
+[data-theme="amor-amistad"] .decor-glow--tl {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--gold-light) 40%, transparent), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="amor-amistad"] .decor-glow--br {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%);
+  animation-delay: 2s;
+}
 /* Ítems: entrada stagger + movimiento por tipo (--i = orden, --d = delay extra) */
 .seasonal-decor span {
   position: absolute;
@@ -235,6 +267,52 @@
   animation-iteration-count: infinite;
   animation-fill-mode: backwards;
 }
+/* Subir (globos) — entra y asciende con leve rebote */
+@keyframes season-rise {
+  0% { transform: translateY(26px) scale(0.75); opacity: 0; }
+  14% { opacity: 1; }
+  100% { transform: translateY(-46px) scale(1); opacity: 0.95; }
+}
+.seasonal-decor .decor-rise {
+  animation-name: season-in, season-rise;
+  animation-duration: 0.55s, var(--dur, 8s);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0s)),
+    calc(var(--i, 0) * 90ms + var(--d, 0s) + 0.55s);
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: both, none;
+}
+/* Hand-drawn (SVG sketch): se dibujan solos al entrar + color por tema */
+.seasonal-decor .decor-svg {
+  width: 52px;
+  height: 52px;
+}
+@media (min-width: 768px) {
+  .seasonal-decor .decor-svg {
+    width: 62px;
+    height: 62px;
+  }
+}
+.seasonal-decor .decor-svg path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: season-draw 1.1s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0s) + 0.1s);
+}
+.seasonal-decor .decor-svg .sk-fill {
+  animation: season-fade-sketch 0.45s ease forwards;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0s) + 0.8s);
+}
+@keyframes season-draw { to { stroke-dashoffset: 0; } }
+@keyframes season-fade-sketch { from { opacity: 0; } to { opacity: 1; } }
+/* Recorte a la paleta del escenario: el trazo hereda el rol gold-dark/gold */
+.seasonal-decor .sk-heart { stroke: var(--gold-dark); }
+.seasonal-decor .sk-sparkle { stroke: var(--accent); }
+.seasonal-decor .sk-heart .sk-fill { fill: color-mix(in srgb, var(--gold-light) 26%, transparent); }
+.seasonal-decor .sk-sparkle .sk-fill { fill: color-mix(in srgb, var(--gold-light) 38%, transparent); }
 /* Telarañas de esquina (Halloween) — color vía var(--gold-light) del tema */
 .seasonal-decor .decor-web {
   position: absolute;
@@ -247,7 +325,8 @@
 .seasonal-decor .decor-web--tr { right: 0; }
 /* Pausa cuando el hero sale de viewport (IntersectionObserver → clase .paused) */
 .seasonal-decor.paused span,
-.seasonal-decor.paused .decor-glow {
+.seasonal-decor.paused .decor-glow,
+.seasonal-decor.paused .decor-svg path {
   animation-play-state: paused;
 }
 /* prefers-reduced-motion: la decoración se congela (NO se oculta del todo y la
@@ -262,8 +341,85 @@
   .seasonal-decor .decor-fall {
     opacity: 0 !important;
   }
+  .seasonal-decor .decor-svg path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .seasonal-decor .decor-svg .sk-fill {
+    opacity: 1 !important;
+  }
 }
 [data-theme="default"] .seasonal-decor { display: none; }
+
+/* ═══ MARCO AMBIENTAL GLOBAL (SeasonalFrame) — todas las páginas ═══
+   Fijo al viewport, solo escritorio, pointer-events: none, bajo el header
+   (z-index 40 < topbar 50 / header 55). Cada escenario define sus piezas. */
+.season-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+  color: var(--gold-light);
+}
+.season-frame .sf {
+  position: absolute;
+  opacity: 0.85;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.12));
+  will-change: transform;
+}
+.season-frame .sf-tl { top: 104px; left: 10px; width: 64px; height: 64px; }
+.season-frame .sf-tr { top: 110px; right: 14px; width: 52px; height: 52px; }
+.season-frame .sf-bl { bottom: 14px; left: 12px; width: 44px; height: 44px; }
+.season-frame .sf-emo { display: grid; place-items: center; line-height: 1; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.12); }
+.season-frame .sf-web { color: var(--gold-light); opacity: 0.55; }
+.season-frame .sf-heart { color: var(--gold-dark); animation: sf-sway 8s ease-in-out infinite; }
+.season-frame .sf-sparkle { color: var(--accent); animation: sf-float 7s ease-in-out infinite; }
+.season-frame .sf-emo { animation: sf-float 9s ease-in-out infinite; }
+.season-frame .sf-web--a { animation: sf-float 13s ease-in-out infinite; }
+@keyframes sf-float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-9px) rotate(4deg); }
+}
+@keyframes sf-sway {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(-5deg); }
+  50% { transform: translateY(-7px) translateX(8px) rotate(5deg); }
+}
+@media (max-width: 767px) {
+  .season-frame { display: none; }
+}
+
+/* ═══ EFECTOS DE BOTÓN POR ESCENARIO (paquete completo 03-sep) ═══
+   Solo cuando hay escenario activo (data-theme != default). El color del glow
+   sale de var(--gold)/var(--accent) → cada escenario tiene su propio brillo
+   (halloween naranja, navidad dorado, san-valentín/amor-amistad frambuesa).
+   La etiqueta TLBM usa bg-[var(--gold)] (no bg-gold) → no recibe el efecto. */
+html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-gold"] {
+  animation: season-btn-glow 2.8s ease-in-out infinite;
+}
+html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-ink"] {
+  animation: season-btn-glow-ink 3.2s ease-in-out infinite;
+}
+html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-gold"]:hover,
+html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-ink"]:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+@keyframes season-btn-glow {
+  0%, 100% { box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--gold) 45%, transparent); }
+  50% { box-shadow: 0 12px 30px -4px color-mix(in srgb, var(--gold) 85%, transparent); }
+}
+@keyframes season-btn-glow-ink {
+  0%, 100% { box-shadow: 0 5px 14px -6px color-mix(in srgb, var(--gold) 30%, transparent); }
+  50% { box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--gold) 60%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-gold"],
+  html[data-theme]:not([data-theme="default"]) :is(a, button)[class*="bg-ink"] {
+    animation: none;
+  }
+}
 
 
 @layer utilities {
