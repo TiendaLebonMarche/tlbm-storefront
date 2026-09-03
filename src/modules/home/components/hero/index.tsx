@@ -6,6 +6,7 @@ import { SEASON, SEASON_COPY } from "@lib/season"
 import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import TopMarquee from "@modules/common/components/top-marquee"
+import SeasonalDecor from "@modules/common/components/seasonal-decor"
 import HeaderSearchControls from "@modules/layout/components/header-search-controls"
 
 // ── Logo URL ────────────────────────────────────────────────────────────────
@@ -379,6 +380,8 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
+        {/* Escenografía de temporada — capa decorativa del hero (vacía en default) */}
+        <SeasonalDecor />
         {/* Slides */}
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div

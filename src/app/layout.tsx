@@ -3,7 +3,6 @@ import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "styles/globals.css"
 import { SEASON } from "@lib/season"
-import SeasonalDecor from "@modules/common/components/seasonal-decor"
 import { GoogleTagManager } from "@next/third-parties/google"
 import StructuredData from "@modules/common/components/structured-data"
 import { UIProvider } from "@lib/context/ui-context"
@@ -171,8 +170,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <meta name="distribution" content="global" />
       </head>
       <body className="antialiased">
-        {/* Escenografía por temporada — capa decorativa (vacía en default) */}
-        <SeasonalDecor />
+        {/* Escenografía por temporada: vive DENTRO del hero (home) — Fase 4.
+            En subpáginas solo actúan la paleta [data-theme] y el copy. */}
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
