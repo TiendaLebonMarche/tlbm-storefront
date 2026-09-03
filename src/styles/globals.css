@@ -119,16 +119,40 @@
   --card-rgb: 92 16 48;
 }
 
-/* Decoración flotante animada (SeasonalDecor) — se monta/desmonta según data-theme */
+/* ═══ Decoración escenográfica (SeasonalDecor) — montada DENTRO del hero ═══
+   Upgrade Fase 5 (03-sep-2026, investigación community 2026):
+   - entrada escalonada (stagger ~90ms/ítem) con aparecer+escala,
+   - movimiento por tipo: float (flotar), drift (cruzar), fall (copos/confeti),
+     sway (lateral suave),
+   - glow ambiental por tema (pulso lento), telarañas SVG (halloween, en el
+     componente), reduced-motion respetado (la marquesina NO: es marca). */
 @keyframes season-float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-18px) rotate(6deg); }
 }
 @keyframes season-drift {
-  0% { transform: translateX(-4%) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
+  0% { transform: translateX(-6vw) translateY(0); opacity: 0; }
+  8% { opacity: 1; }
   90% { opacity: 1; }
-  100% { transform: translateX(104vw) translateY(-30px); opacity: 0; }
+  100% { transform: translateX(106vw) translateY(-46px); opacity: 0; }
+}
+@keyframes season-fall {
+  0% { transform: translateY(-6vh) translateX(0) rotate(0deg); opacity: 0; }
+  6% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(1120px) translateX(-28px) rotate(240deg); opacity: 0.2; }
+}
+@keyframes season-sway {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(-4deg); }
+  50% { transform: translateY(-12px) translateX(14px) rotate(5deg); }
+}
+@keyframes season-in {
+  0% { opacity: 0; transform: scale(0.4) translateY(14px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes season-glow-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 .seasonal-decor {
   position: absolute;
@@ -137,15 +161,107 @@
   overflow: hidden;
   z-index: 5;
 }
-.seasonal-decor .decor-item {
+/* Glow ambiental por tema — pulso lento, esquinas opuestas al texto */
+.seasonal-decor .decor-glow {
   position: absolute;
-  animation: season-float 7s ease-in-out infinite;
+  width: 70%;
+  aspect-ratio: 1.5 / 1;
+  border-radius: 50%;
+  opacity: 0;
+  animation: season-glow-pulse 6.5s ease-in-out infinite;
+  will-change: opacity;
+}
+.decor-glow--tl { top: -20%; left: -16%; }
+.decor-glow--br { bottom: -24%; right: -14%; }
+[data-theme="halloween"] .decor-glow--tl {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--gold) 36%, transparent), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="halloween"] .decor-glow--br {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+  animation-delay: 2.2s;
+}
+[data-theme="navidad"] .decor-glow--tl {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--gold-light) 34%, transparent), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="navidad"] .decor-glow--br {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%);
+  animation-delay: 1.8s;
+}
+[data-theme="san-valentin"] .decor-glow--tl {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--gold-light) 34%, transparent), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="san-valentin"] .decor-glow--br {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%);
+  animation-delay: 2s;
+}
+/* Ítems: entrada stagger + movimiento por tipo (--i = orden, --d = delay extra) */
+.seasonal-decor span {
+  position: absolute;
   user-select: none;
+  will-change: transform, opacity;
+}
+.seasonal-decor .decor-float,
+.seasonal-decor .decor-sway {
+  animation-name: season-in, season-float;
+  animation-duration: 0.55s, 7s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0s)),
+    calc(var(--i, 0) * 90ms + var(--d, 0s) + 0.55s);
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: both, none;
+}
+.seasonal-decor .decor-sway {
+  animation-name: season-in, season-sway;
+  animation-duration: 0.55s, 9s;
+}
+.seasonal-decor .decor-fall {
+  top: -8%;
+  animation-name: season-in, season-fall;
+  animation-duration: 0.55s, var(--dur, 11s);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), linear;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0s)),
+    calc(var(--i, 0) * 90ms + var(--d, 0s) + 0.55s);
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: both, none;
 }
 .seasonal-decor .decor-drift {
+  animation-name: season-drift;
+  animation-duration: var(--dur, 16s);
+  animation-timing-function: linear;
+  animation-delay: var(--d, 0s);
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+}
+/* Telarañas de esquina (Halloween) — color vía var(--gold-light) del tema */
+.seasonal-decor .decor-web {
   position: absolute;
-  top: -40px;
-  animation: season-drift linear infinite;
+  top: 0;
+  opacity: 0.5;
+  color: var(--gold-light);
+  pointer-events: none;
+}
+.seasonal-decor .decor-web--tl { left: 0; }
+.seasonal-decor .decor-web--tr { right: 0; }
+/* Pausa cuando el hero sale de viewport (IntersectionObserver → clase .paused) */
+.seasonal-decor.paused span,
+.seasonal-decor.paused .decor-glow {
+  animation-play-state: paused;
+}
+/* prefers-reduced-motion: la decoración se congela (NO se oculta del todo y la
+   marquesina SÍ sigue moviéndose — decisión Julián 11-ago: es marca). */
+@media (prefers-reduced-motion: reduce) {
+  .seasonal-decor span,
+  .seasonal-decor .decor-glow {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+  .seasonal-decor .decor-drift,
+  .seasonal-decor .decor-fall {
+    opacity: 0 !important;
+  }
 }
 [data-theme="default"] .seasonal-decor { display: none; }
 

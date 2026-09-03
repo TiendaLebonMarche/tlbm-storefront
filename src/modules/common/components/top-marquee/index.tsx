@@ -1,8 +1,9 @@
 "use client"
 
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { SEASON, SEASON_COPY } from "@lib/season"
+import { SEASON, SEASON_COPY, SEASON_DEADLINE } from "@lib/season"
+import type { SeasonDeadline } from "@lib/season"
 
 /**
  * Marquesina superior — REDISEÑO 07-ago-2026 (aprobado por Julián, ref tm_v4.png):
@@ -14,17 +15,18 @@ import { SEASON, SEASON_COPY } from "@lib/season"
  *  - Etiqueta FIJA: dorada `var(--gold)` + logo abreviado TLBM (PNG transparente
  *    con letras negras), corte diagonal en el borde derecho (~18px) que invade
  *    la banda. NO lleva texto — solo el logo.
- *  - Banda móvil: `var(--ink)` con las 4 frases de siempre, separador `·`
- *    BLANCO (el diseño aprobado los muestra blancos, no dorados), loop seamless
- *    45s desktop / 50s mobile (`.animate-marquee-fixed`), pausa al hover.
+ *  - Banda móvil: `var(--ink)` con frases en loop seamless 45s desktop /
+ *    50s mobile, separador `·` BLANCO (diseño aprobado), pausa nunca (marca,
+ *    decisión Julián 11-ago: la marquesina SIEMPRE se mueve).
  *  - Sistema de escenografía: etiqueta usa `var(--gold)`, banda `var(--ink)`
  *    → `[data-theme]` la recoloriza sola sin tocar el componente.
+ *  - Temporada (Fase 3/5): frases cortas de SEASON_COPY + mensaje de deadline
+ *    logístico SOLO en la ventana [D-14, D] (urgencia real, NN/g 2026).
  *
  * LOOP SEAMLESS (no re-negociar): 2 copias idénticas, keyframe
  * translateX(0 → -50%), gap de unión = `pr` de cada copia (NUNCA gap entre
  * copias en el track — rompería el -50%).
  */
-// Frases por defecto (diseño aprobado). En temporada las reemplaza SEASON_COPY.
 const PHRASES = [
   "Bienvenidos a Le Bon Marché",
   "Tienda virtual en Bucaramanga",
@@ -34,15 +36,36 @@ const PHRASES = [
 
 // Copy de temporada activo (undefined en default → comportamiento actual idéntico)
 const seasonalCopy = SEASON_COPY[SEASON]
-const activePhrases = seasonalCopy?.topbar ?? PHRASES
+const basePhrases = seasonalCopy?.topbar ?? PHRASES
 const separator = seasonalCopy?.separator ?? "·"
 
+// ¿El deadline aplica HOY? Ventana [D-14, D] del año en curso (o año siguiente).
+function deadlineActive(d: SeasonDeadline | undefined): boolean {
+  if (!d) return false
+  const now = new Date()
+  const y = now.getFullYear()
+  const target = new Date(y, d.month - 1, d.day)
+  const start = new Date(y, d.month - 1, d.day - 14)
+  if (now > target) return false // se acabó la ventana este año
+  return now >= start
+}
+
 // Logo abreviado TLBM — PNG transparente con letras negras (723×248, ratio 2.92).
-// Sobre la etiqueta dorada da exactamente el diseño aprobado (TLBM negro sobre dorado).
 const LABEL_LOGO_URL =
   "https://res.cloudinary.com/dgo9tm9e2/image/upload/v1785519483/favicon_kvkibv.png"
 
 export default function TopMarquee() {
+  const [phrases, setPhrases] = useState<string[]>(() => {
+    const d = SEASON_DEADLINE[SEASON]
+    return deadlineActive(d) ? [...basePhrases, d!.message] : basePhrases
+  })
+
+  // Re-evalúa tras mount (frontera de día/husos): evita mismatch de hidratación.
+  useEffect(() => {
+    const d = SEASON_DEADLINE[SEASON]
+    setPhrases(deadlineActive(d) ? [...basePhrases, d!.message] : basePhrases)
+  }, [])
+
   return (
     <div
       className="relative z-50 flex items-stretch overflow-hidden bg-[var(--ink)]"
@@ -76,10 +99,10 @@ export default function TopMarquee() {
               className="inline-flex items-center gap-[14px] pr-[14px] text-[10px] font-medium uppercase tracking-[0.12em] text-white/85 md:gap-[18px] md:pr-[18px] md:text-[11px]"
             >
               <span className="opacity-70">{separator}</span>
-              {activePhrases.map((phrase, i) => (
+              {phrases.map((phrase, i) => (
                 <Fragment key={i}>
                   <span>{phrase}</span>
-                  {i < activePhrases.length - 1 && (
+                  {i < phrases.length - 1 && (
                     <span className="opacity-70">{separator}</span>
                   )}
                 </Fragment>
