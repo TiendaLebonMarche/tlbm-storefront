@@ -2,6 +2,7 @@
 
 import { Fragment } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { SEASON, SEASON_COPY } from "@lib/season"
 
 /**
  * Marquesina superior — REDISEÑO 07-ago-2026 (aprobado por Julián, ref tm_v4.png):
@@ -23,12 +24,18 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
  * translateX(0 → -50%), gap de unión = `pr` de cada copia (NUNCA gap entre
  * copias en el track — rompería el -50%).
  */
+// Frases por defecto (diseño aprobado). En temporada las reemplaza SEASON_COPY.
 const PHRASES = [
   "Bienvenidos a Le Bon Marché",
   "Tienda virtual en Bucaramanga",
   "Productos 100% originales",
   "Envíos a toda Colombia",
 ]
+
+// Copy de temporada activo (undefined en default → comportamiento actual idéntico)
+const seasonalCopy = SEASON_COPY[SEASON]
+const activePhrases = seasonalCopy?.topbar ?? PHRASES
+const separator = seasonalCopy?.separator ?? "·"
 
 // Logo abreviado TLBM — PNG transparente con letras negras (723×248, ratio 2.92).
 // Sobre la etiqueta dorada da exactamente el diseño aprobado (TLBM negro sobre dorado).
@@ -68,12 +75,12 @@ export default function TopMarquee() {
               aria-hidden={set === 1}
               className="inline-flex items-center gap-[14px] pr-[14px] text-[10px] font-medium uppercase tracking-[0.12em] text-white/85 md:gap-[18px] md:pr-[18px] md:text-[11px]"
             >
-              <span className="opacity-70">·</span>
-              {PHRASES.map((phrase, i) => (
+              <span className="opacity-70">{separator}</span>
+              {activePhrases.map((phrase, i) => (
                 <Fragment key={i}>
                   <span>{phrase}</span>
-                  {i < PHRASES.length - 1 && (
-                    <span className="opacity-70">·</span>
+                  {i < activePhrases.length - 1 && (
+                    <span className="opacity-70">{separator}</span>
                   )}
                 </Fragment>
               ))}

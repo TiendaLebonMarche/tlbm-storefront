@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
+import { SEASON, SEASON_COPY } from "@lib/season"
 import { motion, AnimatePresence } from "framer-motion"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import TopMarquee from "@modules/common/components/top-marquee"
@@ -301,13 +302,29 @@ function HeroOverlay({ visible, menuSlot, cartSlot, theme }: { visible: boolean;
 
 // ── Main Hero ───────────────────────────────────────────────────────────────
 
+// ── Escenografía de temporada (Fase 3): en temporada el hero = 1 slide temático
+// (foto del slide 1 + copy aprobado). En default: slider completo actual idéntico.
+const seasonalHeroCopy = SEASON_COPY[SEASON]
+const ACTIVE_SLIDES: Slide[] = seasonalHeroCopy
+  ? [
+      {
+        ...SLIDES[0],
+        label: seasonalHeroCopy.hero.label,
+        title: seasonalHeroCopy.hero.title,
+        highlight: seasonalHeroCopy.hero.highlight,
+        subtitle: seasonalHeroCopy.hero.subtitle ?? SLIDES[0].subtitle,
+        cta: seasonalHeroCopy.hero.cta,
+      },
+    ]
+  : SLIDES
+
 export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNode; cartSlot?: React.ReactNode }) {
   const [[slideIndex, direction], setSlideState] = useState([0, 0])
   const [isScrolled, setIsScrolled] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [paused, setPaused] = useState(false)
 
-  const totalSlides = SLIDES.length
+  const totalSlides = ACTIVE_SLIDES.length
 
   // ── Scroll detection ──
   useEffect(() => {
@@ -346,7 +363,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
     setSlideState(([current]) => [(current - 1 + totalSlides) % totalSlides, -1])
   }, [totalSlides])
 
-  const currentSlide = SLIDES[slideIndex]
+  const currentSlide = ACTIVE_SLIDES[slideIndex]
 
   return (
     <>
@@ -515,7 +532,7 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
 
         {/* ── SLIDE INDICATORS (numbered) ── */}
         <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 md:gap-3">
-          {SLIDES.map((slide, index) => (
+          {ACTIVE_SLIDES.map((slide, index) => (
             <button
               key={slide.id}
               onClick={() => goTo(index)}

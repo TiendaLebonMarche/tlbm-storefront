@@ -18,8 +18,7 @@ export const SEASONS: Record<Season, { label: string; emoji: string }> = {
 
 // Decoración por temporada — lista de ítems flotantes (emojis) con posición/delay/drift.
 // Refinar al montar cada escena (ver /root/escenografia/*.html aprobados).
-export const SEASONAL_DECOR: Record<Season, Array<{ emoji: string; top: string; left: string; delay?: string; drift?: boolean; duration?: string }>> = {
-  default: [],
+export const SEASONAL_DECOR: Record<Season, Array<{ emoji: string; top: string; left: string; delay?: string; drift?: boolean; duration?: string }>> = {  default: [],
   halloween: [
     { emoji: "🎃", top: "8%", left: "6%", delay: "0s" },
     { emoji: "🦇", top: "14%", left: "88%", delay: "1.2s", drift: true, duration: "18s" },
@@ -44,4 +43,70 @@ export const SEASONAL_DECOR: Record<Season, Array<{ emoji: string; top: string; 
     { emoji: "💕", top: "50%", left: "4%", delay: "3s", drift: true, duration: "21s" },
     { emoji: "💗", top: "38%", left: "94%", delay: "2.6s", drift: true, duration: "19s" },
   ],
+}
+
+// ── COPY DE TEMPORADA (Fase 3, 03-sep-2026) ────────────────────────────────
+// Textos aprobados en /root/escenografia-ejemplo.html y escenografia-navidad-sv.html.
+// "default" no tiene copy → componentes usan su copy normal.
+// En temporada el HERO muestra UN solo slide temático (foto slide 1 + copy) y la
+// TopMarquee cambia frases + separador. highlight DEBE ser subcadena de title
+// (el render hace title.split(highlight) y lo pinta con text-gold-dark).
+export type SeasonalHeroCopy = {
+  label: string
+  title: string
+  highlight: string
+  subtitle?: string
+  cta: string
+}
+export type SeasonalCopy = {
+  topbar: string[]
+  separator: string
+  hero: SeasonalHeroCopy
+}
+export const SEASON_COPY: Partial<Record<Season, SeasonalCopy>> = {
+  halloween: {
+    topbar: [
+      "Noche de miedo en Le Bon Marché",
+      "Ofertas terroríficas",
+      "Productos 100% originales",
+      "Envíos a toda Colombia",
+    ],
+    separator: "🎃",
+    hero: {
+      label: "🦇🎃👻 Edición Halloween 👻🎃🦇",
+      title: "¡Esta noche todo da miedo…\nmenos nuestros precios!",
+      highlight: "todo da miedo",
+      cta: "🎃 Explorar ofertas 🎃",
+    },
+  },
+  navidad: {
+    topbar: [
+      "Época navideña en Le Bon Marché",
+      "Regalos originales para todos",
+      "Productos 100% originales",
+      "Envíos a toda Colombia",
+    ],
+    separator: "❄️",
+    hero: {
+      label: "🎅🎄❄️ Edición Navidad ❄️🎄🎅",
+      title: "El regalo 100% original\nque sí quieren recibir",
+      highlight: "100% original",
+      cta: "🎁 Explorar regalos 🎁",
+    },
+  },
+  "san-valentin": {
+    topbar: [
+      "14 de febrero en Le Bon Marché",
+      "Detalles que sí sorprenden",
+      "Productos 100% originales",
+      "Envíos a toda Colombia",
+    ],
+    separator: "❤️",
+    hero: {
+      label: "💘🌹💝 Edición San Valentín 💝🌹💘",
+      title: "El detalle 100% original\nque enamora",
+      highlight: "100% original",
+      cta: "💝 Explorar detalles 💝",
+    },
+  },
 }
