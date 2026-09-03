@@ -235,11 +235,11 @@ export default function ProductActions({
             isLowStock ? (
               <>
                 <div className="relative flex items-center justify-center">
-                  <div className="w-3 h-3 rounded-full bg-red-500/30 animate-ping absolute" />
-                  <div className="w-2 h-2 rounded-full bg-red-600 relative" />
+                  <div className="w-3 h-3 rounded-full bg-orange-500/30 animate-ping absolute" />
+                  <div className="w-2 h-2 rounded-full bg-orange-500 relative" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-red-600 font-sans uppercase tracking-wide">
+                  <p className="text-sm font-bold text-orange-600 font-sans uppercase tracking-wide">
                     {stockUnits === 1 ? "¡Última unidad!" : `¡Solo quedan ${stockUnits}!`}
                   </p>
                   <p className="text-[11px] text-brand-gray font-light font-sans tracking-tight">

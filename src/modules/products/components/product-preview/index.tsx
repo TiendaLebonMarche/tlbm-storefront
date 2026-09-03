@@ -97,7 +97,7 @@ export default function ProductPreview({
         {(isNew || customBadge || lowStockText) && (
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
             {lowStockText && (
-              <span className="bg-red-600 text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
+              <span className="bg-orange-600 text-white text-[7px] font-bold uppercase tracking-[0.2em] px-2 py-1">
                 {lowStockText}
               </span>
             )}
