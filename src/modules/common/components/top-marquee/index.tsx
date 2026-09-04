@@ -38,7 +38,13 @@ const PHRASES = [
 
 // Copy de temporada activo (undefined en default → comportamiento actual idéntico)
 const seasonalCopy = SEASON_COPY[SEASON]
-const basePhrases = seasonalCopy?.topbar ?? PHRASES
+// La IDENTIDAD de la tienda va SIEMPRE de primera frase (pedido Julián 03-sep):
+// en temporada convive con las frases de campaña + deadline; en default con los
+// beneficios. Marquesina = cinta continua con info relevante.
+const IDENTITY_PHRASE = "Tienda Le Bon Marché · Bucaramanga"
+const basePhrases = seasonalCopy
+  ? [IDENTITY_PHRASE, ...seasonalCopy.topbar]
+  : [IDENTITY_PHRASE, ...PHRASES]
 const separator = seasonalCopy?.separator ?? "·"
 
 // ¿El deadline aplica HOY? Ventana [D-14, D] del año en curso (o año siguiente).
@@ -104,9 +110,7 @@ export default function TopMarquee() {
               {phrases.map((phrase, i) => (
                 <Fragment key={i}>
                   <span>{phrase}</span>
-                  {i < phrases.length - 1 && (
-                    <span className="opacity-70">{separator}</span>
-                  )}
+                  <span className="opacity-70">{separator}</span>
                 </Fragment>
               ))}
             </span>
