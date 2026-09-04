@@ -32,10 +32,12 @@ export default function ProductPreview({
   product,
   isFeatured,
   region,
+  priority = false,
 }: {
   product: HttpTypes.StoreProduct
   isFeatured?: boolean
   region: HttpTypes.StoreRegion
+  priority?: boolean
 }) {
   const { cheapestPrice } = getProductPrice({ product })
 
@@ -72,15 +74,17 @@ export default function ProductPreview({
       data-testid="product-wrapper"
       className="group flex flex-col h-full no-underline text-inherit cursor-pointer"
     >
-      {/* Image block — rectangular, fondo blanco */}
-      <div className="relative w-full overflow-hidden rounded-none" style={{ aspectRatio: "0.873/1", background: "#FFFFFF" }}>
+      {/* Image block — marco 1:1 (fix espacios 03-sep: menos bandas verticales
+          blancas; la imagen llena la tarjeta y sube la densidad de la grilla) */}
+      <div className="relative w-full overflow-hidden rounded-none" style={{ aspectRatio: "1/1", background: "#FFFFFF" }}>
         {product.thumbnail || (product.images && product.images[0]?.url) ? (
           <Image
             src={product.thumbnail || (product.images && product.images[0]?.url) || ""}
             alt={product.title || "Producto Le Bon Marché"}
             fill
+            priority={priority}
             sizes="(max-width: 640px) 50vw, 33vw"
-            className="object-contain p-2 md:p-3 transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400 text-[9px] font-bold uppercase tracking-widest">
@@ -116,7 +120,7 @@ export default function ProductPreview({
       </div>
 
       {/* Info block — centrado, estilo e-commerce premium */}
-      <div className="pt-5 pb-2 flex flex-col items-center text-center gap-[2px]">
+      <div className="pt-4 pb-2 flex flex-col items-center text-center gap-[2px]">
         {/* Category/Collection — color único por categoría */}
         {category && (
           <span

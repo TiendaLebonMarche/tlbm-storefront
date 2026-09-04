@@ -48,7 +48,7 @@ const StoreTemplate = async ({
     <div className="bg-white min-h-screen" data-testid="category-container">
       
       {/* ── Editorial Store Header ── */}
-      <div className="pt-8 pb-10 px-6">
+      <div className="pt-6 pb-6 px-6">
         <div className="content-container">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
@@ -72,7 +72,7 @@ const StoreTemplate = async ({
         </div>
       </div>
 
-      <div className="content-container px-6 py-10">
+      <div className="content-container px-6 py-7">
         {/* ── Filtro de colecciones (pills elegantes, todo el ancho) ── */}
         <CollectionFilter collections={collections || []} />
 

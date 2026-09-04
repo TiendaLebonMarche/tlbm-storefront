@@ -11,7 +11,10 @@ type InfiniteProductsProps = {
   limit?: number
 }
 
-/** Per-item reveal wrapper using IntersectionObserver */
+/** Per-item reveal wrapper using IntersectionObserver.
+ *  IMPORTANTE (fix espacios en blanco 03-sep): el ítem empieza VISIBLE (sin
+ *  clase oculta). La animación de entrada es una MEJORA PROGRESIVA: si el IO
+ *  falla o tarda, la tarjeta ya está visible — nunca un hueco blanco. */
 function RevealItem({ children, staggerIndex }: { children: React.ReactNode; staggerIndex: number }) {
   const ref = useRef<HTMLLIElement>(null)
   const [visible, setVisible] = useState(false)
@@ -29,7 +32,7 @@ function RevealItem({ children, staggerIndex }: { children: React.ReactNode; sta
   }, [])
 
   return (
-    <li ref={ref} className={visible ? `product-card-reveal stagger-${stagger}` : "product-card-hidden"}>
+    <li ref={ref} className={visible ? `product-card-reveal stagger-${stagger}` : ""}>
       {children}
     </li>
   )
@@ -75,7 +78,7 @@ export default function InfiniteProducts({
       <ul className={gridClass} data-testid="products-list">
         {productsToShow.map((p, index) => (
           <RevealItem key={p.id} staggerIndex={index}>
-            <ProductPreview product={p} region={region} />
+            <ProductPreview product={p} region={region} priority={index < 6} />
           </RevealItem>
         ))}
       </ul>

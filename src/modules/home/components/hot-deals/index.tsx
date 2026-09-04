@@ -40,9 +40,9 @@ export default async function HotDeals({
   const shuffled = [...products].sort(() => 0.5 - Math.random())
 
   return (
-      <section className="w-full bg-white py-12 md:py-16">
+      <section className="w-full bg-white py-10 md:py-12">
         <div className="content-container px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 gap-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-6 gap-8">
             <div className="max-w-2xl">
               <span className="text-brand-black font-bold uppercase tracking-[0.25em] text-[10px] mb-6 block">
                 Nuestros mejores productos

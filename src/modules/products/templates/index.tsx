@@ -105,7 +105,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             </div>
 
             {/* Actions: Price + Variants + CTA */}
-            <div className="py-10">
+            <div className="py-6">
               <Suspense
                 fallback={
                   <ProductActions
@@ -123,7 +123,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="w-full h-px bg-white" />
 
             {/* Trust Signals Grid */}
-            <div className="py-8 grid grid-cols-2 gap-x-8 gap-y-6">
+            <div className="py-6 grid grid-cols-2 gap-x-8 gap-y-5">
               {[
                 {
                   icon: (
@@ -183,7 +183,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="w-full h-px bg-white" />
 
             {/* Seller info & Dynamic Metadata */}
-            <div className="py-8 space-y-6">
+            <div className="py-6 space-y-6">
               <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                 <div className="flex flex-col gap-y-1">
                   <span className="text-[9px] font-bold text-brand-black uppercase tracking-widest opacity-40">Vendedor</span>
