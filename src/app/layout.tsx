@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     default: "Tienda Virtual en Bucaramanga | Le Bon Marché",
     template: "%s | Le Bon Marché",
   },
-  description: "Tienda virtual en Bucaramanga con productos exóticos y 100% originales: tecnología premium, gadgets, parlantes, smartwatches y más. Envíos a toda Colombia.",
+  description: "Tienda virtual en Bucaramanga: productos 100% originales y exóticos, tecnología premium, parlantes y gadgets exclusivos. Envíos rápidos y seguros a toda Colombia.",
   keywords: [
     "tienda virtual en Bucaramanga",
     "Tienda Le Bon Marché productos",
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Tienda Virtual en Bucaramanga | Le Bon Marché",
-    description: "Tienda virtual en Bucaramanga con productos exóticos y 100% originales: tecnología premium, gadgets, parlantes, smartwatches y más. Envíos a toda Colombia.",
+    description: "Tienda virtual en Bucaramanga: productos 100% originales y exóticos, tecnología premium, parlantes y gadgets exclusivos. Envíos rápidos y seguros a toda Colombia.",
     images: ["/twitter-v2.jpg"],
     creator: "@tiendalebonmarche",
     site: "@tiendalebonmarche",
