@@ -6,7 +6,7 @@
 export type Season = "default" | "halloween" | "navidad" | "san-valentin" | "amor-amistad"
 
 // ⚙️ ÚNICO valor a cambiar para activar una temporada
-export const SEASON: Season = "default"
+export const SEASON: Season = "amor-amistad"
 
 // Registro de temporadas (para documentación y uso futuro del SeasonalDecor)
 export const SEASONS: Record<Season, { label: string; emoji: string }> = {
@@ -25,7 +25,7 @@ export const SEASONS: Record<Season, { label: string; emoji: string }> = {
 // bordes; el texto (izquierda centro) y los dots (abajo centro) nunca se tocan.
 export type DecorKind = "float" | "drift" | "fall" | "sway" | "rise"
 // svg: nombre de dibujo hand-drawn (trazo sketch) — se mezcla con emojis.
-export type SketchName = "heart" | "sparkle"
+export type SketchName = "heart" | "sparkle" | "pumpkin" | "copo" | "arbol"
 export type DecorItem = {
   emoji?: string
   svg?: SketchName
@@ -38,7 +38,7 @@ export type DecorItem = {
 export const SEASONAL_DECOR: Record<Season, DecorItem[]> = {
   default: [],
   halloween: [
-    { emoji: "🎃", kind: "float", top: "16%", left: "3.5%" },
+    { svg: "pumpkin", kind: "float", top: "16%", left: "3.5%" },
     { emoji: "🕷️", kind: "float", top: "9%", left: "23%", delay: "0.5s" },
     { emoji: "🦇", kind: "drift", top: "20%", delay: "1s", duration: "14s" },
     { emoji: "🎃", kind: "float", top: "62%", left: "92%", delay: "0.3s" },
@@ -47,11 +47,11 @@ export const SEASONAL_DECOR: Record<Season, DecorItem[]> = {
     { emoji: "🕷️", kind: "float", top: "76%", left: "88%", delay: "1.6s" },
   ],
   navidad: [
-    { emoji: "❄️", kind: "fall", left: "7%", delay: "0s", duration: "10s" },
+    { svg: "copo", kind: "fall", left: "7%", delay: "0s", duration: "10s" },
     { emoji: "⭐", kind: "float", top: "13%", left: "88%", delay: "0.4s" },
     { emoji: "❄️", kind: "fall", left: "28%", delay: "1.2s", duration: "12s" },
     { emoji: "❄️", kind: "fall", left: "52%", delay: "2.2s", duration: "9s" },
-    { emoji: "🎄", kind: "float", top: "66%", left: "4%", delay: "0.8s" },
+    { svg: "arbol", kind: "float", top: "66%", left: "4%", delay: "0.8s" },
     { emoji: "🎁", kind: "float", top: "80%", left: "90%", delay: "1.4s" },
     { emoji: "❄️", kind: "fall", left: "78%", delay: "3.1s", duration: "11s" },
     { emoji: "⭐", kind: "float", top: "50%", left: "94%", delay: "2s" },
@@ -149,7 +149,7 @@ export const SEASON_COPY: Partial<Record<Season, SeasonalCopy>> = {
       label: "💘🌹🎈 Edición Amor y Amistad · 19 sep 🎁💝",
       title: "El detalle 100% original\nque sí enamora este septiembre",
       highlight: "100% original",
-      subtitle: "Packs de tecnología original con mensaje personalizado y entrega en 24 h en Bucaramanga.",
+      subtitle: "Tecnología y gadgets originales para regalar con intención: cada producto se elige solo, con mensaje personalizado y entrega en 24 h en Bucaramanga.",
       cta: "🎁 Explorar regalos 🎁",
     },
   },

@@ -18,9 +18,14 @@ import type { SketchName } from "@lib/season"
 const SKETCH_STROKES: Record<SketchName, { stroke: string; fill: string; fillOpacity: number }> = {
   heart: { stroke: "#D6336C", fill: "#FF8FB3", fillOpacity: 0.16 },
   sparkle: { stroke: "#D4AF37", fill: "#F6DF8E", fillOpacity: 0.3 },
+  pumpkin: { stroke: "#FF7518", fill: "#FF9A3D", fillOpacity: 0.22 },
+  copo: { stroke: "#B8962E", fill: "#FFD166", fillOpacity: 0 },
+  arbol: { stroke: "#0C3318", fill: "#FFD166", fillOpacity: 0.12 },
 }
 
-// Los sketches se recolorizan por escenario vía CSS [data-theme] (clases .sk-heart/.sk-sparkle).
+// Los sketches se recolorizan por escenario: heart/sparkle vía CSS [data-theme]
+// (.sk-heart/.sk-sparkle en globals.css); pumpkin/copo/arbol usan colores fijos
+// de su escenario (solo existen en halloween/navidad).
 const SKETCHES: Record<SketchName, ReactNode> = {
   heart: (
     <>
@@ -42,6 +47,39 @@ const SKETCHES: Record<SketchName, ReactNode> = {
       <path d="M82 62 C74 66 68 70 64 76" opacity="0.8" />
     </>
   ),
+  pumpkin: (
+    <>
+      <path
+        className="sk-fill"
+        d="M50 76 C25 76 15 61 15 47 C15 33 27 26 50 26 C73 26 85 33 85 47 C85 61 75 76 50 76 Z"
+      />
+      <path d="M50 28 C44 42 44 62 50 76" opacity="0.85" />
+      <path d="M33 31 C32 45 35 58 42 70" opacity="0.6" />
+      <path d="M67 31 C68 45 65 58 58 70" opacity="0.6" />
+      <path d="M50 26 C49 17 54 11 63 9" opacity="0.9" />
+      <path d="M63 9 C55 12 52 6 57 3" opacity="0.7" />
+    </>
+  ),
+  copo: (
+    <>
+      <path d="M50 8 L50 92" />
+      <path d="M8 50 L92 50" />
+      <path d="M23 23 L77 77" />
+      <path d="M77 23 L23 77" />
+      <path d="M50 8 L44 20 M50 8 L56 20 M50 92 L44 80 M50 92 L56 80" />
+      <path d="M8 50 L20 44 M8 50 L20 56 M92 50 L80 44 M92 50 L80 56" />
+    </>
+  ),
+  arbol: (
+    <>
+      <path
+        className="sk-fill"
+        d="M50 16 L74 56 L66 56 L84 84 L16 84 L34 56 L26 56 Z"
+      />
+      <path d="M44 84 L44 92 L56 92 L56 84" />
+      <path d="M50 16 L52 6 M50 16 L48 6 M50 16 L54 10 M50 16 L46 10" opacity="0.9" />
+    </>
+  ),
 }
 
 function Sketch({ name }: { name: SketchName }) {
@@ -49,10 +87,10 @@ function Sketch({ name }: { name: SketchName }) {
   return (
     <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden="true">
       <g
-        className={name === "heart" ? "sk-heart" : "sk-sparkle"}
+        className={`sk-${name}`}
         fill="none"
         stroke={c.stroke}
-        strokeWidth={4}
+        strokeWidth={name === "copo" ? 4.2 : 4}
         strokeLinecap="round"
         strokeLinejoin="round"
       >

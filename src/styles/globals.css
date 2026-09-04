@@ -313,6 +313,9 @@
 .seasonal-decor .sk-sparkle { stroke: var(--accent); }
 .seasonal-decor .sk-heart .sk-fill { fill: color-mix(in srgb, var(--gold-light) 26%, transparent); }
 .seasonal-decor .sk-sparkle .sk-fill { fill: color-mix(in srgb, var(--gold-light) 38%, transparent); }
+/* Sketches de escenario con color fijo (solo existen en su tema) */
+.seasonal-decor .sk-pumpkin .sk-fill { fill: color-mix(in srgb, #FF9A3D 30%, transparent); }
+.seasonal-decor .sk-arbol .sk-fill { fill: color-mix(in srgb, #FFD166 16%, transparent); }
 /* Telarañas de esquina (Halloween) — color vía var(--gold-light) del tema */
 .seasonal-decor .decor-web {
   position: absolute;
