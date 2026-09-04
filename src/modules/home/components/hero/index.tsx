@@ -47,13 +47,13 @@ const SLIDES: Slide[] = [
     title: "Tecnología original,\ndifícil de encontrar",
     highlight: "difícil de encontrar",
     subtitle:
-      "Las marcas que amas, 100% originales, con envío a toda Colombia.",
+      "Tienda virtual en Bucaramanga: productos exclusivos, originales y exóticos, con envíos a toda Colombia.",
     cta: "Descubrir Colección",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786465781/hero/hero-slider1v4.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_1920/v1786465781/hero/hero-slider1v4.jpg",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto/v1786481301/hero/hero-mobile-slide1.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_900/v1786481301/hero/hero-mobile-slide1.jpg",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "left",
@@ -179,6 +179,7 @@ function SlideMedia({
           alt={slide.label}
           fill
           sizes="100vw"
+          quality={90}
           className={`object-cover transition-opacity duration-500 ${
             slide.video && isActive ? "opacity-0" : "opacity-100"
           }`}
@@ -513,7 +514,9 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
           </div>
         </div>
 
-        {/* ── ARROWS ── */}
+        {/* ── ARROWS — ocultas con 1 slide (temporada) ── */}
+        {totalSlides > 1 && (
+        <>
         <button
           onClick={prev}
           className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/20 transition-all duration-300 group"
@@ -532,8 +535,11 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>
+        </>
+        )}
 
-        {/* ── SLIDE INDICATORS (numbered) ── */}
+        {/* ── SLIDE INDICATORS (numbered) — ocultos con 1 slide (temporada) ── */}
+        {totalSlides > 1 && (
         <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 md:gap-3">
           {ACTIVE_SLIDES.map((slide, index) => (
             <button
@@ -561,13 +567,16 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
             </button>
           ))}
         </div>
+        )}
 
         {/* ── Pause indicator ── */}
+        {totalSlides > 1 && (
         <div className="absolute bottom-6 md:bottom-10 right-6 md:right-10 z-20">
           <span className="text-[9px] font-medium tracking-[0.15em] text-white/30">
             {paused ? "❚❚" : "▶"} AUTO
           </span>
         </div>
+        )}
       </section>
     </>
   )

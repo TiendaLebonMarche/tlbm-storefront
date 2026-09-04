@@ -140,8 +140,8 @@ export const SEASON_COPY: Partial<Record<Season, SeasonalCopy>> = {
   },
   "amor-amistad": {
     topbar: [
-      "💘 Amor y Amistad en Le Bon Marché",
-      "Regala original: tecnología que sí se usa",
+      "💘 Amor y Amistad · 19 sep",
+      "Envíos 24 h en Bucaramanga",
       "Productos 100% originales",
     ],
     separator: "·",
@@ -149,7 +149,7 @@ export const SEASON_COPY: Partial<Record<Season, SeasonalCopy>> = {
       label: "💘🌹🎈 Edición Amor y Amistad · 19 sep 🎁💝",
       title: "El detalle 100% original\nque sí enamora este septiembre",
       highlight: "100% original",
-      subtitle: "Tecnología y gadgets originales para regalar con intención: cada producto se elige solo, con mensaje personalizado y entrega en 24 h en Bucaramanga.",
+      subtitle: "Tienda virtual en Bucaramanga: tecnología y productos exóticos, exclusivos y 100% originales — con envío a toda Colombia.",
       cta: "🎁 Explorar regalos 🎁",
     },
   },

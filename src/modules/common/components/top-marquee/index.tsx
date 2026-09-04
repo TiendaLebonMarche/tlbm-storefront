@@ -28,10 +28,12 @@ import type { SeasonDeadline } from "@lib/season"
  * copias en el track — rompería el -50%).
  */
 const PHRASES = [
-  "Bienvenidos a Le Bon Marché",
   "Tienda virtual en Bucaramanga",
   "Productos 100% originales",
   "Envíos a toda Colombia",
+  "Entrega 24 h en Bucaramanga",
+  "Nequi · Daviplata · TC · PSE",
+  "Soporte por WhatsApp",
 ]
 
 // Copy de temporada activo (undefined en default → comportamiento actual idéntico)
