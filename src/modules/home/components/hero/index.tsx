@@ -397,6 +397,26 @@ export default function Hero({ menuSlot, cartSlot }: { menuSlot?: React.ReactNod
           >
             <SlideMedia slide={currentSlide} isActive={true} />
 
+            {/* Scrim de legibilidad — slides CLAROS (texto oscuro sobre imagen
+                luminosa): gradiente suave blanco/crema en la zona del texto.
+                Mobile: desde arriba (el texto cae sobre la zona de producto).
+                Desktop: desde el lado donde vive el texto. Aprobado por Julián
+                06-sep (hero luxury marcas originales). */}
+            {currentSlide.textTheme === "dark" && (
+              <>
+                <div className="absolute inset-x-0 top-0 h-[68%] sm:hidden bg-gradient-to-b from-white/85 via-white/40 to-transparent pointer-events-none" />
+                <div
+                  className={`hidden sm:block absolute inset-y-0 ${
+                    currentSlide.textSide === "right" ? "right-0" : "left-0"
+                  } w-[55%] bg-gradient-to-r ${
+                    currentSlide.textSide === "right"
+                      ? "from-transparent via-white/25 to-white/70"
+                      : "from-white/75 via-white/30 to-transparent"
+                  } pointer-events-none`}
+                />
+              </>
+            )}
+
             {/* Gradient overlays — solo en slides oscuros (light theme no necesita) */}
             {currentSlide.textTheme !== "dark" && (
               <>
