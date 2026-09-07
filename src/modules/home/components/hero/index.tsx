@@ -51,9 +51,9 @@ const SLIDES: Slide[] = [
     cta: "Descubrir Colección",
     href: "/store",
     image:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_1920/v1786465781/hero/hero-slider1v4.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_1920/v1788750460/hero/hero-slider-marcas-luxB.png",
     imageMobile:
-      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_900/v1786481301/hero/hero-mobile-slide1.jpg",
+      "https://res.cloudinary.com/dgo9tm9e2/image/upload/f_auto,q_auto:good,w_900/v1788750462/hero/hero-mobile-marcas-luxB.png",
     overlayFrom: "from-black/0",
     overlayTo: "to-black/0",
     textSide: "left",
