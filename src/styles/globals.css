@@ -1102,3 +1102,74 @@ body[data-cart-open="true"] [aria-label="Contactar por WhatsApp"] {
 body[data-cart-open="true"] .group\/header * {
   animation-play-state: paused !important;
 }
+
+/* === ACENTO DE COLOR POR COLECCIÓN (página /collections) — 11-sep-2026 ===
+   SISTEMA ADITIVO: no toca :root ni los bloques [data-theme] de escenografía.
+   Las variables --ct-fill / --ct-ink / --ct-rule / --ct-dark las inyecta cada
+   tarjeta de forma inline desde src/lib/collection-theme.ts (server-side, sin
+   JS → sin flash ni mismatch de hidratación, y sin depender de utilidades
+   arbitrarias de Tailwind v3, que se pierden en silencio con var()).
+
+   Reglas de color (medidas, no de gusto):
+     · --ct-fill SIEMPRE como relleno con --ct-ink encima. Como texto sobre
+       blanco ninguno de los 10 vivos alcanza 4,5:1.
+     · --ct-rule es el miembro de la pareja que supera 3:1 sobre blanco
+       (criterio 1.4.11); los vivos más claros serían invisibles como filete.
+     · --ct-dark (índice, flecha, hover del título) siempre ≥ 10:1. */
+.collection-card {
+  position: relative;
+  border-top: 4px solid var(--ct-rule, #eee);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.28s ease,
+    background-color 0.28s ease;
+}
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(10, 10, 15, 0.08);
+  background-color: color-mix(in srgb, var(--ct-fill, #fff) 7%, #fff);
+}
+.collection-card__idx {
+  color: var(--ct-dark, #0a0a0f);
+  opacity: 0.5;
+  font-variant-numeric: tabular-nums;
+}
+.collection-card__dia {
+  color: var(--ct-rule, #d4af37);
+  line-height: 1;
+}
+.collection-card__pill {
+  background-color: var(--ct-fill, #e8c84a);
+  color: var(--ct-ink, #2a2312);
+}
+.collection-card__go {
+  color: var(--ct-dark, #0a0a0f);
+  transition: transform 0.28s ease;
+}
+.collection-card:hover .collection-card__go {
+  transform: translateX(4px);
+}
+.collection-card:hover .collection-card__title {
+  color: var(--ct-dark, #0a0a0f);
+}
+/* Colección vacía: atenuada, sin color (no promete lo que no hay) */
+.collection-card--empty .collection-card__title {
+  color: #9a9a9a;
+}
+.collection-card--empty .collection-card__idx {
+  color: #767676;
+  opacity: 1;
+}
+.collection-card--empty .collection-card__dia {
+  color: #dcdcdc;
+}
+.collection-card--empty:hover {
+  background-color: #fff;
+}
+/* 12 tarjetas en 2 columnas en móvil: la página pasa de ~5 pantallas de scroll
+   a ~1,3 (medido 11-sep-2026) y se ven 10 categorías sin desplazar. */
+@media (max-width: 639px) {
+  .collection-card {
+    border-top-width: 3px;
+  }
+}

@@ -1,8 +1,8 @@
 import { Metadata } from "next"
+import type { CSSProperties } from "react"
 
+import { collectionTheme, collectionThemeVars } from "@lib/collection-theme"
 import { listCollections } from "@lib/data/collections"
-import { listRegions } from "@lib/data/regions"
-import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import PageHeader from "@modules/common/components/page-header"
 
@@ -17,17 +17,13 @@ type Props = {
 }
 
 export default async function CollectionsPage({ params }: Props) {
-  const { countryCode } = await params
+  // Next 15: `params` es una promesa; hay que resolverla aunque ya no se use
+  // el countryCode (la lista de colecciones no depende de la región).
+  await params
 
-  const [{ collections }, regions] = await Promise.all([
-    listCollections({ fields: "id,title,handle,products.id" }),
-    listRegions(),
-  ])
-
-  const region = regions?.find(
-    (r: StoreRegion) =>
-      r.countries?.some((c) => c.iso_2 === countryCode)
-  )
+  const { collections } = await listCollections({
+    fields: "id,title,handle,products.id",
+  })
 
   // Orden: colecciones con más productos primero (las vacías al final)
   const sorted = [...(collections ?? [])].sort((a, b) => {
@@ -35,13 +31,6 @@ export default async function CollectionsPage({ params }: Props) {
     const nb = b.products?.length ?? 0
     return nb - na
   })
-
-  const formatNumber = (n: number) =>
-    new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: region?.currency_code ?? "COP",
-      maximumFractionDigits: 0,
-    }).format(n)
 
   return (
     <div className="content-container py-6 md:py-8 lg:pt-8 lg:pb-12">
@@ -59,36 +48,49 @@ export default async function CollectionsPage({ params }: Props) {
       {sorted.length === 0 ? (
         <p className="text-black/50">Aún no hay colecciones publicadas.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {sorted.map((collection) => {
+        /* 2 columnas ya en móvil: 12 categorías en una sola columna obligaban a
+           ~5 pantallas de scroll y dejaban visibles solo 3 (medido 11-sep-2026).
+           Con 2 columnas bajan a ~1,3 pantallas y se ven 10. */
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5 md:gap-4">
+          {sorted.map((collection, index) => {
             const count = collection.products?.length ?? 0
+            const isEmpty = count === 0
+            const theme = collectionTheme(collection.handle, count)
+
             return (
               <LocalizedClientLink
                 key={collection.id}
                 href={`/collections/${collection.handle}`}
-                className="group bg-white border border-gray-100 hover:border-gold/40 rounded-xl p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(10,10,15,0.06)]"
+                className={`collection-card group bg-white border border-gray-100 hover:border-gray-200 rounded-xl p-3.5 md:p-[22px] ${
+                  isEmpty ? "collection-card--empty" : ""
+                }`}
+                style={collectionThemeVars(theme) as CSSProperties}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="font-playfair text-lg md:text-xl font-semibold text-black group-hover:text-gold-deep transition-colors">
-                      {collection.title}
-                    </h2>
-                    <p className="mt-1 text-xs uppercase tracking-[0.18em] text-black/40">
-                      {count} {count === 1 ? "producto" : "productos"}
-                    </p>
-                  </div>
+                <div className="flex items-center justify-between mb-2 md:mb-2.5">
+                  <span className="collection-card__idx font-playfair italic text-xs md:text-[15px]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   <span
                     aria-hidden="true"
-                    className="text-gold/70 text-xs mt-1"
+                    className="collection-card__dia text-[11px] md:text-[13px]"
                   >
                     ◆
                   </span>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-[0.2em] text-black/50 group-hover:text-gold-deep transition-colors">
-                    Ver colección
+
+                {/* min-h de 2 líneas: así los pies de todas las tarjetas quedan
+                    alineados entre sí aunque el título ocupe una línea o dos. */}
+                <h2 className="collection-card__title font-playfair text-[15.5px] md:text-[21px] font-semibold text-black leading-[1.22] min-h-[2.44em] transition-colors">
+                  {collection.title}
+                </h2>
+
+                <div className="flex items-center justify-between gap-2.5 mt-2.5 md:mt-3">
+                  <span className="collection-card__pill inline-block text-[9.5px] md:text-xs font-bold uppercase tracking-[0.06em] md:tracking-[0.1em] rounded-full px-2.5 py-1 md:px-[13px] md:py-[5px] leading-tight">
+                    {isEmpty
+                      ? "Próximamente"
+                      : `${count} ${count === 1 ? "producto" : "productos"}`}
                   </span>
-                  <span className="text-gold text-sm transition-transform duration-300 group-hover:translate-x-1">
+                  <span className="collection-card__go text-[13px] md:text-sm">
                     →
                   </span>
                 </div>
