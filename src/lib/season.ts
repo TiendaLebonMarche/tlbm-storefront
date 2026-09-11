@@ -1,12 +1,12 @@
 // Config central de escenografía por temporada (07-ago-2026, upgrade 03-sep).
-// ACTIVACIÓN MANUAL: cambiar SEASON a "halloween" | "navidad" | "san-valentin" → commit + push → deploy.
+// ACTIVACIÓN MANUAL: cambiar SEASON a "halloween" | "navidad" | "san-valentin" | "amor-amistad" → commit + push → deploy.
 // "default" = diseño actual IDÉNTICO (sin escenografía).
 // Al volver a "default", todo se desmonta solo.
 
 export type Season = "default" | "halloween" | "navidad" | "san-valentin" | "amor-amistad"
 
 // ⚙️ ÚNICO valor a cambiar para activar una temporada
-export const SEASON: Season = "amor-amistad"
+export const SEASON: Season = "default"
 
 // Registro de temporadas (para documentación y uso futuro del SeasonalDecor)
 export const SEASONS: Record<Season, { label: string; emoji: string }> = {
